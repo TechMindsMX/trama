@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5.0" client="site" method="upgrade">
+    <name>Busqueda por categorías</name>
+    <author>Ricardo Lyon</author>
+    <version>1.0.0</version>
+    <description>Modulo de busqueda por categorías.</description>
+    <files>
+        <filename>mod_busqueda_por_cat.xml</filename>
+        <filename module="mod_busqueda_por_cat">mod_busqueda_por_cat.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+    </config>
+</extension>
