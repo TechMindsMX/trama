@@ -32,6 +32,8 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
     <?php
         $gantry->displayHead();
 
+		$gantry->addScript('http://code.jquery.com/jquery-1.9.1.js');
+                
 		$gantry->addStyle('grid-responsive.css', 5);
 		$gantry->addLess('bootstrap.less', 'bootstrap.css', 6);
 
@@ -48,6 +50,7 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 		if ($gantry->get('loadtransition')) {
 		$gantry->addScript('load-transition.js');
 		$hidden = ' class="rt-hidden"';}
+		
 
     ?>
 </head>
