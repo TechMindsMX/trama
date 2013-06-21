@@ -26,7 +26,7 @@
 <title>Form</title>
 
 <?php
- $pathJumi = 'components/com_jumi/files';
+ $pathJumi = 'components/com_jumi/files/perfil';
  $accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=4'
   ?>
 
