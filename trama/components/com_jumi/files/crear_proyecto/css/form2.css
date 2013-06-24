@@ -1,0 +1,28 @@
+label {
+	float: left;
+	width: 200px;
+}
+
+input {
+	width: 180px;
+	margin-bottom: 5px;
+}
+
+#descProy, #elenco{
+	width: 405px;
+	height: 110px;
+}
+
+.boxes {
+	width: 1em;
+}
+
+#submitbutton {
+	margin-left: 100px;
+	margin-top: 5px;
+	width: 90px;
+}
+
+br {
+	clear: left;
+}
