@@ -51,7 +51,7 @@ eadf1a49658677e4836a4830bf9401c0 lib/RokBooster/Compressor/FileGroup.php
 3d6c10e97421c41a22c48136cc43041e lib/RokBooster/Compressor/ISort.php
 15637e519c54886ef3aa28570b339452 lib/RokBooster/Compressor/IStragety.php
 24d148989072c0f3077bafb00d2813b6 lib/RokBooster/Compressor/InlineGroup.php
-b76b9d4b347473faece4c2a4ac2523c5 lib/RokBooster/Compressor/Processor/JSMin.php
+831f0ee390ed7ada623347db69d7e3c1 lib/RokBooster/Compressor/Processor/JSMin.php
 61f93eff97170653eccd546645e014b0 lib/RokBooster/Compressor/Processor/YUI.php
 8a3edb0428f11a404535d9134c90063f lib/RokBooster/Compressor/Processor/index.html
 637e210c0dad9b61096c376be51e1a95 lib/RokBooster/Compressor/Sort/ExternalOnTop.php
@@ -60,12 +60,12 @@ b76b9d4b347473faece4c2a4ac2523c5 lib/RokBooster/Compressor/Processor/JSMin.php
 8a3edb0428f11a404535d9134c90063f lib/RokBooster/Compressor/index.html
 f95ad788eb269960db166d805276d254 lib/RokBooster/Joomla/AbstractStrategy.php
 f34bfe252437bd02241bcf48b01e677c lib/RokBooster/Joomla/ListStrategy.php
-7aea17fa409823d5f2ec26ae9a87282c lib/RokBooster/Joomla/PhpQueryScanStrategy.php
+53625ce052e926e26256a562ec3259c3 lib/RokBooster/Joomla/PhpQueryScanStrategy.php
 8a3edb0428f11a404535d9134c90063f lib/RokBooster/Joomla/index.html
 8a3edb0428f11a404535d9134c90063f lib/RokBooster/index.html
-916ae2358f3bd7daa9f0fbdf6bacc373 lib/include.php
+469510169d4697f29ee7b4047af8096a lib/include.php
 8a3edb0428f11a404535d9134c90063f lib/index.html
 92a58a54921a6fcf1fc91815c6ba8668 lib/multibyte.php
 e5d091bf1a69e468800985864be81882 lib/phpQuery.php
 ce84acd8c3d601f471c07aae265dadd6 rokbooster.php
-4ec82f3795c301adcc35bbdd7add87c6 rokbooster.xml
+f02ab8cf425e0f9907977492d98ee0a4 rokbooster.xml

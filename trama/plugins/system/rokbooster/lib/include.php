@@ -40,5 +40,5 @@ if (!defined('ROKBOOSTER_LIB')) {
     /**
      * define rokbooster library dir
      */
-    define('ROKBOOSTER_LIB', '1.1.7');
+    define('ROKBOOSTER_LIB', '1.1.8');
 }

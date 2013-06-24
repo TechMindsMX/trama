@@ -79,7 +79,7 @@
 		</div>
 
 		<div id="tabs-container">
-			<div class="roksprocket-version">RokSprocket <span>v<?php echo str_replace("\1.8.14", "DEV", ROKSPROCKET_VERSION); ?></span></div>
+			<div class="roksprocket-version">RokSprocket <span>v<?php echo str_replace("\1.8.15", "DEV", ROKSPROCKET_VERSION); ?></span></div>
 			<ul class="tabs">
 				<li class="tab active" data-tab="options">
 					<i class="icon options"></i>
