@@ -63,8 +63,8 @@ function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripci
  $document->addScript('http://code.jquery.com/ui/1.10.1/jquery-ui.js');
  $document->addStyleSheet('http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css');
  
-$document->addScript($pathJumi.'/minified/jquery.tree.min.js');
-$document->addStyleSheet($pathJumi.'/minified/jquery.tree.min.css');
+$document->addScript($pathJumi.'/perfil_x/minified/jquery.tree.min.js');
+$document->addStyleSheet($pathJumi.'/perfil_x/minified/jquery.tree.min.css');
 ?>
 		
 <form action="<?php echo $accion; ?>" id="perfilX" method="post" name="perfilX">
