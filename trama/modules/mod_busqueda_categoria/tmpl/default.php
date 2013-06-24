@@ -22,7 +22,7 @@ $opcionesSubCat = '';
 	?>
 	</select>
 	
-	<select id="selectSubCat" name="categoria">
+	<select id="selectSubCat" name="subcategoria">
 			<option value="all">Todas</option>
 	<?php
 	foreach ( $opcionesPadre as $valor ) {
