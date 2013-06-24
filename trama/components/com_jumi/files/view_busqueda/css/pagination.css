@@ -1,0 +1,117 @@
+.pagination {
+            font-size: 80%;
+			clear:both;
+			
+        }
+        
+.pagination a {
+    text-decoration: none;
+	border: solid 1px #AAE;
+	color: #15B;
+}
+
+.pagination a, .pagination span {
+    display: block;
+    float: left;
+    padding: 0.3em 0.5em;
+    margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.pagination .currento {
+    background: #26B;
+    color: #fff;
+	border: solid 1px #AAE;
+}
+
+.pagination .currento.prev, .pagination .currento.next{
+	color:#999;
+	border-color:#999;
+	background:#fff;
+}
+
+#proyecto {
+	width: 564px;
+	height: 285px;
+	position:relative;
+	float:left;
+	margin-left:10px;
+	}
+
+#avatar {
+	
+	width:235px;
+	height:235px;
+	background-color:#900;
+	position:absolute;
+	margin-top:40px;
+	margin-left:5px;
+	}
+	
+#titulo {
+	
+	width:555px;	
+	height:45px;
+	position:absolute;
+	background-image:url(../img/titulo.png);
+	
+	}	
+	
+#tituloText {
+	
+	width:530px;	
+	height:20px;
+	position:absolute;
+	margin-top:10px;
+	margin-left:10px;
+	color:#FFF;
+	font-size:18px;
+	overflow:hidden;
+	
+	}	
+	
+#descripcion {
+	
+	width:335px;
+	height:225px;
+	position:absolute;
+	margin-left:220px;
+	margin-top:50px;
+	background-image:url(../img/desc.png);
+	
+	}
+	
+#descText {
+	
+	width:306px;
+	height:178px;
+	position:absolute;
+	margin-left:12px;
+	margin-top:12px;
+	color:#666;
+	font-size:12px;
+	overflow: hidden;
+	
+	
+	}
+
+#leer {
+	
+	width:80px;
+	height:30px;
+	position:absolute;
+	margin-top:250px;
+	margin-left:470px;
+	
+	}
+	
+#leerText {
+	
+	width:60px;
+	height:20px;
+	position:absolute;
+	margin-left:10px;
+	font-size:13px;
+	color:#7eb347;
+	
+	}
