@@ -27,7 +27,7 @@
 
 <?php
  $pathJumi = 'components/com_jumi/files/perfil';
- $accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=4'
+ $accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7'
   ?>
 
 	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>	

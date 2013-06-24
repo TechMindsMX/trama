@@ -2,6 +2,8 @@
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 ?>
 <?php
+$usuario = JFactory::getUser();
+$_POST['daGr_users_id'] = $usuario->id;
 
 $datos = new procesamiento;
 $datos->agrupacion($_POST);
@@ -223,21 +225,16 @@ class procesamiento {
 
 				case 'prPa_':
 					$clavelimpiaSinNnum = preg_replace("/[0-9]/", "", $clavelimpia);
-					if($campos[$clave] <> "" && $clave[strlen($clave)-1] == '1' ){
-						$array_proyectosPas_1[$clavelimpiaSinNnum] = $campos[$clave];
-						$this->proyectos_pasados_1 = $array_proyectosPas_1;
-					}
-					elseif($campos[$clave] <> "" && $clave[strlen($clave)-1] == '0' ){
-						$array_proyectosPas_0[$clavelimpiaSinNnum] = $campos[$clave];
-						$this->proyectos_pasados_0 = $array_proyectosPas_0;
-					}
-					elseif($campos[$clave] <> ""){
+
+					if ($campos[$clave] <> "") {
+						$c = preg_replace("/[a-zA-Z]/", "", $clavelimpia);
 						$array_proyectosPas[$clavelimpiaSinNnum] = $campos[$clave];
-						$this->proyectos_pasados = $array_proyectosPas;
+						$todos[$c] = $array_proyectosPas;
 					}
 					break;
 			}
 		}
+		$this->proyectos_pasados = $todos;
 	}
 
 	function cargar_imagen($tipo){
@@ -409,15 +406,9 @@ class procesamiento {
 	
 	function get_proyectosPasados(){
 		$this->tabla = 'perfil_historialproyectos';
-		$this->grabarDatosPerfil($this->proyectos_pasados, $this->tabla);
-	}
-	function get_proyectosPasados_0(){
-		$this->tabla = 'perfil_historialproyectos';
-		$this->grabarDatosPerfil($this->proyectos_pasados_0, $this->tabla);
-	}
-	function get_proyectosPasados_1(){
-		$this->tabla = 'perfil_historialproyectos';
-		$this->grabarDatosPerfil($this->proyectos_pasados_1, $this->tabla);
+		foreach ( $this->proyectos_pasados as $key => $value ) {
+			$this->grabarDatosPerfil($this->proyectos_pasados[$key], $this->tabla);
+		}
 	}
 
 	function validacionRFC($tipoPersona,$rfc){
@@ -451,9 +442,7 @@ class procesamiento {
 		
 		if (isset($data) && !empty($data)) {
 
-			$tabladb = "#__". $tabladb;
-			
-			if ($tabladb != '#__perfil_persona') {
+			if ($tabladb != 'perfil_persona') {
 				$data['perfil_persona_idpersona'] = $this->persona;
 			}
 			
@@ -474,9 +463,9 @@ class procesamiento {
 			        ->columns($db->quoteName($col))
 		            ->values(implode(',', $val));   
 				$db->setQuery( $query );
-				$db->query();
+ 				$db->query();
 			
-				if ($tabladb == '#__perfil_persona') {  // Buscamos el id del contacto/persona
+				if ($tabladb == 'perfil_persona') {  // Buscamos el id del contacto/persona
 					$this->persona = $db->insertid();
 				}
 			}
@@ -486,7 +475,7 @@ class procesamiento {
 	function busarCamposTabla($tabladb) {
 			$db =& JFactory::getDBO();
 	        $results = $db->getTableFields("$tabladb");
-	       
+
 	        foreach ($results as $row) {
 	            $camposdb = $row;
 	        }
@@ -531,6 +520,6 @@ $mailGen1 = $datos->get_mailsContactos_1();
 
 $curriculum = $datos->get_cv();
 $pro_pas = $datos->get_proyectosPasados();
-$pro_pas0 = $datos->get_proyectosPasados_0();
-$pro_pas1 = $datos->get_proyectosPasados_1();
 
+$allDone =& JFactory::getApplication();
+$allDone->redirect('index.php', 'Sus datos fueron grabados exitosamente' );
