@@ -1,6 +1,6 @@
 <?php
 /**
- * @version   $Id: PhpQueryScanStrategy.php 4884 2012-11-01 03:20:30Z btowles $
+ * @version   $Id: PhpQueryScanStrategy.php 11602 2013-06-20 20:12:30Z btowles $
  * @author    RocketTheme http://www.rockettheme.com
  * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -218,10 +218,10 @@ class RokBooster_Joomla_PhpQueryScanStrategy extends RokBooster_Joomla_AbstractS
 	 */
 	public function populate()
 	{
-		$this->populateInlineScripts();
-		$this->populateScriptFiles();
-		$this->populateInlineStyles();
 		$this->populateStyleFiles();
+		$this->populateInlineStyles();
+		$this->populateScriptFiles();
+		$this->populateInlineScripts();
 		$this->populateImages();
 
 		$markup = ($this->document->getDocument()->htmlOuter());
@@ -256,14 +256,14 @@ class RokBooster_Joomla_PhpQueryScanStrategy extends RokBooster_Joomla_AbstractS
 					}
 				}
 			}
-			pq('head', $this->document)->prepend(implode("\n", $outputlinks));
+			pq('head', $this->document)->append(implode("\n", $outputlinks));
 		} else {
 			$links            = array();
 			$stylesheet_links = pq($this->prefix . ' link[href][rel=stylesheet]', $this->document);
 			foreach ($stylesheet_links as $stylesheet_link) {
 				$foo = pq($stylesheet_link, $this->document)->markup();
 			}
-			pq('head', $this->document)->prepend($stylesheet_links);
+			pq('head', $this->document)->append($stylesheet_links);
 
 		}
 	}
@@ -283,10 +283,10 @@ class RokBooster_Joomla_PhpQueryScanStrategy extends RokBooster_Joomla_AbstractS
 					$outputblocks[] = '<style type="text/css">' . $inlineGroup->getContent() . '</style>' . PHP_EOL;
 				}
 			}
-			pq('head', $this->document)->prepend(implode("\n", $outputblocks));
+			pq('head', $this->document)->append(implode("\n", $outputblocks));
 		} else {
 			$style_block = pq($this->prefix . 'style[type=text/css]', $this->document);
-			pq('head', $this->document)->prepend($style_block);
+			pq('head', $this->document)->append($style_block);
 		}
 	}
 
@@ -316,10 +316,10 @@ class RokBooster_Joomla_PhpQueryScanStrategy extends RokBooster_Joomla_AbstractS
 					}
 				}
 			}
-			pq('head', $this->document)->prepend(implode("\n", $outputlinks));
+			pq('head', $this->document)->append(implode("\n", $outputlinks));
 		} else {
 			$links = pq($this->prefix . 'script[src]', $this->document);
-			pq('head', $this->document)->prepend($links);
+			pq('head', $this->document)->append($links);
 		}
 	}
 
@@ -340,10 +340,10 @@ class RokBooster_Joomla_PhpQueryScanStrategy extends RokBooster_Joomla_AbstractS
 				}
 
 			}
-			pq('head', $this->document)->prepend(implode("\n", $outputblocks));
+			pq('head', $this->document)->append(implode("\n", $outputblocks));
 		} else {
 			$script_block = pq($this->prefix . 'script:not([src])[type=text/javascript]', $this->document);
-			pq('head', $this->document)->prepend($script_block);
+			pq('head', $this->document)->append($script_block);
 		}
 	}
 

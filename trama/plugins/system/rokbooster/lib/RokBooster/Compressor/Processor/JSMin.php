@@ -1,6 +1,6 @@
 <?php
 /**
- * @version   $Id: JSMin.php 11423 2013-06-13 16:34:23Z btowles $
+ * @version   $Id: JSMin.php 11603 2013-06-20 20:12:44Z btowles $
  * @author    RocketTheme http://www.rockettheme.com
  * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -151,7 +151,7 @@ class RokBooster_Compressor_Processor_JSMin
             } elseif ($this->a === "\n") {
                 if ($this->b === ' ') {
                     $command = self::ACTION_DELETE_A_B;
-                } elseif (false === mb_strpos('{[(+-', $this->b)
+                } elseif (!empty($this->b) && false === mb_strpos('{[(+-', $this->b)
                     && !$this->isAlphaNum($this->b)
                 ) {
                     $command = self::ACTION_DELETE_A;

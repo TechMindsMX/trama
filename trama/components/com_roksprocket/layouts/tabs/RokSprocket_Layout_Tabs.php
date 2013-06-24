@@ -1,6 +1,6 @@
 <?php
 /**
- * @version   $Id: RokSprocket_Layout_Tabs.php 11521 2013-06-16 20:24:07Z btowles $
+ * @version   $Id: RokSprocket_Layout_Tabs.php 11547 2013-06-18 20:17:15Z btowles $
  * @author    RocketTheme http://www.rockettheme.com
  * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -52,8 +52,15 @@ class RokSprocket_Layout_Tabs extends RokSprocket_AbstractLayout
 					$height = $this->parameters->get('tabs_resize_height', 0);
 					$item->getPrimaryImage()->resize($width, $height);
 				}
-				$source = rtrim($this->container->platforminfo->getUrlBase(),'/') . '/' . $item->getPrimaryImage()->getSource();
-				$item->getPrimaryImage()->setSource($source);				
+				/** @var RokCommon_PlatformInfo $platforminfo */
+				$platforminfo = $this->container->platforminfo;
+				$urlbase = ($platforminfo->getUrlBase()) ? $platforminfo->getUrlBase() : '/';
+				if (!$platforminfo->isLinkexternal($item->getPrimaryImage()->getSource())
+					&& strpos($item->getPrimaryImage()->getSource(), '/') !== 0
+					&& strpos($item->getPrimaryImage()->getSource(), $urlbase) !== 0) {
+					$source = rtrim($urlbase, '/') . '/' . $item->getPrimaryImage()->getSource();
+					$item->getPrimaryImage()->setSource($source);
+				}
 			}
 		}
 	}
