@@ -6,12 +6,13 @@ $document->addScript('modules/mod_busqueda_categoria/js/jquery.chained.js');
 $scriptJS = 'jQuery(function() {
 	jQuery("#selectSubCat").chained("#selectCat");	
 });';
+$accion= 'index.php?option=com_jumi&view=application&fileid=';
 
 $document->addScriptDeclaration($scriptJS);
 
 $opcionesSubCat = '';
 ?>
-<form action="" method="post"> 
+<form action="<?php echo $accion; ?>" method="post"> 
 	<select id="selectCat" name="categoria">
 		<option value="">Seleccione una categoría</option>
 	<?php		
