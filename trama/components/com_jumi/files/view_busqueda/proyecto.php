@@ -40,6 +40,10 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '</div>';
 		newcontent += '<div id="descripcion">';
 		newcontent += '<div id="descText">' + members[i].description + '</div>';
+		newcontent += '<div id="leer">';
+		newcontent += '<div id="leerText">' + "Leer mas...";
+		newcontent += '</div>';
+		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '</div>';
 	}
