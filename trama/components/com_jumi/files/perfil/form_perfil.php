@@ -7,16 +7,17 @@
 	$query = $db->getQuery(true);
 	$query
 		->select('users_id')
-		->from('#__perfil_personas')
+		->from('perfil_persona')
 		->where('users_id = '.$usuario->id);
 	$db->setQuery( $query );
+
 	$resultado = $db->loadObjectList();
 	if (isset($resultado)) {
 		echo "<h3>El usuario ya tiene datos en perfil</h3>";
 	} else {
 		echo "<h3>Llenar datos en perfil</h3>";
 	}
- 
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

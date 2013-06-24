@@ -31,7 +31,7 @@ function pageselectCallback (page_index, jq) {
 	var items_per_page = 10;
 	var max_elem = Math.min((page_index+1) * items_per_page, members.length);
 	var newcontent = '';
-console.log(members);
+
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 		newcontent += '<div id="proyecto">';
 		newcontent += '<div id="avatar"> <img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" width="235" height="235" /> </div>';
