@@ -6,7 +6,7 @@ $document->addScript('modules/mod_busqueda_categoria/js/jquery.chained.js');
 $scriptJS = 'jQuery(function() {
 	jQuery("#selectSubCat").chained("#selectCat");	
 });';
-$accion= 'index.php?option=com_jumi&view=application&fileid=';
+$accion= 'index.php?option=com_jumi&view=application&fileid=8';
 
 $document->addScriptDeclaration($scriptJS);
 

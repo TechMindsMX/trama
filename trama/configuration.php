@@ -63,9 +63,9 @@ class JConfig {
 	public $feed_email = 'author';
 	public $cookie_domain = '';
 	public $cookie_path = '';
-	static public $mw_path = 'http://192.168.0.106/';
-	static public $mw_avatar = 'avatar/';
-	static public $mw_banner = 'banner/';
-	static public $mw_bus_case = 'businessCase/';
-	static public $mw_photo = 'photo/';
+	static public $mw_path = 'http://192.168.0.106';
+	static public $mw_avatar = '/avatar';
+	static public $mw_banner = '/banner';
+	static public $mw_bus_case = '/businessCase';
+	static public $mw_photo = '/photo';
 }

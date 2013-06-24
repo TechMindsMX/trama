@@ -1,19 +1,19 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
-$path = JConfig::$mw_path.JConfig::$mw_avatar;
+$path = JConfig::$mw_path.JConfig::$mw_avatar."/";
 
 $usuario = JFactory::getUser();
 $base = JUri::base();
 $document = JFactory::getDocument();
-$pathJumi = '/herexis/components/com_jumi/files';
+$pathJumi = 'components/com_jumi/files';
 
-if ($_POST[categoria] == "" && $_POST[subcategoria] == "all") {	
-	$url = 'http://192.168.0.106:7171/trama-middleware/rest/project/list';
-} elseif ($_POST[categoria] != "" && $_POST[subcategoria] == "all") {
-	$url = 'http://192.168.0.106:7171/trama-middleware/rest/project/category/'. $_POST[categoria];
-} elseif ($_POST[categoria] != "" && $_POST[subcategoria] != "all") {
-	$url = 'http://192.168.0.106:7171/trama-middleware/rest/project/subcategory/'. $_POST[subcategoria];
+if ($_POST['categoria'] == "" && $_POST['subcategoria'] == "all") {	
+	$url = JConfig::$mw_path.':7171/trama-middleware/rest/project/list';
+} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] == "all") {
+	$url = JConfig::$mw_path.':7171/trama-middleware/rest/project/category/'. $_POST['categoria'];
+} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] != "all") {
+	$url = JConfig::$mw_path.':7171/trama-middleware/rest/project/subcategory/'. $_POST['subcategoria'];
 }
 	
 $json0 = file_get_contents($url);
