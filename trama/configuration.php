@@ -67,7 +67,7 @@ class JConfig {
 
 define("MIDDLE", "http://192.168.0.106");
 define("PUERTO", ":7171");
-define("AVATAR", "avatar");
+define("AVATAR", "/avatar");
 define("BANNER", "/banner");
 define("BCASE", "/businessCase");
 define("PHOTO", "/photo");
