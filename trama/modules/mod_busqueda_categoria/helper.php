@@ -2,7 +2,7 @@
 class modCategoriasHelper
 {
     public static function getCategoria( $params ) {
-    	$urlCategoria = JConfig::$mw_path.':7171/trama-middleware/rest/category/categories';
+    	$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
 		$jsonCategoria = file_get_contents($urlCategoria);
 		$jsonObjCategoria = json_decode($jsonCategoria);
 		        
@@ -10,7 +10,7 @@ class modCategoriasHelper
     }
     
     public static function getSubCat( $idPadre ) { 	
-    	$urlSubcategoria = JConfig::$mw_path.':7171/trama-middleware/rest/category/subcategories/'.$idPadre;
+    	$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/'.$idPadre;
 		$jsonSubcategoria = file_get_contents($urlSubcategoria);
 		$jsonObjSubcategoria = json_decode($jsonSubcategoria);
 		
