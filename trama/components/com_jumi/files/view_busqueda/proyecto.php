@@ -6,7 +6,7 @@ $path = JConfig::$mw_path.JConfig::$mw_avatar."/";
 $usuario = JFactory::getUser();
 $base = JUri::base();
 $document = JFactory::getDocument();
-$pathJumi = 'components/com_jumi/files';
+$pathJumi = Juri::base().'/components/com_jumi/files';
 
 if ($_POST['categoria'] == "" && $_POST['subcategoria'] == "all") {	
 	$url = JConfig::$mw_path.':7171/trama-middleware/rest/project/list';

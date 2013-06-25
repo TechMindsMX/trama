@@ -5,7 +5,7 @@ $path = JConfig::$mw_path;
 $usuario = JFactory::getUser();
 $base = JUri::base();
 $document = JFactory::getDocument();
-$pathJumi = '/components/com_jumi/files/crear_proyecto/';
+$pathJumi = Juri::base().'/components/com_jumi/files/crear_proyecto/';
 
 $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
 $document->addStyleSheet($pathJumi.'css/form2.css');
