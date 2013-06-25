@@ -56,6 +56,66 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<label for="nomProy">Nombre del proyecto*:</label> 
 	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
 	<br />
+	 <br>
+		<label for="categoria">Categor&iacute;a*:</label>
+  			<select id="categoria" class="validate[required]">
+              <option value=""></option>
+              <option value="Teatro">Teatro</option>
+              <option value="Danza">Danza</option>
+              <option value="Musica">Música</option>
+              <option value="Conciertos">Conciertos</option>
+              <option value="Espectaculos">Espect&aacute;culos</option>
+              <option value="Opera">&Oacute;pera</option>          
+       		</select><br />
+        <label for="subcategoria">Subcategor&iacute;a*:</label>
+        	<select id="subcategoria" class="validate[required]">
+              <option value=""></option>          
+              <option value="Monologo" class="Teatro">Monólogo</option>
+              <option value="Musical" class="Teatro">Musical</option>
+              <option value="Cabaret" class="Teatro">Cabaret</option>
+              <option value="Infantil" class="Teatro">Infantil</option>
+              <option value="Comedia" class="Teatro">Comedia</option>
+              <option value="Tragicomedia" class="Teatro">Tragicomedia</option>
+              <option value="Contemporaneo" class="Teatro">Contempor&aacute;neo</option>
+              <option value="Improvisacion" class="Teatro">Improvisaci&oacute;n</option>
+              <option value="Drama" class="Teatro">Drama</option>
+              <option value="Melodrama" class="Teatro">Melodrama</option>
+              <option value="Farsa" class="Teatro">Farsa</option>
+             
+              
+              <option value="Folklor" class="Danza">Folklor</option>
+              <option value="Contemporaneo" class="Danza">Contempor&aacute;neo</option>
+              <option value="Clasico" class="Danza">Cl&aacute;sico</option>
+              <option value="Valet" class="Danza">Valet</option>
+              <option value="Otros" class="Danza">Otros</option>
+              
+              
+              <option value="Recitales" class="Musica">Recitales</option>
+              <option value="Clasica" class="Musica">Cl&aacute;sica</option>
+              <option value="Contemporanea" class="Musica">Contempor&aacute;nea</option>
+              <option value="Otros" class="Musica">Otros</option>
+              
+              
+              <option value="Popular" class="Conciertos">Popular</option>
+              <option value="Rock" class="Conciertos">Rock</option>
+              <option value="Pop" class="Conciertos">Pop</option>
+              <option value="Jazz" class="Conciertos">Jazz</option>
+              <option value="Otros" class="Conciertos">Otros</option>
+              
+              
+              <option value="Coreograficos" class="Espectaculos">Coreogr&aacute;ficos</option>
+              <option value="Populares" class="Espectaculos">Populares</option>
+              <option value="Performance" class="Espectaculos">Performance</option>
+              <option value="Escenicos" class="Espectaculos">Esc&eacute;nicos</option>
+              <option value="Infantiles" class="Espectaculos">Infantiles</option>
+              <option value="Otros" class="Espectaculos">Otros</option>
+              
+              <option value="Zarzuela" class="Opera">Zarzuela</option>
+              <option value="Clasica" class="Opera">Cl&aacute;sica</option>
+              <option value="Contemporanea" class="Opera">Contempor&aacute;nea</option>
+              <option value="Opereta" class="Opera">Opereta</option>
+        	</select>
+            <br />
 	<label for="banner">Imagen(Banner) del proyecto*:</label> <input
 		type="file" id="banner" class="validate[required]" name="banner"> <br />
 	<label for="avatar">Imagen(Avatar) del proyecto*:</label> <input
