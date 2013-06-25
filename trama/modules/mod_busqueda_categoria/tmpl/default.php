@@ -27,7 +27,7 @@ $opcionesSubCat = '';
 			<option value="all">Todas</option>
 	<?php
 	foreach ( $opcionesPadre as $valor ) {
-		$opcionesSubCat .= '<option class="'.$valor.'" value="All">Todas las subcategorias</opcion>';
+		$opcionesSubCat .= '<option class="'.$valor.'" value="all">Todas las subcategorias</opcion>';
 	}
 	foreach ( $subCategorias as $key => $value ) {
 		$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'">'.$value->name.'</option>';

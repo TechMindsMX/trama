@@ -63,9 +63,11 @@ class JConfig {
 	public $feed_email = 'author';
 	public $cookie_domain = '';
 	public $cookie_path = '';
-	static public $mw_path = 'http://192.168.0.106';
-	static public $mw_avatar = '/avatar';
-	static public $mw_banner = '/banner';
-	static public $mw_bus_case = '/businessCase';
-	static public $mw_photo = '/photo';
 }
+
+define("MIDDLE", "http://192.168.0.106");
+define("PUERTO", ":7171");
+define("AVATAR", "avatar");
+define("BANNER", "/banner");
+define("BCASE", "/businessCase");
+define("PHOTO", "/photo");
