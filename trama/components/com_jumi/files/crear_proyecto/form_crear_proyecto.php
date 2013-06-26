@@ -28,34 +28,46 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	jQuery(document).ready(function(){
 		jQuery("#form2").validationEngine();
 		
-		
-
 		jQuery("#enviar").click(function (){
 			var form = jQuery("#form2")[0];
 			var total = form.length;
-			var section = '';
-			var unitSale = '';
-			var capacity = '';
+			var section = new Array(3);
+			var unitSale = new Array();
+			var capacity = new Array();
+			var sec = 0;
+			var unit = 0;
+			var cap = 0;
 			
 			for (i=0; i < total; i++) {
 			    seccion = form[i].name.substring(0,7);
-			    capayuni = form[i].name.substring(0,8);
-			    
-			    if(seccion == 'section') {
-			       section += form[i].value+','; 
-			    }else if(capayuni == 'unitSale'){
-			        unitSale += form[i].value+',';
-			    }else if(capayuni == 'capacity'){
-			        capacity += form[i].value+',';
-			    }
+				capayuni = form[i].name.substring(0,8);
+				
+				if(seccion == 'section') {
+				   if(sec < 3){
+				       section[sec] = form[i].value;
+				   }
+				   
+				   sec++;
+				}else if(capayuni == 'unitSale'){
+				   if(unit < 3){
+			    	   unitSale[unit] = form[i].value;
+				   }
+				   unit++
+				}else if(capayuni == 'capacity'){
+				   if(cap < 3){
+			        	capacity[cap] = form[i].value;
+			       }
+			       
+			       cap++;
+				}
 			}
 			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
 			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
 			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
 			
-			jQuery("#seccion").val(section);
-			jQuery("#unidad").val(unitSale);
-			jQuery("#inventario").val(capacity);
+			jQuery("#seccion").val(section.join(","));
+			jQuery("#unidad").val(unitSale.join(",");
+			jQuery("#inventario").val(capacity.join(",");
 			
 			jQuery("#form2").submit();
 		});
@@ -72,15 +84,15 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 <!--DIV DE AGREGAR CAMPOS-->
 <div id="readroot" style="display: none">
 
-	<label for="">Secci&oacute;n:</label> 
+	<label for=""><?php echo JText::_('SECCION'); ?>*:</label> 
 	<input type="text" class="validate[required,custom[onlyLetterNumber]]" name="section0">
 	<br />
 	
-	<label for="">Precio unidad:</label> 
+	<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
 	<input type="number" class="validate[required,custom[onlyNumberSp]]" name="unitSale0" step="any"> 
 	<br>
 	
-	<label for="">Inventario(Cantidad):</label> 
+	<label for=""><? echo jText::_('INVENTARIO_PROYECTO'); ?>:</label> 
 	<input type="number" class="validate[required,custom[onlyNumberSp]]" name="capacity0"> 
 	<br /> 
 	<br /> 
@@ -114,8 +126,8 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	Videos promocionales (solo links de youtube):
 	<br />
 	 
-	<label for="linkYt1">Enlace Youtube 1:</label> 
-	<input type="text" id="linkYt1" class="validate[custom[yt]]" name="youtubeLink1"> 
+	<label for="linkYt1">Enlace Youtube 1*:</label> 
+	<input type="text" id="linkYt1" class="validate[required,custom[yt]]" name="youtubeLink1"> 
 	<br />
 	
 	<label for="linkYt2">Enlace Youtube 2:</label> 
@@ -218,15 +230,11 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<input type="date" id="productionStartDate" class="validate[required]" name="productionStartDate"> 
 	<br>
 	
-	<label for="productionEndDate">Fecha fin de producci&oacute;n*:</label> 
-	<input type="date" id="productionEndDate" class="validate[required]" name="productionEndDate"> 
-	<br> 
-	
-	<label for="premiereStartDate">Fecha inicio presentaci&oacute;n*:</label> 
+	<label for="premiereStartDate">Fecha fin de Producci&oacute;n / Lanzamiento*:</label> 
 	<input type="date" id="premiereStartDate" class="validate[required]" name="premiereStartDate"> 
 	<br> 
 	
-	<label for="premiereEndDate">Fecha fin de presentaci&oacute;n*:</label> 
+	<label for="premiereEndDate">Fecha de cierre*:</label> 
 	<input type="date" id="premiereEndDate" class="validate[required]" name="premiereEndDate">
 	<br /> 
 	<br/> 
