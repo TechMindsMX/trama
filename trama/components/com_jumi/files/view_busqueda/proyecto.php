@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
-$path = JConfig::$mw_path.JConfig::$mw_avatar."/";
+$path = MIDDLE.PUERTO.AVATAR."/";
 
 $usuario = JFactory::getUser();
 $base = JUri::base();
@@ -9,11 +9,11 @@ $document = JFactory::getDocument();
 $pathJumi = Juri::base().'/components/com_jumi/files';
 
 if ($_POST['categoria'] == "" && $_POST['subcategoria'] == "all") {	
-	$url = JConfig::$mw_path.':7171/trama-middleware/rest/project/list';
+	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/list';
 } elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] == "all") {
-	$url = JConfig::$mw_path.':7171/trama-middleware/rest/project/category/'. $_POST['categoria'];
+	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'. $_POST['categoria'];
 } elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] != "all") {
-	$url = JConfig::$mw_path.':7171/trama-middleware/rest/project/subcategory/'. $_POST['subcategoria'];
+	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'. $_POST['subcategoria'];
 }
 	
 $json0 = file_get_contents($url);
@@ -31,17 +31,35 @@ function pageselectCallback (page_index, jq) {
 	var items_per_page = 10;
 	var max_elem = Math.min((page_index+1) * items_per_page, members.length);
 	var newcontent = '';
+	var columnas = 3;
+	var ancho = Math.floor(100/columnas);
+	var countCol = 0;
 
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
-		newcontent += '<div id="proyecto">';
-		newcontent += '<div id="avatar"> <img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" width="235" height="235" /> </div>';
-		newcontent += '<div id="titulo">';
-		newcontent += '<div id="tituloText">' + members[i].name + '</div>';
+		countCol++;
+		if (countCol == columnas) {
+			countCol = countCol - columnas;
+			last='-last';
+		}
+		else {
+			last='';
+		}
+		newcontent += '<div class="proyecto col' + last + ' ancho' + ancho + '">';
+		newcontent += '<div class="inner">';
+		newcontent += '<div class="titulo">';
+		newcontent += '<div class="tituloText inner"><h4>' + members[i].name + '</h4></div>';
 		newcontent += '</div>';
-		newcontent += '<div id="descripcion">';
-		newcontent += '<div id="descText">' + members[i].description + '</div>';
-		newcontent += '<div id="leer">';
-		newcontent += '<div id="leerText">' + "Leer mas...";
+		newcontent += '<div class="avatar"><img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" /></div>';
+		newcontent += '<div class="descripcion">';
+		newcontent += '<div class="inner">';
+			var descripcion = members[i].description;
+			var largo = 80;
+			var trimmed = descripcion.substring(0, largo);
+		newcontent += '<div class="descText">' + trimmed + '</div>';
+		newcontent += '<p class="readmore">';
+		newcontent += '<a href="#" class="leerText">' + "Ver más...";
+		newcontent += '</a>';
+		newcontent += '</p>';
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '</div>';
