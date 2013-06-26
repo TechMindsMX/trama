@@ -15,6 +15,7 @@ $document->addScript($pathJumi.'js/jquery.validationEngine.js');
 $document->addScript($pathJumi.'js/jquery.chained.js');
 $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 
+//action=" echo MIDDLE.PUERTO; /trama-middleware/rest/project/create"
 ?>
 
 <script type="text/javascript" charset="utf-8">
@@ -26,7 +27,41 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form2").validationEngine();
+		
+		
+
+		jQuery("#enviar").click(function (){
+			var form = jQuery("#form2")[0];
+			var total = form.length;
+			var section = '';
+			var unitSale = '';
+			var capacity = '';
+			
+			for (i=0; i < total; i++) {
+			    seccion = form[i].name.substring(0,7);
+			    capayuni = form[i].name.substring(0,8);
+			    
+			    if(seccion == 'section') {
+			       section += form[i].value+','; 
+			    }else if(capayuni == 'unitSale'){
+			        unitSale += form[i].value+',';
+			    }else if(capayuni == 'capacity'){
+			        capacity += form[i].value+',';
+			    }
+			}
+			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
+			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
+			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
+			
+			jQuery("#seccion").val(section);
+			jQuery("#unidad").val(unitSale);
+			jQuery("#inventario").val(capacity);
+			
+			jQuery("#form2").submit();
+		});
+		
 	});
+	
 	function checkHELLO(field, rules, i, options){
 		if (field.val() != "HELLO") {
 			return options.allrules.validate2fields.alertText;
@@ -34,24 +69,34 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	}
 </script>
 
-
 <!--DIV DE AGREGAR CAMPOS-->
 <div id="readroot" style="display: none">
 
-	<label for="">Secci&oacute;n:</label> <input type="text"
-		class="validate[required,custom[onlyLetterNumber]]" name="section0"> <br />
-	<label for="">Precio unidad:</label> <input type="number"
-		class="validate[required,custom[onlyNumberSp]]" name="unitSale0"
-		step="any"> <br> <label for="">Inventario(Cantidad):</label> <input
-		type="number" class="validate[required,custom[onlyNumberSp]]"
-		name="capacity0"> <br /> <br /> <input type="button"
-		value="Quitar campos"
-		onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
+	<label for="">Secci&oacute;n:</label> 
+	<input type="text" class="validate[required,custom[onlyLetterNumber]]" name="section0">
+	<br />
+	
+	<label for="">Precio unidad:</label> 
+	<input type="number" class="validate[required,custom[onlyNumberSp]]" name="unitSale0" step="any"> 
+	<br>
+	
+	<label for="">Inventario(Cantidad):</label> 
+	<input type="number" class="validate[required,custom[onlyNumberSp]]" name="capacity0"> 
+	<br /> 
+	<br /> 
+	
+	<input type="button" value="Quitar campos" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
 	<br />
 </div>
+
 <!--FIN DIV DE AGREGAR CAMPOS-->
+
 <h3>Crear un proyecto</h3>
-<form action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/create" id="form2" enctype="multipart/form-data" method="POST">
+
+<form id="form2" action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/create" enctype="multipart/form-data" method="POST">
+	<input type="hidden" name="userId" value="<?php echo $usuario->id; ?>" />
+	<input type="hidden" value="0" name="type" />
+	
 	<label for="nomProy">Nombre del proyecto*:</label> 
 	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
 	<br />
@@ -64,10 +109,11 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<label for="avatar">Imagen(Avatar) del proyecto*:</label> 
 	<input type="file" id="avatar" class="validate[required]" name="avatar"> 
 	<br />
-	
-	<br /> 
+	<br />
+	 
 	Videos promocionales (solo links de youtube):
-	<br /> 
+	<br />
+	 
 	<label for="linkYt1">Enlace Youtube 1:</label> 
 	<input type="text" id="linkYt1" class="validate[custom[yt]]" name="youtubeLink1"> 
 	<br />
@@ -121,8 +167,12 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	
 	<label for="elenco">Elenco:</label> <br />
 	<textarea name="cast" id="elenco" cols="60" rows="5"></textarea>
+	<br />
 	
-	<br /> 
+	<label for="direccion">Nombre del recinto*: </label> 
+	<input type="text" class="validate[required]" id="nameRecinto" name="inclosure" maxlength="100"> 
+	<br>
+	
 	<label for="direccion">Direcci&oacute;n del recinto*: </label> 
 	<input type="text" class="validate[required]" id="direccion" name="showground" maxlength="100"> 
 	<br> 
@@ -181,5 +231,5 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<br /> 
 	<br/> 
 	
-	<input type="submit" value="Enviar">
+	<input type="button" id="enviar" value="Enviar">
 </form>
