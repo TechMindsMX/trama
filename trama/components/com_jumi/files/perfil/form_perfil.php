@@ -168,21 +168,7 @@
 			<div class="_100">
             <input type="button" onclick="moreFieldsTelGr(this,true)" value="Tel&eacute;fono adicional" />  
             </div>          
-            <div class="_100">
-            	<label for="daGr_perfil_personalidadJuridica_idpersonalidadJuridica">Tipo de persona *:</label>
-            </div>
-            <div class="_25">
-                <label>F&iacute;sica</label>
-                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="1" checked="checked" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" />
-            </div>
-            <div class="_25">
-                <label>Moral</label>
-                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="2" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" />
-            </div>
-            <div class="_50">
-                <label>F&iacute;sica con actividad empresarial</label>
-                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="3" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" />
-            </div>            
+            
             <div id="nombre"><h3>Direcci&oacute;n</h3></div>
             <div class="_50">
                 <label for="dire_nomCalle">Calle *:</label>
@@ -254,7 +240,22 @@
             <div class="_50">
                 <label for="dire_nomDelegacion">Delegaci&oacute;n  o municipio *:</label>
                 <input name="dire_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomDelegacion" maxlength="50" />
-            </div>          
+            </div> 
+            <div class="_100">
+            	<label for="daGr_perfil_personalidadJuridica_idpersonalidadJuridica">Tipo de persona *:</label>
+            </div>
+            <div class="_25">
+                <label>F&iacute;sica</label>
+                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="1" checked="checked" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" />
+            </div>
+            <div class="_25">
+                <label>Moral</label>
+                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="2" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" />
+            </div>
+            <div class="_50">
+                <label>F&iacute;sica con actividad empresarial</label>
+                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="3" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" />
+            </div>                     
             <div id="noFisica" style="display:none">	  
             <div id="nombre"><h3>Datos Fiscales</h3></div>           
             <div id="datosFiscales">
