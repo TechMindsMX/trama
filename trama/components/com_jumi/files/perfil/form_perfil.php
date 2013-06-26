@@ -244,6 +244,7 @@
             <div class="_100">
             	<label for="daGr_perfil_personalidadJuridica_idpersonalidadJuridica">Tipo de persona *:</label>
             </div>
+            
             <div class="_25">
                 <label>F&iacute;sica</label>
                 <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="1" checked="checked" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" />
