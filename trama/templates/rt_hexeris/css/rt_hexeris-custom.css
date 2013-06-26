@@ -1,0 +1,21 @@
+.esconder {
+	position: absolute;
+	left: 3000px;
+}
+
+/*** com_users registration ***/
+#terminos a:link, #terminos a:visited, #terminos a:hover {
+	padding: 5px 10px;
+}
+.enRokbox {
+	min-width: 420px;
+}
+#terminos label { 
+	width: 80%; 
+	display: inline;
+}
+#terminos {
+	margin: 0 0 2em;
+}
+
+/*** fin com_users registration ***/
