@@ -1,6 +1,10 @@
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
+$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/1';
+$jsonproyecto = file_get_contents($urlproyectco);
+$jsonObjproyecto = json_decode($jsonproyecto);
+
 function getCategoria() {
 	$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
 	$jsonCategoria = file_get_contents($urlCategoria);
@@ -34,10 +38,12 @@ $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
 $document->addStyleSheet($pathJumi.'css/form2.css');
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
 $document->addScript($pathJumi.'js/mas.js');
+$document->addScript($pathJumi.'js/jquery.mask.js');
 $document->addScript($pathJumi.'js/jquery.validationEngine-es.js');
 $document->addScript($pathJumi.'js/jquery.validationEngine.js');
 $document->addScript($pathJumi.'js/jquery.chained.js');
 $document->addScript($pathJumi.'js/jquery.MultiFile.js');
+$document->addScript('http://dev7studios.com/demo/jquery-currency/jquery.currency.js');
 $document->addScriptDeclaration($scriptselect);
 
 //action=" echo MIDDLE.PUERTO; /trama-middleware/rest/project/create"
@@ -83,7 +89,7 @@ $document->addScriptDeclaration($scriptselect);
 			
 			jQuery("#form2").submit();
 		});
-		
+
 	});
 	
 	function checkHELLO(field, rules, i, options){
@@ -95,7 +101,6 @@ $document->addScriptDeclaration($scriptselect);
 
 <!--DIV DE AGREGAR CAMPOS-->
 <div id="readroot" style="display: none">
-
 	<label for=""><?php echo JText::_('SECCION'); ?>*:</label> 
 	<input type="text" class="validate[required,custom[onlyLetterNumber]]" name="section0">
 	<br />
@@ -104,13 +109,12 @@ $document->addScriptDeclaration($scriptselect);
 	<input type="number" class="validate[required,custom[onlyNumberSp]]" name="unitSale0" step="any"> 
 	<br>
 	
-	<label for=""><? echo jText::_('INVENTARIO_PROYECTO'); ?>:</label> 
+	<label for=""><? echo jText::_('INVENTARIOPP'); ?>:</label> 
 	<input type="number" class="validate[required,custom[onlyNumberSp]]" name="capacity0"> 
-	<br /> 
 	<br /> 
 	
 	<input type="button" value="Quitar campos" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
-	<br />
+	<br /><br />
 </div>
 
 <!--FIN DIV DE AGREGAR CAMPOS-->
@@ -119,10 +123,11 @@ $document->addScriptDeclaration($scriptselect);
 
 <form id="form2" action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/create" enctype="multipart/form-data" method="POST">
 	<input type="hidden" name="userId" value="<?php echo $usuario->id; ?>" />
-	<input type="hidden" value="0" name="type" />
+	<input type="hidden" name="status" value="0"  />
+	<input type="hidden" name="type" value="0"  />
 	
-	<label for="nomProy"><?php echo JText::_('NOMBRE_PROYECTO'); ?>*:</label> 
-	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
+	<label for="nomProy"><?php echo JText::_('NOMBRE').JText::_('PROYECTO'); ?>*:</label> 
+	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100" value="<?php echo $jsonObjproyecto->name; ?>"> 
 	<br />
 	
 	<label for="categoria">Categoria: </label>
@@ -240,15 +245,15 @@ $document->addScriptDeclaration($scriptselect);
 	<br />
 	<br /> 
 	
-	<label for="seccion">Secci&oacute;n*:</label>
+	<label for="seccion"><?php echo JText::_('SECCION'); ?>*:</label>
 	<input type="text" id="seccion" class="validate[required,custom[onlyLetterNumber]]" name="section"> 
 	<br />
 	
-	<label for="unidad">Precio unidad*:</label> 
-	<input type="number" id="unidad" class="validate[required,custom[onlyNumberSp]]" name="unitSale" step="any"> 
+	<label for="unidad"><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
+	<input type="number" id="unidad" class="validate[required,custom[onlyNumberSp]]" name="unitSale"> 
 	<br> 
 	
-	<label for="inventario">Inventario(Cantidad)*:</label>
+	<label for="inventario"><?php echo JText::_('INVENTARIOPP'); ?>*:</label>
 	<input type="number" id="inventario" class="validate[required,custom[onlyNumberSp]]" name="capacity"> 
 	<br />
 	<br />
