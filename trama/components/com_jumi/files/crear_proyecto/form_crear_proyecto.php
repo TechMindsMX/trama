@@ -47,7 +47,7 @@ $document->addScript('http://dev7studios.com/demo/jquery-currency/jquery.currenc
 $document->addScriptDeclaration($scriptselect);
 
 $action = 'action="'.MIDDLE.PUERTO-'/trama-middleware/rest/project/create"';
-//$action = 'http://localhost/lutek/trama/trama/components/com_jumi/files/crear_proyecto/test.php';
+
 ?>
 <script>
 	jQuery(document).ready(function(){
@@ -125,7 +125,7 @@ $action = 'action="'.MIDDLE.PUERTO-'/trama-middleware/rest/project/create"';
 
 <h3>Crear un proyecto</h3>
 
-<form id="form2" action="<?php echo $action?>" enctype="multipart/form-data" method="POST">
+<form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<input type="hidden" name="userId" value="<?php echo $usuario->id; ?>" />
 	<input type="hidden" name="status" value="0"  />
 	<input type="hidden" name="type" value="0"  />
