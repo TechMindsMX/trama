@@ -31,7 +31,8 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 		jQuery("#enviar").click(function (){
 			var form = jQuery("#form2")[0];
 			var total = form.length;
-			var section = new Array(3);
+			
+			var section = new Array();
 			var unitSale = new Array();
 			var capacity = new Array();
 			var sec = 0;
@@ -40,34 +41,27 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 			
 			for (i=0; i < total; i++) {
 			    seccion = form[i].name.substring(0,7);
-				capayuni = form[i].name.substring(0,8);
-				
-				if(seccion == 'section') {
-				   if(sec < 3){
-				       section[sec] = form[i].value;
-				   }
-				   
-				   sec++;
-				}else if(capayuni == 'unitSale'){
-				   if(unit < 3){
-			    	   unitSale[unit] = form[i].value;
-				   }
-				   unit++
-				}else if(capayuni == 'capacity'){
-				   if(cap < 3){
-			        	capacity[cap] = form[i].value;
-			       }
-			       
-			       cap++;
-				}
+			    capayuni = form[i].name.substring(0,8);
+			    if(seccion == 'section') {
+			    console.log('en seccion');
+			        section[sec] = form[i].value;
+			        sec++;
+			    }else if(capayuni == 'unitSale'){
+			        unitSale[unit] = form[i].value;
+			        unit++
+			    }else if(capayuni == 'capacity'){
+			        capacity[cap] = form[i].value;
+			        cap++;
+			    }
 			}
+			
 			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
 			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
 			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
 			
 			jQuery("#seccion").val(section.join(","));
-			jQuery("#unidad").val(unitSale.join(",");
-			jQuery("#inventario").val(capacity.join(",");
+			jQuery("#unidad").val(unitSale.join(","));
+			jQuery("#inventario").val(capacity.join(","));
 			
 			jQuery("#form2").submit();
 		});
@@ -109,7 +103,7 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<input type="hidden" name="userId" value="<?php echo $usuario->id; ?>" />
 	<input type="hidden" value="0" name="type" />
 	
-	<label for="nomProy">Nombre del proyecto*:</label> 
+	<label for="nomProy"><?php echo JText::_('NOMBRE_PROYECTO'); ?>*:</label> 
 	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
 	<br />
 	<!-- aqui va el codigo para que categoria y subcategoria -->
