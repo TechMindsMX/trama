@@ -46,7 +46,8 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 $document->addScript('http://dev7studios.com/demo/jquery-currency/jquery.currency.js');
 $document->addScriptDeclaration($scriptselect);
 
-//action=" echo MIDDLE.PUERTO; /trama-middleware/rest/project/create"
+$action = 'action="'.MIDDLE.PUERTO-'/trama-middleware/rest/project/create"';
+//$action = 'http://localhost/lutek/trama/trama/components/com_jumi/files/crear_proyecto/test.php';
 ?>
 <script>
 	jQuery(document).ready(function(){
@@ -67,7 +68,6 @@ $document->addScriptDeclaration($scriptselect);
 			    seccion = form[i].name.substring(0,7);
 			    capayuni = form[i].name.substring(0,8);
 			    if(seccion == 'section') {
-			    console.log('en seccion');
 			        section[sec] = form[i].value;
 			        sec++;
 			    }else if(capayuni == 'unitSale'){
@@ -82,6 +82,10 @@ $document->addScriptDeclaration($scriptselect);
 			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
 			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
 			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
+			
+			console.log(section.join(","));
+			console.log(unitSale.join(","));
+			console.log(capacity.join(","));
 			
 			jQuery("#seccion").val(section.join(","));
 			jQuery("#unidad").val(unitSale.join(","));
@@ -121,7 +125,7 @@ $document->addScriptDeclaration($scriptselect);
 
 <h3>Crear un proyecto</h3>
 
-<form id="form2" action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/create" enctype="multipart/form-data" method="POST">
+<form id="form2" action="<?php echo $action?>" enctype="multipart/form-data" method="POST">
 	<input type="hidden" name="userId" value="<?php echo $usuario->id; ?>" />
 	<input type="hidden" name="status" value="0"  />
 	<input type="hidden" name="type" value="0"  />
@@ -250,11 +254,11 @@ $document->addScriptDeclaration($scriptselect);
 	<br />
 	
 	<label for="unidad"><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
-	<input type="number" id="unidad" class="validate[required,custom[onlyNumberSp]]" name="unitSale"> 
+	<input type="text" id="unidad" class="validate[required,custom[onlyNumberSp]]" name="unitSale"> 
 	<br> 
 	
 	<label for="inventario"><?php echo JText::_('INVENTARIOPP'); ?>*:</label>
-	<input type="number" id="inventario" class="validate[required,custom[onlyNumberSp]]" name="capacity"> 
+	<input type="text" id="inventario" class="validate[required,custom[onlyNumberSp]]" name="capacity"> 
 	<br />
 	<br />
 	 
