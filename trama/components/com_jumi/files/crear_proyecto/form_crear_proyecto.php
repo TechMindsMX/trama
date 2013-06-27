@@ -1,10 +1,34 @@
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
+function getCategoria() {
+	$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
+	$jsonCategoria = file_get_contents($urlCategoria);
+	$jsonObjCategoria = json_decode($jsonCategoria);
+	        
+    return $jsonObjCategoria;
+}
+
+function getSubCat() { 	
+	$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
+	$jsonSubcategoria = file_get_contents($urlSubcategoria);
+	$jsonObjSubcategoria = json_decode($jsonSubcategoria);
+	
+	return $jsonObjSubcategoria;
+	
+}
+
 $usuario = JFactory::getUser();
-$base = JUri::base();
 $document = JFactory::getDocument();
-$pathJumi = Juri::base().'/components/com_jumi/files/crear_proyecto/';
+$base = JUri::base();
+$pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
+
+$opcionesSubCat = '';
+$categoria = getCategoria();
+$subCategorias = getSubCat();
+$scriptselect = 'jQuery(function() {
+	jQuery("#subcategoria").chained("#selectCategoria");	
+});';
 
 $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
 $document->addStyleSheet($pathJumi.'css/form2.css');
@@ -14,16 +38,10 @@ $document->addScript($pathJumi.'js/jquery.validationEngine-es.js');
 $document->addScript($pathJumi.'js/jquery.validationEngine.js');
 $document->addScript($pathJumi.'js/jquery.chained.js');
 $document->addScript($pathJumi.'js/jquery.MultiFile.js');
+$document->addScriptDeclaration($scriptselect);
 
 //action=" echo MIDDLE.PUERTO; /trama-middleware/rest/project/create"
 ?>
-
-<script type="text/javascript" charset="utf-8">
-	
-  $(function() {
-    $("#subcategoria").chained("#categoria");    
-});
-</script>
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form2").validationEngine();
@@ -106,7 +124,34 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<label for="nomProy"><?php echo JText::_('NOMBRE_PROYECTO'); ?>*:</label> 
 	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
 	<br />
-	<!-- aqui va el codigo para que categoria y subcategoria -->
+	
+	<label for="categoria">Categoria: </label>
+	<select id="selectCategoria" name="categoria">
+		
+	<?php		
+	foreach ( $categoria as $key => $value ) {
+		var_dump($value->id);
+		
+		echo '<option value="'.$value->id.'">'.$value->name.'</option>';
+		$opcionesPadre[] = $value->id;
+	}
+	?>
+	</select>
+	<br />
+	
+	<label for="subcategory">Subcategoria: </label>
+	<select id="subcategoria" name="subcategory">
+			<option value="all">Todas</option>
+	<?php
+	foreach ( $subCategorias as $key => $value ) {
+		$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'">'.$value->name.'</option>';
+	}
+	
+	echo $opcionesSubCat;
+	?>
+	</select>
+	<br />
+	<br />
 	
 	<label for="banner">Imagen(Banner) del proyecto*:</label>
 	<input type="file" id="banner" class="validate[required]" name="banner"> 
@@ -221,15 +266,15 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<br>
 	
 	<label for="productionStartDate">Fecha inicio producci&oacute;n*:</label> 
-	<input type="date" id="productionStartDate" class="validate[required]" name="productionStartDate"> 
+	<input type="text" id="productionStartDate" class="validate[required, custom[date], custom[funciondate]]" name="productionStartDate"> 
 	<br>
 	
 	<label for="premiereStartDate">Fecha fin de Producci&oacute;n / Lanzamiento*:</label> 
-	<input type="date" id="premiereStartDate" class="validate[required]" name="premiereStartDate"> 
+	<input type="text" id="premiereStartDate" class="validate[required, custom[date], custom[fininicio]]" name="premiereStartDate"> 
 	<br> 
 	
 	<label for="premiereEndDate">Fecha de cierre*:</label> 
-	<input type="date" id="premiereEndDate" class="validate[required]" name="premiereEndDate">
+	<input type="text" id="premiereEndDate" class="validate[required], custom[date], custom[cierre]" name="premiereEndDate">
 	<br /> 
 	<br/> 
 	

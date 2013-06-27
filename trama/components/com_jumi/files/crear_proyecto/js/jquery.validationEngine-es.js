@@ -17,6 +17,59 @@
                     },
                     "alertText": "* Field must equal test"
                 },
+                "funciondate": {
+                	"func": function(field, rules, i, options){
+                		var valorCampo = '';
+                		var fechaCampo = new Date();
+                		var hoy = new Date();
+                		var respuesta = true;
+                		
+                		if(validaFechaDDMMAAAA(field.val())){
+                			valorCampo = field.val().split('/');
+							fechaCampo.setFullYear(valorCampo[2],valorCampo[1]-1,valorCampo[0])                		
+                		}
+                		return ( hoy <= fechaCampo ) ? true : false;
+                	},
+                	"alertText": "* La fecha no puede ser menor a "+new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
+                },
+                "fininicio": {
+                	"func": function ( field ) {
+                		if(validaFechaDDMMAAAA(field.val())){
+						    var fecha = field.val();
+						    var fechaminima = jQuery('#productionStartDate').val();
+						    var arrayfecha = fecha.split('/');
+						    var arrayfechamin = fechaminima.split('/');
+						    var date1 = new Date();
+						    var date2 = new Date();
+						    var date3 = new Date();
+						    
+						    date1.setFullYear(arrayfecha[2],parseInt(arrayfecha[1])-1,parseInt(arrayfecha[0]));
+						    date2.setFullYear(arrayfechamin[2],parseInt(arrayfechamin[1])-1,parseInt(arrayfechamin[0])+120);
+						    date3.setFullYear(arrayfechamin[2],parseInt(arrayfechamin[1])-1,parseInt(arrayfechamin[0]));
+						}
+						
+						return (date1 <= date2) && (date1 > date3) ? true : false;
+                	},
+                	"alertText": "* La Fecha no puede ser mas de 120 dias del inicio de producción ni ser menor a la de inicio de producción"
+                },
+                "cierre": {
+                	"func": function ( field ) {
+                		if(validaFechaDDMMAAAA(field.val())){
+						    var fecha = field.val();
+						    var fechaminima = jQuery('#premiereStartDate').val();
+						    var arrayfecha = fecha.split('/');
+						    var arrayfechamin = fechaminima.split('/');
+						    var date1 = new Date();
+						    var date2 = new Date();
+						    
+						    date1.setFullYear(arrayfecha[2],parseInt(arrayfecha[1])-1,parseInt(arrayfecha[0]));
+						    date2.setFullYear(arrayfechamin[2],parseInt(arrayfechamin[1])-1,parseInt(arrayfechamin[0]));
+						}
+						
+						return (date1 > date2) ? true : false;
+                	},
+                	"alertText": "* La Fecha no puede ser menor a inicio de producción"
+                },
                 "minSize": {
                     "regex": "none",
                     "alertText": "* Mínimo de ",
@@ -84,11 +137,13 @@
                     "alertText": "* No es un valor decimal válido"
                 },
                 "date": {
-                    "regex": /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+                    "func": function (field){
+                		return validaFechaDDMMAAAA(field.val());
+                	},
                     "alertText": "* Fecha inválida, por favor utilize el formato DD/MM/AAAA"
                 },
                 "ipv4": {
-                	"regex": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,
+                	"func": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,
                     "alertText": "* Direccion IP inválida"
                 },
                 "url": {
@@ -147,3 +202,74 @@
     $.validationEngineLanguage.newLang();
 })(jQuery);
 
+function validaFechaDDMMAAAA(fecha){
+	var dtCh= "/";
+	var minYear=1900;
+	var maxYear=2100;
+	function isInteger(s){
+		var i;
+		for (i = 0; i < s.length; i++){
+			var c = s.charAt(i);
+			if (((c < "0") || (c > "9"))) return false;
+		}
+		return true;
+	}
+	function stripCharsInBag(s, bag){
+		var i;
+		var returnString = "";
+		for (i = 0; i < s.length; i++){
+			var c = s.charAt(i);
+			if (bag.indexOf(c) == -1) returnString += c;
+		}
+		return returnString;
+	}
+	function daysInFebruary (year){
+		return (((year % 4 == 0) && ( (!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28 );
+	}
+	function DaysArray(n) {
+		for (var i = 1; i <= n; i++) {
+			this[i] = 31
+			if (i==4 || i==6 || i==9 || i==11) {this[i] = 30}
+			if (i==2) {this[i] = 29}
+		}
+		return this
+	}
+	function isDate(dtStr){
+		var daysInMonth = DaysArray(12)
+		var pos1=dtStr.indexOf(dtCh)
+		var pos2=dtStr.indexOf(dtCh,pos1+1)
+		var strDay=dtStr.substring(0,pos1)
+		var strMonth=dtStr.substring(pos1+1,pos2)
+		var strYear=dtStr.substring(pos2+1)
+		strYr=strYear
+		if (strDay.charAt(0)=="0" && strDay.length>1) strDay=strDay.substring(1)
+		if (strMonth.charAt(0)=="0" && strMonth.length>1) strMonth=strMonth.substring(1)
+		for (var i = 1; i <= 3; i++) {
+			if (strYr.charAt(0)=="0" && strYr.length>1) strYr=strYr.substring(1)
+		}
+		month=parseInt(strMonth)
+		day=parseInt(strDay)
+		year=parseInt(strYr)
+		if (pos1==-1 || pos2==-1){
+			return false
+		}
+		if (strMonth.length<1 || month<1 || month>12){
+			return false
+		}
+		if (strDay.length<1 || day<1 || day>31 || (month==2 && day>daysInFebruary(year)) || day > daysInMonth[month]){
+			return false
+		}
+		if (strYear.length != 4 || year==0 || year<minYear || year>maxYear){
+			return false
+		}
+		if (dtStr.indexOf(dtCh,pos2+1)!=-1 || isInteger(stripCharsInBag(dtStr, dtCh))==false){
+			return false
+		}
+		return true
+	}
+	if(isDate(fecha)){
+		return true;
+	}else{
+		return false;
+	}
+}
