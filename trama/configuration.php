@@ -15,7 +15,7 @@ class JConfig {
 	public $host = 'localhost';
 	public $user = 'root';
 	public $password = '';
-	public $db = 'hexeris-rocketlauncher_j25';
+	public $db = 'hexeris';
 	public $dbprefix = 'c3rn2_';
 	public $live_site = '';
 	public $secret = '8VHfBZXpdfKW1koJ';
@@ -53,8 +53,8 @@ class JConfig {
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
-	public $log_path = 'C:\\wamp\\www\\hexeris-rocketlauncher_j25\\logs';
-	public $tmp_path = 'C:\\wamp\\www\\hexeris-rocketlauncher_j25\\tmp';
+	public $log_path = '/var/www/lutek/trama/trama/logs';
+	public $tmp_path = '/var/www/lutek/trama/trama/tmp';
 	public $lifetime = '150';
 	public $session_handler = 'database';
 	public $MetaRights = '';

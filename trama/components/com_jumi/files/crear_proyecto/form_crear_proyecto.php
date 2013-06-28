@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
 $urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/2';
@@ -65,9 +65,9 @@ if ( isset ( $jsonObjproyecto ) ) {
 	$ligasVideos = $jsonObjproyecto->projectYoutubes;
 	$ligasAudios = $jsonObjproyecto->projectSoundclouds;
 	
-	$fechaIniProd = split('-',$jsonObjproyecto->productionStartDate);
-	$fechaFin = split('-',$jsonObjproyecto->premiereStartDate);
-	$fechaCierre = split('-',$jsonObjproyecto->premiereEndDate);
+	$fechaIniProd = explode('-',$jsonObjproyecto->productionStartDate);
+	$fechaFin = explode('-',$jsonObjproyecto->premiereStartDate);
+	$fechaCierre = explode('-',$jsonObjproyecto->premiereEndDate);
 	
 	$countunitSales = count($jsonObjproyecto->projectUnitSales);
 	$datosRecintos = $jsonObjproyecto->projectUnitSales;
@@ -147,7 +147,7 @@ echo $divrecintos;
 
 <!--FIN DIV DE AGREGAR CAMPOS-->
 
-<h3>Crear un proyecto</h3>
+<h3><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h3>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<?php echo $hiddenIdProyecto; ?>
@@ -174,7 +174,7 @@ echo $divrecintos;
 		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->name : ''; ?>" /> 
 	<br />
 	
-	<label for="categoria">Categoria: </label>
+	<label for="categoria"><?php echo JText::_('CATEGORIA'); ?>: </label>
 	<select id="selectCategoria" name="categoria">
 		
 	<?php		
@@ -186,7 +186,7 @@ echo $divrecintos;
 	</select>
 	<br />
 	
-	<label for="subcategory">Subcategoria: </label>
+	<label for="subcategory"><?php echo JText::_('SUBCATEGORIA'); ?>: </label>
 	<select id="subcategoria" name="subcategory">
 		<option value="all">Todas</option>
 		<?php
@@ -199,17 +199,17 @@ echo $divrecintos;
 	<br />
 	<br />
 	
-	<label for="banner">Imagen(Banner) del proyecto*:</label>
+	<label for="banner"><?php echo JText::_('BANNER').JText::_('PROYECTO'); ?>*:</label>
 	<input type="file" id="banner" class="validate[required]" name="banner">
 	<br />
 	
-	<label for="avatar">Imagen(Avatar) del proyecto*:</label> 
+	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PROYECTO'); ?>*:</label> 
 	<input type="file" id="avatar" class="validate[required]" name="avatar">
 	
 	<br />
 	<br />
 	 
-	Videos promocionales (solo links de youtube):
+	<?php echo JText::_('VIDEOSP'); ?>
 	<br />
 	 
 	<?php
@@ -223,7 +223,7 @@ echo $divrecintos;
 	}
 	?>
 	
-	<br /> Audios promocionales (solo links de soundcloud): 
+	<br /> <?php echo JText::_('VIDEOSP'); ?>
 	<br /> 
 	
 	<?php
@@ -284,7 +284,7 @@ echo $divrecintos;
 		name="budget" /> 
 	<br /> 
 	
-	<br /> Precios de salida del proyecto*: 
+	<br /> <?php echo JText::_('PRECIOS_SALIDA').JText::_('PROYECTO')?>*: 
 	<br />
 	<br /> 
 	
@@ -339,7 +339,7 @@ echo $divrecintos;
 		step="any" /> 
 	<br>
 	
-	<label for="productionStartDate">Fecha inicio producci&oacute;n*:</label> 
+	<label for="productionStartDate"><?php echo JText::_('FECHA_INICIO_PRODUCCION')?>*:</label> 
 	<input
 		type = "text" 
 	    id = "productionStartDate" 
@@ -348,7 +348,7 @@ echo $divrecintos;
 	    name = "productionStartDate" /> 
 	<br>
 	
-	<label for="premiereStartDate">Fecha fin de Producci&oacute;n / Lanzamiento*:</label> 
+	<label for="premiereStartDate"><?php echo JText::_('FECHA_FIN_INICIO')?>*:</label> 
 	<input 
 		type = "text" 
 	    id = "premiereStartDate" 
@@ -358,7 +358,7 @@ echo $divrecintos;
 	       
 	<br> 
 	
-	<label for="premiereEndDate">Fecha de cierre*:</label> 
+	<label for="premiereEndDate"><?php echo JText::_('FECHA_CIERRE')?>*:</label> 
 	<input 
 		type = "text" 
 		id = "premiereEndDate" 
