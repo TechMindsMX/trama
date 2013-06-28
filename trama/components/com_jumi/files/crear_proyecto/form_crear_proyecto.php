@@ -26,11 +26,14 @@ $usuario = JFactory::getUser();
 $document = JFactory::getDocument();
 $base = JUri::base();
 $pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
+
+//definicion de campos del formulario
 $action = 'action="'.MIDDLE.PUERTO.'/trama-middleware/rest/project/create"';
 $hiddenIdProyecto = '';
 $banner = '';
 $avatar = '';
 $opcionesSubCat = '';
+//termina los definicion de campos del formularios
 
 $categoria = getCategoria();
 $subCategorias = getSubCat();
@@ -52,7 +55,8 @@ $document->addScriptDeclaration($scriptselect);
 
 if ( isset ( $jsonObjproyecto ) ) {
 	$hiddenIdProyecto = '<input type="hidden" name="idProject" value="'.$jsonObjproyecto->id.'"  />';
-	echo $avatar = '<img src="'.MIDDLE.AVATAR.'/'.$jsonObjproyecto->projectAvatar->name.'" width="100" />';	
+	$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$jsonObjproyecto->projectAvatar->name.'" width="100" />';
+	$banner = '<img src="'.MIDDLE.BANNER.'/'.$jsonObjproyecto->projectBanner->name.'" width="100" />';
 }
 ?>
 <script>
@@ -133,11 +137,17 @@ if ( isset ( $jsonObjproyecto ) ) {
 
 <form id="form2" <?php echo $action; ?> enctype="multipart/form-data" method="POST">
 	<?php echo $hiddenIdProyecto; ?>
+	<input type="hidden"
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->userId : $usuario->id; ?>"
+		   name="userId" />
+		   
 	<input type="hidden" 
-		   name="userId" 
-		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->userId : $usuario->id; ?>" />
-	<input type="hidden" name="status" value="0"  />
-	<input type="hidden" name="type" value="0"  />
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->status : '0'; ?>"
+		   name="status" />
+		   
+	<input type="hidden"
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->type : '0'; ?>"
+		   name="type" />
 	
 	<label for="nomProy"><?php echo JText::_('NOMBRE').JText::_('PROYECTO'); ?>*:</label>
 	<input type="text" name="name" id="nomProy"
@@ -173,11 +183,11 @@ if ( isset ( $jsonObjproyecto ) ) {
 	
 	<label for="banner">Imagen(Banner) del proyecto*:</label>
 	<input type="file" id="banner" class="validate[required]" name="banner">
-	<?php echo $avatar; ?>
 	<br />
 	
 	<label for="avatar">Imagen(Avatar) del proyecto*:</label> 
-	<input type="file" id="avatar" class="validate[required]" name="avatar"> 
+	<input type="file" id="avatar" class="validate[required]" name="avatar">
+	
 	<br />
 	<br />
 	 
@@ -207,7 +217,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 	<br /> Audios promocionales (solo links de soundcloud): 
 	<br /> 
 	
-	<label for="linkSc1">Enlace Soundcloud 1:</label> 
+	<label for="linkSc1">Enlace Soundcloud 1:</label>
 	<input type="text" id="linkSc1" class="validate[custom[sc]]" name="soundCloudLink1"> 
 	<br />
 	
@@ -232,19 +242,33 @@ if ( isset ( $jsonObjproyecto ) ) {
 	<br /> 
 	
 	<label for="descProy">Descripci&oacute;n del proyecto*:</label> <br />
-	<textarea name="description" id="descProy" class="validate[required]" cols="60" rows="5"></textarea>
+	<textarea name="description" id="descProy" class="validate[required]" cols="60" rows="5"><?php 
+		echo isset($jsonObjproyecto) ? $jsonObjproyecto->description : ''; 
+	?></textarea>
 	<br /> 
 	
 	<label for="elenco">Elenco:</label> <br />
-	<textarea name="cast" id="elenco" cols="60" rows="5"></textarea>
+	<textarea name="cast" id="elenco" cols="60" rows="5"><?php 
+		echo isset($jsonObjproyecto) ? $jsonObjproyecto->cast : ''; 
+	?></textarea>
 	<br />
 	
 	<label for="direccion">Nombre del recinto*: </label> 
-	<input type="text" class="validate[required]" id="nameRecinto" name="inclosure" maxlength="100"> 
+	<input type="text" 
+		   class="validate[required]" 
+		   id="nameRecinto"
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->inclosure : ''; ?>" 
+		   name="inclosure"
+		   maxlength="100" /> 
 	<br>
 	
 	<label for="direccion">Direcci&oacute;n del recinto*: </label> 
-	<input type="text" class="validate[required]" id="direccion" name="showground" maxlength="100"> 
+	<input type="text" 
+		   class="validate[required]"
+		   id="direccion"
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->showground : ''; ?>"
+		   name="showground"
+		   maxlength="100" /> 
 	<br> 
 	
 	<label for="plantilla">Cargar la plantilla de Excel con el Business Case*:</label> 
@@ -252,7 +276,11 @@ if ( isset ( $jsonObjproyecto ) ) {
 	<br />
 	
 	<label for="presupuesto">Presupuesto del proyecto*:</label> 
-	<input type="number" class="validate[required]"	id="presupuesto" name="budget"> 
+	<input type="number" 
+		   class="validate[required]"
+		   id="presupuesto"
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->budget : ''; ?>"
+		   name="budget" /> 
 	<br /> 
 	
 	<br /> Precios de salida del proyecto*: 
@@ -277,23 +305,46 @@ if ( isset ( $jsonObjproyecto ) ) {
 	<br /> 
 	
 	<label for="potenicales">Ingresos potenciales del proyecto*:</label> 
-	<input type="number" id="potenciales" class="validate[required,custom[onlyNumberSp]]" name="revenuePotential" step="any"> 
+	<input type="number" 
+		   id="potenciales"
+		   class="validate[required,custom[onlyNumberSp]]"
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->revenuePotential : ''; ?>"
+		   name="revenuePotential"
+		   step="any" /> 
 	<br>
 	
 	<label for="equilibrio">Punto de equilibrio*:</label>
-	<input type="number" id="equilibrio" class="validate[required,custom[onlyNumberSp]]" name="breakeven" step="any"> 
+	<input type = "number" 
+		   id = "equilibrio"
+		   class = "validate[required,custom[onlyNumberSp]]"
+		   value = "<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->breakeven : ''; ?>"
+		   name = "breakeven"
+		   step="any" /> 
 	<br>
 	
 	<label for="productionStartDate">Fecha inicio producci&oacute;n*:</label> 
-	<input type="text" id="productionStartDate" class="validate[required, custom[date], custom[funciondate]]" name="productionStartDate"> 
+	<input type = "text" 
+	       id = "productionStartDate" 
+	       class = "validate[required, custom[date], custom[funciondate]]"
+	       value = "<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->productionStartDate : ''; ?>" 
+	       name="productionStartDate" /> 
 	<br>
 	
 	<label for="premiereStartDate">Fecha fin de Producci&oacute;n / Lanzamiento*:</label> 
-	<input type="text" id="premiereStartDate" class="validate[required, custom[date], custom[fininicio]]" name="premiereStartDate"> 
+	<input type = "text" 
+	       id = "premiereStartDate" 
+	       class = "validate[required, custom[date], custom[fininicio]]"
+	       value = "<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->premiereStartDate : ''; ?>" 
+	       name = "premiereStartDate" />
+	       
 	<br> 
 	
 	<label for="premiereEndDate">Fecha de cierre*:</label> 
-	<input type="text" id="premiereEndDate" class="validate[required], custom[date], custom[cierre]" name="premiereEndDate">
+	<input type = "text" 
+		   id = "premiereEndDate" 
+		   class = "validate[required], custom[date], custom[cierre]"
+		   value = "<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->premiereEndDate : ''; ?>" 
+		   name = "premiereEndDate">
 	<br /> 
 	<br/> 
 	
