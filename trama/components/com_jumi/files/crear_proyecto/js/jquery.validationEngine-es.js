@@ -50,7 +50,7 @@
 						
 						return (date1 <= date2) && (date1 > date3) ? true : false;
                 	},
-                	"alertText": "* La Fecha no puede ser mas de 120 dias del inicio de producción ni ser menor a la de inicio de producción"
+                	"alertText": "* La Fecha no puede ser mas de 120 dias del inicio de producción ni ser menor a la fecha de lanzamiento"
                 },
                 "cierre": {
                 	"func": function ( field ) {
@@ -68,7 +68,7 @@
 						
 						return (date1 > date2) ? true : false;
                 	},
-                	"alertText": "* La Fecha no puede ser menor a inicio de producción"
+                	"alertText": "* La Fecha no puede ser menor a la fecha de lanzamiento"
                 },
                 "minSize": {
                     "regex": "none",

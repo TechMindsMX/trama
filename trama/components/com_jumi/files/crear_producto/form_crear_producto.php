@@ -1,33 +1,95 @@
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
-$usuario = JFactory::getUser();
-$base = JUri::base();
-$document = JFactory::getDocument();
-$pathJumi = Juri::base().'/components/com_jumi/files/crear_proyecto/';
+$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/1';
+$jsonproyecto = file_get_contents($urlproyectco);
+$jsonObjproyecto = json_decode($jsonproyecto);
 
+function getCategoria() {
+	$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
+	$jsonCategoria = file_get_contents($urlCategoria);
+	$jsonObjCategoria = json_decode($jsonCategoria);
+	 
+	return $jsonObjCategoria;
+}
+
+function getSubCat() {
+	$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
+	$jsonSubcategoria = file_get_contents($urlSubcategoria);
+	$jsonObjSubcategoria = json_decode($jsonSubcategoria);
+
+	return $jsonObjSubcategoria;
+
+}
+
+$usuario = JFactory::getUser();
+$document = JFactory::getDocument();
+$base = JUri::base();
+$pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
+
+$opcionesSubCat = '';
+$categoria = getCategoria();
+$subCategorias = getSubCat();
+$scriptselect = 'jQuery(function() {
+	jQuery("#subcategoria").chained("#selectCategoria");
+});';
 
 $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
 $document->addStyleSheet($pathJumi.'css/form2.css');
-
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
 $document->addScript($pathJumi.'js/mas.js');
 $document->addScript($pathJumi.'js/jquery.validationEngine-es.js');
 $document->addScript($pathJumi.'js/jquery.validationEngine.js');
 $document->addScript($pathJumi.'js/jquery.chained.js');
 $document->addScript($pathJumi.'js/jquery.MultiFile.js');
+$document->addScriptDeclaration($scriptselect);
 
 ?>
 
-<script type="text/javascript" charset="utf-8">
-	
-  $(function() {
-    $("#subcategoria").chained("#categoria");    
-});
-</script>
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form2").validationEngine();
+
+		jQuery("#enviar").click(function (){
+			var form = jQuery("#form2")[0];
+			var total = form.length;
+			
+			var section = new Array();
+			var unitSale = new Array();
+			var capacity = new Array();
+			var sec = 0;
+			var unit = 0;
+			var cap = 0;
+			
+			for (i=0; i < total; i++) {
+			    seccion = form[i].name.substring(0,7);
+			    capayuni = form[i].name.substring(0,8);
+			    if(seccion == 'section') {
+			        section[sec] = form[i].value;
+			        sec++;
+			    }else if(capayuni == 'unitSale'){
+			        unitSale[unit] = form[i].value;
+			        unit++
+			    }else if(capayuni == 'capacity'){
+			        capacity[cap] = form[i].value;
+			        cap++;
+			    }
+			}
+			
+			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
+			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
+			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
+			
+			console.log(section.join(","));
+			console.log(unitSale.join(","));
+			console.log(capacity.join(","));
+			
+			jQuery("#seccion").val(section.join(","));
+			jQuery("#unidad").val(unitSale.join(","));
+			jQuery("#inventario").val(capacity.join(","));
+			
+			jQuery("#form2").submit();
+		});		
 	});
 	function checkHELLO(field, rules, i, options){
 		if (field.val() != "HELLO") {
@@ -65,7 +127,32 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<label for="nomProy"><?php echo JText::_('NOMBREPR').JText::_('PRODUCTO');  ?>*:</label> 
 	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
 	<br />
-	<!-- aqui va el codigo para que categoria y subcategoria -->
+	<label for="categoria">Categoria: </label>
+	<select id="selectCategoria" name="categoria">
+		
+	<?php		
+	foreach ( $categoria as $key => $value ) {
+		var_dump($value->id);
+		
+		echo '<option value="'.$value->id.'">'.$value->name.'</option>';
+		$opcionesPadre[] = $value->id;
+	}
+	?>
+	</select>
+	<br />
+	
+	<label for="subcategory">Subcategoria: </label>
+	<select id="subcategoria" name="subcategory">
+			<option value="all">Todas</option>
+	<?php
+	foreach ( $subCategorias as $key => $value ) {
+		$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'">'.$value->name.'</option>';
+	}
+	
+	echo $opcionesSubCat;
+	?>
+	</select>
+	<br />
 	
 	<label for="banner"><?php echo JText::_('BANNER').JText::_('PRODUCTO');  ?>*:</label>
 	<input type="file" id="banner" class="validate[required]" name="banner"> 
@@ -164,13 +251,13 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 	<br /> 
 	
 	<label for="premiereStartDate"><?php echo JText::_('FECHA_LANZAMIENTO');  ?></label> 
-	<input type="date"  class="validate[required,custom[date]]" name="premiereStartDate"> 
+	<input type="text" id="premiereStartDate"  class="validate[required,custom[date],custom[funciondate]]" name="premiereStartDate"> 
 	<br> 
 	
 	<label for="premiereEndDate"><?php echo JText::_('FECHA_CIERRE');  ?></label> 
-	<input type="date"  class="validate[required,custom[date]]" name="premiereEndDate">
+	<input type="text"  class="validate[required,custom[date],custom[cierre]]" name="premiereEndDate">
 	<br /> 
 	<br/> 
 	
-	<input type="submit" value="<?php echo JText::_('ENVIAR');  ?>">
+	<input type="button" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
 </form>
