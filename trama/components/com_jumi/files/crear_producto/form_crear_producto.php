@@ -123,7 +123,7 @@ $document->addScriptDeclaration($scriptselect);
 <h3><?php echo JText::_('CREAR').JText::_('PRODUCTO');  ?></h3>
 <form action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/create" id="form2" enctype="multipart/form-data" method="POST">
 	<input type="hidden" name="status" id="status" value="0" >
-	<input type="hidden" name="type" id="type" value="1" >
+	<input type="hidden" name="type" id="type" value="PRODUCT" >
 	<label for="nomProy"><?php echo JText::_('NOMBREPR').JText::_('PRODUCTO');  ?>*:</label> 
 	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
 	<br />
