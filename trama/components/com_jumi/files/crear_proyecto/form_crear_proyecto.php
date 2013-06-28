@@ -1,7 +1,7 @@
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
-$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/1';
+$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/2';
 $jsonproyecto = file_get_contents($urlproyectco);
 $jsonObjproyecto = json_decode($jsonproyecto);
 
@@ -26,8 +26,12 @@ $usuario = JFactory::getUser();
 $document = JFactory::getDocument();
 $base = JUri::base();
 $pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
-
+$action = 'action="'.MIDDLE.PUERTO.'/trama-middleware/rest/project/create"';
+$hiddenIdProyecto = '';
+$banner = '';
+$avatar = '';
 $opcionesSubCat = '';
+
 $categoria = getCategoria();
 $subCategorias = getSubCat();
 $scriptselect = 'jQuery(function() {
@@ -46,8 +50,10 @@ $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 $document->addScript('http://dev7studios.com/demo/jquery-currency/jquery.currency.js');
 $document->addScriptDeclaration($scriptselect);
 
-$action = 'action="'.MIDDLE.PUERTO-'/trama-middleware/rest/project/create"';
-
+if ( isset ( $jsonObjproyecto ) ) {
+	$hiddenIdProyecto = '<input type="hidden" name="idProject" value="'.$jsonObjproyecto->id.'"  />';
+	echo $avatar = '<img src="'.MIDDLE.AVATAR.'/'.$jsonObjproyecto->projectAvatar->name.'" width="100" />';	
+}
 ?>
 <script>
 	jQuery(document).ready(function(){
@@ -125,22 +131,26 @@ $action = 'action="'.MIDDLE.PUERTO-'/trama-middleware/rest/project/create"';
 
 <h3>Crear un proyecto</h3>
 
-<form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
-	<input type="hidden" name="userId" value="<?php echo $usuario->id; ?>" />
+<form id="form2" <?php echo $action; ?> enctype="multipart/form-data" method="POST">
+	<?php echo $hiddenIdProyecto; ?>
+	<input type="hidden" 
+		   name="userId" 
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->userId : $usuario->id; ?>" />
 	<input type="hidden" name="status" value="0"  />
 	<input type="hidden" name="type" value="0"  />
 	
-	<label for="nomProy"><?php echo JText::_('NOMBRE').JText::_('PROYECTO'); ?>*:</label> 
-	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100" value="<?php echo $jsonObjproyecto->name; ?>"> 
+	<label for="nomProy"><?php echo JText::_('NOMBRE').JText::_('PROYECTO'); ?>*:</label>
+	<input type="text" name="name" id="nomProy"
+		   class="validate[required,custom[onlyLetterNumber]]" 
+		   maxlength="100"
+		   value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->name : ''; ?>" /> 
 	<br />
 	
 	<label for="categoria">Categoria: </label>
 	<select id="selectCategoria" name="categoria">
 		
 	<?php		
-	foreach ( $categoria as $key => $value ) {
-		var_dump($value->id);
-		
+	foreach ( $categoria as $key => $value ) {		
 		echo '<option value="'.$value->id.'">'.$value->name.'</option>';
 		$opcionesPadre[] = $value->id;
 	}
@@ -150,20 +160,20 @@ $action = 'action="'.MIDDLE.PUERTO-'/trama-middleware/rest/project/create"';
 	
 	<label for="subcategory">Subcategoria: </label>
 	<select id="subcategoria" name="subcategory">
-			<option value="all">Todas</option>
-	<?php
-	foreach ( $subCategorias as $key => $value ) {
-		$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'">'.$value->name.'</option>';
-	}
-	
-	echo $opcionesSubCat;
-	?>
+		<option value="all">Todas</option>
+		<?php
+		foreach ( $subCategorias as $key => $value ) {
+			$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'">'.$value->name.'</option>';
+		}		
+		echo $opcionesSubCat;
+		?>
 	</select>
 	<br />
 	<br />
 	
 	<label for="banner">Imagen(Banner) del proyecto*:</label>
-	<input type="file" id="banner" class="validate[required]" name="banner"> 
+	<input type="file" id="banner" class="validate[required]" name="banner">
+	<?php echo $avatar; ?>
 	<br />
 	
 	<label for="avatar">Imagen(Avatar) del proyecto*:</label> 

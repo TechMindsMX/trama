@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
-$path = MIDDLE.PUERTO.AVATAR."/";
+$path = MIDDLE.AVATAR."/";
 
 $usuario = JFactory::getUser();
 $base = JUri::base();
