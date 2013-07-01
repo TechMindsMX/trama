@@ -20,7 +20,7 @@
 	$url = "http://192.168.0.105:7171/trama-middleware/rest/project/get/1";
 	$homepage = file_get_contents($url);
 	$json = json_decode($homepage);
-	var_dump($json);
+	//var_dump($json);
 	
 	$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
 	$jsonSubcategoria = file_get_contents($urlSubcategoria);
@@ -45,8 +45,8 @@
 	$db->setQuery($query);
 	$results = $db->loadObjectList();
 	
-	var_dump($results);
-	var_dump($jsonObjSubcategoria);
+	//var_dump($results);
+	//var_dump($jsonObjSubcategoria);
 ?>
 	<script type="text/javascript">
 	jQuery(document).ready(function(){

@@ -1,23 +1,55 @@
 <?php
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+	include_once 'utilidades.php';
 ?>
 <?php  //Hay que chequear si el usuario existe
 	$usuario =& JFactory::getUser();
 	$db =& JFactory::getDBO();
-	$query = $db->getQuery(true);
-	$query
-		->select('users_id')
-		->from('perfil_persona')
-		->where('users_id = '.$usuario->id);
-	$db->setQuery( $query );
+	
+	$existe = existingUser($usuario->id);
+	
+	if ($existe == "true") {
+		
+		$datosGeneralesUsuario = datosGenerales($usuario->id, 1);
+		$domicilioGeneral = domicilio($datosGeneralesUsuario[0]->id, 0);
+		$emailGeneral = email($datosGeneralesUsuario[0]->id);
+		$telefonoGeneral = telefono($datosGeneralesUsuario[0]->id);
+		
+		if ($datosGeneralesUsuario->perfil_personalidadJuridica_idpersonalidadJuridica != 0) {
+			
+			$domicilioFiscal = domicilio($datosGeneralesUsuario[0]->id, 1);
+			$datosRLegal = datosGenerales($usuario->id, 2);
+			$domicilioRLegal = domicilio($datosRLegal[0]->id, 0);
+			$emailRLegal = email($datosRLegal[0]->id);
+			$telefonoRLegal = telefono($datosRLegal[0]->id);
+			$datosContacto = datosGenerales($usuario->id, 3);
+			$domicilioContacto = domicilio($datosContacto[0]->id, 0);
+			$emailContacto = email($datosContacto[0]->id);
+			$telefonoContacto = telefono($datosContacto[0]->id);
+		
+		} else {
+			
+			$domicilioFiscal = "";
+			$datosRLegal = "";
+			$domicilioRLegal = "";
+			$emailRLegal = "";
+			$telefonoRLegal = "";
+			$datosContacto = "";
+			$domicilioContacto = "";
+			$emailContacto = "";
+			$telefonoContacto = "";
 
-	$resultado = $db->loadObjectList();
-	if (isset($resultado)) {
-		echo "<h3>El usuario ya tiene datos en perfil</h3>";
+		}
+	
 	} else {
-		echo "<h3>Llenar datos en perfil</h3>";
-	}
+		
+		$datosGeneralesUsuario = "";
+		$domicilioGeneral = "";
+		$emailGeneral = "";
+		$telefonoGeneral = "";
 
+	}
+		
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -123,15 +155,15 @@
             <div id="nombre"><h3><?php echo JText::_('DATOS_GR'); ?></h3></div>            
             <div class="_50">
                 <label for="daGr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
-                <input name="daGr_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="daGr_nomNombre" maxlength="25" />
+                <input name="daGr_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="daGr_nomNombre" maxlength="25" <?php echo 'value = "'.$datosGeneralesUsuario[0]->nomNombre.'"';?>/>
             </div>
             <div class="_25">
                 <label for="daGr_nomApellidoPaterno"><?php echo JText::_('APEPAT'); ?>*:</label>
-                <input name="daGr_nomApellidoPaterno" class="validate[required,custom[onlyLetterSp]]" type="text" id="daGr_nomApellidoPaterno" maxlength="25" />
+                <input name="daGr_nomApellidoPaterno" class="validate[required,custom[onlyLetterSp]]" type="text" id="daGr_nomApellidoPaterno" maxlength="25" <?php echo 'value = "'.$datosGeneralesUsuario[0]->nomApellidoPaterno.'"';?>/>
             </div>
             <div class="_25">
                 <label for="daGr_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
-                <input name="daGr_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="daGr_nomApellidoMaterno" maxlength="25" />
+                <input name="daGr_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="daGr_nomApellidoMaterno" maxlength="25" <?php echo 'value = "'.$datosGeneralesUsuario[0]->nomApellidoMaterno.'"';?>/>
             </div>
             <div class="_50">
                 <label for="maGr_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
