@@ -36,6 +36,9 @@ function pageselectCallback (page_index, jq) {
 	var countCol = 0;
 
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
+
+		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
+		
 		countCol++;
 		if (countCol == columnas) {
 			countCol = countCol - columnas;
@@ -47,9 +50,12 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="proyecto col' + last + ' ancho' + ancho + '">';
 		newcontent += '<div class="inner">';
 		newcontent += '<div class="titulo">';
-		newcontent += '<div class="tituloText inner"><h4>' + members[i].name + '</h4></div>';
+		newcontent += '<div class="tituloText inner">';
+		newcontent += '<h4><a href="' + link + '">' + members[i].name + '</h4></a></div>';
 		newcontent += '</div>';
-		newcontent += '<div class="avatar"><img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" /></div>';
+		newcontent += '<div class="avatar">';
+		newcontent += '<a href="' + link + '">';
+		newcontent += '<img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" /></a></div>';
 		newcontent += '<div class="descripcion">';
 		newcontent += '<div class="inner">';
 			var descripcion = members[i].description;
@@ -57,7 +63,7 @@ function pageselectCallback (page_index, jq) {
 			var trimmed = descripcion.substring(0, largo);
 		newcontent += '<div class="descText">' + trimmed + '</div>';
 		newcontent += '<p class="readmore">';
-		newcontent += '<a href="#" class="leerText">' + "Ver más...";
+		newcontent += '<a href="' + link + '" class="leerText">' + "Ver más...";
 		newcontent += '</a>';
 		newcontent += '</p>';
 		newcontent += '</div>';

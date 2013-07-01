@@ -40,8 +40,11 @@ div.col-last div.inner {
 	margin-bottom: 1em; 
 }
 .titulo, .descripcion {
+	margin: 0 5px 0 4px;
+}
+.titulo, .descripcion, .avatar {
 	border: 1px solid #ddd;
-	box-shadow: 2px 2px 2px #ccc;
+	box-shadow: 2px 2px 2px #bbb;
 }
 .avatar img {
 	width: 100%;
