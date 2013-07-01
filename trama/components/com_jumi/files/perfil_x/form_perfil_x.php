@@ -9,6 +9,20 @@ $pathJumi = Juri::base().'components/com_jumi/files';
 $accion= 'index.php?option=com_jumi&view=application&fileid=2';
 $tablaGrabacion = 'perfilx_respuestas';
 
+function pintaGremiosInstituciones ($tabla, $need) {
+	$db = JFactory::getDbo();
+	$query = $db->getQuery(true); 
+	
+	$query->select ('*')
+	->from ($tabla)
+	->where('nomNombreCategoria = "'.$need.'" AND idcatalogoPerfilPadre = 0');
+	
+	$db->setQuery($query);
+	$results = $db->loadObjectList();
+	
+	return $results[0];
+}
+
 function buscarUsuarioExistente($tabla, $userid){
 
 	$db = JFactory::getDbo();
@@ -27,8 +41,7 @@ function buscarUsuarioExistente($tabla, $userid){
 	return $total;
 }
 
-function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripcion)
-{
+function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripcion) {
 		
 	$db = JFactory::getDbo();
 	$query = $db->getQuery(true); 
@@ -50,7 +63,7 @@ function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripci
 		$inputPadre .= '<span>'.$columna->$descripcion.'</span>';
 			
 		echo $inputPadre;
-		
+				
 		generacampos($columna->$columnaId,$tabla, $columnaId, $columnaIdPadre, $descripcion);
 	}
 	
@@ -58,10 +71,9 @@ function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripci
 		echo "</ul>";
 	}
 }
-
- $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
- $document->addScript('http://code.jquery.com/ui/1.10.1/jquery-ui.js');
- $document->addStyleSheet('http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css');
+$document->addScript('http://code.jquery.com/jquery-1.9.1.js');
+$document->addScript('http://code.jquery.com/ui/1.10.1/jquery-ui.js');
+$document->addStyleSheet('http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css');
  
 $document->addScript($pathJumi.'/perfil_x/minified/jquery.tree.min.js');
 $document->addStyleSheet($pathJumi.'/perfil_x/minified/jquery.tree.min.css');
@@ -69,23 +81,30 @@ $document->addStyleSheet($pathJumi.'/perfil_x/minified/jquery.tree.min.css');
 <script type="text/javascript">
 	function habilita(campo) {
 	if (campo.checked) {
-		jQuery('#'+campo.value).parent().hide()
+		jQuery('#'+campo.value).parent().hide();
+		jQuery('#tree input').prop('disabled', true);
 	} else {
 		jQuery('#'+campo.value).parent().show()
+		jQuery('#tree input').prop('disabled', false)
 	}
 }
 </script>
 	
 <form action="<?php echo $accion; ?>" id="perfilX" method="post" name="perfilX">
+
 <?php 
 if ( $tablaParam == 'perfilx_catalogoperfil' ) {
-?>	<input type="checkbox" class="esgremio" name="Gremios" value="166" onclick="habilita(this);"/>
-	<span>Es usted un gremio</span>
-	<input type="checkbox" class="esgremio" name="Instituciones" value="151" onclick="habilita(this);"/>
+	$gremios = pintaGremiosInstituciones($tablaParam, 'Gremios');
+	$instituciones = pintaGremiosInstituciones($tablaParam, 'Instituciones');
+?>	
+	<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" onclick="habilita(this);"/>
+	<span> Es usted un gremio</span>
+	<input type="checkbox" class="esgremio" name="<?php echo $instituciones->nomNombreCategoria; ?>" value="<?php echo $instituciones->idcatalogoPerfil; ?>" onclick="habilita(this);"/>
 	<span>Es usted una Institucion</span>
 <?php
 }
 ?>
+
 <div id="tree">
 	
 <?php

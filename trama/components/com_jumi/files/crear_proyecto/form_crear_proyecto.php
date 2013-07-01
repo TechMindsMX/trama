@@ -293,10 +293,10 @@ echo $divrecintos;
 		$urlSound = isset($ligasAudios[$i]) ? $ligasAudios[$i]->url : '';
 		
 		echo $labelSound = '<label for="linkYt'.($i+1).'">'.JText::_('ENLACE_SC').' '.($i+1).':</label>';
-		echo $inputSound = '<input type="text" id="linkYt'.($i+1).'" class="validate[custom[sc]]" value = "'.$urlSound.'"	name="youtubeLink'.($i+1).'" /><br />';
+		echo $inputSound = '<input type="text" id="linkSc1'.($i+1).'" class="validate[custom[sc]]" value = "'.$urlSound.'"	name="soundCloudLink'.($i+1).'" /><br />';
 	}
 	?>
-		
+	
 	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?>*:</label> 
 	<input class="multi <?php echo $validacionImgs; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="<?php echo $countImgs; ?>" name="photo" />
 	
