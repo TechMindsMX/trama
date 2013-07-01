@@ -1,7 +1,12 @@
 <?php
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+	
+	$usuario = JFactory::getUser();
+	
 	$base = JUri::base();
 	$pathJumi = Juri::base().'components/com_jumi/files/ver_proyecto/';
+	$proyecto = $_GET['proyid'];
+	
 	//$document->addScript($pathJumi.'js/jquery.nivo.slider.js');
 	$document->addStyleSheet($pathJumi.'css/themes/bar/bar.css');
 	$document->addStyleSheet($pathJumi.'css/nivo-slider.css');
@@ -17,10 +22,9 @@
 <script type="text/javascript" src="http://192.168.0.107/trama/trama/trama/components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
 
 <?php
-	$url = "http://192.168.0.105:7171/trama-middleware/rest/project/get/1";
+	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
 	$homepage = file_get_contents($url);
 	$json = json_decode($homepage);
-	//var_dump($json);
 	
 	$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
 	$jsonSubcategoria = file_get_contents($urlSubcategoria);
@@ -44,9 +48,85 @@
 	
 	$db->setQuery($query);
 	$results = $db->loadObjectList();
+
+function buttons($data, $user) {
+	if ( $user->id == strval($data->userId) ) {
+		$link = 'index.php?option=com_jumi&view=appliction&fileid=9&proyid=';
+		$proyid = '&proyid='.$data->id;
+		$html = '<div><a href="'.$link.$proyid.'">'.JText::_('edit').'</a></div>';
+		return $html;
+	}
+}
+
+function videos($obj, $param) {
+	$html = '';
+	switch ($param) {
+	case 1:
+		$array = $obj->projectYoutubes;
+		foreach ($array as $key => $value ) {
+			$idVideo[] = end(explode("=", $value->url));
+		}
+		$html .= '<iframe class="video-player" width="853" height="480" ';
+		$html .= 'src="//www.youtube.com/embed/'.$idVideo[0].'?rel=0" frameborder="0" allowfullscreen></iframe>';
+	break;
+	default:
+		$arrayVideos = $obj->projectYoutubes;
+		foreach ($arrayVideos as $key => $value ) {
+			$idVideo = end(explode("=", $value->url));
+			$html .= '<div class="item-video">';
+			$html .= '<input class="liga" type="button"';
+			$html .= 'value="//www.youtube.com/embed/'.$idVideo.'?rel=0"';
+			$html .= 'style="background: url(\'http://img.youtube.com/vi/'.$idVideo.'/0.jpg\')';
+			$html .= ' no-repeat; background-size: 100%;">';
+			$html .= '</div>';
+		}
+	break;
+	}
+	return $html;
+}
+
+function imagenes($data) {
+	$html = '';
+	$array = $data->projectPhotos;
+	foreach ( $array as $key => $value ) {
+		$imagen = "/".$value->name;
+		$html .= '<img width="100" height="100" src="'.MIDDLE.PHOTO.$imagen.'" alt="" />';	
+	}
+	return $html;
+}
+
+function audios($data) {
+
+	$html = '';
+	$array = $data->projectSoundclouds;
+	foreach ( $array as $key => $value ) {
+		$val = "/".$value->url;
+	}
+	return $html;
+}
+
+function avatar($data) {
+	$avatar = $data->projectAvatar->name;
+	$html = '<img class="avatar" src="'.MIDDLE.AVATAR.'/'.$avatar.'" />';
 	
-	//var_dump($results);
-	//var_dump($jsonObjSubcategoria);
+	return $html;
+}
+
+function finanzas($data) {
+	$html = '';
+	$opentag = '<span>';
+	$closetag = '</span>';
+	foreach ($data->projectUnitSales as $key => $value) {
+		$html .= '<div class="row">';
+		$html .= $opentag.$value->section.$closetag;
+		$html .= $opentag.$value->unitSale.$closetag;
+		$html .= $opentag.$value->capacity.$closetag;
+		$html .= '</div>';
+	}
+	
+	return $html;
+}
+
 ?>
 	<script type="text/javascript">
 	jQuery(document).ready(function(){
@@ -78,9 +158,12 @@
 <body>
 	<div id="wrapper">
 		<div id="content">
+		<div id="buttons">
+			<?php echo buttons($json, $usuario); ?>
+		</div>
 			<div id="banner" class="ver_proyecto">
 				<div class="content-banner">
-					<img src="components/com_jumi/files/ver_proyecto/images/banner.jpg" />
+					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name ?>" />
 					<div class="info-banner">
 						<h2><?php echo $json->name;?></h1>
 						<h4><?php echo $results[0]->nomNombre." ".$results[0]->nomApellidoPaterno;?></h4>
@@ -92,14 +175,10 @@
 				<div id="content_player">
 					<div id="video-player">
 						<div id="menu-player">
-							<div class="item-video"><input class="liga" type="button" value="//www.youtube.com/embed/UWb5Qc-fBvk?rel=0" style="background: url('http://img.youtube.com/vi/UWb5Qc-fBvk/0.jpg') no-repeat; background-size: 100%;"></div>
-							<div class="item-video"><input class="liga" type="button" value="//www.youtube.com/embed/M7CdTAiaLes?rel=0" style="background: url('http://img.youtube.com/vi/M7CdTAiaLes/0.jpg') no-repeat; background-size: 100%;"></div>
-							<div class="item-video"><input class="liga" type="button" value="//www.youtube.com/embed/3TlJWoM69ww?rel=0" style="background: url('http://img.youtube.com/vi/3TlJWoM69ww/0.jpg') no-repeat; background-size: 100%;"></div>
-							<div class="item-video"><input class="liga" type="button" value="//www.youtube.com/embed/xkZjeACMbDI?rel=0" style="background: url('http://img.youtube.com/vi/xkZjeACMbDI/0.jpg') no-repeat; background-size: 100%;"></div>
-							<div class="item-video"><input class="liga" type="button" value="http://player.vimeo.com/video/28457662" style="background: url('http://ts.vimeo.com.s3.amazonaws.com/235/662/23566238_100.jpg') no-repeat; background-size: 100%;"></div>
+							<?php echo videos($json, 0); ?>
 						</div>
 						<div id="reproductor">
-							<iframe class="video-player" width="853" height="480" src="//www.youtube.com/embed/UWb5Qc-fBvk?rel=0" frameborder="0" allowfullscreen></iframe>
+							<?php echo videos($json, 1); ?>
 						</div>
 					</div>
 				</div>
@@ -109,9 +188,7 @@
 			<div id="wrapper">
 				<div class="slider-wrapper theme-bar">
             		<div id="slider" class="nivoSlider">
-               	 		<img width="100" height="100" src="images/slide/toystory.jpg" alt="" />
-                		<img width="100" height="100" src="images/slide/walle.jpg" alt="" data-transition="slideInLeft" />
-                		<img width="100" height="100" src="images/slide/nemo.jpg" alt="" title="#htmlcaption" />
+            			<?php echo imagenes($json); ?>
             		</div>
         		</div>
         	</div>
@@ -122,17 +199,20 @@
 				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
 				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
 				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
-				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="finanzas" class="ver_proyecto">
-				<div>
-					Finanazas
-				</div>
+				<h3>Finanzas</h3>
+				<?php echo finanzas($json); ?>
+				<?php echo avatar($json); ?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="info" class="ver_proyecto">
-				Informacion
+				<h3>Informacion</h3>
+				<div class="detalleDescripcion">
+					<?php echo $json->description; ?>
+					<?php echo avatar($json); ?>
+				</div>
 				<a class="cerrar">cerrar</a>
 			</div>
 		</div>
@@ -151,5 +231,8 @@
         $('#slider').nivoSlider();
 	    });
     </script>
-</body>
+
+	<?php var_dump($json);
+	?>
+	</body>
 </html>
