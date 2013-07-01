@@ -66,9 +66,26 @@ function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripci
 $document->addScript($pathJumi.'/perfil_x/minified/jquery.tree.min.js');
 $document->addStyleSheet($pathJumi.'/perfil_x/minified/jquery.tree.min.css');
 ?>
-		
+<script type="text/javascript">
+	function habilita(campo) {
+	if (campo.checked) {
+		jQuery('#'+campo.value).parent().hide()
+	} else {
+		jQuery('#'+campo.value).parent().show()
+	}
+}
+</script>
+	
 <form action="<?php echo $accion; ?>" id="perfilX" method="post" name="perfilX">
-
+<?php 
+if ( $tablaParam == 'perfilx_catalogoperfil' ) {
+?>	<input type="checkbox" class="esgremio" name="Gremios" value="166" onclick="habilita(this);"/>
+	<span>Es usted un gremio</span>
+	<input type="checkbox" class="esgremio" name="Instituciones" value="151" onclick="habilita(this);"/>
+	<span>Es usted una Institucion</span>
+<?php
+}
+?>
 <div id="tree">
 	
 <?php

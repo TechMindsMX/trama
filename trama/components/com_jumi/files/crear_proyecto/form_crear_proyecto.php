@@ -1,33 +1,35 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
+$limiteVideos = 5;
+$limiteSound = 5;
+
 $urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/2';
 $jsonproyecto = file_get_contents($urlproyectco);
 $jsonObjproyecto = json_decode($jsonproyecto);
 
-function getCategoria() {
-	$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
-	$jsonCategoria = file_get_contents($urlCategoria);
-	$jsonObjCategoria = json_decode($jsonCategoria);
-	        
-    return $jsonObjCategoria;
-}
-
-function getSubCat() { 	
-	$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
-	$jsonSubcategoria = file_get_contents($urlSubcategoria);
-	$jsonObjSubcategoria = json_decode($jsonSubcategoria);
-	
-	return $jsonObjSubcategoria;
-	
-}
-
+							function getCategoria() {
+								$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
+								$jsonCategoria = file_get_contents($urlCategoria);
+								$jsonObjCategoria = json_decode($jsonCategoria);
+								        
+							    return $jsonObjCategoria;
+							}
+							
+							function getSubCat() { 	
+								$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
+								$jsonSubcategoria = file_get_contents($urlSubcategoria);
+								$jsonObjSubcategoria = json_decode($jsonSubcategoria);
+								
+								return $jsonObjSubcategoria;
+								
+							}
+							
 $usuario = JFactory::getUser();
 $document = JFactory::getDocument();
 $base = JUri::base();
 $pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
-$limiteVideos = 5;
-$limiteSound = 5;
+
 
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
@@ -37,6 +39,7 @@ $avatar = '';
 $opcionesSubCat = '';
 $ligasVideos = '';
 $ligasAudios = '';
+$countunitSales = 1;
 $agregarCampos = '';
 //termina los definicion de campos del formularios
 
@@ -59,6 +62,7 @@ $document->addScript('http://dev7studios.com/demo/jquery-currency/jquery.currenc
 $document->addScriptDeclaration($scriptselect);
 
 if ( isset ( $jsonObjproyecto ) ) {
+		
 	$hiddenIdProyecto = '<input type="hidden" name="idProject" value="'.$jsonObjproyecto->id.'"  />';
 	$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$jsonObjproyecto->projectAvatar->name.'" width="100" />';
 	$banner = '<img src="'.MIDDLE.BANNER.'/'.$jsonObjproyecto->projectBanner->name.'" width="100" />';
@@ -73,7 +77,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 	$countunitSales = count($jsonObjproyecto->projectUnitSales);
 	$datosRecintos = $jsonObjproyecto->projectUnitSales;
 	
-	$agregarCampos = '<script>moreFields();</script>';
+	$agregarCampos = 'moreFields();';
 }
 ?>
 <script>
@@ -117,6 +121,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 			jQuery("#form2").submit();
 		});
 
+		
 	});
 	function checkHELLO(field, rules, i, options){
 		if (field.val() != "HELLO") {
@@ -129,18 +134,31 @@ if ( isset ( $jsonObjproyecto ) ) {
 <?php
 $divrecintos = '<div id="readroot" style="display: none">
 	<label for="">'.JText::_('SECCION').'*:</label> 
-	<input type="text" class="validate[required,custom[onlyLetterNumber]]" value="'.isset($jsonObjproyecto) ? $datosRecintos[1]->section : ''.'" name="section0">
+	<input 
+		type="text" 
+		class="validate[required,custom[onlyLetterNumber]]"
+		name="section0">
 	<br />
 	
 	<label for="">'.JText::_('PRECIO_UNIDAD').'*:</label> 
-	<input type="number" class="validate[required,custom[onlyNumberSp]]" value="'.isset($jsonObjproyecto) ? $datosRecintos[1]->section : ''.'"name="unitSale0" step="any"> 
+	<input 
+		type="number" 
+		class="validate[required,custom[onlyNumberSp]]" 
+		name="unitSale0" step="any"> 
 	<br>
 	
 	<label for="">'.jText::_('INVENTARIOPP').':</label> 
-	<input type="number" class="validate[required,custom[onlyNumberSp]]" value="'.isset($jsonObjproyecto) ? $datosRecintos[1]->section : ''.'"name="capacity0"> 
+	<input 
+		type="number" 
+		class="validate[required,custom[onlyNumberSp]]" 
+		value=""
+		name="capacity0"> 
 	<br /> 
 	
-	<input type="button" value="'.JText::_('QUITAR_CAMPOS').'" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
+	<input 
+		type="button" 
+		value="'.JText::_('QUITAR_CAMPOS').'" 
+		onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
 	<br /><br />
 </div>';
 
@@ -225,7 +243,7 @@ echo $divrecintos;
 	}
 	?>
 	
-	<br /> <?php echo JText::_('VIDEOSP'); ?>
+	<br /> <?php echo JText::_('AUDIOSP'); ?>
 	<br /> 
 	
 	<?php
@@ -316,9 +334,47 @@ echo $divrecintos;
 		name="capacity"> 
 	<br />
 	<br />
+	
+	<?php
+		for($i = 1; $i < $countunitSales; $i++) {
+			$valorSection = isset($jsonObjproyecto) ? $datosRecintos[$i]->section : '';
+			$valorUnitSales = isset($jsonObjproyecto) ? $datosRecintos[$i]->unitSale : '';
+			$valorCapacity = isset($jsonObjproyecto) ? $datosRecintos[$i]->capacity : '';
+			
+			$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('SECCION').'*:</label>';
+			$unitsales .= '<input'; 
+			$unitsales .= '		type = "text"'; 
+			$unitsales .= '		id = "seccion_E'.$i.'"'; 
+			$unitsales .= '		class = "validate[required,custom[onlyLetterNumber]]"'; 
+			$unitsales .= '		value = "'.$valorSection.'"';
+			$unitsales .= '		name = "section_E'.$i.'"/>'; 
+			$unitsales .= '	<br />';
+				
+			$unitsales .= '	<label for="unidad_E'.$i.'">'.JText::_('PRECIO_UNIDAD').'*:</label>'; 
+			$unitsales .= '	<input ';
+			$unitsales .= '		type="text" ';
+			$unitsales .= '		id="unidad_E'.$i.'" ';
+			$unitsales .= '		class="validate[required,custom[onlyNumberSp]]"';
+			$unitsales .= '		value="'.$valorUnitSales.'"';
+			$unitsales .= '		name = "unitSale_E'.$i.'" />'; 
+			$unitsales .= '	<br> ';
+				
+			$unitsales .= '	<label for="inventario_E'.$i.'">'.JText::_('INVENTARIOPP').'*:</label>';
+			$unitsales .= '	<input ';
+			$unitsales .= '		type="text" id="inventario"';
+			$unitsales .= '		id="inventario_E'.$i.'" ';
+			$unitsales .= '		class="validate[required,custom[onlyNumberSp]]"';
+			$unitsales .= '		value="'.$valorCapacity.'"';
+			$unitsales .= '		name = "capacity_E'.$i.'" />'; 
+			$unitsales .= '	<br />';
+			$unitsales .= '	<br />';
+			
+			echo $unitsales;
+		}
+	?>
 	 
 	<span id="writeroot"></span> 
-	<input type="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOs')?>" /> <br /> 
+	<input type="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS')?>" /> <br /> 
 	<br /> 
 	
 	<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('PROYECTO'); ?>*:</label> 
