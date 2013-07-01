@@ -4,9 +4,12 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed
 $limiteVideos = 5;
 $limiteSound = 5;
 
-$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/2';
-$jsonproyecto = file_get_contents($urlproyectco);
-$jsonObjproyecto = json_decode($jsonproyecto);
+if(!empty($_GET['proyid'])) {
+	$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
+	$jsonproyecto = file_get_contents($urlproyectco);
+	$jsonObjproyecto = json_decode($jsonproyecto);
+}
+
 
 							function getCategoria() {
 								$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
@@ -33,7 +36,9 @@ $pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
 
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
+//$action = 'http://localhost/lutek/test.php';
 $hiddenIdProyecto = '';
+$hiddenphotosIds = '';
 $banner = '';
 $avatar = '';
 $opcionesSubCat = '';
@@ -41,6 +46,9 @@ $ligasVideos = '';
 $ligasAudios = '';
 $countunitSales = 1;
 $agregarCampos = '';
+$validacion = 'validate[required]';
+$validacionImgs = 'validate[required]';
+$countImgs = 10;
 //termina los definicion de campos del formularios
 
 $categoria = getCategoria();
@@ -63,7 +71,9 @@ $document->addScriptDeclaration($scriptselect);
 
 if ( isset ( $jsonObjproyecto ) ) {
 		
-	$hiddenIdProyecto = '<input type="hidden" name="idProject" value="'.$jsonObjproyecto->id.'"  />';
+	$hiddenIdProyecto = '<input type="hidden" value="'.$jsonObjproyecto->id.'" name="id" />';
+	$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
+	
 	$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$jsonObjproyecto->projectAvatar->name.'" width="100" />';
 	$banner = '<img src="'.MIDDLE.BANNER.'/'.$jsonObjproyecto->projectBanner->name.'" width="100" />';
 	
@@ -76,8 +86,11 @@ if ( isset ( $jsonObjproyecto ) ) {
 	
 	$countunitSales = count($jsonObjproyecto->projectUnitSales);
 	$datosRecintos = $jsonObjproyecto->projectUnitSales;
+		
+	$validacion = '';
+	$validacionImgs = '';
 	
-	$agregarCampos = 'moreFields();';
+	$countImgs = $countImgs - count($jsonObjproyecto->projectPhotos);
 }
 ?>
 <script>
@@ -91,13 +104,18 @@ if ( isset ( $jsonObjproyecto ) ) {
 			var section = new Array();
 			var unitSale = new Array();
 			var capacity = new Array();
+			var projectPhothosIds = new Array();
 			var sec = 0;
 			var unit = 0;
 			var cap = 0;
+			var photos = 0;
 			
 			for (i=0; i < total; i++) {
 			    seccion = form[i].name.substring(0,7);
 			    capayuni = form[i].name.substring(0,8);
+			    photosIds = form[i].name.substring(0,9);
+			console.log(photosIds);
+			
 			    if(seccion == 'section') {
 			        section[sec] = form[i].value;
 			        sec++;
@@ -107,8 +125,12 @@ if ( isset ( $jsonObjproyecto ) ) {
 			    }else if(capayuni == 'capacity'){
 			        capacity[cap] = form[i].value;
 			        cap++;
+			    }else if(photosIds == 'photosids') {
+			         projectPhothosIds[photos] = form[i].value;
+			         photos++
 			    }
 			}
+			jQuery("#projectPhotosIds").val(projectPhothosIds.join(","));
 			
 			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
 			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
@@ -118,11 +140,25 @@ if ( isset ( $jsonObjproyecto ) ) {
 			jQuery("#unidad").val(unitSale.join(","));
 			jQuery("#inventario").val(capacity.join(","));
 			
+			jQuery("#projectPhotosIds").val(projectPhothosIds.join(","));
+			
 			jQuery("#form2").submit();
 		});
-
+		
+		jQuery('.projectPhotosIds').change(function () {
+			if ( jQuery(this).prop('checked') ) {
+				maxImgs = parseInt(jQuery('#fotos').attr('maxlength')) - 1;
+				
+				jQuery('#fotos').attr('maxlength',maxImgs)
+			} else {
+				maxImgs = parseInt(jQuery('#fotos').attr('maxlength')) + 1;
+				
+				jQuery('#fotos').attr('maxlength',maxImgs)
+			} 
+		});
 		
 	});
+	
 	function checkHELLO(field, rules, i, options){
 		if (field.val() != "HELLO") {
 			return options.allrules.validate2fields.alertText;
@@ -170,7 +206,10 @@ echo $divrecintos;
 <h3><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h3>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
-	<?php echo $hiddenIdProyecto; ?>
+	<?php 
+		echo $hiddenIdProyecto;
+		echo $hiddenphotosIds; 
+	?>
 	<input 
 		type="hidden"
 		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->userId : $usuario->id; ?>"
@@ -220,12 +259,15 @@ echo $divrecintos;
 	<br />
 	
 	<label for="banner"><?php echo JText::_('BANNER').JText::_('PROYECTO'); ?>*:</label>
-	<input type="file" id="banner" class="validate[required]" name="banner">
+	<input type="file" id="banner" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">
+	<br />
+	<?php echo $banner; ?>
 	<br />
 	
 	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PROYECTO'); ?>*:</label> 
-	<input type="file" id="avatar" class="validate[required]" name="avatar">
-	
+	<input type="file" id="avatar" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
+	<br />
+	<?php echo $avatar; ?>
 	<br />
 	<br />
 	 
@@ -255,8 +297,27 @@ echo $divrecintos;
 	}
 	?>
 		
-	<label for="fotos"><?php echo JText::_('FOTOS'); ?>*:</label> 
-	<input class="multi validate[required]" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo"> 
+	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?>*:</label> 
+	<input class="multi <?php echo $validacionImgs; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="<?php echo $countImgs; ?>" name="photo" />
+	
+	<?php
+	if ( isset($jsonObjproyecto) ) {
+		echo '<div id="imagenes" style="display:block; float:left;">';
+		
+		foreach ($jsonObjproyecto->projectPhotos as $key => $value) {
+			echo '<input 
+					type = "checkbox"
+					id = "photosids"
+					name = "photosids"  
+					class="projectPhotosIds" 
+					value="'.$value->id.'" 
+					checked="checked" />';
+		 	echo '<img src="'.MIDDLE.PHOTO.'/'.$value->name.'" width="100" /><br />';
+		}
+		
+		echo '</div>';
+	}
+	?> 
 	<br /> 
 	
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?>*:</label> <br />
@@ -292,11 +353,11 @@ echo $divrecintos;
 	<br> 
 	
 	<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label> 
-	<input type="file" class="validate[required]" id="plantilla" name="businessCase"> 
+	<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 	<br />
 	
 	<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('PROYECTO'); ?>*:</label> 
-	<input 
+	<input 10
 		type="number" 
 		class="validate[required]"
 		id="presupuesto"
