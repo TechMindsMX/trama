@@ -49,6 +49,8 @@ $agregarCampos = '';
 $validacion = 'validate[required]';
 $validacionImgs = 'validate[required]';
 $countImgs = 10;
+$categoriaSelected = '';
+$subcategoriaSelected = '';
 //termina los definicion de campos del formularios
 
 $categoria = getCategoria();
@@ -91,6 +93,15 @@ if ( isset ( $jsonObjproyecto ) ) {
 	$validacionImgs = '';
 	
 	$countImgs = $countImgs - count($jsonObjproyecto->projectPhotos);
+	
+	$subcat = getSubCat();
+	$subcategoriaSelected = $jsonObjproyecto->subcategory;
+	
+	foreach ($subcat as $key => $value) {
+		if( $value->id == $jsonObjproyecto->subcategory ) {
+			$categoriaSelected = $value->father;
+		}
+	}
 }
 ?>
 <script>
@@ -237,8 +248,10 @@ echo $divrecintos;
 	<select id="selectCategoria" name="categoria">
 		
 	<?php		
-	foreach ( $categoria as $key => $value ) {		
-		echo '<option value="'.$value->id.'">'.$value->name.'</option>';
+	foreach ( $categoria as $key => $value ) {
+		$selectedCat = ($value->id == $categoriaSelected) ? 'selected' : ''; 
+				
+		echo '<option value="'.$value->id.'" '.$selectedCat.' >'.$value->name.'</option>';
 		$opcionesPadre[] = $value->id;
 	}
 	?>
@@ -250,7 +263,8 @@ echo $divrecintos;
 		<option value="all">Todas</option>
 		<?php
 		foreach ( $subCategorias as $key => $value ) {
-			$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'">'.$value->name.'</option>';
+			$selectedSubCat = ($value->id == $subcategoriaSelected) ? 'selected' : '';
+			$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'" '.$selectedSubCat.' >'.$value->name.'</option>';
 		}		
 		echo $opcionesSubCat;
 		?>
