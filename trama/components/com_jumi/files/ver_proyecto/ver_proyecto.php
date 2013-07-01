@@ -51,7 +51,7 @@
 
 function buttons($data, $user) {
 	if ( $user->id == strval($data->userId) ) {
-		$link = 'index.php?option=com_jumi&view=appliction&fileid=9&proyid=';
+		$link = 'index.php?option=com_jumi&view=appliction&fileid=9';
 		$proyid = '&proyid='.$data->id;
 		$html = '<div><a href="'.$link.$proyid.'">'.JText::_('edit').'</a></div>';
 		return $html;
@@ -161,6 +161,7 @@ function finanzas($data) {
 		<div id="buttons">
 			<?php echo buttons($json, $usuario); ?>
 		</div>
+		<?php include_once 'solicitud_participar.php'; ?>
 			<div id="banner" class="ver_proyecto">
 				<div class="content-banner">
 					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name ?>" />
@@ -232,7 +233,5 @@ function finanzas($data) {
 	    });
     </script>
 
-	<?php var_dump($json);
-	?>
 	</body>
 </html>

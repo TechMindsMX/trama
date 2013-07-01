@@ -58,6 +58,7 @@ JHtml::_('behavior.noframes');
 					<jdoc:include type="component" />
 					<p><?php echo JText::_('COM_LOGIN_VALID') ?></p>
 					<p><a href="<?php echo JURI::root(); ?>"><?php echo JText::_('COM_LOGIN_RETURN_TO_SITE_HOME_PAGE') ?></a></p>
+					<p><a href="<?php echo JURI::root().'index.php?option=com_users&view=remind'; ?>"><?php echo JText::_('COM_LOGIN_REMIND') ?></a></p>
 					<div id="lock"></div>
 				</div>
 			</div>
