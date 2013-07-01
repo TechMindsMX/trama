@@ -37,6 +37,7 @@ $avatar = '';
 $opcionesSubCat = '';
 $ligasVideos = '';
 $ligasAudios = '';
+$agregarCampos = '';
 //termina los definicion de campos del formularios
 
 $categoria = getCategoria();
@@ -71,10 +72,12 @@ if ( isset ( $jsonObjproyecto ) ) {
 	
 	$countunitSales = count($jsonObjproyecto->projectUnitSales);
 	$datosRecintos = $jsonObjproyecto->projectUnitSales;
+	
+	$agregarCampos = '<script>moreFields();</script>';
 }
 ?>
 <script>
-	jQuery(document).ready(function(){
+	jQuery(document).ready(function(){		
 		jQuery("#form2").validationEngine();
 		
 		jQuery("#enviar").click(function (){
@@ -115,7 +118,6 @@ if ( isset ( $jsonObjproyecto ) ) {
 		});
 
 	});
-	
 	function checkHELLO(field, rules, i, options){
 		if (field.val() != "HELLO") {
 			return options.allrules.validate2fields.alertText;
@@ -127,18 +129,18 @@ if ( isset ( $jsonObjproyecto ) ) {
 <?php
 $divrecintos = '<div id="readroot" style="display: none">
 	<label for="">'.JText::_('SECCION').'*:</label> 
-	<input type="text" class="validate[required,custom[onlyLetterNumber]]" name="section0">
+	<input type="text" class="validate[required,custom[onlyLetterNumber]]" value="'.isset($jsonObjproyecto) ? $datosRecintos[1]->section : ''.'" name="section0">
 	<br />
 	
 	<label for="">'.JText::_('PRECIO_UNIDAD').'*:</label> 
-	<input type="number" class="validate[required,custom[onlyNumberSp]]" name="unitSale0" step="any"> 
+	<input type="number" class="validate[required,custom[onlyNumberSp]]" value="'.isset($jsonObjproyecto) ? $datosRecintos[1]->section : ''.'"name="unitSale0" step="any"> 
 	<br>
 	
 	<label for="">'.jText::_('INVENTARIOPP').':</label> 
-	<input type="number" class="validate[required,custom[onlyNumberSp]]" name="capacity0"> 
+	<input type="number" class="validate[required,custom[onlyNumberSp]]" value="'.isset($jsonObjproyecto) ? $datosRecintos[1]->section : ''.'"name="capacity0"> 
 	<br /> 
 	
-	<input type="button" value="Quitar campos" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
+	<input type="button" value="'.JText::_('QUITAR_CAMPOS').'" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
 	<br /><br />
 </div>';
 
@@ -316,7 +318,7 @@ echo $divrecintos;
 	<br />
 	 
 	<span id="writeroot"></span> 
-	<input type="button" onclick="moreFields()" value="Agregar campos" /> <br /> 
+	<input type="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOs')?>" /> <br /> 
 	<br /> 
 	
 	<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('PROYECTO'); ?>*:</label> 
@@ -368,5 +370,5 @@ echo $divrecintos;
 	<br /> 
 	<br/> 
 	
-	<input type="button" id="enviar" value="Enviar">
+	<input type="button" id="enviar" value="<?php echo JText::_('ENVIAR'); ?>">
 </form>
