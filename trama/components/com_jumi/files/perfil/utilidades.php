@@ -14,7 +14,7 @@ function existingUser($idUsuario){
 	
 	$resultado = $db->loadObjectList();
 	
-	if (isset($resultado)) {
+	if (isset($resultado[0])) {
 		$existe = 'true';
 	} else {
 		$existe = 'false';
@@ -96,4 +96,41 @@ function telefono($idPersona){
 	return $resultado;
 
 }
+
+function datosFiscales($idPersona){
+
+	$db =& JFactory::getDBO();
+	$query = $db->getQuery(true);
+
+	$query
+	->select('*')
+	->from('perfil_datosfiscales')
+	->where('perfil_persona_idpersona = '.$idPersona);
+
+	$db->setQuery( $query );
+
+	$resultado = $db->loadObjectList();
+
+	return $resultado;
+
+}
+
+function proyectosPasados($idPersona){
+
+	$db =& JFactory::getDBO();
+	$query = $db->getQuery(true);
+
+	$query
+	->select('*')
+	->from('perfil_historialproyectos')
+	->where('perfil_persona_idpersona = '.$idPersona);
+
+	$db->setQuery( $query );
+
+	$resultado = $db->loadObjectList();
+
+	return $resultado;
+
+}
+
 ?>

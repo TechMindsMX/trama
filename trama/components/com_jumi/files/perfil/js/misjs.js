@@ -69,6 +69,10 @@ var counterProy = 0;
 
 function moreFieldsProy(campo,add) {
 	if(add){
+		var restantes = 3 - ((jQuery("[id^=prPa_nomNombreProyecto]").length) -1);
+		if(restantes == 0) { counterProy = 2};
+		if(restantes == 1) { counterProy = 1};
+		if(restantes == 2) { counterProy = 0};
 		if(counterProy<=1){
 			var newFields = document.getElementById("readrootProy").cloneNode(true);
 			newFields.id = '';
@@ -99,7 +103,11 @@ var counterCorreoGr = 0;
 
 function moreFieldsCorreoGr(campo,add) {
 	if(add){
-		if(counterCorreoGr<=1){
+		var restantes = 3 - ((jQuery("[id^=maGr_coeEmail]").length) -1);
+		if(restantes == 0) { counterCorreoGr = 2};
+		if(restantes == 1) { counterCorreoGr = 1};
+		if(restantes == 2) { counterCorreoGr = 0};
+		if(counterCorreoGr<=1 ){
 			var newFields = document.getElementById("readrootCorreoGr").cloneNode(true);
 			newFields.id = '';
 			newFields.style.display = 'block';
@@ -129,6 +137,10 @@ var counterCorreoRe = 0;
 
 function moreFieldsCorreoRe(campo,add) {
 	if(add){
+		var restantes = 3 - ((jQuery("[id^=maRe_coeEmail]").length) -1);
+		if(restantes == 0) { counterCorreoRe = 2};
+		if(restantes == 1) { counterCorreoRe = 1};
+		if(restantes == 2) { counterCorreoRe = 0};
 		if(counterCorreoRe<=1){
 			var newFields = document.getElementById("readrootCorreoRe").cloneNode(true);
 			newFields.id = '';
@@ -159,6 +171,10 @@ var counterCorreoCo = 0;
 
 function moreFieldsCorreoCo(campo,add) {
 	if(add){
+		var restantes = 3 - ((jQuery("[id^=maCo_coeEmail]").length) -1);
+		if(restantes == 0) { counterCorreoCo = 2};
+		if(restantes == 1) { counterCorreoCo = 1};
+		if(restantes == 2) { counterCorreoCo = 0};
 		if(counterCorreoCo<=1){
 			var newFields = document.getElementById("readrootCorreoCo").cloneNode(true);
 			newFields.id = '';
@@ -189,6 +205,10 @@ var counterTelGr = 0;
 
 function moreFieldsTelGr(campo,add) {
 	if(add){
+		var restantes = 3 - ((jQuery("[id^=teGr_telTelefono]").length) -1);
+		if(restantes == 0) { counterTelGr = 2};
+		if(restantes == 1) { counterTelGr = 1};
+		if(restantes == 2) { counterTelGr = 0};
 		if(counterTelGr<=1){
 			var newFields = document.getElementById("readrootTelGr").cloneNode(true);
 			newFields.id = '';
@@ -217,11 +237,16 @@ function moreFieldsTelGr(campo,add) {
 		campo.parentNode.parentNode.removeChild(campo.parentNode);
 	}
 }
+
 /*funcion para agregar telefonos de representante adicionales*/
 var counterTelRe = 0;
 
 function moreFieldsTelRe(campo,add) {
 	if(add){
+		var restantes = 3 - ((jQuery("[id^=teRe_telTelefono]").length) -1);
+		if(restantes == 0) { counterTelRe = 2};
+		if(restantes == 1) { counterTelRe = 1};
+		if(restantes == 2) { counterTelRe = 0};
 		if(counterTelRe<=1){
 			var newFields = document.getElementById("readrootTelRe").cloneNode(true);
 			newFields.id = '';
@@ -252,6 +277,10 @@ var counterTelCo = 0;
 
 function moreFieldsTelCo(campo,add) {
 	if(add){
+		var restantes = 3 - ((jQuery("[id^=teCo_telTelefono]").length) -1);
+		if(restantes == 0) { counterTelCo = 2};
+		if(restantes == 1) { counterTelCo = 1};
+		if(restantes == 2) { counterTelCo = 0};
 		if(counterTelCo<=1){
 			var newFields = document.getElementById("readrootTelCo").cloneNode(true);
 			newFields.id = '';
