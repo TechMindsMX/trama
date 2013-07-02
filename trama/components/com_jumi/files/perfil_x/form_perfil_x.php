@@ -79,32 +79,33 @@ $document->addScript($pathJumi.'/perfil_x/minified/jquery.tree.min.js');
 $document->addStyleSheet($pathJumi.'/perfil_x/minified/jquery.tree.min.css');
 ?>
 <script type="text/javascript">
-	function habilita(campo) {
+function habilita(campo) {
+	console.log(campo.name);
 	if (campo.checked) {
-		jQuery('#'+campo.value).parent().hide();
-		jQuery('#tree input').prop('disabled', true);
+		
 	} else {
-		jQuery('#'+campo.value).parent().show()
-		jQuery('#tree input').prop('disabled', false)
+		jQuery('#tree input').prop('disabled', false);
+		jQuery('#tree input').prop('checked', false);
 	}
 }
 </script>
 	
 <form action="<?php echo $accion; ?>" id="perfilX" method="post" name="perfilX">
 
-<?php 
+<?php
+echo '<div id="GremiosoInstituciones">'; 
 if ( $tablaParam == 'perfilx_catalogoperfil' ) {
 	$gremios = pintaGremiosInstituciones($tablaParam, 'Gremios');
 	$instituciones = pintaGremiosInstituciones($tablaParam, 'Instituciones');
 ?>	
-	<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" onclick="habilita(this);"/>
-	<span> Es usted un gremio</span>
-	<input type="checkbox" class="esgremio" name="<?php echo $instituciones->nomNombreCategoria; ?>" value="<?php echo $instituciones->idcatalogoPerfil; ?>" onclick="habilita(this);"/>
-	<span>Es usted una Institucion</span>
+	<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" />
+	<span> Es usted un gremio</span>&nbsp;&nbsp;
+	<input type="checkbox" class="esgremio" name="<?php echo $instituciones->nomNombreCategoria; ?>" value="<?php echo $instituciones->idcatalogoPerfil; ?>" />
+	<span> Es usted una Institución</span>
 <?php
 }
+echo '</div>';
 ?>
-
 <div id="tree">
 	
 <?php
@@ -145,6 +146,22 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 						jQuery('#' + value).prop("checked", true);
 					});
 				}
+				
+				jQuery('#GremiosoInstituciones input').click(function () {
+					var check = jQuery(this).prop('checked');
+					
+					if(check) {
+						jQuery('#GremiosoInstituciones input').prop('checked', false);
+						jQuery(this).prop('checked', true);
+						
+						jQuery('#tree input').prop('disabled', true);
+						jQuery('#tree input').prop('checked', false);
+					} else {
+						jQuery(this).prop('checked', check);
+						jQuery('#tree input').prop('disabled', false);
+						jQuery('#tree input').prop('checked', false);
+					}
+				});
 				
 				jQuery('#uncheckAll').click(function() {
 				  jQuery('#tree').children().find('input[type="checkbox"]').prop("checked", false);
