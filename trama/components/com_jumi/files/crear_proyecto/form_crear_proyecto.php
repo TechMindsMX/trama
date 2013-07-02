@@ -194,7 +194,7 @@ $divrecintos = '<div id="readroot" style="display: none">
 		name="unitSale0" step="any"> 
 	<br>
 	
-	<label for="">'.jText::_('INVENTARIOPP').':</label> 
+	<label for="">'.JText::_('INVENTARIOPP').':</label> 
 	<input 
 		type="number" 
 		class="validate[required,custom[onlyNumberSp]]" 
@@ -236,7 +236,7 @@ echo $divrecintos;
 		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->type : 'PROJECT'; ?>"
 		name="type" />
 	
-	<label for="nomProy"><?php echo JText::_('NOMBRE').JText::_('PROYECTO'); ?>*:</label>
+	<label for="nomProy"><?php echo JText::_('NOMBRE').' '.JText::_('PROYECTO'); ?>*:</label>
 	<input 
 		type="text" name="name" id="nomProy"
 		class="validate[required,custom[onlyLetterNumber]]" 
