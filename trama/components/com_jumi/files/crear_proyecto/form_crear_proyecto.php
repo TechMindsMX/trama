@@ -36,7 +36,6 @@ $pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
 
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
-//$action = 'http://localhost/lutek/test.php';
 $hiddenIdProyecto = '';
 $hiddenphotosIds = '';
 $banner = '';
@@ -310,7 +309,7 @@ echo $divrecintos;
 	}
 	?>
 	
-	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?>*:</label> 
+	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?><span id="maximoImg">10</span>*:</label> 
 	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="<?php echo $countImgs; ?>" name="photo" />
 	
 	<?php

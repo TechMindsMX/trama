@@ -85,7 +85,6 @@
        // limit number of files that can be selected?
        if(!(o.max>0) /*IsNull(MultiFile.max)*/){
         o.max = MultiFile.E.attr('maxlength');
-        console.log(MultiFile.E);
        };
 							if(!(o.max>0) /*IsNull(MultiFile.max)*/){
 								o.max = (String(MultiFile.e.className.match(/\b(max|limit)\-([0-9]+)\b/gi) || ['']).match(/[0-9]+/gi) || [''])[0];
@@ -105,7 +104,6 @@
        // APPLY CONFIGURATION
 							$.extend(MultiFile, o || {});
        MultiFile.STRING = $.extend({},$.fn.MultiFile.options.STRING,MultiFile.STRING);
-       
        //===
        
        //#########################################
@@ -161,7 +159,12 @@
        
        // Bind a new element
        MultiFile.addSlave = function( slave, slave_count ){
-								//if(window.console) console.log('MultiFile.addSlave',slave_count);
+       	var maximo = (parseInt(MultiFile.E.attr('maxlength')))-(slave_count);
+       	$('#maximoImg').html(maximo);
+       	//console.log(MultiFile.n);
+       	//console.log(MultiFile.E.attr('maxlength'));
+       	
+								//if(window.console) console.log('MultiFile.addSlave',slave_count); MultiFile.E.attr('maxlength')
 								
         // Keep track of how many elements have been displayed
         MultiFile.n++;
@@ -187,9 +190,12 @@
         );
         
         // If we've reached maximum number, disable input slave
-        if( (MultiFile.max > 0) && ((MultiFile.n-1) > (MultiFile.max)) )//{ // MultiFile.n Starts at 1, so subtract 1 to find true count
-         slave.disabled = true;
-        //};
+        if( (MultiFile.max > 0) && ((MultiFile.n-1) > (MultiFile.max)) ) { // MultiFile.n Starts at 1, so subtract 1 to find true count
+        	if((MultiFile.n-1) == (parseInt(MultiFile.E.attr('maxlength'))+1)) {
+        		console.log(MultiFile.n-1);
+        		slave.disabled = true;
+        	}
+        };
         
         // Remember most recent slave
         MultiFile.current = MultiFile.slaves[slave_count] = slave;
@@ -282,7 +288,7 @@
        
        // Add a new file to the list
        MultiFile.addToList = function( slave, slave_count ){
-        //if(window.console) console.log('MultiFile.addToList',slave_count);
+        if(window.console) console.log('MultiFile.addToList',slave_count);
 								
         //# Trigger Event! onFileAppend
         if(!MultiFile.trigger('onFileAppend', slave, MultiFile)) return false;
@@ -294,19 +300,20 @@
          v = String(slave.value || ''/*.attr('value)*/),
          a = $('<span class="MultiFile-title" title="'+MultiFile.STRING.selected.replace('$file', v)+'">'+MultiFile.STRING.file.replace('$file', v.match(/[^\/\\]+$/gi)[0])+'</span>'),
          b = $('<a class="MultiFile-remove" href="#'+MultiFile.wrapID+'">'+MultiFile.STRING.remove+'</a>');
-        
         // Insert label
         MultiFile.list.append(
          r.append(b, ' ', a)
         );
-        
+        var counter = 0;
         b
 								.click(function(){
+									counter++;
          
           //# Trigger Event! onFileRemove
+          //var maximo = (parseInt(MultiFile.E.attr('maxlength')))+(slave_count);
+       		//$('#maximoImg').html(maximo);
           if(!MultiFile.trigger('onFileRemove', slave, MultiFile)) return false;
           //# End Event!
-          
           MultiFile.n--;
           MultiFile.current.disabled = false;
           
