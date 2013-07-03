@@ -7,26 +7,57 @@ $usuario = JFactory::getUser();
 $base = JUri::base();
 $document = JFactory::getDocument();
 $pathJumi = Juri::base().'/components/com_jumi/files';
+$busquedaPor = array(1 => 'project', 2 => 'product' );
+$ligasPP = '';
+$loop = 2;
 
-if ($_POST['categoria'] == "" && $_POST['subcategoria'] == "all") {	
-	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/list';
-} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] == "all") {
-	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'. $_POST['categoria'];
-} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] != "all") {
-	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'. $_POST['subcategoria'];
+if ( isset($_GET['typeId']) ) {
+	$loop = 1;
+} else {
+	$ligasPP = '<div class="ligasprod"> <button onclick="test()">'.JText::_('PRODUCTO').'s</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick="hideproyectos()">'.Jtext::_('PROYECTO').'s</button></div>';
 }
+
+function prodProy ($tipo) {
+	if(!empty($_POST)){
+		if ($_POST['categoria'] == "" && $_POST['subcategoria'] == "all") {	
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/list';
+		} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] == "all") {
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/category/'. $_POST['categoria'];
+		} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] != "all") {
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/subcategory/'. $_POST['subcategoria'];
+		}	
+	} else {
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/list';
+	}
+	$json0 = file_get_contents($url);
 	
-$json0 = file_get_contents($url);
-$json2 = json_decode($json0);
+	return $json0;
+}
 
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
 $document->addScript($pathJumi.'/view_busqueda/js/jquery.pagination.js');
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
+ 	
+for ( $i = 1; $i <= $loop; $i++ ) {
+	( isset($_GET['typeId']) ) ? $buscar = $_GET['typeId'] : $buscar = $i;
+	echo 'Busqueda por '.$busquedaPor[$buscar].'<br />';
+}
 ?>
 
-<script type="text/javascript">	
-var members = <?php echo $json0; ?>;
+<script type="text/javascript">
+var members = <?php echo prodProy('project'); ?>;
+$(document).ready(function(){      
+	initPagination();
+});
 
+function test () {
+	jQuery('#proyectos0').hide();
+	jQuery('#proyectos1').show();
+}
+function hideproyectos () {
+	jQuery('#proyectos1').hide();
+	jQuery('#proyectos0').show();
+}
 function pageselectCallback (page_index, jq) {
 	var items_per_page = 10;
 	var max_elem = Math.min((page_index+1) * items_per_page, members.length);
@@ -47,6 +78,7 @@ function pageselectCallback (page_index, jq) {
 		else {
 			last='';
 		}
+		newcontent += '<div id="proyectos'+i+'">'
 		newcontent += '<div class="proyecto col' + last + ' ancho' + ancho + '">';
 		newcontent += '<div class="inner">';
 		newcontent += '<div class="titulo">';
@@ -70,6 +102,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '</div>';
+		newcontent += '</div>';
 	}
                
 	jQuery('#Searchresult').html(newcontent);
@@ -86,17 +119,15 @@ function initPagination() {
 		callback: pageselectCallback
 	});
 }
-	                   
-$(document).ready(function(){      
-	initPagination();
-});
 </script>
 
 
 <title>Pagination</title>
 </head>
 <body>
+	<?php echo $ligasPP; ?>
 	<dl id="Searchresult"></dl>
 	<div id="Pagination" class="pagination"></div>
 </body>
 </html>
+
