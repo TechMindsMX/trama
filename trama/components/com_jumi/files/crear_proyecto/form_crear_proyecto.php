@@ -47,7 +47,6 @@ $ligasAudios = '';
 $countunitSales = 1;
 $agregarCampos = '';
 $validacion = 'validate[required]';
-$validacionImgs = 'validate[required]';
 $countImgs = 10;
 $categoriaSelected = '';
 $subcategoriaSelected = '';
@@ -312,7 +311,7 @@ echo $divrecintos;
 	?>
 	
 	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?>*:</label> 
-	<input class="multi <?php echo $validacionImgs; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="<?php echo $countImgs; ?>" name="photo" />
+	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="<?php echo $countImgs; ?>" name="photo" />
 	
 	<?php
 	if ( isset($jsonObjproyecto) ) {
@@ -325,8 +324,8 @@ echo $divrecintos;
 					name = "photosids"  
 					class="projectPhotosIds" 
 					value="'.$value->id.'" 
-					checked="checked" />';
-		 	echo '<img src="'.MIDDLE.PHOTO.'/'.$value->name.'" width="100" /><br />';
+					checked="checked" />
+					<img src="'.MIDDLE.PHOTO.'/'.$value->name.'" width="100" /><br />';
 		}
 		
 		echo '</div>';
