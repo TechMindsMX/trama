@@ -46,7 +46,8 @@ function buttons($data, $user) {
 	if ( $user->id == strval($data->userId) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid=9';
 		$proyid = '&proyid='.$data->id;
-		$html = '<div><a href="'.$link.$proyid.'">'.JText::_('edit').'</a></div>';
+		$html = '<div id="buttons">'.
+				'<div><a href="'.$link.$proyid.'">'.JText::_('edit').'</a></div>';
 		return $html;
 	}
 }
@@ -140,7 +141,7 @@ function informacionTmpl($data) {
 			'</div>'.
 			'</div>'.
 			'<div id="derechaDesc" class="gantry-width-66 gantry-width-block">'.
-			'<div class="gantry-width-spacer">'.
+// 			'<div class="gantry-width-spacer">'.
 			$data->description.
 			'</div>'.
 			'</div>';
@@ -176,7 +177,6 @@ function informacionTmpl($data) {
 	</script>
 	<div id="wrapper">
 		<div id="content">
-		<div id="buttons">
 			<?php echo buttons($json, $usuario); ?>
 		</div>
 			<div id="banner" class="ver_proyecto">
