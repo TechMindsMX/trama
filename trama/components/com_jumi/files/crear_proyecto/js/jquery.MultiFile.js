@@ -159,6 +159,7 @@
        
        // Bind a new element
        MultiFile.addSlave = function( slave, slave_count ){
+       	
 								//if(window.console) console.log('MultiFile.addSlave',slave_count); MultiFile.E.attr('maxlength')
 								
         // Keep track of how many elements have been displayed
@@ -186,10 +187,12 @@
         // If we've reached maximum number, disable input slave
         if( (MultiFile.max > 0) && ((MultiFile.n-1) > (MultiFile.max)) ) //{ // MultiFile.n Starts at 1, so subtract 1 to find true count
         		slave.disabled = true;
+        		deshabilita(slave);
         //};
         
         if( parseInt($('#maximoImg').html()) == 0) {//agregado por Luis Magaña
         	slave.disabled = true;
+        	deshabilita(slave);
         }
         
         // Remember most recent slave
@@ -281,7 +284,8 @@
        
          //inicia
 $('#imagenes input').click(function () {
-	deshabilita();
+	deshabilita(MultiFile.current);
+	
 	if( $(this).prop('checked') ) {
 		if( (parseInt($('#maximoImg').html())-1) == 0 ){
 			MultiFile.current.disabled = true;
@@ -299,15 +303,10 @@ $('#imagenes input').click(function () {
 		$('#maximoImg').html(maximo);
 	}
 });
-
-function deshabilita () {
-	alert('algo');
-}
         //termina     
        
        // Add a new file to the list
        MultiFile.addToList = function( slave, slave_count ){
-
        	//decrementa la cuenta del numero maximo de imagenes que le quedan por subir. agregado por Luis Magaña
        	var maximo = (parseInt($('#maximoImg').html()))-1;
        	$('#maximoImg').html(maximo);
@@ -571,4 +570,16 @@ function deshabilita () {
 	
 /*# AVOID COLLISIONS #*/
 })(jQuery);
+
+function deshabilita (elemento) {
+	console.log(elemento.disabled);
+	console.log(!$('#imagenes input').prop('checked'));
+	console.log(!parseInt($('#maximoImg').html()) != 0);
+	
+	if ( elemento.disabled && !$('#imagenes input').prop('checked') && (parseInt($('#maximoImg').html()) == 0) ) {
+		$('#imagenes input').prop('disabled', true);
+	}else {
+		$('#imagenes input').prop('disabled', false);
+	}
+}
 /*# AVOID COLLISIONS #*/

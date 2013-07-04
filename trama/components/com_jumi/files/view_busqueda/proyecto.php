@@ -20,11 +20,11 @@ if ( isset($_GET['typeId']) ) {
 function prodProy ($tipo) {
 	if(!empty($_POST)){
 		if ($_POST['categoria'] == "" && $_POST['subcategoria'] == "all") {	
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/list';
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
 		} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] == "all") {
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/category/'. $_POST['categoria'];
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'. $_POST['categoria'];
 		} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] != "all") {
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/subcategory/'. $_POST['subcategoria'];
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'. $_POST['subcategoria'];
 		}	
 	} else {
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/list';
