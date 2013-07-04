@@ -122,8 +122,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 			for (i=0; i < total; i++) {
 			    seccion = form[i].name.substring(0,7);
 			    capayuni = form[i].name.substring(0,8);
-			    photosIds = form[i].name.substring(0,9);
-			console.log(photosIds);
+			    //photosIds = form[i].name.substring(0,9);
 			
 			    if(seccion == 'section') {
 			        section[sec] = form[i].value;
@@ -134,10 +133,10 @@ if ( isset ( $jsonObjproyecto ) ) {
 			    }else if(capayuni == 'capacity'){
 			        capacity[cap] = form[i].value;
 			        cap++;
-			    }else if(photosIds == 'photosids') {
-			         projectPhothosIds[photos] = form[i].value;
-			         photos++
-			    }
+			    }//else if(photosIds == 'photosids') {
+			         //projectPhothosIds[photos] = form[i].value;
+			         //photos++
+			    //}
 			}
 			jQuery("#projectPhotosIds").val(projectPhothosIds.join(","));
 			
@@ -148,9 +147,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 			jQuery("#seccion").val(section.join(","));
 			jQuery("#unidad").val(unitSale.join(","));
 			jQuery("#inventario").val(capacity.join(","));
-			
-			jQuery("#projectPhotosIds").val(projectPhothosIds.join(","));
-			
+						
 			jQuery("#form2").submit();
 		});
 		
@@ -309,18 +306,18 @@ echo $divrecintos;
 	}
 	?>
 	
-	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?><span id="maximoImg">10</span>*:</label> 
-	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="<?php echo $countImgs; ?>" name="photo" />
+	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?><span id="maximoImg"><?php echo $countImgs; ?></span>*:</label> 
+	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo" />
 	
 	<?php
 	if ( isset($jsonObjproyecto) ) {
-		echo '<div id="imagenes" style="display:block; float:left;">';
+		echo '<div class="MultiFile-label" id="imagenes" style="display:block; float:left;">';
 		
 		foreach ($jsonObjproyecto->projectPhotos as $key => $value) {
 			echo '<input 
 					type = "checkbox"
 					id = "photosids"
-					name = "photosids"  
+					name = "photoids_'.$value->id.'"  
 					class="projectPhotosIds" 
 					value="'.$value->id.'" 
 					checked="checked" />

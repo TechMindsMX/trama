@@ -159,18 +159,12 @@
        
        // Bind a new element
        MultiFile.addSlave = function( slave, slave_count ){
-       	var maximo = (parseInt(MultiFile.E.attr('maxlength')))-(slave_count);
-       	$('#maximoImg').html(maximo);
-       	//console.log(MultiFile.n);
-       	//console.log(MultiFile.E.attr('maxlength'));
-       	
 								//if(window.console) console.log('MultiFile.addSlave',slave_count); MultiFile.E.attr('maxlength')
 								
         // Keep track of how many elements have been displayed
         MultiFile.n++;
         // Add reference to master element
-        slave.MultiFile = MultiFile;
-								
+        slave.MultiFile = MultiFile;						
 								// BUG FIX: http://plugins.jquery.com/node/1495
 								// Clear identifying properties from clones
 								if(slave_count>0) slave.id = slave.name = '';
@@ -190,12 +184,13 @@
         );
         
         // If we've reached maximum number, disable input slave
-        if( (MultiFile.max > 0) && ((MultiFile.n-1) > (MultiFile.max)) ) { // MultiFile.n Starts at 1, so subtract 1 to find true count
-        	if((MultiFile.n-1) == (parseInt(MultiFile.E.attr('maxlength'))+1)) {
-        		console.log(MultiFile.n-1);
+        if( (MultiFile.max > 0) && ((MultiFile.n-1) > (MultiFile.max)) ) //{ // MultiFile.n Starts at 1, so subtract 1 to find true count
         		slave.disabled = true;
-        	}
-        };
+        //};
+        
+        if( parseInt($('#maximoImg').html()) == 0) {//agregado por Luis Magaña
+        	slave.disabled = true;
+        }
         
         // Remember most recent slave
         MultiFile.current = MultiFile.slaves[slave_count] = slave;
@@ -284,16 +279,38 @@
        };// MultiFile.addSlave
        // Bind a new element
        
-       
+         //inicia
+$('#imagenes input').click(function () {
+	if( $(this).prop('checked') ) {
+		if( (parseInt($('#maximoImg').html())-1) == 0 ){
+			MultiFile.current.disabled = true;
+			var maximo = (parseInt($('#maximoImg').html()))-1;
+			$('#maximoImg').html(maximo);
+		}else{
+			var maximo = (parseInt($('#maximoImg').html()))-1;
+			$('#maximoImg').html(maximo);
+		}
+	}else{
+		MultiFile.current.disabled = false;
+		var maximo = (parseInt($('#maximoImg').html()))+1;
+		$('#maximoImg').html(maximo);
+	}
+});
+        //termina     
        
        // Add a new file to the list
        MultiFile.addToList = function( slave, slave_count ){
-        if(window.console) console.log('MultiFile.addToList',slave_count);
+
+       	//decrementa la cuenta del numero maximo de imagenes que le quedan por subir. agregado por Luis Magaña
+       	var maximo = (parseInt($('#maximoImg').html()))-1;
+       	$('#maximoImg').html(maximo);
+        
+        //if(window.console) console.log('MultiFile.addToList',slave_count);
 								
         //# Trigger Event! onFileAppend
         if(!MultiFile.trigger('onFileAppend', slave, MultiFile)) return false;
         //# End Event!
-        
+                
         // Create label elements
         var
          r = $('<div class="MultiFile-label"></div>'),
@@ -307,13 +324,17 @@
         var counter = 0;
         b
 								.click(function(){
-									counter++;
-         
+									counter++;         
           //# Trigger Event! onFileRemove
-          //var maximo = (parseInt(MultiFile.E.attr('maxlength')))+(slave_count);
-       		//$('#maximoImg').html(maximo);
           if(!MultiFile.trigger('onFileRemove', slave, MultiFile)) return false;
           //# End Event!
+          
+          //Incrementa el numero maximo de imagenes que puede subir. agregado por Luis Magaña
+          var maximo = (parseInt($('#maximoImg').html()))+1;
+		  $('#maximoImg').html(maximo);
+  
+		  //termina agregado por Luis Magaña
+          
           MultiFile.n--;
           MultiFile.current.disabled = false;
           
