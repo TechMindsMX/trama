@@ -281,14 +281,17 @@
        
          //inicia
 $('#imagenes input').click(function () {
+	deshabilita();
 	if( $(this).prop('checked') ) {
 		if( (parseInt($('#maximoImg').html())-1) == 0 ){
 			MultiFile.current.disabled = true;
 			var maximo = (parseInt($('#maximoImg').html()))-1;
 			$('#maximoImg').html(maximo);
 		}else{
+			//if( (parseInt($('#maximoImg').html())) != 0 ){
 			var maximo = (parseInt($('#maximoImg').html()))-1;
 			$('#maximoImg').html(maximo);
+			//}
 		}
 	}else{
 		MultiFile.current.disabled = false;
@@ -296,6 +299,10 @@ $('#imagenes input').click(function () {
 		$('#maximoImg').html(maximo);
 	}
 });
+
+function deshabilita () {
+	alert('algo');
+}
         //termina     
        
        // Add a new file to the list
@@ -403,8 +410,7 @@ $('#imagenes input').click(function () {
 			//if(settings) settings.wrapper.find('a.MultiFile-remove').click();
 			if(settings) settings.list.find('a.MultiFile-remove').click();
    return $(this);
-  },
-  
+  },  
   
   /**
    * This utility makes it easy to disable all 'empty' file elements in the document before submitting a form.
