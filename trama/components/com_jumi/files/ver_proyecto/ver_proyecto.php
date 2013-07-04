@@ -142,7 +142,7 @@ function informacionTmpl($data) {
 			'<div id="derechaDesc" class="gantry-width-66 gantry-width-block">'.
 			'<div class="gantry-width-spacer">'.
 			$data->description.
-			'</div>';
+			'</div>'.
 			'</div>';
 	
 	return $html;
