@@ -13,14 +13,7 @@
 	$document->addStyleSheet($pathJumi.'css/style.css');
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $json->name; ?></title>
-
-<script type="text/javascript" src="http://192.168.0.107/trama/trama/trama/components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
-
+<script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
 <?php
 	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
 	$homepage = file_get_contents($url);
@@ -127,6 +120,33 @@ function finanzas($data) {
 	return $html;
 }
 
+function descripcion ($data) {
+	$html = '';
+	
+	$html = '<p id="descripcion" class="texto">'.
+			$data->description.
+			'</p>';
+	
+	return $html;
+}
+
+function informacionTmpl($data) {
+ 	require_once 'solicitud_participar.php';
+	$html = '<div id="izquierdaDesc" class="gantry-width-33 gantry-width-block">'.
+			'<div class="gantry-width-spacer">'.
+			avatar($data).
+	  		participar().
+//			irGrupo().
+			'</div>'.
+			'</div>'.
+			'<div id="derechaDesc" class="gantry-width-66 gantry-width-block">'.
+			'<div class="gantry-width-spacer">'.
+			$data->description.
+			'</div>';
+			'</div>';
+	
+	return $html;
+}
 ?>
 	<script type="text/javascript">
 	jQuery(document).ready(function(){
@@ -154,14 +174,11 @@ function finanzas($data) {
 		
 	});
 	</script>
-</head>
-<body>
 	<div id="wrapper">
 		<div id="content">
 		<div id="buttons">
 			<?php echo buttons($json, $usuario); ?>
 		</div>
-		<?php include_once 'solicitud_participar.php'; ?>
 			<div id="banner" class="ver_proyecto">
 				<div class="content-banner">
 					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name ?>" />
@@ -211,8 +228,7 @@ function finanzas($data) {
 			<div id="info" class="ver_proyecto">
 				<h3>Informacion</h3>
 				<div class="detalleDescripcion">
-					<?php echo $json->description; ?>
-					<?php echo avatar($json); ?>
+					<?php echo informacionTmpl($json); ?>
 				</div>
 				<a class="cerrar">cerrar</a>
 			</div>
