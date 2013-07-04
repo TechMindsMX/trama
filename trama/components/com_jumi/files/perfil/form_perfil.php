@@ -39,11 +39,10 @@
 			$domicilioContacto = "";
 			$emailContacto = "";
 			$telefonoContacto = "";
-
+			$proyectosPasados = "";
 		}
 	
 	} else {
-		
 		$datosGeneralesUsuario = "";
 		$domicilioGeneral = "";
 		$emailGeneral = "";
@@ -169,19 +168,23 @@
             <div id="nombre"><h3><?php echo JText::_('DATOS_GR'); ?></h3></div>            
             <div class="_50">
                 <label for="daGr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
-                <input name="daGr_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="daGr_nomNombre" maxlength="25" <?php echo 'value = "'.$datosGeneralesUsuario[0]->nomNombre.'"';?>/>
+                <input name="daGr_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="daGr_nomNombre" maxlength="25" 
+                <?php if (!empty($datosGeneralesUsuario)) {echo 'value = "'.$datosGeneralesUsuario[0]->nomNombre.'"';}?>/>
             </div>
             <div class="_25">
                 <label for="daGr_nomApellidoPaterno"><?php echo JText::_('APEPAT'); ?>*:</label>
-                <input name="daGr_nomApellidoPaterno" class="validate[required,custom[onlyLetterSp]]" type="text" id="daGr_nomApellidoPaterno" maxlength="25" <?php echo 'value = "'.$datosGeneralesUsuario[0]->nomApellidoPaterno.'"';?>/>
+                <input name="daGr_nomApellidoPaterno" class="validate[required,custom[onlyLetterSp]]" type="text" id="daGr_nomApellidoPaterno" maxlength="25" 
+                <?php if (!empty($datosGeneralesUsuario)) {echo 'value = "'.$datosGeneralesUsuario[0]->nomApellidoPaterno.'"';}?>/>
             </div>
             <div class="_25">
                 <label for="daGr_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
-                <input name="daGr_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="daGr_nomApellidoMaterno" maxlength="25" <?php echo 'value = "'.$datosGeneralesUsuario[0]->nomApellidoMaterno.'"';?>/>
+                <input name="daGr_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="daGr_nomApellidoMaterno" maxlength="25" 
+                <?php if (!empty($datosGeneralesUsuario)) {echo 'value = "'.$datosGeneralesUsuario[0]->nomApellidoMaterno.'"';}?>/>
             </div>
             <div class="_50">
                 <label for="maGr_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
-                <input name="maGr_coeEmail" class="validate[required,custom[email]]" type="text" id="maGr_coeEmail" maxlength="100" <?php echo 'value = "'.$emailGeneral[0]->coeEmail.'"';?>/>
+                <input name="maGr_coeEmail" class="validate[required,custom[email]]" type="text" id="maGr_coeEmail" maxlength="100" 
+                <?php if (!empty($emailGeneral)) {echo 'value = "'.$emailGeneral[0]->coeEmail.'"';}?>/>
                 <span id="writerootCorreoGr">
                 <?php 
                 	$noEmail = count($emailGeneral);
@@ -203,30 +206,34 @@
             </div>    
             <div class="_50">
                 <label for="daGr_nomPaginaWeb"><?php echo JText::_('PAGINA_WEB'); ?></label>
-                <input name="daGr_nomPaginaWeb" class="validate[custom[url]]" type="text"  id="daGr_nomPaginaWeb" maxlength="100" <?php echo 'value = "'.$datosGeneralesUsuario[0]->nomPaginaWeb.'"';?>/>
+                <input name="daGr_nomPaginaWeb" class="validate[custom[url]]" type="text"  id="daGr_nomPaginaWeb" maxlength="100" 
+                <?php if (!empty($datosGeneralesUsuario)) {echo 'value = "'.$datosGeneralesUsuario[0]->nomPaginaWeb.'"';}?>/>
             </div>
             <div class="_50">
                 <label for="daGr_Foto"><?php echo JText::_('FOTO'); ?>:</label><br />
-                <input type="file" name="daGr_Foto" id="daGr_Foto" <?php echo 'value = "'.$datosGeneralesUsuario[0]->Foto.'"';?>/>
+                <input type="file" name="daGr_Foto" id="daGr_Foto" 
+                <?php if (!empty($datosGeneralesUsuario)) {echo 'value = "'.$datosGeneralesUsuario[0]->Foto.'"';}?>/>
             </div>
             <div class="_100">
             <div class="_25">
                 <label for="teGr_nomTipoTelefono" ><?php echo JText::_('TIPO_TEL'); ?>:
                 <select name="teGr_perfil_tipoTelefono_idtipoTelefono" id="teGr_nomTipoTelefono" onchange="enable()" >
                 	<option value="" > </option>
-                    <option value="1" <?php $seleccionado = ($telefonoGeneral[0]->perfil_tipoTelefono_idtipoTelefono == 1) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('CASA'); ?></option>
-                    <option value="2" <?php $seleccionado = ($telefonoGeneral[0]->perfil_tipoTelefono_idtipoTelefono == 2) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('CELULAR'); ?></option>
-                    <option value="3" <?php $seleccionado = ($telefonoGeneral[0]->perfil_tipoTelefono_idtipoTelefono == 3) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('OFICINA'); ?></option>
+                    <option value="1" <?php if (!empty($telefonoGeneral)) {$seleccionado = ($telefonoGeneral[0]->perfil_tipoTelefono_idtipoTelefono == 1) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('CASA'); ?></option>
+                    <option value="2" <?php if (!empty($telefonoGeneral)) {$seleccionado = ($telefonoGeneral[0]->perfil_tipoTelefono_idtipoTelefono == 2) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('CELULAR'); ?></option>
+                    <option value="3" <?php if (!empty($telefonoGeneral)) {$seleccionado = ($telefonoGeneral[0]->perfil_tipoTelefono_idtipoTelefono == 3) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('OFICINA'); ?></option>
                 </select>
                 </label>
             </div>            
             <div class="_25">
                 <label for="teGr_telTelefono"><?php echo JText::_('TELEFONO'); ?>:</label>
-                <input name="teGr_telTelefono" class="validate[custom[phone]]" type="text" id="teGr_telTelefono" maxlength="10" <?php echo 'value = "'.$telefonoGeneral[0]->telTelefono.'"';?>/>
+                <input name="teGr_telTelefono" class="validate[custom[phone]]" type="text" id="teGr_telTelefono" maxlength="10" 
+                <?php if (!empty($telefonoGeneral)) {echo 'value = "'.$telefonoGeneral[0]->telTelefono.'"';}?>/>
             </div> 
             <div id="ext" class="_25">
                 <label for="teGr_extension"><?php echo JText::_('EXT'); ?></label> 
-                <input name="teGr_extension" class="validate[onlyNumberSp]" disabled="true" type="text" id="teGr_extension" maxlength="5" size="8" <?php echo 'value = "'.$telefonoGeneral[0]->extension.'"';?> />
+                <input name="teGr_extension" class="validate[onlyNumberSp]" disabled="true" type="text" id="teGr_extension" maxlength="5" size="8" 
+                <?php if (!empty($telefonoGeneral)) {echo 'value = "'.$telefonoGeneral[0]->extension.'"';}?> />
             </div>
             </div>
             <span id="writerootTelGr">
@@ -277,7 +284,8 @@
             <div id="nombre"><h3><?php echo JText::_('DIRECCION'); ?></h3></div>
             <div class="_50">
                 <label for="dire_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
-                <input name="dire_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="dire_nomCalle" maxlength="70" <?php echo 'value = "'.$domicilioGeneral[0]->nomCalle.'"';?>/>
+                <input name="dire_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="dire_nomCalle" maxlength="70" 
+                <?php if (!empty($domicilioGeneral)) {echo 'value = "'.$domicilioGeneral[0]->nomCalle.'"';}?>/>
             </div>
             <div class="_25">
                 <label for="dire_noExterior"><?php echo JText::_('NUM_EXT'); ?>*:</label>
@@ -709,11 +717,13 @@
             <div id="nombre"><h3><?php echo JText::_('EMPRESA_PER'); ?></h3></div>
             <div class="_100">
             	<label for="daGr_dscCurriculum"><?php echo JText::_('CV'); ?></label>            
-                <textarea name="daGr_dscCurriculum"  id="daGr_dscCurriculum" cols="100" rows="6" maxlength="500"  ><?php echo $datosGeneralesUsuario[0]->dscCurriculum;?></textarea>
+                <textarea name="daGr_dscCurriculum"  id="daGr_dscCurriculum" cols="100" rows="6" maxlength="500"  >
+                <?php if (!empty($datosGeneralesUsuario)) {echo $datosGeneralesUsuario[0]->dscCurriculum;}?></textarea>
             </div>
             <div class="_100">
             	<label for="daGr_dscDescripcionPersonal"><?php echo JText::_('DESC_EMP'); ?></label>            
-                <textarea name="daGr_dscDescripcionPersonal"  id="daGr_dscDescripcionPersonal" cols="100" rows="6" maxlength="500" ><?php echo $datosGeneralesUsuario[0]->dscDescripcionPersonal;?></textarea>
+                <textarea name="daGr_dscDescripcionPersonal"  id="daGr_dscDescripcionPersonal" cols="100" rows="6" maxlength="500" >
+                <?php if (!empty($datosGeneralesUsuario)) {echo $datosGeneralesUsuario[0]->dscDescripcionPersonal;}?></textarea>
             </div>            
             <div id="nombre"><h3><?php echo JText::_('PROY_PAS'); ?></h3></div>            
             <div class="_100">
@@ -726,7 +736,8 @@
             </div>
             <div class="_100">
             	<label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?></label> <br />           
-            	<textarea name="prPa_dscDescripcionProyecto"  id="prPa_dscDescripcionProyecto" cols="100" rows="6" maxlength="250" ><?php echo $proyectosPasados[0]->dscDescripcionProyecto;?></textarea>
+            	<textarea name="prPa_dscDescripcionProyecto"  id="prPa_dscDescripcionProyecto" cols="100" rows="6" maxlength="250" >
+            	<?php if (!empty($proyectosPasados)) {echo $proyectosPasados[0]->dscDescripcionProyecto;}?></textarea>
             </div>
             <span id="writerootProy">
 			<?php 

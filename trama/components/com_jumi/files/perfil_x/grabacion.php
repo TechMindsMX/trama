@@ -2,25 +2,23 @@
 defined('_JEXEC') or die( 'Restricted access' );
 
 $tabla = "perfilx_respuestas";
-// $campo = "respuestaPerfil";
-// $valor = "1,2,3,4";
-// $idjoom = "570";
 
 $var = $_POST;
 	foreach ($var as $key => $value) {
-		if (is_numeric($value) && ($key != 'usuario')) {
+		if ((is_numeric($value)) && ($key != 'usuario') && ($key !='control')) {
 			$valor[] = $value;
 		}
-		elseif ($key == 'usuario') {
+		if ($key == 'usuario') {
 			$idjoom = $value;
 		}
 		elseif ($key == 'campo') {
 			$campo = $value;
 		}
-		elseif ($key == 'controlador') {
-			$controller = $value;
+		elseif ($key == 'control') {
+			$control = $value;
 		}
 	}
+
 $valor = implode(',', $valor);
 
 function insertar($tabla, $campo, $valor, $idjoom){
@@ -70,5 +68,8 @@ function dataRecord($tabla, $campo, $valor, $idjoom, $controller){
 		}
 }
 
-dataRecord($tabla, $campo, $valor, $idjoom, $controller);
+dataRecord($tabla, $campo, $valor, $idjoom, $control);
+
+
+
 ?>

@@ -1,5 +1,4 @@
 #content {
-	background: #ccc;
 	width: 100%;
 }
 
@@ -23,7 +22,7 @@
 	background-position-y: -148px;
 }
 
-.cerrar{
+.cerrar {
 	position: absolute;
 	top: 30px;
 	right: 30px;
@@ -54,8 +53,7 @@
 	width: 100%;
 }
 
-.info-banner{
-	background: rgba(0, 0, 0, 0.5);
+.info-banner {
 	max-width: 350px;
 	width: 100%;
 	padding: 15px;
@@ -85,24 +83,19 @@
 }
 
 @media screen and (max-width:960px) {
-	
 	.info-banner {
 		max-width: 150px;
 		left: 50px;
 	}
-	
 	#banner .content-banner .info-banner h2 {
 		font-size: 15px;
 	}
-	
 	#banner .content-banner .info-banner h4 {
 		font-size: 15px;
 	}
-	
 	#banner .content-banner .info-banner p {
 		font-size: 15px;
 	}
-	
 }
 
 #content_player {
@@ -146,11 +139,9 @@
 }
 
 @media screen and (max-width:1200px) {
-	
 	#menu-player {
 		max-width: 100%;
 	}
-	
 	.liga[type="button"] {
 		float: left;
 		max-width: 182px;
@@ -159,11 +150,9 @@
 }
 
 @media screen and (max-width:960px) {
-	
 	#menu-player {
 		max-width: 100%;
 	}
-	
 	.liga[type="button"] {
 		float: left;
 		max-width: 143px;
@@ -173,11 +162,9 @@
 }
 
 @media screen and (max-width:770px) {
-	
 	#menu-player {
 		max-width: 100%;
 	}
-	
 	.liga[type="button"] {
 		float: left;
 		max-width: 86px;

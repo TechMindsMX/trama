@@ -115,7 +115,7 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 </div>
 		<input type="hidden" name="campo" value="<?php echo $campoTabla ?>" />
 		<input type="hidden" name="usuario" value="<?php echo $usuario->id; ?>" />
-		<input type="hidden" name="controlador" value="<?php if(!empty($datosGrabados[0]->idperfilx_respuestas)) { echo $datosGrabados[0]->idperfilx_respuestas; } ?>" />
+		<input type="hidden" name="control" value="<?php if(!empty($datosGrabados[0]->idperfilx_respuestas)) { echo $datosGrabados[0]->idperfilx_respuestas; } ?>" />
 		<input type="button" id="uncheckAll" value="Limpiar Seleccion" />
 		<input type="submit" value="Enviar" />
 	</form>
