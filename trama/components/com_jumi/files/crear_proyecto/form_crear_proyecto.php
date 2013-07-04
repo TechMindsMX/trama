@@ -1,11 +1,11 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
-
 $limiteVideos = 5;
 $limiteSound = 5;
 
 if(!empty($_GET['proyid'])) {
 	$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
+	//$urlproyectco = $ipluis.$puerto.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
 	$jsonproyecto = file_get_contents($urlproyectco);
 	$jsonObjproyecto = json_decode($jsonproyecto);
 }
@@ -122,21 +122,28 @@ if ( isset ( $jsonObjproyecto ) ) {
 			for (i=0; i < total; i++) {
 			    seccion = form[i].name.substring(0,7);
 			    capayuni = form[i].name.substring(0,8);
-			    //photosIds = form[i].name.substring(0,9);
-			
+			    
 			    if(seccion == 'section') {
-			        section[sec] = form[i].value;
-			        sec++;
+			    	if(form[i].value != ''){
+			        	section[sec] = form[i].value;
+			        	sec++;
+			        }
 			    }else if(capayuni == 'unitSale'){
-			        unitSale[unit] = form[i].value;
-			        unit++
+			        if(form[i].value != ''){
+			        	unitSale[unit] = form[i].value;
+			        	unit++
+			        }
 			    }else if(capayuni == 'capacity'){
-			        capacity[cap] = form[i].value;
-			        cap++;
-			    }//else if(photosIds == 'photosids') {
-			         //projectPhothosIds[photos] = form[i].value;
-			         //photos++
-			    //}
+			        if(form[i].value != ''){
+			        	capacity[cap] = form[i].value;
+			        	cap++;
+			        }
+			    }else if(capayuni == 'photoids') {
+			         if ( form[i].checked ){
+			             projectPhothosIds[photos] = form[i].value;
+			              photos++
+			         }
+			    }
 			}
 			jQuery("#projectPhotosIds").val(projectPhothosIds.join(","));
 			
