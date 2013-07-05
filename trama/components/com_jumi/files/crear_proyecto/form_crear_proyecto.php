@@ -328,7 +328,7 @@ echo $divrecintos;
 					class="projectPhotosIds" 
 					value="'.$value->id.'" 
 					checked="checked" />
-					<img src="'.MIDDLE.PHOTO.'/'.$value->name.'" width="100" /><br />';
+					<img alt="'.$jsonObjproyecto->name.'" src="'.MIDDLE.PHOTO.'/'.$value->name.'" width="100" /><br /><br />';
 		}
 		
 		echo '</div>';
