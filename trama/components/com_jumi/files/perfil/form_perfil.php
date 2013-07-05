@@ -39,7 +39,6 @@
 			$domicilioContacto = "";
 			$emailContacto = "";
 			$telefonoContacto = "";
-			$proyectosPasados = "";
 		}
 	
 	} else {
@@ -47,6 +46,7 @@
 		$domicilioGeneral = "";
 		$emailGeneral = "";
 		$telefonoGeneral = "";
+		$proyectosPasados = "";
 
 	}
 	
@@ -289,68 +289,74 @@
             </div>
             <div class="_25">
                 <label for="dire_noExterior"><?php echo JText::_('NUM_EXT'); ?>*:</label>
-                <input name="dire_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="dire_noExterior" size="10" maxlength="5" <?php echo 'value = "'.$domicilioGeneral[0]->noExterior.'"';?> />
+                <input name="dire_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="dire_noExterior" size="10" maxlength="5" 
+				<?php if (!empty($domicilioGeneral)) {echo 'value = "'.$domicilioGeneral[0]->noExterior.'"';}?> />
             </div>
             <div class="_25">
                 <label for="dire_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
-                <input name="dire_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="dire_noInterior" size="10" maxlength="5" <?php echo 'value = "'.$domicilioGeneral[0]->noInterior.'"';?>/>
+                <input name="dire_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="dire_noInterior" size="10" maxlength="5" 
+				<?php if (!empty($domicilioGeneral)) {echo 'value = "'.$domicilioGeneral[0]->noInterior.'"';}?>/>
             </div>
             <div class="_25">
                 <label for="dire_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
-                <input name="dire_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]"  type="text" id="dire_iniCodigoPostal" size="10" maxlength="5" <?php echo 'value = "'.$domicilioGeneral[0]->perfil_codigoPostal_idcodigoPostal.'"';?>/>
+                <input name="dire_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]"  type="text" id="dire_iniCodigoPostal" size="10" maxlength="5" 
+				<?php if (!empty($domicilioGeneral)) {echo 'value = "'.$domicilioGeneral[0]->perfil_codigoPostal_idcodigoPostal.'"';}?>/>
             </div>	 
             <div class="_25">
                 <label for="dire_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
                 <select name="dire_perfil_estado_idestado" id="dire_nomEstado" class="validate[required]" >
-				<option value=""> </option> 
-                    <option value="1" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 1) ? "selected" : ""; echo $seleccionado;?>>Aguascalientes</option> 
-                    <option value="2" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 2) ? "selected" : ""; echo $seleccionado;?>>Baja California</option> 
-                    <option value="3" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 3) ? "selected" : ""; echo $seleccionado;?>>Baja California Sur</option> 
-                    <option value="4" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 4) ? "selected" : ""; echo $seleccionado;?>>Campeche</option> 
-                    <option value="5" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 5) ? "selected" : ""; echo $seleccionado;?>>Coahuila</option> 
-                    <option value="6" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 6) ? "selected" : ""; echo $seleccionado;?>>Colima</option> 
-                    <option value="7" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 7) ? "selected" : ""; echo $seleccionado;?>>Chiapas</option> 
-                    <option value="8" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 8) ? "selected" : ""; echo $seleccionado;?>>Chihuahua</option> 
-                    <option value="9" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 9) ? "selected" : ""; echo $seleccionado;?>>Distrito Federal</option> 
-                    <option value="10" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 10 ) ? "selected" : ""; echo $seleccionado;?>>Durango</option> 
-                    <option value="11" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 11) ? "selected" : ""; echo $seleccionado;?>>Guanajuato</option> 
-                    <option value="12" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 12) ? "selected" : ""; echo $seleccionado;?>>Guerrero</option> 
-                    <option value="13" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 13) ? "selected" : ""; echo $seleccionado;?>>Hidalgo</option> 
-                    <option value="14" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 14) ? "selected" : ""; echo $seleccionado;?>>Jalisco</option> 
-                    <option value="15" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 15) ? "selected" : ""; echo $seleccionado;?>>Estado de México</option> 
-                    <option value="16" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 16) ? "selected" : ""; echo $seleccionado;?>>Michoacán</option> 
-                    <option value="17" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 17) ? "selected" : ""; echo $seleccionado;?>>Morelos</option> 
-                    <option value="18" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 18) ? "selected" : ""; echo $seleccionado;?>>Nayarit</option> 
-                    <option value="19" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 19) ? "selected" : ""; echo $seleccionado;?>>Nuevo León</option> 
-                    <option value="20" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 20) ? "selected" : ""; echo $seleccionado;?>>Oaxaca</option> 
-                    <option value="21" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 21) ? "selected" : ""; echo $seleccionado;?>>Puebla</option> 
-                    <option value="22" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 22) ? "selected" : ""; echo $seleccionado;?>>Querétaro</option> 
-                    <option value="23" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 23) ? "selected" : ""; echo $seleccionado;?>>Quintana Roo</option> 
-                    <option value="24" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 24) ? "selected" : ""; echo $seleccionado;?>>San Luis Potosí</option> 
-                    <option value="25" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 25) ? "selected" : ""; echo $seleccionado;?>>Sinaloa</option> 
-                    <option value="26" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 26) ? "selected" : ""; echo $seleccionado;?>>Sonora</option> 
-                    <option value="27" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 27) ? "selected" : ""; echo $seleccionado;?>>Tabasco</option> 
-                    <option value="28" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 28) ? "selected" : ""; echo $seleccionado;?>>Tamaulipas</option> 
-                    <option value="29" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 29) ? "selected" : ""; echo $seleccionado;?>>Tlaxcala</option> 
-                    <option value="30" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 30) ? "selected" : ""; echo $seleccionado;?>>Veracruz</option> 
-                    <option value="31" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 31) ? "selected" : ""; echo $seleccionado;?>>Yucatan</option> 
-                    <option value="32" <?php $seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 32) ? "selected" : ""; echo $seleccionado;?>>Zacatecas</option>
+					<option value=""> </option> 
+                    <option value="1" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 1) ? "selected" : ""; echo $seleccionado;}?>>Aguascalientes</option> 
+                    <option value="2" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 2) ? "selected" : ""; echo $seleccionado;}?>>Baja California</option> 
+                    <option value="3" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 3) ? "selected" : ""; echo $seleccionado;}?>>Baja California Sur</option> 
+                    <option value="4" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 4) ? "selected" : ""; echo $seleccionado;}?>>Campeche</option> 
+                    <option value="5" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 5) ? "selected" : ""; echo $seleccionado;}?>>Coahuila</option> 
+                    <option value="6" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 6) ? "selected" : ""; echo $seleccionado;}?>>Colima</option> 
+                    <option value="7" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 7) ? "selected" : ""; echo $seleccionado;}?>>Chiapas</option> 
+                    <option value="8" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 8) ? "selected" : ""; echo $seleccionado;}?>>Chihuahua</option> 
+                    <option value="9" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 9) ? "selected" : ""; echo $seleccionado;}?>>Distrito Federal</option> 
+                    <option value="10" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 10) ? "selected" : ""; echo $seleccionado;}?>>Durango</option> 
+                    <option value="11" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 11) ? "selected" : ""; echo $seleccionado;}?>>Guanajuato</option> 
+                    <option value="12" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 12) ? "selected" : ""; echo $seleccionado;}?>>Guerrero</option> 
+                    <option value="13" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 13) ? "selected" : ""; echo $seleccionado;}?>>Hidalgo</option> 
+                    <option value="14" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 14) ? "selected" : ""; echo $seleccionado;}?>>Jalisco</option> 
+                    <option value="15" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 15) ? "selected" : ""; echo $seleccionado;}?>>Estado de México</option> 
+                    <option value="16" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 16) ? "selected" : ""; echo $seleccionado;}?>>Michoacán</option> 
+                    <option value="17" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 17) ? "selected" : ""; echo $seleccionado;}?>>Morelos</option> 
+                    <option value="18" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 18) ? "selected" : ""; echo $seleccionado;}?>>Nayarit</option> 
+                    <option value="19" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 19) ? "selected" : ""; echo $seleccionado;}?>>Nuevo León</option> 
+                    <option value="20" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 20) ? "selected" : ""; echo $seleccionado;}?>>Oaxaca</option> 
+                    <option value="21" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 21) ? "selected" : ""; echo $seleccionado;}?>>Puebla</option> 
+                    <option value="22" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 22) ? "selected" : ""; echo $seleccionado;}?>>Querétaro</option> 
+                    <option value="23" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 23) ? "selected" : ""; echo $seleccionado;}?>>Quintana Roo</option> 
+                    <option value="24" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 24) ? "selected" : ""; echo $seleccionado;}?>>San Luis Potosí</option> 
+                    <option value="25" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 25) ? "selected" : ""; echo $seleccionado;}?>>Sinaloa</option> 
+                    <option value="26" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 26) ? "selected" : ""; echo $seleccionado;}?>>Sonora</option> 
+                    <option value="27" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 27) ? "selected" : ""; echo $seleccionado;}?>>Tabasco</option> 
+                    <option value="28" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 28) ? "selected" : ""; echo $seleccionado;}?>>Tamaulipas</option> 
+                    <option value="29" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 29) ? "selected" : ""; echo $seleccionado;}?>>Tlaxcala</option> 
+                    <option value="30" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 30) ? "selected" : ""; echo $seleccionado;}?>>Veracruz</option> 
+                    <option value="31" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 31) ? "selected" : ""; echo $seleccionado;}?>>Yucatan</option> 
+                    <option value="32" <?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_estado_idestado == 32) ? "selected" : ""; echo $seleccionado;}?>>Zacatecas</option>
                 </select>
             </div>
             <div class="_25">
                 <label for="dire_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                 <select name="dire_perfil_pais_idpais" id="dire_nomPais" class="validate[required]">
 					<option value=""> </option> 
-                    <option value="1" <?php $seleccionado = ($domicilioGeneral[0]->perfil_pais_idpais == 1) ? "selected" : ""; echo $seleccionado;?>>M&eacute;xico</option>';
+                    <option value="1" 
+					<?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_pais_idpais == 1) ? "selected" : ""; echo $seleccionado;}?>>M&eacute;xico</option>';
 				</select>
             </div>
             <div class="_50">
                 <label for="dire_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
-                <input name="dire_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomColonias" maxlength="50" <?php echo 'value = "'.$domicilioGeneral[0]->perfil_colonias_idcolonias.'"';?> />
+                <input name="dire_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomColonias" maxlength="50" 
+				<?php if (!empty($domicilioGeneral)) {echo 'value = "'.$domicilioGeneral[0]->perfil_colonias_idcolonias.'"';}?> />
             </div>
             <div class="_50">
                 <label for="dire_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
-                <input name="dire_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomDelegacion" maxlength="50" <?php echo 'value = "'.$domicilioGeneral[0]->perfil_delegacion_iddelegacion.'"';?>  />
+                <input name="dire_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomDelegacion" maxlength="50" 
+				<?php if (!empty($domicilioGeneral)) {echo 'value = "'.$domicilioGeneral[0]->perfil_delegacion_iddelegacion.'"';}?>  />
             </div> 
             <div class="_100">
             	<label for="daGr_perfil_personalidadJuridica_idpersonalidadJuridica"><?php echo JText::_('TIPO_PERSONA'); ?> *:</label>
@@ -358,30 +364,36 @@
             
             <div class="_25">
                 <label><?php echo JText::_('FISICA'); ?></label>
-                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="1" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" <?php $check = $datosGeneralesUsuario[0]->perfil_personalidadJuridica_idpersonalidadJuridica == 1 ? "checked = \"checked\"" : ""; echo $check;?>/>
+                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="1" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" 
+				<?php if (!empty($datosGeneralesUsuario)) {$check = $datosGeneralesUsuario[0]->perfil_personalidadJuridica_idpersonalidadJuridica == 1 ? "checked = \"checked\"" : ""; echo $check;}?>/>
             </div>
             <div class="_25">
                 <label><?php echo JText::_('MORAL'); ?></label>
-                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="2" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" <?php $check = $datosGeneralesUsuario[0]->perfil_personalidadJuridica_idpersonalidadJuridica == 2 ? "checked = \"checked\"" : ""; echo $check;?>/>
+                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="2" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" 
+				<?php if (!empty($datosGeneralesUsuario)) {$check = $datosGeneralesUsuario[0]->perfil_personalidadJuridica_idpersonalidadJuridica == 2 ? "checked = \"checked\"" : ""; echo $check;}?>/>
             </div>
             <div class="_50">
                 <label><?php echo JText::_('FISICA_EMP'); ?></label>
-                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="3" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" <?php $check = $datosGeneralesUsuario[0]->perfil_personalidadJuridica_idpersonalidadJuridica == 3 ? "checked = \"checked\"" : ""; echo $check;?>/>
+                <input name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" class="validate[required]" type="radio" value="3" id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" onclick="toggle_noFisica(this)" 
+				<?php if (!empty($datosGeneralesUsuario)) {$check = $datosGeneralesUsuario[0]->perfil_personalidadJuridica_idpersonalidadJuridica == 3 ? "checked = \"checked\"" : ""; echo $check;}?>/>
             </div>                     
             <div id="noFisica" style="display:none">	  
             <div id="nombre"><h3><?php echo JText::_('DATOS_FISCALES'); ?></h3></div>           
             <div id="datosFiscales">
             <div class="_50">
                 <label for="daFi_nomNombreComercial"><?php echo JText::_('NOMBRE_COMERCIAL'); ?> *:</label>
-                <input name="daFi_nomNombreComercial" class="validate[required,custom[onlyLetterNumber]]" type="text" id="daFi_nomNombreComercial" maxlength="50" <?php echo 'value = "'.$datosFiscales[0]->nomNombreComercial.'"';?> />
+                <input name="daFi_nomNombreComercial" class="validate[required,custom[onlyLetterNumber]]" type="text" id="daFi_nomNombreComercial" maxlength="50" 
+				<?php if (!empty($datosFiscales)) {echo 'value = "'.$datosFiscales[0]->nomNombreComercial.'"';}?> />
             </div>
             <div class="_25">
                 <label for="daFi_nomRazonSocial"><?php echo JText::_('RAZON_SOCIAL'); ?>*:</label>
-                <input name="daFi_nomRazonSocial" class="validate[required,custom[onlyLetterNumber]]" type="text" id="daFi_nomRazonSocial" maxlength="50" <?php echo 'value = "'.$datosFiscales[0]->nomRazonSocial.'"';?> />
+                <input name="daFi_nomRazonSocial" class="validate[required,custom[onlyLetterNumber]]" type="text" id="daFi_nomRazonSocial" maxlength="50" 
+				<?php if (!empty($datosFiscales)) {echo 'value = "'.$datosFiscales[0]->nomRazonSocial.'"';}?> />
             </div>
             <div class="_25">
                 <label for="daFi_rfcRFC">RFC(May&uacute;sculas)*:</label>
-                <input name="daFi_rfcRFC" class="validate[required,custom[rfc]]" type="text" id="daFi_rfcRFC" maxlength="14" <?php echo 'value = "'.$datosFiscales[0]->rfcRFC.'"';?> />
+                <input name="daFi_rfcRFC" class="validate[required,custom[rfc]]" type="text" id="daFi_rfcRFC" maxlength="14" 
+				<?php if (!empty($datosFiscales)) {echo 'value = "'.$datosFiscales[0]->rfcRFC.'"';}?> />
             </div>
             </div>             
             <div id="nombre"><h3><?php echo JText::_('DOM_FISCAL'); ?></h3></div>            
@@ -393,58 +405,102 @@
             </div>
             <div class="_50">
                 <label for="doFi_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
-                <input name="doFi_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doFi_nomCalle" maxlength="70" <?php echo 'value = "'.$domicilioFiscal[0]->nomCalle.'"';?> />
+                <input name="doFi_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doFi_nomCalle" maxlength="70" 
+				<?php if (!empty($domicilioFiscal)) {echo 'value = "'.$domicilioFiscal[0]->nomCalle.'"';}?> />
             </div>
             <div class="_25">
                 <label for="doFi_noExterior"><?php echo JText::_('NUM_EXT'); ?> *:</label>
-                <input name="doFi_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doFi_noExterior" size="10" maxlength="10" <?php echo 'value = "'.$domicilioFiscal[0]->noExterior.'"';?> />
+                <input name="doFi_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doFi_noExterior" size="10" maxlength="10" 
+				<?php if (!empty($domicilioFiscal)) {echo 'value = "'.$domicilioFiscal[0]->noExterior.'"';}?> />
             </div>
             <div class="_25">
                 <label for="doFi_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
-                <input name="doFi_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="doFi_noInterior" size="10" maxlength="10" <?php echo 'value = "'.$domicilioFiscal[0]->noInterior.'"';?>/>
+                <input name="doFi_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="doFi_noInterior" size="10" maxlength="10" 
+				<?php if (!empty($domicilioFiscal)) {echo 'value = "'.$domicilioFiscal[0]->noInterior.'"';}?>/>
             </div>
             <div class="_25">
                 <label for="doFi_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
-                <input name="doFi_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]" type="text" id="doFi_iniCodigoPostal" size="10" maxlength="5" <?php echo 'value = "'.$domicilioFiscal[0]->perfil_codigoPostal_idcodigoPostal.'"';?> />
+                <input name="doFi_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]" type="text" id="doFi_iniCodigoPostal" size="10" maxlength="5" 
+				<?php if (!empty($domicilioFiscal)) {echo 'value = "'.$domicilioFiscal[0]->perfil_codigoPostal_idcodigoPostal.'"';}?> />
             </div>	 
             <div class="_25">
                 <label for="doFi_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
                 <select name="doFi_perfil_estado_idestado" id="doFi_nomEstado" class="validate[required]" >
-                	<?php echo $estados; ?>
+                	<option value=""> </option> 
+                    <option value="1" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 1) ? "selected" : ""; echo $seleccionado;}?>>Aguascalientes</option> 
+                    <option value="2" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 2) ? "selected" : ""; echo $seleccionado;}?>>Baja California</option> 
+                    <option value="3" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 3) ? "selected" : ""; echo $seleccionado;}?>>Baja California Sur</option> 
+                    <option value="4" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 4) ? "selected" : ""; echo $seleccionado;}?>>Campeche</option> 
+                    <option value="5" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 5) ? "selected" : ""; echo $seleccionado;}?>>Coahuila</option> 
+                    <option value="6" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 6) ? "selected" : ""; echo $seleccionado;}?>>Colima</option> 
+                    <option value="7" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 7) ? "selected" : ""; echo $seleccionado;}?>>Chiapas</option> 
+                    <option value="8" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 8) ? "selected" : ""; echo $seleccionado;}?>>Chihuahua</option> 
+                    <option value="9" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 9) ? "selected" : ""; echo $seleccionado;}?>>Distrito Federal</option> 
+                    <option value="10" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 10) ? "selected" : ""; echo $seleccionado;}?>>Durango</option> 
+                    <option value="11" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 11) ? "selected" : ""; echo $seleccionado;}?>>Guanajuato</option> 
+                    <option value="12" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 12) ? "selected" : ""; echo $seleccionado;}?>>Guerrero</option> 
+                    <option value="13" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 13) ? "selected" : ""; echo $seleccionado;}?>>Hidalgo</option> 
+                    <option value="14" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 14) ? "selected" : ""; echo $seleccionado;}?>>Jalisco</option> 
+                    <option value="15" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 15) ? "selected" : ""; echo $seleccionado;}?>>Estado de México</option> 
+                    <option value="16" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 16) ? "selected" : ""; echo $seleccionado;}?>>Michoacán</option> 
+                    <option value="17" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 17) ? "selected" : ""; echo $seleccionado;}?>>Morelos</option> 
+                    <option value="18" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 18) ? "selected" : ""; echo $seleccionado;}?>>Nayarit</option> 
+                    <option value="19" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 19) ? "selected" : ""; echo $seleccionado;}?>>Nuevo León</option> 
+                    <option value="20" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 20) ? "selected" : ""; echo $seleccionado;}?>>Oaxaca</option> 
+                    <option value="21" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 21) ? "selected" : ""; echo $seleccionado;}?>>Puebla</option> 
+                    <option value="22" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 22) ? "selected" : ""; echo $seleccionado;}?>>Querétaro</option> 
+                    <option value="23" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 23) ? "selected" : ""; echo $seleccionado;}?>>Quintana Roo</option> 
+                    <option value="24" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 24) ? "selected" : ""; echo $seleccionado;}?>>San Luis Potosí</option> 
+                    <option value="25" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 25) ? "selected" : ""; echo $seleccionado;}?>>Sinaloa</option> 
+                    <option value="26" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 26) ? "selected" : ""; echo $seleccionado;}?>>Sonora</option> 
+                    <option value="27" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 27) ? "selected" : ""; echo $seleccionado;}?>>Tabasco</option> 
+                    <option value="28" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 28) ? "selected" : ""; echo $seleccionado;}?>>Tamaulipas</option> 
+                    <option value="29" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 29) ? "selected" : ""; echo $seleccionado;}?>>Tlaxcala</option> 
+                    <option value="30" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 30) ? "selected" : ""; echo $seleccionado;}?>>Veracruz</option> 
+                    <option value="31" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 31) ? "selected" : ""; echo $seleccionado;}?>>Yucatan</option> 
+                    <option value="32" <?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_estado_idestado == 32) ? "selected" : ""; echo $seleccionado;}?>>Zacatecas</option>
                 </select>
             </div>
             <div class="_25">
                 <label for="doFi_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                 <select name="doFi_perfil_pais_idpais" id="doFi_nomPais" class="validate[required]">
-                    <?php echo $paises; ?>
+                    <option value=""> </option> 
+                    <option value="1" 
+					<?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_pais_idpais == 1) ? "selected" : ""; echo $seleccionado;}?>>M&eacute;xico</option>';
                 </select>
             </div>
             <div class="_50">
                 <label for="doFi_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
-                <input name="doFi_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doFi_nomColonias" maxlength="50" <?php echo 'value = "'.$domicilioFiscal[0]->perfil_colonias_idcolonias.'"';?> />
+                <input name="doFi_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doFi_nomColonias" maxlength="50" 
+				<?php if (!empty($domicilioFiscal)) {echo 'value = "'.$domicilioFiscal[0]->perfil_colonias_idcolonias.'"';}?> />
             </div>
             <div class="_50">
                 <label for="doFi_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
-                <input name="doFi_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="doFi_nomDelegacion" maxlength="50" <?php echo 'value = "'.$domicilioFiscal[0]->perfil_delegacion_iddelegacion.'"';?> />
+                <input name="doFi_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="doFi_nomDelegacion" maxlength="50" 
+				<?php if (!empty($domicilioFiscal)) {echo 'value = "'.$domicilioFiscal[0]->perfil_delegacion_iddelegacion.'"';}?> />
             </div>            
             <div id="nombre"><h3><?php echo JText::_('REPRESENTANTE'); ?></h3></div>            
             <div class="_50"><label for="datosPrev"><?php echo JText::_('COPIAR_INFO'); ?></label></div>
             <div class="_25"><input name="Copiar" onclick="copiarRepresentante()" type="button" value="<?php echo JText::_('COPIAR'); ?>" /></div>
             <div class="_50">
                 <label for="repr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>
-                <input name="repr_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="repr_nomNombre" maxlength="25" <?php echo 'value = "'.$datosRLegal[0]->nomNombre.'"';?> />
+                <input name="repr_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="repr_nomNombre" maxlength="25" 
+				<?php if (!empty($datosRLegal)) {echo 'value = "'.$datosRLegal[0]->nomNombre.'"';}?> />
             </div>
             <div class="_25">
                 <label for="repr_nomApellidoPaterno"><?php echo JText::_('APEPAT'); ?> *:</label>
-                <input name="repr_nomApellidoPaterno" class="validate[required,custom[onlyLetterSp]]" type="text" id="repr_nomApellidoPaterno" maxlength="25" <?php echo 'value = "'.$datosRLegal[0]->nomApellidoPaterno.'"';?> />
+                <input name="repr_nomApellidoPaterno" class="validate[required,custom[onlyLetterSp]]" type="text" id="repr_nomApellidoPaterno" maxlength="25" 
+				<?php if (!empty($datosRLegal)) {echo 'value = "'.$datosRLegal[0]->nomApellidoPaterno.'"';}?> />
             </div>
             <div class="_25">
                 <label for="repr_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
-                <input name="repr_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="repr_nomApellidoMaterno" maxlength="25" <?php echo 'value = "'.$datosRLegal[0]->nomApellidoMaterno.'"';?> />
+                <input name="repr_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="repr_nomApellidoMaterno" maxlength="25" 
+				<?php if (!empty($datosRLegal)) {echo 'value = "'.$datosRLegal[0]->nomApellidoMaterno.'"';}?> />
             </div>
            	<div class="_50">
                 <label for="maRe_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
-                <input name="maRe_coeEmail" class="validate[required,custom[email]]" type="text" id="maRe_coeEmail" maxlength="100" <?php echo 'value = "'.$emailRLegal[0]->coeEmail.'"';?>/>
+                <input name="maRe_coeEmail" class="validate[required,custom[email]]" type="text" id="maRe_coeEmail" maxlength="100" 
+				<?php if (!empty($emailRLegal)) {echo 'value = "'.$emailRLegal[0]->coeEmail.'"';}?>/>
                 <span id="writerootCorreoRe">
                 <?php 
                 	$noEmail = count($emailGeneral);
@@ -471,20 +527,22 @@
                 <label for="teRe_nomTipoTelefono" ><?php echo JText::_('TIPO_TEL'); ?>:
                 <select name="teRe_perfil_tipoTelefono_idtipoTelefono" id="teRe_nomTipoTelefono" onchange="enable2()" >                 	
                 	<option value="" > </option>
-                    <option value="1" <?php $seleccionado = ($telefonoRLegal[0]->perfil_tipoTelefono_idtipoTelefono == 1) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('CASA'); ?></option>
-                    <option value="2" <?php $seleccionado = ($telefonoRLegal[0]->perfil_tipoTelefono_idtipoTelefono == 2) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('CELULAR'); ?></option>
-                    <option value="3" <?php $seleccionado = ($telefonoRLegal[0]->perfil_tipoTelefono_idtipoTelefono == 3) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('OFICINA'); ?></option>
+                    <option value="1" <?php if (!empty($telefonoRLegal)) {$seleccionado = ($telefonoRLegal[0]->perfil_tipoTelefono_idtipoTelefono == 1) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('CASA'); ?></option>
+                    <option value="2" <?php if (!empty($telefonoRLegal)) {$seleccionado = ($telefonoRLegal[0]->perfil_tipoTelefono_idtipoTelefono == 2) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('CELULAR'); ?></option>
+                    <option value="3" <?php if (!empty($telefonoRLegal)) {$seleccionado = ($telefonoRLegal[0]->perfil_tipoTelefono_idtipoTelefono == 3) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('OFICINA'); ?></option>
                </select>
                 </label>
             </div>
             
             <div class="_25">
                 <label for="teRe_telTelefono"><?php echo JText::_('TELEFONO'); ?>:</label>
-                <input name="teRe_telTelefono" class="validate[custom[phone]]" type="text" id="teRe_telTelefono" maxlength="10" <?php echo 'value = "'.$telefonoRLegal[0]->telTelefono.'"';?> />
+                <input name="teRe_telTelefono" class="validate[custom[phone]]" type="text" id="teRe_telTelefono" maxlength="10" 
+				<?php if (!empty($telefonoRLegal)) {echo 'value = "'.$telefonoRLegal[0]->telTelefono.'"';}?> />
             </div>
             <div id="ext2" class="_25"> 
             <label for="teRe_extension"><?php echo JText::_('EXT'); ?></label> 
-            <input name="teRe_extension" class="validate[onlyNumberSp]" disabled="true" type="text" id="teRe_extension" maxlength="5" size="8" <?php echo 'value = "'.$telefonoRLegal[0]->extension.'"';?> />
+            <input name="teRe_extension" class="validate[onlyNumberSp]" disabled="true" type="text" id="teRe_extension" maxlength="5" size="8" 
+			<?php if (!empty($telefonoRLegal)) {echo 'value = "'.$telefonoRLegal[0]->extension.'"';}?> />
             </div>
             </div> 
             <span id="writerootTelRe">   
@@ -538,58 +596,102 @@
             </div>
             <div class="_50">
                 <label for="doRe_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
-                <input name="doRe_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doRe_nomCalle" maxlength="70" <?php echo 'value = "'.$domicilioRLegal[0]->nomCalle.'"';?> />
+                <input name="doRe_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doRe_nomCalle" maxlength="70" 
+				<?php if (!empty($domicilioRLegal)) {echo 'value = "'.$domicilioRLegal[0]->nomCalle.'"';}?> />
             </div>
             <div class="_25">
                 <label for="doRe_noExterior"><?php echo JText::_('NUM_EXT'); ?> *:</label>
-                <input name="doRe_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doRe_noExterior" size="10" maxlength="10" <?php echo 'value = "'.$domicilioRLegal[0]->noExterior.'"';?> />
+                <input name="doRe_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doRe_noExterior" size="10" maxlength="10" 
+				<?php if (!empty($domicilioRLegal)) {echo 'value = "'.$domicilioRLegal[0]->noExterior.'"';}?> />
             </div>
             <div class="_25">
                 <label for="doRe_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
-                <input name="doRe_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="doRe_noInterior" size="10" maxlength="10" <?php echo 'value = "'.$domicilioRLegal[0]->noInterior.'"';?>/>
+                <input name="doRe_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="doRe_noInterior" size="10" maxlength="10" 
+				<?php if (!empty($domicilioRLegal)) {echo 'value = "'.$domicilioRLegal[0]->noInterior.'"';}?>/>
             </div>
             <div class="_25">
                 <label for="doRe_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
-                <input name="doRe_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]" type="text" id="doRe_iniCodigoPostal" size="10" maxlength="5" <?php echo 'value = "'.$domicilioRLegal[0]->perfil_codigoPostal_idcodigoPostal.'"';?> />
+                <input name="doRe_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]" type="text" id="doRe_iniCodigoPostal" size="10" maxlength="5" 
+				<?php if (!empty($domicilioRLegal)) {echo 'value = "'.$domicilioRLegal[0]->perfil_codigoPostal_idcodigoPostal.'"';}?> />
             </div>	 
             <div class="_25">
                 <label for="doRe_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
                 <select name="doRe_perfil_estado_idestado" id="doRe_nomEstado" class="validate[required]" >
-                	<?php echo $estados; ?>
+					<option value=""> </option> 
+                	<option value="1" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 1) ? "selected" : ""; echo $seleccionado;}?>>Aguascalientes</option> 
+                    <option value="2" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 2) ? "selected" : ""; echo $seleccionado;}?>>Baja California</option> 
+                    <option value="3" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 3) ? "selected" : ""; echo $seleccionado;}?>>Baja California Sur</option> 
+                    <option value="4" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 4) ? "selected" : ""; echo $seleccionado;}?>>Campeche</option> 
+                    <option value="5" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 5) ? "selected" : ""; echo $seleccionado;}?>>Coahuila</option> 
+                    <option value="6" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 6) ? "selected" : ""; echo $seleccionado;}?>>Colima</option> 
+                    <option value="7" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 7) ? "selected" : ""; echo $seleccionado;}?>>Chiapas</option> 
+                    <option value="8" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 8) ? "selected" : ""; echo $seleccionado;}?>>Chihuahua</option> 
+                    <option value="9" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 9) ? "selected" : ""; echo $seleccionado;}?>>Distrito Federal</option> 
+                    <option value="10" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 10) ? "selected" : ""; echo $seleccionado;}?>>Durango</option> 
+                    <option value="11" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 11) ? "selected" : ""; echo $seleccionado;}?>>Guanajuato</option> 
+                    <option value="12" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 12) ? "selected" : ""; echo $seleccionado;}?>>Guerrero</option> 
+                    <option value="13" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 13) ? "selected" : ""; echo $seleccionado;}?>>Hidalgo</option> 
+                    <option value="14" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 14) ? "selected" : ""; echo $seleccionado;}?>>Jalisco</option> 
+                    <option value="15" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 15) ? "selected" : ""; echo $seleccionado;}?>>Estado de México</option> 
+                    <option value="16" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 16) ? "selected" : ""; echo $seleccionado;}?>>Michoacán</option> 
+                    <option value="17" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 17) ? "selected" : ""; echo $seleccionado;}?>>Morelos</option> 
+                    <option value="18" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 18) ? "selected" : ""; echo $seleccionado;}?>>Nayarit</option> 
+                    <option value="19" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 19) ? "selected" : ""; echo $seleccionado;}?>>Nuevo León</option> 
+                    <option value="20" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 20) ? "selected" : ""; echo $seleccionado;}?>>Oaxaca</option> 
+                    <option value="21" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 21) ? "selected" : ""; echo $seleccionado;}?>>Puebla</option> 
+                    <option value="22" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 22) ? "selected" : ""; echo $seleccionado;}?>>Querétaro</option> 
+                    <option value="23" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 23) ? "selected" : ""; echo $seleccionado;}?>>Quintana Roo</option> 
+                    <option value="24" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 24) ? "selected" : ""; echo $seleccionado;}?>>San Luis Potosí</option> 
+                    <option value="25" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 25) ? "selected" : ""; echo $seleccionado;}?>>Sinaloa</option> 
+                    <option value="26" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 26) ? "selected" : ""; echo $seleccionado;}?>>Sonora</option> 
+                    <option value="27" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 27) ? "selected" : ""; echo $seleccionado;}?>>Tabasco</option> 
+                    <option value="28" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 28) ? "selected" : ""; echo $seleccionado;}?>>Tamaulipas</option> 
+                    <option value="29" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 29) ? "selected" : ""; echo $seleccionado;}?>>Tlaxcala</option> 
+                    <option value="30" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 30) ? "selected" : ""; echo $seleccionado;}?>>Veracruz</option> 
+                    <option value="31" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 31) ? "selected" : ""; echo $seleccionado;}?>>Yucatan</option> 
+                    <option value="32" <?php if (!empty($domicilioRLegal)) {$seleccionado = ($domicilioRLegal[0]->perfil_estado_idestado == 32) ? "selected" : ""; echo $seleccionado;}?>>Zacatecas</option>
                 </select>
             </div>
             <div class="_25">
                 <label for="doRe_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                 <select name="doRe_perfil_pais_idpais" id="doRe_nomPais" class="validate[required]">
-                    <?php echo $paises; ?>
+                     <option value=""> </option> 
+                    <option value="1" 
+					<?php if (!empty($domicilioFiscal)) {$seleccionado = ($domicilioFiscal[0]->perfil_pais_idpais == 1) ? "selected" : ""; echo $seleccionado;}?>>M&eacute;xico</option>';
                 </select>
             </div>
             <div class="_50">
                 <label for="doRe_nomColonias"><?php echo JText::_('COLONIA'); ?>*:</label>
-                <input name="doRe_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doRe_nomColonias" maxlength="50" <?php echo 'value = "'.$domicilioRLegal[0]->perfil_colonias_idcolonias.'"';?> />
+                <input name="doRe_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doRe_nomColonias" maxlength="50" 
+				<?php if (!empty($domicilioRLegal)) {echo 'value = "'.$domicilioRLegal[0]->perfil_colonias_idcolonias.'"';}?> />
             </div>
             <div class="_50">
                 <label for="doRe_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
-                <input name="doRe_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="doRe_nomDelegacion" maxlength="50" <?php echo 'value = "'.$domicilioRLegal[0]->perfil_delegacion_iddelegacion.'"';?> />
+                <input name="doRe_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="doRe_nomDelegacion" maxlength="50" 
+				<?php if (!empty($domicilioRLegal)) {echo 'value = "'.$domicilioRLegal[0]->perfil_delegacion_iddelegacion.'"';}?> />
             </div>            
             <div id="nombre"><h3><?php echo JText::_('CONT'); ?></h3></div>            
             <div class="_50"><label for="datosPrev"><?php echo JText::_('COPIAR_INFO'); ?></label></div>
             <div class="_25"><input name="Copiar" onclick="copiarContacto()" type="button" value="<?php echo JText::_('COPIAR'); ?>" /></div>
             <div class="_50">
                 <label for="daCo_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>
-                <input name="daCo_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="daCo_nomNombre" maxlength="25" <?php echo 'value = "'.$datosContacto[0]->nomNombre.'"';?> />
+                <input name="daCo_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="daCo_nomNombre" maxlength="25" 
+				<?php if (!empty($datosContacto)) {echo 'value = "'.$datosContacto[0]->nomNombre.'"';}?> />
             </div>
             <div class="_25">
                 <label for="daCo_nomApellidoPaterno"><?php echo JText::_('APEPAT'); ?> *:</label>
-                <input name="daCo_nomApellidoPaterno" class="validate[required,custom[onlyLetterSp]]" type="text" id="daCo_nomApellidoPaterno" maxlength="25" <?php echo 'value = "'.$datosContacto[0]->nomApellidoPaterno.'"';?>/>
+                <input name="daCo_nomApellidoPaterno" class="validate[required,custom[onlyLetterSp]]" type="text" id="daCo_nomApellidoPaterno" maxlength="25" 
+				<?php if (!empty($datosContacto)) {echo 'value = "'.$datosContacto[0]->nomApellidoPaterno.'"';}?>/>
             </div>
             <div class="_25">
                 <label for="daCo_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
-                <input name="daCo_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="daCo_nomApellidoMaterno" maxlength="25" <?php echo 'value = "'.$datosContacto[0]->nomApellidoMaterno.'"';?>/>
+                <input name="daCo_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="daCo_nomApellidoMaterno" maxlength="25" 
+				<?php if (!empty($datosContacto)) {echo 'value = "'.$datosContacto[0]->nomApellidoMaterno.'"';}?>/>
             </div>
             <div class="_50">
                 <label for="maCo_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
-                <input name="maCo_coeEmail" class="validate[required,custom[email]]" type="text" id="maCo_coeEmail" maxlength="100" <?php echo 'value = "'.$emailContacto[0]->coeEmail.'"';?>/>
+                <input name="maCo_coeEmail" class="validate[required,custom[email]]" type="text" id="maCo_coeEmail" maxlength="100" 
+				<?php if (!empty($emailContacto)) {echo 'value = "'.$emailContacto[0]->coeEmail.'"';}?>/>
                 <span id="writerootCorreoCo">
                 <?php 
                 	$noEmail = count($emailContacto);
@@ -615,15 +717,16 @@
             	<label for="teCo_nomTipoTelefono" ><?php echo JText::_('TIPO_TEL'); ?>:
                 <select name="teCo_perfil_tipoTelefono_idtipoTelefono"  id="teCo_nomTipoTelefono" onchange="enable3()" >
                 	<option value="" > </option>
-                    <option value="1" <?php $seleccionado = ($telefonoContacto[0]->perfil_tipoTelefono_idtipoTelefono == 1) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('CASA'); ?></option>
-                    <option value="2" <?php $seleccionado = ($telefonoContacto[0]->perfil_tipoTelefono_idtipoTelefono == 2) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('CELULAR'); ?></option>
-                    <option value="3" <?php $seleccionado = ($telefonoContacto[0]->perfil_tipoTelefono_idtipoTelefono == 3) ? "selected" : ""; echo $seleccionado;?>> <?php echo JText::_('OFICINA'); ?></option>
+                    <option value="1" <?php if (!empty($telefonoContacto)) {$seleccionado = ($telefonoContacto[0]->perfil_tipoTelefono_idtipoTelefono == 1) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('CASA'); ?></option>
+                    <option value="2" <?php if (!empty($telefonoContacto)) {$seleccionado = ($telefonoContacto[0]->perfil_tipoTelefono_idtipoTelefono == 2) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('CELULAR'); ?></option>
+                    <option value="3" <?php if (!empty($telefonoContacto)) {$seleccionado = ($telefonoContacto[0]->perfil_tipoTelefono_idtipoTelefono == 3) ? "selected" : ""; echo $seleccionado;}?>> <?php echo JText::_('OFICINA'); ?></option>
                </select>
                 </label>
             </div>
             <div class="_25">
                 <label for="teCo_telTelefono"><?php echo JText::_('TELEFONO'); ?>:</label>
-                <input name="teCo_telTelefono" class="validate[custom[phone]]" type="text" id="teCo_telTelefono" maxlength="10" <?php echo 'value = "'.$telefonoContacto[0]->telTelefono.'"';?>/>
+                <input name="teCo_telTelefono" class="validate[custom[phone]]" type="text" id="teCo_telTelefono" maxlength="10" 
+				<?php if (!empty($telefonoContacto)) {echo 'value = "'.$telefonoContacto[0]->telTelefono.'"';}?>/>
             </div>
             <div id="ext3" class="_25"> <?php echo JText::_('EXT'); ?> <input name="Extension" disabled="true"  class="validate[onlyNumberSp]" type="text" id="teCo_extension" maxlength="5" size="8" <?php echo 'value = "'.$telefonoContacto[0]->extension.'"';?> />
             </div>
@@ -679,39 +782,79 @@
             </div>
             <div class="_50">
                 <label for="doCo_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
-                <input name="doCo_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doCo_nomCalle" maxlength="70" <?php echo 'value = "'.$domicilioContacto[0]->nomCalle.'"';?> />
+                <input name="doCo_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doCo_nomCalle" maxlength="70" 
+				<?php if (!empty($domicilioContacto)) {echo 'value = "'.$domicilioContacto[0]->nomCalle.'"';}?> />
             </div>
             <div class="_25">
                 <label for="doCo_noExterior"><?php echo JText::_('NUM_EXT'); ?> *:</label>
-                <input name="doCo_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doCo_noExterior" size="10" maxlength="10" <?php echo 'value = "'.$domicilioContacto[0]->noExterior.'"';?> />
+                <input name="doCo_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doCo_noExterior" size="10" maxlength="10" 
+				<?php if (!empty($domicilioContacto)) {echo 'value = "'.$domicilioContacto[0]->noExterior.'"';}?> />
             </div>
             <div class="_25">
                 <label for="doCo_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
-                <input name="doCo_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="doCo_noInterior" size="10" maxlength="10" <?php echo 'value = "'.$domicilioContacto[0]->noInterior.'"';?>/>
+                <input name="doCo_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="doCo_noInterior" size="10" maxlength="10" 
+				<?php if (!empty($domicilioContacto)) {echo 'value = "'.$domicilioContacto[0]->noInterior.'"';}?>/>
             </div>
             <div class="_25">
                 <label for="doCo_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
-                <input name="doCo_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]" type="text" id="doCo_iniCodigoPostal" size="10" maxlength="5" <?php echo 'value = "'.$domicilioContacto[0]->perfil_codigoPostal_idcodigoPostal.'"';?> />
+                <input name="doCo_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]" type="text" id="doCo_iniCodigoPostal" size="10" maxlength="5" 
+				<?php if (!empty($domicilioContacto)) {echo 'value = "'.$domicilioContacto[0]->perfil_codigoPostal_idcodigoPostal.'"';}?> />
             </div>	 
             <div class="_25">
                 <label for="doCo_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
                 <select name="doCo_perfil_estado_idestado" id="doCo_nomEstado" class="validate[required]">
-                	<?php echo $estados; ?>
+					<option value=""> </option> 
+                	<option value="1" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 1) ? "selected" : ""; echo $seleccionado;}?>>Aguascalientes</option> 
+                    <option value="2" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 2) ? "selected" : ""; echo $seleccionado;}?>>Baja California</option> 
+                    <option value="3" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 3) ? "selected" : ""; echo $seleccionado;}?>>Baja California Sur</option> 
+                    <option value="4" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 4) ? "selected" : ""; echo $seleccionado;}?>>Campeche</option> 
+                    <option value="5" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 5) ? "selected" : ""; echo $seleccionado;}?>>Coahuila</option> 
+                    <option value="6" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 6) ? "selected" : ""; echo $seleccionado;}?>>Colima</option> 
+                    <option value="7" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 7) ? "selected" : ""; echo $seleccionado;}?>>Chiapas</option> 
+                    <option value="8" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 8) ? "selected" : ""; echo $seleccionado;}?>>Chihuahua</option> 
+                    <option value="9" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 9) ? "selected" : ""; echo $seleccionado;}?>>Distrito Federal</option> 
+                    <option value="10" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 10) ? "selected" : ""; echo $seleccionado;}?>>Durango</option> 
+                    <option value="11" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 11) ? "selected" : ""; echo $seleccionado;}?>>Guanajuato</option> 
+                    <option value="12" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 12) ? "selected" : ""; echo $seleccionado;}?>>Guerrero</option> 
+                    <option value="13" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 13) ? "selected" : ""; echo $seleccionado;}?>>Hidalgo</option> 
+                    <option value="14" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 14) ? "selected" : ""; echo $seleccionado;}?>>Jalisco</option> 
+                    <option value="15" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 15) ? "selected" : ""; echo $seleccionado;}?>>Estado de México</option> 
+                    <option value="16" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 16) ? "selected" : ""; echo $seleccionado;}?>>Michoacán</option> 
+                    <option value="17" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 17) ? "selected" : ""; echo $seleccionado;}?>>Morelos</option> 
+                    <option value="18" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 18) ? "selected" : ""; echo $seleccionado;}?>>Nayarit</option> 
+                    <option value="19" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 19) ? "selected" : ""; echo $seleccionado;}?>>Nuevo León</option> 
+                    <option value="20" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 20) ? "selected" : ""; echo $seleccionado;}?>>Oaxaca</option> 
+                    <option value="21" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 21) ? "selected" : ""; echo $seleccionado;}?>>Puebla</option> 
+                    <option value="22" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 22) ? "selected" : ""; echo $seleccionado;}?>>Querétaro</option> 
+                    <option value="23" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 23) ? "selected" : ""; echo $seleccionado;}?>>Quintana Roo</option> 
+                    <option value="24" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 24) ? "selected" : ""; echo $seleccionado;}?>>San Luis Potosí</option> 
+                    <option value="25" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 25) ? "selected" : ""; echo $seleccionado;}?>>Sinaloa</option> 
+                    <option value="26" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 26) ? "selected" : ""; echo $seleccionado;}?>>Sonora</option> 
+                    <option value="27" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 27) ? "selected" : ""; echo $seleccionado;}?>>Tabasco</option> 
+                    <option value="28" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 28) ? "selected" : ""; echo $seleccionado;}?>>Tamaulipas</option> 
+                    <option value="29" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 29) ? "selected" : ""; echo $seleccionado;}?>>Tlaxcala</option> 
+                    <option value="30" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 30) ? "selected" : ""; echo $seleccionado;}?>>Veracruz</option> 
+                    <option value="31" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 31) ? "selected" : ""; echo $seleccionado;}?>>Yucatan</option> 
+                    <option value="32" <?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_estado_idestado == 32) ? "selected" : ""; echo $seleccionado;}?>>Zacatecas</option>
                 </select>
             </div>
             <div class="_25">
                 <label for="doCo_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                 <select name="doCo_perfil_pais_idpais" id="doCo_nomPais" class="validate[required]">
-                    <?php echo $paises; ?>
+                    <option value=""> </option> 
+                    <option value="1" 
+					<?php if (!empty($domicilioContacto)) {$seleccionado = ($domicilioContacto[0]->perfil_pais_idpais == 1) ? "selected" : ""; echo $seleccionado;}?>>M&eacute;xico</option>';
                 </select>
             </div>
             <div class="_50">
                 <label for="doCo_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
-                <input name="doCo_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doCo_nomColonias" maxlength="50" <?php echo 'value = "'.$domicilioContacto[0]->perfil_colonias_idcolonias.'"';?> />
+                <input name="doCo_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doCo_nomColonias" maxlength="50" 
+				<?php if (!empty($domicilioContacto)) {echo 'value = "'.$domicilioContacto[0]->perfil_colonias_idcolonias.'"';}?> />
             </div>
             <div class="_50">
                 <label for="doCo_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
-                <input name="doCo_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="doCo_nomDelegacion" maxlength="50" <?php echo 'value = "'.$domicilioContacto[0]->perfil_delegacion_iddelegacion.'"';?> />
+                <input name="doCo_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="doCo_nomDelegacion" maxlength="50" 
+				<?php if (!empty($domicilioContacto)) {echo 'value = "'.$domicilioContacto[0]->perfil_delegacion_iddelegacion.'"';}?> />
             </div>     
             </div>       
             <div id="nombre"><h3><?php echo JText::_('EMPRESA_PER'); ?></h3></div>
@@ -728,11 +871,13 @@
             <div id="nombre"><h3><?php echo JText::_('PROY_PAS'); ?></h3></div>            
             <div class="_100">
                 <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('PROYECTO'); ?></label>
-                <input name="prPa_nomNombreProyecto"  type="text" id="prPa_nomNombreProyecto" maxlength="70" <?php echo 'value = "'.$proyectosPasados[0]->nomNombreProyecto.'"';?> />
+                <input name="prPa_nomNombreProyecto"  type="text" id="prPa_nomNombreProyecto" maxlength="70" 
+                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->nomNombreProyecto.'"';}?> />
             </div>
             <div class="_100">
                 <label for="prPa_urlProyectosPasados"><?php echo JText::_('URL_PROY'); ?></label>
-                <input name="prPa_urlProyectosPasados" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados" maxlength="70"<?php echo 'value = "'.$proyectosPasados[0]->urlProyectosPasados.'"';?> />
+                <input name="prPa_urlProyectosPasados" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados" maxlength="70"
+                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->urlProyectosPasados.'"';}?> />
             </div>
             <div class="_100">
             	<label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?></label> <br />           
