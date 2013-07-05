@@ -14,8 +14,6 @@ $tipoPP = isset($_GET['typeId']) ? $_GET['typeId'] : 0;
 $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
 $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
 
-echo 'tipo de busqueda: "'.$busquedaPor[$tipoPP].'", Categoria: "'.$categoria.'", Subcategoria: "'.$subcategoria.'"';
-
 if ( !$tipoPP ) {
 	$ligasPP = '<div id="ligasprod">'.
 			   '<input type="button" id="oculta" value="'.JText::_('PRODUCTO').'s" />'.
