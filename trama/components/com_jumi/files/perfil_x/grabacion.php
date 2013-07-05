@@ -5,7 +5,7 @@ $tabla = "perfilx_respuestas";
 
 $var = $_POST;
 	foreach ($var as $key => $value) {
-		if ((is_numeric($value)) && ($key != 'usuario') && ($key !='control')) {
+		if ((is_numeric($value)) && ($key != 'usuario') && ($key !='controlador')) {
 			$valor[] = $value;
 		}
 		if ($key == 'usuario') {
@@ -14,7 +14,7 @@ $var = $_POST;
 		elseif ($key == 'campo') {
 			$campo = $value;
 		}
-		elseif ($key == 'control') {
+		elseif ($key == 'controlador') {
 			$control = $value;
 		}
 	}
@@ -61,9 +61,9 @@ function actualizar($tabla, $campo, $valor, $idjoom){
 	redirecciona(JText::_('DATOS_ACTUALIZADOS'));
 }
 
-function dataRecord($tabla, $campo, $valor, $idjoom, $controller){
+function dataRecord($tabla, $campo, $valor, $idjoom, $control){
 	
-		if(empty($controller)){
+		if(empty($control)){
 			insertar($tabla, $campo, $valor, $idjoom);
 		}else{
 			actualizar($tabla, $campo, $valor, $idjoom);
@@ -77,6 +77,7 @@ function redirecciona($msg) {
 }
 
 dataRecord($tabla, $campo, $valor, $idjoom, $control);
+
 
 
 
