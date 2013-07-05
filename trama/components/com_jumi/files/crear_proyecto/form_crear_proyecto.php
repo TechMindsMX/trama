@@ -37,7 +37,7 @@ $pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
 $hiddenIdProyecto = '';
-$hiddenphotosIds = '';
+$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" value= ""/>';
 $banner = '';
 $avatar = '';
 $opcionesSubCat = '';
@@ -235,7 +235,7 @@ echo $divrecintos;
 		   
 	<input
 		type="hidden"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->type : 'PROJECT'; ?>"
+		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->type : 'PROYECT'; ?>"
 		name="type" />
 	
 	<label for="nomProy"><?php echo JText::_('NOMBRE').' '.JText::_('PROYECTO'); ?>*:</label>

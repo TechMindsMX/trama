@@ -7,28 +7,44 @@ $usuario = JFactory::getUser();
 $base = JUri::base();
 $document = JFactory::getDocument();
 $pathJumi = Juri::base().'/components/com_jumi/files';
-$busquedaPor = array(1 => 'project', 2 => 'product' );
+$busquedaPor = array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT' );
 $ligasPP = '';
-$loop = 2;
 
-if ( isset($_GET['typeId']) ) {
-	$loop = 1;
-} else {
-	$ligasPP = '<div class="ligasprod"> <button onclick="test()">'.JText::_('PRODUCTO').'s</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick="hideproyectos()">'.Jtext::_('PROYECTO').'s</button></div>';
+$tipoPP = isset($_GET['typeId']) ? $_GET['typeId'] : 0;
+$categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
+$subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
+
+echo 'tipo de busqueda: "'.$busquedaPor[$tipoPP].'", Categoria: "'.$categoria.'", Subcategoria: "'.$subcategoria.'"';
+
+if ( !$tipoPP ) {
+	$ligasPP = '<div id="ligasprod">'.
+			   '<input type="button" id="oculta" value="'.JText::_('PRODUCTO').'s" />'.
+			   '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
+			   '<input type="button" id="oculta" value="'.Jtext::_('PROYECTO').'s" />'.
+			   '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
+			   '<input type="button" id="oculta" value="Mostrar todos" />'.
+			   '</div>';
 }
 
 function prodProy ($tipo) {
-	if(!empty($_POST)){
-		if ($_POST['categoria'] == "" && $_POST['subcategoria'] == "all") {	
+	if( !empty($_POST) ) {
+		if ( ($tipo == 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
-		} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] == "all") {
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'. $_POST['categoria'];
-		} elseif ($_POST['categoria'] != "" && $_POST['subcategoria'] != "all") {
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'. $_POST['subcategoria'];
+		} elseif ( ($tipo == 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] == "all") ) {//Productos y Proyectos por categoria
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/all/'.$_POST['categoria'];
+		} elseif ( ($tipo == 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] != "all") ) {//Productos y proyectos por subcategoria
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/all/'.$_POST['subcategoria'];
+		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] == "all") ) {//Productos o proyectos por categoria
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'.$_POST['categoria'];
+		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] != "all") ) {//Productos o proyectos por Subcategoria
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$_POST['subcategoria'];
+		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) {//nose
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
 		}	
 	} else {
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/'.$tipo.'/list';
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
 	}
+	
 	$json0 = file_get_contents($url);
 	
 	return $json0;
@@ -37,27 +53,34 @@ function prodProy ($tipo) {
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
 $document->addScript($pathJumi.'/view_busqueda/js/jquery.pagination.js');
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
- 	
-for ( $i = 1; $i <= $loop; $i++ ) {
-	( isset($_GET['typeId']) ) ? $buscar = $_GET['typeId'] : $buscar = $i;
-	echo 'Busqueda por '.$busquedaPor[$buscar].'<br />';
-}
 ?>
 
 <script type="text/javascript">
-var members = <?php echo prodProy('project'); ?>;
-$(document).ready(function(){      
+var members = <?php echo prodProy($busquedaPor[$tipoPP]); ?>;
+
+$(document).ready(function(){
 	initPagination();
+	
+	jQuery("#ligasprod input").click(function () {
+		switch(this.value){
+			case 'proyectos':
+				jQuery('#Searchresult div#PRODUCT').fadeOut();
+				jQuery('#Searchresult div#PROJECT').fadeIn();
+			break;
+			
+			case 'productos':
+				jQuery('#Searchresult div#PRODUCT').fadeIn();
+				jQuery('#Searchresult div#PROJECT').fadeOut();
+			break;
+			
+			case 'Mostrar todos':
+				jQuery('#Searchresult div#PRODUCT').fadeIn();
+				jQuery('#Searchresult div#PROJECT').fadeIn();
+			break;
+		}
+	});
 });
 
-function test () {
-	jQuery('#proyectos0').hide();
-	jQuery('#proyectos1').show();
-}
-function hideproyectos () {
-	jQuery('#proyectos1').hide();
-	jQuery('#proyectos0').show();
-}
 function pageselectCallback (page_index, jq) {
 	var items_per_page = 10;
 	var max_elem = Math.min((page_index+1) * items_per_page, members.length);
@@ -78,7 +101,7 @@ function pageselectCallback (page_index, jq) {
 		else {
 			last='';
 		}
-		newcontent += '<div id="proyectos'+i+'">'
+		newcontent += '<div id="'+members[i].type+'">'
 		newcontent += '<div class="proyecto col' + last + ' ancho' + ancho + '">';
 		newcontent += '<div class="inner">';
 		newcontent += '<div class="titulo">';

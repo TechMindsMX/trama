@@ -48,9 +48,9 @@
 						    date3.setFullYear(arrayfechamin[2],parseInt(arrayfechamin[1])-1,parseInt(arrayfechamin[0]));
 						}
 						
-						return (date1 <= date2) && (date1 > date3) ? true : false;
+						return (date1 > date2) && (date1 > date3) ? true : false;
                 	},
-                	"alertText": "* La Fecha no puede ser mas de 120 dias del inicio de producción ni ser menor a la fecha de lanzamiento"
+                	"alertText": "* La Fecha no puede ser menor de 120 dias del inicio de producción ni ser menor a la fecha de lanzamiento"
                 },
                 "cierre": {
                 	"func": function ( field ) {
