@@ -38,7 +38,7 @@ function insertar($tabla, $campo, $valor, $idjoom){
 	$db->setQuery($query);
 	$db->query();
 	
-	echo $query;
+	redirecciona(JText::_('DATOS_GUARDADOS'));
 }
 
 function actualizar($tabla, $campo, $valor, $idjoom){
@@ -57,6 +57,8 @@ function actualizar($tabla, $campo, $valor, $idjoom){
 	
 	$db->setQuery($query);
 	$db->query();
+	
+	redirecciona(JText::_('DATOS_ACTUALIZADOS'));
 }
 
 function dataRecord($tabla, $campo, $valor, $idjoom, $controller){
@@ -66,6 +68,12 @@ function dataRecord($tabla, $campo, $valor, $idjoom, $controller){
 		}else{
 			actualizar($tabla, $campo, $valor, $idjoom);
 		}
+}
+
+function redirecciona($msg) {
+	$app = JFactory::getApplication();
+	$link = Juri::base();
+	$app->redirect($link, $msg, $msgType='message');
 }
 
 dataRecord($tabla, $campo, $valor, $idjoom, $control);
