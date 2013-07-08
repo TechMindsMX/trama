@@ -187,10 +187,12 @@
         // If we've reached maximum number, disable input slave
         if( (MultiFile.max > 0) && ((MultiFile.n-1) > (MultiFile.max)) ) //{ // MultiFile.n Starts at 1, so subtract 1 to find true count
         		slave.disabled = true;
+        		deshabilita(slave);
         //};
         
         if( parseInt($('#maximoImg').html()) == 0) {//agregado por Luis Magaña
         	slave.disabled = true;
+        	deshabilita(slave);
         }
         
         // Remember most recent slave
@@ -281,23 +283,25 @@
        // Bind a new element
        
          //inicia
-$('#imagenes input').click(function () {	
+$('#imagenes input').click(function () {
+	deshabilita(MultiFile.current);
 	
-	if (jQuery(this).prop('checked')) {
-		console.log('checked es: TRUE');
-	} else {
-		console.log('checked es: FALSE');
+	if( $(this).prop('checked') ) {
+		if( (parseInt($('#maximoImg').html())-1) == 0 ){
+			MultiFile.current.disabled = true;
+			var maximo = (parseInt($('#maximoImg').html()))-1;
+			$('#maximoImg').html(maximo);
+		}else{
+			//if( (parseInt($('#maximoImg').html())) != 0 ){
+			var maximo = (parseInt($('#maximoImg').html()))-1;
+			$('#maximoImg').html(maximo);
+			//}
+		}
+	}else{
+		MultiFile.current.disabled = false;
+		var maximo = (parseInt($('#maximoImg').html()))+1;
+		$('#maximoImg').html(maximo);
 	}
-	// if( (parseInt($('#maximoImg').html())-1) == 0 ){	
-		// MultiFile.current.disabled = true;
-		// var maximo = (parseInt($('#maximoImg').html()))+1;
-		// $('#maximoImg').html(maximo);
-	// }else{
-		// if( (parseInt($('#maximoImg').html())) != 0 ){
-			// var maximo = (parseInt($('#maximoImg').html()))-1;
-			// $('#maximoImg').html(maximo);
-		// }
-	// }
 });
         //termina     
        
@@ -573,11 +577,7 @@ function deshabilita (elemento) {
 	console.log(!parseInt($('#maximoImg').html()) != 0);
 	
 	if ( elemento.disabled && !$('#imagenes input').prop('checked') && (parseInt($('#maximoImg').html()) == 0) ) {
-		$.each($('#imagenes input'),function(){
-			if($(this).prop('checked') == false) {
-				$(this).prop('disabled', true);
-			}
-		})
+		$('#imagenes input').prop('disabled', true);
 	}else {
 		$('#imagenes input').prop('disabled', false);
 	}
