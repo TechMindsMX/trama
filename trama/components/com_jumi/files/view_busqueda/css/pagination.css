@@ -32,9 +32,6 @@
 div.proyecto > .inner {
  	margin: 0 0 0 1em;
 }
-div.col-last div.inner {
-	margin-right: 0px;
-}
 .proyecto {
 	float: left;
 	margin-bottom: 1em; 
@@ -45,6 +42,10 @@ div.col-last div.inner {
 .titulo, .descripcion, .avatar {
 	border: 1px solid #ddd;
 	box-shadow: 2px 2px 2px #bbb;
+}
+.avatar {
+	height: 200px;
+	overflow: hidden;
 }
 .avatar img {
 	width: 100%;
