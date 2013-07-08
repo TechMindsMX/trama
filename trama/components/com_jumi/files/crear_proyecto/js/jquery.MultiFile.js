@@ -187,20 +187,10 @@
         // If we've reached maximum number, disable input slave
         if( (MultiFile.max > 0) && ((MultiFile.n-1) > (MultiFile.max)) ) //{ // MultiFile.n Starts at 1, so subtract 1 to find true count
         		slave.disabled = true;
-<<<<<<< HEAD
-		// console.log('desde la funcion original');
-		// deshabilita(slave);
-=======
->>>>>>> branch 'master' of https://lutekvalhalla@bitbucket.org/techminds/trama.git
         //};
         
         if( parseInt($('#maximoImg').html()) == 0) {//agregado por Luis Magaña
         	slave.disabled = true;
-<<<<<<< HEAD
-        	console.log('desde mi deshabilitacion');
-        	deshabilita(slave);
-=======
->>>>>>> branch 'master' of https://lutekvalhalla@bitbucket.org/techminds/trama.git
         }
         
         // Remember most recent slave
@@ -291,68 +281,42 @@
        // Bind a new element
        
          //inicia
-<<<<<<< HEAD
-$('#imagenes input').click(function () {
-	console.log('desde el clik en el check');
-	deshabilita(MultiFile.current);
-=======
 $('#imagenes input').click(function () {	
->>>>>>> branch 'master' of https://lutekvalhalla@bitbucket.org/techminds/trama.git
-	
-<<<<<<< HEAD
 	if( $(this).prop('checked') ) {
-		
 		if( (parseInt($('#maximoImg').html())-1) == 0 ){
 			MultiFile.current.disabled = true;
 			var maximo = (parseInt($('#maximoImg').html()))-1;
 			if ( maximo == 0 ) {
-       			$.each($('#imagenes input'), function() {
-       				if( !$(this).prop('checked') ) {
-       					$(this).prop('disabled', true);
-       				}
-       			});
-       		}
+				$.each($('#imagenes input'), function () {
+					if( !$(this).prop('checked') ) {
+						$(this).prop('disabled', true)
+					} 
+				});
+			}
 			$('#maximoImg').html(maximo);
 		}else{
-			var maximo = (parseInt($('#maximoImg').html()))-1;
-			if ( maximo == 0 ) {
-       			$.each($('#imagenes input'), function() {
-       				if( !$(this).prop('checked') ) {
-       					$(this).prop('disabled', true);
-       				}
-       			});
-       		}
-			$('#maximoImg').html(maximo);
+				var maximo = (parseInt($('#maximoImg').html()))-1;
+				if ( maximo == 0 ) {
+					$.each($('#imagenes input'), function () {
+						if( !$(this).prop('checked') ) {
+							$(this).prop('disabled', true)
+						} 
+					});
+				}
+				$('#maximoImg').html(maximo);
 		}
-		
 	}else{
 		MultiFile.current.disabled = false;
 		var maximo = (parseInt($('#maximoImg').html()))+1;
-		if ( maximo > 0 ) {
-       			$.each($('#imagenes input'), function() {
-       				if( !$(this).prop('checked') ) {
-       					$(this).prop('disabled', false);
-       				}
-       			});
-       		}
+		if ( maximo != 0 ) {
+				$.each($('#imagenes input'), function () {
+					if( !$(this).prop('checked') ) {
+						$(this).prop('disabled', false)
+					} 
+				});
+			}
 		$('#maximoImg').html(maximo);
-=======
-	if (jQuery(this).prop('checked')) {
-		console.log('checked es: TRUE');
-	} else {
-		console.log('checked es: FALSE');
->>>>>>> branch 'master' of https://lutekvalhalla@bitbucket.org/techminds/trama.git
 	}
-	// if( (parseInt($('#maximoImg').html())-1) == 0 ){	
-		// MultiFile.current.disabled = true;
-		// var maximo = (parseInt($('#maximoImg').html()))+1;
-		// $('#maximoImg').html(maximo);
-	// }else{
-		// if( (parseInt($('#maximoImg').html())) != 0 ){
-			// var maximo = (parseInt($('#maximoImg').html()))-1;
-			// $('#maximoImg').html(maximo);
-		// }
-	// }
 });
         //termina     
        
@@ -361,12 +325,12 @@ $('#imagenes input').click(function () {
        	//decrementa la cuenta del numero maximo de imagenes que le quedan por subir. agregado por Luis Magaña
        	var maximo = (parseInt($('#maximoImg').html()))-1;
        	if ( maximo == 0 ) {
-       		$.each($('#imagenes input'), function() {
-       			if( !$(this).prop('checked') ) {
-       				$(this).prop('disabled', true);
-       			}
-       		});
-       	}
+      	  $.each($('#imagenes input'), function () {
+      		 if( !$(this).prop('checked') ) {
+      			 $(this).prop('disabled', true)
+      		 } 
+      	  });
+        }
        	$('#maximoImg').html(maximo);
         
         //if(window.console) console.log('MultiFile.addToList',slave_count);
@@ -395,21 +359,20 @@ $('#imagenes input').click(function () {
           
           //Incrementa el numero maximo de imagenes que puede subir. agregado por Luis Magaña
           var maximo = (parseInt($('#maximoImg').html()))+1;
-          	if ( maximo > 0 ) {
-       		$.each($('#imagenes input'), function() {
-       			if( !$(this).prop('checked') ) {
-       				$(this).prop('disabled', false);
-       			}
-       		});
-       	}
+          if ( maximo > 0 ) {
+        	  $.each($('#imagenes input'), function () {
+        		 if( !$(this).prop('checked') ) {
+        			 $(this).prop('disabled', false)
+        		 } 
+        	  });
+          }
 		  $('#maximoImg').html(maximo);
   
 		  //termina agregado por Luis Magaña
           
           MultiFile.n--;
           MultiFile.current.disabled = false;
-          deshabilita(MultiFile.current);
-          console.log('desde el click en el tache');
+          
           // Remove element, remove label, point to current
 										MultiFile.slaves[slave_count] = null;
 										$(slave).remove();
@@ -638,22 +601,6 @@ $('#imagenes input').click(function () {
 })(jQuery);
 
 function deshabilita (elemento) {
-<<<<<<< HEAD
-
-=======
-	console.log(elemento.disabled);
-	console.log(!$('#imagenes input').prop('checked'));
-	console.log(!parseInt($('#maximoImg').html()) != 0);
-	
-	if ( elemento.disabled && !$('#imagenes input').prop('checked') && (parseInt($('#maximoImg').html()) == 0) ) {
-		$.each($('#imagenes input'),function(){
-			if($(this).prop('checked') == false) {
-				$(this).prop('disabled', true);
-			}
-		})
-	}else {
-		$('#imagenes input').prop('disabled', false);
-	}
->>>>>>> branch 'master' of https://lutekvalhalla@bitbucket.org/techminds/trama.git
+	console.log('algo');
 }
 /*# AVOID COLLISIONS #*/

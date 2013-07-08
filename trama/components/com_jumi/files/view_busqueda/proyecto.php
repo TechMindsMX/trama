@@ -80,7 +80,7 @@ $(document).ready(function(){
 });
 
 function pageselectCallback (page_index, jq) {
-	var items_per_page = 10;
+	var items_per_page = 9;
 	var max_elem = Math.min((page_index+1) * items_per_page, members.length);
 	var newcontent = '';
 	var columnas = 3;

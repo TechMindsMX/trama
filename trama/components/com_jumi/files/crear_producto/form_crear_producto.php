@@ -124,6 +124,7 @@ $document->addScriptDeclaration($scriptselect);
 <form action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/create" id="form2" enctype="multipart/form-data" method="POST">
 	<input type="hidden" name="status" id="status" value="0" >
 	<input type="hidden" name="type" id="type" value="PRODUCT" >
+	<input type="hidden" name="userId" value="<?php echo $usuario->id; ?>" />
 	<label for="nomProy"><?php echo JText::_('NOMBREPR').JText::_('PRODUCTO');  ?>*:</label> 
 	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
 	<br />
