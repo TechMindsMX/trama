@@ -229,6 +229,19 @@ $document->addScriptDeclaration($scriptselect);
 	<input type="text" class="validate[required]" id="direccion" name="showground" maxlength="100"> 
 	<br> 
 	
+	<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label> 
+	<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
+	<br />
+	
+	<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('PRODUCTO'); ?>*:</label> 
+	<input 10
+		type="number" 
+		class="validate[required]"
+		id="presupuesto"
+		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->budget : ''; ?>"
+		name="budget" /> 
+	<br /> 
+	
 	<br /> <?php echo JText::_('PRECIOS_SALIDA').JText::_('PRODUCTO');  ?>*: 
 	<br />
 	<br /> 
@@ -250,6 +263,25 @@ $document->addScriptDeclaration($scriptselect);
 	<input type="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS');  ?>" /> <br /> 
 	<br /> 
 	
+	<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('PRODUCTO'); ?>*:</label> 
+	<input 
+		type="number" 
+		id="potenciales"
+		class="validate[required,custom[onlyNumberSp]]"
+		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->revenuePotential : ''; ?>"
+		name="revenuePotential"
+		step="any" /> 
+	<br>
+	
+	<label for="equilibrio"><?php echo JText::_('PUNTO_EQUILIBRIO'); ?>*:</label>
+	<input
+		type = "number" 
+		id = "equilibrio"
+		class = "validate[required,custom[onlyNumberSp]]"
+		value = "<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->breakeven : ''; ?>"
+		name = "breakeven"
+		step="any" /> 
+	<br>
 	<label for="premiereStartDate"><?php echo JText::_('FECHA_LANZAMIENTO');  ?></label> 
 	<input type="text" id="premiereStartDate"  class="validate[required,custom[date],custom[funciondate]]" name="premiereStartDate"> 
 	<br> 
