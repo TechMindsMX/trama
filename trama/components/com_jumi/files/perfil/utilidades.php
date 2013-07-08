@@ -133,4 +133,40 @@ function proyectosPasados($idPersona){
 
 }
 
+function insertFields($tabladb, $col, $val){
+	$db =& JFactory::getDBO();
+	$query = $db->getQuery(true);
+	$query
+		->insert($db->quoteName($tabladb))
+		->columns($db->quoteName($col))
+		->values(implode(',', $val));
+	$db->setQuery( $query );
+	$db->query();
+}
+
+function updateFields($tabladb, $fields, $conditions){
+	$db =& JFactory::getDBO();
+	$query = $db->getQuery(true);
+	$query
+		->update($db->quoteName($tabladb))
+		->set($fields)
+		->where($conditions);
+	
+	$db->setQuery( $query );
+	$db->query();
+}
+
+function deleteFields($tabladb, $conditions){
+
+	$db = JFactory::getDBO();
+	
+	$query = $db->getQuery(true);
+	
+	$query
+		->delete($db->quoteName($tabladb))
+		->where($conditions);
+	
+	$db->setQuery($query);
+	$db->query();
+}
 ?>

@@ -87,6 +87,7 @@ box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 
 label {
     width: 100%;
+    margin-bottom: 0px; 
 }
 todo{
 	
@@ -96,6 +97,7 @@ input[type=text] {
     border: 1px solid #B3B3B3;
     width: 100%;
     -moz-border-radius: 3px;
+    height: 18px;
 }
 input[type=file] {
     border: 1px solid #B3B3B3;
@@ -128,6 +130,7 @@ select {
     margin-right: 2%;
 	margin-top: 1%;
 	margin-bottom: 1%;
+	height: 22px;
 
 	
 	}
@@ -138,8 +141,7 @@ select {
     margin-right: 2%;
 	margin-top: 1%;
 	margin-bottom: 1%;
-
-	
+	height: 27px;
 	}
 	
 
