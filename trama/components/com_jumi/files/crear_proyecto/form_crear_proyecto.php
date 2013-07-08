@@ -158,7 +158,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 			jQuery("#form2").submit();
 		});
 		
-		jQuery('.projectPhotosIds').change(function () {
+		/*jQuery('.projectPhotosIds').change(function () {			
 			if ( jQuery(this).prop('checked') ) {
 				maxImgs = parseInt(jQuery('#fotos').attr('maxlength')) - 1;
 				
@@ -168,7 +168,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 				
 				jQuery('#fotos').attr('maxlength',maxImgs)
 			} 
-		});
+		});*/
 		
 	});
 	
@@ -235,7 +235,7 @@ echo $divrecintos;
 		   
 	<input
 		type="hidden"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->type : 'PROYECT'; ?>"
+		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->type : 'PROJECT'; ?>"
 		name="type" />
 	
 	<label for="nomProy"><?php echo JText::_('NOMBRE').' '.JText::_('PROYECTO'); ?>*:</label>

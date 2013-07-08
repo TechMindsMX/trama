@@ -282,24 +282,22 @@
        
          //inicia
 $('#imagenes input').click(function () {	
-	if( $(this).prop('checked') ) {
-		if( (parseInt($('#maximoImg').html())-1) == 0 ){
-			MultiFile.current.disabled = true;
-			var maximo = (parseInt($('#maximoImg').html()))-1;
-			$('#maximoImg').html(maximo);
-		}else{
-			if( (parseInt($('#maximoImg').html())) != 0 ){
-				var maximo = (parseInt($('#maximoImg').html()))-1;
-				$('#maximoImg').html(maximo);
-			}
-		}
-	}else{
-		MultiFile.current.disabled = false;
-		$(this).hide();
-		$(this).next().hide();
-		var maximo = (parseInt($('#maximoImg').html()))+1;
-		$('#maximoImg').html(maximo);
+	
+	if (jQuery(this).prop('checked')) {
+		console.log('checked es: TRUE');
+	} else {
+		console.log('checked es: FALSE');
 	}
+	// if( (parseInt($('#maximoImg').html())-1) == 0 ){	
+		// MultiFile.current.disabled = true;
+		// var maximo = (parseInt($('#maximoImg').html()))+1;
+		// $('#maximoImg').html(maximo);
+	// }else{
+		// if( (parseInt($('#maximoImg').html())) != 0 ){
+			// var maximo = (parseInt($('#maximoImg').html()))-1;
+			// $('#maximoImg').html(maximo);
+		// }
+	// }
 });
         //termina     
        
