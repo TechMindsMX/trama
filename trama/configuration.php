@@ -15,7 +15,7 @@ class JConfig {
 	public $host = 'localhost';
 	public $user = 'root';
 	public $password = '';
-	public $db = 'hexeris-rocketlauncher_j25';
+	public $db = 'development_j25';
 	public $dbprefix = 'c3rn2_';
 	public $live_site = '';
 	public $secret = '8VHfBZXpdfKW1koJ';
@@ -65,8 +65,8 @@ class JConfig {
 	public $cookie_path = '';
 }
 
-define("MIDDLE", "http://192.168.0.105");
-define("PUERTO", ":7171");
+define("MIDDLE", "http://192.168.0.122");
+define("PUERTO", ":7070");
 define("AVATAR", "/avatar");
 define("BANNER", "/banner");
 define("BCASE", "/businessCase");
