@@ -24,7 +24,6 @@
 	$producer = JFactory::getUser($json->userId);
 
 	$db = JFactory::getDbo();
-	
 	$query = $db->getQuery(true);
 	
 	$query
@@ -35,7 +34,7 @@
 	
 	$db->setQuery($query);
 	$results = $db->loadObjectList();
-
+	
 $tipo = prefijoTipo($json);
 
 function getProySubCatName($data) {
@@ -78,6 +77,11 @@ function videos($obj, $param) {
 	foreach ($array as $key => $value ) {
 		if (strstr($value->url, 'youtube')) {
 			$arrayLimpio[] = array('youtube' => end(explode("=", $value->url)));
+		}
+		if (strstr($value->url, 'youtu.be')) {
+			$urlcorta = end(explode(".be/", $value->url));
+			$urlcorta = explode("?", $urlcorta);
+			$arrayLimpio[] = array('youtube' => $urlcorta[0]);
 		}
 		elseif (strstr($value->url, 'vimeo')) {
 			$arrayLimpio[] = array('vimeo' => end(explode("://vimeo.com/", $value->url)));
@@ -221,6 +225,7 @@ function informacionTmpl($data, $results) {
 			'<div class="gantry-width-spacer">'.
 			encabezado($data, $results).
 			$data->description.
+			'<br /><h3>Elenco</h3><p>'.$data->cast.'</p>'.
 			'</div>'.
 			'</div>'.
 			'</div>';

@@ -74,8 +74,8 @@ class procesamiento {
 		$count = 0;
 		
 		foreach($claves as $clave ) {
-			$clavevaltmp = mb_substr($clave, 0, 5);
-			$clavelimpia = mb_substr($clave, 5);
+			$clavevaltmp = substr($clave, 0, 5);
+			$clavelimpia = substr($clave, 5);
 
 			switch ($clavevaltmp) {
 				case 'daGr_':
