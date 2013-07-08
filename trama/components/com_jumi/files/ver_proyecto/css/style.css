@@ -4,11 +4,12 @@
 
 #menu {
 	clear: both;
+	margin: 1em 0;
 }
 
 .menu-item {
-	width: 203px;
-	height: 157px;
+	width: 229px;
+	height: 151px;
 	overflow: hidden;
 	float: left;
 }
@@ -29,23 +30,35 @@
 }
 
 .video {
-	background: url('../images/icon-video.png');
+	background-image: url('../images/icon-video.png');
 }
 
 .gallery {
-	background: url('../images/icon-gallery.png');
+	background-image: url('../images/icon-gallery.png');
 }
 
 .audios {
-	background: url('../images/icon-audios.png');
+	background-image: url('../images/icon-audios.png');
 }
 
 .info {
-	background: url('../images/icon-info.png');
+	background-image: url('../images/icon-info.png');
 }
 
 .finanzas {
-	background: url('../images/icon-finanzas.png');
+	background-image: url('../images/icon-finanzas.png');
+}
+.menu-item {
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s; /* Safari */
+	background-repeat:no-repeat;
+	background-position: center top;
+}
+.over {
+	background-position: center center;
+}
+.active {
+	background-position: center bottom;
 }
 
 .content-banner {

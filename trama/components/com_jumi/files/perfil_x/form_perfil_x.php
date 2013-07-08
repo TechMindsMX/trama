@@ -59,7 +59,7 @@ function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripci
 	}
 	
 	foreach ($results as $columna) {
-		$inputPadre = '<li><input type="checkbox" name="'.$columna->$descripcion.'" value="'.$columna->$columnaId.'" id="'.$columna->$columnaId.'" />';
+		$inputPadre = '<li><input type="checkbox" name="'.$columna->$columnaId.'" value="'.$columna->$columnaId.'" id="'.$columna->$columnaId.'" />';
 		$inputPadre .= '<span>'.$columna->$descripcion.'</span>';
 			
 		echo $inputPadre;

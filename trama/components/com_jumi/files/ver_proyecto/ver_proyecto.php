@@ -16,9 +16,14 @@
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
 <?php
 	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
-	$homepage = file_get_contents($url);
+//	$homepage = file_get_contents($url);
+
+$homepage = '{"id":1,"name":"Slava snow show","showground":"Av. Chapultepec y Av. CuauhtÃ©moc, Del. CuauhtÃ©moc,  MÃ©xico,  DF  06700","inclosure":"Centro Cultural Telmex","breakeven":100000,"budget":200000,"revenuePotential":500000,"description":"Desde su primera apariciÃ³n en MÃ©xico en 2006, este show ha cautivado a propios y extraÃ±os, ya que con mÃ­mica y trucos bÃ¡sicos generan admiraciÃ³n en todo el pÃºblico. Los payasos consiguen que los asistentes disfruten de un mÃ¡gico mundo alejado de los problemas, en medio de la frÃ­a nieve. \r\nLa compaÃ±Ã­a fundada por el ruso Slava Polunin y que tiene entre sus filas a los mejores payasos del mundo se renueva para esta temporada y ofrecerÃ¡ el mejor espectÃ¡culo, siempre lleno de sorpresas para propios y extraÃ±os.\r\n\r\nEl Centro Cultural Telmex 2 recibirÃ¡ en esta ocasiÃ³n a los payasos que trasladan al pÃºblico de un estado de Ã¡nimo a otro, haciendo alusiÃ³n a los caprichos del clima. \r\n\r\nA decir de su fundador, Slavaâ€™s tiene tantas descripciones como hay miembros de la audiencia. â€œSnowshow es la belleza de un solo copo de nieve que cae suavemente y cae en su hombro. Snowshow es el sonido de una risa incontrolable en adultos no hay nada en particular. Snowshow es la alegrÃ­a de creer que todo es posible, Snowshow es la tristeza de un adiÃ³s de una plataforma de la estaciÃ³n de tren. Snowshow es la constataciÃ³n de que la vida es realmente maravillosaâ€.\r\nGanador del â€œOliver Awardâ€ como El Mejor show en Londres, el espectÃ¡culo de Slava ha causado furor mundialmente y una vez mÃ¡s lo harÃ¡ en MÃ©xico a partir del 22 de mayo en el Centro Cultural Telmex 2. ","cast":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu ante aliquam, posuere massa at, pulvinar lectus. Cras condimentum ornare sapien, quis mattis odio tincidunt at. Cras faucibus ipsum in adipiscing tincidunt. Vivamus auctor, augue eu interdum blandit, massa nunc ultrices purus, vitae rhoncus nibh diam eget ligula. Suspendisse scelerisque nulla sodales euismod sodales. Fusce id augue nec nisi malesuada tempus. Duis imperdiet metus sed sapien mollis, nec commodo massa faucibus. In enim libero, rutrum a commodo eu, aliquam a felis. Aenean eget urna ac lorem porttitor luctus. Maecenas pharetra nibh ac nunc pulvinar, quis cursus elit egestas.","fundStartDate":null,"fundEndDate":null,"productionStartDate":"2013-07-04","premiereStartDate":"2013-08-04","premiereEndDate":"2013-09-06","timeCreated":1372973266545,"subcategory":15,"status":0,"type":"PROJECT","userId":379,"projectBanner":{"projectBannerId":1,"name":"1372973267118_0.png"},"projectAvatar":{"projectAvatarId":1,"name":"1372973267856_0.png"},"projectBusinessCase":{"projectBusinessCaseId":1,"name":"1372973268132"},"projectUnitSales":[{"id":1,"section":"1A","unitSale":500,"capacity":3,"projectId":1}],"projectYoutubes":[{"id":5,"url":"https://vimeo.com/13850491","projectId":1},{"id":4,"url":"https://vimeo.com/13850491","projectId":1},{"id":3,"url":"http://www.youtube.com/watch?v=sL_7d1UFZ6s","projectId":1},{"id":2,"url":"http://www.youtube.com/watch?v=d9bfiNBtxcA","projectId":1},{"id":1,"url":"http://www.youtube.com/watch?v=fpUY7e-k4Jo","projectId":1}],"projectSoundclouds":[{"id":5,"url":"","projectId":1},{"id":4,"url":"","projectId":1},{"id":3,"url":"","projectId":1},{"id":2,"url":"","projectId":1},{"id":1,"url":"","projectId":1}],"projectPhotos":[{"id":1,"name":"1372973269979_0.png","projectId":1},{"id":2,"name":"1372973275368_5.png","projectId":1},{"id":3,"name":"1372973273644_2.png","projectId":1},{"id":4,"name":"1372973275593_6.png","projectId":1},{"id":5,"name":"1372973275981_7.png","projectId":1},{"id":6,"name":"1372973272232_1.png","projectId":1},{"id":7,"name":"1372973275167_4.png","projectId":1},{"id":8,"name":"1372973275062_3.png","projectId":1}]}';
 	$json = json_decode($homepage);
-	
+// var_dump($json);
+
+	$producer = JFactory::getUser($json->userId);
+
 	$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
 	$jsonSubcategoria = file_get_contents($urlSubcategoria);
 	$jsonObjSubcategoria = json_decode($jsonSubcategoria);
@@ -60,43 +65,58 @@ function buttons($data, $user) {
 	if ( $user->id == strval($data->userId) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid=9';
 		$proyid = '&proyid='.$data->id;
-		$html = '<a href="'.$link.$proyid.'">'.JText::_('Edit').'</a>';
-
+		$html = '<div id="buttons">'.
+				'<div><a href="'.$link.$proyid.'">'.JText::_('edit').'</a></div>';
 		return $html;
 	}
 }
 
 function videos($obj, $param) {
 	$html = '';
+
+	$array = $obj->projectYoutubes;
+	foreach ($array as $key => $value ) {
+		if (strstr($value->url, 'youtube')) {
+			$arrayLimpio[] = array('youtube' => end(explode("=", $value->url)));
+		}
+		elseif (strstr($value->url, 'vimeo')) {
+			$arrayLimpio[] = array('vimeo' => end(explode("://vimeo.com/", $value->url)));
+		}
+	}
+
 	switch ($param) {
 	case 1:
-		$array = $obj->projectYoutubes;
-		foreach ($array as $key => $value ) {
-			switch ($value->url) {
-				case strstr($value->url, 'youtube'):
-					$tipoVideo = 'you';
-					break;
-				case strstr($value->url, 'vimeo'):
-					$tipoVideo = 'vimeo';
-					break;
-			}
-			echo "TIPO ".$tipoVideo;
-		
-			$idVideo[] = end(explode("=", $value->url));
+		$video1 = $arrayLimpio[0];
+		if (key($video1) == 'youtube') {
+			$html .= '<iframe class="video-player" width="100%" '.
+					'src="//www.youtube.com/embed/'.$video1['youtube'].
+					'?rel=0" frameborder="0" allowfullscreen></iframe>';
 		}
-		$html .= '<iframe class="video-player" width="853" height="480" ';
-		$html .= 'src="//www.youtube.com/embed/'.$idVideo[0].'?rel=0" frameborder="0" allowfullscreen></iframe>';
+		elseif (key($video1) == 'vimeo') {
+			$html .= '<iframe class="video-player" width="100%" '.
+				'src="http://player.vimeo.com/video/'.$video1['vimeo'].'?autoplay=0" '.
+				'frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+		}
 	break;
 	default:
-		$arrayVideos = $obj->projectYoutubes;
-		foreach ($arrayVideos as $key => $value ) {
-			$idVideo = end(explode("=", $value->url));
-			$html .= '<div class="item-video">';
-			$html .= '<input class="liga" type="button"';
-			$html .= 'value="//www.youtube.com/embed/'.$idVideo.'?rel=0"';
-			$html .= 'style="background: url(\'http://img.youtube.com/vi/'.$idVideo.'/0.jpg\')';
-			$html .= ' no-repeat; background-size: 100%;">';
-			$html .= '</div>';
+		foreach ( $arrayLimpio as $llave => $valor ) {
+			foreach ($valor as $key => $value) {
+				if ($key == 'youtube') {
+					$html .= '<div class="item-video"><input class="liga" type="button"'.
+						'value="//www.youtube.com/embed/'.$value.'?rel=0&autoplay=1"'.
+						'style="background: url(\'http://img.youtube.com/vi/'.$value.'/0.jpg\')'.
+						' no-repeat; background-size: 100%;" /></div>';
+				}
+				elseif ($key == 'vimeo') {
+					$hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$value.php"));
+					$thumbVimeo = $hash[0]['thumbnail_medium']; 
+					
+					$html .= '<div class="item-video"><input class="liga" type="button"'.
+						'value="//player.vimeo.com/video/'.$value.'?autoplay=1"'.
+						'style="background: url('.$thumbVimeo.')'.
+						' no-repeat; background-size: 100%;" /></div>';
+				}
+			}
 		}
 	break;
 	}
@@ -221,11 +241,19 @@ function fechas($data, $tipo) {
 		jQuery(".ver_proyecto").hide();
 		jQuery("#banner").show();
 
+		jQuery(".menu-item").hover(
+			function(){
+				jQuery(this).addClass("over");
+			},
+			function(){
+				jQuery(this).removeClass("over");
+			}
+		);
 		jQuery(".menu-item").click(function(){
 			var clase = jQuery(this).attr("id");
 			jQuery(".ver_proyecto").hide();
 			jQuery(".menu-item").removeClass("active");
-			jQuery("#content #"+clase).show("slow");
+			jQuery("#"+clase).show("slow");
 			jQuery(this).addClass("active");
 		});
 
@@ -244,9 +272,8 @@ function fechas($data, $tipo) {
 	</script>
 	<div id="wrapper">
 		<div id="content">
-			<?php if($usuario->id == $json->userId) {
-				echo buttons($json, $usuario); 	
-			} ?>
+			<?php echo buttons($json, $usuario); ?>
+		</div>
 			<div id="banner" class="ver_proyecto">
 				<div class="content-banner">
 					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name ?>" />
@@ -310,6 +337,7 @@ function fechas($data, $tipo) {
 				<div class="menu-item finanzas" id="finanzas"></div>
 				<div class="menu-item info" id="info"></div>			
 			</div>
+			<div style="clear: both;"></div>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -319,5 +347,5 @@ function fechas($data, $tipo) {
     </script>
 
 <?php 
- var_dump($json);
+ //var_dump($json);
  ?>
