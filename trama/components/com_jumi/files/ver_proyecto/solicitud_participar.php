@@ -2,15 +2,11 @@
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 ?>
 <script>
-	jQuery("#solicitud").submit(function() {
-		
-		console.log(jQuery("#mensaje").val().length);
-		// if (jQuery("#mensaje").val().length >= 3) {
-			// jQuery("span").text("Validated...").show();
-			// return true;
+	jQuery("#enviar").submit(function() {
+		// if (jQuery('#mensaje').length > 0) {
+// 			jQuery.post(<?php MIDDLE.PUERTO.''?>, jQuery("#solicitud").serialize())
 		// }
-		// jQuery("span").text("Not valid!").show().fadeOut(4000);
-		// return false;
+		
 	});
 </script>
 
@@ -45,7 +41,7 @@ function participar($json) {
 			 '<label for="mensaje">'.JText::_('MENSAJE').'</label>' . 
 			 '<textarea id="mensaje" name="mensaje"></textarea>' . 
 			 '<input type="hidden" name="proyId" value="' . $producer -> id . '" />' . 
-			 '<input type="submit" value="Enviar" />' . 
+			 '<input type="button" value="Enviar" id="enviar"/>' . 
 			 '</form>' . 
 			 '</div>' . 
 			 '</div>' . 
