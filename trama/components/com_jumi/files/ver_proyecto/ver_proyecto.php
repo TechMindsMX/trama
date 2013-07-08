@@ -42,12 +42,26 @@
 	$db->setQuery($query);
 	$results = $db->loadObjectList();
 
+$tipo = prefijoTipo($json);
+
+function prefijoTipo($data) {
+	switch ($data->type) {
+		case 'PROJECT':
+			$prefix ='PROY_';
+			break;
+		default:
+			$prefix ='PROD_';
+			break;
+	}
+	return $prefix;
+}
+
 function buttons($data, $user) {
 	if ( $user->id == strval($data->userId) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid=9';
 		$proyid = '&proyid='.$data->id;
-		$html = '<div id="buttons">'.
-				'<div><a href="'.$link.$proyid.'">'.JText::_('edit').'</a></div>';
+		$html = '<a href="'.$link.$proyid.'">'.JText::_('Edit').'</a>';
+
 		return $html;
 	}
 }
@@ -58,6 +72,16 @@ function videos($obj, $param) {
 	case 1:
 		$array = $obj->projectYoutubes;
 		foreach ($array as $key => $value ) {
+			switch ($value->url) {
+				case strstr($value->url, 'youtube'):
+					$tipoVideo = 'you';
+					break;
+				case strstr($value->url, 'vimeo'):
+					$tipoVideo = 'vimeo';
+					break;
+			}
+			echo "TIPO ".$tipoVideo;
+		
 			$idVideo[] = end(explode("=", $value->url));
 		}
 		$html .= '<iframe class="video-player" width="853" height="480" ';
@@ -106,17 +130,32 @@ function avatar($data) {
 	return $html;
 }
 
-function finanzas($data) {
-	$html = '';
-	$opentag = '<span>';
-	$closetag = '</span>';
+function finanzas ($data) {
+	$html = '<div id="finanzas_general">'.
+			'<p><span>'.JText::_('BUDGET').'</span>'.$data->budget.'</p>'.
+			'<p><span>'.JText::_('BREAKEVEN').'</span>'.$data->breakeven.'</p>'.
+			'<p><span>'.JText::_('REVE_POTENTIAL').'</span>'.$data->revenuePotential.'</p>'.
+			'</div>';
+
+	return $html;
+}
+
+function tablaFinanzas($data) {
+	$html = '<table id="tabla_finanzas">'.
+			'<tr><th>'.
+			JText::_('SECCION').'</th><th>'.
+			JText::_('PRECIO').'</th><th>'.
+			JText::_('CANTIDAD').'</th></tr>';
+	$opentag = '<td>';
+	$closetag = '</td>';
 	foreach ($data->projectUnitSales as $key => $value) {
-		$html .= '<div class="row">';
+		$html .= '<tr class="row">';
 		$html .= $opentag.$value->section.$closetag;
 		$html .= $opentag.$value->unitSale.$closetag;
 		$html .= $opentag.$value->capacity.$closetag;
-		$html .= '</div>';
+		$html .= '</tr>';
 	}
+	$html .= '</table>';
 	
 	return $html;
 }
@@ -131,23 +170,51 @@ function descripcion ($data) {
 	return $html;
 }
 
+function irGrupo($data) {
+	$html = '<a class="button" >'.JText::_('IR_GRUPO').'</a>';
+	
+	return $html;
+}
+
 function informacionTmpl($data) {
  	require_once 'solicitud_participar.php';
 	$html = '<div id="izquierdaDesc" class="gantry-width-33 gantry-width-block">'.
 			'<div class="gantry-width-spacer">'.
 			avatar($data).
+			'<div class="gantry-width-spacer flotado">'.
 	  		participar().
-//			irGrupo().
+			'</div>'.
+			'<div class="gantry-width-spacer flotado">'.
+			irGrupo($data).
+			'</div>'.
 			'</div>'.
 			'</div>'.
 			'<div id="derechaDesc" class="gantry-width-66 gantry-width-block">'.
-// 			'<div class="gantry-width-spacer">'.
+			'<div class="gantry-width-spacer">'.
 			$data->description.
+			'</div>'.
 			'</div>'.
 			'</div>';
 	
 	return $html;
 }
+
+function fechas($data, $tipo) {
+	$html = '<div id="fechas)">';
+	if (isset($data->fundStartDate)) {
+			$html .= '<p><span>'.JText::_('FUND_START').'</span>'.$data->fundStartDate.'</p>';
+	}
+	if (isset($data->fundStartDate)) {
+			$html .= '<p><span>'.JText::_('FUND_END').'</span>'.$data->fundEndDate.'</p>';
+	}
+	$html .= '<p><span>'.JText::_($tipo.'PRODUCTION_START').'</span>'.$data->productionStartDate.'</p>'.
+			'<p><span>'.JText::_($tipo.'PREMIERE_START').'</span>'.$data->premiereStartDate.'</p>'.
+			'<p><span>'.JText::_($tipo.'PREMIERE_END').'</span>'.$data->premiereEndDate.'</p>'.
+			'</div>';
+
+	return $html;
+}
+
 ?>
 	<script type="text/javascript">
 	jQuery(document).ready(function(){
@@ -177,13 +244,14 @@ function informacionTmpl($data) {
 	</script>
 	<div id="wrapper">
 		<div id="content">
-			<?php echo buttons($json, $usuario); ?>
-		</div>
+			<?php if($usuario->id == $json->userId) {
+				echo buttons($json, $usuario); 	
+			} ?>
 			<div id="banner" class="ver_proyecto">
 				<div class="content-banner">
 					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name ?>" />
 					<div class="info-banner">
-						<h2><?php echo $json->name;?></h1>
+						<h2><?php echo $json->name;?></h2>
 						<h4><?php echo $results[0]->nomNombre." ".$results[0]->nomApellidoPaterno;?></h4>
 						<p><?php echo $nombreSubcategoria;?></p>
 					</div>
@@ -222,7 +290,8 @@ function informacionTmpl($data) {
 			<div id="finanzas" class="ver_proyecto">
 				<h3>Finanzas</h3>
 				<?php echo finanzas($json); ?>
-				<?php echo avatar($json); ?>
+				<?php echo tablaFinanzas($json); ?>
+				<?php echo fechas($json, $tipo); ?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="info" class="ver_proyecto">
@@ -249,5 +318,6 @@ function informacionTmpl($data) {
 	    });
     </script>
 
-	</body>
-</html>
+<?php 
+ var_dump($json);
+ ?>
