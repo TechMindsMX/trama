@@ -1,9 +1,9 @@
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
-$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/1';
-$jsonproyecto = file_get_contents($urlproyectco);
-$jsonObjproyecto = json_decode($jsonproyecto);
+// $urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/1';
+// $jsonproyecto = file_get_contents($urlproyectco);
+// $jsonObjproyecto = json_decode($jsonproyecto);
 
 function getCategoria() {
 	$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
@@ -111,10 +111,10 @@ $document->addScriptDeclaration($scriptselect);
 
 	<label for=""><?php echo JText::_('SECCION'); ?>:</label> <input type="text"
 		class="validate[required,custom[onlyLetterNumber]]" name="section0"> <br />
-	<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>:</label> <input type="number"
+	<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>:</label> <input type="text"
 		class="validate[required,custom[onlyNumberSp]]" name="unitSale0"
 		step="any"> <br> <label for=""><?php echo JText::_('INVENTARIOPP'); ?>:</label> <input
-		type="number" class="validate[required,custom[onlyNumberSp]]"
+		type="text" class="validate[required,custom[onlyNumberSp]]"
 		name="capacity0"> <br /> <br /> <input type="button" value="<?php echo JText::_('QUITAR_CAMPOS');  ?>"
 		onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
 	<br />
@@ -238,7 +238,6 @@ $document->addScriptDeclaration($scriptselect);
 		type="number" 
 		class="validate[required]"
 		id="presupuesto"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->budget : ''; ?>"
 		name="budget" /> 
 	<br /> 
 	
@@ -251,11 +250,11 @@ $document->addScriptDeclaration($scriptselect);
 	<br />
 	
 	<label for="unidad"><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
-	<input type="number" id="unidad" class="validate[required,custom[onlyNumberSp]]" name="unitSale" step="any"> 
+	<input type="text" id="unidad" class="validate[required,custom[onlyNumberSp]]" name="unitSale" step="any"> 
 	<br> 
 	
 	<label for="inventario"><?php echo JText::_('INVENTARIOPP');  ?>*:</label>
-	<input type="number" id="inventario" class="validate[required,custom[onlyNumberSp]]" name="capacity"> 
+	<input type="text" id="inventario" class="validate[required,custom[onlyNumberSp]]" name="capacity"> 
 	<br />
 	<br />
 	 
@@ -268,7 +267,6 @@ $document->addScriptDeclaration($scriptselect);
 		type="number" 
 		id="potenciales"
 		class="validate[required,custom[onlyNumberSp]]"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->revenuePotential : ''; ?>"
 		name="revenuePotential"
 		step="any" /> 
 	<br>
@@ -278,7 +276,6 @@ $document->addScriptDeclaration($scriptselect);
 		type = "number" 
 		id = "equilibrio"
 		class = "validate[required,custom[onlyNumberSp]]"
-		value = "<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->breakeven : ''; ?>"
 		name = "breakeven"
 		step="any" /> 
 	<br>
