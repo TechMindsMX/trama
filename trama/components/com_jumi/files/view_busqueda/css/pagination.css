@@ -34,7 +34,8 @@ div.proyecto > .inner {
 }
 .proyecto {
 	float: left;
-	margin-bottom: 1em; 
+	margin-bottom: 1em;
+	min-width: 360px;
 }
 .titulo, .descripcion {
 	margin: 0 5px 0 4px;
