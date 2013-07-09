@@ -2,38 +2,6 @@
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $limiteVideos = 5;
 $limiteSound = 5;
-
-if(!empty($_GET['proyid'])) {
-	$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
-	//$urlproyectco = $ipluis.$puerto.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
-	$jsonproyecto = file_get_contents($urlproyectco);
-	$jsonObjproyecto = json_decode($jsonproyecto);
-}
-
-
-							function getCategoria() {
-								$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
-								$jsonCategoria = file_get_contents($urlCategoria);
-								$jsonObjCategoria = json_decode($jsonCategoria);
-								        
-							    return $jsonObjCategoria;
-							}
-							
-							function getSubCat() { 	
-								$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
-								$jsonSubcategoria = file_get_contents($urlSubcategoria);
-								$jsonObjSubcategoria = json_decode($jsonSubcategoria);
-								
-								return $jsonObjSubcategoria;
-								
-							}
-							
-$usuario = JFactory::getUser();
-$document = JFactory::getDocument();
-$base = JUri::base();
-$pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
-
-
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
 $hiddenIdProyecto = '';
@@ -51,8 +19,16 @@ $categoriaSelected = '';
 $subcategoriaSelected = '';
 //termina los definicion de campos del formularios
 
-$categoria = getCategoria();
-$subCategorias = getSubCat();
+require_once 'getcategorias.php';
+
+							
+$usuario = JFactory::getUser();
+$document = JFactory::getDocument();
+$base = JUri::base();
+$pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
+
+$categoria = categoriasforms::getCategoria('all');
+$subCategorias = categoriasforms::getSubCat('all');
 $scriptselect = 'jQuery(function() {
 	jQuery("#subcategoria").chained("#selectCategoria");	
 });';
@@ -68,6 +44,13 @@ $document->addScript($pathJumi.'js/jquery.chained.js');
 $document->addScript($pathJumi.'js/jquery.MultiFile.js');
 $document->addScript('http://dev7studios.com/demo/jquery-currency/jquery.currency.js');
 $document->addScriptDeclaration($scriptselect);
+
+if ( !empty($_GET['proyid']) ) {
+	$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
+	//$urlproyectco = $ipluis.$puerto.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
+	$jsonproyecto = file_get_contents($urlproyectco);
+	$jsonObjproyecto = json_decode($jsonproyecto);
+}
 
 if ( isset ( $jsonObjproyecto ) ) {
 		
@@ -91,11 +74,10 @@ if ( isset ( $jsonObjproyecto ) ) {
 	$validacionImgs = '';
 	
 	$countImgs = $countImgs - count($jsonObjproyecto->projectPhotos);
-	
-	$subcat = getSubCat();
+
 	$subcategoriaSelected = $jsonObjproyecto->subcategory;
 	
-	foreach ($subcat as $key => $value) {
+	foreach ($subCategorias as $key => $value) {
 		if( $value->id == $jsonObjproyecto->subcategory ) {
 			$categoriaSelected = $value->father;
 		}
@@ -157,19 +139,6 @@ if ( isset ( $jsonObjproyecto ) ) {
 						
 			jQuery("#form2").submit();
 		});
-		
-		/*jQuery('.projectPhotosIds').change(function () {			
-			if ( jQuery(this).prop('checked') ) {
-				maxImgs = parseInt(jQuery('#fotos').attr('maxlength')) - 1;
-				
-				jQuery('#fotos').attr('maxlength',maxImgs)
-			} else {
-				maxImgs = parseInt(jQuery('#fotos').attr('maxlength')) + 1;
-				
-				jQuery('#fotos').attr('maxlength',maxImgs)
-			} 
-		});*/
-		
 	});
 	
 	function checkHELLO(field, rules, i, options){
@@ -180,25 +149,24 @@ if ( isset ( $jsonObjproyecto ) ) {
 </script>
 
 <!--DIV DE AGREGAR CAMPOS-->
-<?php
-$divrecintos = '<div id="readroot" style="display: none">
-	<label for="">'.JText::_('SECCION').'*:</label> 
+<div id="readroot" style="display: none">
+	<label for=""><?php echo JText::_('SECCION'); ?>*:</label> 
 	<input 
 		type="text" 
 		class="validate[required,custom[onlyLetterNumber]]"
 		name="section0">
 	<br />
 	
-	<label for="">'.JText::_('PRECIO_UNIDAD').'*:</label> 
+	<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
 	<input 
-		type="number" 
+		type="text" 
 		class="validate[required,custom[onlyNumberSp]]" 
 		name="unitSale0" step="any"> 
 	<br>
 	
-	<label for="">'.JText::_('INVENTARIOPP').':</label> 
+	<label for=""><?php echo JText::_('INVENTARIOPP'); ?>:</label> 
 	<input 
-		type="number" 
+		type="text" 
 		class="validate[required,custom[onlyNumberSp]]" 
 		value=""
 		name="capacity0"> 
@@ -206,14 +174,10 @@ $divrecintos = '<div id="readroot" style="display: none">
 	
 	<input 
 		type="button" 
-		value="'.JText::_('QUITAR_CAMPOS').'" 
+		value="<?php echo JText::_('QUITAR_CAMPOS'); ?>" 
 		onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
 	<br /><br />
-</div>';
-
-echo $divrecintos;
-?>
-
+</div>
 <!--FIN DIV DE AGREGAR CAMPOS-->
 
 <h3><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h3>
@@ -405,7 +369,8 @@ echo $divrecintos;
 	
 	<label for="inventario"><?php echo JText::_('INVENTARIOPP'); ?>*:</label>
 	<input 
-		type="text" id="inventario" 
+		type="text"
+		id="inventario" 
 		class="validate[required,custom[onlyNumberSp]]"
 		value="<?php echo isset($jsonObjproyecto) ? $datosRecintos[0]->capacity : ''; ?>"  
 		name="capacity"> 
@@ -501,7 +466,14 @@ echo $divrecintos;
 		value = "<?php echo isset($jsonObjproyecto) ? $fechaCierre[2].'/'.$fechaCierre[1].'/'.$fechaCierre[0] : ''; ?>" 
 		name = "premiereEndDate">
 	<br /> 
-	<br/> 
+	<br />
+	
+	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
+	<textarea name="tags" cols="60" rows="5"><?php 
+		echo isset($jsonObjproyecto) ? $jsonObjproyecto->keywords : ''; 
+	?></textarea>
+	<br />
+	<br /> 
 	
 	<input type="button" id="enviar" value="<?php echo JText::_('ENVIAR'); ?>">
 </form>

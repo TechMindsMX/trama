@@ -1,35 +1,19 @@
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+$limiteVideos = 5;
+$limiteSound = 5;
+$countImgs = 10;
 
-// $urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/1';
-// $jsonproyecto = file_get_contents($urlproyectco);
-// $jsonObjproyecto = json_decode($jsonproyecto);
-
-function getCategoria() {
-	$urlCategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
-	$jsonCategoria = file_get_contents($urlCategoria);
-	$jsonObjCategoria = json_decode($jsonCategoria);
-	 
-	return $jsonObjCategoria;
-}
-
-function getSubCat() {
-	$urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
-	$jsonSubcategoria = file_get_contents($urlSubcategoria);
-	$jsonObjSubcategoria = json_decode($jsonSubcategoria);
-
-	return $jsonObjSubcategoria;
-
-}
-
+$pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
 $usuario = JFactory::getUser();
 $document = JFactory::getDocument();
 $base = JUri::base();
-$pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
 
+require_once 'getcategorias.php';
+
+$categoria = categoriasforms::getCategoria('all');
+$subCategorias = categoriasforms::getSubCat('all');
 $opcionesSubCat = '';
-$categoria = getCategoria();
-$subCategorias = getSubCat();
 $scriptselect = 'jQuery(function() {
 	jQuery("#subcategoria").chained("#selectCategoria");
 });';
@@ -91,6 +75,7 @@ $document->addScriptDeclaration($scriptselect);
 			jQuery("#form2").submit();
 		});		
 	});
+	
 	function checkHELLO(field, rules, i, options){
 		if (field.val() != "HELLO") {
 			return options.allrules.validate2fields.alertText;
@@ -98,119 +83,137 @@ $document->addScriptDeclaration($scriptselect);
 	}
 </script>
 
-
-  
-  <script>
-  jQuery(function() {
-    jQuery( "#datepicker1" ).datepicker();
-    jQuery( "#datepicker2" ).datepicker();
-  });
-  </script>
 <!--DIV DE AGREGAR CAMPOS-->
 <div id="readroot" style="display: none">
 
-	<label for=""><?php echo JText::_('SECCION'); ?>:</label> <input type="text"
-		class="validate[required,custom[onlyLetterNumber]]" name="section0"> <br />
-	<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>:</label> <input type="text"
-		class="validate[required,custom[onlyNumberSp]]" name="unitSale0"
-		step="any"> <br> <label for=""><?php echo JText::_('INVENTARIOPP'); ?>:</label> <input
-		type="text" class="validate[required,custom[onlyNumberSp]]"
-		name="capacity0"> <br /> <br /> <input type="button" value="<?php echo JText::_('QUITAR_CAMPOS');  ?>"
-		onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
-	<br />
+	<label for=""><?php echo JText::_('SECCION'); ?>:</label>
+	<input 
+		type="text"
+		class="validate[required,custom[onlyLetterNumber]]"
+		name="section0" />
+		<br />
+		
+	<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>:</label>
+	<input 
+		type="text"
+		class="validate[required,custom[onlyNumberSp]]" 
+		name="unitSale0"/>
+		<br />
+		
+		<label for=""><?php echo JText::_('INVENTARIOPP'); ?>:</label>
+		<input
+			type="text"
+			class="validate[required,custom[onlyNumberSp]]"
+			name="capacity0" /> 
+		<br />
+		<br />
+		
+		<input 
+			type="button" 
+			value="<?php echo JText::_('QUITAR_CAMPOS');  ?>"
+			onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
+		<br />
 </div>
 <!--FIN DIV DE AGREGAR CAMPOS-->
+
 <h3><?php echo JText::_('CREAR').JText::_('PRODUCTO');  ?></h3>
-<form action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/create" id="form2" enctype="multipart/form-data" method="POST">
-	<input type="hidden" name="status" id="status" value="0" >
-	<input type="hidden" name="type" id="type" value="PRODUCT" >
-	<input type="hidden" name="userId" value="<?php echo $usuario->id; ?>" />
-	<label for="nomProy"><?php echo JText::_('NOMBREPR').JText::_('PRODUCTO');  ?>*:</label> 
+<form action="" id="form2" enctype="multipart/form-data" method="POST">
+	<input
+		type="hidden"
+		id="status"
+		value="0"
+		name="status" />
+		
+	<input 
+		type="hidden"
+		id="type"
+		value="PRODUCT"
+		name="type" />
+		
+	<input 
+		type="hidden"
+		value="<?php echo $usuario->id; ?>"
+		name="userId" />
+	
+	<label for="nomProy"> <?php echo JText::_('NOMBREPR').JText::_('PRODUCTO');  ?>*: </label> 
 	<input type="text" name="name" id="nomProy" class="validate[required,custom[onlyLetterNumber]]" maxlength="100"> 
 	<br />
+	
 	<label for="categoria">Categoria: </label>
 	<select id="selectCategoria" name="categoria">
-		
-	<?php		
-	foreach ( $categoria as $key => $value ) {
-		var_dump($value->id);
-		
-		echo '<option value="'.$value->id.'">'.$value->name.'</option>';
-		$opcionesPadre[] = $value->id;
-	}
-	?>
+		<?php		
+		foreach ( $categoria as $key => $value ) {
+			var_dump($value->id);
+
+			echo '<option value="'.$value->id.'">'.$value->name.'</option>';
+			$opcionesPadre[] = $value->id;
+		}
+		?>
 	</select>
 	<br />
 	
 	<label for="subcategory">Subcategoria: </label>
 	<select id="subcategoria" name="subcategory">
-			<option value="all">Todas</option>
-	<?php
-	foreach ( $subCategorias as $key => $value ) {
-		$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'">'.$value->name.'</option>';
-	}
-	
-	echo $opcionesSubCat;
-	?>
+		<option value="all">Todas</option>
+		<?php
+		foreach ( $subCategorias as $key => $value ) {
+			$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'">'.$value->name.'</option>';
+		}
+		
+		echo $opcionesSubCat;
+		?>
 	</select>
+	<br />
 	<br />
 	
 	<label for="banner"><?php echo JText::_('BANNER').JText::_('PRODUCTO');  ?>*:</label>
-	<input type="file" id="banner" class="validate[required]" name="banner"> 
+	<input 
+		type="file"
+		id="banner"
+		class="validate[required]"
+		name="banner" /> 
 	<br />
 	
 	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PRODUCTO');  ?>*:</label> 
-	<input type="file" id="avatar" class="validate[required]" name="avatar"> 
+	<input 
+		type="file"
+		id="avatar"
+		class="validate[required]"
+		name="avatar" /> 
 	<br />
-	
 	<br /> 
+	
+	<!-- ligas videos -->
 	<?php echo JText::_('VIDEOSP');  ?>
-	<br /> 
-	<label for="linkYt1"><?php echo JText::_('ENLACE_YT');  ?>1*:</label> 
-	<input type="text" id="linkYt1" class="validate[required,custom[yt]]" name="youtubeLink1"> 
+	<br />
+	<?php
+	for ( $i = 0; $i < $limiteVideos; $i++ ) {
+		$urlVideo = isset($ligasVideos[$i]) ? $ligasVideos[$i]->url : '';
+		$obligatorio = ($i == 0) ? 'validate[required,custom[yt]]' : 'validate[custom[yt]]';
+		$asterisco = ($i == 0) ? '*' : '';
+		
+		echo $labelVideos = '<label for="linkYt'.($i+1).'">'.JText::_('ENLACE_YT').' '.($i+1).$asterisco.':</label>';
+		echo $inputVideos = '<input type="text" id="linkYt'.($i+1).'" class="'.$obligatorio.'" value = "'.$urlVideo.'"	name="youtubeLink'.($i+1).'" /><br />';
+	}
+	?>
 	<br />
 	
-	<label for="linkYt2"><?php echo JText::_('ENLACE_YT');  ?>2:</label> 
-	<input type="text" id="linkYt2" class="validate[custom[yt]]" name="youtubeLink2">
+	<!-- ligas sonido -->
+	<?php echo JText::_('AUDIOSP');  ?>
 	<br />
 	
-	<label for="linkYt3"><?php echo JText::_('ENLACE_YT');  ?>3:</label> 
-	<input type="text" id="linkYt3" class="validate[custom[yt]]" name="youtubeLink3"> 
-	<br />
+	<?php
+	for ( $i = 0; $i < $limiteSound; $i++ ) {
+		$urlSound = isset($ligasAudios[$i]) ? $ligasAudios[$i]->url : '';
+		
+		echo $labelSound = '<label for="linkYt'.($i+1).'">'.JText::_('ENLACE_SC').' '.($i+1).':</label>';
+		echo $inputSound = '<input type="text" id="linkSc1'.($i+1).'" class="validate[custom[sc]]" value = "'.$urlSound.'"	name="soundCloudLink'.($i+1).'" /><br />';
+	}
+	?>
 	
-	<label for="linkYt4"><?php echo JText::_('ENLACE_YT');  ?>4:</label> 
-	<input type="text" id="linkYt4" class="validate[custom[yt]]" name="youtubeLink4"> 
-	<br />
 	
-	<label for="linkYt5"><?php echo JText::_('ENLACE_YT');  ?>5:</label> 
-	<input type="text" id="linkYt5" class="validate[custom[yt]]" name="youtubeLink5"> 
-	<br />
-	
-	<br /> <?php echo JText::_('AUDIOSP');  ?>
-	<br /> 
-	
-	<label for="linkSc1"><?php echo JText::_('ENLACE_SC');  ?> 1:</label> 
-	<input type="text" id="linkSc1" class="validate[custom[sc]]" name="soundCloudLink1"> 
-	<br />
-	
-	<label for="linkSc"><?php echo JText::_('ENLACE_SC');  ?> 2:</label> 
-	<input type="text" id="linkSc2" class="validate[custom[sc]]" name="soundCloudLink2"> 
-	<br />
-	
-	<label for="linkSc3"><?php echo JText::_('ENLACE_SC');  ?> 3:</label> 
-	<input type="text" id="linkSc3" class="validate[custom[sc]]" name="soundCloudLink3"> 
-	<br />
-	
-	<label for="linkSc4"><?php echo JText::_('ENLACE_SC');  ?> 4:</label> 
-	<input type="text" id="linkSc4" class="validate[custom[sc]]" name="soundCloudLink4"> 
-	<br />
-	
-	<label for="linkSc5"><?php echo JText::_('ENLACE_SC');  ?> 5:</label> 
-	<input type="text" id="linkSc5" class="validate[custom[sc]]" name="soundCloudLink5"> 
-	<br />
-	
-	<label for="fotos"><?php echo JText::_('FOTOS');  ?>*:</label> 
-	<input class="multi validate[required]" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo"> 
+	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?><span id="maximoImg"><?php echo $countImgs; ?></span>*:</label> 
+	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo" /> 
 	<br /> 
 	
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PRODUCTO'); ?>*:</label> <br />
@@ -235,7 +238,7 @@ $document->addScriptDeclaration($scriptselect);
 	<br />
 	
 	<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('PRODUCTO'); ?>*:</label> 
-	<input 10
+	<input
 		type="number" 
 		class="validate[required]"
 		id="presupuesto"
@@ -287,7 +290,12 @@ $document->addScriptDeclaration($scriptselect);
 	<label for="premiereEndDate"><?php echo JText::_('FECHA_CIERRE');  ?></label> 
 	<input type="text"  class="validate[required,custom[date],custom[cierre]]" name="premiereEndDate">
 	<br /> 
-	<br/> 
+	<br />
+	
+	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
+	<textarea name="tags" cols="60" rows="5"></textarea>
+	<br />
+	<br />
 	
 	<input type="button" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
 </form>
