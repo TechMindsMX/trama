@@ -28,3 +28,12 @@
 
 
 /*** Fin Descripcion producto y proyecto ****/
+
+/*** Modulos compactos class sufix ****/
+div.compacto {
+	padding: 4px;
+}
+.compacto p {
+	margin: 0;
+}
+/*** fin Modulos compactos class sufix ****/
