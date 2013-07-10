@@ -35,8 +35,6 @@
 	$db->setQuery($query);
 	$results = $db->loadObjectList();
 	
-$tipo = prefijoTipo($json);
-
 function getProySubCatName($data) {
     $urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
 	$subcats = json_decode(file_get_contents($urlSubcategoria));
@@ -46,18 +44,6 @@ function getProySubCatName($data) {
 		}
 	}
 	return $nomCat;
-}
-
-function prefijoTipo($data) {
-	switch ($data->type) {
-		case 'PROJECT':
-			$prefix ='PROY_';
-			break;
-		default:
-			$prefix ='PROD_';
-			break;
-	}
-	return $prefix;
 }
 
 function buttons($data, $user) {
@@ -233,7 +219,7 @@ function informacionTmpl($data, $results) {
 	return $html;
 }
 
-function fechas($data, $tipo) {
+function fechas($data) {
 	$html = '<div id="fechas)">';
 	if (isset($data->fundStartDate)) {
 			$html .= '<p><span>'.JText::_('FUND_START').'</span>'.$data->fundStartDate.'</p>';
@@ -241,9 +227,9 @@ function fechas($data, $tipo) {
 	if (isset($data->fundStartDate)) {
 			$html .= '<p><span>'.JText::_('FUND_END').'</span>'.$data->fundEndDate.'</p>';
 	}
-	$html .= '<p><span>'.JText::_($tipo.'PRODUCTION_START').'</span>'.$data->productionStartDate.'</p>'.
-			'<p><span>'.JText::_($tipo.'PREMIERE_START').'</span>'.$data->premiereStartDate.'</p>'.
-			'<p><span>'.JText::_($tipo.'PREMIERE_END').'</span>'.$data->premiereEndDate.'</p>'.
+	$html .= '<p><span>'.JText::_($data->type.'_PRODUCTION_START').'</span>'.$data->productionStartDate.'</p>'.
+			'<p><span>'.JText::_($data->type.'_PREMIERE_START').'</span>'.$data->premiereStartDate.'</p>'.
+			'<p><span>'.JText::_($data->type.'_PREMIERE_END').'</span>'.$data->premiereEndDate.'</p>'.
 			'</div>';
 
 	return $html;
@@ -251,7 +237,12 @@ function fechas($data, $tipo) {
 
 ?>
 	<script type="text/javascript">
+	function scrollwrapper(){
+		jQuery(window).scrollTop(jQuery('div#wrapper').offset().top);
+	}
+
 	jQuery(document).ready(function(){
+		scrollwrapper();
 		jQuery(".ver_proyecto").hide();
 		jQuery("#banner").show();
 
@@ -264,17 +255,21 @@ function fechas($data, $tipo) {
 			}
 		);
 		jQuery(".menu-item").click(function(){
-			var clase = jQuery(this).attr("id");
-			jQuery(".ver_proyecto").hide();
 			jQuery(".menu-item").removeClass("active");
-			jQuery("#"+clase).show("slow");
+			var clase = jQuery(this).attr("id");
+			jQuery(".ver_proyecto").hide('slow');
+			jQuery("#"+clase).show("slow", function() {
+				scrollwrapper();
+			});
 			jQuery(this).addClass("active");
 		});
 
 		jQuery(".cerrar").click(function(){
-			jQuery(".ver_proyecto").hide();
-			jQuery("#banner").show("slow");
 			jQuery(".menu-item").removeClass("active");
+			jQuery(".ver_proyecto").hide();
+			jQuery("#banner").show("slow", function() {
+				scrollwrapper();
+			});
 		});	
 
 		jQuery(".liga").click(function(){
@@ -331,7 +326,7 @@ function fechas($data, $tipo) {
 				<?php echo encabezado($json, $results); ?>
 				<?php echo finanzas($json); ?>
 				<?php echo tablaFinanzas($json); ?>
-				<?php echo fechas($json, $tipo); ?>
+				<?php echo fechas($json); ?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="info" class="ver_proyecto">
