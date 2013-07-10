@@ -34,6 +34,8 @@
 	
 	$db->setQuery($query);
 	$results = $db->loadObjectList();
+
+$json->etiquetaTipo = tipoProyProd($json);
 	
 function getProySubCatName($data) {
     $urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
@@ -44,6 +46,20 @@ function getProySubCatName($data) {
 		}
 	}
 	return $nomCat;
+}
+
+function tipoProyProd($data) {
+	$tipo = $data->type;
+	switch ($tipo) {
+		case 'PRODUCT':
+			$tipoEtiqueta = JText::_('PRODUCT');
+			break;
+		
+		default:
+			$tipoEtiqueta = JText::_('PROJECT');
+			break;
+	}
+	return $tipoEtiqueta;
 }
 
 function buttons($data, $user) {
@@ -188,33 +204,54 @@ function irGrupo($data) {
 
 function encabezado($data, $results) {
 	$html = '<h2>'.$data->name.'</h2>'.
-		'<h4>'.getProySubCatName($data).'</h4>'.
+		'<h4>'.getProySubCatName($data).'</h4><span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
 		'<p>'.$results[0]->nomNombre.' '.$results[0]->nomApellidoPaterno.'</p>';
 	
 	return $html;
 }
 
-function informacionTmpl($data, $results) {
+function informacionTmpl($data, $results, $params) {
  	require_once 'solicitud_participar.php';
+	switch ($params) {
+		case 'finanzas':
+			$izquierda = avatar($data).
+				'<div class="gantry-width-spacer flotado">'.
+		  		participar($data).
+				'</div>'.
+				'<div class="gantry-width-spacer flotado">'.
+				irGrupo($data).
+				'</div>';
+			$derecha = finanzas($data).
+						tablaFinanzas($data).
+						fechas($data);
+			break;
+		
+		default:
+			$izquierda = avatar($data).
+				'<div class="gantry-width-spacer flotado">'.
+		  		participar($data).
+				'</div>'.
+				'<div class="gantry-width-spacer flotado">'.
+				irGrupo($data).
+				'</div>';
+			$derecha = $data->description.
+				'<br /><h3>Elenco</h3><p>'.$data->cast.'</p>';
+			
+			break;
+	}
+
+
 	$html = '<div id="izquierdaDesc" class="gantry-width-33 gantry-width-block">'.
 			'<div class="gantry-width-spacer">'.
-			avatar($data).
-			'<div class="gantry-width-spacer flotado">'.
-	  		participar($data).
-			'</div>'.
-			'<div class="gantry-width-spacer flotado">'.
-			irGrupo($data).
-			'</div>'.
+			$izquierda.
 			'</div>'.
 			'</div>'.
 			'<div id="derechaDesc" class="gantry-width-66 gantry-width-block">'.
 			'<div class="gantry-width-spacer">'.
 			encabezado($data, $results).
+			'</div>'.
 			'<div id="contenido-detalle">'.
-			$data->description.
-			'<br /><h3>Elenco</h3><p>'.$data->cast.'</p>'.
-			'</div>'.
-			'</div>'.
+			$derecha.
 			'</div>'.
 			'</div>';
 	
@@ -223,14 +260,12 @@ function informacionTmpl($data, $results) {
 
 function fechas($data) {
 	$html = '<div id="fechas)">';
-	if (isset($data->fundStartDate)) {
-			$html .= '<p><span>'.JText::_('FUND_START').'</span>'.$data->fundStartDate.'</p>';
+	if ($data->type == 'PROJECT') {
+			$html .= '<p><span>'.JText::_($data->type.'_FUND_START').'</span>'.$data->fundStartDate.'</p>'.
+					'<p><span>'.JText::_($data->type.'_FUND_END').'</span>'.$data->fundEndDate.'</p>'.
+					'<p><span>'.JText::_($data->type.'_PRODUCTION_START').'</span>'.$data->productionStartDate.'</p>';
 	}
-	if (isset($data->fundStartDate)) {
-			$html .= '<p><span>'.JText::_('FUND_END').'</span>'.$data->fundEndDate.'</p>';
-	}
-	$html .= '<p><span>'.JText::_($data->type.'_PRODUCTION_START').'</span>'.$data->productionStartDate.'</p>'.
-			'<p><span>'.JText::_($data->type.'_PREMIERE_START').'</span>'.$data->premiereStartDate.'</p>'.
+	$html .= '<p><span>'.JText::_($data->type.'_PREMIERE_START').'</span>'.$data->premiereStartDate.'</p>'.
 			'<p><span>'.JText::_($data->type.'_PREMIERE_END').'</span>'.$data->premiereEndDate.'</p>'.
 			'</div>';
 
@@ -286,11 +321,13 @@ function fechas($data) {
 			<?php echo buttons($json, $usuario); ?>
 		</div>
 			<div id="banner" class="ver_proyecto">
-				<div class="content-banner">
-					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name ?>" />
-					<div class="info-banner">
+				<div class="info-banner">
+					<div class="rt-inner">
 						<?php echo encabezado($json, $results); ?>
 					</div>
+				</div>
+				<div class="content-banner">
+					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name ?>" />
 				</div>
 			</div>
 			<div id="video" class="ver_proyecto">
@@ -325,16 +362,13 @@ function fechas($data) {
 			</div>
 			<div id="finanzas" class="ver_proyecto">
 				<h3>Finanzas</h3>
-				<?php echo encabezado($json, $results); ?>
-				<?php echo finanzas($json); ?>
-				<?php echo tablaFinanzas($json); ?>
-				<?php echo fechas($json); ?>
+				<?php echo informacionTmpl($json, $results, "finanzas"); ?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="info" class="ver_proyecto">
 				<h3>Informacion</h3>
 				<div class="detalleDescripcion">
-					<?php echo informacionTmpl($json, $results); ?>
+					<?php echo informacionTmpl($json, $results, null); ?>
 				</div>
 				<a class="cerrar">cerrar</a>
 			</div>
