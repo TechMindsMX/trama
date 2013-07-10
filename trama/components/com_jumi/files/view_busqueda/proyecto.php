@@ -48,13 +48,21 @@ function prodProy ($tipo) {
 	return $json0;
 }
 
+$json = json_decode(prodProy($busquedaPor[$tipoPP]));
+
+require_once ('libraries/trama/class.php');
+foreach ($json as $key => $value) {
+	$value->nomCat = JTrama::getProySubCatName($value->subcategory);
+}
+$jsonJS = json_encode($json);
+
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
 $document->addScript($pathJumi.'/view_busqueda/js/jquery.pagination.js');
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
 ?>
 
 <script type="text/javascript">
-var members = <?php echo prodProy($busquedaPor[$tipoPP]); ?>;
+var members = <?php echo $jsonJS; ?>;
 
 $(document).ready(function(){
 	initPagination();
@@ -104,7 +112,11 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="inner">';
 		newcontent += '<div class="titulo">';
 		newcontent += '<div class="tituloText inner">';
-		newcontent += '<h4><a href="' + link + '">' + members[i].name + '</h4></a></div>';
+			var descripcion = members[i].name;
+			var largo = 33;
+			var trimmed = descripcion.substring(0, largo);
+		newcontent += '<h4><a href="' + link + '">' + trimmed + '</h4></a>';
+		newcontent += '<p>' + members[i].nomCat + '</div>';
 		newcontent += '</div>';
 		newcontent += '<div class="avatar">';
 		newcontent += '<a href="' + link + '">';
