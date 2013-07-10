@@ -1,84 +1,62 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
-$limiteVideos = 5;
-$limiteSound = 5;
+require_once 'modules/mod_busqueda_categoria/helper.php';
+require_once 'components/com_jumi/files/includes/clase.php';
+require_once 'components/com_jumi/files/includes/libreriasPP.php';
+
+$categoria = modCategoriasHelper::getCategoria('all');
+$subCategorias = modCategoriasHelper::getSubCat('all');
+
+//si proyid no esta vacio traigo los datos del proyecto del servicio del middleware
+$objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
+
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
+$hiddenphotosIds = '<input type="hidden" name="projectPhotosIds" id="projectPhotosIds" value= ""/>';
+$validacion = 'validate[required]';
+$countunitSales = 1;
+$countImgs = 10;
+$limiteVideos = 5;
+$limiteSound = 5;
 $hiddenIdProyecto = '';
-$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" value= ""/>';
+$agregarCampos = '';
+$categoriaSelected = '';
+$subcategoriaSelected = '';
 $banner = '';
 $avatar = '';
 $opcionesSubCat = '';
 $ligasVideos = '';
 $ligasAudios = '';
-$countunitSales = 1;
-$agregarCampos = '';
-$validacion = 'validate[required]';
-$countImgs = 10;
-$categoriaSelected = '';
-$subcategoriaSelected = '';
 //termina los definicion de campos del formularios
 
-require_once 'getcategorias.php';
 
-							
-$usuario = JFactory::getUser();
-$document = JFactory::getDocument();
-$base = JUri::base();
-$pathJumi = Juri::base().'components/com_jumi/files/crear_proyecto/';
-
-$categoria = categoriasforms::getCategoria('all');
-$subCategorias = categoriasforms::getSubCat('all');
-$scriptselect = 'jQuery(function() {
-	jQuery("#subcategoria").chained("#selectCategoria");	
-});';
-
-$document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
-$document->addStyleSheet($pathJumi.'css/form2.css');
-$document->addScript('http://code.jquery.com/jquery-1.9.1.js');
-$document->addScript($pathJumi.'js/mas.js');
-$document->addScript($pathJumi.'js/jquery.mask.js');
-$document->addScript($pathJumi.'js/jquery.validationEngine-es.js');
-$document->addScript($pathJumi.'js/jquery.validationEngine.js');
-$document->addScript($pathJumi.'js/jquery.chained.js');
-$document->addScript($pathJumi.'js/jquery.MultiFile.js');
-$document->addScript('http://dev7studios.com/demo/jquery-currency/jquery.currency.js');
-$document->addScriptDeclaration($scriptselect);
-
-if ( !empty($_GET['proyid']) ) {
-	$urlproyectco = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
-	//$urlproyectco = $ipluis.$puerto.'/trama-middleware/rest/project/get/'.$_GET['proyid'];
-	$jsonproyecto = file_get_contents($urlproyectco);
-	$jsonObjproyecto = json_decode($jsonproyecto);
-}
-
-if ( isset ( $jsonObjproyecto ) ) {
+if ( isset ($objDatosProyecto) ) {
 		
-	$hiddenIdProyecto = '<input type="hidden" value="'.$jsonObjproyecto->id.'" name="id" />';
+	$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
 	$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
 	
-	$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$jsonObjproyecto->projectAvatar->name.'" width="100" />';
-	$banner = '<img src="'.MIDDLE.BANNER.'/'.$jsonObjproyecto->projectBanner->name.'" width="100" />';
+	$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$objDatosProyecto->projectAvatar->name.'" width="100" />';
+	$banner = '<img src="'.MIDDLE.BANNER.'/'.$objDatosProyecto->projectBanner->name.'" width="100" />';
 	
-	$ligasVideos = $jsonObjproyecto->projectYoutubes;
-	$ligasAudios = $jsonObjproyecto->projectSoundclouds;
+	$ligasVideos = $objDatosProyecto->projectYoutubes;
+	$ligasAudios = $objDatosProyecto->projectSoundclouds;
 	
-	$fechaIniProd = explode('-',$jsonObjproyecto->productionStartDate);
-	$fechaFin = explode('-',$jsonObjproyecto->premiereStartDate);
-	$fechaCierre = explode('-',$jsonObjproyecto->premiereEndDate);
+	$fechaIniProd = explode('-',$objDatosProyecto->productionStartDate);
+	$fechaFin = explode('-',$objDatosProyecto->premiereStartDate);
+	$fechaCierre = explode('-',$objDatosProyecto->premiereEndDate);
 	
-	$countunitSales = count($jsonObjproyecto->projectUnitSales);
-	$datosRecintos = $jsonObjproyecto->projectUnitSales;
+	$countunitSales = count($objDatosProyecto->projectUnitSales);
+	$datosRecintos = $objDatosProyecto->projectUnitSales;
 		
 	$validacion = '';
 	$validacionImgs = '';
 	
-	$countImgs = $countImgs - count($jsonObjproyecto->projectPhotos);
+	$countImgs = $countImgs - count($objDatosProyecto->projectPhotos);
 
-	$subcategoriaSelected = $jsonObjproyecto->subcategory;
+	$subcategoriaSelected = $objDatosProyecto->subcategory;
 	
 	foreach ($subCategorias as $key => $value) {
-		if( $value->id == $jsonObjproyecto->subcategory ) {
+		if( $value->id == $objDatosProyecto->subcategory ) {
 			$categoriaSelected = $value->father;
 		}
 	}
@@ -140,12 +118,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 			jQuery("#form2").submit();
 		});
 	});
-	
-	function checkHELLO(field, rules, i, options){
-		if (field.val() != "HELLO") {
-			return options.allrules.validate2fields.alertText;
-		}
-	}
+
 </script>
 
 <!--DIV DE AGREGAR CAMPOS-->
@@ -189,25 +162,27 @@ if ( isset ( $jsonObjproyecto ) ) {
 	?>
 	<input 
 		type="hidden"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->userId : $usuario->id; ?>"
+		value="<?php echo $usuario->id; ?>"
 		name="userId" />
 		   
 	<input 
 		type = "hidden" 
-		value = "<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->status : '0'; ?>"
+		value = "<?php echo isset($objDatosProyecto) ? $objDatosProyecto->status : '0'; ?>"
 		name = "status" />
 		   
 	<input
 		type="hidden"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->type : 'PROJECT'; ?>"
+		value="PROJECT"
 		name="type" />
 	
 	<label for="nomProy"><?php echo JText::_('NOMBRE').' '.JText::_('PROYECTO'); ?>*:</label>
 	<input 
-		type="text" name="name" id="nomProy"
+		type="text"
+		id="nomProy"
 		class="validate[required,custom[onlyLetterNumber]]" 
 		maxlength="100"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->name : ''; ?>" /> 
+		value="<?php echo isset($objDatosProyecto) ? $objDatosProyecto->name : ''; ?>" 
+		name="name" /> 
 	<br />
 	
 	<label for="categoria"><?php echo JText::_('CATEGORIA'); ?>: </label>
@@ -281,10 +256,10 @@ if ( isset ( $jsonObjproyecto ) ) {
 	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo" />
 	
 	<?php
-	if ( isset($jsonObjproyecto) ) {
+	if ( isset($objDatosProyecto) ) {
 		echo '<div class="MultiFile-label" id="imagenes" style="display:block; float:left;">';
 		
-		foreach ($jsonObjproyecto->projectPhotos as $key => $value) {
+		foreach ($objDatosProyecto->projectPhotos as $key => $value) {
 			echo '<input 
 					type = "checkbox"
 					id = "photosids"
@@ -292,7 +267,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 					class="projectPhotosIds" 
 					value="'.$value->id.'" 
 					checked="checked" />
-					<img alt="'.$jsonObjproyecto->name.'" src="'.MIDDLE.PHOTO.'/'.$value->name.'" width="100" /><br /><br />';
+					<img alt="'.$objDatosProyecto->name.'" src="'.MIDDLE.PHOTO.'/'.$value->name.'" width="100" /><br /><br />';
 		}
 		
 		echo '</div>';
@@ -302,13 +277,13 @@ if ( isset ( $jsonObjproyecto ) ) {
 	
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?>*:</label> <br />
 	<textarea name="description" id="descProy" class="validate[required]" cols="60" rows="5"><?php 
-		echo isset($jsonObjproyecto) ? $jsonObjproyecto->description : ''; 
+		echo isset($objDatosProyecto) ? $objDatosProyecto->description : ''; 
 	?></textarea>
 	<br /> 
 	
 	<label for="elenco"><?php echo JText::_('ELENCO'); ?>:</label> <br />
 	<textarea name="cast" id="elenco" cols="60" rows="5"><?php 
-		echo isset($jsonObjproyecto) ? $jsonObjproyecto->cast : ''; 
+		echo isset($objDatosProyecto) ? $objDatosProyecto->cast : ''; 
 	?></textarea>
 	<br />
 	
@@ -317,7 +292,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type="text" 
 		class="validate[required]" 
 		id="nameRecinto"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->inclosure : ''; ?>" 
+		value="<?php echo isset($objDatosProyecto) ? $objDatosProyecto->inclosure : ''; ?>" 
 		name="inclosure"
 		maxlength="100" /> 
 	<br>
@@ -327,7 +302,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type="text" 
 		class="validate[required]"
 		id="direccion"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->showground : ''; ?>"
+		value="<?php echo isset($objDatosProyecto) ? $objDatosProyecto->showground : ''; ?>"
 		name="showground"
 		maxlength="100" /> 
 	<br> 
@@ -341,7 +316,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type="number" 
 		class="validate[required]"
 		id="presupuesto"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->budget : ''; ?>"
+		value="<?php echo isset($objDatosProyecto) ? $objDatosProyecto->budget : ''; ?>"
 		name="budget" /> 
 	<br /> 
 	
@@ -354,7 +329,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type="text" 
 		id="seccion" 
 		class="validate[required,custom[onlyLetterNumber]]"
-		value="<?php echo isset($jsonObjproyecto) ? $datosRecintos[0]->section : ''; ?>" 
+		value="<?php echo isset($objDatosProyecto) ? $datosRecintos[0]->section : ''; ?>" 
 		name="section"> 
 	<br />
 	
@@ -363,7 +338,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type="text" 
 		id="unidad" 
 		class="validate[required,custom[onlyNumberSp]]"
-		value="<?php echo isset($jsonObjproyecto) ? $datosRecintos[0]->unitSale : ''; ?>" 
+		value="<?php echo isset($objDatosProyecto) ? $datosRecintos[0]->unitSale : ''; ?>" 
 		name="unitSale"> 
 	<br> 
 	
@@ -372,16 +347,16 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type="text"
 		id="inventario" 
 		class="validate[required,custom[onlyNumberSp]]"
-		value="<?php echo isset($jsonObjproyecto) ? $datosRecintos[0]->capacity : ''; ?>"  
+		value="<?php echo isset($objDatosProyecto) ? $datosRecintos[0]->capacity : ''; ?>"  
 		name="capacity"> 
 	<br />
 	<br />
 	
 	<?php
 		for($i = 1; $i < $countunitSales; $i++) {
-			$valorSection = isset($jsonObjproyecto) ? $datosRecintos[$i]->section : '';
-			$valorUnitSales = isset($jsonObjproyecto) ? $datosRecintos[$i]->unitSale : '';
-			$valorCapacity = isset($jsonObjproyecto) ? $datosRecintos[$i]->capacity : '';
+			$valorSection = isset($objDatosProyecto) ? $datosRecintos[$i]->section : '';
+			$valorUnitSales = isset($objDatosProyecto) ? $datosRecintos[$i]->unitSale : '';
+			$valorCapacity = isset($objDatosProyecto) ? $datosRecintos[$i]->capacity : '';
 			
 			$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('SECCION').'*:</label>';
 			$unitsales .= '<input'; 
@@ -424,7 +399,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type="number" 
 		id="potenciales"
 		class="validate[required,custom[onlyNumberSp]]"
-		value="<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->revenuePotential : ''; ?>"
+		value="<?php echo isset($objDatosProyecto) ? $objDatosProyecto->revenuePotential : ''; ?>"
 		name="revenuePotential"
 		step="any" /> 
 	<br>
@@ -434,7 +409,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type = "number" 
 		id = "equilibrio"
 		class = "validate[required,custom[onlyNumberSp]]"
-		value = "<?php echo isset($jsonObjproyecto) ? $jsonObjproyecto->breakeven : ''; ?>"
+		value = "<?php echo isset($objDatosProyecto) ? $objDatosProyecto->breakeven : ''; ?>"
 		name = "breakeven"
 		step="any" /> 
 	<br>
@@ -444,7 +419,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type = "text" 
 	    id = "productionStartDate" 
 	    class = "validate[required, custom[date], custom[funciondate]]"
-	    value = "<?php echo isset($jsonObjproyecto) ? $fechaIniProd[2].'/'.$fechaIniProd[1].'/'.$fechaIniProd[0] : ''; ?>" 
+	    value = "<?php echo isset($objDatosProyecto) ? $fechaIniProd[2].'/'.$fechaIniProd[1].'/'.$fechaIniProd[0] : ''; ?>" 
 	    name = "productionStartDate" /> 
 	<br>
 	
@@ -453,7 +428,7 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type = "text" 
 	    id = "premiereStartDate" 
 	    class = "validate[required, custom[date], custom[fininicio]]"
-	    value = "<?php echo isset($jsonObjproyecto) ? $fechaFin[2].'/'.$fechaFin[1].'/'.$fechaFin[0] : ''; ?>" 
+	    value = "<?php echo isset($objDatosProyecto) ? $fechaFin[2].'/'.$fechaFin[1].'/'.$fechaFin[0] : ''; ?>" 
 	    name = "premiereStartDate" />
 	       
 	<br> 
@@ -463,14 +438,14 @@ if ( isset ( $jsonObjproyecto ) ) {
 		type = "text" 
 		id = "premiereEndDate" 
 		class = "validate[required], custom[date], custom[cierre]"
-		value = "<?php echo isset($jsonObjproyecto) ? $fechaCierre[2].'/'.$fechaCierre[1].'/'.$fechaCierre[0] : ''; ?>" 
+		value = "<?php echo isset($objDatosProyecto) ? $fechaCierre[2].'/'.$fechaCierre[1].'/'.$fechaCierre[0] : ''; ?>" 
 		name = "premiereEndDate">
 	<br /> 
 	<br />
 	
 	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
 	<textarea name="tags" cols="60" rows="5"><?php 
-		echo isset($jsonObjproyecto) ? $jsonObjproyecto->keywords : ''; 
+		echo isset($objDatosProyecto) ? $objDatosProyecto->tags : ''; 
 	?></textarea>
 	<br />
 	<br /> 
