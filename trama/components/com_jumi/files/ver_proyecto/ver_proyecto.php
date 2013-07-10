@@ -210,8 +210,10 @@ function informacionTmpl($data, $results) {
 			'<div id="derechaDesc" class="gantry-width-66 gantry-width-block">'.
 			'<div class="gantry-width-spacer">'.
 			encabezado($data, $results).
+			'<div id="contenido-detalle">'.
 			$data->description.
 			'<br /><h3>Elenco</h3><p>'.$data->cast.'</p>'.
+			'</div>'.
 			'</div>'.
 			'</div>'.
 			'</div>';
