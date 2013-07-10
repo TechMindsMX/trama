@@ -429,8 +429,17 @@ if ( isset ($objDatosProducto) ) {
 	<br />
 	
 	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
-	<textarea name="tags" cols="60" rows="5"><?php 
-		echo isset($objDatosProducto) ? $objDatosProducto->tags : ''; 
+	<textarea name="tags" cols="60" rows="5"><?php
+		if( isset($objDatosProducto) ) {
+			foreach ($objDatosProducto->tags as $key => $value) {
+				$array[] = $value->tag;
+			}
+			$tags = implode($array, ', ');
+			echo $tags;
+			
+		}else {
+			echo '';
+		}
 	?></textarea>
 	<br />
 	<br />

@@ -118,7 +118,6 @@ if ( isset ($objDatosProyecto) ) {
 			jQuery("#form2").submit();
 		});
 	});
-
 </script>
 
 <!--DIV DE AGREGAR CAMPOS-->
@@ -437,15 +436,24 @@ if ( isset ($objDatosProyecto) ) {
 	<input 
 		type = "text" 
 		id = "premiereEndDate" 
-		class = "validate[required], custom[date], custom[cierre]"
+		class = "validate[required, custom[date], custom[cierre]]"
 		value = "<?php echo isset($objDatosProyecto) ? $fechaCierre[2].'/'.$fechaCierre[1].'/'.$fechaCierre[0] : ''; ?>" 
 		name = "premiereEndDate">
 	<br /> 
 	<br />
 	
 	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
-	<textarea name="tags" cols="60" rows="5"><?php 
-		echo isset($objDatosProyecto) ? $objDatosProyecto->tags : ''; 
+	<textarea name="tags" cols="60" rows="5"><?php
+		if( isset($objDatosProyecto) ) {
+			foreach ($objDatosProyecto->tags as $key => $value) {
+				$array[] = $value->tag;
+			}
+			$tags = implode($array, ', ');
+			echo $tags;
+			
+		}else {
+			echo '';
+		}
 	?></textarea>
 	<br />
 	<br /> 

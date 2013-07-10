@@ -11,7 +11,6 @@ class claseTraerDatos
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
 			$json = file_get_contents($url);
 			$jsonDecode = json_decode($json); 
-			$jsonDecode->tags = 'nada';
 			
 			$respuesta = $jsonDecode;
 		} else {
