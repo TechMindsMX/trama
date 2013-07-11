@@ -1,11 +1,11 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
-require_once 'modules/mod_busqueda_categoria/helper.php';
-require_once 'components/com_jumi/files/includes/clase.php';
-require_once 'components/com_jumi/files/includes/libreriasPP.php';
+require_once 'libraries/trama/class.php';
+require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
+require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
 
-$categoria = modCategoriasHelper::getCategoria('all');
-$subCategorias = modCategoriasHelper::getSubCat('all');
+$categoria = JTrama::getAllCatsPadre();
+$subCategorias = JTrama::getAllSubCats();
 
 //si proyid no esta vacio traigo los datos del proyecto del servicio del middleware
 $objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
@@ -444,7 +444,7 @@ if ( isset ($objDatosProyecto) ) {
 	
 	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
 	<textarea name="tags" cols="60" rows="5"><?php
-		if( isset($objDatosProyecto) ) {
+		if( isset($objDatosProyecto) && !empty($objDatosProyecto->tags)) {
 			foreach ($objDatosProyecto->tags as $key => $value) {
 				$array[] = $value->tag;
 			}
