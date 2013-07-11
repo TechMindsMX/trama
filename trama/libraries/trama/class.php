@@ -11,11 +11,15 @@ class JTrama
 	public function	getAllSubCats() {
 		$url = MIDDLE . PUERTO . '/trama-middleware/rest/category/subcategories/all';
 		$subcats = json_decode(file_get_contents($url));
+		
+		return $subcats;
 	}	
 
 	public function	getAllCatsPadre() {
 	  	$url = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
 		$cats = json_decode(file_get_contents($url));
+		
+		return $cats;
 	}
 
 	public function fetchAllCats()	{
