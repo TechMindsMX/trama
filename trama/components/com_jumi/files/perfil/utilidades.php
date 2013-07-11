@@ -38,8 +38,8 @@ function datosGenerales($idUsuario, $tipoContacto){
 	$db->setQuery( $query );
 
 	$resultado = $db->loadObjectList();
-
-	return $resultado;
+	
+	return $resultado[0];
 
 }
 

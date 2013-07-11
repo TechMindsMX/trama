@@ -94,13 +94,13 @@
 				<?php if (!empty($emailGeneral)) {echo 'value = "'.$emailGeneral[0]->coeEmail.'"';}?>/>
 			</div>
 			<div class="_100mail">
-				<label for="maGr_coeEmail0"><?php echo JText::_('CORREO'); ?> :</label>
-				<input name="maGr_coeEmail0" type="text" id="maGr_coeEmail0" maxlength="100" 
+				<label for="maGr_coeEmail00"><?php echo JText::_('CORREO'); ?> :</label>
+				<input name="maGr_coeEmail00" type="text" id="maGr_coeEmail00" maxlength="100" 
 				<?php if (!empty($emailGeneral)) {echo 'value = "'.$emailGeneral[0]->coeEmail.'"';}?>/>
 			</div>
 			<div class="_100mail">
-				<label for="maGr_coeEmail1"><?php echo JText::_('CORREO'); ?> :</label>
-				<input name="maGr_coeEmail1" type="text" id="maGr_coeEmail1" maxlength="100" 
+				<label for="maGr_coeEmail01"><?php echo JText::_('CORREO'); ?> :</label>
+				<input name="maGr_coeEmail01" type="text" id="maGr_coeEmail01" maxlength="100" 
 				<?php if (!empty($emailGeneral)) {echo 'value = "'.$emailGeneral[0]->coeEmail.'"';}?>/>
 			</div>
 			<div class="_50">
@@ -110,20 +110,20 @@
                	<input name="teGr_perfil_tipoTelefono_idtipoTelefono" id="teGr_nomTipoTelefono" value="1" type="hidden" />
            	</div> 
            	<div class="_50">
-               	<label for="teGr_telTelefono"><?php echo JText::_('TELEFONO_CELULAR'); ?>:</label>
-               	<input name="teGr_telTelefono" class="validate[custom[phone]]" type="text" id="teGr_telTelefono" maxlength="10" 
+               	<label for="teGr_telTelefono00"><?php echo JText::_('TELEFONO_CELULAR'); ?>:</label>
+               	<input name="teGr_telTelefono00" class="validate[custom[phone]]" type="text" id="teGr_telTelefono00" maxlength="10" 
                	<?php if (!empty($telefonoGeneral)) {echo 'value = "'.$telefonoGeneral[0]->telTelefono.'"';}?>/>
-               	<input name="teGr_perfil_tipoTelefono_idtipoTelefono0" id="teGr_nomTipoTelefono0" value="2" type="hidden" />
+               	<input name="teGr_perfil_tipoTelefono_idtipoTelefono00" id="teGr_nomTipoTelefono00" value="2" type="hidden" />
            	</div>          
            	<div class="_50">
-               	<label for="teGr_telTelefono"><?php echo JText::_('TELEFONO_OFICINA'); ?>:</label>
-               	<input name="teGr_telTelefono" class="validate[custom[phone]]" type="text" id="teGr_telTelefono" maxlength="10" 
+               	<label for="teGr_telTelefono01"><?php echo JText::_('TELEFONO_OFICINA'); ?>:</label>
+               	<input name="teGr_telTelefono01" class="validate[custom[phone]]" type="text" id="teGr_telTelefono01" maxlength="10" 
                	<?php if (!empty($telefonoGeneral)) {echo 'value = "'.$telefonoGeneral[0]->telTelefono.'"';}?>/>
-               	<input name="teGr_perfil_tipoTelefono_idtipoTelefono1" id="teGr_nomTipoTelefono1" value="3" type="hidden" />
+               	<input name="teGr_perfil_tipoTelefono_idtipoTelefono01" id="teGr_nomTipoTelefono01" value="3" type="hidden" />
            	</div> 
             <div id="ext" class="_25">
-                <label for="teGr_extension"><?php echo JText::_('EXT'); ?></label> 
-                <input name="teGr_extension" class="validate[onlyNumberSp]" disabled="true" type="text" id="teGr_extension" maxlength="5" size="8" 
+                <label for="teGr_extension01"><?php echo JText::_('EXT'); ?></label> 
+                <input name="teGr_extension01" class="validate[onlyNumberSp]" type="text" id="teGr_extension01" maxlength="5" size="8" 
                	<?php if (!empty($telefonoGeneral)) {echo 'value = "'.$telefonoGeneral[0]->extension.'"';}?> />
             </div>       
            	<div id="nombre"><h3><?php echo JText::_('DIRECCION'); ?></h3></div>
@@ -200,7 +200,7 @@
                	<select name="dire_perfil_pais_idpais" id="dire_nomPais" class="validate[required]">
 					<option value=""> </option> 
                		<option value="1" 
-					<?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_pais_idpais == 1) ? "selected" : ""; echo $seleccionado;}?>>M&eacute;xico</option>';
+					<?php if (!empty($domicilioGeneral)) {$seleccionado = ($domicilioGeneral[0]->perfil_pais_idpais == 1) ? "selected" : ""; echo $seleccionado;}?>>M&eacute;xico</option>
 				</select>
             </div>
             <div class="_100">

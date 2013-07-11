@@ -621,21 +621,21 @@ class procesamiento {
 	
 }
 
-$generales = $datos->get_datosGenerales();
-$tipoGeneral = $datos->get_tipoGenerales();
-$direccion = $datos->get_direccion();
-$telsGen = $datos->get_telsGenerales();
-$telsGen0 = $datos->get_telsGenerales_0();
-$telsGen1 = $datos->get_telsGenerales_1();
+// $generales = $datos->get_datosGenerales();
+// $tipoGeneral = $datos->get_tipoGenerales();
+// $direccion = $datos->get_direccion();
+// $telsGen = $datos->get_telsGenerales();
+// $telsGen0 = $datos->get_telsGenerales_0();
+// $telsGen1 = $datos->get_telsGenerales_1();
 
-$mailGen = $datos->get_mailsGeneral();
-$mailGen0 = $datos->get_mailsGeneral_0();
-$mailGen1 = $datos->get_mailsGeneral_1();
+// $mailGen = $datos->get_mailsGeneral();
+// $mailGen0 = $datos->get_mailsGeneral_0();
+// $mailGen1 = $datos->get_mailsGeneral_1();
 
 $datos_fiscales = $datos->get_datosFiscales();
 $domicilio_fiscales = $datos->get_domicilioFiscal();
 
-$pro_pas = $datos->get_proyectosPasados();
+// $pro_pas = $datos->get_proyectosPasados();
 
 // $repr = $datos->get_representante();
 // $tipoRepresentante = $datos->get_tipoRepresentante();
@@ -659,7 +659,7 @@ $pro_pas = $datos->get_proyectosPasados();
 // $mailCon0 = $datos->get_mailsContactos_0();
 // $mailCon1 = $datos->get_mailsContactos_1();
 
-$curriculum = $datos->get_cv();
+// $curriculum = $datos->get_cv();
 
 
 $allDone =& JFactory::getApplication();
