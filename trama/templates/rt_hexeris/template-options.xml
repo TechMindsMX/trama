@@ -156,7 +156,7 @@
             <field name="facebook" type="text" default="" label="FACEBOOK_LINK" position="left" class="text-long" />
             <field name="google" type="text" default="" label="GOOGLE_LINK" position="right" class="text-long" />
             <field name="rss" type="text" default="" label="RSS_LINK" position="right" class="text-long" />
-            <field name="youtube" type="text" default="" label="GOOGLE_LINK" class="text-long" position="right" />
+            <field name="youtube" type="text" default="" class="text-long" position="right" />
         	<field name="linkedin" type="text" default="" class="text-long" position="right" />
         </fields>
 
