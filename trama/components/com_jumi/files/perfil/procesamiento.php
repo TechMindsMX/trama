@@ -58,17 +58,17 @@ class procesamiento {
 	
 	function agrupacion($campos){
 		
-		if($campos['daGr_perfil_personalidadJuridica_idpersonalidadJuridica'] != 1){
-			$validacion_rfc = $this->validacionRFC($campos['daGr_perfil_personalidadJuridica_idpersonalidadJuridica'],$campos['daFi_rfcRFC']);
+// 		if($campos['daGr_perfil_personalidadJuridica_idpersonalidadJuridica'] != 1){
+// 			$validacion_rfc = $this->validacionRFC($campos['daGr_perfil_personalidadJuridica_idpersonalidadJuridica'],$campos['daFi_rfcRFC']);
 			
-			if(!$validacion_rfc){
-				header("Location: {$_SERVER['HTTP_REFERER']}");
-				$error = "<p>RFC INVALIDO</p>";
-					$application = JFactory::getApplication();
-					$application->enqueueMessage(JText::_($error), 'error');
-				exit;
-			}
-		}
+// 			if(!$validacion_rfc){
+// 				header("Location: {$_SERVER['HTTP_REFERER']}");
+// 				$error = "<p>RFC INVALIDO</p>";
+// 					$application = JFactory::getApplication();
+// 					$application->enqueueMessage(JText::_($error), 'error');
+// 				exit;
+// 			}
+// 		}
 				
 		$claves = array_keys($campos);
 		$count = 0;
@@ -525,10 +525,10 @@ class procesamiento {
 		$usuario =& JFactory::getUser();
 		
 		
-// 		$existe = "false";
+		$existe = "false";
 // 		$existe = "true";
 
-		$existe = existingUser($usuario-> id);
+// 		$existe = existingUser($usuario-> id);
 		
 		if (isset($data) && !empty($data)) {
 			
@@ -634,29 +634,30 @@ $mailGen1 = $datos->get_mailsGeneral_1();
 
 $datos_fiscales = $datos->get_datosFiscales();
 $domicilio_fiscales = $datos->get_domicilioFiscal();
+
 $pro_pas = $datos->get_proyectosPasados();
 
-$repr = $datos->get_representante();
-$tipoRepresentante = $datos->get_tipoRepresentante();
-$domicilioRep = $datos->get_domicilioRepresentate();
-$telsRep = $datos->get_telsRepresentante();
-$telsRep0 = $datos->get_telsRepresentante_0();
-$telsRep1 = $datos->get_telsRepresentante_1();
+// $repr = $datos->get_representante();
+// $tipoRepresentante = $datos->get_tipoRepresentante();
+// $domicilioRep = $datos->get_domicilioRepresentate();
+// $telsRep = $datos->get_telsRepresentante();
+// $telsRep0 = $datos->get_telsRepresentante_0();
+// $telsRep1 = $datos->get_telsRepresentante_1();
 
-$mailRep = $datos->get_mailRepresentante();
-$mailRep0 = $datos->get_mailRepresentante_0();
-$mailRep1 = $datos->get_mailRepresentante_1();
+// $mailRep = $datos->get_mailRepresentante();
+// $mailRep0 = $datos->get_mailRepresentante_0();
+// $mailRep1 = $datos->get_mailRepresentante_1();
 
-$dat_contacto = $datos->get_contacto();
-$tipoCotacto = $datos->get_tipoContacto();
-$dom_contacto = $datos->get_domicilioContacto();
-$telsCon = $datos->get_telsContacto();
-$telsCon0 = $datos->get_telsContacto_0();
-$telsCon1 = $datos->get_telsContacto_1();
+// $dat_contacto = $datos->get_contacto();
+// $tipoCotacto = $datos->get_tipoContacto();
+// $dom_contacto = $datos->get_domicilioContacto();
+// $telsCon = $datos->get_telsContacto();
+// $telsCon0 = $datos->get_telsContacto_0();
+// $telsCon1 = $datos->get_telsContacto_1();
 
-$mailCon = $datos->get_mailsContactos();
-$mailCon0 = $datos->get_mailsContactos_0();
-$mailCon1 = $datos->get_mailsContactos_1();
+// $mailCon = $datos->get_mailsContactos();
+// $mailCon0 = $datos->get_mailsContactos_0();
+// $mailCon1 = $datos->get_mailsContactos_1();
 
 $curriculum = $datos->get_cv();
 
