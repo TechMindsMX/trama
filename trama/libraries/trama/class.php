@@ -2,21 +2,79 @@
 
 defined('JPATH_PLATFORM') or die ;
 
-abstract class JTrama 
+class JTrama 
 {
-	public static $nomCat = null;
+	public $nomCat = null;
+	
+	public $nomCatPadre = null;
 
-	public static function getProySubCatName($valor) {
+	public function	getAllSubCats() {
+		$url = MIDDLE . PUERTO . '/trama-middleware/rest/category/subcategories/all';
+		$subcats = json_decode(file_get_contents($url));
+	}	
+
+	public function	getAllCatsPadre() {
+	  	$url = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
+		$cats = json_decode(file_get_contents($url));
+	}
+
+	public function fetchAllCats()	{
+		$cats = JTrama::getAllSubCats();
+		$subcats = JTrama::getAllCatsPadre();
+		$cats = array_merge($cats, $subcats);
 		
-		$urlSubcategoria = MIDDLE . PUERTO . '/trama-middleware/rest/category/subcategories/all';
-		$subcats = json_decode(file_get_contents($urlSubcategoria));
-		foreach ($subcats as $key => $value) {
-			if ($value -> id == $valor ) {
+		return $cats;
+	}
+
+	public function getSubCatName($data) {
+		$cats = JTrama::fetchAllCats();
+		foreach ($cats as $key => $value) {
+			if ($value -> id == $data ) {
 				$nomCat = $value -> name;
 			}
 		}
 		return $nomCat;
 	}
-
+	public function getCatName($data) {
+		$cats = JTrama::fetchAllCats();
+		foreach ($cats as $key => $value) {
+			if ($value -> id == $data ) {
+				$nomCat = $value -> name;
+				$idFather = $value -> father;
+				if ($idFather >= 0) {
+					$catPadre = $cats[$idFather];
+					$nomCatPadre = $catPadre->name;
+				}
+				else {
+					$nomCatPadre = '';
+				}
+			}
+		}
+		return $nomCatPadre;		
+	}
+	
+	public function getProducerName($data) {
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query
+		->select(array('a.nomNombre','a.nomApellidoPaterno'))
+		->from('perfil_persona AS a')
+		->join('INNER', 'perfil_persona_contacto AS b ON (a.id = b.perfil_persona_idpersona)')
+		->where('a.users_id = '.$data.' && b.perfil_tipoContacto_idtipoContacto = 1');
+		
+		$db->setQuery($query);
+		$producer = $db->loadRow();
+		if (!is_null($producer)) {
+			$producer = implode(' ',$producer);
+		}
+		else {
+			$producer = 'Anonimo';
+		}
+		return $producer;
+	}
+	public function __toString()  
+    {  
+    }  
 }
 ?>

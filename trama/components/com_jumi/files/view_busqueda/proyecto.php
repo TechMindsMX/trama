@@ -52,8 +52,11 @@ $json = json_decode(prodProy($busquedaPor[$tipoPP]));
 
 require_once ('libraries/trama/class.php');
 foreach ($json as $key => $value) {
-	$value->nomCat = JTrama::getProySubCatName($value->subcategory);
+	$value->nomCat = JTrama::getSubCatName($value->subcategory);
+	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
+	$value->producer = JTrama::getProducerName($value->userId);
 }
+// var_dump($json);
 $jsonJS = json_encode($json);
 
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
@@ -116,7 +119,9 @@ function pageselectCallback (page_index, jq) {
 			var largo = 33;
 			var trimmed = descripcion.substring(0, largo);
 		newcontent += '<h4><a href="' + link + '">' + trimmed + '</h4></a>';
-		newcontent += '<p>' + members[i].nomCat + '</div>';
+		newcontent += '<span>' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
+		newcontent += '<span>' + members[i].producer+'</span>';
+		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '<div class="avatar">';
 		newcontent += '<a href="' + link + '">';
