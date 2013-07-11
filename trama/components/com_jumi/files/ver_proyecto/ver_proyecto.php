@@ -11,9 +11,11 @@
 	$document->addStyleSheet($pathJumi.'css/themes/bar/bar.css');
 	$document->addStyleSheet($pathJumi.'css/nivo-slider.css');
 	$document->addStyleSheet($pathJumi.'css/style.css');
+	//$document->addScript('components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js');
 ?>
 
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
+<script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
 <?php
 	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
 	$homepage = file_get_contents($url);
@@ -202,6 +204,12 @@ function irGrupo($data) {
 	return $html;
 }
 
+function rating($data) {
+	$html = '<div id="rating" style="float:left; margin-top:15px;"></div><div id="texto">Puntuar</div>';
+	
+	return $html;
+}
+
 function encabezado($data, $results) {
 	$html = '<h2>'.$data->name.'</h2>'.
 		'<h4>'.getProySubCatName($data).'</h4><span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
@@ -233,6 +241,9 @@ function informacionTmpl($data, $results, $params) {
 				'</div>'.
 				'<div class="gantry-width-spacer flotado">'.
 				irGrupo($data).
+				'</div>'.
+				'<div class="granty-width-spacer flotando">'.
+				rating($data).
 				'</div>';
 			$derecha = $data->description.
 				'<br /><h3>Elenco</h3><p>'.$data->cast.'</p>';
@@ -385,9 +396,43 @@ function fechas($data) {
 		</div>
 	</div>
 	<script type="text/javascript">
+		$(document).ready(function() {
+			var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
+			$('#rating').raty({
+				click: function(score, evt) {
+					$.ajax({
+						url:"http://192.168.0.102/lutek/raty/prueba.php",
+						data: {
+							"score": score,
+							"projectId": "<?php echo $_GET['proyid']; ?>",
+							"userId": <?php echo $usuario->id; ?>
+						},
+						type: 'post',
+						success:function(result){
+							var obj = eval("("+result+")");
+							var count = obj.projectPhotos.length;
+							var i;
+							for(i = 0; i < count; i++) {
+								console.log(obj.projectPhotos[i]);
+							}
+							$('#rating').raty({
+								readOnly: true,
+								path: ruta,
+								score: obj.id
+							});
+						}
+					})
+				},
+				score		: 2.5,
+				path		: ruta,
+				target: '#texto',
+				targetText: 'Puntuar'
+			});
+		});
+		
 	    $(window).load(function() {
-        $('#slider').nivoSlider();
-	    });
+        	$('#slider').nivoSlider();
+		});
     </script>
 
 <?php 
