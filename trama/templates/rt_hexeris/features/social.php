@@ -20,8 +20,10 @@ class GantryFeatureSocial extends GantryFeature {
 	}
 
 	function render($position="") {
+		
 		ob_start();
 		global $gantry;
+		
 		?>
 		<div class="rt-social-buttons">
 			<span class="social-button">
@@ -41,6 +43,16 @@ class GantryFeatureSocial extends GantryFeature {
 			<?php if ($gantry->get('social-google') != "") : ?>
 			<a class="social-button rt-google-btn" href="<?php echo $gantry->get('social-google'); ?>">
 				<span class="icon-google-plus"></span>
+			</a>
+			<?php endif; ?>
+			<?php if ($gantry->get('social-youtube') != "") : ?>
+			<a class="social-button rt-google-btn" href="<?php echo $gantry->get('social-youtube');	?>">			
+				<span class="icon-play"></span>
+			</a>
+			<?php endif; ?>
+			<?php if ($gantry->get('social-linkedin') != "") : ?>
+			<a class="social-button rt-google-btn" href="<?php echo $gantry->get('social-linkedin'); ?>">
+				<span class="icon-linkedin"></span>
 			</a>
 			<?php endif; ?>
 			<?php if ($gantry->get('social-rss') != "") : ?>
