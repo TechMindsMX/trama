@@ -9,10 +9,10 @@ $scriptselect = 'jQuery(function() {
 });';
 
 $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
-//$document->addStyleSheet('components/com_jumi/files/includes/calendarios/jquery.datepick.css');
+
 $document->addStyleSheet($pathJumi.'css/form2.css');
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
-//$document->addScript('components/com_jumi/files/includes/calendarios/jquery.datepick.js');
+
 $document->addScript($pathJumi.'js/mas.js');
 $document->addScript($pathJumi.'js/jquery.mask.js');
 $document->addScript($pathJumi.'js/jquery.validationEngine-es.js');
