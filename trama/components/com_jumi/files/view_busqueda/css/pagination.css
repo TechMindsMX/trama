@@ -63,3 +63,12 @@ div.proyecto > .inner {
 .proyecto .readmore {
 	text-align: right;
 }
+
+@media screen and (min-width: 721px) and (max-width: 1216px) {
+	.ancho33 {width: 50%;}
+	
+}
+@media screen and (max-width: 976px) {
+	.ancho33 {width: 100%;}
+	
+}
