@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5.0" client="site" method="upgrade">
+    <name>Busqueda por Etiquetas</name>
+    <author>Ricardo Lyon</author>
+    <version>1.0</version>
+    <description>Modulo de busqueda por etiquetas</description>
+    <files>
+        <filename>mod_busqueda_tags.xml</filename>
+        <filename module="mod_busqueda_tags">mod_busqueda_tags.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+    </config>
+</extension>
