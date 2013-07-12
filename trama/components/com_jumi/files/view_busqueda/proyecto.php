@@ -27,7 +27,8 @@ if ( !$tipoPP ) {
 function prodProy ($tipo) {
 	if( !empty($_POST) ) {
 		if (isset($_POST['tags'])) {
-			$tagLimpia = tagLimpia($_POST['tags']);
+			$tagLimpia = array_shift(tagLimpia($_POST['tags']));
+			var_dump($tagLimpia);
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByTag/'.$tagLimpia;
 		}
 		elseif ( ($tipo == 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
