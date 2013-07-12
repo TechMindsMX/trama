@@ -21,7 +21,7 @@ $doc -> addScript('modules/mod_busqueda_tags/js/lib.js');
 <form action="<?php echo $url; ?>" id="busqueda_tags" method="post">
 
 	<input type="text" name="tags" id="tags" size="30" />
-	<input type="submit" value="<?php echo JText::_('BUSCAR'); ?>" />
+	<input type="submit" class="button" value="<?php echo JText::_('BUSCAR'); ?>" />
 
 </form>
 
