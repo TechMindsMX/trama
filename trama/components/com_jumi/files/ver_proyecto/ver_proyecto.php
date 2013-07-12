@@ -191,7 +191,8 @@ function irGrupo($data) {
 }
 
 function rating($data) {
-	$html = '<div id="rating" style="float:left; margin-top:15px;"></div><div id="texto">Puntuar</div>';
+	$html = '<div id="rating" style="float:left; margin-top:15px;"></div>'.
+			'<div id="texto"style="float: left; font-size: 70px; position: relative; text-align: center; width: 30%; top: 15px;"></div>';
 	
 	return $html;
 }
@@ -399,11 +400,20 @@ function fechas($data) {
 					
 					request.done(function(result){
 						var obj = eval('(' + result + ')');
+												
 						if (obj.resultType == 'SUCCESS') {
 							jQuery('#rating').raty({
 								readOnly: true,
 								path 	: ruta,
 								score 	: score,
+								target		: '#texto',
+								targetText	: obj.rate
+							});
+						} else if(obj.resultType == 'FAIL') {
+							jQuery('#rating').raty({
+								readOnly: true,
+								path 	: ruta,
+								score 	: obj.rate,
 								target		: '#texto',
 								targetText	: obj.rate
 							});
@@ -416,8 +426,8 @@ function fechas($data) {
 				},
 				score		: 2.5,
 				path		: ruta,
-				target		: '#texto',
-				targetText	: 'Puntuar'
+				//target		: '#texto',
+				//targetText	: 'Puntuar'
 			});
 		});
 		
