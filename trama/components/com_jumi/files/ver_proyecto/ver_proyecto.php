@@ -400,28 +400,28 @@ function fechas($data) {
 			var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
 			$('#rating').raty({
 				click: function(score, evt) {
-					$.ajax({
-						url:"http://192.168.0.102/lutek/raty/prueba.php",
+					var request = $.ajax({
+						url:"http://192.168.0.122:7070/trama-middleware/rest/project/rate",
 						data: {
 							"score": score,
 							"projectId": "<?php echo $_GET['proyid']; ?>",
 							"userId": <?php echo $usuario->id; ?>
 						},
-						type: 'post',
-						success:function(result){
-							var obj = eval("("+result+")");
-							var count = obj.projectPhotos.length;
-							var i;
-							for(i = 0; i < count; i++) {
-								console.log(obj.projectPhotos[i]);
-							}
-							$('#rating').raty({
-								readOnly: true,
-								path: ruta,
-								score: obj.id
-							});
-						}
-					})
+						type: 'post'
+					});
+					
+					request.done(function(result){
+						console.log(result);
+						$('#rating').raty({
+							readOnly: true,
+							path: ruta,
+							score: score
+						});
+					});
+					
+					request.fail(function (jqXHR, textStatus) {
+						console.log('Surguieron problemas al almacenar tu calificación');
+					});
 				},
 				score		: 2.5,
 				path		: ruta,
