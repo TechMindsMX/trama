@@ -396,6 +396,7 @@ function fechas($data) {
 		</div>
 	</div>
 	<script type="text/javascript">
+	 var count = 0;
 		$(document).ready(function() {
 			var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
 			$('#rating').raty({
@@ -411,12 +412,14 @@ function fechas($data) {
 					});
 					
 					request.done(function(result){
-						console.log(result);
-						$('#rating').raty({
-							readOnly: true,
-							path: ruta,
-							score: score
-						});
+						if(result == 'SUCCESS') {
+							console.log('guardado');
+						} else if (result == 'FAIL') {
+							count++;
+							if(count >= 20) {
+								alert('Grumpy cat says: stop bothering me!!!!!');
+							}
+						}
 					});
 					
 					request.fail(function (jqXHR, textStatus) {
@@ -425,8 +428,8 @@ function fechas($data) {
 				},
 				score		: 2.5,
 				path		: ruta,
-				target: '#texto',
-				targetText: 'Puntuar'
+				target		: '#texto',
+				targetText	: 'Puntuar'
 			});
 		});
 		
