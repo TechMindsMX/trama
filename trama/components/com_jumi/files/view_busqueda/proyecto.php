@@ -60,8 +60,19 @@ foreach ($json as $key => $value) {
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
 	$value->producer = JTrama::getProducerName($value->userId);
 }
-// var_dump($json);
+foreach ($json as $key => $value) {
+	switch ($value->type) {
+		case 'PROJECT':
+			$proyectos[] = $value;
+			break; 
+		case 'PRODUCT':
+			$productos[] = $value;
+	}
+};
+
 $jsonJS = json_encode($json);
+$productos = json_encode($productos);
+$proyectos = json_encode($proyectos);
 
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
 $document->addScript($pathJumi.'/view_busqueda/js/jquery.pagination.js');
@@ -88,18 +99,18 @@ $(document).ready(function(){
 	jQuery("#ligasprod input").click(function () {
 		switch(this.value){
 			case 'proyectos':
-				jQuery('#Searchresult div#PRODUCT').fadeOut();
-				jQuery('#Searchresult div#PROJECT').fadeIn();
+				members = <?php echo $proyectos; ?>;
+				initPagination();
 			break;
 			
 			case 'productos':
-				jQuery('#Searchresult div#PRODUCT').fadeIn();
-				jQuery('#Searchresult div#PROJECT').fadeOut();
+				members = <?php echo $productos; ?>;
+				initPagination();
 			break;
 			
 			case 'Mostrar todos':
-				jQuery('#Searchresult div#PRODUCT').fadeIn();
-				jQuery('#Searchresult div#PROJECT').fadeIn();
+				members = <?php echo $jsonJS; ?>;
+				initPagination();
 			break;
 		}
 	});
@@ -113,6 +124,7 @@ function pageselectCallback (page_index, jq) {
 	var ancho = Math.floor(100/columnas);
 	var countCol = 0;
 
+			console.log(members);
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
