@@ -6,7 +6,13 @@
 	$usuario =& JFactory::getUser();
 	$generales = datosGenerales($usuario->id, 1);
 	$direccionGeneral = domicilio($generales->id, 1);
-	$existe = existingUser($usuario->id);
+
+	$domFi =  domicilio($generales->id, 2);
+	if (isset($domFi)) {
+		$existe = 'true';
+	} else {
+		$existe = 'false';
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -17,7 +23,7 @@
 
 	<?php
  		$pathJumi = 'components/com_jumi/files/perfil';
- 		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7'
+ 		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=empresa';
  	?>
 
 	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>	

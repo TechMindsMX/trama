@@ -297,20 +297,17 @@ class procesamiento {
 	function get_telsGenerales(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 1;
-		$this->indiceTelefono = 0;
-		$this->grabarDatosPerfil($this->tels_general, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_general, $this->tabla, $this->tipoContacto);
 	}
 	function get_telsGenerales_0(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 1;
-		$this->indiceTelefono = 1;
-		$this->grabarDatosPerfil($this->tels_general_0, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_general_0, $this->tabla, $this->tipoContacto);
 	}
 	function get_telsGenerales_1(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 1;
-		$this->indiceTelefono = 2;
-		$this->grabarDatosPerfil($this->tels_general_1, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_general_1, $this->tabla, $this->tipoContacto);
 	}
 	
 	function get_mailsGeneral(){
@@ -355,20 +352,17 @@ class procesamiento {
 	function get_telsRepresentante(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 2;
-		$this->indiceTelefono = 0;
-		$this->grabarDatosPerfil($this->tels_representantes, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_representantes, $this->tabla, $this->tipoContacto);
 	}
 	function get_telsRepresentante_0(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 2;
-		$this->indiceTelefono = 1;
-		$this->grabarDatosPerfil($this->tels_representantes_0, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_representantes_0, $this->tabla, $this->tipoContacto);
 	}
 	function get_telsRepresentante_1(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 2;
-		$this->indiceTelefono = 2;
-		$this->grabarDatosPerfil($this->tels_representantes_1, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_representantes_1, $this->tabla, $this->tipoContacto);
 	}
 	
 	function get_mailRepresentante(){
@@ -401,20 +395,17 @@ class procesamiento {
 	function get_telsContacto(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 3;
-		$this->indiceTelefono = 0;
-		$this->grabarDatosPerfil($this->tels_contacto, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_contacto, $this->tabla, $this->tipoContacto);
 	}
 	function get_telsContacto_0(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 3;
-		$this->indiceTelefono = 1;
-		$this->grabarDatosPerfil($this->tels_contacto_0, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_contacto_0, $this->tabla, $this->tipoContacto);
 	}
 	function get_telsContacto_1(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 3;
-		$this->indiceTelefono = 2;
-		$this->grabarDatosPerfil($this->tels_contacto_1, $this->tabla, $this->tipoContacto, $this->indiceTelefono);
+		$this->grabarDatosPerfil($this->tels_contacto_1, $this->tabla, $this->tipoContacto);
 	}
 	
 	function get_mailsContactos(){
@@ -473,17 +464,16 @@ class procesamiento {
 		
 		if($iniciales > 0 && $valFecha){
 			return TRUE;
-		}else{
+		} else {
 			return FALSE;
 		}
 	}
 	
-	function grabarDatosPerfil($data, $tabladb, $tipoContacto, $indiceTelefono) {
+	function grabarDatosPerfil($data, $tabladb, $tipoContacto) {
 		$db =& JFactory::getDBO();
 		$usuario =& JFactory::getUser();
 		
-		$existe = "false";
-// 		$existe = "true";
+		$existe = $_GET['exi'];
 
 		if (isset($data) && !empty($data)) {
 			
@@ -524,8 +514,7 @@ class procesamiento {
 				}
 				
 				$resultado = datosGenerales($usuario->id, $tipoContacto);
-				var_dump($contador,$tipoContacto,$fields,$tabladb,$campoId,$resultado,$data);
-				exit;
+
 				if(($tabladb == 'perfil_direccion') && ($data['perfil_tipoDireccion_idtipoDireccion'] == 1)){
 					$conditions = ($campoId. ' = '.$resultado->id. '&& perfil_tipoDireccion_idtipoDireccion = 1');
 					updateFields($tabladb, $fields, $conditions);
@@ -540,7 +529,20 @@ class procesamiento {
 							$conditions = ($campoId. ' = '.$resultado->id. ' && perfil_tipoTelefono_idtipoTelefono = '.$data[perfil_tipoTelefono_idtipoTelefono]);
 							updateFields($tabladb, $fields, $conditions);
 							break;
-						} elseif($i == $count-1) {
+						} elseif($i == noTelefonos-1) {
+							insertFields($tabladb, $col, $val);
+						}
+					}
+				} elseif ($tabladb == 'perfil_email'){
+					$emails = email($resultado->id);
+					$noEmails = count($emails);
+
+					for($i = 0; $i < $noEmails; $i++){
+						if($emails[$i]->idemail == $data[idemail]) {
+							$conditions = ($campoId. ' = '.$resultado->id. ' && idemail = '.$data[idemail]);
+							updateFields($tabladb, $fields, $conditions);
+							break;
+						} elseif ($i == $noEmails-1) {
 							insertFields($tabladb, $col, $val);
 						}
 					}
@@ -576,6 +578,9 @@ class procesamiento {
 	
 }
 
+$form = $_GET['form'];
+
+if ($form == 'perfil') {
 $generales = $datos->get_datosGenerales();
 $direccion = $datos->get_direccion();
 $telsGen = $datos->get_telsGenerales();
@@ -585,32 +590,32 @@ $telsGen1 = $datos->get_telsGenerales_1();
 $mailGen = $datos->get_mailsGeneral();
 $mailGen0 = $datos->get_mailsGeneral_0();
 $mailGen1 = $datos->get_mailsGeneral_1();
+} elseif ($form == 'empresa') {
+$datos_fiscales = $datos->get_datosFiscales();
+$domicilio_fiscales = $datos->get_domicilioFiscal();
+} elseif ($form == 'curri') {
+$pro_pas = $datos->get_proyectosPasados();
+} elseif ($form == 'contac') {
+$repr = $datos->get_representante();
+$domicilioRep = $datos->get_domicilioRepresentate();
+$telsRep = $datos->get_telsRepresentante();
+$telsRep0 = $datos->get_telsRepresentante_0();
+$telsRep1 = $datos->get_telsRepresentante_1();
 
-// $datos_fiscales = $datos->get_datosFiscales();
-// $domicilio_fiscales = $datos->get_domicilioFiscal();
+$mailRep = $datos->get_mailRepresentante();
+$mailRep0 = $datos->get_mailRepresentante_0();
+$mailRep1 = $datos->get_mailRepresentante_1();
 
-// $pro_pas = $datos->get_proyectosPasados();
+$dat_contacto = $datos->get_contacto();
+$dom_contacto = $datos->get_domicilioContacto();
+$telsCon = $datos->get_telsContacto();
+$telsCon0 = $datos->get_telsContacto_0();
+$telsCon1 = $datos->get_telsContacto_1();
 
-// $repr = $datos->get_representante();
-// $domicilioRep = $datos->get_domicilioRepresentate();
-// $telsRep = $datos->get_telsRepresentante();
-// $telsRep0 = $datos->get_telsRepresentante_0();
-// $telsRep1 = $datos->get_telsRepresentante_1();
-
-// $mailRep = $datos->get_mailRepresentante();
-// $mailRep0 = $datos->get_mailRepresentante_0();
-// $mailRep1 = $datos->get_mailRepresentante_1();
-
-// $dat_contacto = $datos->get_contacto();
-// $dom_contacto = $datos->get_domicilioContacto();
-// $telsCon = $datos->get_telsContacto();
-// $telsCon0 = $datos->get_telsContacto_0();
-// $telsCon1 = $datos->get_telsContacto_1();
-
-// $mailCon = $datos->get_mailsContactos();
-// $mailCon0 = $datos->get_mailsContactos_0();
-// $mailCon1 = $datos->get_mailsContactos_1();
-
+$mailCon = $datos->get_mailsContactos();
+$mailCon0 = $datos->get_mailsContactos_0();
+$mailCon1 = $datos->get_mailsContactos_1();
+}
 // $curriculum = $datos->get_cv();
 
 

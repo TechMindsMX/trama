@@ -8,7 +8,12 @@
 	$emailGeneral = email($generales->id);
 	$telefonoGeneral = telefono($generales->id);
 	$direccionGeneral = domicilio($generales->id, 1);
-	$existe = existingUser($usuario->id);
+	$exisRep = datosGenerales($usuario->id, 2);
+	if (isset($exisRep)) {
+		$existe = 'true';
+	} else {
+		$existe = 'false';
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -19,7 +24,7 @@
 
 	<?php
  		$pathJumi = 'components/com_jumi/files/perfil';
- 		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7'
+ 		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=contac';
  	?>
 
 	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>	
@@ -202,14 +207,17 @@
             	<input name="Copiar" id="copiarForContactoRepresentante" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
             </div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maRe_idemail" type="hidden" id="maRe_idemail" value="'.$emailRepresentante[0]->idemail.'" />'; }?>
 				<label for="maRe_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
 				<input name="maRe_coeEmail" class="validate[required,custom[email]]" type="text" id="maRe_coeEmail" maxlength="100" />
 			</div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maRe_idemail00" type="hidden" id="maRe_idemail00" value="'.$emailRepresentante[1]->idemail.'" />'; }?>
 				<label for="maRe_coeEmail00"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maRe_coeEmail00" type="text" id="maRe_coeEmail00" maxlength="100" />
 			</div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maRe_idemail01" type="hidden" id="maRe_idemail01" value="'.$emailRepresentante[2]->idemail.'" />'; }?>
 				<label for="maRe_coeEmail01"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maRe_coeEmail01" type="text" id="maRe_coeEmail01" maxlength="100" />
 			</div>
@@ -329,14 +337,17 @@
             	<input name="Copiar" id="copiarForContactoContacto" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
             </div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maCo_idemail" type="hidden" id="maCo_idemail" value="'.$emailContacto[0]->idemail.'" />'; }?>
 				<label for="maCo_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
 				<input name="maCo_coeEmail" class="validate[required,custom[email]]" type="text" id="maCo_coeEmail" maxlength="100" />
 			</div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maCo_idemail00" type="hidden" id="maCo_idemail00" value="'.$emailContacto[1]->idemail.'" />'; }?>
 				<label for="maCo_coeEmail00"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maCo_coeEmail00" type="text" id="maCo_coeEmail00" maxlength="100" />
 			</div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maCo_idemail01" type="hidden" id="maCo_idemail01" value="'.$emailContacto[2]->idemail.'" />'; }?>
 				<label for="maCo_coeEmail01"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maCo_coeEmail01" type="text" id="maCo_coeEmail01" maxlength="100" />
 			</div>

@@ -5,6 +5,12 @@
 <?php
 	$usuario =& JFactory::getUser();
 	$existe = existingUser($usuario->id);
+	if ($existe == 'true') {
+		$generales = datosGenerales($usuario->id, 1);
+		$email = email($generales->id);
+		$telefono = telefono($generales->id);
+		$direccion = domicilio($generales->id, 1);
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -15,7 +21,7 @@
 
 	<?php
  		$pathJumi = 'components/com_jumi/files/perfil';
- 		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7'
+ 		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=perfil';
  	?>
 
 	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>	
@@ -31,10 +37,6 @@
 	
 			<?php 		
 				if ($existe == 'true') {
-					$generales = datosGenerales($usuario->id, 1);
-					$email = email($generales->id);
-					$telefono = telefono($generales->id);
-					$direccion = domicilio($generales->id, 1);
 					
 					echo "jQuery('#daGr_nomNombre').val('".$generales->nomNombre."');";
 					echo "jQuery('#daGr_nomApellidoPaterno').val('".$generales->nomApellidoPaterno."');";
@@ -66,6 +68,14 @@
  					echo "jQuery('#daGr_dscDescripcionPersonal').val('".$generales->dscDescripcionPersonal."');";
  					echo "jQuery('#daGr_dscCurriculum').val('".$generales->dscCurriculum."');";
  					
+ 					if ($generales->perfil_personalidadJuridica_idpersonalidadJuridica == 1) {
+						echo 'jQuery("li:contains(\'Empresa\')").hide();';
+						echo 'jQuery("li:contains(\'Contacto\')").hide();';
+					}
+ 					
+				} else {
+					echo 'jQuery("li:contains(\'Empresa\')").hide();';
+					echo 'jQuery("li:contains(\'Contacto\')").hide();';
 				}
 			?>
 
@@ -114,14 +124,17 @@
 				<input name="daGr_nomPaginaWeb" class="validate[custom[url]]" type="text"  id="daGr_nomPaginaWeb" maxlength="100" />
 			</div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maGr_idemail" type="hidden" id="maGr_idemail" value="'.$email[0]->idemail.'" />'; }?>
 				<label for="maGr_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
 				<input name="maGr_coeEmail" class="validate[required,custom[email]]" type="text" id="maGr_coeEmail" maxlength="100" />
 			</div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maGr_idemail00" type="hidden" id="maGr_idemail00" value="'.$email[1]->idemail.'" />'; }?>
 				<label for="maGr_coeEmail00"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maGr_coeEmail00" type="text" id="maGr_coeEmail00" maxlength="100" />
 			</div>
 			<div class="_100mail">
+				<?php if ($existe == 'true') { echo '<input name="maGr_idemail01" type="hidden" id="maGr_idemail01" value="'.$email[2]->idemail.'" />'; }?>
 				<label for="maGr_coeEmail01"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maGr_coeEmail01" type="text" id="maGr_coeEmail01" maxlength="100" />
 			</div>

@@ -4,7 +4,13 @@
 ?>
 <?php
 	$usuario =& JFactory::getUser();
-	$existe = existingUser($usuario->id);
+	$exisPro = proyectosPasados($generales->id);
+	if (isset($exisPro)) {
+		$existe = 'true';
+	} else {
+		$existe = 'false';
+	}
+	
 	$generales = datosGenerales($usuario->id, 1);
 	$proyectosPasados = proyectosPasados($generales->id);
 ?>
@@ -17,7 +23,7 @@
 
 	<?php
  		$pathJumi = 'components/com_jumi/files/perfil';
- 		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7'
+ 		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=curri';
  	?>
 
 	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>	
@@ -30,6 +36,16 @@
 		jQuery(document).ready(function(){
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();			
+
+			<?php 		
+				if ($generales->perfil_personalidadJuridica_idpersonalidadJuridica == 1) {
+					echo 'jQuery("li:contains(\'Empresa\')").hide();';
+					echo 'jQuery("li:contains(\'Contacto\')").hide();';
+				}
+			?>
+
+
+
 		});
 		/*
 		* @param {jqObject} the field where the validation applies
