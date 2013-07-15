@@ -14,7 +14,7 @@
 	$document->addStyleSheet($pathJumi.'css/nivo-slider.css');
 	$document->addStyleSheet($pathJumi.'css/style.css');
 	//$document->addScript('components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js');
-?>
+?> 
 
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
 <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
@@ -191,8 +191,15 @@ function irGrupo($data) {
 }
 
 function rating($data) {
+		
+	if($data->rating == 'NaN') {
+		$rating = 0;
+	} else {
+		$rating = $data->rating;
+	}
+	
 	$html = '<div id="rating" style="float:left; margin-top:15px;"></div>'.
-			'<div id="texto"style="float: left; font-size: 70px; position: relative; text-align: center; width: 30%; top: 15px;"></div>';
+			'<div id="texto"style="float: left; font-size: 70px; position: relative; text-align: center; width: 30%; top: 30px;">'.$rating.'</div>';
 	
 	return $html;
 }
@@ -384,6 +391,14 @@ function fechas($data) {
 	</div>
 	<script type="text/javascript">
 	 var count = 0;
+	 
+	 if(isNaN(<?php echo $json->rating; ?>)){
+	 	var rating = 0;
+	 } else {
+	 	var rating = <?php echo $json->rating; ?>;
+	 }
+	 console.log(rating);
+	 
 		$(document).ready(function() {
 			var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
 			$('#rating').raty({
@@ -424,7 +439,7 @@ function fechas($data) {
 						console.log('Surguieron problemas al almacenar tu calificación');
 					});
 				},
-				score		: 2.5,
+				score		: rating,
 				path		: ruta,
 				//target		: '#texto',
 				//targetText	: 'Puntuar'
