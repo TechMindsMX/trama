@@ -31,7 +31,10 @@ $ligasAudios = '';
 
 
 if ( isset ($objDatosProyecto) ) {
-		
+	if($objDatosProyecto->status != 0 || $objDatosProyecto->status != 2) {
+		$allDone =& JFactory::getApplication();
+		$allDone->redirect('index.php', 'Este proyecto ya no puede ser editado.' );
+	}
 	$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
 	$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
 	
