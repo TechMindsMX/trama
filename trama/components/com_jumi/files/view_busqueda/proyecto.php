@@ -26,7 +26,11 @@ if ( !$tipoPP ) {
 
 function prodProy ($tipo) {
 	if( !empty($_POST) ) {
-		if ( ($tipo == 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
+		if (isset($_POST['tags'])) {
+			$tagLimpia = array_shift(tagLimpia($_POST['tags']));
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByTag/'.$tagLimpia;
+		}
+		elseif ( ($tipo == 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
 		} elseif ( ($tipo == 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] == "all") ) {//Productos y Proyectos por categoria
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/all/'.$_POST['categoria'];
@@ -62,6 +66,17 @@ $jsonJS = json_encode($json);
 $document->addScript('http://code.jquery.com/jquery-1.9.1.js');
 $document->addScript($pathJumi.'/view_busqueda/js/jquery.pagination.js');
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
+
+function tagLimpia ($data) {
+  $limitePalabras = 1;
+  $pattern = '/[^a-zA-Z_áéíóúñ\s]/i';
+  $data = preg_replace($pattern, '', $data);
+  $datolimpio = explode(' ', $data, $limitePalabras);
+  
+  return $datolimpio;
+}
+
+
 ?>
 
 <script type="text/javascript">

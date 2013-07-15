@@ -3,6 +3,8 @@
 	
 	$usuario = JFactory::getUser();
 	
+	require_once 'libraries/trama/class.php';
+	
 	$base = JUri::base();
 	$pathJumi = Juri::base().'components/com_jumi/files/ver_proyecto/';
 	$proyecto = $_GET['proyid'];
@@ -18,24 +20,8 @@
 <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
 <?php
 	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
-	$homepage = file_get_contents($url);
+	$json = json_decode(file_get_contents($url));
 
-//$homepage = '{"id":1,"name":"Slava snow show","showground":"Av. Chapultepec y Av. CuauhtÃ©moc, Del. CuauhtÃ©moc,  MÃ©xico,  DF  06700","inclosure":"Centro Cultural Telmex","breakeven":100000,"budget":200000,"revenuePotential":500000,"description":"Desde su primera apariciÃ³n en MÃ©xico en 2006, este show ha cautivado a propios y extraÃ±os, ya que con mÃ­mica y trucos bÃ¡sicos generan admiraciÃ³n en todo el pÃºblico. Los payasos consiguen que los asistentes disfruten de un mÃ¡gico mundo alejado de los problemas, en medio de la frÃ­a nieve. \r\nLa compaÃ±Ã­a fundada por el ruso Slava Polunin y que tiene entre sus filas a los mejores payasos del mundo se renueva para esta temporada y ofrecerÃ¡ el mejor espectÃ¡culo, siempre lleno de sorpresas para propios y extraÃ±os.\r\n\r\nEl Centro Cultural Telmex 2 recibirÃ¡ en esta ocasiÃ³n a los payasos que trasladan al pÃºblico de un estado de Ã¡nimo a otro, haciendo alusiÃ³n a los caprichos del clima. \r\n\r\nA decir de su fundador, Slavaâ€™s tiene tantas descripciones como hay miembros de la audiencia. â€œSnowshow es la belleza de un solo copo de nieve que cae suavemente y cae en su hombro. Snowshow es el sonido de una risa incontrolable en adultos no hay nada en particular. Snowshow es la alegrÃ­a de creer que todo es posible, Snowshow es la tristeza de un adiÃ³s de una plataforma de la estaciÃ³n de tren. Snowshow es la constataciÃ³n de que la vida es realmente maravillosaâ€.\r\nGanador del â€œOliver Awardâ€ como El Mejor show en Londres, el espectÃ¡culo de Slava ha causado furor mundialmente y una vez mÃ¡s lo harÃ¡ en MÃ©xico a partir del 22 de mayo en el Centro Cultural Telmex 2. ","cast":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu ante aliquam, posuere massa at, pulvinar lectus. Cras condimentum ornare sapien, quis mattis odio tincidunt at. Cras faucibus ipsum in adipiscing tincidunt. Vivamus auctor, augue eu interdum blandit, massa nunc ultrices purus, vitae rhoncus nibh diam eget ligula. Suspendisse scelerisque nulla sodales euismod sodales. Fusce id augue nec nisi malesuada tempus. Duis imperdiet metus sed sapien mollis, nec commodo massa faucibus. In enim libero, rutrum a commodo eu, aliquam a felis. Aenean eget urna ac lorem porttitor luctus. Maecenas pharetra nibh ac nunc pulvinar, quis cursus elit egestas.","fundStartDate":null,"fundEndDate":null,"productionStartDate":"2013-07-04","premiereStartDate":"2013-08-04","premiereEndDate":"2013-09-06","timeCreated":1372973266545,"subcategory":15,"status":0,"type":"PROJECT","userId":379,"projectBanner":{"projectBannerId":1,"name":"1372973267118_0.png"},"projectAvatar":{"projectAvatarId":1,"name":"1372973267856_0.png"},"projectBusinessCase":{"projectBusinessCaseId":1,"name":"1372973268132"},"projectUnitSales":[{"id":1,"section":"1A","unitSale":500,"capacity":3,"projectId":1}],"projectYoutubes":[{"id":5,"url":"https://vimeo.com/13850491","projectId":1},{"id":4,"url":"https://vimeo.com/13850491","projectId":1},{"id":3,"url":"http://www.youtube.com/watch?v=sL_7d1UFZ6s","projectId":1},{"id":2,"url":"http://www.youtube.com/watch?v=d9bfiNBtxcA","projectId":1},{"id":1,"url":"http://www.youtube.com/watch?v=fpUY7e-k4Jo","projectId":1}],"projectSoundclouds":[{"id":5,"url":"","projectId":1},{"id":4,"url":"","projectId":1},{"id":3,"url":"","projectId":1},{"id":2,"url":"","projectId":1},{"id":1,"url":"","projectId":1}],"projectPhotos":[{"id":1,"name":"1372973269979_0.png","projectId":1},{"id":2,"name":"1372973275368_5.png","projectId":1},{"id":3,"name":"1372973273644_2.png","projectId":1},{"id":4,"name":"1372973275593_6.png","projectId":1},{"id":5,"name":"1372973275981_7.png","projectId":1},{"id":6,"name":"1372973272232_1.png","projectId":1},{"id":7,"name":"1372973275167_4.png","projectId":1},{"id":8,"name":"1372973275062_3.png","projectId":1}]}';
-	$json = json_decode($homepage);
-
-	$producer = JFactory::getUser($json->userId);
-
-	$db = JFactory::getDbo();
-	$query = $db->getQuery(true);
-	
-	$query
-	->select(array('a.nomNombre','a.nomApellidoPaterno'))
-	->from('perfil_persona AS a')
-	->join('INNER', 'perfil_persona_contacto AS b ON (a.id = b.perfil_persona_idpersona)')
-	->where('a.users_id = '.$json->userId.' && b.perfil_tipoContacto_idtipoContacto = 1');
-	
-	$db->setQuery($query);
-	$results = $db->loadObjectList();
 
 $json->etiquetaTipo = tipoProyProd($json);
 	
@@ -205,20 +191,21 @@ function irGrupo($data) {
 }
 
 function rating($data) {
-	$html = '<div id="rating" style="float:left; margin-top:15px;"></div><div id="texto">Puntuar</div>';
+	$html = '<div id="rating" style="float:left; margin-top:15px;"></div>'.
+			'<div id="texto"style="float: left; font-size: 70px; position: relative; text-align: center; width: 30%; top: 15px;"></div>';
 	
 	return $html;
 }
 
-function encabezado($data, $results) {
+function encabezado($data) {
 	$html = '<h2>'.$data->name.'</h2>'.
 		'<h4>'.getProySubCatName($data).'</h4><span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
-		'<p>'.$results[0]->nomNombre.' '.$results[0]->nomApellidoPaterno.'</p>';
+		'<p>'.JTrama::getProducerName($data->userId).'</p>';
 	
 	return $html;
 }
 
-function informacionTmpl($data, $results, $params) {
+function informacionTmpl($data, $params) {
  	require_once 'solicitud_participar.php';
 	switch ($params) {
 		case 'finanzas':
@@ -259,7 +246,7 @@ function informacionTmpl($data, $results, $params) {
 			'</div>'.
 			'<div id="derechaDesc" class="gantry-width-66 gantry-width-block">'.
 			'<div class="gantry-width-spacer">'.
-			encabezado($data, $results).
+			encabezado($data).
 			'</div>'.
 			'<div id="contenido-detalle">'.
 			$derecha.
@@ -334,7 +321,7 @@ function fechas($data) {
 			<div id="banner" class="ver_proyecto">
 				<div class="info-banner">
 					<div class="rt-inner">
-						<?php echo encabezado($json, $results); ?>
+						<?php echo encabezado($json); ?>
 					</div>
 				</div>
 				<div class="content-banner">
@@ -373,13 +360,13 @@ function fechas($data) {
 			</div>
 			<div id="finanzas" class="ver_proyecto">
 				<h3>Finanzas</h3>
-				<?php echo informacionTmpl($json, $results, "finanzas"); ?>
+				<?php echo informacionTmpl($json, "finanzas"); ?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="info" class="ver_proyecto">
 				<h3>Informacion</h3>
 				<div class="detalleDescripcion">
-					<?php echo informacionTmpl($json, $results, null); ?>
+					<?php echo informacionTmpl($json, null); ?>
 				</div>
 				<a class="cerrar">cerrar</a>
 			</div>
@@ -396,37 +383,51 @@ function fechas($data) {
 		</div>
 	</div>
 	<script type="text/javascript">
+	 var count = 0;
 		$(document).ready(function() {
 			var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
 			$('#rating').raty({
 				click: function(score, evt) {
-					$.ajax({
-						url:"http://192.168.0.102/lutek/raty/prueba.php",
+					var request = $.ajax({
+						url:"http://192.168.0.122:7070/trama-middleware/rest/project/rate",
 						data: {
 							"score": score,
 							"projectId": "<?php echo $_GET['proyid']; ?>",
 							"userId": <?php echo $usuario->id; ?>
 						},
-						type: 'post',
-						success:function(result){
-							var obj = eval("("+result+")");
-							var count = obj.projectPhotos.length;
-							var i;
-							for(i = 0; i < count; i++) {
-								console.log(obj.projectPhotos[i]);
-							}
-							$('#rating').raty({
+						type: 'post'
+					});
+					
+					request.done(function(result){
+						var obj = eval('(' + result + ')');
+												
+						if (obj.resultType == 'SUCCESS') {
+							jQuery('#rating').raty({
 								readOnly: true,
-								path: ruta,
-								score: obj.id
+								path 	: ruta,
+								score 	: score,
+								target		: '#texto',
+								targetText	: obj.rate
+							});
+						} else if(obj.resultType == 'FAIL') {
+							jQuery('#rating').raty({
+								readOnly: true,
+								path 	: ruta,
+								score 	: obj.rate,
+								target		: '#texto',
+								targetText	: obj.rate
 							});
 						}
-					})
+					});
+					
+					request.fail(function (jqXHR, textStatus) {
+						console.log('Surguieron problemas al almacenar tu calificación');
+					});
 				},
 				score		: 2.5,
 				path		: ruta,
-				target: '#texto',
-				targetText: 'Puntuar'
+				//target		: '#texto',
+				//targetText	: 'Puntuar'
 			});
 		});
 		
