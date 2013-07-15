@@ -31,33 +31,46 @@ $ligasAudios = '';
 
 
 if ( isset ($objDatosProducto) ) {
-	$hiddenIdProducto = '<input type="hidden" value="'.$objDatosProducto->id.'" name="id" />';
-	$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
-	
-	$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$objDatosProducto->projectAvatar->name.'" width="100" />';
-	$banner = '<img src="'.MIDDLE.BANNER.'/'.$objDatosProducto->projectBanner->name.'" width="100" />';
-	
-	$ligasVideos = $objDatosProducto->projectYoutubes;
-	$ligasAudios = $objDatosProducto->projectSoundclouds;
-	
-	$fechaIniProd = explode('-',$objDatosProducto->productionStartDate);
-	$fechaFin = explode('-',$objDatosProducto->premiereStartDate);
-	$fechaCierre = explode('-',$objDatosProducto->premiereEndDate);
-	
-	$countunitSales = count($objDatosProducto->projectUnitSales);
-	$datosRecintos = $objDatosProducto->projectUnitSales;
+	if($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) {
+		$hiddenIdProducto = '<input type="hidden" value="'.$objDatosProducto->id.'" name="id" />';
+		$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
 		
-	$validacion = '';
-	$validacionImgs = '';
-	
-	$countImgs = $countImgs - count($objDatosProducto->projectPhotos);
-
-	$subcategoriaSelected = $objDatosProducto->subcategory;
-	
-	foreach ($subCategorias as $key => $value) {
-		if( $value->id == $objDatosProducto->subcategory ) {
-			$categoriaSelected = $value->father;
+		$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$objDatosProducto->projectAvatar->name.'" width="100" />';
+		$banner = '<img src="'.MIDDLE.BANNER.'/'.$objDatosProducto->projectBanner->name.'" width="100" />';
+		
+		$ligasVideos = $objDatosProducto->projectYoutubes;
+		$ligasAudios = $objDatosProducto->projectSoundclouds;
+		
+		$fechaIniProd = explode('-',$objDatosProducto->productionStartDate);
+		$fechaFin = explode('-',$objDatosProducto->premiereStartDate);
+		$fechaCierre = explode('-',$objDatosProducto->premiereEndDate);
+		
+		$countunitSales = count($objDatosProducto->projectUnitSales);
+		$datosRecintos = $objDatosProducto->projectUnitSales;
+		
+		$validacion = '';
+		$validacionImgs = '';
+		
+		$countImgs = $countImgs - count($objDatosProducto->projectPhotos);
+		
+		$subcategoriaSelected = $objDatosProducto->subcategory;
+		
+		foreach ($subCategorias as $key => $value) {
+			if( $value->id == $objDatosProducto->subcategory ) {
+				$categoriaSelected = $value->father;
+			}
 		}
+	} else {
+		$jsonStatus = json_decode((file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list')));
+		
+		foreach ($jsonStatus as $key => $value) {
+			if($objDatosProyecto->status == $value->id) {
+				$mensaje = 'El satus del producto '.$value->name.', no permite edición.';
+			}
+		}
+		
+		$allDone =& JFactory::getApplication();
+		$allDone->redirect('index.php', $mensaje );
 	}
 }
 ?>

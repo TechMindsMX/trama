@@ -31,37 +31,47 @@ $ligasAudios = '';
 
 
 if ( isset ($objDatosProyecto) ) {
-	if($objDatosProyecto->status != 0 || $objDatosProyecto->status != 2) {
-		$allDone =& JFactory::getApplication();
-		$allDone->redirect('index.php', 'Este proyecto ya no puede ser editado.' );
-	}
-	$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
-	$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
-	
-	$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$objDatosProyecto->projectAvatar->name.'" width="100" />';
-	$banner = '<img src="'.MIDDLE.BANNER.'/'.$objDatosProyecto->projectBanner->name.'" width="100" />';
-	
-	$ligasVideos = $objDatosProyecto->projectYoutubes;
-	$ligasAudios = $objDatosProyecto->projectSoundclouds;
-	
-	$fechaIniProd = explode('-',$objDatosProyecto->productionStartDate);
-	$fechaFin = explode('-',$objDatosProyecto->premiereStartDate);
-	$fechaCierre = explode('-',$objDatosProyecto->premiereEndDate);
-	
-	$countunitSales = count($objDatosProyecto->projectUnitSales);
-	$datosRecintos = $objDatosProyecto->projectUnitSales;
 		
-	$validacion = '';
-	$validacionImgs = '';
-	
-	$countImgs = $countImgs - count($objDatosProyecto->projectPhotos);
-
-	$subcategoriaSelected = $objDatosProyecto->subcategory;
-	
-	foreach ($subCategorias as $key => $value) {
-		if( $value->id == $objDatosProyecto->subcategory ) {
-			$categoriaSelected = $value->father;
+	if($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) {
+		$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
+		$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
+		
+		$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$objDatosProyecto->projectAvatar->name.'" width="100" />';
+		$banner = '<img src="'.MIDDLE.BANNER.'/'.$objDatosProyecto->projectBanner->name.'" width="100" />';
+		
+		$ligasVideos = $objDatosProyecto->projectYoutubes;
+		$ligasAudios = $objDatosProyecto->projectSoundclouds;
+		
+		$fechaIniProd = explode('-',$objDatosProyecto->productionStartDate);
+		$fechaFin = explode('-',$objDatosProyecto->premiereStartDate);
+		$fechaCierre = explode('-',$objDatosProyecto->premiereEndDate);
+		
+		$countunitSales = count($objDatosProyecto->projectUnitSales);
+		$datosRecintos = $objDatosProyecto->projectUnitSales;
+		
+		$validacion = '';
+		$validacionImgs = '';
+		
+		$countImgs = $countImgs - count($objDatosProyecto->projectPhotos);
+		
+		$subcategoriaSelected = $objDatosProyecto->subcategory;
+		
+		foreach ($subCategorias as $key => $value) {
+			if( $value->id == $objDatosProyecto->subcategory ) {
+				$categoriaSelected = $value->father;
+			}
 		}
+	} else {
+		$jsonStatus = json_decode((file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list')));
+		
+		foreach ($jsonStatus as $key => $value) {
+			if($objDatosProyecto->status == $value->id) {
+				$mensaje = 'El satus del proyecto '.$value->name.', no permite edición.';
+			}
+		}
+		
+		$allDone =& JFactory::getApplication();
+		$allDone->redirect('index.php', $mensaje );
 	}
 }
 ?>
