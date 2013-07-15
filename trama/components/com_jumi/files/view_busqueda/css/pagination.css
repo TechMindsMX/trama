@@ -43,7 +43,7 @@ div.proyecto > .inner {
 	border: 1px solid #ddd;
 	box-shadow: 2px 2px 2px #bbb;
 }
-.titulo span {
+.titulo span, .descripcion span {
 	display: block;
 	font-size: 86%;
 	line-height: 1.5em;

@@ -53,13 +53,21 @@ function prodProy ($tipo) {
 }
 
 $json = json_decode(prodProy($busquedaPor[$tipoPP]));
+$statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 
 require_once ('libraries/trama/class.php');
 foreach ($json as $key => $value) {
 	$value->nomCat = JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
 	$value->producer = JTrama::getProducerName($value->userId);
+	foreach ($statusName as $llave => $valor) {
+		if ($valor->id == $value->status ) {
+			$value->statusName = $valor->name;
+		}
+	}
 }
+
+
 foreach ($json as $key => $value) {
 	switch ($value->type) {
 		case 'PROJECT':
@@ -159,7 +167,7 @@ function pageselectCallback (page_index, jq) {
 			var largo = 80;
 			var trimmed = descripcion.substring(0, largo);
 		newcontent += '<div class="descText">' + trimmed + '</div>';
-		newcontent += '<p class="readmore">';
+		newcontent += '<span>Estado: ' + members[i].statusName + '</span><p class="readmore">';
 		newcontent += '<a href="' + link + '" class="leerText">' + "Ver más...";
 		newcontent += '</a>';
 		newcontent += '</p>';
