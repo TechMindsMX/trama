@@ -30,10 +30,9 @@ function datosGenerales($idUsuario, $tipoContacto){
 	$query = $db->getQuery(true);
 
 	$query
-		->select('a.*')
-		->from('perfil_persona AS a')
-		->join('INNER', 'perfil_persona_contacto AS b ON (a.id = b.perfil_persona_idpersona)')
-		->where('a.users_id = '.$idUsuario.' && b.perfil_tipoContacto_idtipoContacto = ' .$tipoContacto);
+		->select('*')
+		->from('perfil_persona')
+		->where('users_id = '.$idUsuario.' && perfil_tipoContacto_idtipoContacto = ' .$tipoContacto);
 
 	$db->setQuery( $query );
 
@@ -56,8 +55,8 @@ function domicilio($idPersona, $tipoDireccion){
 	$db->setQuery( $query );
 
 	$resultado = $db->loadObjectList();
-
-	return $resultado;
+	
+	return $resultado[0];
 
 }
 
@@ -111,7 +110,7 @@ function datosFiscales($idPersona){
 
 	$resultado = $db->loadObjectList();
 
-	return $resultado;
+	return $resultado[0];
 
 }
 

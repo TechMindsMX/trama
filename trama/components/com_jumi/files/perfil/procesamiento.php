@@ -5,11 +5,11 @@
 	
 $usuario = JFactory::getUser();
 $_POST['daGr_users_id'] = $usuario->id;
-$_POST['tiGr_perfil_tipoContacto_idtipoContacto'] = 1;
+$_POST['daGr_perfil_tipoContacto_idtipoContacto'] = 1;
 $_POST['repr_users_id'] = $usuario->id;
-$_POST['tiRe_perfil_tipoContacto_idtipoContacto'] = 2;
+$_POST['repr_perfil_tipoContacto_idtipoContacto'] = 2;
 $_POST['daCo_users_id'] = $usuario->id;
-$_POST['tiCo_perfil_tipoContacto_idtipoContacto'] = 3;
+$_POST['daCo_perfil_tipoContacto_idtipoContacto'] = 3;
 
 $datos = new procesamiento;
 $datos->agrupacion($_POST);
@@ -20,7 +20,6 @@ if(!empty($_FILES)){
 
 class procesamiento {
 	var $datos_generales;
-	var $tipo_general;
 	var $tels_general;
 	var $tels_general_0;
 	var $tels_general_1;
@@ -31,7 +30,6 @@ class procesamiento {
 	var $datos_fiscales;
 	var $domicilio_fiscal;
 	var $representate;
-	var $tipo_representante;
 	var $tels_representantes;
 	var $tels_representantes_0;
 	var $tels_representantes_1;
@@ -40,7 +38,6 @@ class procesamiento {
 	var $mails_representante_1;
 	var $domicilio_representante;
 	var $datos_contacto;
-	var $tipo_contacto;
 	var $tels_contacto;
 	var $tels_contacto_0;
 	var $tels_contacto_1;
@@ -82,13 +79,6 @@ class procesamiento {
 					if($campos[$clave] <> ""){
 						$gral[$clavelimpia] = $campos[$clave];
 						$this->datos_generales = $gral;
-					}
-					break;
-					
-				case 'tiGr_':
-					if($campos[$clave] <> ""){
-						$tiGral[$clavelimpia] = $campos[$clave];
-						$this->tipo_general = $tiGral;
 					}
 					break;
 
@@ -151,13 +141,6 @@ class procesamiento {
 					$array_representante[$clavelimpia] = $campos[$clave];
 					$this->representate = $array_representante;
 					break;
-					
-				case 'tiRe_':
-					if($campos[$clave] <> ""){
-						$tiRe[$clavelimpia] = $campos[$clave];
-						$this->tipo_representante = $tiRe;
-					}
-					break;
 
 				case 'teRe_':
 					$clavelimpiaSinNnum = preg_replace("/[0-9]/", "", $clavelimpia);
@@ -204,13 +187,6 @@ class procesamiento {
 					if($campos[$clave] <> ""){
 						$array_contacto[$clavelimpia] = $campos[$clave];
 						$this->datos_contacto = $array_contacto;
-					}
-					break;
-					
-				case 'tiCo_':
-					if($campos[$clave] <> ""){
-						$tiCo[$clavelimpia] = $campos[$clave];
-						$this->tipo_contacto = $tiCo;
 					}
 					break;
 
@@ -318,11 +294,6 @@ class procesamiento {
 		$this->tipoContacto = 1;
 		$this->grabarDatosPerfil($this->datos_generales, $this->tabla, $this->tipoContacto);
 	}
-	function get_tipoGenerales(){
-		$this->tabla = 'perfil_persona_contacto';
-		$this->tipoContacto = 1;
-		$this->grabarDatosPerfil($this->tipo_general, $this->tabla, $this->tipoContacto);
-	}
 	function get_telsGenerales(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 1;
@@ -360,6 +331,7 @@ class procesamiento {
 
 	function get_direccion(){
 		$this->tabla = 'perfil_direccion';
+		$this->tipoContacto = 1;
 		$this->grabarDatosPerfil($this->direccion, $this->tabla, $this->tipoContacto);
 	}
 	
@@ -379,14 +351,7 @@ class procesamiento {
 		$this->tabla = 'perfil_persona';
 		$this->tipoContacto = 2;
 		$this->grabarDatosPerfil($this->representate, $this->tabla, $this->tipoContacto);
-	}
-	
-	function get_tipoRepresentante(){
-		$this->tabla = 'perfil_persona_contacto';
-		$this->tipoContacto = 2;
-		$this->grabarDatosPerfil($this->tipo_representante, $this->tabla, $this->tipoContacto);
-	}
-	
+	}	
 	function get_telsRepresentante(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 2;
@@ -433,13 +398,6 @@ class procesamiento {
 		$this->tipoContacto = 3;
 		$this->grabarDatosPerfil($this->datos_contacto, $this->tabla, $this->tipoContacto);
 	}
-	
-	function get_tipoContacto(){
-		$this->tabla = 'perfil_persona_contacto';
-		$this->tipoContacto = 3;
-		$this->grabarDatosPerfil($this->tipo_contacto, $this->tabla, $this->tipoContacto);
-	}
-	
 	function get_telsContacto(){
 		$this->tabla = 'perfil_telefono';
 		$this->tipoContacto = 3;
@@ -491,7 +449,7 @@ class procesamiento {
 		$this->tabla = 'perfil_historialproyectos';
 		$this->tipoContacto = 1;
 		foreach ( $this->proyectos_pasados as $key => $value ) {
-			$this->grabarDatosPerfil($this->proyectos_pasados[$key], $this->tabla, $datos['existe'], $this->tipoContacto);
+			$this->grabarDatosPerfil($this->proyectos_pasados[$key], $this->tabla, $this->tipoContacto);
 		}
 	}
 
@@ -524,16 +482,15 @@ class procesamiento {
 		$db =& JFactory::getDBO();
 		$usuario =& JFactory::getUser();
 		
-		
 		$existe = "false";
 // 		$existe = "true";
 
-// 		$existe = existingUser($usuario-> id);
-		
 		if (isset($data) && !empty($data)) {
 			
 			if ($tabladb != 'perfil_persona') {
-				$data['perfil_persona_idpersona'] = $this->persona;
+				$generales = datosGenerales($usuario->id, $tipoContacto);
+				$idPersona = $generales->id;
+				$data['perfil_persona_idpersona'] = $idPersona;
 			}
 			
 		    $camposTabla = $this->busarCamposTabla($tabladb);
@@ -549,16 +506,12 @@ class procesamiento {
 			if ($existe == 'false') {
 				
 				insertFields($tabladb, $col, $val);				
-			
-				if ($tabladb == 'perfil_persona') {  // Buscamos el id del contacto/persona
-					$this->persona = $db->insertid();
-				}
 				
 			} elseif ($existe == 'true') {
 								
 				$contador = count($col);
 				
-				for($i=0; $i < $contador; $i++) {
+				for($i = 0; $i < $contador; $i++) {
 					$fields[] = $col[$i].'='.$val[$i];
 				}
 				
@@ -571,36 +524,38 @@ class procesamiento {
 				}
 				
 				$resultado = datosGenerales($usuario->id, $tipoContacto);
-				
+				var_dump($contador,$tipoContacto,$fields,$tabladb,$campoId,$resultado,$data);
+				exit;
 				if(($tabladb == 'perfil_direccion') && ($data['perfil_tipoDireccion_idtipoDireccion'] == 1)){
-					$conditions = ($campoId. ' = '.$resultado[0]->id. '&& perfil_tipoDireccion_idtipoDireccion = 1');
+					$conditions = ($campoId. ' = '.$resultado->id. '&& perfil_tipoDireccion_idtipoDireccion = 1');
 					updateFields($tabladb, $fields, $conditions);
 				} elseif (($tabladb == 'perfil_direccion') && ($data['perfil_tipoDireccion_idtipoDireccion'] == 2)) {
-					$conditions = ($campoId. ' = '.$resultado[0]->id. '&& perfil_tipoDireccion_idtipoDireccion = 2');
+					$conditions = ($campoId. ' = '.$resultado->id. '&& perfil_tipoDireccion_idtipoDireccion = 2');
 					updateFields($tabladb, $fields, $conditions);
 				} elseif($tabladb == 'perfil_telefono'){
-					$telefonos = telefono($resultado[0]->id);
-					if(isset($telefonos[$indiceTelefono]->telTelefono)){
-						$conditions = ($campoId. ' = '.$resultado[0]->id. ' && idtelefono = '.$telefonos[$indiceTelefono]->idtelefono);
-						updateFields($tabladb, $fields, $conditions);
-					}elseif((!isset($telefonos[$indiceTelefono]->telTelefono))&&($telefonos[0]->telTelefono != $data['telTelefono'] || $telefonos[1]->telTelefono != $data['telTelefono'] || $telefonos[2]->telTelefono != $data['telTelefono'])){
-						insertFields($tabladb, $col, $val);
+					$telefonos = telefono($resultado->id);
+					$noTelefonos = count($telefonos);
+					for($i = 0; $i < $noTelefonos; $i++){
+						if($telefonos[$i]->perfil_tipoTelefono_idtipoTelefono == $data[perfil_tipoTelefono_idtipoTelefono]) {
+							$conditions = ($campoId. ' = '.$resultado->id. ' && perfil_tipoTelefono_idtipoTelefono = '.$data[perfil_tipoTelefono_idtipoTelefono]);
+							updateFields($tabladb, $fields, $conditions);
+							break;
+						} elseif($i == $count-1) {
+							insertFields($tabladb, $col, $val);
+						}
 					}
 				} else {
-					$conditions = ($campoId. ' = '.$resultado[0]->id);
+					$conditions = ($campoId. ' = '.$resultado->id);
 					updateFields($tabladb, $fields, $conditions);
 				}
 				
-				if ($tabladb == 'perfil_persona') {  // Buscamos el id del contacto/persona
-					$this->persona = $db->insertid();				
-				}
 			}
 		}else{
 			if($tabladb == 'perfil_telefono'){
 				$resultado = datosGenerales($usuario->id, $tipoContacto);
-				$telefonos = telefono($resultado[0]->id);
+				$telefonos = telefono($resultado->id);
 				if(isset($telefonos[$indiceTelefono]->telTelefono)){
-					$conditions = ('perfil_persona_idpersona = '.$resultado[0]->id. '&& idtelefono = '.$telefonos[$indiceTelefono]->idtelefono);
+					$conditions = ('perfil_persona_idpersona = '.$resultado->id. '&& idtelefono = '.$telefonos[$indiceTelefono]->idtelefono);
 				}
 				deleteFields($tabladb, $conditions);
 			}
@@ -621,24 +576,22 @@ class procesamiento {
 	
 }
 
-// $generales = $datos->get_datosGenerales();
-// $tipoGeneral = $datos->get_tipoGenerales();
-// $direccion = $datos->get_direccion();
-// $telsGen = $datos->get_telsGenerales();
-// $telsGen0 = $datos->get_telsGenerales_0();
-// $telsGen1 = $datos->get_telsGenerales_1();
+$generales = $datos->get_datosGenerales();
+$direccion = $datos->get_direccion();
+$telsGen = $datos->get_telsGenerales();
+$telsGen0 = $datos->get_telsGenerales_0();
+$telsGen1 = $datos->get_telsGenerales_1();
 
-// $mailGen = $datos->get_mailsGeneral();
-// $mailGen0 = $datos->get_mailsGeneral_0();
-// $mailGen1 = $datos->get_mailsGeneral_1();
+$mailGen = $datos->get_mailsGeneral();
+$mailGen0 = $datos->get_mailsGeneral_0();
+$mailGen1 = $datos->get_mailsGeneral_1();
 
-$datos_fiscales = $datos->get_datosFiscales();
-$domicilio_fiscales = $datos->get_domicilioFiscal();
+// $datos_fiscales = $datos->get_datosFiscales();
+// $domicilio_fiscales = $datos->get_domicilioFiscal();
 
 // $pro_pas = $datos->get_proyectosPasados();
 
 // $repr = $datos->get_representante();
-// $tipoRepresentante = $datos->get_tipoRepresentante();
 // $domicilioRep = $datos->get_domicilioRepresentate();
 // $telsRep = $datos->get_telsRepresentante();
 // $telsRep0 = $datos->get_telsRepresentante_0();
@@ -649,7 +602,6 @@ $domicilio_fiscales = $datos->get_domicilioFiscal();
 // $mailRep1 = $datos->get_mailRepresentante_1();
 
 // $dat_contacto = $datos->get_contacto();
-// $tipoCotacto = $datos->get_tipoContacto();
 // $dom_contacto = $datos->get_domicilioContacto();
 // $telsCon = $datos->get_telsContacto();
 // $telsCon0 = $datos->get_telsContacto_0();
