@@ -126,7 +126,7 @@ function pageselectCallback (page_index, jq) {
 			last='';
 		}
 		newcontent += '<div id="'+members[i].type+'">'
-		newcontent += '<div class="proyecto col' + last + ' ancho' + ancho + '">';
+		newcontent += '<div class="proyecto col' + last + ' ancho">';
 		newcontent += '<div class="inner">';
 		newcontent += '<div class="titulo">';
 		newcontent += '<div class="tituloText inner">';

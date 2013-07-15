@@ -27,8 +27,9 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 	<?php elseif ($gantry->get('layout-mode') == '1200fixed') : ?>
 	<meta name="viewport" content="width=1200px">
 	<?php else : ?>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<?php endif; ?>
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="HandheldFriendly" content="True" /	<?php endif; ?>
     <?php
         $gantry->displayHead();
 

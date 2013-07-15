@@ -23,7 +23,7 @@
 	border-color: #999;
 	background: #fff;
 }
-.ancho33 {
+.ancho {
 	width: 33%;
 }
 .inner {
@@ -35,7 +35,6 @@ div.proyecto > .inner {
 .proyecto {
 	float: left;
 	margin-bottom: 1em;
-	min-width: 360px;
 }
 .titulo, .descripcion {
 	margin: 0 5px 0 4px;
@@ -50,7 +49,6 @@ div.proyecto > .inner {
 	line-height: 1.5em;
 }
 .avatar {
-	height: 364px;
 	overflow: hidden;
 }
 .avatar img {
@@ -65,10 +63,8 @@ div.proyecto > .inner {
 }
 
 @media screen and (min-width: 721px) and (max-width: 1216px) {
-	.ancho33 {width: 50%;}
-	
+	.ancho {width: 50%;}
 }
 @media screen and (max-width: 976px) {
-	.ancho33 {width: 100%;}
-	
+	.ancho {width: 100%;}
 }
