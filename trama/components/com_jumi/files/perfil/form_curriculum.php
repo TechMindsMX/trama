@@ -4,14 +4,13 @@
 ?>
 <?php
 	$usuario =& JFactory::getUser();
+	$generales = datosGenerales($usuario->id, 1);
 	$exisPro = proyectosPasados($generales->id);
-	if (isset($exisPro)) {
+	if (!empty($exisPro)) {
 		$existe = 'true';
 	} else {
 		$existe = 'false';
 	}
-	
-	$generales = datosGenerales($usuario->id, 1);
 	$proyectosPasados = proyectosPasados($generales->id);
 ?>
 
@@ -34,6 +33,7 @@
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		jQuery(document).ready(function(){
+			var eliminaProy= "";
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();			
 
@@ -43,7 +43,15 @@
 					echo 'jQuery("li:contains(\'Contacto\')").hide();';
 				}
 			?>
-
+			jQuery('.btnEliminar').click(function(){
+				var confirmar = confirm('Esta seguro que deseas eliminar este proyecto');
+				if (confirmar){
+					eliminaProy += jQuery(this).parent().parent().children().children(':first-child').val() + ',';
+					jQuery(this).parent().parent().remove();
+					jQuery('#eliminaProy').val(eliminaProy);
+				}
+				
+			});
 
 
 		});
@@ -67,6 +75,7 @@
 <body>
 <!--DIVS OCULTOS QUE AGREGAN CAMPOS-->
 	<div class="_100" id="readrootProy" style="display: none">                  
+            <input name="prPa_idHistorialProyectos" type="hidden" id="prPa_idHistorialProyectos" value="<?php echo 'NULL';?>" />
             <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('PROYECTO'); ?></label>
             <input name="prPa_nomNombreProyecto"  type="text" id="prPa_nomNombreProyecto" maxlength="70" />            
             <label for="prPa_urlProyectosPasados"><?php echo JText::_('URL_PROY'); ?></label>
@@ -78,27 +87,34 @@
 
 	<div id="contenedor">
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
+			<input id="eliminaProy" name="eliminaProy" type="hidden" value="" />
 			<div id="nombre"><h3><?php echo JText::_('PROY_PAS'); ?></h3></div>            
-            <div class="_100">
-                <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('PROYECTO'); ?></label>
-                <input name="prPa_nomNombreProyecto" type="text" id="prPa_nomNombreProyecto" maxlength="70" 
-                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->nomNombreProyecto.'"';}?>/>
-            </div>
-            <div class="_100">
-                <label for="prPa_urlProyectosPasados"><?php echo JText::_('URL_PROY'); ?></label>
-                <input name="prPa_urlProyectosPasados" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados" maxlength="70" 
-                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->urlProyectosPasados.'"';}?>/>
-            </div>
-            <div class="_100">
-            	<label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?></label> <br />           
-            	<textarea name="prPa_dscDescripcionProyecto"  id="prPa_dscDescripcionProyecto" cols="100" rows="6">
-            	<?php if (!empty($proyectosPasados)) {echo $proyectosPasados[0]->dscDescripcionProyecto;}?></textarea>
-            </div>
+            <span>
+	            <div class="_100">
+	            	<?php if ($existe == 'true') { echo '<input name="prPa_idHistorialProyectos" type="hidden" id="prPa_idHistorialProyectos" value="'.$proyectosPasados[0]->idHistorialProyectos.'" />'; }?>
+	                <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('PROYECTO'); ?></label>
+	                <input name="prPa_nomNombreProyecto" type="text" id="prPa_nomNombreProyecto" maxlength="70" 
+	                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->nomNombreProyecto.'"';}?>/>
+	            </div>
+	            <div class="_100">
+	                <label for="prPa_urlProyectosPasados"><?php echo JText::_('URL_PROY'); ?></label>
+	                <input name="prPa_urlProyectosPasados" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados" maxlength="70" 
+	                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->urlProyectosPasados.'"';}?>/>
+	            </div>
+	            <div class="_100">
+	            	<label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?></label> <br />           
+	            	<textarea name="prPa_dscDescripcionProyecto"  id="prPa_dscDescripcionProyecto" cols="100" rows="6"><?php 
+	            	if (!empty($proyectosPasados)) {echo $proyectosPasados[0]->dscDescripcionProyecto;}
+	            	?></textarea>
+	            	<input type="button" value="<?php echo JText::_('QUITAR_PROY'); ?>" class="btnEliminar" />
+	            </div>
+            </span>
             <span id="writerootProy">
             <?php
             	$noProyectos = count($proyectosPasados);
             	for ($i = 1; $i < $noProyectos; $i++) {
-					echo '<div class="_100">
+					echo '<span><div class="_100">
+						<input name="prPa_idHistorialProyectos'.($i-1).'" type="hidden" id="prPa_idHistorialProyectos'.($i-1).'" value="'.$proyectosPasados[$i]->idHistorialProyectos.'" />
 						<label for="prPa_nomNombreProyecto'.($i-1).'">'.JText::_('NOMBREPR').JText::_('PROYECTO').'</label>
                 		<input name="prPa_nomNombreProyecto'.($i-1).'" type="text" id="prPa_nomNombreProyecto'.($i-1).'" maxlength="70" value="'.$proyectosPasados[$i]->nomNombreProyecto.'" />
 		            </div>
@@ -109,7 +125,8 @@
 		            <div class="_100">
 		            	<label for="prPa_dscDescripcionProyecto'.($i-1).'">'.JText::_('DESCRIPCION').JText::_('PROYECTO').'</label> <br />           
 		            	<textarea name="prPa_dscDescripcionProyecto'.($i-1).'"  id="prPa_dscDescripcionProyecto'.($i-1).'" cols="100" rows="6">'.$proyectosPasados[$i]->dscDescripcionProyecto.'</textarea>
-		            </div>';
+						<input type="button" value="'.JText::_('QUITAR_PROY').'" class="btnEliminar" />
+			</div></span>';
 				}
             ?>
             </span>

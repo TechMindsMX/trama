@@ -58,11 +58,11 @@
 					echo "jQuery('#maRe_coeEmail00').val('".$emailRepresentante[1]->coeEmail."');";
 					echo "jQuery('#maRe_coeEmail01').val('".$emailRepresentante[2]->coeEmail."');";
  					for ($i=0; $i<count($telefonoRepresentante); $i++) {
-						if ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 1) {
+						if ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefonoRepresentante[$i]->telTelefono != 0) {
 							echo "jQuery('#teRe_telTelefono').val('".$telefonoRepresentante[$i]->telTelefono."');";
-						} elseif ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 2) {
+						} elseif ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 2 && $telefonoRepresentante[$i]->telTelefono != 0) {
 							echo "jQuery('#teRe_telTelefono00').val('".$telefonoRepresentante[$i]->telTelefono."');";
-						} elseif ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 3) {
+						} elseif ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 3 && $telefonoRepresentante[$i]->telTelefono != 0) {
 							echo "jQuery('#teRe_telTelefono01').val('".$telefonoRepresentante[$i]->telTelefono."');";
 							echo "jQuery('#teRe_extension01').val('".$telefonoRepresentante[$i]->extension."');";
 						}
@@ -85,11 +85,11 @@
  					echo "jQuery('#maCo_coeEmail00').val('".$emailContacto[1]->coeEmail."');";
  					echo "jQuery('#maCo_coeEmail01').val('".$emailContacto[2]->coeEmail."');";
  					for ($i=0; $i<count($telefonoContacto); $i++) {
- 						if ($telefonoContacto[$i]->perfil_tipoTelefono_idtipoTelefono == 1) {
+ 						if ($telefonoContacto[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefonoContacto[$i]->telTelefono != 0) {
  							echo "jQuery('#teCo_telTelefono').val('".$telefonoContacto[$i]->telTelefono."');";
- 						} elseif ($telefonoContacto[$i]->perfil_tipoTelefono_idtipoTelefono == 2) {
+ 						} elseif ($telefonoContacto[$i]->perfil_tipoTelefono_idtipoTelefono == 2 && $telefonoContacto[$i]->telTelefono != 0) {
  							echo "jQuery('#teCo_telTelefono00').val('".$telefonoContacto[$i]->telTelefono."');";
- 						} elseif ($telefonoContacto[$i]->perfil_tipoTelefono_idtipoTelefono == 3) {
+ 						} elseif ($telefonoContacto[$i]->perfil_tipoTelefono_idtipoTelefono == 3 && $telefonoContacto[$i]->telTelefono != 0) {
  							echo "jQuery('#teCo_telTelefono01').val('".$telefonoContacto[$i]->telTelefono."');";
  							echo "jQuery('#teCo_extension01').val('".$telefonoContacto[$i]->extension."');";
  						}

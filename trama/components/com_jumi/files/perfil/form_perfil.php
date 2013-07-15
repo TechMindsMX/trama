@@ -47,11 +47,11 @@
 					echo "jQuery('#maGr_coeEmail00').val('".$email[1]->coeEmail."');";
 					echo "jQuery('#maGr_coeEmail01').val('".$email[2]->coeEmail."');";
  					for ($i=0; $i<count($telefono); $i++) {
-						if ($telefono[$i]->perfil_tipoTelefono_idtipoTelefono == 1) {
+						if ($telefono[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefono[$i]->telTelefono != 0) {
 							echo "jQuery('#teGr_telTelefono').val('".$telefono[$i]->telTelefono."');";
-						} elseif ($telefono[$i]->perfil_tipoTelefono_idtipoTelefono == 2) {
+						} elseif ($telefono[$i]->perfil_tipoTelefono_idtipoTelefono == 2 && $telefono[$i]->telTelefono != 0) {
 							echo "jQuery('#teGr_telTelefono00').val('".$telefono[$i]->telTelefono."');";
-						} elseif ($telefono[$i]->perfil_tipoTelefono_idtipoTelefono == 3) {
+						} elseif ($telefono[$i]->perfil_tipoTelefono_idtipoTelefono == 3 && $telefono[$i]->telTelefono != 0) {
 							echo "jQuery('#teGr_telTelefono01').val('".$telefono[$i]->telTelefono."');";
 							echo "jQuery('#teGr_extension01').val('".$telefono[$i]->extension."');";
 						}

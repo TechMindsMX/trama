@@ -10,7 +10,6 @@ $_POST['repr_users_id'] = $usuario->id;
 $_POST['repr_perfil_tipoContacto_idtipoContacto'] = 2;
 $_POST['daCo_users_id'] = $usuario->id;
 $_POST['daCo_perfil_tipoContacto_idtipoContacto'] = 3;
-
 $datos = new procesamiento;
 $datos->agrupacion($_POST);
 
@@ -231,14 +230,28 @@ class procesamiento {
 					break;
 
 				case 'prPa_':
-					$clavelimpiaSinNnum = preg_replace("/[0-9]/", "", $clavelimpia);
+// 					$clavelimpiaSinNnum = preg_replace("/[0-9]/", "", $clavelimpia);
 
+// 					if ($campos[$clave] <> "") {
+// 						$c = preg_replace("/[a-zA-Z]/", "", $clavelimpia);
+// 						$array_proyectosPas[$clavelimpiaSinNnum] = $campos[$clave];
+// 						$todos[$c] = $array_proyectosPas;
+// 						if ($c != $temp) {
+// 							$array_proyectosPas['idHistorialProyectos']= '';
+// 						}
+// 						$c = $temp;
+// 					}
+// 					break;
+
+					$clavelimpiaSinNnum = preg_replace("/[0-9]/", "", $clavelimpia);
+					
 					if ($campos[$clave] <> "") {
 						$c = preg_replace("/[a-zA-Z]/", "", $clavelimpia);
 						$array_proyectosPas[$clavelimpiaSinNnum] = $campos[$clave];
 						$todos[$c] = $array_proyectosPas;
 					}
 					break;
+					
 			}
 		}
 		$this->proyectos_pasados = $todos;
@@ -494,11 +507,11 @@ class procesamiento {
 			}
 			
 			if ($existe == 'false') {
-				
+
 				insertFields($tabladb, $col, $val);				
 				
 			} elseif ($existe == 'true') {
-								
+
 				$contador = count($col);
 				
 				for($i = 0; $i < $contador; $i++) {
@@ -546,6 +559,18 @@ class procesamiento {
 							insertFields($tabladb, $col, $val);
 						}
 					}
+				} elseif ($tabladb == 'perfil_historialproyectos'){
+					$proyecPasados = proyectosPasados($resultado->id);
+					$noProyectos = count($proyecPasados);
+					for($i = 0; $i < $noProyectos; $i++){
+						if($proyecPasados[$i]->idHistorialProyectos == $data[idHistorialProyectos]) {
+							$conditions = ($campoId. ' = '.$resultado->id. ' && idHistorialProyectos = '.$data[idHistorialProyectos]);
+							updateFields($tabladb, $fields, $conditions);
+							break;
+						} elseif ($i == $noProyectos-1) {
+							insertFields($tabladb, $col, $val);
+						}
+					}					
 				} else {
 					$conditions = ($campoId. ' = '.$resultado->id);
 					updateFields($tabladb, $fields, $conditions);
@@ -553,9 +578,11 @@ class procesamiento {
 				
 			}
 		}else{
-			if($tabladb == 'perfil_telefono'){
+			if($tabladb == 'perfil_historialproyectos'){
 				$resultado = datosGenerales($usuario->id, $tipoContacto);
-				$telefonos = telefono($resultado->id);
+				$proyecPasados = proyectosPasados($resultado->id);
+				var_dump($proyecPasados);
+				exit;
 				if(isset($telefonos[$indiceTelefono]->telTelefono)){
 					$conditions = ('perfil_persona_idpersona = '.$resultado->id. '&& idtelefono = '.$telefonos[$indiceTelefono]->idtelefono);
 				}
@@ -581,43 +608,57 @@ class procesamiento {
 $form = $_GET['form'];
 
 if ($form == 'perfil') {
-$generales = $datos->get_datosGenerales();
-$direccion = $datos->get_direccion();
-$telsGen = $datos->get_telsGenerales();
-$telsGen0 = $datos->get_telsGenerales_0();
-$telsGen1 = $datos->get_telsGenerales_1();
-
-$mailGen = $datos->get_mailsGeneral();
-$mailGen0 = $datos->get_mailsGeneral_0();
-$mailGen1 = $datos->get_mailsGeneral_1();
+	$generales = $datos->get_datosGenerales();
+	$direccion = $datos->get_direccion();
+	$telsGen = $datos->get_telsGenerales();
+	$telsGen0 = $datos->get_telsGenerales_0();
+	$telsGen1 = $datos->get_telsGenerales_1();
+	
+	$mailGen = $datos->get_mailsGeneral();
+	$mailGen0 = $datos->get_mailsGeneral_0();
+	$mailGen1 = $datos->get_mailsGeneral_1();
+	$dataGeneral = datosGenerales($usuario->id, 1);
+	if ($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 2 || $dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 3){
+		$allDone =& JFactory::getApplication();
+		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13&Itemid=200', 'Sus datos fueron grabados exitosamente' );
+	} else {
+		$allDone =& JFactory::getApplication();
+		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=15&Itemid=202', 'Sus datos fueron grabados exitosamente' );
+	}
 } elseif ($form == 'empresa') {
-$datos_fiscales = $datos->get_datosFiscales();
-$domicilio_fiscales = $datos->get_domicilioFiscal();
+	$datos_fiscales = $datos->get_datosFiscales();
+	$domicilio_fiscales = $datos->get_domicilioFiscal();
+	$allDone =& JFactory::getApplication();
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16&Itemid=201', 'Sus datos fueron grabados exitosamente' );
 } elseif ($form == 'curri') {
-$pro_pas = $datos->get_proyectosPasados();
+	$eliminaProy = substr_replace($_POST['eliminaProy'] ,"",-1);
+	$conditions = 'idHistorialProyectos IN ('.$eliminaProy.')';
+	deleteFields('perfil_historialproyectos', $conditions);
+	$pro_pas = $datos->get_proyectosPasados();
+	$allDone =& JFactory::getApplication();
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5&Itemid=199', 'Sus datos fueron grabados exitosamente' );
 } elseif ($form == 'contac') {
-$repr = $datos->get_representante();
-$domicilioRep = $datos->get_domicilioRepresentate();
-$telsRep = $datos->get_telsRepresentante();
-$telsRep0 = $datos->get_telsRepresentante_0();
-$telsRep1 = $datos->get_telsRepresentante_1();
-
-$mailRep = $datos->get_mailRepresentante();
-$mailRep0 = $datos->get_mailRepresentante_0();
-$mailRep1 = $datos->get_mailRepresentante_1();
-
-$dat_contacto = $datos->get_contacto();
-$dom_contacto = $datos->get_domicilioContacto();
-$telsCon = $datos->get_telsContacto();
-$telsCon0 = $datos->get_telsContacto_0();
-$telsCon1 = $datos->get_telsContacto_1();
-
-$mailCon = $datos->get_mailsContactos();
-$mailCon0 = $datos->get_mailsContactos_0();
-$mailCon1 = $datos->get_mailsContactos_1();
+	$repr = $datos->get_representante();
+	$domicilioRep = $datos->get_domicilioRepresentate();
+	$telsRep = $datos->get_telsRepresentante();
+	$telsRep0 = $datos->get_telsRepresentante_0();
+	$telsRep1 = $datos->get_telsRepresentante_1();
+	
+	$mailRep = $datos->get_mailRepresentante();
+	$mailRep0 = $datos->get_mailRepresentante_0();
+	$mailRep1 = $datos->get_mailRepresentante_1();
+	
+	$dat_contacto = $datos->get_contacto();
+	$dom_contacto = $datos->get_domicilioContacto();
+	$telsCon = $datos->get_telsContacto();
+	$telsCon0 = $datos->get_telsContacto_0();
+	$telsCon1 = $datos->get_telsContacto_1();
+	
+	$mailCon = $datos->get_mailsContactos();
+	$mailCon0 = $datos->get_mailsContactos_0();
+	$mailCon1 = $datos->get_mailsContactos_1();
+	$allDone =& JFactory::getApplication();
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=15&Itemid=202', 'Sus datos fueron grabados exitosamente' );
 }
 // $curriculum = $datos->get_cv();
 
-
-$allDone =& JFactory::getApplication();
-$allDone->redirect('index.php', 'Sus datos fueron grabados exitosamente' );
