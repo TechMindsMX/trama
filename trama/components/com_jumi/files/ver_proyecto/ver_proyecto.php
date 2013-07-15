@@ -199,7 +199,9 @@ function rating($data) {
 	}
 	
 	$html = '<div id="rating" style="float:left; margin-top:15px;"></div>'.
-			'<div id="texto"style="float: left; font-size: 70px; position: relative; text-align: center; width: 30%; top: 30px;">'.$rating.'</div>';
+			'<div id="texto"style="float: left; font-size: 70px; position: relative; text-align: center; width: 30%; top: 30px;">'.
+			number_format($rating, 1).
+			'</div>';
 	
 	return $html;
 }
@@ -395,9 +397,8 @@ function fechas($data) {
 	 if(isNaN(<?php echo $json->rating; ?>)){
 	 	var rating = 0;
 	 } else {
-	 	var rating = <?php echo $json->rating; ?>;
+	 	var rating = parseFloat(<?php echo $json->rating; ?>);
 	 }
-	 console.log(rating);
 	 
 		$(document).ready(function() {
 			var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
