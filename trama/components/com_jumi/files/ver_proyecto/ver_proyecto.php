@@ -25,16 +25,6 @@
 
 $json->etiquetaTipo = tipoProyProd($json);
 	
-function getProySubCatName($data) {
-    $urlSubcategoria = MIDDLE.PUERTO.'/trama-middleware/rest/category/subcategories/all';
-	$subcats = json_decode(file_get_contents($urlSubcategoria));
-	foreach ($subcats as $key => $value) {
-		if($value->id == $data->subcategory) {
-			$nomCat= $value->name;
-		}
-	}
-	return $nomCat;
-}
 
 function tipoProyProd($data) {
 	$tipo = $data->type;
@@ -208,7 +198,7 @@ function rating($data) {
 
 function encabezado($data) {
 	$html = '<h2>'.$data->name.'</h2>'.
-		'<h4>'.getProySubCatName($data).'</h4>'.
+		'<h4>'.JTrama::getSubCatName($data->subcategory).'</h4>'.
 		'<span class="tipo_proy_prod"> - '.JTrama::getStatusName($data->status).'</span>'.
 		'<span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
 		'<p>'.JTrama::getProducerName($data->userId).'</p>';
