@@ -77,8 +77,16 @@ class JTrama
 		}
 		return $producer;
 	}
-	public function __toString()  
-    {  
-    }  
+	public static function getStatusName ($string) {
+		$allNames = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+		
+		foreach ($allNames as $llave => $valor) {
+			if ($valor->id == $string) {
+				$statusName = $valor->name;
+			}
+		}
+		return $statusName;
+	}
+
 }
 ?>

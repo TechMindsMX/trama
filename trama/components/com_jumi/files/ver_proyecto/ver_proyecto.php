@@ -3,7 +3,7 @@
 	
 	$usuario = JFactory::getUser();
 	
-	require_once 'libraries/trama/class.php';
+	jimport('trama.class');
 	
 	$base = JUri::base();
 	$pathJumi = Juri::base().'components/com_jumi/files/ver_proyecto/';
@@ -208,7 +208,9 @@ function rating($data) {
 
 function encabezado($data) {
 	$html = '<h2>'.$data->name.'</h2>'.
-		'<h4>'.getProySubCatName($data).'</h4><span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
+		'<h4>'.getProySubCatName($data).'</h4>'.
+		'<span class="tipo_proy_prod"> - '.JTrama::getStatusName($data->status).'</span>'.
+		'<span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
 		'<p>'.JTrama::getProducerName($data->userId).'</p>';
 	
 	return $html;
