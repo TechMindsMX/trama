@@ -163,8 +163,8 @@
                     "alertText": "* RFC inválida "
                 },
 				"yt": {
-                    "regex": /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/,
-                    "alertText": "* Enlace Youtube inválido "
+                    "regex": /http:\/\/(?:www\.)?(vimeo|youtube)\.com\/(?:watch\?v=)?(.*?)(?:\z|$|&)/,
+                    "alertText": "* Enlace inválido (Solo enlaces de Youtube o Vimeo)"
                 },
 				"sc": {
                     "regex": /^https?:\/\/(?:www\.)?soundcloud\.com\/[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)*(?!\/sets(?:\/|$))(?:\/[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)*){1,2}\/?$/,
