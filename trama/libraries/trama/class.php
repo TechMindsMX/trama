@@ -54,18 +54,20 @@ class JTrama
 				}
 			}
 		}
-		return $nomCatPadre;		
+		return $nomCatPadre;
 	}
 	
 	public function getProducerName($data) {
+		include_once JPATH_ROOT.'/components/com_community/libraries/core.php';
+		$link = CRoute::_('index.php?option=com_community&view=profile&userid='.$data);
+		
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		
 		$query
 		->select(array('a.nomNombre','a.nomApellidoPaterno'))
 		->from('perfil_persona AS a')
-		->join('INNER', 'perfil_persona_contacto AS b ON (a.id = b.perfil_persona_idpersona)')
-		->where('a.users_id = '.$data.' && b.perfil_tipoContacto_idtipoContacto = 1');
+		->where('a.users_id = '.$data.' && a.perfil_tipoContacto_idtipoContacto = 1');
 		
 		$db->setQuery($query);
 		$producer = $db->loadRow();
@@ -75,8 +77,10 @@ class JTrama
 		else {
 			$producer = 'Anonimo';
 		}
-		return $producer;
+		$html = '<a href="'.$link.'" mce_href="'.$link.'">'.$producer.'</a>';
+		return $html;
 	}
+	
 	public static function getStatusName ($string) {
 		$allNames = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 		
