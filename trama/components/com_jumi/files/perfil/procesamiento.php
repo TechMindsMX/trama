@@ -54,17 +54,17 @@ class procesamiento {
 	
 	function agrupacion($campos){
 		
-// 		if($campos['daGr_perfil_personalidadJuridica_idpersonalidadJuridica'] != 1){
-// 			$validacion_rfc = $this->validacionRFC($campos['daGr_perfil_personalidadJuridica_idpersonalidadJuridica'],$campos['daFi_rfcRFC']);
+		// if(isset($generales) && $generales->perfil_personalidadJuridica_idpersonalidadJuridica != 1){
+			// $validacion_rfc = $this->validacionRFC( $generales->perfil_personalidadJuridica_idpersonalidadJuridica,$campos['daFi_rfcRFC']);
 			
-// 			if(!$validacion_rfc){
-// 				header("Location: {$_SERVER['HTTP_REFERER']}");
-// 				$error = "<p>RFC INVALIDO</p>";
-// 					$application = JFactory::getApplication();
-// 					$application->enqueueMessage(JText::_($error), 'error');
-// 				exit;
-// 			}
-// 		}
+			// if(!$validacion_rfc){
+				// header("Location: {$_SERVER['HTTP_REFERER']}");
+				// $error = "<p>RFC INVALIDO</p>";
+					// $application = JFactory::getApplication();
+					// $application->enqueueMessage(JText::_($error), 'error');
+				// exit;
+			// }
+		// }
 				
 		$claves = array_keys($campos);
 		$count = 0;
@@ -620,23 +620,23 @@ if ($form == 'perfil') {
 	$dataGeneral = datosGenerales($usuario->id, 1);
 	if ($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 2 || $dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 3){
 		$allDone =& JFactory::getApplication();
-		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13&Itemid=200', 'Sus datos fueron grabados exitosamente' );
+		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13', 'Sus datos fueron grabados exitosamente' );
 	} else {
 		$allDone =& JFactory::getApplication();
-		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=15&Itemid=202', 'Sus datos fueron grabados exitosamente' );
+		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=15', 'Sus datos fueron grabados exitosamente' );
 	}
 } elseif ($form == 'empresa') {
 	$datos_fiscales = $datos->get_datosFiscales();
 	$domicilio_fiscales = $datos->get_domicilioFiscal();
 	$allDone =& JFactory::getApplication();
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16&Itemid=201', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16', 'Sus datos fueron grabados exitosamente' );
 } elseif ($form == 'curri') {
 	$eliminaProy = substr_replace($_POST['eliminaProy'] ,"",-1);
 	$conditions = 'idHistorialProyectos IN ('.$eliminaProy.')';
 	deleteFields('perfil_historialproyectos', $conditions);
 	$pro_pas = $datos->get_proyectosPasados();
 	$allDone =& JFactory::getApplication();
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5&Itemid=199', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5', 'Sus datos fueron grabados exitosamente' );
 } elseif ($form == 'contac') {
 	$repr = $datos->get_representante();
 	$domicilioRep = $datos->get_domicilioRepresentate();
@@ -658,7 +658,7 @@ if ($form == 'perfil') {
 	$mailCon0 = $datos->get_mailsContactos_0();
 	$mailCon1 = $datos->get_mailsContactos_1();
 	$allDone =& JFactory::getApplication();
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=15&Itemid=202', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=15', 'Sus datos fueron grabados exitosamente' );
 }
 // $curriculum = $datos->get_cv();
 

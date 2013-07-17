@@ -9,6 +9,7 @@
 	$telefonoGeneral = telefono($generales->id);
 	$direccionGeneral = domicilio($generales->id, 1);
 	$exisRep = datosGenerales($usuario->id, 2);
+
 	if (isset($exisRep)) {
 		$existe = 'true';
 	} else {
@@ -37,8 +38,7 @@
 		jQuery(document).ready(function(){
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();
-	
-			<?php 		
+			<?php
 				if ($existe == 'true') {
 					$representante = datosGenerales($usuario->id, 2);
 					$contacto = datosGenerales($usuario->id, 3);
@@ -54,9 +54,13 @@
 					echo "jQuery('#repr_nomNombre').val('".$representante->nomNombre."');";
 					echo "jQuery('#repr_nomApellidoPaterno').val('".$representante->nomApellidoPaterno."');";
 					echo "jQuery('#repr_nomApellidoMaterno').val('".$representante->nomApellidoMaterno."');";
-					echo "jQuery('#maRe_coeEmail').val('".$emailRepresentante[0]->coeEmail."');";
-					echo "jQuery('#maRe_coeEmail00').val('".$emailRepresentante[1]->coeEmail."');";
-					echo "jQuery('#maRe_coeEmail01').val('".$emailRepresentante[2]->coeEmail."');";
+					for ($i=0; $i<count($emailRepresentante); $i++) {
+						if ($i == 0) {
+							echo "jQuery('#maRe_coeEmail').val('".$emailRepresentante[$i]->coeEmail."');";
+						} else {
+							echo "jQuery('#maRe_coeEmail0".($i-1)."').val('".$emailRepresentante[$i]->coeEmail."');";
+						}
+					}
  					for ($i=0; $i<count($telefonoRepresentante); $i++) {
 						if ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefonoRepresentante[$i]->telTelefono != 0) {
 							echo "jQuery('#teRe_telTelefono').val('".$telefonoRepresentante[$i]->telTelefono."');";
@@ -81,9 +85,13 @@
  					echo "jQuery('#daCo_nomNombre').val('".$contacto->nomNombre."');";
  					echo "jQuery('#daCo_nomApellidoPaterno').val('".$contacto->nomApellidoPaterno."');";
  					echo "jQuery('#daCo_nomApellidoMaterno').val('".$contacto->nomApellidoMaterno."');";
- 					echo "jQuery('#maCo_coeEmail').val('".$emailContacto[0]->coeEmail."');";
- 					echo "jQuery('#maCo_coeEmail00').val('".$emailContacto[1]->coeEmail."');";
- 					echo "jQuery('#maCo_coeEmail01').val('".$emailContacto[2]->coeEmail."');";
+					for ($i=0; $i<count($emailContacto); $i++) {
+						if ($i == 0) {
+							echo "jQuery('#maCo_coeEmail').val('".$emailContacto[$i]->coeEmail."');";
+						} else {
+							echo "jQuery('#maCo_coeEmail0".($i-1)."').val('".$emailContacto[$i]->coeEmail."');";
+						}
+					}
  					for ($i=0; $i<count($telefonoContacto); $i++) {
  						if ($telefonoContacto[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefonoContacto[$i]->telTelefono != 0) {
  							echo "jQuery('#teCo_telTelefono').val('".$telefonoContacto[$i]->telTelefono."');";
@@ -117,21 +125,26 @@
 				jQuery('#doRe_nomPais').val('<?php echo $direccionGeneral->perfil_pais_idpais;?>');
 			});
 
-			jQuery('#copiarForContactoRepresentante').click(function(){				
-				jQuery('#maRe_coeEmail').val('<?php echo $emailGeneral[0]->coeEmail;?>');
-				jQuery('#maRe_coeEmail00').val('<?php echo $emailGeneral[1]->coeEmail;?>');
-				jQuery('#maRe_coeEmail01').val('<?php echo $emailGeneral[2]->coeEmail;?>');
+			jQuery('#copiarForContactoRepresentante').click(function(){
 				<?php
-				for ($i=0; $i<count($telefonoGeneral); $i++) {
-					if ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 1) {
-						echo "jQuery('#teRe_telTelefono').val('".$telefonoGeneral[$i]->telTelefono."');";
-					} elseif ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 2) {
-						echo "jQuery('#teRe_telTelefono00').val('".$telefonoGeneral[$i]->telTelefono."');";
-					} elseif ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 3) {
-						echo "jQuery('#teRe_telTelefono01').val('".$telefonoGeneral[$i]->telTelefono."');";
-						echo "jQuery('#teRe_extension01').val('".$telefonoGeneral[$i]->extension."');";
+					for ($i=0; $i<count($emailGeneral); $i++) {
+						if ($i == 0) {
+							echo "jQuery('#maRe_coeEmail').val('".$emailGeneral[$i]->coeEmail."');";
+						} else {
+							echo "jQuery('#maRe_coeEmail0".($i-1)."').val('".$emailGeneral[$i]->coeEmail."');";
+						}
 					}
-				}
+				
+					for ($i=0; $i<count($telefonoGeneral); $i++) {
+						if ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefonoRepresentante[$i]->telTelefono != 0) {
+							echo "jQuery('#teRe_telTelefono').val('".$telefonoGeneral[$i]->telTelefono."');";
+						} elseif ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 2 && $telefonoRepresentante[$i]->telTelefono != 0) {
+							echo "jQuery('#teRe_telTelefono00').val('".$telefonoGeneral[$i]->telTelefono."');";
+						} elseif ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 3 && $telefonoRepresentante[$i]->telTelefono != 0) {
+							echo "jQuery('#teRe_telTelefono01').val('".$telefonoGeneral[$i]->telTelefono."');";
+							echo "jQuery('#teRe_extension01').val('".$telefonoGeneral[$i]->extension."');";
+						}
+					}
 				?>
 			});
 
@@ -146,21 +159,26 @@
 				jQuery('#doCo_nomPais').val('<?php echo $direccionGeneral->perfil_pais_idpais;?>');
 			});
 
-			jQuery('#copiarForContactoContacto').click(function(){				
-				jQuery('#maCo_coeEmail').val('<?php echo $emailGeneral[0]->coeEmail;?>');
-				jQuery('#maCo_coeEmail00').val('<?php echo $emailGeneral[1]->coeEmail;?>');
-				jQuery('#maCo_coeEmail01').val('<?php echo $emailGeneral[2]->coeEmail;?>');
+			jQuery('#copiarForContactoContacto').click(function(){
 				<?php
-				for ($i=0; $i<count($telefonoGeneral); $i++) {
-					if ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 1) {
-						echo "jQuery('#teCo_telTelefono').val('".$telefonoGeneral[$i]->telTelefono."');";
-					} elseif ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 2) {
-						echo "jQuery('#teCo_telTelefono00').val('".$telefonoGeneral[$i]->telTelefono."');";
-					} elseif ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 3) {
-						echo "jQuery('#teCo_telTelefono01').val('".$telefonoGeneral[$i]->telTelefono."');";
-						echo "jQuery('#teCo_extension01').val('".$telefonoGeneral[$i]->extension."');";
+					for ($i=0; $i<count($emailGeneral); $i++) {
+						if ($i == 0) {
+							echo "jQuery('#maCo_coeEmail').val('".$emailGeneral[$i]->coeEmail."');";
+						} else {
+							echo "jQuery('#maCo_coeEmail0".($i-1)."').val('".$emailGeneral[$i]->coeEmail."');";
+						}
 					}
-				}
+					
+					for ($i=0; $i<count($telefonoGeneral); $i++) {
+						if ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefonoRepresentante[$i]->telTelefono != 0) {
+							echo "jQuery('#teCo_telTelefono').val('".$telefonoGeneral[$i]->telTelefono."');";
+						} elseif ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 2 && $telefonoRepresentante[$i]->telTelefono != 0) {
+							echo "jQuery('#teCo_telTelefono00').val('".$telefonoGeneral[$i]->telTelefono."');";
+						} elseif ($telefonoGeneral[$i]->perfil_tipoTelefono_idtipoTelefono == 3 && $telefonoRepresentante[$i]->telTelefono != 0) {
+							echo "jQuery('#teCo_telTelefono01').val('".$telefonoGeneral[$i]->telTelefono."');";
+							echo "jQuery('#teCo_extension01').val('".$telefonoGeneral[$i]->extension."');";
+						}
+					}
 				?>
 			});
 
@@ -207,17 +225,17 @@
             	<input name="Copiar" id="copiarForContactoRepresentante" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
             </div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maRe_idemail" type="hidden" id="maRe_idemail" value="'.$emailRepresentante[0]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($emailRepresentante[0])) { echo '<input name="maRe_idemail" type="hidden" id="maRe_idemail" value="'.$emailRepresentante[0]->idemail.'" />'; }?>
 				<label for="maRe_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
 				<input name="maRe_coeEmail" class="validate[required,custom[email]]" type="text" id="maRe_coeEmail" maxlength="100" />
 			</div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maRe_idemail00" type="hidden" id="maRe_idemail00" value="'.$emailRepresentante[1]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($emailRepresentante[1])) { echo '<input name="maRe_idemail00" type="hidden" id="maRe_idemail00" value="'.$emailRepresentante[1]->idemail.'" />'; }?>
 				<label for="maRe_coeEmail00"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maRe_coeEmail00" type="text" id="maRe_coeEmail00" maxlength="100" />
 			</div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maRe_idemail01" type="hidden" id="maRe_idemail01" value="'.$emailRepresentante[2]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($emailRepresentante[2])) { echo '<input name="maRe_idemail01" type="hidden" id="maRe_idemail01" value="'.$emailRepresentante[2]->idemail.'" />'; }?>
 				<label for="maRe_coeEmail01"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maRe_coeEmail01" type="text" id="maRe_coeEmail01" maxlength="100" />
 			</div>
@@ -337,17 +355,17 @@
             	<input name="Copiar" id="copiarForContactoContacto" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
             </div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maCo_idemail" type="hidden" id="maCo_idemail" value="'.$emailContacto[0]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($emailContacto[0])) { echo '<input name="maCo_idemail" type="hidden" id="maCo_idemail" value="'.$emailContacto[0]->idemail.'" />'; }?>
 				<label for="maCo_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
 				<input name="maCo_coeEmail" class="validate[required,custom[email]]" type="text" id="maCo_coeEmail" maxlength="100" />
 			</div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maCo_idemail00" type="hidden" id="maCo_idemail00" value="'.$emailContacto[1]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($emailContacto[1])) { echo '<input name="maCo_idemail00" type="hidden" id="maCo_idemail00" value="'.$emailContacto[1]->idemail.'" />'; }?>
 				<label for="maCo_coeEmail00"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maCo_coeEmail00" type="text" id="maCo_coeEmail00" maxlength="100" />
 			</div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maCo_idemail01" type="hidden" id="maCo_idemail01" value="'.$emailContacto[2]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($emailContacto[2])) { echo '<input name="maCo_idemail01" type="hidden" id="maCo_idemail01" value="'.$emailContacto[2]->idemail.'" />'; }?>
 				<label for="maCo_coeEmail01"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maCo_coeEmail01" type="text" id="maCo_coeEmail01" maxlength="100" />
 			</div>

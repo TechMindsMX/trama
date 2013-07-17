@@ -43,9 +43,13 @@
 					echo "jQuery('#daGr_nomApellidoMaterno').val('".$generales->nomApellidoMaterno."');";
 					echo "jQuery('#daGr_Foto').val('".$generales->Foto."');";
 					echo "jQuery('#daGr_nomPaginaWeb').val('".$generales->nomPaginaWeb."');";
-					echo "jQuery('#maGr_coeEmail').val('".$email[0]->coeEmail."');";
-					echo "jQuery('#maGr_coeEmail00').val('".$email[1]->coeEmail."');";
-					echo "jQuery('#maGr_coeEmail01').val('".$email[2]->coeEmail."');";
+					for ($i=0; $i<count($email); $i++) {
+						if ($i == 0) {
+							echo "jQuery('#maGr_coeEmail').val('".$email[$i]->coeEmail."');";
+						} else {
+							echo "jQuery('#maGr_coeEmail0".($i-1)."').val('".$email[$i]->coeEmail."');";
+						}
+					}
  					for ($i=0; $i<count($telefono); $i++) {
 						if ($telefono[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefono[$i]->telTelefono != 0) {
 							echo "jQuery('#teGr_telTelefono').val('".$telefono[$i]->telTelefono."');";
@@ -69,13 +73,14 @@
  					echo "jQuery('#daGr_dscCurriculum').val('".$generales->dscCurriculum."');";
  					
  					if ($generales->perfil_personalidadJuridica_idpersonalidadJuridica == 1) {
-						echo 'jQuery("li:contains(\'Empresa\')").hide();';
-						echo 'jQuery("li:contains(\'Contacto\')").hide();';
+						 echo 'jQuery("li:contains(\'Empresa\')").hide();';
+						 echo 'jQuery("li:contains(\'Contacto\')").hide();';
 					}
  					
 				} else {
-					echo 'jQuery("li:contains(\'Empresa\')").hide();';
-					echo 'jQuery("li:contains(\'Contacto\')").hide();';
+					 echo 'jQuery("li:contains(\'Empresa\')").hide();';
+					 echo 'jQuery("li:contains(\'Contacto\')").hide();';
+					 echo 'jQuery("li:contains(\'Curriculum\')").hide();';
 				}
 			?>
 
@@ -124,17 +129,17 @@
 				<input name="daGr_nomPaginaWeb" class="validate[custom[url]]" type="text"  id="daGr_nomPaginaWeb" maxlength="100" />
 			</div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maGr_idemail" type="hidden" id="maGr_idemail" value="'.$email[0]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($email[0])) { echo '<input name="maGr_idemail" type="hidden" id="maGr_idemail" value="'.$email[0]->idemail.'" />'; }?>
 				<label for="maGr_coeEmail"><?php echo JText::_('CORREO'); ?> *:</label>
 				<input name="maGr_coeEmail" class="validate[required,custom[email]]" type="text" id="maGr_coeEmail" maxlength="100" />
 			</div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maGr_idemail00" type="hidden" id="maGr_idemail00" value="'.$email[1]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($email[1])) { echo '<input name="maGr_idemail00" type="hidden" id="maGr_idemail00" value="'.$email[1]->idemail.'" />'; }?>
 				<label for="maGr_coeEmail00"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maGr_coeEmail00" type="text" id="maGr_coeEmail00" maxlength="100" />
 			</div>
 			<div class="_100mail">
-				<?php if ($existe == 'true') { echo '<input name="maGr_idemail01" type="hidden" id="maGr_idemail01" value="'.$email[2]->idemail.'" />'; }?>
+				<?php if ($existe == 'true' && isset($email[2])) { echo '<input name="maGr_idemail01" type="hidden" id="maGr_idemail01" value="'.$email[2]->idemail.'" />'; }?>
 				<label for="maGr_coeEmail01"><?php echo JText::_('CORREO'); ?> :</label>
 				<input name="maGr_coeEmail01" type="text" id="maGr_coeEmail01" maxlength="100" />
 			</div>

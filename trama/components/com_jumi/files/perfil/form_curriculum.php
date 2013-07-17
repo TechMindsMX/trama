@@ -5,13 +5,17 @@
 <?php
 	$usuario =& JFactory::getUser();
 	$generales = datosGenerales($usuario->id, 1);
-	$exisPro = proyectosPasados($generales->id);
-	if (!empty($exisPro)) {
-		$existe = 'true';
+	if(isset($generales)){
+		$exisPro = proyectosPasados($generales->id);
+		if (!empty($exisPro)) {
+			$existe = 'true';
+		} else {
+			$existe = 'false';
+		}
+		$proyectosPasados = proyectosPasados($generales->id);
 	} else {
 		$existe = 'false';
 	}
-	$proyectosPasados = proyectosPasados($generales->id);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -111,6 +115,7 @@
             </span>
             <span id="writerootProy">
             <?php
+			if (isset($proyectosPasados)) {
             	$noProyectos = count($proyectosPasados);
             	for ($i = 1; $i < $noProyectos; $i++) {
 					echo '<span><div class="_100">
@@ -128,6 +133,7 @@
 						<input type="button" value="'.JText::_('QUITAR_PROY').'" class="btnEliminar" />
 			</div></span>';
 				}
+			}
             ?>
             </span>
             <input type="button" onclick="moreFieldsProy(this,true)" value="<?php echo JText::_('AGREGAR_PROY'); ?>" /><br /><br />

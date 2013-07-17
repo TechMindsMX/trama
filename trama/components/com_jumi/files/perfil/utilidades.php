@@ -36,9 +36,9 @@ function datosGenerales($idUsuario, $tipoContacto){
 
 	$db->setQuery( $query );
 
-	$resultado = $db->loadObjectList();
-	
-	return $resultado[0];
+	$temporal = $db->loadObjectList();
+	$resultado = $temporal[0];
+	return $resultado;
 
 }
 
