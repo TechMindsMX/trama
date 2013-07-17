@@ -12,6 +12,7 @@
 	height: 151px;
 	overflow: hidden;
 	float: left;
+	margin-bottom: 1em;
 }
 
 .menu-item:hover {
@@ -97,22 +98,6 @@ div#banner div.rt-inner h4 {
 	line-height: 20px;
 }
 
-@media screen and (max-width:960px) {
-	.info-banner {
-		max-width: 150px;
-		left: 50px;
-	}
-	#banner .content-banner .info-banner h2 {
-		font-size: 15px;
-	}
-	#banner .content-banner .info-banner h4 {
-		font-size: 15px;
-	}
-	#banner .content-banner .info-banner p {
-		font-size: 15px;
-	}
-}
-
 #content_player {
 	max-width: 1150px;
 	max-width: 100%;
@@ -174,6 +159,19 @@ div#banner div.rt-inner h4 {
 		width: 100%;
 		height: 107px;
 	}
+	.info-banner {
+		max-width: 150px;
+		left: 50px;
+	}
+	#banner .content-banner .info-banner h2 {
+		font-size: 15px;
+	}
+	#banner .content-banner .info-banner h4 {
+		font-size: 15px;
+	}
+	#banner .content-banner .info-banner p {
+		font-size: 15px;
+	}
 }
 
 @media screen and (max-width:770px) {
@@ -185,6 +183,9 @@ div#banner div.rt-inner h4 {
 		max-width: 86px;
 		width: 100%;
 		height: 65px;
+	}
+	.menu-item {
+		width: 100%;
 	}
 }
 
