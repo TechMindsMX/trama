@@ -162,9 +162,21 @@
                     "regex": /^[A-Z]{3,4}([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([A-Z0-9]{3,4})$/,
                     "alertText": "* RFC inválida "
                 },
-				"yt": {
-                    "regex": /https?:\/\/(?:www\.)?(vimeo|youtube)\.com\/(?:watch\?v=)?(.*?)(?:\z|$|&)/,
-                    "alertText": "* Enlace inválido (Solo enlaces de Youtube o Vimeo)"
+				
+                "yt": {
+                    "func": function (field){
+                    	var regyt = /http:\/\/(?:youtu\.be\/|(?:[a-z]{2,3}\.)?youtube\.com\/watch(?:\?|#\!)v=)([\w-]{11}).*/gi;
+                    	var regvi = /http:\/\/(www\.)?vimeo.com\/(\d+)($|\/)/;
+                    	var campo = field.val();
+                    	
+                    	if ( (campo.match(regyt)) || (campo.match(regvi)) ) {
+                    		regreso = true;
+	                    } else {
+	                    	regreso = false;
+	                    }
+	                    	return regreso;
+                    },                
+                	"alertText":"* Enlace inválido (Solo enlaces de Youtube o Vimeo)"
                 },
 				"sc": {
                     "regex": /^https?:\/\/(?:www\.)?soundcloud\.com\/[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)*(?!\/sets(?:\/|$))(?:\/[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)*){1,2}\/?$/,
