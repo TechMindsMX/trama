@@ -2,13 +2,14 @@
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 	
 	$usuario = JFactory::getUser();
+	$jinput = JFactory::getApplication()->input;
 	
 	jimport('trama.class');
 	jimport('trama.jsocial');
 	
 	$base = JUri::base();
 	$pathJumi = Juri::base().'components/com_jumi/files/ver_proyecto/';
-	$proyecto = $_GET['proyid'];
+	$proyecto = $jinput->get('proyid', '', 'INT');
 	
 	//$document->addScript($pathJumi.'js/jquery.nivo.slider.js');
 	$document->addStyleSheet($pathJumi.'css/themes/bar/bar.css');
@@ -24,9 +25,7 @@
 	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
 	$json = json_decode(file_get_contents($url));
 
-
 $json->etiquetaTipo = tipoProyProd($json);
-	
 
 function tipoProyProd($data) {
 	$tipo = $data->type;
@@ -57,7 +56,7 @@ function buttons($data, $user) {
 function videos($obj, $param) {
 	$html = '';
 
-	$array = $obj->projectYoutubes;
+	$array = $obj->projectVideos;
 	foreach ($array as $key => $value ) {
 		if (strstr($value->url, 'youtube')) {
 			$arrayLimpio[] = array('youtube' => end(explode("=", $value->url)));
@@ -449,5 +448,5 @@ function fechas($data) {
     </script>
 
 <?php 
-var_dump($json);
+// var_dump($json);
  ?>
