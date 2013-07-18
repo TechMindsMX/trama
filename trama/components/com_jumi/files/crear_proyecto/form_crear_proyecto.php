@@ -1,6 +1,6 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
-require_once 'libraries/trama/class.php';
+jimport('trama.class');
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
 
@@ -28,7 +28,6 @@ $opcionesSubCat = '';
 $ligasVideos = '';
 $ligasAudios = '';
 //termina los definicion de campos del formularios
-
 
 if ( isset ($objDatosProyecto) ) {
 		
