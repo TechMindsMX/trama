@@ -4,6 +4,7 @@
 	$usuario = JFactory::getUser();
 	
 	jimport('trama.class');
+	jimport('trama.jsocial');
 	
 	$base = JUri::base();
 	$pathJumi = Juri::base().'components/com_jumi/files/ver_proyecto/';
@@ -18,6 +19,7 @@
 
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
 <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
+
 <?php
 	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
 	$json = json_decode(file_get_contents($url));
@@ -31,10 +33,12 @@ function tipoProyProd($data) {
 	switch ($tipo) {
 		case 'PRODUCT':
 			$tipoEtiqueta = JText::_('PRODUCT');
+			$data->editUrl = '12';
 			break;
 		
 		default:
 			$tipoEtiqueta = JText::_('PROJECT');
+			$data->editUrl = '9';
 			break;
 	}
 	return $tipoEtiqueta;
@@ -42,10 +46,10 @@ function tipoProyProd($data) {
 
 function buttons($data, $user) {
 	if ( $user->id == strval($data->userId) ) {
-		$link = 'index.php?option=com_jumi&view=appliction&fileid=9';
+		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
 		$proyid = '&proyid='.$data->id;
 		$html = '<div id="buttons">'.
-				'<div><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a></div>';
+				'<div><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a>'.JTramaSocial::inviteToGroup($data->id).'</div>';
 		return $html;
 	}
 }
@@ -445,5 +449,5 @@ function fechas($data) {
     </script>
 
 <?php 
-// var_dump($json);
+var_dump($json);
  ?>
