@@ -163,7 +163,7 @@
                     "alertText": "* RFC inválida "
                 },
 				"yt": {
-                    "regex": /http:\/\/(?:www\.)?(vimeo|youtube)\.com\/(?:watch\?v=)?(.*?)(?:\z|$|&)/,
+                    "regex": /http:\/\/(?:www.)?(?:(vimeo).com\/(.*)|(youtube).com\/watch\?v=(.*?)&)/,
                     "alertText": "* Enlace inválido (Solo enlaces de Youtube o Vimeo)"
                 },
 				"sc": {
