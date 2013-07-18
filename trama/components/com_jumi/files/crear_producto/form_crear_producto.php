@@ -64,7 +64,7 @@ if ( isset ($objDatosProducto) ) {
 		$jsonStatus = json_decode((file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list')));
 		
 		foreach ($jsonStatus as $key => $value) {
-			if($objDatosProyecto->status == $value->id) {
+			if($objDatosProducto->status == $value->id) {
 				$mensaje = 'El satus del producto '.$value->name.', no permite edición.';
 			}
 		}

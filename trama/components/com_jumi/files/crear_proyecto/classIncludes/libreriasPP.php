@@ -9,16 +9,13 @@ $scriptselect = 'jQuery(function() {
 });';
 
 $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
-
 $document->addStyleSheet($pathJumi.'css/form2.css');
-$document->addScript('http://code.jquery.com/jquery-1.9.1.js');
 
-$document->addScript($pathJumi.'js/mas.js');
-$document->addScript($pathJumi.'js/jquery.mask.js');
-$document->addScript($pathJumi.'js/jquery.validationEngine-es.js');
-$document->addScript($pathJumi.'js/jquery.validationEngine.js');
-$document->addScript($pathJumi.'js/jquery.chained.js');
-$document->addScript($pathJumi.'js/jquery.MultiFile.js');
-$document->addScript('http://dev7studios.com/demo/jquery-currency/jquery.currency.js');
+echo '<script src="'.$pathJumi.'js/mas.js"> </script>';
+echo '<script src="'.$pathJumi.'js/jquery.mask.js"> </script>';
+echo '<script src="'.$pathJumi.'js/jquery.validationEngine-es.js"> </script>';
+echo '<script src="'.$pathJumi.'js/jquery.validationEngine.js"> </script>';
+echo '<script src="'.$pathJumi.'js/jquery.chained.js"> </script>';
+echo '<script src="'.$pathJumi.'js/jquery.MultiFile.js"> </script>';
 $document->addScriptDeclaration($scriptselect);
 ?>
