@@ -165,8 +165,8 @@
 				
                 "yt": {
                     "func": function (field){
-                    	var regyt = /http:\/\/(?:youtu\.be\/|(?:[a-z]{2,3}\.)?youtube\.com\/watch(?:\?|#\!)v=)([\w-]{11}).*/gi;
-                    	var regvi = /http:\/\/(www\.)?vimeo.com\/(\d+)($|\/)/;
+                    	var regyt = /https?:\/\/(?:youtu\.be\/|(?:[a-z]{2,3}\.)?youtube\.com\/watch(?:\?|#\!)v=)([\w-]{11}).*/gi;
+                    	var regvi = /https?:\/\/(www\.)?vimeo.com\/(\d+)($|\/)/;
                     	var campo = field.val();
                     	
                     	if ( (campo.match(regyt)) || (campo.match(regvi)) ) {
