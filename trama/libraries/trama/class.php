@@ -91,6 +91,12 @@ class JTrama
 		}
 		return $statusName;
 	}
+	
+	public function getProjectsByUser ($userid) {
+		$projectList = json_decode(file_get_contents("http://192.168.0.122:7070/trama-middleware/rest/project/getByUser/".$userid));
+		
+		return $projectList;
+	}
 
 }
 ?>
