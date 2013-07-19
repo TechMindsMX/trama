@@ -1,23 +1,15 @@
-<?php // 
-
-// $idPadreParam = 0;
-// $tablaParam = 'perfilx_catalogofuncion';
-// $columnaIdParam = 'idcatalogoFuncion';
-// $columnaIdPadreParam = 'idcatalogoFuncionPadre';
-// $descripcionParam = 'nomNombreCategoria';
-
-// $campoTabla = 'respuestaFuncion';
-
-// ?>
-
 <?php
 defined('_JEXEC') or die( 'Restricted access' );
+
+$path = 'images/fotoperfil/';
+$pathJumi = Juri::base().'components/com_jumi/files';
 
 $tabla = "perfilx_respuestas";
 
 $var = $_POST;
 
 function busquedaPerfil($tabla, $valor ,$campo){
+	
 	$db =& JFactory::getDBO();
 	$query = $db->getQuery(true);
 	
@@ -40,26 +32,29 @@ function agrupacionIds($tabla, $valor, $campo){
 	for($i = 0; $i < $noKeyWorks; $i++){
 
 		$resultado = busquedaPerfil($tabla, $valor[$i], $campo);
-		
+				
 		$noIds = count($resultado);
 		
 		for ($j = 0; $j < $noIds; $j++) {
 
-			$arrayIds[] = $resultado[$j];
+			$arrayIds[] = $resultado[$j]->users_id;
 
 		}
 		
-	}
+		if (isset($arrayIds)) {
+			
+			$arrayresults = array_count_values($arrayIds);
+		
+		} else {
+			
+			$allDone =& JFactory::getApplication();
+			$allDone->redirect('index.php', 'No se encontro ningun resultado' );
+		
+		}
+				
+	}	
 	
-	return $arrayIds;
-}
-
-function idPeso($agrupacionIds){
-	
-	$noSinDuplicados = count(array_unique($agrupacionIds));
-	
-	return $noSinDuplicados;
-	
+	return $arrayresults;
 }
 
 foreach ($var as $key => $value) {
@@ -77,14 +72,114 @@ foreach ($var as $key => $value) {
 	}
 }
 
+if(empty($valor)) {
+	$allDone =& JFactory::getApplication();
+	$allDone->redirect('index.php', 'No se selecciono ninguna busqueda' );
+}
+
 $agrupacionIds = agrupacionIds($tabla, $valor, $campo);
 
-var_dump($agrupacionIds);
+$arrayIds = array_keys($agrupacionIds);
 
-//$searchIds = idPeso($agrupacionIds);
+arsort($agrupacionIds);
 
-//var_dump($searchIds);
+$Ids = implode(",",$arrayIds);
 
-//exit;
+$db =& JFactory::getDBO();
+$query = $db->getQuery(true);
+
+$query
+	->select('nomNombre, nomApellidoPaterno, nomApellidoMaterno, Foto, users_id')
+	->from('perfil_persona')
+	->where('users_id IN ('.$Ids.') && perfil_tipoContacto_idtipoContacto = 1');
+
+$db->setQuery( $query );
+
+$resultado = $db->loadObjectList();
+
+foreach ($agrupacionIds as $key => $val) {
+	
+	for ($i = 0; $i < count($resultado); $i++){
+		
+		if ($resultado[$i]->users_id == $key){
+
+			$arregloOrdenado[] = $resultado[$i]; 
+		
+		}
+	
+	}
+
+}
+
+$jsonResult = json_encode($arregloOrdenado);
 
 ?>
+
+<?php 
+	$document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
+	echo '<script src="'.$pathJumi.'/view_busqueda/js/jquery.pagination.js"></script>';
+?>
+
+<script type="text/javascript">
+var members = <?php echo $jsonResult; ?>;
+console.log(members);
+
+$(document).ready(function(){
+	initPagination();
+
+});
+
+function pageselectCallback (page_index, jq) {
+	var items_per_page = 9;
+	var max_elem = Math.min((page_index+1) * items_per_page, members.length);
+	var newcontent = '';
+	var columnas = 3;
+	var ancho = Math.floor(100/columnas);
+	var countCol = 0;
+
+	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
+
+		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
+		
+		countCol++;
+		if (countCol == columnas) {
+			countCol = countCol - columnas;
+			last='-last';
+		}
+		else {
+			last='';
+		}
+		newcontent += '<div id="'+members[i]+'">'
+		newcontent += '<div class="proyecto col' + last + ' ancho">';
+		newcontent += '<div class="inner">';
+		newcontent += '<div class="titulo">';
+		newcontent += '<div class="tituloText inner">';
+		newcontent += '<h4><a href="' + link + '">' + members[i].nomNombre + ' ' + members[i].nomApellidoPaterno +'</h4></a>';
+		newcontent += '<div class="fotoPerfil">';
+		newcontent += '<a href="' + link + '">';
+		newcontent += '<img src="<?php echo $path; ?>' + members[i].Foto + '" alt="Foto" /></a></div>';
+		newcontent += '</div>';
+		newcontent += '</div>';
+		newcontent += '</div>';
+		newcontent += '</div>';
+		newcontent += '</div>';
+	}
+               
+	jQuery('#Searchresult').html(newcontent);
+            
+	return false;
+}
+            
+function initPagination() {			 
+	var num_entries = members.length;
+	var pags = (members.length/num_entries) + 1;
+
+	jQuery("#Pagination").pagination(num_entries, {
+		num_display_entries: pags,
+		callback: pageselectCallback
+	});
+}
+</script>
+
+	<dl id="Searchresult"></dl>
+	<div id="Pagination" class="pagination"></div>
