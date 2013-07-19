@@ -3,9 +3,10 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed
 
 $path = MIDDLE.AVATAR."/";
 
-$usuario = JFactory::getUser();
-$base = JUri::base();
-$document = JFactory::getDocument();
+$usuario =& JFactory::getUser();
+$base =& JUri::base();
+$document =& JFactory::getDocument();
+
 $pathJumi = Juri::base().'components/com_jumi/files';
 $busquedaPor = array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT' );
 $ligasPP = '';
@@ -46,9 +47,14 @@ function prodProy ($tipo) {
 	} else {
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
 	}
-	
-	$json0 = file_get_contents($url);
 
+	$json0 = @file_get_contents($url);
+
+	if ( $json0 === false ) {
+		$app =& JFactory::getApplication();
+		$app->redirect(JURI::base(), JText::_('BUSQUEDA_SIN_RESULTADOS'), 'notice');
+	}
+	
 	return $json0;
 }
 
