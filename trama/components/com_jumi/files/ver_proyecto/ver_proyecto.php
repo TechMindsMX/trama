@@ -2,7 +2,12 @@
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 	
 	$usuario = JFactory::getUser();
-	$jinput = JFactory::getApplication()->input;
+	$app = JFactory::getApplication();
+	if ($usuario->guest == 1) {
+		$app->redirect('index.php?option=com_users&view=login', JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+	}
+	
+	$jinput = $app->input;
 	
 	jimport('trama.class');
 	jimport('trama.jsocial');
@@ -121,11 +126,23 @@ function imagenes($data) {
 }
 
 function audios($data) {
-
 	$html = '';
 	$array = $data->projectSoundclouds;
-	foreach ( $array as $key => $value ) {
-		$val = "/".$value->url;
+	
+	require_once 'Services/Soundcloud.php';
+		
+	// create a client object with your app credentials
+	$client = new Services_Soundcloud('52bdfab59cb4719ea8d5ea626efae0da', '7688bd528138b2de5daf52edffc091c5');
+	$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
+	
+		foreach ($array as $key => $value) {
+	// get a tracks oembed data
+	$track_url = str_replace('https', 'http', $value->url);
+var_dump($track_url).'<br />';$track_url = 'http://soundcloud.com/forss/flickermood'; // QUITAR
+	$embed_info = json_decode($client->get('oembed', array('url' => $track_url)));
+	// render the html for the player widget
+	
+	$html .= $embed_info->html;
 	}
 	return $html;
 }
@@ -356,6 +373,7 @@ function fechas($data) {
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="audios" class="ver_proyecto">
+				<?php echo audios($json); ?>
 				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
 				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
 				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
