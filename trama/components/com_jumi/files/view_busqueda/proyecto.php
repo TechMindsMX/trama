@@ -48,7 +48,7 @@ function prodProy ($tipo) {
 	}
 	
 	$json0 = file_get_contents($url);
-	
+
 	return $json0;
 }
 
@@ -75,8 +75,12 @@ foreach ($json as $key => $value) {
 };
 
 $jsonJS = json_encode($json);
-$productos = json_encode($productos);
-$proyectos = json_encode($proyectos);
+if (!empty($productos)) {
+	$productos = json_encode($productos);
+}
+if (!empty($proyectos)) {
+	$proyectos = json_encode($proyectos);
+}
 
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
 echo '<script src="'.$pathJumi.'/view_busqueda/js/jquery.pagination.js"></script>';
@@ -103,13 +107,17 @@ $(document).ready(function(){
 	jQuery("#ligasprod input").click(function () {
 		switch(this.value){
 			case 'proyectos':
-				members = <?php echo $proyectos; ?>;
-				initPagination();
+				<?php if (isset($proyectos)) {
+					echo 'members = '.$proyectos.';
+					initPagination();';
+				} ?>
 			break;
 			
 			case 'productos':
-				members = <?php echo $productos; ?>;
-				initPagination();
+				<?php if (isset($productos)) {
+					echo 'members = '.$productos.';
+					initPagination();';
+				} ?>
 			break;
 			
 			case 'Mostrar todos':
