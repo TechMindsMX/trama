@@ -89,17 +89,17 @@
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
             <div id="nombre"><h3><?php echo JText::_('DATOS_FISCALES'); ?></h3></div>           
             <div id="datosFiscales">
-	            <div class="_50">
+	            <div class="_75">
 	                <label for="daFi_nomNombreComercial"><?php echo JText::_('NOMBRE_COMERCIAL'); ?> *:</label>
 	                <input name="daFi_nomNombreComercial" class="validate[required,custom[onlyLetterNumber]]" type="text" id="daFi_nomNombreComercial" maxlength="50" />
 	            </div>
 	            <div class="_25">
-	                <label for="daFi_nomRazonSocial"><?php echo JText::_('RAZON_SOCIAL'); ?>*:</label>
-	                <input name="daFi_nomRazonSocial" class="validate[required,custom[onlyLetterNumber]]" type="text" id="daFi_nomRazonSocial" maxlength="50" />
-	            </div>
-	            <div class="_25">
 	                <label for="daFi_rfcRFC">RFC(May&uacute;sculas)*:</label>
 	                <input name="daFi_rfcRFC" class="validate[required,custom[rfc]]" type="text" id="daFi_rfcRFC" maxlength="14" />
+	            </div>
+				<div class="_100">
+	                <label for="daFi_nomRazonSocial"><?php echo JText::_('RAZON_SOCIAL'); ?>*:</label>
+	                <input name="daFi_nomRazonSocial" class="validate[required,custom[onlyLetterNumber]]" type="text" id="daFi_nomRazonSocial" maxlength="50" />
 	            </div>
             </div>             
             <div id="nombre"><h3><?php echo JText::_('DOM_FISCAL'); ?></h3></div>            

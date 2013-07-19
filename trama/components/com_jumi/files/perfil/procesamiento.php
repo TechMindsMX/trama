@@ -10,11 +10,12 @@ $_POST['repr_users_id'] = $usuario->id;
 $_POST['repr_perfil_tipoContacto_idtipoContacto'] = 2;
 $_POST['daCo_users_id'] = $usuario->id;
 $_POST['daCo_perfil_tipoContacto_idtipoContacto'] = 3;
+
 $datos = new procesamiento;
 $datos->agrupacion($_POST);
 
 if(!empty($_FILES)){
-	$datos->cargar_imagen($_FILES['daGr_Foto']['type']);
+	$datos->cargar_imagen($_FILES['daGr_Foto']['type'], $usuario->id);
 }
 
 class procesamiento {
@@ -75,8 +76,9 @@ class procesamiento {
 
 			switch ($clavevaltmp) {
 				case 'daGr_':
-					if($campos[$clave] <> ""){
+					if($campos[$clave] <> "" || $campos['daGr_nomApellidoMaterno'] == ""){
 						$gral[$clavelimpia] = $campos[$clave];
+						$gral['Foto'] = "/images/fotoPerfil/" . $campos['daGr_users_id'].".jpg";
 						$this->datos_generales = $gral;
 					}
 					break;
@@ -230,19 +232,6 @@ class procesamiento {
 					break;
 
 				case 'prPa_':
-// 					$clavelimpiaSinNnum = preg_replace("/[0-9]/", "", $clavelimpia);
-
-// 					if ($campos[$clave] <> "") {
-// 						$c = preg_replace("/[a-zA-Z]/", "", $clavelimpia);
-// 						$array_proyectosPas[$clavelimpiaSinNnum] = $campos[$clave];
-// 						$todos[$c] = $array_proyectosPas;
-// 						if ($c != $temp) {
-// 							$array_proyectosPas['idHistorialProyectos']= '';
-// 						}
-// 						$c = $temp;
-// 					}
-// 					break;
-
 					$clavelimpiaSinNnum = preg_replace("/[0-9]/", "", $clavelimpia);
 					
 					if ($campos[$clave] <> "") {
@@ -250,18 +239,17 @@ class procesamiento {
 						$array_proyectosPas[$clavelimpiaSinNnum] = $campos[$clave];
 						$todos[$c] = $array_proyectosPas;
 					}
-					break;
-					
+					break;					
 			}
 		}
 		$this->proyectos_pasados = $todos;
 	}
 
-	function cargar_imagen($tipo){
-
+	function cargar_imagen($tipo, $usuario){
+	
 		if($tipo === 'image/jpeg' && getimagesize($_FILES["daGr_Foto"]["tmp_name"])){
-			move_uploaded_file($_FILES["daGr_Foto"]["tmp_name"],"archivos/" . $_FILES["daGr_Foto"]["name"]);
-			$this->resize("archivos/".$_FILES["daGr_Foto"]["name"], $_FILES["daGr_Foto"]["name"]);
+			move_uploaded_file($_FILES["daGr_Foto"]["tmp_name"],"/var/www/html/trama/development/images/fotoPerfil/" .$usuario.".jpg");
+			$this->resize("/var/www/html/trama/development/images/fotoPerfil/".$usuario.".jpg", $usuario.".jpg");
 		}else{
 			echo 'no es imagen o el archivo esta corrupto <br />';
 		} 
@@ -273,8 +261,8 @@ class procesamiento {
 		
 		$img_original = imagecreatefromjpeg($rutaImagenOriginal);
 		
-		$max_ancho = 200;
-		$max_alto = 200;
+		$max_ancho = 100;
+		$max_alto = 100;
 		
 		list($ancho,$alto)=getimagesize($rutaImagenOriginal);
 		
@@ -485,9 +473,7 @@ class procesamiento {
 	function grabarDatosPerfil($data, $tabladb, $tipoContacto) {
 		$db =& JFactory::getDBO();
 		$usuario =& JFactory::getUser();
-		
 		$existe = $_GET['exi'];
-
 		if (isset($data) && !empty($data)) {
 			
 			if ($tabladb != 'perfil_persona') {
@@ -500,7 +486,7 @@ class procesamiento {
 			
 			foreach ($data as $key => $value) {
 				
-				if (!empty($value)) {
+				if (!empty($value) || $data['nomApellidoMaterno'] == "") {
 			        $col[] = mysql_real_escape_string($key);
 					$val[] = "'".mysql_real_escape_string($value)."'";
 				}
@@ -538,11 +524,11 @@ class procesamiento {
 					$telefonos = telefono($resultado->id);
 					$noTelefonos = count($telefonos);
 					for($i = 0; $i < $noTelefonos; $i++){
-						if($telefonos[$i]->perfil_tipoTelefono_idtipoTelefono == $data[perfil_tipoTelefono_idtipoTelefono]) {
-							$conditions = ($campoId. ' = '.$resultado->id. ' && perfil_tipoTelefono_idtipoTelefono = '.$data[perfil_tipoTelefono_idtipoTelefono]);
+						if($telefonos[$i]->perfil_tipoTelefono_idtipoTelefono == $data['perfil_tipoTelefono_idtipoTelefono']) {
+							$conditions = ($campoId. ' = '.$resultado->id. ' && perfil_tipoTelefono_idtipoTelefono = '.$data['perfil_tipoTelefono_idtipoTelefono']);
 							updateFields($tabladb, $fields, $conditions);
 							break;
-						} elseif($i == noTelefonos-1) {
+						} elseif($i == $noTelefonos-1) {
 							insertFields($tabladb, $col, $val);
 						}
 					}
@@ -551,8 +537,8 @@ class procesamiento {
 					$noEmails = count($emails);
 
 					for($i = 0; $i < $noEmails; $i++){
-						if($emails[$i]->idemail == $data[idemail]) {
-							$conditions = ($campoId. ' = '.$resultado->id. ' && idemail = '.$data[idemail]);
+						if($emails[$i]->idemail == $data['idemail']) {
+							$conditions = ($campoId. ' = '.$resultado->id. ' && idemail = '.$data['idemail']);
 							updateFields($tabladb, $fields, $conditions);
 							break;
 						} elseif ($i == $noEmails-1) {
@@ -563,8 +549,8 @@ class procesamiento {
 					$proyecPasados = proyectosPasados($resultado->id);
 					$noProyectos = count($proyecPasados);
 					for($i = 0; $i < $noProyectos; $i++){
-						if($proyecPasados[$i]->idHistorialProyectos == $data[idHistorialProyectos]) {
-							$conditions = ($campoId. ' = '.$resultado->id. ' && idHistorialProyectos = '.$data[idHistorialProyectos]);
+						if($proyecPasados[$i]->idHistorialProyectos == $data['idHistorialProyectos']) {
+							$conditions = ($campoId. ' = '.$resultado->id. ' && idHistorialProyectos = '.$data['idHistorialProyectos']);
 							updateFields($tabladb, $fields, $conditions);
 							break;
 						} elseif ($i == $noProyectos-1) {

@@ -36,8 +36,7 @@ function datosGenerales($idUsuario, $tipoContacto){
 
 	$db->setQuery( $query );
 
-	$temporal = $db->loadObjectList();
-	$resultado = $temporal[0];
+	$resultado = $db->loadObject();
 	return $resultado;
 
 }
@@ -54,9 +53,9 @@ function domicilio($idPersona, $tipoDireccion){
 
 	$db->setQuery( $query );
 
-	$resultado = $db->loadObjectList();
+	$resultado = $db->loadObject();
 	
-	return $resultado[0];
+	return $resultado;
 
 }
 
@@ -108,9 +107,9 @@ function datosFiscales($idPersona){
 
 	$db->setQuery( $query );
 
-	$resultado = $db->loadObjectList();
+	$resultado = $db->loadObject();
 
-	return $resultado[0];
+	return $resultado;
 
 }
 

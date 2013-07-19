@@ -41,7 +41,7 @@
 					echo "jQuery('#daGr_nomNombre').val('".$generales->nomNombre."');";
 					echo "jQuery('#daGr_nomApellidoPaterno').val('".$generales->nomApellidoPaterno."');";
 					echo "jQuery('#daGr_nomApellidoMaterno').val('".$generales->nomApellidoMaterno."');";
-					echo "jQuery('#daGr_Foto').val('".$generales->Foto."');";
+					// echo "jQuery('#daGr_Foto').val('".$generales->Foto."');";
 					echo "jQuery('#daGr_nomPaginaWeb').val('".$generales->nomPaginaWeb."');";
 					for ($i=0; $i<count($email); $i++) {
 						if ($i == 0) {

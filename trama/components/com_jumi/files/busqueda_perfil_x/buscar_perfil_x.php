@@ -1,9 +1,66 @@
+<?php // 
+
+// $idPadreParam = 0;
+// $tablaParam = 'perfilx_catalogofuncion';
+// $columnaIdParam = 'idcatalogoFuncion';
+// $columnaIdPadreParam = 'idcatalogoFuncionPadre';
+// $descripcionParam = 'nomNombreCategoria';
+
+// $campoTabla = 'respuestaFuncion';
+
+// ?>
+
 <?php
 defined('_JEXEC') or die( 'Restricted access' );
 
 $tabla = "perfilx_respuestas";
 
 $var = $_POST;
+
+function busquedaPerfil($tabla, $valor ,$campo){
+	$db =& JFactory::getDBO();
+	$query = $db->getQuery(true);
+	
+	$query
+		->select('users_id')
+		->from($tabla)
+		->where('FIND_IN_SET("'.$valor.'", '.$campo.')');
+	
+	$db->setQuery( $query );
+	
+	$resultado = $db->loadObjectList();
+	
+	return $resultado;
+}
+
+function agrupacionIds($tabla, $valor, $campo){
+	
+	$noKeyWorks = count($valor);
+	
+	for($i = 0; $i < $noKeyWorks; $i++){
+
+		$resultado = busquedaPerfil($tabla, $valor[$i], $campo);
+		
+		$noIds = count($resultado);
+		
+		for ($j = 0; $j < $noIds; $j++) {
+
+			$arrayIds[] = $resultado[$j];
+
+		}
+		
+	}
+	
+	return $arrayIds;
+}
+
+function idPeso($agrupacionIds){
+	
+	$noSinDuplicados = count(array_unique($agrupacionIds));
+	
+	return $noSinDuplicados;
+	
+}
 
 foreach ($var as $key => $value) {
 	if ((is_numeric($value)) && ($key != 'usuario') && ($key !='controlador')) {
@@ -19,21 +76,15 @@ foreach ($var as $key => $value) {
 		$control = $value;
 	}
 }
-var_dump($valor);
 
-$db =& JFactory::getDBO();
-$query = $db->getQuery(true);
+$agrupacionIds = agrupacionIds($tabla, $valor, $campo);
 
-$query
-->select('users_id')
-->from('perfilx_respuestas')
-->where('FIND_IN_SET("'.$valor[0].'", respuestaFuncion)');
+var_dump($agrupacionIds);
 
-$db->setQuery( $query );
+//$searchIds = idPeso($agrupacionIds);
 
-$resultado = $db->loadObjectList();
-echo $query;
-var_dump($resultado);
-exit;
+//var_dump($searchIds);
+
+//exit;
 
 ?>
