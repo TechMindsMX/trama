@@ -14,7 +14,12 @@ class UserData {
 		$db->setQuery( $query );
 	
 		$temporal = $db->loadObjectList();
-		$resultado = $temporal[0];
+		
+		if(empty($temporal)){
+			$resultado = null;
+		}else{
+			$resultado = $temporal[0];
+		}
 		return $resultado;
 	}
 	

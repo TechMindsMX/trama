@@ -13,7 +13,14 @@ $base = JUri::base();
 $proyectos = JTrama::getProjectsByUser($userid);		 
 $pathJumi = $base.'components/com_jumi/files/perfil_usuario/';
 $document->addStyleSheet($pathJumi.'css/style.css');
+
 $datosgenerales = $objuserdata::datosGr($userid);
+
+if(is_null($datosgenerales)){
+	$redirect = JFactory::getApplication();
+	$redirect->redirect('index.php', 'No hay datos de usuario','notice');
+}
+
 $id_datos_generales = $datosgenerales->id;
 
 $proyectos_pasados = $objuserdata::pastProjects($id_datos_generales);
