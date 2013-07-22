@@ -113,6 +113,7 @@ function validate(&$errors, $config_data)
 		$errors['subject'] = JText::_('COM_FLEXICONTACT_REQUIRED');
 
 // validate user fields
+	// valido si el telefono trae solo numeros
 
 	if (($config_data->field_opt1 == "mandatory") and (!is_numeric($this->data->field1)))
 		$errors['field1'] = JText::_('COM_FLEXICONTACT_REQUIRED');
