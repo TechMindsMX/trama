@@ -79,6 +79,7 @@ function display($tpl = null)
 			<input type="text" class="fc_input" name="from_name" size="30" value="'.$this->escape($this->post_data->from_name).'" readonly /> '.
 				self::get_error('from_name').'</td></tr>';}
 
+	
 // from email address
 	if(empty($this->post_data->from_email)){
 	echo '<tr><td class="fc_prompt">'.JText::_('COM_FLEXICONTACT_FROM_ADDRESS').'</td>
