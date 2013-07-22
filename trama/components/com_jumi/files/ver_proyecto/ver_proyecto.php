@@ -135,15 +135,22 @@ function audios($data) {
 	$client = new Services_Soundcloud('52bdfab59cb4719ea8d5ea626efae0da', '7688bd528138b2de5daf52edffc091c5');
 	$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
 	
-		foreach ($array as $key => $value) {
-	// get a tracks oembed data
-	$track_url = str_replace('https', 'http', $value->url);
-var_dump($track_url).'<br />';$track_url = 'http://soundcloud.com/forss/flickermood'; // QUITAR
-	$embed_info = json_decode($client->get('oembed', array('url' => $track_url)));
-	// render the html for the player widget
-	
-	$html .= $embed_info->html;
+	foreach ($array as $key => $value) {
+		if (!empty($value->url)) {
+		// get a tracks oembed data
+	//	$track_url = str_replace('https', 'http', $value->url);
+		$track_url = $value->url;
+		$embed_info = json_decode($client->get('resolve', array('url' => $track_url)));
+		// render the html for the player widget
+		
+		$html .= '<iframe width="100%" height="100" scrolling="no" frameborder="no" src="'.
+		'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$embed_info->id.'"></iframe>';
+		}
 	}
+	if ($html == '') {
+		$html = JText::_('NO_HAY_AUIDOS');
+	}
+	
 	return $html;
 }
 
@@ -374,10 +381,6 @@ function fechas($data) {
 			</div>
 			<div id="audios" class="ver_proyecto">
 				<?php echo audios($json); ?>
-				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
-				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
-				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
-				<iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F63404056"></iframe>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="finanzas" class="ver_proyecto">
