@@ -38,7 +38,7 @@ if ( isset ($objDatosProyecto) ) {
 		$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$objDatosProyecto->projectAvatar->name.'" width="100" />';
 		$banner = '<img src="'.MIDDLE.BANNER.'/'.$objDatosProyecto->projectBanner->name.'" width="100" />';
 		
-		$ligasVideos = $objDatosProyecto->projectYoutubes;
+		$ligasVideos = $objDatosProyecto->projectVideos;
 		$ligasAudios = $objDatosProyecto->projectSoundclouds;
 		
 		$fechaIniProd = explode('-',$objDatosProyecto->productionStartDate);
