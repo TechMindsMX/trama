@@ -67,10 +67,10 @@
  					echo "jQuery('#dire_nomCalle').val('".$direccion->nomCalle."');";
  					echo "jQuery('#dire_noExterior').val('".$direccion->noExterior."');";
  					echo "jQuery('#dire_noInterior').val('".$direccion->noInterior."');";
- 					echo "jQuery('#dire_nomColonias').val('".$direccion->perfil_colonias_idcolonias."');";
- 					echo "jQuery('#dire_nomDelegacion').val('".$direccion->perfil_delegacion_iddelegacion."');";
+  					echo "jQuery('#dire_nomColonias').append(new Option('".$direccion->perfil_colonias_idcolonias."', '".$direccion->perfil_colonias_idcolonias."'));";
+  					echo "jQuery('#dire_nomEstado').append(new Option('".$direccion->perfil_estado_idestado."', '".$direccion->perfil_estado_idestado."'));";
  					echo "jQuery('#dire_iniCodigoPostal').val('".$direccion->perfil_codigoPostal_idcodigoPostal."');";
- 					echo "jQuery('#dire_nomEstado').val('".$direccion->perfil_estado_idestado."');";
+ 					echo "jQuery('#dire_nomDelegacion').val('".$direccion->perfil_delegacion_iddelegacion."');";
  					echo "jQuery('#dire_nomPais').val('".$direccion->perfil_pais_idpais."');";
  					echo "jQuery('input[name=daGr_perfil_personalidadJuridica_idpersonalidadJuridica][value=".$generales->perfil_personalidadJuridica_idpersonalidadJuridica."]').attr('checked', true);";
  					echo "jQuery('#daGr_dscDescripcionPersonal').val('".$generales->dscDescripcionPersonal."');";
@@ -188,7 +188,6 @@
                	<label for="dire_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
                	<!--input name="dire_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomColonias" maxlength="50" /-->
                	<select name="dire_perfil_colonias_idcolonias" class="validate[required]" id="dire_nomColonias">
-               		<option> nada</option>
                	</select>
             </div>
             <div class="_50">

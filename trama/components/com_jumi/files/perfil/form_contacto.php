@@ -76,10 +76,10 @@
  					echo "jQuery('#doRe_nomCalle').val('".$direccionRepresentante->nomCalle."');";
  					echo "jQuery('#doRe_noExterior').val('".$direccionRepresentante->noExterior."');";
  					echo "jQuery('#doRe_noInterior').val('".$direccionRepresentante->noInterior."');";
- 					echo "jQuery('#doRe_nomColonias').val('".$direccionRepresentante->perfil_colonias_idcolonias."');";
+ 					echo "jQuery('#doRe_nomColonias').append(new Option('".$direccionRepresentante->perfil_colonias_idcolonias."', '".$direccionRepresentante->perfil_colonias_idcolonias."'));";
+ 					echo "jQuery('#doRe_nomEstado').append(new Option('".$direccionRepresentante->perfil_estado_idestado."', '".$direccionRepresentante->perfil_estado_idestado."'));";
  					echo "jQuery('#doRe_nomDelegacion').val('".$direccionRepresentante->perfil_delegacion_iddelegacion."');";
  					echo "jQuery('#doRe_iniCodigoPostal').val('".$direccionRepresentante->perfil_codigoPostal_idcodigoPostal."');";
- 					echo "jQuery('#doRe_nomEstado').val('".$direccionRepresentante->perfil_estado_idestado."');";
  					echo "jQuery('#doRe_nomPais').val('".$direccionRepresentante->perfil_pais_idpais."');";
  					
  					/*Llenado Contacto*/
@@ -107,10 +107,10 @@
  					echo "jQuery('#doCo_nomCalle').val('".$direccionContacto->nomCalle."');";
  					echo "jQuery('#doCo_noExterior').val('".$direccionContacto->noExterior."');";
  					echo "jQuery('#doCo_noInterior').val('".$direccionContacto->noInterior."');";
- 					echo "jQuery('#doCo_nomColonias').val('".$direccionContacto->perfil_colonias_idcolonias."');";
+ 					echo "jQuery('#doCo_nomColonias').append(new Option('".$direccionContacto->perfil_colonias_idcolonias."', '".$direccionContacto->perfil_colonias_idcolonias."'));";
+ 					echo "jQuery('#doCo_nomEstado').append(new Option('".$direccionContacto->perfil_estado_idestado."', '".$direccionContacto->perfil_estado_idestado."'));";
  					echo "jQuery('#doCo_nomDelegacion').val('".$direccionContacto->perfil_delegacion_iddelegacion."');";
  					echo "jQuery('#doCo_iniCodigoPostal').val('".$direccionContacto->perfil_codigoPostal_idcodigoPostal."');";
- 					echo "jQuery('#doCo_nomEstado').val('".$direccionContacto->perfil_estado_idestado."');";
  					echo "jQuery('#doCo_nomPais').val('".$direccionContacto->perfil_pais_idpais."');";
  					
 				}

@@ -61,10 +61,10 @@
 	 					echo "jQuery('#doFi_nomCalle').val('".$direFiscal->nomCalle."');";
 	 					echo "jQuery('#doFi_noExterior').val('".$direFiscal->noExterior."');";
 	 					echo "jQuery('#doFi_noInterior').val('".$direFiscal->noInterior."');";
-	 					echo "jQuery('#doFi_nomColonias').val('".$direFiscal->perfil_colonias_idcolonias."');";
+	 					echo "jQuery('#doFi_nomColonias').append(new Option('".$direFiscal->perfil_colonias_idcolonias."', '".$direFiscal->perfil_colonias_idcolonias."'));";
+ 						echo "jQuery('#doFi_nomEstado').append(new Option('".$direFiscal->perfil_estado_idestado."', '".$direFiscal->perfil_estado_idestado."'));";
 	 					echo "jQuery('#doFi_nomDelegacion').val('".$direFiscal->perfil_delegacion_iddelegacion."');";
 	 					echo "jQuery('#doFi_iniCodigoPostal').val('".$direFiscal->perfil_codigoPostal_idcodigoPostal."');";
-	 					echo "jQuery('#doFi_nomEstado').val('".$direFiscal->perfil_estado_idestado."');";
 	 					echo "jQuery('#doFi_nomPais').val('".$direFiscal->perfil_pais_idpais."');";	 					
 					}
 				?>
