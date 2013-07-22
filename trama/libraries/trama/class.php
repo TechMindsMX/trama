@@ -57,9 +57,9 @@ class JTrama
 		return $nomCatPadre;
 	}
 	
-	public function getProducerName($data) {
+	public function getProducerProfile($data) {
 		include_once JPATH_ROOT.'/components/com_community/libraries/core.php';
-		$link = CRoute::_('index.php?option=com_community&view=profile&userid='.$data);
+		$link = JRoute::_('index.php?option=com_jumi&view=application&fileid=17&userid='.$data);
 		
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);

@@ -231,7 +231,7 @@ function encabezado($data) {
 		'<h4>'.JTrama::getSubCatName($data->subcategory).'</h4>'.
 		'<span class="tipo_proy_prod"> - '.JTrama::getStatusName($data->status).'</span>'.
 		'<span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
-		'<p>'.JTrama::getProducerName($data->userId).'</p>';
+		'<p>'.JTrama::getProducerProfile($data->userId).'</p>';
 	
 	return $html;
 }

@@ -65,7 +65,7 @@ jimport('trama.class');
 foreach ($json as $key => $value) {
 	$value->nomCat = JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
-	$value->producer = JTrama::getProducerName($value->userId);
+	$value->producer = JTrama::getProducerProfile($value->userId);
 	$value->statusName = JTrama::getStatusName($value->status);
 }
 
