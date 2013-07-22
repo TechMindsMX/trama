@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die( 'Restricted access' );
 
-$path = 'images/fotoperfil/';
+$path = 'images/fotoPerfil/';
 $pathJumi = Juri::base().'components/com_jumi/files';
 
 $tabla = "perfilx_respuestas";
@@ -48,7 +48,7 @@ function agrupacionIds($tabla, $valor, $campo){
 		} else {
 			
 			$allDone =& JFactory::getApplication();
-			$allDone->redirect('index.php', 'No se encontro ningun resultado' );
+			$allDone->redirect($_SERVER['HTTP_REFERER'], 'No se encontro ningun resultado' );
 		
 		}
 				
@@ -74,7 +74,7 @@ foreach ($var as $key => $value) {
 
 if(empty($valor)) {
 	$allDone =& JFactory::getApplication();
-	$allDone->redirect('index.php', 'No se selecciono ninguna busqueda' );
+	$allDone->redirect($_SERVER['HTTP_REFERER'], 'No se selecciono ninguna busqueda' );
 }
 
 $agrupacionIds = agrupacionIds($tabla, $valor, $campo);
