@@ -114,7 +114,7 @@ $promedio = $objuserdata->scoreUser($userid)
 							<?php 
 								foreach ($proyectos_pasados as $key => $value) {
 		      					
-								echo '<a href="'.$value->urlProyectosPasados.'">'.$value->nomNombreProyecto.'</a>';		
+								echo '<a href="'.$value->urlProyectosPasados.'" target="_blank">'.$value->nomNombreProyecto.'</a>';		
 								echo "<br />" ; 
 								echo "<br />"  ;   
 								echo $value->dscDescripcionProyecto;		
@@ -133,7 +133,7 @@ $promedio = $objuserdata->scoreUser($userid)
 							<?php 
 								foreach ($proyectos as $key => $value) {
 								echo "<ul>";	
-								echo '<li><a href="index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$value->id.'" >'.$value->name.'</a></li>';
+								echo '<li><a href="index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$value->id.'"  >'.$value->name.'</a></li>';
 								echo "</ul>";
 								}							
 							?>							
