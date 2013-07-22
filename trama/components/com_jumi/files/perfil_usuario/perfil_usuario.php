@@ -32,9 +32,23 @@ $promedio = $objuserdata->scoreUser($userid)
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
       <div id="contenido">
+      	
+      	<div id="raty">
+      	 <div id="datos">
+		       <?php 
+		      echo $datosgenerales->nomNombre." ".$datosgenerales->nomApellidoPaterno;
+		       
+		       ?>
+		       </div>
+		       	<div id="calif"></div>
+				<div id="texto"><?php echo number_format($promedio->score ,1); ?></div>
+				<div style="clear: both"></div>
+			</div>
+			
 			<section class="ac-container">
-				<div id="foto"><img src="<?php echo $datosgenerales->Foto; ?>" alt="<?php echo $datosgenerales->nomNombre ?>" /></div>
+				<div id="foto"><img src="<?php echo $datosgenerales->Foto; ?>"  /></div>
 				<div>
+					<div style="clear: both"></div>
 					<input id="ac-2" name="accordion-1" type="radio" />
 					<label for="ac-2">Perfil Extendido</label>
 					<article class="ac-medium">
@@ -66,14 +80,7 @@ $promedio = $objuserdata->scoreUser($userid)
 			</section>
        
    
-		        <div id="datos">
-		       <?php 
-		      echo $datosgenerales->nomNombre." ".$datosgenerales->nomApellidoPaterno;
 		       
-		       ?>
-		       </div>
-		       	<div id="calif"></div>
-				<div id="texto"><?php echo number_format($promedio->score ,1); ?></div>
 		       
 			<section class="ac-container2">
 				
@@ -106,12 +113,13 @@ $promedio = $objuserdata->scoreUser($userid)
 						<p>
 							<?php 
 								foreach ($proyectos_pasados as $key => $value) {
-		      					echo $value->nomNombreProyecto;		
+		      					
+								echo '<a href="'.$value->urlProyectosPasados.'">'.$value->nomNombreProyecto.'</a>';		
 								echo "<br />" ; 
-								echo '<a href="'.$value->urlProyectosPasados.'">'.$value->urlProyectosPasados.'</a>';		
-								echo "<br />" ;   
+								echo "<br />"  ;   
 								echo $value->dscDescripcionProyecto;		
-								echo "<br />"  ;    
+								echo "<br />"  ;   
+								echo "<br />"  ;  
 								}   
 		       				?>	
 						</p>

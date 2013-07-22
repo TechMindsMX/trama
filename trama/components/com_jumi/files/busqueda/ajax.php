@@ -3,7 +3,7 @@ $calificador = is_numeric($_POST['calificador']) ? $_POST['calificador'] : 0;
 $calificado = is_numeric($_POST['calificado']) ? $_POST['calificado'] : 0;
 $score = is_numeric($_POST['score']) ? $_POST['score'] : 0;
 
-$bd = new mysqli('localhost', 'root', '', 'hexeris');
+$bd = new mysqli('localhost', 'root', '', 'development_j25');
 $respuesta = array();
 
 $query = 'SELECT * FROM perfil_rating_usuario WHERE idUserCalificador = '.$calificador.' AND iduserCalificado = '.$calificado;

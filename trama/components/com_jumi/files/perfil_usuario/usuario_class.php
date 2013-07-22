@@ -68,8 +68,14 @@ class UserData {
 	}
 	
 	public function etiquetas ($tabla,$campo,$userid){
+		
 		$respuestas = $this::respuestasPerfilx($campo, $userid);
-		$arrayRespuesta = explode(',', $respuestas[0]->$campo);
+		if (!empty($respuestas)){
+			$arrayRespuesta = explode(',', $respuestas[0]->$campo);
+		}else{
+			$arrayRespuesta = "";
+		}
+		
 
 		return $arrayRespuesta;
 	}
@@ -86,12 +92,12 @@ class UserData {
 		
 		$db->setQuery($query);
 		$results = $db->loadObjectList();
-		
+		if(!empty($respuestas)){
 		if (!empty($results)) { 
 			echo "<ul>";
 		}
 		
-		foreach ($results as $columna) {		
+		foreach ($results as $columna) {
 			foreach ($respuestas as $key) {
 				if($key == $columna->$columnaId) {
 					$inputPadre = '<li>';
@@ -99,12 +105,14 @@ class UserData {
 					
 					echo $inputPadre;
 					$this->generacampos($columna->$columnaId,$tabla, $columnaId, $columnaIdPadre, $descripcion, $campo, $userid);
+				
 				}
 			}
 		}
 		
 		if (!empty($results)) {
 			echo "</ul>";
+		}
 		}
 	}
 	
