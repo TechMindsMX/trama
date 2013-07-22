@@ -170,7 +170,7 @@ $promedio = $objuserdata->scoreUser($userid)
 			 			console.log('Surguieron problemas al almacenar tu calificación');
 			    	});
 			   },
-			   score  : 3.3,
+			   score  : <?php echo $datosgenerales->score; ?>,
 			   path  : ruta
 			});
 		});

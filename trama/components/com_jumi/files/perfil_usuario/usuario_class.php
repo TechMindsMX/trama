@@ -5,7 +5,8 @@ class UserData {
 	public static function datosGr ($userid) {
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
-	
+		$query2 = $db->getQuery(true);
+		
 		$query
 			->select('*')
 			->from('perfil_persona')
@@ -15,11 +16,22 @@ class UserData {
 	
 		$temporal = $db->loadObjectList();
 		
+		$query2->select ('avg(rating) as score')
+			->from ('perfil_rating_usuario')
+			->where('idUserCalificado = '.$userid);
+			
+		$db->setQuery( $query2 );
+		$score = $db->loadObject();		
+		
+		$promedio = is_null($score->score)? 0 : $score->score; 
+		
 		if(empty($temporal)){
 			$resultado = null;
 		}else{
 			$resultado = $temporal[0];
+			$resultado->score = $promedio;
 		}
+		
 		return $resultado;
 	}
 	
