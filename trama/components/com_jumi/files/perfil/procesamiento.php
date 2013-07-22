@@ -10,7 +10,7 @@ $_POST['repr_users_id'] = $usuario->id;
 $_POST['repr_perfil_tipoContacto_idtipoContacto'] = 2;
 $_POST['daCo_users_id'] = $usuario->id;
 $_POST['daCo_perfil_tipoContacto_idtipoContacto'] = 3;
-$flagImage = $_POST['daGr_hidden_Foto'];
+$flagImage = $_POST['daGr_Foto'];
 
 $datos = new procesamiento;
 $datos->agrupacion($_POST);
@@ -78,7 +78,7 @@ class procesamiento {
 						if( $_FILES["daGr_Foto"]["name"] != "" ){
 							$this->cargar_imagen($_FILES['daGr_Foto']['type'], $campos['daGr_users_id']);
 							$gral['Foto'] = "images/fotoPerfil/" . $campos['daGr_users_id'].".jpg";
-						} elseif ( $campos['daGr_hidden_Foto'] == '') {
+						} elseif ( $campos['daGr_Foto'] == '') {
 							$gral['Foto'] = "images/fotoPerfil/default.jpg";
 						}
 						$this->datos_generales = $gral;

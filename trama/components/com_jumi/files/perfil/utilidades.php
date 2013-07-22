@@ -149,7 +149,7 @@ function updateFields($tabladb, $fields, $conditions){
 		->update($db->quoteName($tabladb))
 		->set($fields)
 		->where($conditions);
-	
+
 	$db->setQuery( $query );
 	$db->query();
 }
