@@ -122,7 +122,6 @@ $jsonResult = json_encode($arregloOrdenado);
 
 <script type="text/javascript">
 var members = <?php echo $jsonResult; ?>;
-console.log(members);
 
 $(document).ready(function(){
 	initPagination();
@@ -139,7 +138,7 @@ function pageselectCallback (page_index, jq) {
 
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
-		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
+		var link = 'index.php?option=com_jumi&view=appliction&fileid=17&userid=' + members[i].users_id;
 		
 		countCol++;
 		if (countCol == columnas) {
@@ -157,7 +156,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<h4><a href="' + link + '">' + members[i].nomNombre + ' ' + members[i].nomApellidoPaterno +'</h4></a>';
 		newcontent += '<div class="fotoPerfil">';
 		newcontent += '<a href="' + link + '">';
-		newcontent += '<img src="<?php echo $path; ?>' + members[i].Foto + '" alt="Foto" /></a></div>';
+		newcontent += '<img src="' + members[i].Foto + '" alt="Foto" /></a></div>';
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '</div>';
