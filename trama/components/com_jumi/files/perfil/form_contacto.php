@@ -119,12 +119,11 @@
 			jQuery('#copiarDireccionRepresentante').click(function(){
 				jQuery('#doRe_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 				jQuery('#doRe_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
-				jQuery('#doRe_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');					
-				jQuery('#doRe_nomColonias').val('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>');
+				jQuery('#doRe_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');
+				jQuery('#doRe_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));					
 				jQuery('#doRe_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');
 				jQuery('#doRe_iniCodigoPostal').val('<?php echo $direccionGeneral->perfil_codigoPostal_idcodigoPostal;?>');
-				jQuery('#doRe_nomEstado').val('<?php echo $direccionGeneral->perfil_estado_idestado;?>');
-				jQuery('#doRe_nomPais').val('<?php echo $direccionGeneral->perfil_pais_idpais;?>');
+				jQuery('#doRe_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));					
 			});
 
 			jQuery('#copiarForContactoRepresentante').click(function(){
@@ -154,11 +153,10 @@
 				jQuery('#doCo_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 				jQuery('#doCo_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
 				jQuery('#doCo_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');					
-				jQuery('#doCo_nomColonias').val('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>');
+				jQuery('#doCo_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));				
 				jQuery('#doCo_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');
 				jQuery('#doCo_iniCodigoPostal').val('<?php echo $direccionGeneral->perfil_codigoPostal_idcodigoPostal;?>');
-				jQuery('#doCo_nomEstado').val('<?php echo $direccionGeneral->perfil_estado_idestado;?>');
-				jQuery('#doCo_nomPais').val('<?php echo $direccionGeneral->perfil_pais_idpais;?>');
+				jQuery('#doCo_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));				
 			});
 
 			jQuery('#copiarForContactoContacto').click(function(){
@@ -393,7 +391,6 @@
             <div class="_25">
                	<label for="doCo_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                	<select name="doCo_perfil_pais_idpais" id="doCo_nomPais" class="validate[required]">
-					<option value=""> </option> 
                		<option value="México" selected="selected">M&eacute;xico</option>
 				</select>
             </div>
