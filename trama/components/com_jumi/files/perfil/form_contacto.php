@@ -120,9 +120,11 @@
 				jQuery('#doRe_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 				jQuery('#doRe_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
 				jQuery('#doRe_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');
+				jQuery('option', jQuery('#doRe_nomColonias')).remove();
 				jQuery('#doRe_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));					
 				jQuery('#doRe_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');
 				jQuery('#doRe_iniCodigoPostal').val('<?php echo $direccionGeneral->perfil_codigoPostal_idcodigoPostal;?>');
+				jQuery('option', jQuery('#doRe_nomEstado')).remove();
 				jQuery('#doRe_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));					
 			});
 
@@ -153,9 +155,11 @@
 				jQuery('#doCo_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 				jQuery('#doCo_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
 				jQuery('#doCo_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');					
+				jQuery('option', jQuery('#doCo_nomColonias')).remove();
 				jQuery('#doCo_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));				
 				jQuery('#doCo_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');
 				jQuery('#doCo_iniCodigoPostal').val('<?php echo $direccionGeneral->perfil_codigoPostal_idcodigoPostal;?>');
+				jQuery('option', jQuery('#doCo_nomEstado')).remove();
 				jQuery('#doCo_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));				
 			});
 
