@@ -4,7 +4,7 @@ jimport("trama.class");
 jimport("trama.jsocial");
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
 $input = JFactory::getApplication()->input;
-$userid = $input->get("userId",0,"int");
+$userid = $input->get("userid",0,"int");
 $objuserdata = new UserData;
 
 $usuario = JFactory::getUser();

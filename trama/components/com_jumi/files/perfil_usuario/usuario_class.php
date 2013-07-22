@@ -19,7 +19,7 @@ class UserData {
 		$query2->select ('avg(rating) as score')
 			->from ('perfil_rating_usuario')
 			->where('idUserCalificado = '.$userid);
-			
+
 		$db->setQuery( $query2 );
 		$score = $db->loadObject();		
 		
@@ -31,7 +31,7 @@ class UserData {
 			$resultado = $temporal[0];
 			$resultado->score = $promedio;
 		}
-		
+				
 		return $resultado;
 	}
 	
