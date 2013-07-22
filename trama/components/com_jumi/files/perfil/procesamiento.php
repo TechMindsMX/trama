@@ -76,7 +76,7 @@ class procesamiento {
 					if($campos[$clave] <> "" || $campos['daGr_nomApellidoMaterno'] == ""){
 						$gral[$clavelimpia] = $campos[$clave];
 						if( $_FILES["daGr_Foto"]["name"] != "" ){
-							var_dump($this->cargar_imagen($_FILES['daGr_Foto']['type'], $usuario->id));
+							$this->cargar_imagen($_FILES['daGr_Foto']['type'], $campos['daGr_users_id']);
 							$gral['Foto'] = "images/fotoPerfil/" . $campos['daGr_users_id'].".jpg";
 						} elseif ( $campos['daGr_hidden_Foto'] == '') {
 							$gral['Foto'] = "images/fotoPerfil/default.jpg";
@@ -248,10 +248,10 @@ class procesamiento {
 	}
 
 	function cargar_imagen($tipo, $usuario){
-	
+		
 		if($tipo === 'image/jpeg' && getimagesize($_FILES["daGr_Foto"]["tmp_name"])){
-			move_uploaded_file($_FILES["daGr_Foto"]["tmp_name"],"/var/www/html/trama/development/images/fotoPerfil/" .$usuario.".jpg");
-			$this->resize("/var/www/html/trama/development/images/fotoPerfil/".$usuario.".jpg", $usuario.".jpg");
+			move_uploaded_file($_FILES["daGr_Foto"]["tmp_name"],"images/fotoPerfil/" .$usuario.".jpg");
+			$this->resize("images/fotoPerfil/".$usuario.".jpg", $usuario.".jpg");
 		}else{
 			echo 'no es imagen o el archivo esta corrupto <br />';
 		} 
@@ -286,10 +286,7 @@ class procesamiento {
 		imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
 		imagedestroy($img_original);
 		$calidad=95;
-		imagejpeg($tmp,"archivos/".$nombre,$calidad);
-		
-		//Header("Content-type: image/jpeg");
-		//imagejpeg($tmp);
+		imagejpeg($tmp,$ruta,$calidad);
 	}
 	
 	function get_datosGenerales(){
