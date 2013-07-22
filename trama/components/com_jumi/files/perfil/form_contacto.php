@@ -36,6 +36,9 @@
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		jQuery(document).ready(function(){
+			jQuery('#doRe_iniCodigoPostal').change(function () {
+				console.log('algo');
+			})
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();
 			<?php

@@ -32,6 +32,36 @@
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		jQuery(document).ready(function(){
+			jQuery('input[name$="perfil_codigoPostal_idcodigoPostal"]').change(function () {
+				
+				var request = $.ajax({
+	     			url:"components/com_jumi/files/busqueda/ajax.php",
+	 				data: {
+	  					"cp": this.value,
+	  					"fun": '2'
+	 				},
+	 				type: 'post'
+				});
+	
+				request.done(function(result){
+					var obj = eval('('+result+')');
+					var colonias = obj.dAsenta;
+					var select = jQuery('select[name$="perfil_colonias_idcolonias"]');
+					var options = select.prop('options');
+					
+					jQuery('option', select).remove();
+					
+					jQuery.each(colonias, function (key, value){
+						select.append(new Option(value, value));
+					});
+					//$(“#ddlCategorias”).get(0).options[$("#ddlCategorias").get(0).options.length] = new Option(text, val);
+				});
+		
+				request.fail(function (jqXHR, textStatus) {
+		 			console.log(jqXHR);
+		    	});
+				
+			})
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();
 	
@@ -181,7 +211,10 @@
             </div>
             <div class="_75">
                	<label for="dire_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
-               	<input name="dire_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomColonias" maxlength="50" />
+               	<!--input name="dire_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomColonias" maxlength="50" /-->
+               	<select name="dire_perfil_colonias_idcolonias" class="validate[required]" id="dire_nomColonias">
+               		<option> nada</option>
+               	</select>
             </div>
             <div class="_50">
             	<label for="dire_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
