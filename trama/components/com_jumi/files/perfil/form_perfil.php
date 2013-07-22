@@ -45,7 +45,7 @@
 					echo "jQuery('#daGr_nomNombre').val('".$generales->nomNombre."');";
 					echo "jQuery('#daGr_nomApellidoPaterno').val('".$generales->nomApellidoPaterno."');";
 					echo "jQuery('#daGr_nomApellidoMaterno').val('".$generales->nomApellidoMaterno."');";
-					// echo "jQuery('#daGr_Foto').val('".$generales->Foto."');";
+					echo "jQuery('#daGr_hidden_Foto').val('".$generales->Foto."');";
 					echo "jQuery('#daGr_nomPaginaWeb').val('".$generales->nomPaginaWeb."');";
 					for ($i=0; $i<count($email); $i++) {
 						if ($i == 0) {
@@ -110,6 +110,7 @@
 <body>
 	<div id="contenedor">
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
+			<input type="hidden" name="daGr_hidden_Foto" id="daGr_hidden_Foto" value="" />
 			<div id="nombre"><h3><?php echo JText::_('DATOS_GR'); ?></h3></div>            
 			<div class="_50">
 				<label for="daGr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
