@@ -30,40 +30,15 @@
 	<script src="<?php echo $pathJumi ?>/js/jquery.js" type="text/javascript"></script>    
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<?php echo $pathJumi ?>/js/cp.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		jQuery(document).ready(function(){
-			jQuery('input[name$="perfil_codigoPostal_idcodigoPostal"]').change(function () {
-				
-				var request = $.ajax({
-	     			url:"components/com_jumi/files/busqueda/ajax.php",
-	 				data: {
-	  					"cp": this.value,
-	  					"fun": '2'
-	 				},
-	 				type: 'post'
-				});
-	
-				request.done(function(result){
-					var obj = eval('('+result+')');
-					var colonias = obj.dAsenta;
-					var select_colonias = jQuery('select[name$="perfil_colonias_idcolonias"]');
-					
-					jQuery('option', select).remove();
-					
-					jQuery.each(colonias, function (key, value){
-						select.append(new Option(value, value));
-					});
-					//$(“#ddlCategorias”).get(0).options[$("#ddlCategorias").get(0).options.length] = new Option(text, val);
-				});
-		
-				request.fail(function (jqXHR, textStatus) {
-		 			console.log(jqXHR);
-		    	});
-				
-			})
+			
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();
-	
+			
+			datosxCP();
+			
 			<?php 		
 				if ($existe == 'true') {
 					
@@ -217,51 +192,16 @@
             </div>
             <div class="_50">
             	<label for="dire_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
-            	<input name="dire_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomDelegacion" maxlength="50" />
+            	<input readonly="readonly" name="dire_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="dire_nomDelegacion" maxlength="50" />
             </div> 
             <div class="_25">
                	<label for="dire_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
-               	<select name="dire_perfil_estado_idestado" id="dire_nomEstado" class="validate[required]" >
-					<option value=""> </option> 
-                  	<option value="1">Aguascalientes</option> 
-                   	<option value="2">Baja California</option> 
-                   	<option value="3">Baja California Sur</option> 
-                   	<option value="4">Campeche</option> 
-					<option value="5">Coahuila</option> 
-                   	<option value="6">Colima</option> 
-                   	<option value="7">Chiapas</option> 
-                   	<option value="8">Chihuahua</option> 
-                   	<option value="9">Distrito Federal</option> 
-                   	<option value="10">Durango</option> 
-                   	<option value="11">Guanajuato</option> 
-                   	<option value="12">Guerrero</option> 
-                   	<option value="13">Hidalgo</option> 
-                   	<option value="14">Jalisco</option> 
-                   	<option value="15">Estado de México</option> 
-                   	<option value="16">Michoacán</option> 
-                   	<option value="17">Morelos</option> 
-                   	<option value="18">Nayarit</option> 
-                   	<option value="19">Nuevo León</option> 
-                   	<option value="20">Oaxaca</option> 
-                   	<option value="21">Puebla</option> 
-                   	<option value="22">Querétaro</option> 
-                   	<option value="23">Quintana Roo</option> 
-                   	<option value="24">San Luis Potosí</option> 
-                   	<option value="25">Sinaloa</option> 
-                   	<option value="26">Sonora</option> 
-                   	<option value="27">Tabasco</option> 
-                   	<option value="28">Tamaulipas</option> 
-                   	<option value="29">Tlaxcala</option> 
-                   	<option value="30">Veracruz</option> 
-                   	<option value="31">Yucatan</option> 
-                   	<option value="32">Zacatecas</option>
-               	</select>
+               	<select name="dire_perfil_estado_idestado" id="dire_nomEstado" class="validate[required]" ></select>
             </div>
             <div class="_25">
                	<label for="dire_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
-               	<select name="dire_perfil_pais_idpais" id="dire_nomPais" class="validate[required]">
-					<option value=""> </option> 
-               		<option value="1">M&eacute;xico</option>
+               	<select name="dire_perfil_pais_idpais" id="dire_nomPais" class="validate[required]"> 
+               		<option value="1" selected="selected">M&eacute;xico</option>
 				</select>
             </div>
             <div class="_100">

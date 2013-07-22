@@ -34,11 +34,10 @@
 	<script src="<?php echo $pathJumi ?>/js/jquery.js" type="text/javascript"></script>    
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<?php echo $pathJumi ?>/js/cp.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		jQuery(document).ready(function(){
-			jQuery('#doRe_iniCodigoPostal').change(function () {
-				console.log('algo');
-			})
+			datosxCP();
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();
 			<?php
@@ -286,7 +285,7 @@
             </div>
             <div class="_75">
                	<label for="doRe_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
-               	<input name="doRe_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doRe_nomColonias" maxlength="50" />
+               	<select name="doRe_perfil_colonias_idcolonias"class="validate[required]" id="doRe_nomColonias"></select>
             </div>
             <div class="_50">
             	<label for="doRe_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
@@ -294,47 +293,12 @@
             </div> 
             <div class="_25">
                	<label for="doRe_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
-               	<select name="doRe_perfil_estado_idestado" id="doRe_nomEstado" class="validate[required]" >
-					<option value=""> </option> 
-                  	<option value="1">Aguascalientes</option> 
-                   	<option value="2">Baja California</option> 
-                   	<option value="3">Baja California Sur</option> 
-                   	<option value="4">Campeche</option> 
-					<option value="5">Coahuila</option> 
-                   	<option value="6">Colima</option> 
-                   	<option value="7">Chiapas</option> 
-                   	<option value="8">Chihuahua</option> 
-                   	<option value="9">Distrito Federal</option> 
-                   	<option value="10">Durango</option> 
-                   	<option value="11">Guanajuato</option> 
-                   	<option value="12">Guerrero</option> 
-                   	<option value="13">Hidalgo</option> 
-                   	<option value="14">Jalisco</option> 
-                   	<option value="15">Estado de México</option> 
-                   	<option value="16">Michoacán</option> 
-                   	<option value="17">Morelos</option> 
-                   	<option value="18">Nayarit</option> 
-                   	<option value="19">Nuevo León</option> 
-                   	<option value="20">Oaxaca</option> 
-                   	<option value="21">Puebla</option> 
-                   	<option value="22">Querétaro</option> 
-                   	<option value="23">Quintana Roo</option> 
-                   	<option value="24">San Luis Potosí</option> 
-                   	<option value="25">Sinaloa</option> 
-                   	<option value="26">Sonora</option> 
-                   	<option value="27">Tabasco</option> 
-                   	<option value="28">Tamaulipas</option> 
-                   	<option value="29">Tlaxcala</option> 
-                   	<option value="30">Veracruz</option> 
-                   	<option value="31">Yucatan</option> 
-                   	<option value="32">Zacatecas</option>
-               	</select>
+               	<select name="doRe_perfil_estado_idestado" id="doRe_nomEstado" class="validate[required]" ></select>
             </div>
             <div class="_25">
                	<label for="doRe_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                	<select name="doRe_perfil_pais_idpais" id="doRe_nomPais" class="validate[required]">
-					<option value=""> </option> 
-               		<option value="1">M&eacute;xico</option>
+               		<option value="México" selected="selected">M&eacute;xico</option>
 				</select>
             </div>	
 			<div id="nombre"><h3><?php echo JText::_('CONT'); ?></h3></div>            
@@ -416,7 +380,7 @@
             </div>
             <div class="_75">
                	<label for="doCo_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
-               	<input name="doCo_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doCo_nomColonias" maxlength="50" />
+               	<select name="doCo_perfil_colonias_idcolonias" class="validate[required]" id="doCo_nomColonias"></select>
             </div>
             <div class="_50">
             	<label for="doCo_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
@@ -424,47 +388,13 @@
             </div> 
             <div class="_25">
                	<label for="doCo_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
-               	<select name="doCo_perfil_estado_idestado" id="doCo_nomEstado" class="validate[required]" >
-					<option value=""> </option> 
-                  	<option value="1">Aguascalientes</option> 
-                   	<option value="2">Baja California</option> 
-                   	<option value="3">Baja California Sur</option> 
-                   	<option value="4">Campeche</option> 
-					<option value="5">Coahuila</option> 
-                   	<option value="6">Colima</option> 
-                   	<option value="7">Chiapas</option> 
-                   	<option value="8">Chihuahua</option> 
-                   	<option value="9">Distrito Federal</option> 
-                   	<option value="10">Durango</option> 
-                   	<option value="11">Guanajuato</option> 
-                   	<option value="12">Guerrero</option> 
-                   	<option value="13">Hidalgo</option> 
-                   	<option value="14">Jalisco</option> 
-                   	<option value="15">Estado de México</option> 
-                   	<option value="16">Michoacán</option> 
-                   	<option value="17">Morelos</option> 
-                   	<option value="18">Nayarit</option> 
-                   	<option value="19">Nuevo León</option> 
-                   	<option value="20">Oaxaca</option> 
-                   	<option value="21">Puebla</option> 
-                   	<option value="22">Querétaro</option> 
-                   	<option value="23">Quintana Roo</option> 
-                   	<option value="24">San Luis Potosí</option> 
-                   	<option value="25">Sinaloa</option> 
-                   	<option value="26">Sonora</option> 
-                   	<option value="27">Tabasco</option> 
-                   	<option value="28">Tamaulipas</option> 
-                   	<option value="29">Tlaxcala</option> 
-                   	<option value="30">Veracruz</option> 
-                   	<option value="31">Yucatan</option> 
-                   	<option value="32">Zacatecas</option>
-               	</select>
+               	<select name="doCo_perfil_estado_idestado" id="doCo_nomEstado" class="validate[required]" ></select>
             </div>
             <div class="_25">
                	<label for="doCo_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                	<select name="doCo_perfil_pais_idpais" id="doCo_nomPais" class="validate[required]">
 					<option value=""> </option> 
-               		<option value="1">M&eacute;xico</option>
+               		<option value="México" selected="selected">M&eacute;xico</option>
 				</select>
             </div>
             <div>
