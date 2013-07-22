@@ -156,7 +156,8 @@ $promedio = $objuserdata->scoreUser($userid)
 		 				data: {
 		  					"score": score,
 		  					"calificador": <?php echo $usuario->id; ?>,
-		  					"calificado": <?php echo $userid; ?>
+		  					"calificado": <?php echo $userid; ?>,
+		  					"fun": 1
 		 				},
 		 				type: 'post'
 					});
