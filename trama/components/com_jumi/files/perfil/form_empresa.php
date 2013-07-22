@@ -44,9 +44,11 @@
 					jQuery('#doFi_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 					jQuery('#doFi_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
 					jQuery('#doFi_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');					
+					jQuery('option', jQuery('#doFi_nomColonias')).remove();
 					jQuery('#doFi_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));					
 					jQuery('#doFi_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');
 					jQuery('#doFi_iniCodigoPostal').val('<?php echo $direccionGeneral->perfil_codigoPostal_idcodigoPostal;?>');
+					jQuery('option', jQuery('#doFi_nomEstado')).remove();
 					jQuery('#doFi_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));					
 					jQuery('#doFi_nomPais').val('<?php echo $direccionGeneral->perfil_pais_idpais;?>');
 				});
