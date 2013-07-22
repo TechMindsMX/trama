@@ -8,6 +8,7 @@ $userid = $input->get("userid",0,"int");
 $objuserdata = new UserData;
 
 $usuario = JFactory::getUser();
+$userid = ($userid==0)? $usuario->id: $userid ;
 $document = JFactory::getDocument();
 $base = JUri::base();
 $proyectos = JTrama::getProjectsByUser($userid);		 

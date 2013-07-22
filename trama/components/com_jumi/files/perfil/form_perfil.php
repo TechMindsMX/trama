@@ -46,8 +46,7 @@
 				request.done(function(result){
 					var obj = eval('('+result+')');
 					var colonias = obj.dAsenta;
-					var select = jQuery('select[name$="perfil_colonias_idcolonias"]');
-					var options = select.prop('options');
+					var select_colonias = jQuery('select[name$="perfil_colonias_idcolonias"]');
 					
 					jQuery('option', select).remove();
 					
