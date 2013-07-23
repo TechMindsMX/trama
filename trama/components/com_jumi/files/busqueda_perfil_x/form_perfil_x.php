@@ -6,7 +6,7 @@ $usuario = JFactory::getUser();
 $base = JUri::base();
 $document = JFactory::getDocument();
 $pathJumi = Juri::base().'components/com_jumi/files';
-$accion= 'index.php?option=com_jumi&view=application&fileid=20';
+$accion= 'index.php?option=com_jumi&view=application&fileid=21';
 $tablaGrabacion = 'perfilx_respuestas';
 
 function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripcion) {
