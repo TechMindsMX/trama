@@ -25,14 +25,15 @@ if(is_null($datosgenerales)){
 $id_datos_generales = $datosgenerales->id;
 
 $proyectos_pasados = $objuserdata::pastProjects($id_datos_generales);
-$promedio = $objuserdata->scoreUser($userid)
+$promedio = $objuserdata->scoreUser($userid);
+
 ?>
 
     <body>
         
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
-      <div id="contenido">
+      <div id="contenido"><?php echo UserData::addFriendJS($userid, $usuario); ?>
       	
       	<div id="raty">
       	 <div id="datos">
