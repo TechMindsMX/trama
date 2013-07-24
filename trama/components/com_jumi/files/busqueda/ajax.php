@@ -7,7 +7,7 @@ switch ($fun) {
 		$calificado = is_numeric($_POST['calificado']) ? $_POST['calificado'] : 0;
 		$score = is_numeric($_POST['score']) ? $_POST['score'] : 0;
 		
-		$bd = new mysqli('localhost', 'root', '', 'hexeris');
+		$bd = new mysqli('localhost', 'root', '', 'development_j25');
 		$respuesta = array();
 		
 		$query = 'SELECT * FROM perfil_rating_usuario WHERE idUserCalificador = '.$calificador.' AND iduserCalificado = '.$calificado;
@@ -33,7 +33,8 @@ switch ($fun) {
 			$resultado_score = $bd->query($query_promedio);
 		
 			$obj_score = $resultado_score->fetch_object();
-			
+			var_dump($obj_score);
+			exit;
 			$respuesta['score'] = is_null($obj_score->score)? 0 : $obj_score->score;
 			$respuesta['msg'] = 'Solo se acepta una sola calificación';
 			$respuesta['bloquear'] = true;
