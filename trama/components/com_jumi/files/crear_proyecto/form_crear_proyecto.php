@@ -236,7 +236,8 @@ if ( isset ($objDatosProyecto) ) {
 	<?php echo $avatar; ?>
 	<br />
 	<br />
-	 
+	<fieldset class="fieldset">
+	<LEGEND class="legend">Datos de video privado<input type="checkbox" name="" id=""></input></LEGEND>
 	<?php echo JText::_('VIDEOSP'); ?>
 	<br />
 	 
@@ -250,7 +251,7 @@ if ( isset ($objDatosProyecto) ) {
 		echo $inputVideos = '<input type="text" id="linkYt'.($i+1).'" class="'.$obligatorio.'" value = "'.$urlVideo.'"	name="videoLink'.($i+1).'" /><br />';
 	}
 	?>
-	
+	</fieldset>
 	<br /> <?php echo JText::_('AUDIOSP'); ?>
 	<br /> 
 	
