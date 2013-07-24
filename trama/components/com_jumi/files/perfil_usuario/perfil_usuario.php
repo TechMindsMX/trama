@@ -33,7 +33,7 @@ $promedio = $objuserdata->scoreUser($userid);
         
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
-      <div id="contenido"><?php echo UserData::addFriendJS($userid, $usuario); ?>
+      <div id="contenido"><?php echo JTramaSocial::addFriendJS($userid, $usuario); ?>
       	
       	<div id="raty">
       	 <div id="datos">

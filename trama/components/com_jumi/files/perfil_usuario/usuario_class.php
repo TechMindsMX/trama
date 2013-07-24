@@ -130,27 +130,6 @@ class UserData {
 		return $results[0];
 	}
 
-	public static function addFriendJS($userid, $usuario){
-		include_once('components/com_community/libraries/core.php');
-		include_once('components/com_community/helpers/friends.php');
-		$addFriendHtml = '<link rel="stylesheet" href="http://localhost/sourcetree/trama/components/com_community/assets/window.css" type="text/css">
-			<script src="http://localhost/sourcetree/trama/components/com_community/assets/joms.jquery-1.8.1.min.js" type="text/javascript"></script>
-			<script src="http://localhost/sourcetree/trama/components/com_community/assets/script-1.2.min.js" type="text/javascript"></script>
-			<script src="http://localhost/sourcetree/trama/components/com_community/assets/window-1.0.min.js" type="text/javascript"></script>';
-		$user				= CFactory::getUser( $userid );
-		$row->profileLink	= CRoute::_('index.php?option=com_community&view=profile&userid=' . $userid );
-		$row->friendsCount	= $user->getFriendCount();
-		$isFriend 			=  CFriendsHelper::isConnected ( $userid, $usuario->id );
-	
-		$row->addFriend 	= ((! $isFriend) && ($usuario->id != 0) && $usuario->id != $userid) ? true : false;
-		if($row->addFriend == true) {
-			$addFriendHtml .= '<a href="javascript:void(0)" onclick="joms.friends.connect(\''. $user->id.'\')">'.
-						JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND').'</a>';
-		} else {
-			$addFriendHtml .='<i class="com-icon-tick"></i> <span>'.JText::_('COM_COMMUNITY_PROFILE_ADDED_AS_FRIEND').'</span>';
-		}
-	return $addFriendHtml;
-	}
 
 }
 
