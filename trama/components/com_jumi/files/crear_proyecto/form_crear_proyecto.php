@@ -18,6 +18,11 @@ $countunitSales = 1;
 $countImgs = 10;
 $limiteVideos = 5;
 $limiteSound = 5;
+$checkedvideos = true;
+$checkedsound = true;
+$checkedimages = true;
+$checkedinfo = true;
+$checkednumbers = true;
 $hiddenIdProyecto = '';
 $agregarCampos = '';
 $categoriaSelected = '';
@@ -30,6 +35,9 @@ $ligasAudios = '';
 //termina los definicion de campos del formularios
 
 if ( isset ($objDatosProyecto) ) {
+	
+	$objDatosProyecto->videosPrivados = false;
+	$objDatosProyecto->soundprivados = false;
 		
 	if($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) {
 		$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
@@ -65,12 +73,14 @@ if ( isset ($objDatosProyecto) ) {
 		
 		foreach ($jsonStatus as $key => $value) {
 			if($objDatosProyecto->status == $value->id) {
-				$mensaje = 'El satus del proyecto '.$value->name.', no permite edición.';
+				$mensaje = 'El status del proyecto '.$value->name.', no permite edición.';
 			}
 		}
 		
 		$allDone =& JFactory::getApplication();
 		$allDone->redirect('index.php', $mensaje );
+		
+		$checkedvideos = $objDatosProyecto->videosPrivados;
 	}
 }
 ?>
@@ -223,11 +233,13 @@ if ( isset ($objDatosProyecto) ) {
 	</select>
 	<br />
 	<br />
-	
+	<div="file">
 	<label for="banner"><?php echo JText::_('BANNER').JText::_('PROYECTO'); ?>*:</label>
 	<input type="file" id="banner" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">
+	
 	<br />
 	<?php echo $banner; ?>
+	</div>
 	<br />
 	
 	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PROYECTO'); ?>*:</label> 
@@ -235,9 +247,33 @@ if ( isset ($objDatosProyecto) ) {
 	<br />
 	<?php echo $avatar; ?>
 	<br />
+	<label for="url"><?php echo JText::_('URL_PROY'); ?>: </label> 
+	<input 
+		type="text" 
+		class="validate[custom[url]]"
+		id="url"
+		value=""
+		
+		maxlength="100" /> 
+	<br> 
 	<br />
 	<fieldset class="fieldset">
-	<LEGEND class="legend">Datos de video privado<input type="checkbox" name="" id=""></input></LEGEND>
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="videosPublic" 
+		value="1" 
+		id="videosPublic" 
+		<?php echo $checkedvideos? 'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="videosPublic" 
+		value="0" 
+		id="videosPublic"
+		<?php echo $checkedvideos?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<?php echo JText::_('VIDEOSP'); ?>
 	<br />
 	 
@@ -252,6 +288,24 @@ if ( isset ($objDatosProyecto) ) {
 	}
 	?>
 	</fieldset>
+	<br />
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="audioPublic" 
+		value="1" 
+		id="audioPublic" 
+		checked="checked" 
+		<?php echo $checkedsound? 'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="audioPublic" 
+		value="0" 
+		id="audioPublic"
+		<?php echo $checkedsound?'':'checked="checked"';?>>No</input>
+	</LEGEND>
 	<br /> <?php echo JText::_('AUDIOSP'); ?>
 	<br /> 
 	
@@ -263,7 +317,25 @@ if ( isset ($objDatosProyecto) ) {
 		echo $inputSound = '<input type="text" id="linkSc1'.($i+1).'" class="validate[custom[sc]]" value = "'.$urlSound.'"	name="soundCloudLink'.($i+1).'" /><br />';
 	}
 	?>
-	
+	</fieldset>
+	<br />
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="imagesPublic"
+		value="1"
+		id="imagesPublic"
+		<?php echo $checkedimages?'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="imagesPublic"
+		value="0"
+		id="imagesPublic"
+		<?php echo $checkedimages?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?><span id="maximoImg"><?php echo $countImgs; ?></span>*:</label> 
 	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo" />
 	
@@ -285,20 +357,56 @@ if ( isset ($objDatosProyecto) ) {
 		echo '</div>';
 	}
 	?> 
+	</fieldset>
+	
 	<br /> 
 	
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="infoPublic" 
+		value="1" 
+		id="infoPublic" 
+		<?php echo $checkedinfo?'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="infoPublic" 
+		value="0" 
+		id="infoPublic"
+		<?php echo $checkedinfo?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?>*:</label> <br />
 	<textarea name="description" id="descProy" class="validate[required]" cols="60" rows="5"><?php 
 		echo isset($objDatosProyecto) ? $objDatosProyecto->description : ''; 
 	?></textarea>
-	<br /> 
 	
+	<br />
 	<label for="elenco"><?php echo JText::_('ELENCO'); ?>:</label> <br />
 	<textarea name="cast" id="elenco" cols="60" rows="5"><?php 
 		echo isset($objDatosProyecto) ? $objDatosProyecto->cast : ''; 
 	?></textarea>
+	</fieldset>
 	<br />
-	
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="numbersPublic" 
+		value="1" 
+		id="numbersPublic" 
+		<?php echo $checkednumbers?'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="numbersPublic" 
+		value="0" 
+		id="numbersPublic"
+		<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<label for="direccion"><?php echo JText::_('RECINTO'); ?>*: </label> 
 	<input 
 		type="text" 
@@ -324,7 +432,7 @@ if ( isset ($objDatosProyecto) ) {
 	<br />
 	
 	<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('PROYECTO'); ?>*:</label> 
-	<input 10
+	<input 
 		type="number" 
 		class="validate[required]"
 		id="presupuesto"
@@ -468,6 +576,7 @@ if ( isset ($objDatosProyecto) ) {
 			echo '';
 		}
 	?></textarea>
+	</fieldset>
 	<br />
 	<br /> 
 	
