@@ -217,13 +217,13 @@ if ( isset ($objDatosProducto) ) {
 	<br />
 	<br />
 	
-	<label for="banner"><?php echo JText::_('BANNER').JText::_('PROYECTO'); ?>*:</label>
+	<label for="banner"><?php echo JText::_('BANNER').JText::_('PRODUCTO'); ?>*:</label>
 	<input type="file" id="banner" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">
 	<br />
 	<?php echo $banner; ?>
 	<br />
 	
-	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PROYECTO'); ?>*:</label> 
+	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PRODUCTO'); ?>*:</label> 
 	<input type="file" id="avatar" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
 	<br />
 	<?php echo $avatar; ?>
@@ -282,7 +282,7 @@ if ( isset ($objDatosProducto) ) {
 	?> 
 	<br />
 	
-	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?>*:</label> <br />
+	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PRODUCTO'); ?>*:</label> <br />
 	<textarea name="description" id="descProy" class="validate[required]" cols="60" rows="5"><?php 
 		echo isset($objDatosProducto) ? $objDatosProducto->description : ''; 
 	?></textarea>
@@ -318,7 +318,7 @@ if ( isset ($objDatosProducto) ) {
 	<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 	<br />
 	
-	<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('PROYECTO'); ?>*:</label> 
+	<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('PRODUCTO'); ?>*:</label> 
 	<input 10
 		type="number" 
 		class="validate[required]"
@@ -401,7 +401,7 @@ if ( isset ($objDatosProducto) ) {
 	<input type="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS');  ?>" /> <br /> 
 	<br /> 
 	
-	<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('PROYECTO'); ?>*:</label> 
+	<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('PRODUCTO'); ?>*:</label> 
 	<input 
 		type="number" 
 		id="potenciales"
