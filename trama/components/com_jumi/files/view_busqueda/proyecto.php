@@ -17,14 +17,13 @@ $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
 
 if ( !$tipoPP ) {
 	$ligasPP = '<div id="ligasprod">'.
-			   '<input type="checkbox" id="producto" />'.JText::_('PRODUCTO').'s'.
-			   '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
-			   '<input type="checkbox" id="proyecto" />'.Jtext::_('PROYECTO').'s'.
-			   '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
-			   '<input type="checkbox" id="repertorio" />Repertorios'.
-			   '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
-			   '<input type="button" id="oculta" value="Mostrar todos" />'.
-			   '</div>';
+			   '<div style="float:left; margin-right:10px;">Filtrar por: </div>'.
+			   '<div style="float:left; margin-right:10px;">'.JText::_('PRODUCTO').'s <input type="checkbox" id="producto" /></div>'.
+			   '<div style="float:left; margin-right:10px;">'.Jtext::_('PROYECTO').'s <input type="checkbox" id="proyecto" /></div>'.
+			   '<div style="float:left; margin-right:10px;">'.Jtext::_('REPERTORIO').'s <input type="checkbox" id="repertorio" /></div>'.
+			   '<div style="float:left; margin-right:10px;"><input type="button" value="Limpiar Filtro" /></div>'.
+			   '<div id="contador"></div>'.
+			   '</div><br />';
 }
 
 function prodProy ($tipo) {
@@ -93,6 +92,7 @@ foreach ($json as $key => $value) {
 };
 
 $jsonJS = json_encode($json);
+
 if (!empty($productos)) {
 	$productos = json_encode($productos);
 }
@@ -102,16 +102,15 @@ if (!empty($proyectos)) {
 if(!empty($repertorio)) {
 	$repertorio = json_encode($repertorio);
 }
-
-// foreach ($repertProy as $key => $value) {
-	// foreach ($value as $key1 => $value1) {
-		// if($key1 == 'type') {
-			// echo $value->type.'<br />';
-		// }
-	// }
-	// echo "<br /><br />";
-// }
-// exit;
+if(!empty($prodProy)) {
+	$prodProy = json_encode($prodProy);
+}
+if(!empty($repertorioProduc)) {
+	$repertorioProduc = json_encode($repertorioProduc);
+}
+if(!empty($repertProy)) {
+	$repertProy = json_encode($repertProy);
+}
 
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
 echo '<script src="'.$pathJumi.'/view_busqueda/js/jquery.pagination.js"></script>';
@@ -133,36 +132,61 @@ function tagLimpia ($data) {
 var members = <?php echo $jsonJS; ?>;
 
 $(document).ready(function(){
+	jQuery('#contador').html("Resultados: "+members.length);
 	initPagination();
 	
-	jQuery("#ligasprod input").click(function () {
+	jQuery("#ligasprod input").click(function () {		
 		var producto = jQuery('#producto').prop('checked');
 		var proyecto = jQuery('#proyecto').prop('checked');
 		var repertorio = jQuery('#repertorio').prop('checked');
 		
-		if(producto) {
-			<?php
-			if (isset($proyectos)) {
-				echo 'members = '.$proyectos.';
-				initPagination();';
+		
+		if(this.type != 'button') {
+			if(!producto && proyecto && !repertorio) {
+				<?php if (isset($proyectos)) {
+					echo 'members = '.$proyectos.';
+					jQuery("#contador").html("Resultados: "+members.length);
+					initPagination();';
+				} ?>
+			}else if (producto && !proyecto && !repertorio) {
+				<?php if (isset($productos)) {
+					echo 'members = '.$productos.';
+					jQuery("#contador").html("Resultados: "+members.length);
+					initPagination();';
+			 	} ?>
+			}else if(!producto && !proyecto && repertorio) {
+				<?php if (isset($repertorio)) {
+					echo 'members = '.$repertorio.';
+					jQuery("#contador").html("Resultados: "+members.length);
+					initPagination();';
+			 	} ?>
+			}else if(producto && proyecto && !repertorio) {
+				<?php if (isset($prodProy)) {
+					echo 'members = '.$prodProy.';
+					jQuery("#contador").html("Resultados: "+members.length);
+					initPagination();';
+			 	} ?>
+			}else if(producto && !proyecto && repertorio) {
+				<?php if (isset($repertorioProduc)) {
+					echo 'members = '.$repertorioProduc.';
+					jQuery("#contador").html("Resultados: "+members.length);
+					initPagination();';
+			 	} ?>
+			}else if(!producto && proyecto && repertorio) {
+				<?php if (isset($repertProy)) {
+					echo 'members = '.$repertProy.';
+					jQuery("#contador").html("Resultados: "+members.length);
+					initPagination();';
+			 	} ?>
+			}else if( (repertorio && proyecto && producto) || (!repertorio && !proyecto && !producto) ){
+				members = <?php echo $jsonJS; ?>;
+				jQuery("#contador").html("Resultados: "+members.length);
+				initPagination();
 			}
-			?>
-		}else if (proyecto) {
-			<?php
-			if (isset($productos)) {
-				echo 'members = '.$productos.';
-				initPagination();';
-		 	}
-		 	?>
-		}else if(repertorio) {
-			<?php
-			if (isset($repertorio)) {
-				echo 'members = '.$repertorio.';
-				initPagination();';
-		 	}
-		 	?>
-		}else if(repertorio && proyecto && proyecto) {
+		}else{
+			$('#ligasprod input').prop('checked',false);
 			members = <?php echo $jsonJS; ?>;
+			jQuery("#contador").html("Resultados: "+members.length);
 			initPagination();
 		}
 	});
