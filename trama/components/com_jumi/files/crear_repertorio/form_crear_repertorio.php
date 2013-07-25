@@ -1,4 +1,14 @@
 <?php 
+
+$usuario = JFactory::getUser();
+$app = JFactory::getApplication();
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
+	$url    = 'index.php?option=com_users&view=login';
+	$url   .= '&return='.base64_encode($return);
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+}
+
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 jimport('trama.class');
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
@@ -187,7 +197,7 @@ if ( isset ($objDatosRepertorio) ) {
 		class="validate[custom[url]]"
 		id="url"
 		value=""
-		
+		name="url"
 		maxlength="100" /> 
 	<br> 
 	<br>

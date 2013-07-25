@@ -1,4 +1,13 @@
 <?php
+$usuario = JFactory::getUser();
+$app = JFactory::getApplication();
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
+	$url    = 'index.php?option=com_users&view=login';
+	$url   .= '&return='.base64_encode($return);
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+}
+
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 jimport('trama.class');
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
@@ -36,8 +45,9 @@ $ligasAudios = '';
 
 if ( isset ($objDatosProyecto) ) {
 	
-	$objDatosProyecto->videosPrivados = false;
-	$objDatosProyecto->soundprivados = false;
+	var_dump($objDatosProyecto);
+	
+	
 		
 	if($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) {
 		$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
@@ -63,6 +73,12 @@ if ( isset ($objDatosProyecto) ) {
 		
 		$subcategoriaSelected = $objDatosProyecto->subcategory;
 		
+		$checkedvideos = $objDatosProyecto->videoPublic == 1? true:false;
+		$checkedsound = $objDatosProyecto->audioPublic == 1? true:false;
+		$checkedimages = $objDatosProyecto->imagePublic == 1? true:false;
+		$checkedinfo = $objDatosProyecto->infoPublic == 1? true:false;
+		$checkednumbers = $objDatosProyecto->numberPublic == 1? true:false;
+		
 		foreach ($subCategorias as $key => $value) {
 			if( $value->id == $objDatosProyecto->subcategory ) {
 				$categoriaSelected = $value->father;
@@ -80,7 +96,7 @@ if ( isset ($objDatosProyecto) ) {
 		$allDone =& JFactory::getApplication();
 		$allDone->redirect('index.php', $mensaje );
 		
-		$checkedvideos = $objDatosProyecto->videosPrivados;
+		
 	}
 }
 ?>
@@ -233,13 +249,10 @@ if ( isset ($objDatosProyecto) ) {
 	</select>
 	<br />
 	<br />
-	<div="file">
 	<label for="banner"><?php echo JText::_('BANNER').JText::_('PROYECTO'); ?>*:</label>
-	<input type="file" id="banner" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">
+	<input type="file" id="banner" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">	
 	
-	<br />
 	<?php echo $banner; ?>
-	</div>
 	<br />
 	
 	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PROYECTO'); ?>*:</label> 
@@ -254,7 +267,7 @@ if ( isset ($objDatosProyecto) ) {
 		id="url"
 		value=""
 		
-		maxlength="100" /> 
+		maxlength="100" > 
 	<br> 
 	<br />
 	<fieldset class="fieldset">
@@ -262,15 +275,15 @@ if ( isset ($objDatosProyecto) ) {
 	<label for="priv">¿Hacer estos datos públicos?</label>
 	<input 
 		type="radio" 
-		name="videosPublic" 
+		name="videoPublic" 
 		value="1" 
-		id="videosPublic" 
+		id="videoPublic" 
 		<?php echo $checkedvideos? 'checked="checked"':'';?>>Si</input>
 	<input 
 		type="radio" 
-		name="videosPublic" 
+		name="videoPublic" 
 		value="0" 
-		id="videosPublic"
+		id="videoPublic"
 		<?php echo $checkedvideos?'':'checked="checked"';?>>No</input>
 	</LEGEND>
 	<br />
@@ -324,15 +337,15 @@ if ( isset ($objDatosProyecto) ) {
 	<label for="priv">¿Hacer estos datos públicos?</label>
 	<input 
 		type="radio" 
-		name="imagesPublic"
+		name="imagePublic"
 		value="1"
-		id="imagesPublic"
+		id="imagePublic"
 		<?php echo $checkedimages?'checked="checked"':'';?>>Si</input>
 	<input 
 		type="radio" 
-		name="imagesPublic"
+		name="imagePublic"
 		value="0"
-		id="imagesPublic"
+		id="imagePublic"
 		<?php echo $checkedimages?'':'checked="checked"';?>>No</input>
 	</LEGEND>
 	<br />
@@ -395,15 +408,15 @@ if ( isset ($objDatosProyecto) ) {
 	<label for="priv">¿Hacer estos datos públicos?</label>
 	<input 
 		type="radio" 
-		name="numbersPublic" 
+		name="numberPublic" 
 		value="1" 
-		id="numbersPublic" 
+		id="numberPublic" 
 		<?php echo $checkednumbers?'checked="checked"':'';?>>Si</input>
 	<input 
 		type="radio" 
-		name="numbersPublic" 
+		name="numberPublic" 
 		value="0" 
-		id="numbersPublic"
+		id="numberPublic"
 		<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
 	</LEGEND>
 	<br />
