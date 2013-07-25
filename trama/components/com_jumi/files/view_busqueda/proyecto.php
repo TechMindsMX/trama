@@ -8,7 +8,7 @@ $base =& JUri::base();
 $document =& JFactory::getDocument();
 
 $pathJumi = Juri::base().'components/com_jumi/files';
-$busquedaPor = array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT' );
+$busquedaPor = array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTORY' );
 $ligasPP = '';
 
 $tipoPP = isset($_GET['typeId']) ? $_GET['typeId'] : 0;
@@ -17,9 +17,11 @@ $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
 
 if ( !$tipoPP ) {
 	$ligasPP = '<div id="ligasprod">'.
-			   '<input type="button" id="oculta" value="'.JText::_('PRODUCTO').'s" />'.
+			   '<input type="checkbox" id="producto" />'.JText::_('PRODUCTO').'s'.
 			   '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
-			   '<input type="button" id="oculta" value="'.Jtext::_('PROYECTO').'s" />'.
+			   '<input type="checkbox" id="proyecto" />'.Jtext::_('PROYECTO').'s'.
+			   '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
+			   '<input type="checkbox" id="repertorio" />Repertorios'.
 			   '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
 			   '<input type="button" id="oculta" value="Mostrar todos" />'.
 			   '</div>';
@@ -73,10 +75,20 @@ foreach ($json as $key => $value) {
 foreach ($json as $key => $value) {
 	switch ($value->type) {
 		case 'PROJECT':
-			$proyectos[] = $value;
+			$proyectos[] = $value; //Solo Proyectos
+			$prodProy[] = $value; //Proyectos y Productos
+			$repertProy[] = $value; //PRoyectos y Repertorios
 			break; 
 		case 'PRODUCT':
-			$productos[] = $value;
+			$productos[] = $value; //Solo Productos
+			$prodProy[] = $value; //Proyectos y Productos
+			$repertorioProduc[] = $value; //Productos y Repertorios
+			break;
+		case 'REPERTORY':
+			$repertorio[] = $value; //Solo Repertorios
+			$repertorioProduc[] = $value; //Repertorios y Productos
+			$repertProy[] = $value; //Repertorios y Proyectos
+			
 	}
 };
 
@@ -87,6 +99,19 @@ if (!empty($productos)) {
 if (!empty($proyectos)) {
 	$proyectos = json_encode($proyectos);
 }
+if(!empty($repertorio)) {
+	$repertorio = json_encode($repertorio);
+}
+
+// foreach ($repertProy as $key => $value) {
+	// foreach ($value as $key1 => $value1) {
+		// if($key1 == 'type') {
+			// echo $value->type.'<br />';
+		// }
+	// }
+	// echo "<br /><br />";
+// }
+// exit;
 
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
 echo '<script src="'.$pathJumi.'/view_busqueda/js/jquery.pagination.js"></script>';
@@ -111,25 +136,34 @@ $(document).ready(function(){
 	initPagination();
 	
 	jQuery("#ligasprod input").click(function () {
-		switch(this.value){
-			case 'proyectos':
-				<?php if (isset($proyectos)) {
-					echo 'members = '.$proyectos.';
-					initPagination();';
-				} ?>
-			break;
-			
-			case 'productos':
-				<?php if (isset($productos)) {
-					echo 'members = '.$productos.';
-					initPagination();';
-				} ?>
-			break;
-			
-			case 'Mostrar todos':
-				members = <?php echo $jsonJS; ?>;
-				initPagination();
-			break;
+		var producto = jQuery('#producto').prop('checked');
+		var proyecto = jQuery('#proyecto').prop('checked');
+		var repertorio = jQuery('#repertorio').prop('checked');
+		
+		if(producto) {
+			<?php
+			if (isset($proyectos)) {
+				echo 'members = '.$proyectos.';
+				initPagination();';
+			}
+			?>
+		}else if (proyecto) {
+			<?php
+			if (isset($productos)) {
+				echo 'members = '.$productos.';
+				initPagination();';
+		 	}
+		 	?>
+		}else if(repertorio) {
+			<?php
+			if (isset($repertorio)) {
+				echo 'members = '.$repertorio.';
+				initPagination();';
+		 	}
+		 	?>
+		}else if(repertorio && proyecto && proyecto) {
+			members = <?php echo $jsonJS; ?>;
+			initPagination();
 		}
 	});
 });
@@ -142,7 +176,6 @@ function pageselectCallback (page_index, jq) {
 	var ancho = Math.floor(100/columnas);
 	var countCol = 0;
 
-			console.log(members);
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
@@ -213,4 +246,3 @@ function initPagination() {
 	<div id="Pagination" class="pagination"></div>
 </body>
 </html>
-
