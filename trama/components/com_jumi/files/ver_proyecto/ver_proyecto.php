@@ -33,6 +33,8 @@
 	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
 	$json = json_decode(file_get_contents($url));
 
+var_dump($json);
+exit;
 $json->etiquetaTipo = tipoProyProd($json);
 
 function tipoProyProd($data) {
