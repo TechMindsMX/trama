@@ -42,7 +42,10 @@ function tipoProyProd($data) {
 			$tipoEtiqueta = JText::_('PRODUCT');
 			$data->editUrl = '12';
 			break;
-		
+		case 'REPERTORY':
+			$tipoEtiqueta = JText::_('REPERTORIO');
+			$data->editUrl = '14';
+			break;
 		default:
 			$tipoEtiqueta = JText::_('PROJECT');
 			$data->editUrl = '9';
