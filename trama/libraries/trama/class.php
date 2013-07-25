@@ -97,6 +97,23 @@ class JTrama
 		
 		return $projectList;
 	}
+	
+	public function getEditUrl($value) {
+		$value->viewUrl = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
+		switch ($value->type) {
+			case 'PROJECT':
+				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=9&proyid=';
+				break;
+			case 'PRODUCT':
+				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=12&proyid=';
+				break;
+			case 'REPERTORY':
+				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=14&proyid=';
+				break;
+			}
+		$this->proy = $value;
+		return $this->proy;
+	}
 
 }
 ?>

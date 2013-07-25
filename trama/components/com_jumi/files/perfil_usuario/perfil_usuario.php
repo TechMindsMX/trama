@@ -17,14 +17,15 @@ $input = JFactory::getApplication()->input;
 $userid = $input->get("userid",0,"int");
 
 $objuserdata = new UserData;
-
 $userid = ($userid==0)? $usuario->id: $userid ;
+
 $document = JFactory::getDocument();
 $base = JUri::base();
 $proyectos = JTrama::getProjectsByUser($userid);
 foreach ($proyectos as $key => $value) {
-	$value->viewUrl = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
-	$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=14&proyid=';
+	$entity = new JTrama;
+	
+	$entity->getEditUrl($value);
 }
 
 
@@ -128,10 +129,10 @@ $promedio = $objuserdata->scoreUser($userid);
 					<article class="ac-large">
 							<?php 
 								foreach ($proyectos as $key => $value) {
-									if ( $usuario->id = $value->userId && $value->type == 'REPERTORY' ) {
+									if ( $usuario->id == $value->userId && $value->type == 'REPERTORY' ) {
 										echo '<h4><a href="'.$value->viewUrl.$value->id.'" target="_blank">'.$value->name.'</a></h4>';
 										echo '<span><a class="button editar" href="'.$value->editUrl.$value->id.'">'.JText::_('EDIT').'</a></span>';	
-									echo '<p>'.$value->description.'</p>';
+										echo '<p>'.$value->description.'</p>';
 									}
 								}   
 		       				?>	
@@ -143,11 +144,13 @@ $promedio = $objuserdata->scoreUser($userid);
 					<article class="ac-large">
 						<p>
 							<?php 
-								foreach ($proyectos as $key => $value) {
-								echo "<ul>";	
-								echo '<li><a href="'.$value->viewUrl.$value->id.'" >'.$value->name.'</a></li>';
-								echo "</ul>";
-								}							
+								foreach ($proyectos as $key => $value ) {
+									if ( $usuario->id == $value->userId && $value->type != 'REPERTORY' ) {
+										echo "<ul>";	
+										echo '<li><a href="'.$value->viewUrl.$value->id.'" >'.$value->name.'</a></li>';
+										echo "</ul>";
+									}
+								}
 							?>							
 						</p>
 					</article>
