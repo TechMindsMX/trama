@@ -1,5 +1,6 @@
 <?php 
 
+defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $usuario = JFactory::getUser();
 $app = JFactory::getApplication();
 if ($usuario->guest == 1) {
@@ -8,8 +9,6 @@ if ($usuario->guest == 1) {
 	$url   .= '&return='.base64_encode($return);
 	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
-
-defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 jimport('trama.class');
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';

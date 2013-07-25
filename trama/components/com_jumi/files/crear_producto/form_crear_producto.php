@@ -1,5 +1,13 @@
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+$usuario = JFactory::getUser();
+$app = JFactory::getApplication();
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
+	$url    = 'index.php?option=com_users&view=login';
+	$url   .= '&return='.base64_encode($return);
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+}
 jimport('trama.class');
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
@@ -18,6 +26,11 @@ $countunitSales = 1;
 $countImgs = 10;
 $limiteVideos = 5;
 $limiteSound = 5;
+$checkedvideos = true;
+$checkedsound = true;
+$checkedimages = true;
+$checkedinfo = true;
+$checkednumbers = true;
 $hiddenIdProducto = '';
 $agregarCampos = '';
 $categoriaSelected = '';
@@ -54,6 +67,12 @@ if ( isset ($objDatosProducto) ) {
 		$countImgs = $countImgs - count($objDatosProducto->projectPhotos);
 		
 		$subcategoriaSelected = $objDatosProducto->subcategory;
+		
+		$checkedvideos = $objDatosProducto->videoPublic == 1? true:false;
+		$checkedsound = $objDatosProducto->audioPublic == 1? true:false;
+		$checkedimages = $objDatosProducto->imagePublic == 1? true:false;
+		$checkedinfo = $objDatosProducto->infoPublic == 1? true:false;
+		$checkednumbers = $objDatosProducto->numberPublic == 1? true:false;
 		
 		foreach ($subCategorias as $key => $value) {
 			if( $value->id == $objDatosProducto->subcategory ) {
@@ -228,8 +247,34 @@ if ( isset ($objDatosProducto) ) {
 	<?php echo $avatar; ?>
 	<br />
 	<br />
-	
+	<label for="url"><?php echo JText::_('URL_PROY'); ?>: </label> 
+	<input 
+		type="text" 
+		class="validate[custom[url]]"
+		id="url"
+		value=""
+		name="url"
+		maxlength="100" > 
+		<br />
+		<br />
 	<!-- ligas videos -->
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="videoPublic" 
+		value="1" 
+		id="videoPublic" 
+		<?php echo $checkedvideos? 'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="videoPublic" 
+		value="0" 
+		id="videoPublic"
+		<?php echo $checkedvideos?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<?php echo JText::_('VIDEOSP');  ?>
 	<br />
 	<?php
@@ -242,8 +287,25 @@ if ( isset ($objDatosProducto) ) {
 		echo $inputVideos = '<input type="text" id="linkYt'.($i+1).'" class="'.$obligatorio.'" value = "'.$urlVideo.'"	name="videoLink'.($i+1).'" /><br />';
 	}
 	?>
+	</fieldset>
 	<br />
-	
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="audioPublic" 
+		value="1" 
+		id="audioPublic" 
+		checked="checked" 
+		<?php echo $checkedsound? 'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="audioPublic" 
+		value="0" 
+		id="audioPublic"
+		<?php echo $checkedsound?'':'checked="checked"';?>>No</input>
+	</LEGEND>
 	<!-- ligas sonido -->
 	<?php echo JText::_('AUDIOSP');  ?>
 	<br />
@@ -256,8 +318,25 @@ if ( isset ($objDatosProducto) ) {
 		echo $inputSound = '<input type="text" id="linkSc1'.($i+1).'" class="validate[custom[sc]]" value = "'.$urlSound.'"	name="soundCloudLink'.($i+1).'" /><br />';
 	}
 	?>
-	
-	
+	</fieldset>
+	<br />
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="imagePublic"
+		value="1"
+		id="imagePublic"
+		<?php echo $checkedimages?'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="imagePublic"
+		value="0"
+		id="imagePublic"
+		<?php echo $checkedimages?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<label for="fotos" id="labelImagenes"><?php echo JText::_('FOTOS'); ?><span id="maximoImg"><?php echo $countImgs; ?></span>*:</label> 
 	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo" />
 	
@@ -279,8 +358,25 @@ if ( isset ($objDatosProducto) ) {
 		echo '</div>';
 	}
 	?> 
+	</fieldset>
 	<br />
-	
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="infoPublic" 
+		value="1" 
+		id="infoPublic" 
+		<?php echo $checkedinfo?'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="infoPublic" 
+		value="0" 
+		id="infoPublic"
+		<?php echo $checkedinfo?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PRODUCTO'); ?>*:</label> <br />
 	<textarea name="description" id="descProy" class="validate[required]" cols="60" rows="5"><?php 
 		echo isset($objDatosProducto) ? $objDatosProducto->description : ''; 
@@ -301,6 +397,7 @@ if ( isset ($objDatosProducto) ) {
 		value="<?php echo isset($objDatosProducto) ? $objDatosProducto->inclosure : ''; ?>" 
 		name="inclosure"
 		maxlength="100" /> 
+		
 	<br>
 	
 	<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
@@ -311,8 +408,25 @@ if ( isset ($objDatosProducto) ) {
 		value="<?php echo isset($objDatosProducto) ? $objDatosProducto->showground : ''; ?>"
 		name="showground"
 		maxlength="100" /> 
+		</fieldset>
 	<br> 
-	
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="numberPublic" 
+		value="1" 
+		id="numberPublic" 
+		<?php echo $checkednumbers?'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="numberPublic" 
+		value="0" 
+		id="numberPublic"
+		<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label> 
 	<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 	<br />
@@ -453,6 +567,7 @@ if ( isset ($objDatosProducto) ) {
 			echo '';
 		}
 	?></textarea>
+	</fieldset>
 	<br />
 	<br />
 	

@@ -267,7 +267,7 @@ if ( isset ($objDatosProyecto) ) {
 		class="validate[custom[url]]"
 		id="url"
 		value=""
-		
+		name="url"
 		maxlength="100" > 
 	<br> 
 	<br />
@@ -402,25 +402,9 @@ if ( isset ($objDatosProyecto) ) {
 	<textarea name="cast" id="elenco" cols="60" rows="5"><?php 
 		echo isset($objDatosProyecto) ? $objDatosProyecto->cast : ''; 
 	?></textarea>
-	</fieldset>
+	
 	<br />
-	<fieldset class="fieldset">
-	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
-	<input 
-		type="radio" 
-		name="numberPublic" 
-		value="1" 
-		id="numberPublic" 
-		<?php echo $checkednumbers?'checked="checked"':'';?>>Si</input>
-	<input 
-		type="radio" 
-		name="numberPublic" 
-		value="0" 
-		id="numberPublic"
-		<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
-	</LEGEND>
-	<br />
+	
 	<label for="direccion"><?php echo JText::_('RECINTO'); ?>*: </label> 
 	<input 
 		type="text" 
@@ -441,6 +425,25 @@ if ( isset ($objDatosProyecto) ) {
 		maxlength="100" /> 
 	<br> 
 	
+	</fieldset>
+	<br />
+	<fieldset class="fieldset">
+	<LEGEND class="legend">
+	<label for="priv">¿Hacer estos datos públicos?</label>
+	<input 
+		type="radio" 
+		name="numberPublic" 
+		value="1" 
+		id="numberPublic" 
+		<?php echo $checkednumbers?'checked="checked"':'';?>>Si</input>
+	<input 
+		type="radio" 
+		name="numberPublic" 
+		value="0" 
+		id="numberPublic"
+		<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
+	</LEGEND>
+	<br />
 	<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label> 
 	<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 	<br />

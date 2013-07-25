@@ -9,6 +9,7 @@ input {
 }
 
 input[type = 'file'] {
+	max-width: 200px;
 	width: 100% !important;
 }
 
