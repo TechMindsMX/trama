@@ -45,7 +45,6 @@ $ligasAudios = '';
 
 if ( isset ($objDatosProyecto) ) {
 	
-	var_dump($objDatosProyecto);
 	
 	
 		
