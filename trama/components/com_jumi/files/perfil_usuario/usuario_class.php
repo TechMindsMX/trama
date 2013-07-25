@@ -35,22 +35,6 @@ class UserData {
 		return $resultado;
 	}
 	
-	public static function pastProjects ($userid){
-		$db = JFactory::getDBO();
-		$query = $db->getQuery(true);
-	
-		$query
-		->select('*')
-		->from('perfil_historialproyectos')
-		->where('perfil_persona_idpersona = '.$userid);
-	
-		$db->setQuery( $query );
-	
-		$resultado = $db->loadObjectList();
-	
-		return $resultado;
-	}
-		
 	public static function respuestasPerfilx ($campo,$userid){
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);

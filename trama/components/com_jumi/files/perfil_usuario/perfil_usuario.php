@@ -1,30 +1,44 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+
+$usuario = JFactory::getUser();
+$app = JFactory::getApplication();
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
+	$url    = 'index.php?option=com_users&view=login';
+	$url   .= '&return='.base64_encode($return);
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+}
+
 jimport("trama.class");
 jimport("trama.jsocial");
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
 $input = JFactory::getApplication()->input;
 $userid = $input->get("userid",0,"int");
+
 $objuserdata = new UserData;
 
-$usuario = JFactory::getUser();
 $userid = ($userid==0)? $usuario->id: $userid ;
 $document = JFactory::getDocument();
 $base = JUri::base();
-$proyectos = JTrama::getProjectsByUser($userid);		 
+$proyectos = JTrama::getProjectsByUser($userid);
+foreach ($proyectos as $key => $value) {
+	$value->viewUrl = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
+	$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=14&proyid=';
+}
+
+
 $pathJumi = $base.'components/com_jumi/files/perfil_usuario/';
 $document->addStyleSheet($pathJumi.'css/style.css');
 
 $datosgenerales = $objuserdata::datosGr($userid);
 
 if(is_null($datosgenerales)){
-	$redirect = JFactory::getApplication();
-	$redirect->redirect('index.php', 'No hay datos de usuario','notice');
+	$app->redirect('index.php', 'No hay datos de usuario','notice');
 }
 
 $id_datos_generales = $datosgenerales->id;
 
-$proyectos_pasados = $objuserdata::pastProjects($id_datos_generales);
 $promedio = $objuserdata->scoreUser($userid);
 
 ?>
@@ -112,19 +126,15 @@ $promedio = $objuserdata->scoreUser($userid);
 					<input id="ac-4a" name="accordion-2" type="radio" />
 					<label for="ac-4a">Proyectos pasados</label>
 					<article class="ac-large">
-						<p>
 							<?php 
-								foreach ($proyectos_pasados as $key => $value) {
-		      					
-								echo '<a href="'.$value->urlProyectosPasados.'" target="_blank">'.$value->nomNombreProyecto.'</a>';		
-								echo "<br />" ; 
-								echo "<br />"  ;   
-								echo $value->dscDescripcionProyecto;		
-								echo "<br />"  ;   
-								echo "<br />"  ;  
+								foreach ($proyectos as $key => $value) {
+									if ( $usuario->id = $value->userId && $value->type == 'REPERTORY' ) {
+										echo '<h4><a href="'.$value->viewUrl.$value->id.'" target="_blank">'.$value->name.'</a></h4>';
+										echo '<span><a class="button editar" href="'.$value->editUrl.$value->id.'">'.JText::_('EDIT').'</a></span>';	
+									echo '<p>'.$value->description.'</p>';
+									}
 								}   
 		       				?>	
-						</p>
 					</article>
                     </div>
                     <div>
@@ -135,7 +145,7 @@ $promedio = $objuserdata->scoreUser($userid);
 							<?php 
 								foreach ($proyectos as $key => $value) {
 								echo "<ul>";	
-								echo '<li><a href="index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$value->id.'"  >'.$value->name.'</a></li>';
+								echo '<li><a href="'.$value->viewUrl.$value->id.'" >'.$value->name.'</a></li>';
 								echo "</ul>";
 								}							
 							?>							
