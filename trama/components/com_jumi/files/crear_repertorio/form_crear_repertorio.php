@@ -107,6 +107,8 @@ if ( isset ($objDatosRepertorio) ) {
 			jQuery("#seccion").val(section.join(","));
 			jQuery("#unidad").val(unitSale.join(","));
 			jQuery("#inventario").val(capacity.join(","));
+
+			emptyKeys();
 			
 			jQuery("#form2").submit();
 		});
@@ -288,7 +290,7 @@ if ( isset ($objDatosRepertorio) ) {
 	
 
 	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
-	<textarea name="tags" cols="60" rows="5"><?php
+	<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
 		if( isset($objDatosRepertorio) && !empty($objDatosRepertorio->tags) ) {
 			foreach ($objDatosRepertorio->tags as $key => $value) {
 				$array[] = $value->tag;

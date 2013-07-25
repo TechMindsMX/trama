@@ -107,17 +107,16 @@ if ( isset ($objDatosProducto) ) {
 			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
 			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
 			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
-			
-			console.log(section.join(","));
-			console.log(unitSale.join(","));
-			console.log(capacity.join(","));
-			
+
 			jQuery("#seccion").val(section.join(","));
 			jQuery("#unidad").val(unitSale.join(","));
 			jQuery("#inventario").val(capacity.join(","));
-			
+
+			emptyKeys();
+
 			jQuery("#form2").submit();
 		});
+		
 	});
 
 </script>
@@ -442,7 +441,7 @@ if ( isset ($objDatosProducto) ) {
 	<br />
 	
 	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
-	<textarea name="tags" cols="60" rows="5"><?php
+	<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
 		if( isset($objDatosProducto) && !empty($objDatosProducto->tags) ) {
 			foreach ($objDatosProducto->tags as $key => $value) {
 				$array[] = $value->tag;
