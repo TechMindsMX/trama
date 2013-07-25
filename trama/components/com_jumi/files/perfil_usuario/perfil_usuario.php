@@ -130,8 +130,8 @@ $promedio = $objuserdata->scoreUser($userid);
 							<?php 
 								foreach ($proyectos as $key => $value) {
 									if ( $usuario->id == $value->userId && $value->type == 'REPERTORY' ) {
-										echo '<h4><a href="'.$value->viewUrl.$value->id.'" target="_blank">'.$value->name.'</a></h4>';
-										echo '<span><a class="button editar" href="'.$value->editUrl.$value->id.'">'.JText::_('EDIT').'</a></span>';	
+										echo '<h4><a href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></h4>';
+										echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';	
 										echo '<p>'.$value->description.'</p>';
 									}
 								}   
@@ -147,7 +147,7 @@ $promedio = $objuserdata->scoreUser($userid);
 								foreach ($proyectos as $key => $value ) {
 									if ( $usuario->id == $value->userId && $value->type != 'REPERTORY' ) {
 										echo "<ul>";	
-										echo '<li><a href="'.$value->viewUrl.$value->id.'" >'.$value->name.'</a></li>';
+										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
 										echo "</ul>";
 									}
 								}
