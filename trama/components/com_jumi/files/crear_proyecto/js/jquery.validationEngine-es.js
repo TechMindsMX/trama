@@ -166,7 +166,7 @@
                 "yt": {
                     "func": function (field){
                     	var regyt = /https?:\/\/(?:youtu\.be\/|(?:[a-z]{2,3}\.)?youtube\.com\/watch(?:\?|#\!)v=)([\w-]{11}).*/gi;
-                    	var regvi = /https?:\/\/(www\.)?vimeo.com\/(\d+)($|\/)/;
+                    	var regvi = /http?:\/\/(?:www\.)?(vimeo|youtube)\.com\/(?:watch\?v=)?(.*?)(?:\z|$|&)/;
                     	var campo = field.val();
                     	
                     	if ( (campo.match(regyt)) || (campo.match(regvi)) ) {
