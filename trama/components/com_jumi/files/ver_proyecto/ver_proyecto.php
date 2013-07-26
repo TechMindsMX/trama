@@ -30,12 +30,11 @@
 <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
 
 <?php
-	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
-	$json = json_decode(file_get_contents($url));
+$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
+$json = json_decode(file_get_contents($url));
 
-var_dump($json);
-exit;
 $json->etiquetaTipo = tipoProyProd($json);
+$json->acceso = JTramaSocial::checkUserGroup($proyecto, $usuario->id);
 
 function tipoProyProd($data) {
 	$tipo = $data->type;
@@ -68,97 +67,110 @@ function buttons($data, $user) {
 
 function videos($obj, $param) {
 	$html = '';
-
-	$array = $obj->projectVideos;
-	foreach ($array as $key => $value ) {
-		if (strstr($value->url, 'youtube')) {
-			$arrayLimpio[] = array('youtube' => end(explode("=", $value->url)));
-		}
-		if (strstr($value->url, 'youtu.be')) {
-			$urlcorta = end(explode(".be/", $value->url));
-			$urlcorta = explode("?", $urlcorta);
-			$arrayLimpio[] = array('youtube' => $urlcorta[0]);
-		}
-		elseif (strstr($value->url, 'vimeo')) {
-			$arrayLimpio[] = array('vimeo' => end(explode("://vimeo.com/", $value->url)));
-		}
-	}
-
-	switch ($param) {
-	case 1:
-		$video1 = $arrayLimpio[0];
-		if (key($video1) == 'youtube') {
-			$html .= '<iframe class="video-player" width="100%" '.
-					'src="//www.youtube.com/embed/'.$video1['youtube'].
-					'?rel=0" frameborder="0" allowfullscreen></iframe>';
-		}
-		elseif (key($video1) == 'vimeo') {
-			$html .= '<iframe class="video-player" width="100%" '.
-				'src="http://player.vimeo.com/video/'.$video1['vimeo'].'?autoplay=0" '.
-				'frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-		}
-	break;
-	default:
-		foreach ( $arrayLimpio as $llave => $valor ) {
-			foreach ($valor as $key => $value) {
-				if ($key == 'youtube') {
-					$html .= '<div class="item-video"><input class="liga" type="button"'.
-						'value="//www.youtube.com/embed/'.$value.'?rel=0&autoplay=1"'.
-						'style="background: url(\'http://img.youtube.com/vi/'.$value.'/0.jpg\')'.
-						' no-repeat; background-size: 100%;" /></div>';
-				}
-				elseif ($key == 'vimeo') {
-					$hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$value.php"));
-					$thumbVimeo = $hash[0]['thumbnail_medium']; 
-					
-					$html .= '<div class="item-video"><input class="liga" type="button"'.
-						'value="//player.vimeo.com/video/'.$value.'?autoplay=1"'.
-						'style="background: url('.$thumbVimeo.')'.
-						' no-repeat; background-size: 100%;" /></div>';
-				}
+	
+	if( ($obj->acceso != null) || ($obj->videoPublic == 1 )){
+		$array = $obj->projectVideos;
+		foreach ($array as $key => $value ) {
+			if (strstr($value->url, 'youtube')) {
+				$arrayLimpio[] = array('youtube' => end(explode("=", $value->url)));
+			}
+			if (strstr($value->url, 'youtu.be')) {
+				$urlcorta = end(explode(".be/", $value->url));
+				$urlcorta = explode("?", $urlcorta);
+				$arrayLimpio[] = array('youtube' => $urlcorta[0]);
+			}
+			elseif (strstr($value->url, 'vimeo')) {
+				$arrayLimpio[] = array('vimeo' => end(explode("://vimeo.com/", $value->url)));
 			}
 		}
-	break;
+	
+		switch ($param) {
+		case 1:
+			$video1 = $arrayLimpio[0];
+			if (key($video1) == 'youtube') {
+				$html .= '<iframe class="video-player" width="100%" '.
+						'src="//www.youtube.com/embed/'.$video1['youtube'].
+						'?rel=0" frameborder="0" allowfullscreen></iframe>';
+			}
+			elseif (key($video1) == 'vimeo') {
+				$html .= '<iframe class="video-player" width="100%" '.
+					'src="http://player.vimeo.com/video/'.$video1['vimeo'].'?autoplay=0" '.
+					'frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+			}
+		break;
+		default:
+			foreach ( $arrayLimpio as $llave => $valor ) {
+				foreach ($valor as $key => $value) {
+					if ($key == 'youtube') {
+						$html .= '<div class="item-video"><input class="liga" type="button"'.
+							'value="//www.youtube.com/embed/'.$value.'?rel=0&autoplay=1"'.
+							'style="background: url(\'http://img.youtube.com/vi/'.$value.'/0.jpg\')'.
+							' no-repeat; background-size: 100%;" /></div>';
+					}
+					elseif ($key == 'vimeo') {
+						$hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$value.php"));
+						$thumbVimeo = $hash[0]['thumbnail_medium']; 
+						
+						$html .= '<div class="item-video"><input class="liga" type="button"'.
+							'value="//player.vimeo.com/video/'.$value.'?autoplay=1"'.
+							'style="background: url('.$thumbVimeo.')'.
+							' no-repeat; background-size: 100%;" /></div>';
+					}
+				}
+			}
+		break;
+		}
+	}elseif( ($obj->acceso == null) || ($obj->videoPublic == 0 ) ){
+		$html = 'Contenido privado';
 	}
 	return $html;
 }
 
 function imagenes($data) {
 	$html = '';
-	$array = $data->projectPhotos;
-	foreach ( $array as $key => $value ) {
-		$imagen = "/".$value->name;
-		$html .= '<img width="100" height="100" src="'.MIDDLE.PHOTO.$imagen.'" alt="" />';	
+
+	if( ($data->acceso != null) || ($data->imagePublic == 1 )){
+		$array = $data->projectPhotos;
+		foreach ( $array as $key => $value ) {
+			$imagen = "/".$value->name;
+			$html .= '<img width="100" height="100" src="'.MIDDLE.PHOTO.$imagen.'" alt="" />';	
+		}
+	}elseif( ($data->acceso == null) || ($data->imagePublic == 0 ) ){
+		$html = 'Contenido privado';
 	}
 	return $html;
 }
 
 function audios($data) {
 	$html = '';
-	$array = $data->projectSoundclouds;
 	
-	require_once 'Services/Soundcloud.php';
+	if( ($data->acceso != null) || ($data->audioPublic == 1 )){
+		$array = $data->projectSoundclouds;
 		
-	// create a client object with your app credentials
-	$client = new Services_Soundcloud('52bdfab59cb4719ea8d5ea626efae0da', '7688bd528138b2de5daf52edffc091c5');
-	$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
-	
-	foreach ($array as $key => $value) {
-		if (!empty($value->url)) {
-		// get a tracks oembed data
-	//	$track_url = str_replace('https', 'http', $value->url);
-		$track_url = $value->url;
-		$embed_info = json_decode($client->get('resolve', array('url' => $track_url)));
-		// render the html for the player widget
+		require_once 'Services/Soundcloud.php';
+			
+		// create a client object with your app credentials
+		$client = new Services_Soundcloud('52bdfab59cb4719ea8d5ea626efae0da', '7688bd528138b2de5daf52edffc091c5');
+		$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
 		
-		$html .= '<iframe width="100%" height="100" scrolling="no" frameborder="no" src="'.
-		'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$embed_info->id.'"></iframe>';
+		foreach ($array as $key => $value) {
+			if (!empty($value->url)) {
+			// get a tracks oembed data
+		//	$track_url = str_replace('https', 'http', $value->url);
+			$track_url = $value->url;
+			$embed_info = json_decode($client->get('resolve', array('url' => $track_url)));
+			// render the html for the player widget
+			
+			$html .= '<iframe width="100%" height="100" scrolling="no" frameborder="no" src="'.
+			'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$embed_info->id.'"></iframe>';
+			}
 		}
-	}
-	if ($html == '') {
-		$html = JText::_('NO_HAY_AUIDOS');
-	}
-	
+		if ($html == '') {
+			$html = JText::_('NO_HAY_AUIDOS');
+		}
+	}elseif( ($data->acceso == null) || ($data->audioPublic == 0 ) ){
+		$html = 'Contenido privado';
+	}	
 	return $html;
 }
 
@@ -170,12 +182,17 @@ function avatar($data) {
 }
 
 function finanzas ($data) {
-	$html = '<div id="finanzas_general">'.
-			'<p><span>'.JText::_('BUDGET').'</span>'.$data->budget.'</p>'.
-			'<p><span>'.JText::_('BREAKEVEN').'</span>'.$data->breakeven.'</p>'.
-			'<p><span>'.JText::_('REVE_POTENTIAL').'</span>'.$data->revenuePotential.'</p>'.
-			'</div>';
-
+	$html = '';
+	
+	if( ($data->acceso != null) || ($data->numberPublic == 1 )){
+		$html = '<div id="finanzas_general">'.
+				'<p><span>'.JText::_('BUDGET').'</span>'.$data->budget.'</p>'.
+				'<p><span>'.JText::_('BREAKEVEN').'</span>'.$data->breakeven.'</p>'.
+				'<p><span>'.JText::_('REVE_POTENTIAL').'</span>'.$data->revenuePotential.'</p>'.
+				'</div>';
+	}elseif( ($data->acceso == null) || ($data->numberPublic == 0 ) ){
+		$html = 'Contenido privado';
+	}
 	return $html;
 }
 
@@ -476,6 +493,10 @@ function fechas($data) {
 		});
     </script>
 
-<?php 
-// var_dump($json);
+<?php
+foreach($json as $key => $value) {
+	echo $key.' ============= ';
+	var_dump($value);
+	echo "<br /><br />";
+}
  ?>

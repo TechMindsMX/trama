@@ -136,5 +136,29 @@ class JTramaSocial extends CommunityGroupsController {
 	return $addFriendHtml;
 	}
 
+	public static function checkUserGroup($group, $userid){
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query
+			->select('id')
+		    ->from('#__community_groups')
+		    ->where('proyid = '.$group);
+		$db->setQuery($query);
+		$results = $db->loadResult();
+		
+		if($results != null) {
+			$query2 = $db->getQuery(true);
+			$query2
+				->select('groupid, memberid')
+				->from('#__community_groups_members')
+				->where('memberid = '.$userid.' and groupid = '.$results);
+			$db->setQuery($query2);
+			$results2 = $db->loadResult();
+			
+			return $results2;
+		}else{
+			echo 'no existe el grupo';
+		}
+	}
 }
 ?>
