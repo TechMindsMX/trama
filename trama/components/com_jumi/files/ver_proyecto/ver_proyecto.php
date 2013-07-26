@@ -68,109 +68,99 @@ function buttons($data, $user) {
 function videos($obj, $param) {
 	$html = '';
 	
-	if( ($obj->acceso != null) || ($obj->videoPublic == 1 )){
-		$array = $obj->projectVideos;
-		foreach ($array as $key => $value ) {
-			if (strstr($value->url, 'youtube')) {
-				$arrayLimpio[] = array('youtube' => end(explode("=", $value->url)));
-			}
-			if (strstr($value->url, 'youtu.be')) {
-				$urlcorta = end(explode(".be/", $value->url));
-				$urlcorta = explode("?", $urlcorta);
-				$arrayLimpio[] = array('youtube' => $urlcorta[0]);
-			}
-			elseif (strstr($value->url, 'vimeo')) {
-				$arrayLimpio[] = array('vimeo' => end(explode("://vimeo.com/", $value->url)));
-			}
+	$array = $obj->projectVideos;
+	foreach ($array as $key => $value ) {
+		if (strstr($value->url, 'youtube')) {
+			$arrayLimpio[] = array('youtube' => end(explode("=", $value->url)));
 		}
-	
-		switch ($param) {
-		case 1:
-			$video1 = $arrayLimpio[0];
-			if (key($video1) == 'youtube') {
-				$html .= '<iframe class="video-player" width="100%" '.
-						'src="//www.youtube.com/embed/'.$video1['youtube'].
-						'?rel=0" frameborder="0" allowfullscreen></iframe>';
-			}
-			elseif (key($video1) == 'vimeo') {
-				$html .= '<iframe class="video-player" width="100%" '.
-					'src="http://player.vimeo.com/video/'.$video1['vimeo'].'?autoplay=0" '.
-					'frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-			}
-		break;
-		default:
-			foreach ( $arrayLimpio as $llave => $valor ) {
-				foreach ($valor as $key => $value) {
-					if ($key == 'youtube') {
-						$html .= '<div class="item-video"><input class="liga" type="button"'.
-							'value="//www.youtube.com/embed/'.$value.'?rel=0&autoplay=1"'.
-							'style="background: url(\'http://img.youtube.com/vi/'.$value.'/0.jpg\')'.
-							' no-repeat; background-size: 100%;" /></div>';
-					}
-					elseif ($key == 'vimeo') {
-						$hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$value.php"));
-						$thumbVimeo = $hash[0]['thumbnail_medium']; 
-						
-						$html .= '<div class="item-video"><input class="liga" type="button"'.
-							'value="//player.vimeo.com/video/'.$value.'?autoplay=1"'.
-							'style="background: url('.$thumbVimeo.')'.
-							' no-repeat; background-size: 100%;" /></div>';
-					}
+		if (strstr($value->url, 'youtu.be')) {
+			$urlcorta = end(explode(".be/", $value->url));
+			$urlcorta = explode("?", $urlcorta);
+			$arrayLimpio[] = array('youtube' => $urlcorta[0]);
+		}
+		elseif (strstr($value->url, 'vimeo')) {
+			$arrayLimpio[] = array('vimeo' => end(explode("://vimeo.com/", $value->url)));
+		}
+	}
+
+	switch ($param) {
+	case 1:
+		$video1 = $arrayLimpio[0];
+		if (key($video1) == 'youtube') {
+			$html .= '<iframe class="video-player" width="100%" '.
+					'src="//www.youtube.com/embed/'.$video1['youtube'].
+					'?rel=0" frameborder="0" allowfullscreen></iframe>';
+		}
+		elseif (key($video1) == 'vimeo') {
+			$html .= '<iframe class="video-player" width="100%" '.
+				'src="http://player.vimeo.com/video/'.$video1['vimeo'].'?autoplay=0" '.
+				'frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+		}
+	break;
+	default:
+		foreach ( $arrayLimpio as $llave => $valor ) {
+			foreach ($valor as $key => $value) {
+				if ($key == 'youtube') {
+					$html .= '<div class="item-video"><input class="liga" type="button"'.
+						'value="//www.youtube.com/embed/'.$value.'?rel=0&autoplay=1"'.
+						'style="background: url(\'http://img.youtube.com/vi/'.$value.'/0.jpg\')'.
+						' no-repeat; background-size: 100%;" /></div>';
+				}
+				elseif ($key == 'vimeo') {
+					$hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$value.php"));
+					$thumbVimeo = $hash[0]['thumbnail_medium']; 
+					
+					$html .= '<div class="item-video"><input class="liga" type="button"'.
+						'value="//player.vimeo.com/video/'.$value.'?autoplay=1"'.
+						'style="background: url('.$thumbVimeo.')'.
+						' no-repeat; background-size: 100%;" /></div>';
 				}
 			}
-		break;
 		}
-	}elseif( ($obj->acceso == null) || ($obj->videoPublic == 0 ) ){
-		$html = 'Contenido privado';
+	break;
 	}
+
 	return $html;
 }
 
 function imagenes($data) {
 	$html = '';
-
-	if( ($data->acceso != null) || ($data->imagePublic == 1 )){
-		$array = $data->projectPhotos;
-		foreach ( $array as $key => $value ) {
-			$imagen = "/".$value->name;
-			$html .= '<img width="100" height="100" src="'.MIDDLE.PHOTO.$imagen.'" alt="" />';	
-		}
-	}elseif( ($data->acceso == null) || ($data->imagePublic == 0 ) ){
-		$html = 'Contenido privado';
+	
+	$array = $data->projectPhotos;
+	foreach ( $array as $key => $value ) {
+		$imagen = "/".$value->name;
+		$html .= '<img width="100" height="100" src="'.MIDDLE.PHOTO.$imagen.'" alt="" />';	
 	}
+
 	return $html;
 }
 
 function audios($data) {
 	$html = '';
 	
-	if( ($data->acceso != null) || ($data->audioPublic == 1 )){
-		$array = $data->projectSoundclouds;
+	$array = $data->projectSoundclouds;
+	
+	require_once 'Services/Soundcloud.php';
 		
-		require_once 'Services/Soundcloud.php';
-			
-		// create a client object with your app credentials
-		$client = new Services_Soundcloud('52bdfab59cb4719ea8d5ea626efae0da', '7688bd528138b2de5daf52edffc091c5');
-		$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
+	// create a client object with your app credentials
+	$client = new Services_Soundcloud('52bdfab59cb4719ea8d5ea626efae0da', '7688bd528138b2de5daf52edffc091c5');
+	$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
+	
+	foreach ($array as $key => $value) {
+		if (!empty($value->url)) {
+		// get a tracks oembed data
+	//	$track_url = str_replace('https', 'http', $value->url);
+		$track_url = $value->url;
+		$embed_info = json_decode($client->get('resolve', array('url' => $track_url)));
+		// render the html for the player widget
 		
-		foreach ($array as $key => $value) {
-			if (!empty($value->url)) {
-			// get a tracks oembed data
-		//	$track_url = str_replace('https', 'http', $value->url);
-			$track_url = $value->url;
-			$embed_info = json_decode($client->get('resolve', array('url' => $track_url)));
-			// render the html for the player widget
-			
-			$html .= '<iframe width="100%" height="100" scrolling="no" frameborder="no" src="'.
-			'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$embed_info->id.'"></iframe>';
-			}
+		$html .= '<iframe width="100%" height="100" scrolling="no" frameborder="no" src="'.
+		'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$embed_info->id.'"></iframe>';
 		}
-		if ($html == '') {
-			$html = JText::_('NO_HAY_AUIDOS');
-		}
-	}elseif( ($data->acceso == null) || ($data->audioPublic == 0 ) ){
-		$html = 'Contenido privado';
-	}	
+	}
+	if ($html == '') {
+		$html = JText::_('NO_HAY_AUIDOS');
+	}
 	return $html;
 }
 
@@ -184,15 +174,11 @@ function avatar($data) {
 function finanzas ($data) {
 	$html = '';
 	
-	if( ($data->acceso != null) || ($data->numberPublic == 1 )){
-		$html = '<div id="finanzas_general">'.
-				'<p><span>'.JText::_('BUDGET').'</span>'.$data->budget.'</p>'.
-				'<p><span>'.JText::_('BREAKEVEN').'</span>'.$data->breakeven.'</p>'.
-				'<p><span>'.JText::_('REVE_POTENTIAL').'</span>'.$data->revenuePotential.'</p>'.
-				'</div>';
-	}elseif( ($data->acceso == null) || ($data->numberPublic == 0 ) ){
-		$html = 'Contenido privado';
-	}
+	$html = '<div id="finanzas_general">'.
+			'<p><span>'.JText::_('BUDGET').'</span>'.$data->budget.'</p>'.
+			'<p><span>'.JText::_('BREAKEVEN').'</span>'.$data->breakeven.'</p>'.
+			'<p><span>'.JText::_('REVE_POTENTIAL').'</span>'.$data->revenuePotential.'</p>'.
+			'</div>';
 	return $html;
 }
 
@@ -383,6 +369,9 @@ function fechas($data) {
 			</div>
 			<div id="video" class="ver_proyecto">
 				<div id="content_player">
+				<?php
+				if( ($json->acceso != null) || ($json->videoPublic == 1) ){
+				?>
 					<div id="video-player">
 						<div id="menu-player">
 							<?php echo videos($json, 0); ?>
@@ -391,32 +380,66 @@ function fechas($data) {
 							<?php echo videos($json, 1); ?>
 						</div>
 					</div>
+				<?php
+				}elseif( ($json->acceso == null) || ($json->videoPublic == 0) ) {
+					echo 'Contenido Privado';
+				}
+				?>
 				</div>
 			<a class="cerrar">cerrar</a>
 			</div>
 			<div id="gallery" class="ver_proyecto">
 			<div id="wrapper">
+				<?php
+				if( ($json->acceso != null) || ($json->imagePublic == 1) ){
+				?>
 				<div class="slider-wrapper theme-bar">
             		<div id="slider" class="nivoSlider">
             			<?php echo imagenes($json); ?>
             		</div>
         		</div>
+        		<?php
+				}elseif( ($json->acceso == null) || ($json->imagePublic == 0) ) {
+					echo 'Contenido Privado';
+				}
+				?>
         	</div>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="audios" class="ver_proyecto">
-				<?php echo audios($json); ?>
+				<?php
+				if( ($json->acceso != null) || ($json->audioPublic == 1) ){
+					echo audios($json);
+				}elseif( ($json->acceso == null) || ($json->audioPublic == 0) ) {
+					echo 'Contenido Privado';
+				}
+				?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="finanzas" class="ver_proyecto">
+				<?php
+				if( ($json->acceso != null) || ($json->numberPublic == 1) ){
+				?>
 				<h3>Finanzas</h3>
-				<?php echo informacionTmpl($json, "finanzas"); ?>
+				<?php 
+					echo informacionTmpl($json, "finanzas"); 
+				}elseif( ($json->acceso == null) || ($json->numberPublic == 0) ) {
+					echo 'Contenido Privado';
+				}
+				?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="info" class="ver_proyecto">
+				<?php
+				if( ($json->acceso != null) || ($json->infoPublic == 1) ){
+				?>
 				<h3>Informacion</h3>
 				<div class="detalleDescripcion">
-					<?php echo informacionTmpl($json, null); ?>
+					<?php 
+						echo informacionTmpl($json, null);
+					}elseif( ($json->acceso == null) || ($json->infoPublic == 0) ) {
+						echo 'Contenido Privado';
+					} ?>
 				</div>
 				<a class="cerrar">cerrar</a>
 			</div>
@@ -494,9 +517,9 @@ function fechas($data) {
     </script>
 
 <?php
-foreach($json as $key => $value) {
+/*foreach($json as $key => $value) {
 	echo $key.' ============= ';
 	var_dump($value);
 	echo "<br /><br />";
-}
+}*/
  ?>
