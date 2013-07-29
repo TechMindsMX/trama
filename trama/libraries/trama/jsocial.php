@@ -117,10 +117,12 @@ class JTramaSocial extends CommunityGroupsController {
 	public static function addFriendJS($userid, $usuario){
 		include_once('components/com_community/libraries/core.php');
 		include_once('components/com_community/helpers/friends.php');
-		$addFriendHtml = '<link rel="stylesheet" href="http://localhost/sourcetree/trama/components/com_community/assets/window.css" type="text/css">
-			<script src="http://localhost/sourcetree/trama/components/com_community/assets/joms.jquery-1.8.1.min.js" type="text/javascript"></script>
-			<script src="http://localhost/sourcetree/trama/components/com_community/assets/script-1.2.min.js" type="text/javascript"></script>
-			<script src="http://localhost/sourcetree/trama/components/com_community/assets/window-1.0.min.js" type="text/javascript"></script>';
+		JFactory::getDocument()->addScript('components/com_community/assets/joms.jquery-1.8.1.min.js');
+		JFactory::getDocument()->addScript('components/com_community/assets/script-1.2.min.js');
+		JFactory::getDocument()->addScript('components/com_community/assets/window-1.0.min.js');
+		JFactory::getDocument()->addScript('components/com_community/assets/minitip-1.0.js');
+		JFactory::getDocument()->addScript('components/com_community/assets/joms.ajax.min.js');
+		$addFriendHtml = '<link rel="stylesheet" href="components/com_community/assets/window.css" type="text/css">';
 		$user				= CFactory::getUser( $userid );
 		$row->profileLink	= CRoute::_('index.php?option=com_community&view=profile&userid=' . $userid );
 		$row->friendsCount	= $user->getFriendCount();
