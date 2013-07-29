@@ -33,8 +33,7 @@ switch ($fun) {
 			$resultado_score = $bd->query($query_promedio);
 		
 			$obj_score = $resultado_score->fetch_object();
-			var_dump($obj_score);
-			exit;
+			
 			$respuesta['score'] = is_null($obj_score->score)? 0 : $obj_score->score;
 			$respuesta['msg'] = 'Solo se acepta una sola calificación';
 			$respuesta['bloquear'] = true;
