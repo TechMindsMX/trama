@@ -20,7 +20,7 @@ jQuery(document).ready(function(){
 jQuery("#form2 select").click(function() {
 	
 	var seleccion = jQuery(this).find('option:selected');
-	tmp = seleccion.text();
+	temp = seleccion.text();
 	bandera = jQuery(this).attr("id");
 	
 	if (bandera == 'selectCategoria') {
@@ -52,7 +52,7 @@ jQuery("#form2 select").change(function(){
 	    var arreglo = valortextarea.split(',');
 	    var cuantos = arreglo.length;
 	    	    
-	    arrayCat = findReplace(cuantos, selectedCategoria, arreglo, tmp, tmpSub);
+	    arrayCat = findReplace(cuantos, selectedCategoria, arreglo, temp, tmpSub);
 	    valor_final = arrayCat.join(',');
 	    $('#tagsArea').val(valor_final);
 
