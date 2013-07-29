@@ -643,7 +643,7 @@ if ($form == 'perfil') {
 	$mailCon0 = $datos->get_mailsContactos_0();
 	$mailCon1 = $datos->get_mailsContactos_1();
 	$allDone =& JFactory::getApplication();
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=15', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5', 'Sus datos fueron grabados exitosamente' );
 }
 // $curriculum = $datos->get_cv();
 
