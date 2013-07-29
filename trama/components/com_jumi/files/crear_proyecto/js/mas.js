@@ -93,11 +93,11 @@ function emptyKeys() {
 	if (valorKeysArea == "") {
 
 		var catSeleccionada = jQuery('#selectCategoria').find('option:selected');
-		var selectedCat = catSeleccionada.text();
+		temp = catSeleccionada.text();
 		var subCatSeleccionada = jQuery('#subcategoria').find('option:selected');
-		var selectedSubCat = subCatSeleccionada.text();
+		tmpSub = subCatSeleccionada.text();
 
-		$('#tagsArea').val(selectedSubCat+','+selectedCat);
+		$('#tagsArea').val(tmpSub+','+temp);
 
 	}
 	

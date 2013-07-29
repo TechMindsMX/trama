@@ -11,7 +11,7 @@ $objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['projectI
 
 $grupoExistente = searchGroup($objDatosProyecto->userId,$objDatosProyecto->id);
 
-if (!isset($grupoExistente)) {
+if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 
 	$fecha = date("Y-m-d H:i:s");
 	$grupo = new stdClass();
@@ -60,12 +60,17 @@ if (!isset($grupoExistente)) {
 	
 	}
 	
+} else if ($objDatosProyecto->type == 'REPERTORY'){
+	
+	$allDone =& JFactory::getApplication();
+	$allDone->redirect('index.php');
+
 } else {
 	
 	$idGroup = searchGroup($objDatosProyecto->userId,$objDatosProyecto->id);
 	$allDone =& JFactory::getApplication();
 	$allDone->redirect('index.php?option=com_community&view=groups&task=viewgroup&groupid='.$idGroup->id);
-
+	
 }
 	
 function searchGroup($userId,$id){
