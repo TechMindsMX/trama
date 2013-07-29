@@ -517,9 +517,5 @@ function fechas($data) {
     </script>
 
 <?php
-/*foreach($json as $key => $value) {
-	echo $key.' ============= ';
-	var_dump($value);
-	echo "<br /><br />";
-}*/
+//var_dump($json);
  ?>
