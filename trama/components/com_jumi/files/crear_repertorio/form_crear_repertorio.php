@@ -140,6 +140,37 @@ if ( isset ($objDatosRepertorio) ) {
 		type="hidden"
 		value="<?php echo $usuario->id; ?>"
 		name="userId" />
+		
+	<input 
+		type="hidden" 
+		name="videoPublic" 
+		value="1" 
+		id="videoPublic" 
+		checked="checked" />
+	<input 
+		type="hidden" 
+		name="audioPublic" 
+		value="1" 
+		id="audioPublic" 
+		checked="checked" />
+	<input 
+		type="hidden" 
+		name="imagePublic" 
+		value="1" 
+		id="imagePublic" 
+		checked="checked" />
+	<input 
+		type="hidden" 
+		name="infoPublic" 
+		value="1" 
+		id="infoPublic" 
+		checked="checked" />
+	<input 
+		type="hidden" 
+		name="numberPublic" 
+		value="1" 
+		id="numberPublic" 
+		checked="checked" />
 	
 	<label for="nomProy"> <?php echo JText::_('NOMBREPR').JText::_('REPERTORIO');  ?>*: </label> 
 	<input 
