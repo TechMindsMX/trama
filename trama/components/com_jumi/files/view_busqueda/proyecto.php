@@ -124,8 +124,6 @@ function tagLimpia ($data) {
   
   return $datolimpio;
 }
-
-
 ?>
 
 <script type="text/javascript">
@@ -143,48 +141,76 @@ $(document).ready(function(){
 		
 		if(this.type != 'button') {
 			if(!producto && proyecto && !repertorio) {
-				<?php if (isset($proyectos)) {
+				<?php 
+				if (isset($proyectos)) {
 					echo 'members = '.$proyectos.';
 					jQuery("#contador").html("Resultados: "+members.length);
 					initPagination();';
+				}else {
+					echo 'alert("No hay Resultados con este filtro");'.
+						 'jQuery("#ligasprod in/home/lutek/workspaceput").prop("checked",false);';
 				} ?>
 			}else if (producto && !proyecto && !repertorio) {
-				<?php if (isset($productos)) {
+				<?php 
+				if (isset($productos)) {
 					echo 'members = '.$productos.';
 					jQuery("#contador").html("Resultados: "+members.length);
 					initPagination();';
-			 	} ?>
+			 	}else {
+					echo 'alert("No hay Resultados con este filtro");'.
+						 'jQuery("#ligasprod input").prop("checked",false);';
+				} 
+			 	?>
 			}else if(!producto && !proyecto && repertorio) {
-				<?php if (isset($repertorio)) {
+				<?php
+				if (isset($repertorio)) {
 					echo 'members = '.$repertorio.';
 					jQuery("#contador").html("Resultados: "+members.length);
 					initPagination();';
-			 	} ?>
+			 	}else {
+					echo 'alert("No hay Resultados con este filtro");'.
+						 'jQuery("#ligasprod input").prop("checked",false);';;
+				}
+				?>
 			}else if(producto && proyecto && !repertorio) {
-				<?php if (isset($prodProy)) {
+				<?php
+				if (isset($prodProy)) {
 					echo 'members = '.$prodProy.';
 					jQuery("#contador").html("Resultados: "+members.length);
 					initPagination();';
-			 	} ?>
+			 	}else {
+					echo 'alert("No hay Resultados con este filtro");'.
+						 'jQuery("#ligasprod input").prop("checked",false);';
+				}
+				?>
 			}else if(producto && !proyecto && repertorio) {
-				<?php if (isset($repertorioProduc)) {
+				<?php
+				if (isset($repertorioProduc)) {
 					echo 'members = '.$repertorioProduc.';
 					jQuery("#contador").html("Resultados: "+members.length);
 					initPagination();';
-			 	} ?>
+			 	}else {
+					echo 'alert("No hay Resultados con este filtro");'.
+						 'jQuery("#ligasprod input").prop("checked",false);';
+				}?>	
 			}else if(!producto && proyecto && repertorio) {
 				<?php if (isset($repertProy)) {
 					echo 'members = '.$repertProy.';
 					jQuery("#contador").html("Resultados: "+members.length);
 					initPagination();';
-			 	} ?>
+			 	}
+			 	else {
+					echo 'alert("No hay Resultados con este filtro");'.
+						 'jQuery("#ligasprod input").prop("checked",false);';
+				}?>
+			 	
 			}else if( (repertorio && proyecto && producto) || (!repertorio && !proyecto && !producto) ){
 				members = <?php echo $jsonJS; ?>;
 				jQuery("#contador").html("Resultados: "+members.length);
 				initPagination();
 			}
 		}else{
-			$('#ligasprod input').prop('checked',false);
+			jQuery('#ligasprod input').prop('checked',false);
 			members = <?php echo $jsonJS; ?>;
 			jQuery("#contador").html("Resultados: "+members.length);
 			initPagination();
