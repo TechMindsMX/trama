@@ -60,6 +60,26 @@
                     "regex": "none",
                     "alertText": "* Los campos no coinciden"
                 },
+
+                "yt": {
+                    "func": function (field){
+                    	var regyt = /https?:\/\/(?:youtu\.be\/|(?:[a-z]{2,3}\.)?youtube\.com\/watch(?:\?|#\!)v=)([\w-]{11}).*/gi;
+                    	var regvi = /http?:\/\/(?:www\.)?(vimeo|youtube)\.com\/(?:watch\?v=)?(.*?)(?:\z|$|&)/;
+                    	var campo = field.val();
+                    	
+                    	if ( (campo.match(regyt)) || (campo.match(regvi)) ) {
+                    		regreso = true;
+	                    } else {
+	                    	regreso = false;
+	                    }
+	                    	return regreso;
+                    },                
+                	"alertText":"* Enlace inválido (Solo enlaces de Youtube o Vimeo)"
+                },
+				"sc": {
+                    "regex": /^https?:\/\/(?:www\.)?soundcloud\.com\/[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)*(?!\/sets(?:\/|$))(?:\/[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)*){1,2}\/?$/,
+                    "alertText": "* Enlace Soundcloud inválido "
+                },
                 "creditCard": {
                     "regex": "none",
                     "alertText": "* La tarjeta de crédito no es válida"

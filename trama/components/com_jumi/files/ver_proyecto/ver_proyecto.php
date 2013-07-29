@@ -30,10 +30,11 @@
 <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
 
 <?php
-	$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
-	$json = json_decode(file_get_contents($url));
+$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
+$json = json_decode(file_get_contents($url));
 
 $json->etiquetaTipo = tipoProyProd($json);
+$json->acceso = JTramaSocial::checkUserGroup($proyecto, $usuario->id);
 
 function tipoProyProd($data) {
 	$tipo = $data->type;
@@ -66,7 +67,7 @@ function buttons($data, $user) {
 
 function videos($obj, $param) {
 	$html = '';
-
+	
 	$array = $obj->projectVideos;
 	foreach ($array as $key => $value ) {
 		if (strstr($value->url, 'youtube')) {
@@ -118,21 +119,25 @@ function videos($obj, $param) {
 		}
 	break;
 	}
+
 	return $html;
 }
 
 function imagenes($data) {
 	$html = '';
+	
 	$array = $data->projectPhotos;
 	foreach ( $array as $key => $value ) {
 		$imagen = "/".$value->name;
 		$html .= '<img width="100" height="100" src="'.MIDDLE.PHOTO.$imagen.'" alt="" />';	
 	}
+
 	return $html;
 }
 
 function audios($data) {
 	$html = '';
+	
 	$array = $data->projectSoundclouds;
 	
 	require_once 'Services/Soundcloud.php';
@@ -156,7 +161,6 @@ function audios($data) {
 	if ($html == '') {
 		$html = JText::_('NO_HAY_AUIDOS');
 	}
-	
 	return $html;
 }
 
@@ -168,12 +172,13 @@ function avatar($data) {
 }
 
 function finanzas ($data) {
+	$html = '';
+	
 	$html = '<div id="finanzas_general">'.
 			'<p><span>'.JText::_('BUDGET').'</span>'.$data->budget.'</p>'.
 			'<p><span>'.JText::_('BREAKEVEN').'</span>'.$data->breakeven.'</p>'.
 			'<p><span>'.JText::_('REVE_POTENTIAL').'</span>'.$data->revenuePotential.'</p>'.
 			'</div>';
-
 	return $html;
 }
 
@@ -364,6 +369,9 @@ function fechas($data) {
 			</div>
 			<div id="video" class="ver_proyecto">
 				<div id="content_player">
+				<?php
+				if( ($json->acceso != null) || ($json->videoPublic == 1) ){
+				?>
 					<div id="video-player">
 						<div id="menu-player">
 							<?php echo videos($json, 0); ?>
@@ -372,32 +380,66 @@ function fechas($data) {
 							<?php echo videos($json, 1); ?>
 						</div>
 					</div>
+				<?php
+				}elseif( ($json->acceso == null) || ($json->videoPublic == 0) ) {
+					echo 'Contenido Privado';
+				}
+				?>
 				</div>
 			<a class="cerrar">cerrar</a>
 			</div>
 			<div id="gallery" class="ver_proyecto">
 			<div id="wrapper">
+				<?php
+				if( ($json->acceso != null) || ($json->imagePublic == 1) ){
+				?>
 				<div class="slider-wrapper theme-bar">
             		<div id="slider" class="nivoSlider">
             			<?php echo imagenes($json); ?>
             		</div>
         		</div>
+        		<?php
+				}elseif( ($json->acceso == null) || ($json->imagePublic == 0) ) {
+					echo 'Contenido Privado';
+				}
+				?>
         	</div>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="audios" class="ver_proyecto">
-				<?php echo audios($json); ?>
+				<?php
+				if( ($json->acceso != null) || ($json->audioPublic == 1) ){
+					echo audios($json);
+				}elseif( ($json->acceso == null) || ($json->audioPublic == 0) ) {
+					echo 'Contenido Privado';
+				}
+				?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="finanzas" class="ver_proyecto">
+				<?php
+				if( ($json->acceso != null) || ($json->numberPublic == 1) ){
+				?>
 				<h3>Finanzas</h3>
-				<?php echo informacionTmpl($json, "finanzas"); ?>
+				<?php 
+					echo informacionTmpl($json, "finanzas"); 
+				}elseif( ($json->acceso == null) || ($json->numberPublic == 0) ) {
+					echo 'Contenido Privado';
+				}
+				?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="info" class="ver_proyecto">
+				<?php
+				if( ($json->acceso != null) || ($json->infoPublic == 1) ){
+				?>
 				<h3>Informacion</h3>
 				<div class="detalleDescripcion">
-					<?php echo informacionTmpl($json, null); ?>
+					<?php 
+						echo informacionTmpl($json, null);
+					}elseif( ($json->acceso == null) || ($json->infoPublic == 0) ) {
+						echo 'Contenido Privado';
+					} ?>
 				</div>
 				<a class="cerrar">cerrar</a>
 			</div>
@@ -474,6 +516,6 @@ function fechas($data) {
 		});
     </script>
 
-<?php 
-// var_dump($json);
+<?php
+//var_dump($json);
  ?>
