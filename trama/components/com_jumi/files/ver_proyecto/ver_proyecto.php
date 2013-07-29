@@ -370,7 +370,7 @@ function fechas($data) {
 			<div id="video" class="ver_proyecto">
 				<div id="content_player">
 				<?php
-				if( ($json->acceso != null) || ($json->videoPublic == 1) ){
+				if( ($json->acceso != null) || ($json->videoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 					<div id="video-player">
 						<div id="menu-player">
@@ -391,7 +391,7 @@ function fechas($data) {
 			<div id="gallery" class="ver_proyecto">
 			<div id="wrapper">
 				<?php
-				if( ($json->acceso != null) || ($json->imagePublic == 1) ){
+				if( ($json->acceso != null) || ($json->imagePublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 				<div class="slider-wrapper theme-bar">
             		<div id="slider" class="nivoSlider">
@@ -408,7 +408,7 @@ function fechas($data) {
 			</div>
 			<div id="audios" class="ver_proyecto">
 				<?php
-				if( ($json->acceso != null) || ($json->audioPublic == 1) ){
+				if( ($json->acceso != null) || ($json->audioPublic == 1) || ($json->userId == $usuario->id) ){
 					echo audios($json);
 				}elseif( ($json->acceso == null) || ($json->audioPublic == 0) ) {
 					echo 'Contenido Privado';
@@ -418,7 +418,7 @@ function fechas($data) {
 			</div>
 			<div id="finanzas" class="ver_proyecto">
 				<?php
-				if( ($json->acceso != null) || ($json->numberPublic == 1) ){
+				if( ($json->acceso != null) || ($json->numberPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 				<h3>Finanzas</h3>
 				<?php 
@@ -431,7 +431,7 @@ function fechas($data) {
 			</div>
 			<div id="info" class="ver_proyecto">
 				<?php
-				if( ($json->acceso != null) || ($json->infoPublic == 1) ){
+				if( ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 				<h3>Informacion</h3>
 				<div class="detalleDescripcion">
