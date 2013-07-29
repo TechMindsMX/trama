@@ -308,7 +308,7 @@ if ($components)
 	
 		foreach ($components as &$component)
 		{
-			if ($component -> id == 2 || $component -> id == 156){
+			if ($component -> id == 2){
 			if (!empty($component->submenu))
 			{
 				// This component has a db driven submenu.
