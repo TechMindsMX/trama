@@ -20,7 +20,7 @@ $subCategorias = JTrama::getAllSubCats();
 $objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
 
 //definicion de campos del formulario
-$action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
+$action = 'http://192.168.0.107:7171/trama-middleware/rest/project/create';
 $hiddenphotosIds = '<input type="hidden" name="projectPhotosIds" id="projectPhotosIds" value= ""/>';
 $validacion = 'validate[required]';
 $countunitSales = 1;
