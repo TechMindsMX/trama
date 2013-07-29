@@ -22,7 +22,7 @@ jQuery("#form2 select").click(function() {
 	var seleccion = jQuery(this).find('option:selected');
 	tmp = seleccion.text();
 	bandera = jQuery(this).attr("id");
-
+	
 	if (bandera == 'selectCategoria') {
 		
 		var subSeleccion = jQuery('#subcategoria').find('option:selected');
@@ -51,7 +51,7 @@ jQuery("#form2 select").change(function(){
 
 	    var arreglo = valortextarea.split(',');
 	    var cuantos = arreglo.length;
-
+	    	    
 	    arrayCat = findReplace(cuantos, selectedCategoria, arreglo, tmp, tmpSub);
 	    valor_final = arrayCat.join(',');
 	    $('#tagsArea').val(valor_final);
@@ -97,7 +97,7 @@ function emptyKeys() {
 		var subCatSeleccionada = jQuery('#subcategoria').find('option:selected');
 		var selectedSubCat = subCatSeleccionada.text();
 
-		$('#tagsArea').val(selectedCat+','+selectedSubCat);
+		$('#tagsArea').val(selectedSubCat+','+selectedCat);
 
 	}
 	

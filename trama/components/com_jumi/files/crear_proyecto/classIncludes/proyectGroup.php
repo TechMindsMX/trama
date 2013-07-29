@@ -1,21 +1,24 @@
 <?php
 defined('_JEXEC') OR die( "Direct Access Is Not Allowed" );
 
-$id = $_GET['projectId'];
-$userId = $_GET['userId'];
-$name = $_GET['name'];
-$description = $_GET['description'];
+jimport('trama.class');
+require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
+require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
 
-var_dump($_GET);
-exit;
+$subCategorias = JTrama::getAllSubCats();
+
+//si proyid no esta vacio traigo los datos del proyecto del servicio del middleware
+$objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['projectId']))?$_GET['projectId']:null, $subCategorias);
+
 $grupo = new stdClass();
 
 	$grupo->published = 1;
-	$grupo->proyid = $id;
-	$grupo->ownerid = $userId;
+	$grupo->proyid = $objDatosProyecto->id;
+	$grupo->ownerid = $objDatosProyecto->userId;
 	$grupo->categoryid = 1;
-	$grupo->name = $name;
-	$grupo->description= $description;
+	$grupo->name = $objDatosProyecto->name;
+	$grupo->description = $objDatosProyecto->description;
+	$grupo->created = $fecha;
 	$grupo->approvals = 1;
 	$grupo->params = '{"discussordering":1,"photopermission":1,"videopermission":1,"eventpermission":1,"grouprecentphotos":6,"grouprecentvideos":6,"grouprecentevents":6,"newmembernotification":1,"joinrequestnotification":1,"wallnotification":1,"removeactivities":0,"groupdiscussionfilesharing":1,"groupannouncementfilesharing":1,"stream":1}';
 
@@ -29,7 +32,7 @@ $grupo = new stdClass();
 		$query
 			->select('id')
 			->from('#__community_groups')
-			->where('ownerid = '.$userId.' && proyid = '.$id);
+			->where('ownerid = '.$objDatosProyecto->userId.' && proyid = '.$objDatosProyecto->id);
 		
 		$db->setQuery( $query );
 		
@@ -38,7 +41,7 @@ $grupo = new stdClass();
 		$memberGroup = new stdClass();
 		
 			$memberGroup->groupid = $idGroup->id;
-			$memberGroup->memberid = $userId;
+			$memberGroup->memberid = $objDatosProyecto->userId;
 			$memberGroup->approved = 1;
 			$memberGroup->permissions = 1;
 			
