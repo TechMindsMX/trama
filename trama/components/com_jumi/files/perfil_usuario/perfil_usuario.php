@@ -129,12 +129,14 @@ $promedio = $objuserdata->scoreUser($userid);
 					<article class="ac-large">
 							<?php 
 								foreach ($proyectos as $key => $value) {
-									if ( $usuario->id == $value->userId && $value->type == 'REPERTORY' ) {
+									if ($value->type == 'REPERTORY') {
 										echo '<h4><a href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></h4>';
-										echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';	
+										if ( $usuario->id == $value->userId ) {
+											echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';	
+										}
 										echo '<p>'.$value->description.'</p>';
 									}
-								}   
+								}
 		       				?>	
 					</article>
                     </div>
@@ -145,9 +147,12 @@ $promedio = $objuserdata->scoreUser($userid);
 						<p>
 							<?php 
 								foreach ($proyectos as $key => $value ) {
-									if ( $usuario->id == $value->userId && $value->type != 'REPERTORY' ) {
+									if ($value->type != 'REPERTORY' ) {
 										echo "<ul>";	
 										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
+											if ( $usuario->id == $value->userId ) {
+												echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';	
+											}
 										echo "</ul>";
 									}
 								}
