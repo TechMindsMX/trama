@@ -33,6 +33,12 @@ br {
 	clear: left;
 }
 
+.divcontent {
+	display: none;
+	height: 80px;
+	min-height: 70px;
+}
+
 .field_set{
 	border: 1px;
 	padding: 7px;

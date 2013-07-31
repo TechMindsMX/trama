@@ -15,7 +15,7 @@ require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP
 
 $categoria = JTrama::getAllCatsPadre();
 $subCategorias = JTrama::getAllSubCats();
-
+JHtml::_('behavior.modal');
 //si proyid no esta vacio traigo los datos del proyecto del servicio del middleware
 $objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
 
@@ -33,6 +33,7 @@ $checkedsound = true;
 $checkedimages = true;
 $checkedinfo = true;
 $checkednumbers = true;
+$comentarios = '';
 $hiddenIdProyecto = '';
 $agregarCampos = '';
 $categoriaSelected = '';
@@ -45,11 +46,10 @@ $ligasAudios = '';
 //termina los definicion de campos del formularios
 
 if ( isset ($objDatosProyecto) ) {
-	
-	
-	
-		
 	if($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) {
+		if($objDatosProyecto->status == 2) {
+			$comentarios = '<span><input class="modal" type="button" class="botoncomentarios" value="Comentarios"/></span>';
+		}
 		$status_proyecto = $objDatosProyecto->status;
 		$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
 		$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
@@ -192,8 +192,11 @@ if ( isset ($objDatosProyecto) ) {
 	<br /><br />
 </div>
 <!--FIN DIV DE AGREGAR CAMPOS-->
+<div class="divcontent" id="divContent"><?php echo isset($objDatosProyecto) ? $objDatosProyecto->description : ''; ?></div>
 
 <h3><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h3>
+
+<a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<?php 

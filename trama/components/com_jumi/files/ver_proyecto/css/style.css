@@ -81,6 +81,13 @@
 #banner {
 	position: relative;
 }
+.editButton {
+	margin-right: 20px;
+}
+.fechacreacion {
+	margin-top: -10px;
+    position: absolute;
+}
 div#banner div.rt-inner {
 	color: #FFF;
 	line-height: 15px;

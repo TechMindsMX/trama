@@ -59,8 +59,14 @@ function buttons($data, $user) {
 	if ( $user->id == strval($data->userId) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
 		$proyid = '&proyid='.$data->id;
+		if( ($data->status == 0) || ($data->status == 2)) {
 		$html = '<div id="buttons">'.
-				'<div><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a>'.JTramaSocial::inviteToGroup($data->id).'</div>';
+				'<div><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a></span>'
+				.JTramaSocial::inviteToGroup($data->id).'</div>';
+		}else{
+			$html = '<div id="buttons">'.
+				'<div>'.JTramaSocial::inviteToGroup($data->id).'</div>';
+		}
 		return $html;
 	}
 }
@@ -235,11 +241,13 @@ function rating($data) {
 }
 
 function encabezado($data) {
+	$fechacreacion = $data->timeCreated/1000;
 	$html = '<h2>'.$data->name.'</h2>'.
 		'<h4>'.JTrama::getSubCatName($data->subcategory).'</h4>'.
 		'<span class="tipo_proy_prod"> - '.JTrama::getStatusName($data->status).'</span>'.
 		'<span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
-		'<p>'.JTrama::getProducerProfile($data->userId).'</p>';
+		'<p>'.JTrama::getProducerProfile($data->userId).'</p>'.
+		'<span class="fechacreacion"> Creado '.date('d/M/Y', $fechacreacion).'</span>';
 	
 	return $html;
 }
