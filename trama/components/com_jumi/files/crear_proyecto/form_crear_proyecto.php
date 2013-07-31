@@ -27,6 +27,7 @@ $countunitSales = 1;
 $countImgs = 10;
 $limiteVideos = 5;
 $limiteSound = 5;
+$status_proyecto = 0;
 $checkedvideos = true;
 $checkedsound = true;
 $checkedimages = true;
@@ -49,6 +50,7 @@ if ( isset ($objDatosProyecto) ) {
 	
 		
 	if($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) {
+		$status_proyecto = $objDatosProyecto->status;
 		$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
 		$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
 		
@@ -205,7 +207,7 @@ if ( isset ($objDatosProyecto) ) {
 		   
 	<input 
 		type = "hidden" 
-		value = "<?php echo isset($objDatosProyecto) ? $objDatosProyecto->status : '0'; ?>"
+		value = "<?php echo $status_proyecto; ?>"
 		name = "status" />
 		   
 	<input

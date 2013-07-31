@@ -31,6 +31,7 @@ $checkedsound = true;
 $checkedimages = true;
 $checkedinfo = true;
 $checkednumbers = true;
+$status_producto = 0;
 $hiddenIdProducto = '';
 $agregarCampos = '';
 $categoriaSelected = '';
@@ -43,8 +44,8 @@ $ligasAudios = '';
 //termina los definicion de campos del formularios
 
 if ( isset ($objDatosProducto) ) {
-	
 	if($objDatosProducto->status == 0 || $objDatosProducto->status == 2) {
+		$status_producto = $objDatosProducto->status;
 		$hiddenIdProducto = '<input type="hidden" value="'.$objDatosProducto->id.'" name="id" />';
 		$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
 		
@@ -183,7 +184,7 @@ if ( isset ($objDatosProducto) ) {
 	<input
 		type="hidden"
 		id="status"
-		value="0"
+		value="<?php echo $status_producto; ?>"
 		name="status" />
 		
 	<input 
