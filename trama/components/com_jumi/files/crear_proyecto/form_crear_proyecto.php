@@ -33,6 +33,7 @@ $checkedsound = true;
 $checkedimages = true;
 $checkedinfo = true;
 $checkednumbers = true;
+$urlProy = '';
 $comentarios = '';
 $hiddenIdProyecto = '';
 $agregarCampos = '';
@@ -50,6 +51,7 @@ if ( isset ($objDatosProyecto) ) {
 		if($objDatosProyecto->status == 2) {
 			$comentarios = '<span><input class="modal" type="button" class="botoncomentarios" value="Comentarios"/></span>';
 		}
+		$urlProy = $objDatosProyecto->url;
 		$status_proyecto = $objDatosProyecto->status;
 		$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
 		$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
@@ -271,7 +273,7 @@ if ( isset ($objDatosProyecto) ) {
 		type="text" 
 		class="validate[custom[url]]"
 		id="url"
-		value=""
+		value="<?php echo $urlProy; ?>"
 		name="url"
 		maxlength="100" > 
 	<br> 
