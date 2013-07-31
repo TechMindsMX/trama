@@ -597,5 +597,6 @@ if ( isset ($objDatosProyecto) ) {
 	<br />
 	<br /> 
 	
+	<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
 	<input type="button" id="enviar" value="<?php echo JText::_('ENVIAR'); ?>">
 </form>

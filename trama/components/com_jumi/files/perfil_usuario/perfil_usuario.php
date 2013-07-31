@@ -125,10 +125,11 @@ $promedio = $objuserdata->scoreUser($userid);
 				</div>
 				<div>
 					<input id="ac-4a" name="accordion-2" type="radio" />
-					<label for="ac-4a">Proyectos pasados</label>
+					<label for="ac-4a">Repertorio</label>
 					<article class="ac-large">
 							<?php 
 								foreach ($proyectos as $key => $value) {
+									
 									if ($value->type == 'REPERTORY') {
 										echo '<h4><a href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></h4>';
 										if ( $usuario->id == $value->userId ) {
@@ -146,13 +147,18 @@ $promedio = $objuserdata->scoreUser($userid);
 					<article class="ac-large">
 						<p>
 							<?php 
-								foreach ($proyectos as $key => $value ) {
-									if ($value->type != 'REPERTORY' ) {
-										echo "<ul>";	
+								foreach ($proyectos as $key => $value ) {							
+									if ($value->type != 'REPERTORY') {
+										$fecha = $value->timeCreated/1000;
+										echo "<ul>";
 										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
-											if ( $usuario->id == $value->userId ) {
-												echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';	
+											if ($usuario->id == $value->userId) {
+												if($value->status == 0 || $value->status == 2) {
+													echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';
+												}
+												echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
 											}
+										echo ' Creado <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
 										echo "</ul>";
 									}
 								}
@@ -167,7 +173,7 @@ $promedio = $objuserdata->scoreUser($userid);
        
        <script type="text/javascript">
 		var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
-		 
+
 		jQuery(document).ready(function () {
 			jQuery('#calif').raty({
 				click: function (score) {
