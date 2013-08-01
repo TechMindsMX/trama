@@ -1,3 +1,5 @@
+<link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $usuario = JFactory::getUser();
@@ -491,14 +493,13 @@ if ( isset ($objDatosProducto) ) {
 		
 	<br>
 	
-	<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
-	<input 
-		type="text" 
-		class="validate[required]"
-		id="direccion"
-		value="<?php echo isset($objDatosProducto) ? $objDatosProducto->showground : ''; ?>"
-		name="showground"
-		maxlength="100" /> 
+	<br />
+	<div id="panel" style="max-width: 420px">
+		<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
+      <input name="showground" class="validate[required]" value="<?php echo isset($objDatosRepertorio) ? $objDatosRepertorio->showground : ''; ?>" id="searchTextField" type="text" size="50">
+       </div>
+    <div id="map-canvas" style="height: 400px; max-width: 420px"></div>
+	<br />
 		</fieldset>
 	<br> 
 	<fieldset class="fieldset">

@@ -11,6 +11,7 @@ $scriptselect = 'jQuery(function() {
 $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
 $document->addStyleSheet($pathJumi.'css/form2.css');
 
+echo '<script src="'.$pathJumi.'js/maps.js"> </script>';
 echo '<script src="'.$pathJumi.'js/mas.js"> </script>';
 echo '<script src="'.$pathJumi.'js/jquery.mask.js"> </script>';
 echo '<script src="'.$pathJumi.'js/jquery.validationEngine-es.js"> </script>';

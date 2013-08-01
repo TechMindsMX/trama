@@ -1,3 +1,5 @@
+<link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <?php 
 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
@@ -65,6 +67,7 @@ if ( isset ($objDatosRepertorio) ) {
 	 
 }
 ?>
+
 <script>
 	jQuery(document).ready(function(){
 		jQuery('#description').addClass('validate[required,custom[tiny]]');
@@ -168,11 +171,7 @@ if ( isset ($objDatosRepertorio) ) {
 
  
     }
-	
 </script>
-
-
-
 <h3><?php echo JText::_('CREAR').JText::_('REPERTORIO');  ?></h3>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
@@ -396,15 +395,13 @@ if ( isset ($objDatosRepertorio) ) {
 			maxlength="100" /> 
 		<br>
 	
-	<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
-	<input 
-		type="text" 
-		class="validate[required]"
-		id="direccion"
-		value="<?php echo isset($objDatosRepertorio) ? $objDatosRepertorio->showground : ''; ?>"
-		name="showground"
-		maxlength="100" /> 
-	<br> 
+	<br />
+	<div id="panel" style="max-width: 420px">
+		<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
+      <input name="showground" class="validate[required]" value="<?php echo isset($objDatosRepertorio) ? $objDatosRepertorio->showground : ''; ?>" id="searchTextField" type="text" size="50">
+       </div>
+    <div id="map-canvas" style="height: 400px; max-width: 420px"></div>
+	<br />
 
 	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
 	<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
@@ -420,7 +417,7 @@ if ( isset ($objDatosRepertorio) ) {
 		}
 	?></textarea>
 	<br />
-	<br />
+	
 	
 	<input type="submit" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
 </form>
