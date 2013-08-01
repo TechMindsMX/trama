@@ -67,6 +67,8 @@ if ( isset ($objDatosRepertorio) ) {
 ?>
 <script>
 	jQuery(document).ready(function(){
+		jQuery('#description').addClass('validate[required,custom[tiny]]');
+		jQuery("#tinymce").addClass( "validate[required]");
 		jQuery("#form2").validationEngine();
 
 		jQuery("#enviar").click(function (){
@@ -287,26 +289,58 @@ if ( isset ($objDatosRepertorio) ) {
 	<br />
 	
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('REPERTORIO'); ?>*:</label> <br />
-	<textarea name="description" id="descProy" class="validate[required]" cols="60" rows="5"><?php 
-		echo isset($objDatosRepertorio) ? $objDatosRepertorio->description : ''; 
-	?></textarea>
-	<br /> 
+	<div style= "max-width:420px;">
+		<?php
+			$editor =& JFactory::getEditor();
+			$contenidoDescription = isset($objDatosRepertorio) ? $objDatosRepertorio->description : '';
+			echo $editor->display( 'description', 
+						   $contenidoDescription,
+						   '100%',
+						    '250', 
+						    '20', 
+						    '20', 
+						    false, 
+						    null, 
+						    null, 
+						    null, 
+						    array('mode' => 'simple'));
+			?>
+		</textarea>
+		</div>
 	
-	<label for="elenco"><?php echo JText::_('ELENCO'); ?>:</label> <br />
-	<textarea name="cast" id="elenco" cols="60" rows="5"><?php 
-		echo isset($objDatosRepertorio) ? $objDatosRepertorio->cast : ''; 
-	?></textarea>
+	<br /> 	
 	<br />
-	 
-	<label for="direccion"><?php echo JText::_('RECINTO'); ?>*: </label> 
-	<input 
-		type="text" 
-		class="validate[required]" 
-		id="nameRecinto"
-		value="<?php echo isset($objDatosRepertorio) ? $objDatosRepertorio->inclosure : ''; ?>" 
-		name="inclosure"
-		maxlength="100" /> 
-	<br>
+		<label for="elenco">
+		<?php echo JText::_('ELENCO'); ?>:</label> <br />
+		<div style= "max-width:420px;">
+		<?php
+			$editor =& JFactory::getEditor('tinymce');
+			$contenidoCast = isset($objDatosRepertorio) ? $objDatosRepertorio->cast : '';
+			echo $editor->display( 'cast', 
+						   $contenidoCast,
+						   '100%',
+						    '250', 
+						    '20', 
+						    '20', 
+						    false, 
+						    null, 
+						    null, 
+						    null, 
+						    array('theme' => 'simple'));
+			?>
+		</textarea>
+		</div>
+		<br />
+		<br />		 
+		<label for="direccion"><?php echo JText::_('RECINTO'); ?>*: </label> 
+		<input 
+			type="text" 
+			class="validate[required]" 
+			id="nameRecinto"
+			value="<?php echo isset($objDatosRepertorio) ? $objDatosRepertorio->inclosure : ''; ?>" 
+			name="inclosure"
+			maxlength="100" /> 
+		<br>
 	
 	<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
 	<input 
@@ -317,7 +351,6 @@ if ( isset ($objDatosRepertorio) ) {
 		name="showground"
 		maxlength="100" /> 
 	<br> 
-	
 
 	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
 	<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
