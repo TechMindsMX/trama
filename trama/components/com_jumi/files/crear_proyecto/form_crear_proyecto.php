@@ -194,11 +194,12 @@ if ( isset ($objDatosProyecto) ) {
 	<br /><br />
 </div>
 <!--FIN DIV DE AGREGAR CAMPOS-->
-<div class="divcontent" id="divContent"><?php echo isset($objDatosProyecto) ? $objDatosProyecto->description : ''; ?></div>
+
+<div class="divcontent" id="divContent"><?php echo isset($objDatosProyecto) ? $objDatosProyecto->messages : ''; ?></div>
 
 <h3><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h3>
 
-<a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a>
+<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<?php 

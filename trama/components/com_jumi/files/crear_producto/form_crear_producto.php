@@ -26,12 +26,12 @@ $countunitSales = 1;
 $countImgs = 10;
 $limiteVideos = 5;
 $limiteSound = 5;
+$status_producto = 0;
 $checkedvideos = true;
 $checkedsound = true;
 $checkedimages = true;
 $checkedinfo = true;
 $checkednumbers = true;
-$status_producto = 0;
 $hiddenIdProducto = '';
 $agregarCampos = '';
 $categoriaSelected = '';
@@ -45,7 +45,11 @@ $ligasAudios = '';
 
 if ( isset ($objDatosProducto) ) {
 	if($objDatosProducto->status == 0 || $objDatosProducto->status == 2) {
+		if($objDatosProducto->status == 2) {
+			$comentarios = '<span><input class="modal" type="button" class="botoncomentarios" value="Comentarios"/></span>';
+		}
 		$status_producto = $objDatosProducto->status;
+		
 		$hiddenIdProducto = '<input type="hidden" value="'.$objDatosProducto->id.'" name="id" />';
 		$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
 		
@@ -174,7 +178,11 @@ if ( isset ($objDatosProducto) ) {
 </div>
 <!--FIN DIV DE AGREGAR CAMPOS-->
 
+<div class="divcontent" id="divContent"><?php echo isset($objDatosProducto) ? $objDatosProducto->messages : ''; ?></div>
+
 <h3><?php echo JText::_('CREAR').JText::_('PRODUCTO');  ?></h3>
+
+<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<?php 
