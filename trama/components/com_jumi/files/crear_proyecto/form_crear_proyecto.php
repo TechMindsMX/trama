@@ -161,6 +161,59 @@ if ( isset ($objDatosProyecto) ) {
 			jQuery("#form2").submit();
 		});
 	});
+	function loadImage(input1) {
+        var input, file, fr, img;
+
+        if (typeof window.FileReader !== 'function') {
+            write("The file API isn't supported on this browser yet.");
+            return;
+        }
+
+        input = document.getElementById(input1.id);
+        if (!input) {
+            write("Um, couldn't find the imgfile element.");
+        }
+        else if (!input.files) {
+            write("This browser doesn't seem to support the `files` property of file inputs.");
+        }
+        else if (!input.files[0]) {
+            write("Please select a file before clicking 'Load'");
+        }
+        else {
+            file = input.files[0];
+            fr = new FileReader();
+            fr.onload = createImage;
+            fr.readAsDataURL(file);
+        }
+		
+		var fileInput = jQuery('#'+input1.id)[0];
+        peso = fileInput.files[0].size;
+		
+        function createImage() {
+            img = document.createElement('img');
+            img.onload = imageLoaded;
+            img.style.display = 'none'; // If you don't want it showing
+            img.src = fr.result;
+            document.body.appendChild(img);
+        }
+	
+        function imageLoaded() {
+			if(img.width != 1920 || img.height != 1080 || peso > 4096000){
+				
+				
+			alert ("Solo se aceptan imagenes de resolucion 1920 x 1080 y con un peso no mayor a 4 mb, su imagen no sera subida. ");
+			$fileupload = $('#'+input1.id);  
+			$fileupload.replaceWith($fileupload.clone(true)); 
+			$('#'+input1.id).val(""); 
+            // This next bit removes the image, which is obviously optional -- perhaps you want
+            // to do something with it!
+            img.parentNode.removeChild(img);
+            img = undefined;}
+            
+        }
+
+ 
+    }
 </script>
 
 <!--DIV DE AGREGAR CAMPOS-->
@@ -259,13 +312,13 @@ if ( isset ($objDatosProyecto) ) {
 	<br />
 	<br />
 	<label for="banner"><?php echo JText::_('BANNER').JText::_('PROYECTO'); ?>*:</label>
-	<input type="file" id="banner" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">	
+	<input type="file" id="banner" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">	
 	
 	<?php echo $banner; ?>
 	<br />
 	
 	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PROYECTO'); ?>*:</label> 
-	<input type="file" id="avatar" accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
+	<input type="file" id="avatar" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
 	<br />
 	<?php echo $avatar; ?>
 	<br />
@@ -400,19 +453,49 @@ if ( isset ($objDatosProyecto) ) {
 		<?php echo $checkedinfo?'':'checked="checked"';?>>No</input>
 	</LEGEND>
 	<br />
-	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?>*:</label> <br />
-	<textarea name="description" id="descProy" class="validate[required]" cols="60" rows="5"><?php 
-		echo isset($objDatosProyecto) ? $objDatosProyecto->description : ''; 
-	?></textarea>
-	
+	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?>*:</label> <br />	
+	<div style= "max-width:420px;">
+		<?php
+			$editor =& JFactory::getEditor('tinymce');
+			$contenidoDescription = isset($objDatosRepertorio) ? $objDatosRepertorio->description : '';
+			echo $editor->display( 'description', 
+						   $contenidoDescription,
+						   '100%',
+						    '250', 
+						    '20', 
+						    '20', 
+						    false, 
+						    null, 
+						    null, 
+						    null, 
+						    array('mode' => 'simple'));
+			?>
+		</textarea>
+		</div>
+	<br />
 	<br />
 	<label for="elenco"><?php echo JText::_('ELENCO'); ?>:</label> <br />
-	<textarea name="cast" id="elenco" cols="60" rows="5"><?php 
-		echo isset($objDatosProyecto) ? $objDatosProyecto->cast : ''; 
-	?></textarea>
+	<div style= "max-width:420px;">
+		<?php
+			$editor =& JFactory::getEditor('tinymce');
+			$contenidoCast = isset($objDatosRepertorio) ? $objDatosRepertorio->cast : '';
+			echo $editor->display( 'cast', 
+						   $contenidoCast,
+						   '100%',
+						    '250', 
+						    '20', 
+						    '20', 
+						    false, 
+						    null, 
+						    null, 
+						    null, 
+						    array('theme' => 'simple'));
+			?>
+		</textarea>
+		</div>
 	
 	<br />
-	
+	<br />
 	<label for="direccion"><?php echo JText::_('RECINTO'); ?>*: </label> 
 	<input 
 		type="text" 
