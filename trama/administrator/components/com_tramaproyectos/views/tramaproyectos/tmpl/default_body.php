@@ -13,9 +13,7 @@ $item->producerName = JFactory::getUser($item->userId)->name;
                 <td>
                         <?php echo $item->id; ?>
                 </td>
-                <td>
-                        <?php echo JHtml::_('grid.id', $i, $item->id); ?>
-                </td>
+                
                 <td>
                         <a href="index.php?option=com_tramaproyectos&view=detalleproyecto&id=<?php echo $item->id; ?>"><?php echo $item->name; ?></a>
                 </td>
