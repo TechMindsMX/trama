@@ -32,7 +32,6 @@
 <?php
 $url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
 $json = json_decode(file_get_contents($url));
-
 $json->etiquetaTipo = tipoProyProd($json);
 $json->acceso = JTramaSocial::checkUserGroup($proyecto, $usuario->id);
 
@@ -62,10 +61,13 @@ function buttons($data, $user) {
 		if( ($data->status == 0) || ($data->status == 2)) {
 		$html = '<div id="buttons">'.
 				'<div><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a></span>'
+				.'<span style="cursor: pointer; padding-right:15px;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>'
 				.JTramaSocial::inviteToGroup($data->id).'</div>';
 		}else{
 			$html = '<div id="buttons">'.
-				'<div>'.JTramaSocial::inviteToGroup($data->id).'</div>';
+					'<div>'.JTramaSocial::inviteToGroup($data->id)
+					.'<span style="cursor: pointer; padding-right:15px;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>'
+					.'</div>';
 		}
 		return $html;
 	}
@@ -317,6 +319,21 @@ function fechas($data) {
 	return $html;
 }
 
+function producerName($data) {
+	$db =& JFactory::getDBO();
+	$query = $db->getQuery(true);
+	
+	$query
+		->select('nomNombre,nomApellidoPaterno')
+		->from('perfil_persona')
+		->where('users_id = '.$data.' && perfil_tipoContacto_idtipoContacto = 1');
+	
+	$db->setQuery( $query );
+	
+	$resultado = $db->loadObject();
+	
+	return $resultado->nomNombre.' '.$resultado->nomApellidoPaterno;
+}
 ?>
 	<script type="text/javascript">
 	function scrollwrapper(){
@@ -516,6 +533,32 @@ function fechas($data) {
 				path		: ruta,
 				//target		: '#texto',
 				//targetText	: 'Puntuar'
+			});
+			
+			$('.shareButton').click(function() {
+				var respuesta = $.ajax({
+	     			url:"components/com_jumi/files/busqueda/ajax.php",
+	 				data: {
+	  					"userId": <?php echo $json->userId; ?>,
+	  					"projectId": <?php echo $json->id; ?>,
+	  					"linkProyecto": "<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$json->id; ?>",
+	  					"nomUser": "<?php echo producerName($json->userId); ?>",
+	  		  			"nomProyecto": "<?php echo $json->name;?>",		
+	  					"fun": 3
+	 				},
+	 				type: 'post'
+				});
+
+				respuesta.done(function(result){
+					obj = eval('('+result+')');
+					console.log(obj);
+					if (!obj.shared) {
+						$('.editButton').append('<span style="padding-left: 15px;">  Proyecto Compartido</span>');
+						$('.shareButton').remove();
+					} else {
+						alert(obj.name+' ya habias compartido esto antes');
+					}
+				});
 			});
 		});
 		
