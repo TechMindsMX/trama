@@ -114,9 +114,6 @@ class JTrama
 		$this->proy = $value;
 		return $this->proy;
 	}
-<<<<<<< .merge_file_a02316
-=======
-	
 	
 	public static function tipoProyProd($data) {
 	$tipo = $data->type;
@@ -136,7 +133,6 @@ class JTrama
 	}
 	return $tipoEtiqueta;
 }
->>>>>>> .merge_file_a06504
 
 }
 ?>
