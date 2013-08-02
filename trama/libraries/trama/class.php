@@ -114,6 +114,29 @@ class JTrama
 		$this->proy = $value;
 		return $this->proy;
 	}
+<<<<<<< .merge_file_a02316
+=======
+	
+	
+	public static function tipoProyProd($data) {
+	$tipo = $data->type;
+	switch ($tipo) {
+		case 'PRODUCT':
+			$tipoEtiqueta = JText::_('PRODUCT');
+			$data->editUrl = '12';
+			break;
+		case 'REPERTORY':
+			$tipoEtiqueta = JText::_('REPERTORIO');
+			$data->editUrl = '14';
+			break;
+		default:
+			$tipoEtiqueta = JText::_('PROJECT');
+			$data->editUrl = '9';
+			break;
+	}
+	return $tipoEtiqueta;
+}
+>>>>>>> .merge_file_a06504
 
 }
 ?>
