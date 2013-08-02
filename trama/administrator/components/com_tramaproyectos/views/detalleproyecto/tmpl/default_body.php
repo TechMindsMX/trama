@@ -1,0 +1,76 @@
+<?php
+// No direct access to this file
+defined('_JEXEC') or die('Restricted Access');
+?>
+<?php 
+jimport('trama.class');
+$proyeto = $this->items;
+$urls = new JTrama;
+$urls1 = $urls->getEditUrl($proyeto);
+var_dump($proyeto->logs);
+?>
+<tr class="row">
+	<td width="30%" valign="top">
+		<div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 20px;">
+			<?php echo $proyeto->name; ?>
+		</div>
+		<div style="margin-bottom:10px; color:#FF0000;">
+			<?php echo JTrama::tipoProyProd($proyeto).' - '.$urls::getStatusName($proyeto->status); ?>			
+		</div>
+		
+		<div style="margin-bottom:10px">
+			<a href="<?php echo MIDDLE.BCASE.'/'.$proyeto->projectBusinessCase->name; ?>.xlsx" target="blank">
+				Business Case
+			</a>
+		</div>
+		
+		<div>
+			<p>Descripcion del proyecto</p>
+			<p align="justify"><?php echo $proyeto->description; ?></p>
+		</div>
+		
+		<div>
+			<a href="../<?php echo $urls1->viewUrl; ?>" target="blank">Ver mas</a>
+		</div>
+		
+		<div>
+			
+		</div>
+	</td>
+	
+	<td width="70%">
+		<div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 20px;">
+			Cambiar Status y agregar comentarios.
+		</div>
+		
+		<input type="hidden" name="projectId" value="<?php echo $proyeto->id; ?>" />
+		<div>
+			<input type="radio" name="status" value="1" <?php echo $proyeto->status == 1?'checked="checked"':''; ?> />
+			Revision
+		</div>
+		
+		<div>
+			<input type="radio" name="status" value="2" <?php echo $proyeto->status == 2?'checked="checked"':''; ?> />
+			Rechazado
+		</div>
+		
+		<div>
+			<input type="radio" name="status" value="5" <?php echo $proyeto->status == 5?'checked="checked"':''; ?> />
+			Financiamiento
+		</div>
+		<div style="margin-bottom: 10px;">
+			<input type="radio" name="status" value="4" <?php echo $proyeto->status == 4?'checked="checked"':''; ?> />
+			Cancelado
+		</div>		
+		
+		<div>
+			Comentarios<br />
+			<textarea name="comment" rows="15" cols="50"></textarea>
+		</div>
+		
+		<div style="margin-top:10px;">
+			<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
+			<input type="submit" value="Enviar" />
+		</div>
+	</td>
+</tr>
