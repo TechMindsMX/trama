@@ -7,8 +7,7 @@ jimport('trama.class');
 
 foreach($this->items as $i => $item):
 $item->producerName = JFactory::getUser($item->userId)->name;
-	
-	var_dump($item);
+
  ?>
         <tr class="row<?php echo $i % 2; ?>">
                 <td>
@@ -18,7 +17,7 @@ $item->producerName = JFactory::getUser($item->userId)->name;
                         <?php echo JHtml::_('grid.id', $i, $item->id); ?>
                 </td>
                 <td>
-                        <?php echo $item->name; ?>
+                        <a href="index.php?option=com_tramaproyectos&view=detalleproyecto&id=<?php echo $item->id; ?>"><?php echo $item->name; ?></a>
                 </td>
                 <td>
                         <?php echo $item->producerName; ?>

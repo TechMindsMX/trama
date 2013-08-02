@@ -9,7 +9,7 @@ jimport('joomla.application.component.modellist');
 class TramaProyectosModelTramaProyectos extends JModelList
 {
         /**
-         * oad the list data.
+         * load the list data.
          *
          * @return      string  An SQL query
          */

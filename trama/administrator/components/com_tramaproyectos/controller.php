@@ -17,10 +17,10 @@ class TramaProyectosController extends JController
          */
         function display($cachable = false, $urlparams = false) 
         {
-                // set default view if not set
+        	    // set default view if not set
                 $input = JFactory::getApplication()->input;
-                $input->set('view', $input->getCmd('view', 'TramaProyectos'));
- 
+				                $input->set('view', $input->getCmd('view', 'TramaProyectos'));
+				
                 // call parent behavior
                 parent::display($cachable);
         }
