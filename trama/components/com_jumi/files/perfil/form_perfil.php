@@ -222,11 +222,47 @@
             <div id="nombre"><h3><?php echo JText::_('EMPRESA_PER'); ?></h3></div>
             <div class="_100">
             	<label for="daGr_dscDescripcionPersonal"><?php echo JText::_('DESC_EMP'); ?></label>            
-                <textarea name="daGr_dscDescripcionPersonal"  id="daGr_dscDescripcionPersonal" cols="100" rows="6"></textarea>
+                
+                <div style= "max-width:630px;">
+				<?php
+					$editor =& JFactory::getEditor('tinymce');
+					$contenidoDescription = isset($objDatosRepertorio) ? $objDatosRepertorio->description : '';
+					echo $editor->display( 'daGr_dscDescripcionPersonal', 
+								   $contenidoDescription,
+								   '100%',
+								    '300', 
+								    '20', 
+								    '20', 
+								    false, 
+								    null, 
+								    null, 
+								    null, 
+								    array('mode' => 'simple'));
+					?>
+				</textarea>
+				</div>
             </div>
             <div class="_100">
             	<label for="daGr_dscCurriculum"><?php echo JText::_('CV'); ?></label>            
-                <textarea name="daGr_dscCurriculum"  id="daGr_dscCurriculum" cols="100" rows="6" ></textarea>
+                
+                <div style= "max-width:630px;">
+				<?php
+					$editor =& JFactory::getEditor('tinymce');
+					$contenidoCv = isset($objDatosRepertorio) ? $objDatosRepertorio->description : '';
+					echo $editor->display( 'daGr_dscCurriculum', 
+								   $contenidoCv,
+								   '100%',
+								    '300', 
+								    '20', 
+								    '20', 
+								    false, 
+								    null, 
+								    null, 
+								    null, 
+								    array('mode' => 'simple'));
+					?>
+				</textarea>
+				</div>
             </div>
             <div>
             	<input name="Enviar" type="submit" onclick="return validar();" value="<?php echo JText::_('ENVIAR'); ?>" />

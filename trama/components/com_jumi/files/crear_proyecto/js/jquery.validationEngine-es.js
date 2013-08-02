@@ -32,6 +32,21 @@
                 	},
                 	"alertText": "* La fecha no puede ser menor a "+new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
                 },
+                "valitiny": {
+                	"func":function (field) {
+                		var respuesta = false;
+                		var tiny = $('#description_ifr').contents().find('.mceContentBody p').text();
+                		
+                		if (tiny != '') {
+                			respuesta = true;
+                		} else {
+                			respuesta = false;
+                		}
+                		
+                		return respuesta;
+                	},
+                	"alertText": "el campo es requerido"
+                },
                 "fininicio": {
                 	"func": function ( field ) {
                 		if(validaFechaDDMMAAAA(field.val())){
