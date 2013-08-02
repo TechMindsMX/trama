@@ -1,7 +1,7 @@
 <?php
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 	
-	$usuario = JFactory::getUser();
+	$usuario =& JFactory::getUser();
 	$app = JFactory::getApplication();
 	if ($usuario->guest == 1) {
 		$return = JURI::getInstance()->toString();
@@ -9,13 +9,19 @@
 		$url   .= '&return='.base64_encode($return);
 		$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 	}
-	
 	$jinput = $app->input;
 	
 	jimport('trama.class');
 	jimport('trama.jsocial');
+	jimport('trama.jfactoryext');
+
+	// chequeamos si el usuario es Special
+	$isSpecial = '';
+	$grupos = new JFactoryExtended;
+	foreach ($usuario->getAuthorisedViewLevels() as $key => $value) {
+		$isSpecial = ($value == $grupos->getSpecialViewlevel()) ? 1 : 0;
+	}
 	
-	$base = JUri::base();
 	$pathJumi = Juri::base().'components/com_jumi/files/ver_proyecto/';
 	$proyecto = $jinput->get('proyid', '', 'INT');
 	
@@ -378,7 +384,7 @@ function fechas($data) {
 			<div id="video" class="ver_proyecto">
 				<div id="content_player">
 				<?php
-				if( ($json->acceso != null) || ($json->videoPublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->videoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 					<div id="video-player">
 						<div id="menu-player">
@@ -390,7 +396,7 @@ function fechas($data) {
 					</div>
 				<?php
 				}elseif( ($json->acceso == null) || ($json->videoPublic == 0) ) {
-					echo 'Contenido Privado';
+					echo JText::_('CONTENIDO_PRIVADO');
 				}
 				?>
 				</div>
@@ -399,7 +405,7 @@ function fechas($data) {
 			<div id="gallery" class="ver_proyecto">
 			<div id="wrapper">
 				<?php
-				if( ($json->acceso != null) || ($json->imagePublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->imagePublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 				<div class="slider-wrapper theme-bar">
             		<div id="slider" class="nivoSlider">
@@ -408,7 +414,7 @@ function fechas($data) {
         		</div>
         		<?php
 				}elseif( ($json->acceso == null) || ($json->imagePublic == 0) ) {
-					echo 'Contenido Privado';
+					echo JText::_('CONTENIDO_PRIVADO');
 				}
 				?>
         	</div>
@@ -416,37 +422,37 @@ function fechas($data) {
 			</div>
 			<div id="audios" class="ver_proyecto">
 				<?php
-				if( ($json->acceso != null) || ($json->audioPublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->audioPublic == 1) || ($json->userId == $usuario->id) ){
 					echo audios($json);
 				}elseif( ($json->acceso == null) || ($json->audioPublic == 0) ) {
-					echo 'Contenido Privado';
+					echo JText::_('CONTENIDO_PRIVADO');
 				}
 				?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="finanzas" class="ver_proyecto">
 				<?php
-				if( ($json->acceso != null) || ($json->numberPublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->numberPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 				<h3>Finanzas</h3>
 				<?php 
 					echo informacionTmpl($json, "finanzas"); 
 				}elseif( ($json->acceso == null) || ($json->numberPublic == 0) ) {
-					echo 'Contenido Privado';
+					echo JText::_('CONTENIDO_PRIVADO');
 				}
 				?>
 				<a class="cerrar">cerrar</a>
 			</div>
 			<div id="info" class="ver_proyecto">
 				<?php
-				if( ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 				<h3>Informacion</h3>
 				<div class="detalleDescripcion">
 					<?php 
 						echo informacionTmpl($json, null);
 					}elseif( ($json->acceso == null) || ($json->infoPublic == 0) ) {
-						echo 'Contenido Privado';
+						echo JText::_('CONTENIDO_PRIVADO');
 					} ?>
 				</div>
 				<a class="cerrar">cerrar</a>
