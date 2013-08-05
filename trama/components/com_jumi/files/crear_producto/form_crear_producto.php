@@ -48,7 +48,7 @@ $ligasAudios = '';
 if ( isset ($objDatosProducto) ) {
 	if($objDatosProducto->status == 0 || $objDatosProducto->status == 2) {
 		if($objDatosProducto->status == 2) {
-			$comentarios = '<span><input class="modal" type="button" class="botoncomentarios" value="Comentarios"/></span>';
+			$comentarios = '<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>';
 		}
 		$status_producto = $objDatosProducto->status;
 		
@@ -232,11 +232,26 @@ if ( isset ($objDatosProducto) ) {
 </div>
 <!--FIN DIV DE AGREGAR CAMPOS-->
 
-<div class="divcontent" id="divContent"><?php echo isset($objDatosProducto) ? $objDatosProducto->messages : ''; ?></div>
+<div class="divcontent" id="divContent">
+	<?php 
+	if( isset($objDatosProyecto) ){
+		foreach ($objDatosProyecto->logs as $key => $value) {
+			$fechacreacion = $value->timestamp/1000;
+			echo '<div style="margin-bottom: 10px;">'.
+				 '<li>'.
+				 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+				 '<div><strong>Status</strong>: '.JTrama::getStatusName($value->status).'</div>'.
+				 '<div align="justify"><strong>Comentario</strong>: '.$value->comment.'</div>'.
+				 '</li>'.
+				 '</div>';
+		}
+	}
+	?>
+</div>
 
 <h3><?php echo JText::_('CREAR').JText::_('PRODUCTO');  ?></h3>
 
-<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>
+<?php echo $comentarios; ?>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<?php 

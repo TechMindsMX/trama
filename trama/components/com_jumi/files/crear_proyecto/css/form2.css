@@ -28,6 +28,10 @@ input[type = 'file'] {
 	margin-top: 5px;
 	width: 90px;
 }
+.ligacomentarios{
+	display: block;
+    margin-bottom: 10px;
+}
 
 br {
 	clear: left;
@@ -35,7 +39,7 @@ br {
 
 .divcontent {
 	display: none;
-	height: 80px;
+	height: auto;
 	min-height: 70px;
 }
 
