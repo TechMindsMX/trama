@@ -266,7 +266,7 @@ function encabezado($data) {
 }
 
 function informacionTmpl($data, $params) {
-	 $mapa= '<div id="map-canvas" style="height:300px;width:300px;margin-top:25px;"></div>				
+	 $mapa= '<div style="height: 300px"><div id="map-canvas" style="height: 100%; margin-top:25px;"></div></div>			
   	 <p style="max-width:300px;">'.$data->showground.'</p>';
  	require_once 'solicitud_participar.php';
 	switch ($params) {
@@ -379,6 +379,7 @@ function producerName($data) {
 			jQuery(".ver_proyecto").hide('slow');
 			jQuery("#"+clase).show("slow", function() {
 				scrollwrapper();
+				initialize();
 			});
 			jQuery(this).addClass("active");
 		});
@@ -515,13 +516,12 @@ function codeAddress() {
       var marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location
-      });
+     });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
 }
-google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
  	
