@@ -24,6 +24,9 @@ foreach($this->items as $i => $item):
                 <td>
                 	<?php echo $urls::tipoProyProd($item); ?>
                 </td>
+                <td>
+                	<?php echo $urls::getStatusName($item->status); ?>
+                </td>
         </tr>
 <?php 
 	}
