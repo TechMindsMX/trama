@@ -235,8 +235,8 @@ if ( isset ($objDatosProducto) ) {
 
 <div class="divcontent" id="divContent">
 	<?php 
-	if( isset($objDatosProyecto) ){
-		foreach ($objDatosProyecto->logs as $key => $value) {
+	if( isset($objDatosProducto) ){
+		foreach ($objDatosProducto->logs as $key => $value) {
 			$fechacreacion = $value->timestamp/1000;
 			echo '<div style="margin-bottom: 10px;">'.
 				 '<li>'.
