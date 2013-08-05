@@ -245,8 +245,8 @@ function rating($data) {
 		$rating = $data->rating;
 	}
 	
-	$html = '<div id="rating" style="float:left; margin-top:15px;"></div>'.
-			'<div id="texto"style="float: left; font-size: 70px; position: relative; text-align: center; width: 30%; top: 30px;">'.
+	$html = '<div id="rating" style="float:left; margin-top:8px;"></div>'.
+			'<div id="texto"style="float: left; font-size: 50px; position: relative; text-align: center; width: 30%; top: 10px;">'.
 			number_format($rating, 1).
 			'</div>';
 	
@@ -266,6 +266,8 @@ function encabezado($data) {
 }
 
 function informacionTmpl($data, $params) {
+	 $mapa= '<div id="map-canvas" style="height:300px;width:300px;margin-top:25px;"></div>				
+  	 <p style="max-width:300px;">'.$data->showground.'</p>';
  	require_once 'solicitud_participar.php';
 	switch ($params) {
 		case 'finanzas':
@@ -286,11 +288,17 @@ function informacionTmpl($data, $params) {
 				'<div class="gantry-width-spacer flotado">'.
 		  		participar($data).
 				'</div>'.
+				
 				'<div class="gantry-width-spacer flotado">'.
 				irGrupo($data).
 				'</div>'.
+				
 				'<div class="granty-width-spacer flotando">'.
 				rating($data).
+				
+				'</div>'.
+				'<div class="granty-width-spacer flotado">'.
+				$mapa.
 				'</div>';
 			$derecha = $data->description.
 				'<br /><h3>Elenco</h3><p>'.$data->cast.'</p>';
@@ -311,6 +319,7 @@ function informacionTmpl($data, $params) {
 			'<div id="contenido-detalle">'.
 			$derecha.
 			'</div>'.
+			
 			'</div>';
 	
 	return $html;
@@ -465,17 +474,57 @@ function producerName($data) {
 				?>
 				<a class="cerrar">cerrar</a>
 			</div>
+			
 			<div id="info" class="ver_proyecto">
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
 				<h3>Informacion</h3>
+				
 				<div class="detalleDescripcion">
 					<?php 
 						echo informacionTmpl($json, null);
 					}elseif( ($json->acceso == null) || ($json->infoPublic == 0) ) {
 						echo JText::_('CONTENIDO_PRIVADO');
 					} ?>
+					
+					
+					<link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+    <script>
+var geocoder;
+var map;
+function initialize() {
+  geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(-34.397, 150.644);
+  var mapOptions = {
+    zoom: 18,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  codeAddress();
+}
+
+function codeAddress() {
+  var address = '<?php echo $json->showground; ?>';
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+ 	
 				</div>
 				<a class="cerrar">cerrar</a>
 			</div>
@@ -491,6 +540,7 @@ function producerName($data) {
 			<div style="clear: both;"></div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 	 var count = 0;
 	 
