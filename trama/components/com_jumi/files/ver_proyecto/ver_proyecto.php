@@ -339,7 +339,7 @@ function fechas($data) {
 	return $html;
 }
 
-function producerName($data) {
+function userName($data) {
 	$db =& JFactory::getDBO();
 	$query = $db->getQuery(true);
 	
@@ -603,7 +603,7 @@ function codeAddress() {
 	  					"userId": <?php echo $usuario->id; ?>,
 	  					"projectId": <?php echo $json->id; ?>,
 	  					"linkProyecto": "<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$json->id; ?>",
-	  					"nomUser": "<?php echo producerName($usuario->id); ?>",
+	  					"nomUser": "<?php echo userName($usuario->id); ?>",
 	  		  			"nomProyecto": "<?php echo $json->name;?>",		
 	  					"fun": 3
 	 				},
