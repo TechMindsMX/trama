@@ -11,7 +11,7 @@ function participar($json) {
 	include_once JPATH_ROOT.'/components/com_community/libraries/messaging.php';
 	// Add a onclick action to any link to send a message
 	// Here, we assume $usrid contain the id of the user we want to send message to
-	$onclick = CMessaging::getPopup($usuario->id);
+	$onclick = CMessaging::getPopup($json->userId);
 	$html = '<a class="button" onclick="'.$onclick.'" href="#">'.JText::_('SOLICITA_PARTICIPAR').'</a>';	
 	
 	// JHTML::_('behavior.modal');
