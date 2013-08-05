@@ -266,7 +266,7 @@ function encabezado($data) {
 }
 
 function informacionTmpl($data, $params) {
-	 $mapa= '<div style="height: 300px"><div id="map-canvas" style="height: 100%; margin-top:25px;"></div></div>			
+	 $mapa= '<div style="height: 300px; width:350px;"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
   	 <p style="max-width:300px;">'.$data->showground.'</p>';
  	require_once 'solicitud_participar.php';
 	switch ($params) {
@@ -500,7 +500,7 @@ function initialize() {
   geocoder = new google.maps.Geocoder();
   var latlng = new google.maps.LatLng(-34.397, 150.644);
   var mapOptions = {
-    zoom: 18,
+    zoom: 14,
     center: latlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
