@@ -62,22 +62,26 @@ function tipoProyProd($data) {
 }
 
 function buttons($data, $user) {
+	$share = '<span style="cursor: pointer; padding-right:15px;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
+	
 	if ( $user->id == strval($data->userId) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
 		$proyid = '&proyid='.$data->id;
 		if( ($data->status == 0) || ($data->status == 2)) {
-		$html = '<div id="buttons">'.
-				'<div><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a></span>'
-				.'<span style="cursor: pointer; padding-right:15px;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>'
-				.JTramaSocial::inviteToGroup($data->id).'</div>';
+			$html = '<div id="buttons">'.
+					'<div><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a></span>'
+					.$share
+					.JTramaSocial::inviteToGroup($data->id).'</div>';
 		}else{
 			$html = '<div id="buttons">'.
 					'<div>'.JTramaSocial::inviteToGroup($data->id)
-					.'<span style="cursor: pointer; padding-right:15px;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>'
+					.$share
 					.'</div>';
 		}
-		return $html;
+	} else {
+		$html = '<div id="buttons">'.$share.'</div>';
 	}
+	return $html;
 }
 
 function videos($obj, $param) {
