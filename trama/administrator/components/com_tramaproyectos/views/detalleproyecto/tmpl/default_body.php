@@ -60,9 +60,6 @@ $urls1 = $urls->getEditUrl($proyeto);
 	</td>
 	
 	<td width="70%" valign="top">
-		<div style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">
-			Cambiar Status y agregar comentarios.
-		</div>
 		
 		<input type="hidden" name="projectId" value="<?php echo $proyeto->id; ?>" />
 		<div>
