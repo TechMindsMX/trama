@@ -2,6 +2,7 @@
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 	
 	$usuario =& JFactory::getUser();
+
 	$app = JFactory::getApplication();
 	if ($usuario->guest == 1) {
 		$return = JURI::getInstance()->toString();
@@ -545,10 +546,10 @@ function producerName($data) {
 				var respuesta = $.ajax({
 	     			url:"components/com_jumi/files/busqueda/ajax.php",
 	 				data: {
-	  					"userId": <?php echo $json->userId; ?>,
+	  					"userId": <?php echo $usuario->id; ?>,
 	  					"projectId": <?php echo $json->id; ?>,
 	  					"linkProyecto": "<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$json->id; ?>",
-	  					"nomUser": "<?php echo producerName($json->userId); ?>",
+	  					"nomUser": "<?php echo producerName($usuario->id); ?>",
 	  		  			"nomProyecto": "<?php echo $json->name;?>",		
 	  					"fun": 3
 	 				},
@@ -556,13 +557,13 @@ function producerName($data) {
 				});
 
 				respuesta.done(function(result){
-					obj = eval('('+result+')');
-					console.log(obj);
-					if (!obj.shared) {
+					var objShare = eval('('+result+')');
+
+					if (!objShare.shared) {
 						$('.editButton').append('<span style="padding-left: 15px;">  Proyecto Compartido</span>');
 						$('.shareButton').remove();
 					} else {
-						alert(obj.name+' ya habias compartido esto antes');
+						alert(objShare.name+' ya habias compartido esto antes');
 					}
 				});
 			});
