@@ -4,10 +4,11 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 <?php 
 jimport('trama.class');
+$urls = new JTrama;
 
 foreach($this->items as $i => $item):
-$item->producerName = JFactory::getUser($item->userId)->name;
-
+	if ( $item->type != 'REPERTORY' ) {
+		$item->producerName = JFactory::getUser($item->userId)->name;
  ?>
         <tr class="row<?php echo $i % 2; ?>">
                 <td>
@@ -20,5 +21,11 @@ $item->producerName = JFactory::getUser($item->userId)->name;
                 <td>
                         <?php echo $item->producerName; ?>
                 </td>
+                <td>
+                	<?php echo $urls::tipoProyProd($item); ?>
+                </td>
         </tr>
-<?php endforeach; ?>
+<?php 
+	}
+endforeach; 
+?>

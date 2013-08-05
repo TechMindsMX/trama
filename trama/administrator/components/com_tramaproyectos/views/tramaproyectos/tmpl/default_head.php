@@ -13,4 +13,7 @@ defined('_JEXEC') or die('Restricted Access');
         <th>
         	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_NAMEPRODUCER');?>
         </th>
+        <th>
+        	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_TIPO');?>
+        </th>
 </tr>
