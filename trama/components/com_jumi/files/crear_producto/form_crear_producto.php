@@ -36,6 +36,7 @@ $checkedinfo = true;
 $checkednumbers = true;
 $hiddenIdProducto = '';
 $agregarCampos = '';
+$comentarios = '';
 $categoriaSelected = '';
 $subcategoriaSelected = '';
 $banner = '';
