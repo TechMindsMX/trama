@@ -30,7 +30,9 @@ input[type = 'file'] {
 }
 .ligacomentarios{
 	display: block;
-    margin-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 br {
