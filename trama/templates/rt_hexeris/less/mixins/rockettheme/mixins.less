@@ -115,7 +115,7 @@
 
 // Background Pattern
 .background-pattern(@pattern) when not (isnumber(@pattern)) {
-	background-image: url(../images/patterns/@{pattern}.jpg);
+	background-image: url(../images/patterns/@{pattern}.png);
 }
 
 // Overlay
@@ -155,7 +155,7 @@
 .mod-box1() {
 	.box1 {
 		color: @white;
-		background: @main-accent;
+		background: @white2;
 		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 		.title, h1, h2, h3, h4, h5, h6 {
 			color: darken(@main-accent, 40%);
@@ -192,18 +192,18 @@
 }	
 .mod-box3() {
 	.box3 {
-		color: @grey;
-		background: @white;
+		color: @white;
+		background: @light-brown;
 		text-shadow: none;
 		.title, h1, h2, h3, h4, h5, h6 {
 			color: @grey;
 			text-shadow: none;
 		}
 		a {
-			color: @main-accent;
+			color: @white;
 			text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
 			&:hover {
-				color: @main-accent2;
+				color: @light-blue;
 			}
 		}
 		.section-button(@main-accent, @main-accent2);
@@ -251,14 +251,14 @@
 .mod-title1() {
 	.title1 {
 		.module-title {
-			background: @main-accent;
+			background: @white;
 			border-radius: 3px;
 			&:before {
-				color: @main-accent;
+				color: @white2;
 				text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 			}
 			.title {
-				color: @white;
+				color: @black;
 				text-shadow: none;
 			}
 		}	

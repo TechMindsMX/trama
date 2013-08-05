@@ -218,7 +218,7 @@ a:hover {
 .sprocket-lists {
 	.sprocket-lists-title {
 		.box1 &, .box2 &, .box4 &, .box6 & {
-			color: @white !important;
+			color: @black !important;
 		}	
 		.box3 &, .box5 & {
 			color: @body-text;
@@ -226,7 +226,7 @@ a:hover {
 	}
 	.sprocket-lists-container {
 		li.active {
-			background: rgba(0, 0, 0, 0.1);			
+			background: @white2;			
 		}
 	}
 	[class^="title"] &, [class*=" title"] & {
@@ -235,6 +235,11 @@ a:hover {
 		}
 	}
 }
+
+.sprocket-lists-item {
+	background: @light-brown;	
+}
+
 .sprocket-headlines {
 	.sprocket-headlines-navigation .arrow {
 		color: @body-text;

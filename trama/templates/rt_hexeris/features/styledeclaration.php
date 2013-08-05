@@ -45,7 +45,7 @@ class GantryFeatureStyleDeclaration extends GantryFeature {
 
         'main-pattern'      => $gantry->get('main-pattern',      'sketch'),
         'main-body-overlay' => $gantry->get('main-body-overlay', '#7eb347'),
-        'main-accent'       => $gantry->get('main-accent',       '#7eb347'),
+        'main-accent'       => $gantry->get('main-accent',       '#fdfdfd'),
         'main-accent2'      => $gantry->get('main-accent2',      '#81cde7'),
 
         'footer-type'       => $gantry->get('footer-type',       'preset1'),
