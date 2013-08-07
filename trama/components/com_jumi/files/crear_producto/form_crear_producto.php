@@ -437,6 +437,7 @@ if ( isset ($objDatosProducto) ) {
 		echo '</div>';
 	}
 	?> 
+	<div style="max-width:430px;"><strong>NOTA</strong>: Para una mejor calidad del contenido las im&aacute;genes deben tener un tamaño no menor a 800x600 ni mayor a 1920x1200.</div>  
 	</fieldset>
 	<br />
 	<fieldset class="fieldset">
