@@ -252,7 +252,7 @@ if ( isset ($objDatosProyecto) ) {
 
 <div class="divcontent" id="divContent">
 	<?php 
-	if( isset($objDatosProyecto) ){
+	if( isset($objDatosProyecto) && !empty($objDatosProyecto->logs) ){
 		foreach ($objDatosProyecto->logs as $key => $value) {
 			$fechacreacion = $value->timestamp/1000;
 			echo '<div style="margin-bottom: 10px;">'.

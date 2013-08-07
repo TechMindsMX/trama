@@ -1,6 +1,7 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
+$count = 0;
 $usuario = JFactory::getUser();
 $app = JFactory::getApplication();
 if ($usuario->guest == 1) {
@@ -149,6 +150,7 @@ $promedio = $objuserdata->scoreUser($userid);
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type != 'REPERTORY') {
+										
 										$fecha = $value->timeCreated/1000;
 										echo "<ul>";
 										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
@@ -158,9 +160,29 @@ $promedio = $objuserdata->scoreUser($userid);
 												}
 												echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
 											}
+											if ( !empty($value->logs) ) {
+												echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
+											}
 										echo ' Creado <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
 										echo "</ul>";
 									}
+							?>
+							<div class="divcontent" id="divContent<?php echo $count; ?>">
+									<?php
+									foreach ($value->logs as $indice => $valor) {
+										$fechacreacion = $valor->timestamp/1000;
+										echo '<div style="margin-bottom: 10px;">'.
+											 '<li>'.
+											 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+											 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
+											 '</li>'.
+											 '</div>';
+										}
+									?>
+								</div>
+							<?php
+									$count = $count + 1;
 								}
 							?>							
 						</p>

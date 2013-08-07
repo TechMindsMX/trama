@@ -23,6 +23,9 @@
 #texto{
 	float:left;
 }
+.divcontent {
+	display: none;
+}
 .ac-container{
 	max-width: 400px;
 	width: 100%;
