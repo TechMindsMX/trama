@@ -50,6 +50,7 @@ $ligasAudios = '';
 
 if ( isset ($objDatosProyecto) ) {
 	if($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) {
+			
 		if($objDatosProyecto->status == 2) {
 			$comentarios = '<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>';
 		}
