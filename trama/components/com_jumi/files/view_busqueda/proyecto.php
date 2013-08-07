@@ -72,27 +72,31 @@ foreach ($json as $key => $value) {
 
 
 foreach ($json as $key => $value) {
-	switch ($value->type) {
-		case 'PROJECT':
-			$proyectos[] = $value; //Solo Proyectos
-			$prodProy[] = $value; //Proyectos y Productos
-			$repertProy[] = $value; //PRoyectos y Repertorios
-			break; 
-		case 'PRODUCT':
-			$productos[] = $value; //Solo Productos
-			$prodProy[] = $value; //Proyectos y Productos
-			$repertorioProduc[] = $value; //Productos y Repertorios
-			break;
-		case 'REPERTORY':
-			$repertorio[] = $value; //Solo Repertorios
-			$repertorioProduc[] = $value; //Repertorios y Productos
-			$repertProy[] = $value; //Repertorios y Proyectos
-			
-	}
+	if($value->status != 4){
+	$jsonJS[] = $value;
+			switch ($value->type) {
+				case 'PROJECT':
+					$proyectos[] = $value; //Solo Proyectos
+					$prodProy[] = $value; //Proyectos y Productos
+					$repertProy[] = $value; //PRoyectos y Repertorios				
+					break; 
+				case 'PRODUCT':
+					$productos[] = $value; //Solo Productos
+					$prodProy[] = $value; //Proyectos y Productos
+					$repertorioProduc[] = $value; //Productos y Repertorios				
+					break;
+				case 'REPERTORY':
+					$repertorio[] = $value; //Solo Repertorios
+					$repertorioProduc[] = $value; //Repertorios y Productos
+					$repertProy[] = $value; //Repertorios y Proyectos							
+					break;	
+			}		
+		}		
 };
 
-$jsonJS = json_encode($json);
-
+if (!empty($jsonJS)) {
+	$jsonJS = json_encode($jsonJS);
+}
 if (!empty($productos)) {
 	$productos = json_encode($productos);
 }
