@@ -110,7 +110,7 @@ if ( isset ($objDatosProyecto) ) {
 	jQuery(document).ready(function(){		
 		jQuery("#form2").validationEngine();
 		
-		jQuery("#enviar, #revision").click(function (){
+		jQuery("#guardar, #revision").click(function (){
 			var form = jQuery("#form2")[0];
 			var total = form.length;
 			
@@ -163,6 +163,11 @@ if ( isset ($objDatosProyecto) ) {
 			
 			if( this.id == 'revision' ) {
 				jQuery('#status').val(9);
+			} else if(this.id == 'guardar') {
+				if( jQuery('#status').val() != <?php echo $status_proyecto; ?> ) {
+					
+					jQuery('#status').val(<?php echo $status_proyecto; ?>);
+				}
 			}
 						
 			jQuery("#form2").submit();
@@ -712,6 +717,6 @@ if ( isset ($objDatosProyecto) ) {
 	<br /> 
 	
 	<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
-	<input type="button" id="enviar" value="<?php echo JText::_('GUARDAR'); ?>">
+	<input type="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
 	<input type="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
 </form>

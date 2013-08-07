@@ -141,8 +141,12 @@ if ( isset ($objDatosProducto) ) {
 
 			emptyKeys();
 			
-			if(this.id == 'revision') {
+			f( this.id == 'revision' ) {
 				jQuery('#status').val(9);
+			} else if(this.id == 'guardar') {
+				if( jQuery('#status').val() != <?php echo $status_producto; ?> ) {
+					jQuery('#status').val(<?php echo $status_producto; ?>);
+				}
 			}
 
 			jQuery("#form2").submit();
