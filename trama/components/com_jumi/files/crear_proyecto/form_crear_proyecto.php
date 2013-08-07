@@ -162,7 +162,11 @@ if ( isset ($objDatosProyecto) ) {
 			emptyKeys();
 			
 			if( this.id == 'revision' ) {
-				jQuery('#status').val(9);
+				if( jQuery('#status') == 0 ) {
+					jQuery('#status').val(9);
+				} else if( jQuery('#status') == 2 ){
+					jQuery('#status').val(3);
+				}
 			} else if(this.id == 'guardar') {
 				if( jQuery('#status').val() != <?php echo $status_proyecto; ?> ) {
 					
