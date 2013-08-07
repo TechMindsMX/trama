@@ -1,15 +1,16 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
-?>
-<?php 
+ 
 jimport('trama.class');
+
+$adminId = JFactory::getUser();
 $proyeto = $this->items;
 $urls = new JTrama;
 $urls1 = $urls->getEditUrl($proyeto);
 ?>
 <tr class="row">
-	<td width="30%" valign="top">
+	<td width="100%" valign="top">
 		<div style="padding-right: 20px;">
 			<div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 20px;">
 				<?php echo $proyeto->name; ?>
@@ -33,11 +34,46 @@ $urls1 = $urls->getEditUrl($proyeto);
 				<a href="../<?php echo $urls1->viewUrl; ?>" target="blank">Ver mas</a>
 			</div>
 			
+			<div>
+				<h4 align="center">Cambiar Estatus</h4>
+				<input type="hidden" name="userId" value="<?php echo $adminId->id; ?>" />
+				<input type="hidden" name="projectId" value="<?php echo $proyeto->id; ?>" />
+				<div>
+					<input type="radio" name="status" value="1" <?php echo $proyeto->status == 1?'checked="checked"':''; ?> />
+					<?php echo JTrama::getStatusName(1); ?>
+				</div>
+				
+				<div>
+					<input type="radio" name="status" value="2" <?php echo $proyeto->status == 2?'checked="checked"':''; ?> />
+					<?php echo JTrama::getStatusName(2); ?>
+				</div>
+				
+				<div>
+					<input type="radio" name="status" value="5" <?php echo $proyeto->status == 5?'checked="checked"':''; ?> />
+					<?php echo JTrama::getStatusName(5); ?>
+				</div>
+				
+				<div style="margin-bottom: 10px;">
+					<input type="radio" name="status" value="4" <?php echo $proyeto->status == 4?'checked="checked"':''; ?> />
+					<?php echo JTrama::getStatusName(4); ?>
+				</div>		
+				
+				<div>
+					Comentarios<br />
+					<textarea name="comment" rows="15" cols="100"></textarea>
+				</div>
+				
+				<div style="margin-top:10px;">
+					<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
+					<input type="submit" value="Enviar" />
+				</div>
+			</div>
+			
 			<?php
 			if( !empty($proyeto->logs) ) {
 			?>
 			<div>
-				<div style="text-align: center; font-size: 12px; font-weight: bold;">Bitacora de Cambios</div>
+				<h4 align="center">Bitacora de Cambios</h4>
 				<ul>
 					<?php
 					foreach ($proyeto->logs as $key => $value) {
@@ -56,39 +92,6 @@ $urls1 = $urls->getEditUrl($proyeto);
 			<?php
 			}
 			?>
-		</div>
-	</td>
-	
-	<td width="70%" valign="top">
-		
-		<input type="hidden" name="projectId" value="<?php echo $proyeto->id; ?>" />
-		<div>
-			<input type="radio" name="status" value="1" <?php echo $proyeto->status == 1?'checked="checked"':''; ?> />
-			Revision
-		</div>
-		
-		<div>
-			<input type="radio" name="status" value="2" <?php echo $proyeto->status == 2?'checked="checked"':''; ?> />
-			Rechazado
-		</div>
-		
-		<div>
-			<input type="radio" name="status" value="5" <?php echo $proyeto->status == 5?'checked="checked"':''; ?> />
-			Financiamiento
-		</div>
-		<div style="margin-bottom: 10px;">
-			<input type="radio" name="status" value="4" <?php echo $proyeto->status == 4?'checked="checked"':''; ?> />
-			Cancelado
-		</div>		
-		
-		<div>
-			Comentarios<br />
-			<textarea name="comment" rows="15" cols="50"></textarea>
-		</div>
-		
-		<div style="margin-top:10px;">
-			<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
-			<input type="submit" value="Enviar" />
 		</div>
 	</td>
 </tr>
