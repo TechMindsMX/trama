@@ -21,7 +21,7 @@ JHtml::_('behavior.modal');
 //si proyid no esta vacio traigo los datos del proyecto del servicio del middleware
 $objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
 
-//definicion de campos del formulario
+//definicion de los valores de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
 $hiddenphotosIds = '<input type="hidden" name="projectPhotosIds" id="projectPhotosIds" value= ""/>';
 $validacion = 'validate[required]';
@@ -109,7 +109,7 @@ if ( isset ($objDatosProyecto) ) {
 	jQuery(document).ready(function(){		
 		jQuery("#form2").validationEngine();
 		
-		jQuery("#enviar").click(function (){
+		jQuery("#enviar, #revision").click(function (){
 			var form = jQuery("#form2")[0];
 			var total = form.length;
 			
@@ -159,10 +159,15 @@ if ( isset ($objDatosProyecto) ) {
 			jQuery("#inventario").val(capacity.join(","));
 
 			emptyKeys();
+			
+			if( this.id == 'revision' ) {
+				jQuery('#status').val(2);
+			}
 						
-			jQuery("#form2").submit();
+			//jQuery("#form2").submit();
 		});
 	});
+	
 	function loadImage(input1) {
         var input, file, fr, img;
 
@@ -283,6 +288,7 @@ if ( isset ($objDatosProyecto) ) {
 		   
 	<input 
 		type = "hidden" 
+		id = "status"
 		value = "<?php echo $status_proyecto; ?>"
 		name = "status" />
 		   
@@ -705,5 +711,6 @@ if ( isset ($objDatosProyecto) ) {
 	<br /> 
 	
 	<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
-	<input type="button" id="enviar" value="<?php echo JText::_('ENVIAR'); ?>">
+	<input type="button" id="enviar" value="<?php echo JText::_('GUARDAR'); ?>">
+	<input type="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
 </form>

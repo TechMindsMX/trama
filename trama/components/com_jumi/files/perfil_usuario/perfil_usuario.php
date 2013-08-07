@@ -150,7 +150,6 @@ $promedio = $objuserdata->scoreUser($userid);
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type != 'REPERTORY') {
-										
 										$fecha = $value->timeCreated/1000;
 										echo "<ul>";
 										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
@@ -159,9 +158,9 @@ $promedio = $objuserdata->scoreUser($userid);
 													echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';
 												}
 												echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
-											}
-											if ( !empty($value->logs) ) {
-												echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
+												if ( !empty($value->logs) ) {
+													echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
+												}
 											}
 										echo ' Creado <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
 										echo "</ul>";
