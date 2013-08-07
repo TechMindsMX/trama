@@ -34,6 +34,9 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
         $gantry->displayHead();
 
 		$gantry->addScript('jquery-1.9.1.js');
+
+		$user = JFactory::getUser();
+		!$user->guest ?  $gantry->addScript('hideItemMenu.js') : ""; 
                 
 		$gantry->addStyle('grid-responsive.css', 5);
 		$gantry->addLess('bootstrap.less', 'bootstrap.css', 6);
@@ -52,8 +55,8 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 		$gantry->addScript('load-transition.js');
 		$hidden = ' class="rt-hidden"';}
 		
-
     ?>
+    
 </head>
 <body <?php echo $gantry->displayBodyTag(); ?>>
 	<div id="rt-page-surround">
