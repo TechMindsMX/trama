@@ -105,7 +105,7 @@ if ( isset ($objDatosProducto) ) {
 	jQuery(document).ready(function(){
 		jQuery("#form2").validationEngine();
 
-		jQuery("#enviar").click(function (){
+		jQuery("#enviar, #revision").click(function (){
 			var form = jQuery("#form2")[0];
 			var total = form.length;
 			
@@ -140,11 +140,16 @@ if ( isset ($objDatosProducto) ) {
 			jQuery("#inventario").val(capacity.join(","));
 
 			emptyKeys();
+			
+			if(this.id == 'revision') {
+				jQuery('#status').val(9);
+			}
 
 			jQuery("#form2").submit();
 		});
 		
 	});
+	
 	function loadImage(input1) {
         var input, file, fr, img;
 
@@ -682,4 +687,5 @@ if ( isset ($objDatosProducto) ) {
 	
 	<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
 	<input type="button" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
+	<input type="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION');  ?>">
 </form>

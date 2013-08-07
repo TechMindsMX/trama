@@ -161,10 +161,10 @@ if ( isset ($objDatosProyecto) ) {
 			emptyKeys();
 			
 			if( this.id == 'revision' ) {
-				jQuery('#status').val(2);
+				jQuery('#status').val(9);
 			}
 						
-			//jQuery("#form2").submit();
+			jQuery("#form2").submit();
 		});
 	});
 	
