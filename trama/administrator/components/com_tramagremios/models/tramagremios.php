@@ -20,7 +20,7 @@ class TramaGremiosModelTramaGremios extends JModelList {
 		$db -> setQuery($query);
 
 		$resultado = $db -> loadObjectList();
-		var_dump($resultado);
+
 		return $resultado;
 	}
 

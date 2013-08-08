@@ -3,7 +3,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controlleradmin');
 
-class UsersControllerUsers extends JControllerAdmin {
+class TramaGremiosControllerTramaGremios extends JControllerAdmin {
 	
 	public function __construct($config = array())
 	{

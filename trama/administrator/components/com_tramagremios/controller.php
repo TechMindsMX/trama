@@ -5,9 +5,6 @@ defined('_JEXEC') or die('Restricted access');
 // import Joomla controller library
 jimport('joomla.application.component.controller');
  
-/**
- * General Controller of TramaProyectos component
- */
 class TramaGremiosController extends JController
 {
 	function display($cachable = false, $urlparams = false) 
