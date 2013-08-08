@@ -37,7 +37,7 @@ class TramaGremiosViewTramaGremios extends JView
         }
         protected function addToolBar() 
         {
-                JToolBarHelper::title(JText::_('COM_TRAMAGREMIOS_MANAGER_TRAMAGREMIOSS'));
+                JToolBarHelper::title(JText::_('COM_TRAMAGREMIOS_MANAGER_TRAMAGREMIOS'));
                 JToolBarHelper::custom('block.change', 'block.png', 'block_f2.png', 'Block', true);
                 JToolBarHelper::custom('block.change', 'unblock.png', 'unblock_f2.png', 'Unblock', true);
         }
