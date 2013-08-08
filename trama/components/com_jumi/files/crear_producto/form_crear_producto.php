@@ -142,9 +142,9 @@ if ( isset ($objDatosProducto) ) {
 			emptyKeys();
 			
 			if( this.id == 'revision' ) {
-				if( jQuery('#status') == 0 ) {
+				if( jQuery('#status').val() == 0 ) {
 					jQuery('#status').val(9);
-				} else if( jQuery('#status') == 2 ){
+				} else if( jQuery('#status').val() == 2 ){
 					jQuery('#status').val(3);
 				}
 			} else if(this.id == 'guardar') {
@@ -476,7 +476,7 @@ if ( isset ($objDatosProducto) ) {
 	<div style= "max-width:420px;">
 		<?php
 			$editor =& JFactory::getEditor('tinymce');
-			$contenidoDescription = isset($objDatosRepertorio) ? $objDatosRepertorio->description : '';
+			$contenidoDescription = isset($objDatosProducto) ? $objDatosProducto->description : '';
 			echo $editor->display( 'description', 
 						   $contenidoDescription,
 						   '100%',
@@ -497,7 +497,7 @@ if ( isset ($objDatosProducto) ) {
 	<div style= "max-width:420px;">
 		<?php
 			$editor =& JFactory::getEditor('tinymce');
-			$contenidoCast = isset($objDatosRepertorio) ? $objDatosRepertorio->cast : '';
+			$contenidoCast = isset($objDatosProducto) ? $objDatosProducto->cast : '';
 			echo $editor->display( 'cast', 
 						   $contenidoCast,
 						   '100%',
@@ -528,7 +528,7 @@ if ( isset ($objDatosProducto) ) {
 	<br />
 	<div id="panel" style="max-width: 420px">
 		<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
-      <input name="showground" class="validate[required]" value="<?php echo isset($objDatosRepertorio) ? $objDatosRepertorio->showground : ''; ?>" id="searchTextField" type="text" size="50">
+      <input name="showground" class="validate[required]" value="<?php echo isset($objDatosProducto) ? $objDatosProducto->showground : ''; ?>" id="searchTextField" type="text" size="50">
        </div>
     <div id="map-canvas" style="height: 400px; max-width: 420px"></div>
 	<br />
