@@ -92,6 +92,12 @@ class JTrama
 		return $statusName;
 	}
 	
+	public static function getStatus(){
+		$status = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+		
+		return $status;
+	}
+	
 	public function getProjectsByUser ($userid) {
 		$projectList = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByUser/'.$userid));
 		
