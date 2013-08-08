@@ -30,4 +30,7 @@ jimport('trama.class');
 	    		</select>
         	</div>
         </th>
+        <th>
+        	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_CALIFICADOR'); ?>
+        </th>
 </tr>
