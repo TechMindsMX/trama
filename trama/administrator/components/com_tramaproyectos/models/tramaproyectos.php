@@ -17,32 +17,6 @@ class TramaProyectosModelTramaProyectos extends JModelList
         {
         	$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/all'));
 			
-			foreach ($query as $key => $value) {
-				if($value->status == 0) {
-					$array1[] = $value;
-				}
-			}
-
-			foreach ($query as $key => $value) {
-				if($value->status == 1) {
-					$array2[] = $value;
-				}
-			}
-			
-			foreach ($query as $key => $value) {
-				if($value->status == 3) {
-					$array3[] = $value;
-				}
-			}
-			
-			foreach ($query as $key => $value) {
-				if($value->status == 4) {
-					$array4[] = $value;
-				}
-			}
-			
-			$respuesta = array_merge($array1, $array2, $array3, $array4);
-			
-			return $respuesta;
+			return $query;
         }
 }
