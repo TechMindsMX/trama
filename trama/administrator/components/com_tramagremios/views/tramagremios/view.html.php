@@ -30,7 +30,15 @@ class TramaGremiosViewTramaGremios extends JView
                 $this->items = $items;
                 $this->pagination = $pagination;
  
+				$this->addToolBar();
+ 
                 // Display the template
                 parent::display($tpl);
+        }
+        protected function addToolBar() 
+        {
+                JToolBarHelper::title(JText::_('COM_TRAMAGREMIOS_MANAGER_TRAMAGREMIOSS'));
+                JToolBarHelper::custom('block.change', 'block.png', 'block_f2.png', 'Block', true);
+                JToolBarHelper::custom('block.change', 'unblock.png', 'unblock_f2.png', 'Unblock', true);
         }
 }
