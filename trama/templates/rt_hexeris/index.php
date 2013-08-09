@@ -36,7 +36,13 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 		$gantry->addScript('jquery-1.9.1.js');
 
 		$user = JFactory::getUser();
-		!$user->guest ?  $gantry->addScript('hideItemMenu.js') : ""; 
+		if (!$user->guest) {
+			echo '<script>';
+			echo 'jQuery(document).ready( function(){';
+			echo 'jQuery(".desc").text("'.$user->name.'");';
+			echo '});';
+			echo '</script>';
+		}
                 
 		$gantry->addStyle('grid-responsive.css', 5);
 		$gantry->addLess('bootstrap.less', 'bootstrap.css', 6);

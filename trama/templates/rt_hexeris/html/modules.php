@@ -133,4 +133,20 @@ function getIconClass($modsfx){
 	return $class;
 }
 
+function modChrome_login($module, &$params, &$attribs)
+{
+    if (!empty ($module->content)) : ?>
+    <div class="rt-block">
+        <div class="module-content">
+            <?php if ($module->showtitle != 0) : ?>
+            <h2 class="title"><?php echo $module->title; ?></h2>
+            <?php endif; ?>
+            <div class="module-inner">
+                <?php echo $module->content; ?>
+            </div>
+        </div>
+    </div>
+    <?php endif;
+}
+
 ?>

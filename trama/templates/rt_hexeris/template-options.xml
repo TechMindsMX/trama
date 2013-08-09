@@ -182,7 +182,7 @@
 		</fields>
 
 		<fields name="login" type="chain" label="LOGIN" description="LOGIN_DESC">
-			<field name="enabled" type="toggle" default="0" label="SHOW" />
+			<field name="enabled" type="toggle" default="1" label="SHOW" />
 			<field name="position" type="position" default="utility-c" label="POSITION" />
 			<field name="text" type="text" default="Member Login" label="LOGIN_TEXT" class="text-medium" />
 			<field name="logouttext" type="text" default="Logout" label="LOGOUT_TEXT" class="text-medium" />

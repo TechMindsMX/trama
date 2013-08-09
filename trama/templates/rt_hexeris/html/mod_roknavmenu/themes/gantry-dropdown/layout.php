@@ -70,7 +70,7 @@ class GantryDropdownLayout extends AbstractRokMenuLayout
         $wrapper_css = '';
         $ul_css = '';
         $group_css = '';
-
+		
         $item_params = $item->getParams();
 
 	    //get columns count for children
@@ -81,10 +81,10 @@ class GantryDropdownLayout extends AbstractRokMenuLayout
         $custom_icon = $item_params->get('dropdown_customicon');
         //get the custom class
         $custom_class = $item_params->get('dropdown_customclass');
-
+        
         //add default link class
         $item->addLinkClass('item');
-
+		
 	    if ($custom_image && $custom_image != -1) $item->addLinkClass('image');
 	    if ($custom_icon && $custom_icon != -1) $item->addLinkClass('icon');
         if ($custom_class != '') $item->addListItemClass($custom_class);
@@ -123,7 +123,7 @@ class GantryDropdownLayout extends AbstractRokMenuLayout
         $child_type = $child_type == '' ? 'menuitems' : $child_type;
         $distribution = $item_params->get('dropdown_distribution');
         $manual_distribution = explode(",",$item_params->get('dropdown_manual_distribution'));
-
+		
         $modules = array();
         if ($child_type == 'modules') {
             $modules_id = $item_params->get('dropdown_modules');
@@ -368,9 +368,15 @@ class GantryDropdownLayout extends AbstractRokMenuLayout
 ?>
 <div class="gf-menu-device-container"></div>
 <ul class="gf-menu l1 " <?php if (array_key_exists('tag_id',$this->args)): ?>id="<?php echo $this->args['tag_id'];?>"<?php endif;?>>
+	<?php $user = JFactory::getUser(); ?>
     <?php foreach ($menu->getChildren() as $item) : ?>
-        <?php $this->renderItem($item, $menu); ?>
+    	<?php if (!$user->guest && (($item->getTitle() == 'Inicio') || ($item->getTitle() == 'Servicios') || ($item->getTitle() == 'Acerca de'))) {?>
+        <?php  ?>
+        <?php } else { $this->renderItem($item, $menu);}?>
     <?php endforeach; ?>
+    <li>
+    	<a class="item" href="#" data-rokbox="" data-rokbox-element="#rt-popuplogin"> <span class="desc">Acceso</span> </a>
+    </li>
 </ul>
 <?php
         return ob_get_clean();
