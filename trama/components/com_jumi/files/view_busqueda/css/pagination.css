@@ -57,6 +57,7 @@ div.proyecto > .inner {
 .descText {
 	margin: 2em 0;
 	line-height: 2em;
+	height:56px;
 }
 .proyecto .readmore {
 	text-align: right;
