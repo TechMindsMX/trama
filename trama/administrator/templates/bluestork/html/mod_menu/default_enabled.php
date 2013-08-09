@@ -308,21 +308,23 @@ if ($components)
 	
 		foreach ($components as &$component)
 		{
-			if ($component -> id == 2){
-			if (!empty($component->submenu))
-			{
-				// This component has a db driven submenu.
-				$menu->addChild(new JMenuNode($component->text, $component->link, $component->img), true);
-				foreach ($component->submenu as $sub)
+			$compo = array('com_flexicontact','com_tramaproyectos','com_tramagremios');
+			if (in_array($component -> element , $compo)){
+				if (!empty($component->submenu))
 				{
-					$menu->addChild(new JMenuNode($sub->text, $sub->link, $sub->img));
+					// This component has a db driven submenu.
+					$menu->addChild(new JMenuNode($component->text, $component->link, $component->img), true);
+					foreach ($component->submenu as $sub)
+					{
+						$menu->addChild(new JMenuNode($sub->text, $sub->link, $sub->img));
+					}
+					$menu->getParent();
 				}
-				$menu->getParent();
+				else
+				{
+					$menu->addChild(new JMenuNode($component->text, $component->link, $component->img));
+				}
 			}
-			else
-			{
-				$menu->addChild(new JMenuNode($component->text, $component->link, $component->img));
-			}}
 		}
 		$menu->getParent();
 	}

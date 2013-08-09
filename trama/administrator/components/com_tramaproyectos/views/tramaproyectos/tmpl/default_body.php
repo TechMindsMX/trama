@@ -9,7 +9,12 @@ $urls = new JTrama;
 foreach($this->items as $i => $item):
 	if ( $item->type != 'REPERTORY' ) {
 		$user_revision = $item->logs;
-		$revisado_por = JFactory::getUser($user_revision[0]->userId)->name;
+		if (!empty($user_revision)) {
+			$revisado_por = JFactory::getUser($user_revision[0]->userId)->name;
+		}
+		else {
+			$revisado_por = '';
+		}
 		$item->producerName = JFactory::getUser($item->userId)->name;
  ?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">

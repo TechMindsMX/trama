@@ -47,7 +47,7 @@ $ligasAudios = '';
 //termina los definicion de campos del formularios
 
 if ( isset ($objDatosProducto) ) {
-	if($objDatosProducto->status == 0 || $objDatosProducto->status == 2) {
+	if( ($objDatosProducto->status == 0 || $objDatosProducto->status == 2) && ($objDatosProducto->userId == $usuario->id) ) {
 		if($objDatosProducto->status == 2) {
 			$comentarios = '<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>';
 		}
@@ -90,11 +90,17 @@ if ( isset ($objDatosProducto) ) {
 	} else {
 		$jsonStatus = json_decode((file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list')));
 		
-		foreach ($jsonStatus as $key => $value) {
-			if($objDatosProducto->status == $value->id) {
-				$mensaje = 'El satus del producto '.$value->name.', no permite edición.';
+		if( !($objDatosProducto->userId == $usuario->id) ) {
+			$mensaje = 'No es propietario del Producto';
+		} else {
+			foreach ($jsonStatus as $key => $value) {
+				if($objDatosProducto->status == $value->id) {
+					$mensaje = 'El satus del producto '.$value->name.', no permite edición.';
+				}
 			}
 		}
+		
+		echo $mensaje;
 		
 		$allDone =& JFactory::getApplication();
 		$allDone->redirect('index.php', $mensaje );

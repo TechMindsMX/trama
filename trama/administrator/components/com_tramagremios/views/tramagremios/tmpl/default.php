@@ -10,7 +10,6 @@ JHtml::_('behavior.tooltip');
         <thead>
 			<tr>
 				<th width="1%">
-					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
 				</th>
 		        <th width="5">
 		        	<?php echo JText::_('COM_TRAMAGREMIOS_TRAMAGREMIOS_HEADING_ID'); ?>
@@ -50,7 +49,7 @@ JHtml::_('behavior.tooltip');
 						<?php echo $item->nomNombreCategoria; ?>
 					</td>
 					<td>
-						<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'tramaremios.unblock', 'tramaremios.block'); ?>
+						<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'block.unblock', 'block.block'); ?>
 					</td>
 				</tr>
 			<?php 

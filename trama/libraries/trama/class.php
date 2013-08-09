@@ -46,8 +46,11 @@ class JTrama
 				$nomCat = $value -> name;
 				$idFather = $value -> father;
 				if ($idFather >= 0) {
-					$catPadre = $cats[$idFather];
-					$nomCatPadre = $catPadre->name;
+					foreach ($cats as $indice => $valor) {
+						if ( $valor->id == $idFather ) {
+							$nomCatPadre = $valor->name;
+						}
+					}
 				}
 				else {
 					$nomCatPadre = '';
