@@ -351,8 +351,12 @@ function userName($data) {
 	$db->setQuery( $query );
 	
 	$resultado = $db->loadObject();
+	if (!is_null($resultado)) {
+		$result = $resultado->nomNombre.' '.$resultado->nomApellidoPaterno;
+	}
+		$result = JFactory::getUser()->name;
 	
-	return $resultado->nomNombre.' '.$resultado->nomApellidoPaterno;
+	return $result;
 }
 ?>
 	<script type="text/javascript">
