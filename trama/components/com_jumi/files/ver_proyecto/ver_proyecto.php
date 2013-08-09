@@ -354,7 +354,7 @@ function userName($data) {
 	if (!is_null($resultado)) {
 		$result = $resultado->nomNombre.' '.$resultado->nomApellidoPaterno;
 	}
-		$result = JFactory::getUser()->name;
+		$result = JFactory::getUser($data)->name;
 	
 	return $result;
 }
