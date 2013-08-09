@@ -36,10 +36,11 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 		$gantry->addScript('jquery-1.9.1.js');
 
 		$user = JFactory::getUser();
+		$name = explode(' ',$user->name);
 		if (!$user->guest) {
 			echo '<script>';
 			echo 'jQuery(document).ready( function(){';
-			echo 'jQuery(".desc").text("'.$user->name.'");';
+			echo 'jQuery(".desc").text("'.$name[0].'");';
 			echo '});';
 			echo '</script>';
 		}
