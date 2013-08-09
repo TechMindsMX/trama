@@ -5,6 +5,7 @@
 <?php
 	$usuario =& JFactory::getUser();
 	$existe = existingUser($usuario->id);
+
 	if ($existe == 'true') {
 		$generales = datosGenerales($usuario->id, 1);
 		$email = email($generales->id);
@@ -24,10 +25,10 @@
  		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=perfil';
  	?>
 
-	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>	
+	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>
 	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/form.css" type="text/css"/>
 	<script src="<?php echo $pathJumi ?>/js/misjs.js" type="text/javascript"></script>
-	<script src="<?php echo $pathJumi ?>/js/jquery.js" type="text/javascript"></script>    
+	<script src="<?php echo $pathJumi ?>/js/jquery.js" type="text/javascript"></script>
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $pathJumi ?>/js/cp.js" type="text/javascript" charset="utf-8"></script>
@@ -37,7 +38,7 @@
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();
 			
-			datosxCP();
+			//datosxCP();
 			
 			<?php 		
 				if ($existe == 'true') {
@@ -73,8 +74,6 @@
  					echo "jQuery('#dire_nomDelegacion').val('".$direccion->perfil_delegacion_iddelegacion."');";
  					echo "jQuery('#dire_nomPais').val('".$direccion->perfil_pais_idpais."');";
  					echo "jQuery('input[name=daGr_perfil_personalidadJuridica_idpersonalidadJuridica][value=".$generales->perfil_personalidadJuridica_idpersonalidadJuridica."]').attr('checked', true);";
- 					echo "jQuery('#daGr_dscDescripcionPersonal').val('".$generales->dscDescripcionPersonal."');";
- 					echo "jQuery('#daGr_dscCurriculum').val('".$generales->dscCurriculum."');";
  					
  					if ($generales->perfil_personalidadJuridica_idpersonalidadJuridica == 1) {
 						 echo 'jQuery("li:contains(\'Empresa\')").hide();';
@@ -226,7 +225,7 @@
                 <div style= "max-width:630px;">
 				<?php
 					$editor =& JFactory::getEditor('tinymce');
-					$contenidoDescription = isset($objDatosRepertorio) ? $objDatosRepertorio->description : '';
+					$contenidoDescription = isset($generales) ? $generales->dscDescripcionPersonal : '';
 					echo $editor->display( 'daGr_dscDescripcionPersonal', 
 								   $contenidoDescription,
 								   '100%',
@@ -239,7 +238,6 @@
 								    null, 
 								    array('mode' => 'simple'));
 					?>
-				</textarea>
 				</div>
             </div>
             <div class="_100">
@@ -248,7 +246,7 @@
                 <div style= "max-width:630px;">
 				<?php
 					$editor =& JFactory::getEditor('tinymce');
-					$contenidoCv = isset($objDatosRepertorio) ? $objDatosRepertorio->description : '';
+					$contenidoCv = isset($generales) ? $generales->dscCurriculum : '';
 					echo $editor->display( 'daGr_dscCurriculum', 
 								   $contenidoCv,
 								   '100%',
@@ -261,7 +259,6 @@
 								    null, 
 								    array('mode' => 'simple'));
 					?>
-				</textarea>
 				</div>
             </div>
             <div>
