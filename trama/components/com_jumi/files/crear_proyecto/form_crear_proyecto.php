@@ -49,7 +49,7 @@ $ligasAudios = '';
 //termina los definicion de campos del formularios
 
 if ( isset ($objDatosProyecto) ) {
-	if($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) {
+	if( ($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) && ($objDatosProyecto) && ($objDatosProyecto->userId == $usuario->id) ) {
 			
 		if($objDatosProyecto->status == 2) {
 			$comentarios = '<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>';
@@ -93,9 +93,13 @@ if ( isset ($objDatosProyecto) ) {
 	} else {
 		$jsonStatus = json_decode((file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list')));
 		
-		foreach ($jsonStatus as $key => $value) {
-			if($objDatosProyecto->status == $value->id) {
-				$mensaje = 'El status del proyecto '.$value->name.', no permite edición.';
+		if( !($objDatosProyecto->userId == $usuario->id) ) {
+			$mensaje = 'No es propietario del proyecto';
+		}else {
+			foreach ($jsonStatus as $key => $value) {
+				if($objDatosProyecto->status == $value->id) {
+					$mensaje = 'El status del proyecto '.$value->name.', no permite edición.';
+				}
 			}
 		}
 		

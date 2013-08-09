@@ -42,29 +42,34 @@ $ligasAudios = '';
 
 if ( isset ($objDatosRepertorio) ) {
 	
-	
-	$hiddenIdRepertorio = '<input type="hidden" value="'.$objDatosRepertorio->id.'" name="id" />';
-	$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
-	
-	$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$objDatosRepertorio->projectAvatar->name.'" width="100" />';
-	$banner = '<img src="'.MIDDLE.BANNER.'/'.$objDatosRepertorio->projectBanner->name.'" width="100" />';
-	
-	$ligasVideos = $objDatosRepertorio->projectVideos;
-	$ligasAudios = $objDatosRepertorio->projectSoundclouds;
-	
-	$validacion = '';
-	$validacionImgs = '';
-	
-	$countImgs = $countImgs - count($objDatosRepertorio->projectPhotos);
-	
-	$subcategoriaSelected = $objDatosRepertorio->subcategory;
-	
-	foreach ($subCategorias as $key => $value) {
-		if( $value->id == $objDatosRepertorio->subcategory ) {
-			$categoriaSelected = $value->father;
+	if($objDatosRepertorio->userId == $usuario->id) {
+		$hiddenIdRepertorio = '<input type="hidden" value="'.$objDatosRepertorio->id.'" name="id" />';
+		$hiddenphotosIds = '<input type="hidden"  name="projectPhotosIds" id="projectPhotosIds" />';
+		
+		$avatar = '<img src="'.MIDDLE.AVATAR.'/'.$objDatosRepertorio->projectAvatar->name.'" width="100" />';
+		$banner = '<img src="'.MIDDLE.BANNER.'/'.$objDatosRepertorio->projectBanner->name.'" width="100" />';
+		
+		$ligasVideos = $objDatosRepertorio->projectVideos;
+		$ligasAudios = $objDatosRepertorio->projectSoundclouds;
+		
+		$validacion = '';
+		$validacionImgs = '';
+		
+		$countImgs = $countImgs - count($objDatosRepertorio->projectPhotos);
+		
+		$subcategoriaSelected = $objDatosRepertorio->subcategory;
+		
+		foreach ($subCategorias as $key => $value) {
+			if( $value->id == $objDatosRepertorio->subcategory ) {
+				$categoriaSelected = $value->father;
+			}
 		}
+	} else {
+		$mensaje = 'No es propietario del Repertorio';
+		
+		$allDone =& JFactory::getApplication();
+		$allDone->redirect('index.php', $mensaje );
 	}
-	 
 }
 ?>
 
