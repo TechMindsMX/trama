@@ -68,7 +68,7 @@ switch ($fun) {
 			$objMaxId = $resultado->fetch_object();
 			$objMaxId->id = $objMaxId->id + 1;
 			
-			$frase = $nomUser.' a compartido el proyecto '.$nomProyecto.', '.$linkProyecto;
+			$frase = $nomUser.' ah compartido '.$nomProyecto.', '.$linkProyecto;
 			$fecha = date("Y-m-d H:i:s");
 			
 			$query_proy = 'INSERT INTO `c3rn2_community_activities` ';
