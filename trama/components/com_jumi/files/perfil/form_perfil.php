@@ -38,7 +38,7 @@
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();
 			
-			//datosxCP();
+		    datosxCP();
 			
 			<?php 		
 				if ($existe == 'true') {
@@ -181,7 +181,13 @@
             </div>
             <div class="_25">
                	<label for="dire_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
-               	<input name="dire_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]"  type="text" id="dire_iniCodigoPostal" size="10" maxlength="5" />
+               	<input 
+               		type="text"
+               		name="dire_perfil_codigoPostal_idcodigoPostal"
+               		class="validate[required,custom[onlyNumberSp]]"
+               		id="dire_iniCodigoPostal"
+               		size="10"
+               		maxlength="5" />
             </div>
             <div class="_75">
                	<label for="dire_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
