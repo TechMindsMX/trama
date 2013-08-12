@@ -89,6 +89,8 @@
 	margin-bottom: 0;
 }
 .sprocket-lists-item .sprocket-padding {
+	font-size:14px;
+	font-weight:bold;
 	padding: 23px 15px 13px;
 	display: block;
 }
