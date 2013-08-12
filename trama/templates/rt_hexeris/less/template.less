@@ -189,7 +189,7 @@ input[type="color"],
 	&.rt-block {
 		padding: 0;
 		margin: 25px 10px;
-		.module-title {
+		.module-title, .sprocket-lists-item {
 			margin-bottom: 20px;
 			.box-shadow(0 2px 1px rgba(0, 0, 0, 0.1));
 			&:before {
@@ -201,6 +201,9 @@ input[type="color"],
 				left: 30px;
 				z-index: 1;
 			}
+		}
+		.sprocket-lists-item:before {
+		  top: -7px;
 		}
 		.title {
 			padding: 10px 15px;
