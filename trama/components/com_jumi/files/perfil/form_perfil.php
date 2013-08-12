@@ -140,12 +140,12 @@
 			<div class="_100mail">
 				<?php if ($existe == 'true' && isset($email[1])) { echo '<input name="maGr_idemail00" type="hidden" id="maGr_idemail00" value="'.$email[1]->idemail.'" />'; }?>
 				<label for="maGr_coeEmail00"><?php echo JText::_('CORREO'); ?> :</label>
-				<input name="maGr_coeEmail00" type="text" id="maGr_coeEmail00" maxlength="100" />
+				<input name="maGr_coeEmail00" class="validate[custom[email]]" type="text" id="maGr_coeEmail00" maxlength="100" />
 			</div>
 			<div class="_100mail">
 				<?php if ($existe == 'true' && isset($email[2])) { echo '<input name="maGr_idemail01" type="hidden" id="maGr_idemail01" value="'.$email[2]->idemail.'" />'; }?>
 				<label for="maGr_coeEmail01"><?php echo JText::_('CORREO'); ?> :</label>
-				<input name="maGr_coeEmail01" type="text" id="maGr_coeEmail01" maxlength="100" />
+				<input name="maGr_coeEmail01" class="validate[custom[email]]" type="text" id="maGr_coeEmail01" maxlength="100" />
 			</div>
 			<div class="_50">
                	<label for="teGr_telTelefono"><?php echo JText::_('TELEFONO_CASA'); ?>:</label>
