@@ -33,4 +33,7 @@ jimport('trama.class');
         <th>
         	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_CALIFICADOR'); ?>
         </th>
+        <th>
+        	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_MODIFICADO'); ?>
+        </th>
 </tr>

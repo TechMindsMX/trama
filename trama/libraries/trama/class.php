@@ -89,7 +89,11 @@ class JTrama
 		
 		foreach ($allNames as $llave => $valor) {
 			if ($valor->id == $string) {
-				$statusName = $valor->name;
+				if($valor->name == 'Listo'){
+					$statusName = 'Listo para revision';
+				} else {
+					$statusName = $valor->name;
+				}
 			}
 		}
 		return $statusName;
