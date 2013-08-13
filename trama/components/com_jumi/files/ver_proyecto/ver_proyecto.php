@@ -158,6 +158,7 @@ function audios($data) {
 	$html = '';
 	
 	$array = $data->projectSoundclouds;
+	if ($array == '') {
 	
 	require_once 'Services/Soundcloud.php';
 		
@@ -177,7 +178,6 @@ function audios($data) {
 		'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$embed_info->id.'"></iframe>';
 		}
 	}
-	if ($html == '') {
 		$html = JText::_('NO_HAY_AUIDOS');
 	}
 	return $html;
@@ -266,7 +266,7 @@ function encabezado($data) {
 }
 
 function informacionTmpl($data, $params) {
-	 $mapa= '<div style="height: 300px; width:350px;"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
+	 $mapa= '<div id="map-wrapper" style="height: 300px; max-width:350px;"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
   	 <p style="max-width:300px;">'.$data->showground.'</p>';
  	require_once 'solicitud_participar.php';
 	switch ($params) {
@@ -502,7 +502,7 @@ var geocoder;
 var map;
 function initialize() {
   geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(-34.397, 150.644);
+  var latlng = new google.maps.LatLng(19.432684,-99.133359);
   var mapOptions = {
     zoom: 14,
     center: latlng,
@@ -522,7 +522,8 @@ function codeAddress() {
           position: results[0].geometry.location
      });
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+    	map.setCenter(latlng);
+    	jQuery('#map-canvas').append('<p>No hay dirección</p>');
     }
   });
 }
