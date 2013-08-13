@@ -26,8 +26,16 @@ class TramaProyectosViewDetalleProyecto extends JView
             }
             // Assign data to the view
             $this->items = $items;
-							
+			
+			$this->addToolBar();
+			
             // Display the template
             parent::display($tpl);
         }
+		
+		protected function addToolBar() {
+                JToolBarHelper::title(JText::_('COM_TRAMPROYECTOS_MANAGER_TRAMA_DETALLE'));
+                JToolBarHelper::preferences('com_tramagremios');
+				
+		}
 }
