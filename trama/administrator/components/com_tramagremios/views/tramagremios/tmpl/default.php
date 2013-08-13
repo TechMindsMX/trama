@@ -1,12 +1,12 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
- 
+
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_tramagremios'); ?>" method="post" name="adminForm">
-    <table class="adminlist">
+    <table class="adminlist" style="font-size: 1.1em;">
         <thead>
 			<tr>
 				<th width="1%">
@@ -14,9 +14,11 @@ JHtml::_('behavior.tooltip');
 		        <th width="5">
 		        	<?php echo JText::_('COM_TRAMAGREMIOS_TRAMAGREMIOS_HEADING_ID'); ?>
 		        </th>
-		                         
 		        <th>
-		            <?php echo JText::_('COM_TRAMAGREMIOS_TRAMAGREMIOS_HEADING_GREETING'); ?>
+		            <?php echo JText::_('COM_TRAMAGREMIOS_TRAMAGREMIOS_HEADING_NAME'); ?>
+		        </th>
+		        <th>
+		            <?php echo JText::_('COM_TRAMAGREMIOS_TRAMAGREMIOS_HEADING_DATE'); ?>
 		        </th>
 		        <th>
 		        	<?php echo JText::_('COM_TRAMAGREMIOS_TRAMAGREMIOS_HEADING_TIPO');?>
@@ -43,7 +45,11 @@ JHtml::_('behavior.tooltip');
 						<?php echo $item->users_id; ?>
 					</td>
 					<td>
-						<a target="_blank" href="<?php echo $link. $item->users_id; ?>"><?php echo $item->nomNombre.' '.$item->nomNombre; ?></a>
+						<?php echo $item->nomNombre.' '.$item->nomNombre; ?>
+						<a target="_blank" href="<?php echo $link. $item->users_id; ?>" style="margin-left: 1em; font-size: 0.9em;">Ver perfíl </a>
+					</td>
+					<td>
+						<?php echo $item->registerDate; ?>
 					</td>
 					<td>
 						<?php echo $item->nomNombreCategoria; ?>
@@ -65,7 +71,7 @@ JHtml::_('behavior.tooltip');
 
 	    <tfoot>
 			<tr>
-	        	<td colspan="4"><?php // echo $this->pagination->getListFooter(); ?></td>
+	        	// <td colspan="6"><?php // echo $this->pagination->getListFooter(); ?></td>
 			</tr>
 		</tfoot>
 
