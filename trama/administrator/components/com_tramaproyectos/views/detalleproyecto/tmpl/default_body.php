@@ -9,6 +9,7 @@ $proyeto = $this->items;
 $urls = new JTrama;
 $urls1 = $urls->getEditUrl($proyeto);
 ?>
+<input type="hidden" name="task" value="" />
 <tr class="row">
 	<td width="100%" valign="top">
 		<div style="padding-right: 20px;">

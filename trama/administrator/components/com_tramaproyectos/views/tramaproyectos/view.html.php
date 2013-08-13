@@ -37,8 +37,7 @@ class TramaProyectosViewTramaProyectos extends JView
         }
 		
 		protected function addToolBar() {
-                JToolBarHelper::title(JText::_('COM_TRAMPROYECTOS_MANAGER_TRAMA_PROYECTOS'));
-                JToolBarHelper::preferences('com_tramagremios');
-				
+            JToolBarHelper::title(JText::_('COM_TRAMPROYECTOS_MANAGER_TRAMA_PROYECTOS'));
+            JToolBarHelper::preferences('com_tramagremios');
 		}
 }
