@@ -42,11 +42,11 @@ JHtml::_('behavior.tooltip');
 						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 					</td>
 					<td>
-						<?php echo $item->users_id; ?>
+						<?php echo $item->id; ?>
 					</td>
 					<td>
-						<?php echo $item->nomNombre.' '.$item->nomNombre; ?>
-						<a target="_blank" href="<?php echo $link. $item->users_id; ?>" style="margin-left: 1em; font-size: 0.9em;">Ver perfíl </a>
+						<?php echo $item->name; ?>
+						<a target="_blank" href="<?php echo $link. $item->id; ?>" style="margin-left: 1em; font-size: 0.9em;">Ver perfíl </a>
 					</td>
 					<td>
 						<?php echo $item->registerDate; ?>

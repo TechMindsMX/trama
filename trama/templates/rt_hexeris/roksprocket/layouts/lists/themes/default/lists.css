@@ -20,9 +20,12 @@
 	list-style: none !important;
 }
 .sprocket-lists ul.sprocket-lists-container li {
-	padding: 23px 0 10px 0;
+	padding: 13px 0 0px 0;
 	border-top: 1px solid rgba(255, 255, 255, 0.2);
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+ul.sprocket-lists-container span.sprocket-lists-item {
+	margin-bottom: 0px !important;
 }
 .sprocket-lists-container {
 	overflow: hidden;
