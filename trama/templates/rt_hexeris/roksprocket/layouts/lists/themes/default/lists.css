@@ -160,7 +160,6 @@ ul.sprocket-lists-container span.sprocket-lists-item {
 	width: 18px;
 	height: 18px;
 	border-radius: 3px;
-	opacity: 0.5;
 	cursor: pointer;
 	float: right;
 	margin: 5px 5px 0 0;
@@ -196,9 +195,15 @@ ul.sprocket-lists-container span.sprocket-lists-item {
 	color: #fff;
 }
 .sprocket-lists-arrows .arrow {
-	background: #000;
+	background: #666;
 	color: #fff;
 }
+
+.sprocket-lists-arrows .arrow:hover{
+	background: #2c9ad9;
+	color: #fff;
+}
+
 .sprocket-lists-arrows .arrow span {
 	display: none;
 }

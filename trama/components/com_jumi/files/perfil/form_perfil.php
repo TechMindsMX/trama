@@ -83,7 +83,6 @@
 				} else {
 					 echo 'jQuery("li:contains(\'Empresa\')").hide();';
 					 echo 'jQuery("li:contains(\'Contacto\')").hide();';
-					 echo 'jQuery("li:contains(\'Curriculum\')").hide();';
 				}
 			?>
 

@@ -480,9 +480,7 @@ class procesamiento {
 				$idPersona = $generales->id;
 				$data['perfil_persona_idpersona'] = $idPersona;
 			}
-			
-		    $camposTabla = $this->busarCamposTabla($tabladb);
-			
+						
 			foreach ($data as $key => $value) {
 				
 				if (!empty($value) || $data['nomApellidoMaterno'] == "") {
@@ -495,7 +493,7 @@ class procesamiento {
 
 				insertFields($tabladb, $col, $val);				
 				
-			} elseif ($existe == 'true') {
+			} else {
 
 				$contador = count($col);
 				
@@ -562,32 +560,8 @@ class procesamiento {
 				}
 				
 			}
-		}else{
-			if($tabladb == 'perfil_historialproyectos'){
-				$resultado = datosGenerales($usuario->id, $tipoContacto);
-				$proyecPasados = proyectosPasados($resultado->id);
-				var_dump($proyecPasados);
-				exit;
-				if(isset($telefonos[$indiceTelefono]->telTelefono)){
-					$conditions = ('perfil_persona_idpersona = '.$resultado->id. '&& idtelefono = '.$telefonos[$indiceTelefono]->idtelefono);
-				}
-				deleteFields($tabladb, $conditions);
-			}
-					
 		}
-	}
-	
-	function busarCamposTabla($tabladb) {
-			$db =& JFactory::getDBO();
-	        $results = $db->getTableFields("$tabladb");
-
-	        foreach ($results as $row) {
-	            $camposdb = $row;
-	        }
-			$campos = array_keys($camposdb);
-			return $campos;
-	}
-	
+	}	
 }
 
 $form = $_GET['form'];
