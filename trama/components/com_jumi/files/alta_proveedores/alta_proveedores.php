@@ -110,7 +110,13 @@ $doc->addStyleSheet($path.'alta_proyectos.css');
 	?>
 </div>
 <div class="inputs">
-	<input type="checkbox" name="check" /><label for="check">Aquí</label>
+	<input type="checkbox" name="check" /><label for="check"><?php echo $proyecto->objDatos->name; ?></label>
+	<select>
+		<?php foreach ($proyecto->fechasPago as $key => $value) {
+			echo '<option value="'.$value.'">'.$value.'</option>';
+		}
+		?>
+	</select>
 </div>
 
 <script type="text/javascript">
