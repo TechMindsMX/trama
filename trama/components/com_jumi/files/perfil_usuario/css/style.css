@@ -1,9 +1,18 @@
+.bussines-card{
+	max-width: 380px;
+	min-height: 112px;
+	width: 100%;
+	height: auto;
+	padding: 10px;
+}
+
 #foto {
-	max-width: 400px;
+	max-width: 175px;
 	width: 100%;
 	background-image: url(../images/avatartrama.jpg no-repeat);
-	margin-right:20px;
+	margin-right:10px;
 	margin-bottom:20px;
+	float: left;
 }
 
 #datos{

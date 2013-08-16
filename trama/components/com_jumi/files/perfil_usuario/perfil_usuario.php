@@ -14,6 +14,7 @@ if ($usuario->guest == 1) {
 jimport("trama.class");
 jimport("trama.jsocial");
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
+require_once 'components/com_jumi/files/ver_proyecto/solicitud_participar.php';
 $input = JFactory::getApplication()->input;
 $userid = $input->get("userid",0,"int");
 
@@ -49,22 +50,31 @@ $promedio = $objuserdata->scoreUser($userid);
         
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
-      <div id="contenido"><?php echo JTramaSocial::addFriendJS($userid, $usuario); ?>
-      	
-      	<div id="raty">
-      	 <div id="datos">
-		       <?php 
-		      echo $datosgenerales->nomNombre." ".$datosgenerales->nomApellidoPaterno;
-		       
-		       ?>
-		       </div>
-		       	<div id="calif"></div>
-				<div id="texto"><?php echo number_format($promedio->score ,1); ?></div>
-				<div style="clear: both"></div>
-			</div>
+      <div id="contenido"><div style="float:left; width:100%"><?php echo JTramaSocial::addFriendJS($userid, $usuario); ?></div>
 			
 			<section class="ac-container">
+				<div class="bussines-card">
 				<div id="foto"><img src="<?php echo $datosgenerales->Foto; ?>"  /></div>
+				<div id="datos">
+				<?php 
+			    	echo $datosgenerales->nomNombre." ".$datosgenerales->nomApellidoPaterno;
+			    	echo "<br/>";
+			    	echo $datosgenerales->nomNombre;
+			    	echo "<br/>";			    	
+			    	echo $datosgenerales->nomNombre;
+			 	?>
+			  	</div>
+			  	<?php 
+			  		echo '<div>'.
+			  			participar($datosgenerales).
+			  			'</div>';
+			  	?>
+			  	<div id="raty">
+		  			<div id="calif"></div>
+					<div id="texto"><?php echo number_format($promedio->score ,1); ?></div>
+					
+				</div>
+				</div>
 				<div>
 					<div style="clear: both"></div>
 					<input id="ac-2" name="accordion-1" type="radio" />
