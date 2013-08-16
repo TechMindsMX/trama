@@ -35,5 +35,12 @@ div.compacto {
 }
 .compacto p {
 	margin: 0;
+	color:red;
+}
+.compacto a {
+	color:#fff;
+	font-weight:bold;
+	font-size:18px;
+	
 }
 /*** fin Modulos compactos class sufix ****/
