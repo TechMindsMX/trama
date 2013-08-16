@@ -1,4 +1,4 @@
-/**
+/* /** */
  * @author    RocketTheme http://www.rockettheme.com
  * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -7,7 +7,7 @@
 .sprocket-headlines {position: relative;-webkit-transform: translateZ(0);}
 .sprocket-headlines:after {display: table;content: "";*zoom: 1;clear: both;}
 .sprocket-headlines-container {display: table-row;}
-.sprocket-headlines ul {list-style: none !important;margin: 0;}
+.sprocket-headlines ul {list-style: none !important;margin: 0; max-width:1050px;}
 
 /* Layout - Sprocket Headlines - Badge */
 .sprocket-headlines-badge {float: left;}
