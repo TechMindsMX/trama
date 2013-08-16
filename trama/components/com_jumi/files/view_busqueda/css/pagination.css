@@ -3,8 +3,8 @@
 }
 .pagination a {
 	text-decoration: none;
-	border: solid 1px #AAE;
-	color: #15B;
+	color: #666;	
+	font-size:16px;
 }
 .pagination a,.pagination span {
 	display: block;
@@ -14,34 +14,107 @@
 	margin-bottom: 5px;
 }
 .pagination .current {
-	background: #26B;
-	color: #fff;
-	border: solid 1px #AAE;
+	color: #e1001a !important;
 }
-.pagination .current.prev,.pagination .current.next {
-	color: #999;
-	border-color: #999;
-	background: #fff;
-}
+.pagination .currento.prev,.pagination .currento.next {
+	color: #666;
+	font-weight:bold;
+	font-size:16px;
+	}
 .ancho {
 	width: 33%;
 }
 .inner {
 	margin: 1em;
 }
+#ligasprod{
+	background: #b3b3b3;
+	border-radius: 4px;
+	padding: 5px 5px 5px 17px;
+	margin-left: 14px;
+	max-width:610px;
+	font-weight:bold;
+	text-shadow:none;
+	color:black;
+}
+#contador{
+	color:#e1001a;
+}
+#contador span{
+	color:#000;
+}
+#filtrar{
+	float: left;
+	margin-right: 10px;
+	background: #2c9ad9;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	padding: 5px 0px 5px 17px;
+	width: 75px;
+	height: 23px;
+	margin-top: -5px;
+	margin-left: -17px;
+	font-weight: bold;
+	color: #fff;
+}
+#triangle {
+	width: 0;
+	height: 0;
+	border-top: 17px solid transparent;
+	border-left: 11px solid #2c9ad9;
+	border-bottom: 16px solid transparent;
+	margin-top: -5px;
+	margin-left: -10px;
+}
+.botonLimpio input[type=button]{
+ font-size: 14px;
+ border: none;
+ background: none;
+ font-family:inherit;
+ font-weight:bold;
+ margin-top:-3px;
+}
 div.proyecto > .inner {
- 	margin: 0 0 0 1em;
+ 	margin: 0 5px 0 1em; 	
+	border-radius: 7px;
+	box-shadow: 5px 3px 16px #999292;
+	background: #fff;
+	padding-top:7px;
+	padding-bottom:7px;
 }
 .proyecto {
 	float: left;
 	margin-bottom: 1em;
 }
-.titulo, .descripcion {
-	margin: 0 5px 0 4px;
+.titulo{
+	color:fff;
+	content: "\f0d7";
+	
 }
-.titulo, .descripcion, .avatar {
-	border: 1px solid #ddd;
-	box-shadow: 2px 2px 2px #bbb;
+.tituloProy a{
+	font-size:22px;
+	color:#000 !important;
+	font-weight:bold;
+}
+.catSubCat {
+	font-size:15px !important;
+	color:#000 !important;
+	text-transform: uppercase;
+	font-weight:bold;
+}
+.productor a{
+	
+	color:#000 !important;
+	font-weight:bold;
+	font-size:14px !important;
+}
+.statusP{
+	font-size:13px !important;
+}
+.descripcion{
+	color:#000 !important;
+	font-weight:bold;
+	font-size:14px !important;
 }
 .titulo span, .descripcion span {
 	display: block;
@@ -49,15 +122,27 @@ div.proyecto > .inner {
 	line-height: 1.5em;
 }
 .avatar {
+	max-width:370px;
 	overflow: hidden;
+}
+.avatar:before {
+	font-size: 30px;
+	content: "\f0d7";
+	font-family: FontAwesome;
+	position: absolute;
+	margin: -8px 0 0 20px;
+	z-index: 1;
+	color:#fff;
+	text-shadow: 0 0 0;
 }
 .avatar img {
 	width: 100%;
 }
 .descText {
 	margin: 2em 0;
-	line-height: 2em;
-	height:56px;
+	line-height: 1.5em;
+	height:66px;
+	overflow:hidden;
 }
 .proyecto .readmore {
 	text-align: right;

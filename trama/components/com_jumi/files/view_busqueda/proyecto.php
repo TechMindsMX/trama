@@ -17,11 +17,12 @@ $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
 
 if ( !$tipoPP ) {
 	$ligasPP = '<div id="ligasprod">'.
-			   '<div style="float:left; margin-right:10px;">Filtrar por: </div>'.
-			   '<div style="float:left; margin-right:10px;">'.JText::_('PRODUCTO').'s <input type="checkbox" id="producto" /></div>'.
-			   '<div style="float:left; margin-right:10px;">'.Jtext::_('PROYECTO').'s <input type="checkbox" id="proyecto" /></div>'.
-			   '<div style="float:left; margin-right:10px;">'.Jtext::_('REPERTORIO').'s <input type="checkbox" id="repertorio" /></div>'.
-			   '<div style="float:left; margin-right:10px;"><input type="button" value="Limpiar Filtro" /></div>'.
+			   '<div id="filtrar" style="float:left;">Filtrar por: </div>'.
+			   '<div id="triangle" style="float:left; margin-right:10px;"> </div>'.
+			   '<div style="float:left; margin-right:10px;">Proyectos <input type="checkbox" id="producto" /></div>'.
+			   '<div style="float:left; margin-right:10px;">Productos <input type="checkbox" id="proyecto" /></div>'.
+			   '<div style="float:left; margin-right:10px;">Repertorios <input type="checkbox" id="repertorio" /></div>'.
+			   '<div class="botonLimpio" style="float:left; margin-right:10px;"><input type="button" value="Limpiar Filtro" /></div>'.
 			   '<div id="contador"></div>'.
 			   '</div><br />';
 }
@@ -134,7 +135,7 @@ function tagLimpia ($data) {
 var members = <?php echo $jsonJS; ?>;
 
 $(document).ready(function(){
-	jQuery('#contador').html("Resultados: "+members.length);
+	jQuery('#contador').html("<span>RESULTADOS: </span>"+members.length);
 	initPagination();
 	
 	jQuery("#ligasprod input").click(function () {		
@@ -148,7 +149,7 @@ $(document).ready(function(){
 				<?php 
 				if (isset($proyectos)) {
 					echo 'members = '.$proyectos.';
-					jQuery("#contador").html("Resultados: "+members.length);
+					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
 					initPagination();';
 				}else {
 					echo 'alert("No hay Resultados con este filtro");'.
@@ -158,7 +159,7 @@ $(document).ready(function(){
 				<?php 
 				if (isset($productos)) {
 					echo 'members = '.$productos.';
-					jQuery("#contador").html("Resultados: "+members.length);
+					jQuery("#contador").html("<span>RESULTADOS: </span>"+members.length);
 					initPagination();';
 			 	}else {
 					echo 'alert("No hay Resultados con este filtro");'.
@@ -169,7 +170,7 @@ $(document).ready(function(){
 				<?php
 				if (isset($repertorio)) {
 					echo 'members = '.$repertorio.';
-					jQuery("#contador").html("Resultados: "+members.length);
+					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
 					initPagination();';
 			 	}else {
 					echo 'alert("No hay Resultados con este filtro");'.
@@ -180,7 +181,7 @@ $(document).ready(function(){
 				<?php
 				if (isset($prodProy)) {
 					echo 'members = '.$prodProy.';
-					jQuery("#contador").html("Resultados: "+members.length);
+					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
 					initPagination();';
 			 	}else {
 					echo 'alert("No hay Resultados con este filtro");'.
@@ -191,7 +192,7 @@ $(document).ready(function(){
 				<?php
 				if (isset($repertorioProduc)) {
 					echo 'members = '.$repertorioProduc.';
-					jQuery("#contador").html("Resultados: "+members.length);
+					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
 					initPagination();';
 			 	}else {
 					echo 'alert("No hay Resultados con este filtro");'.
@@ -200,7 +201,7 @@ $(document).ready(function(){
 			}else if(!producto && proyecto && repertorio) {
 				<?php if (isset($repertProy)) {
 					echo 'members = '.$repertProy.';
-					jQuery("#contador").html("Resultados: "+members.length);
+					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
 					initPagination();';
 			 	}
 			 	else {
@@ -210,13 +211,13 @@ $(document).ready(function(){
 			 	
 			}else if( (repertorio && proyecto && producto) || (!repertorio && !proyecto && !producto) ){
 				members = <?php echo $jsonJS; ?>;
-				jQuery("#contador").html("Resultados: "+members.length);
+				jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
 				initPagination();
 			}
 		}else{
 			jQuery('#ligasprod input').prop('checked',false);
 			members = <?php echo $jsonJS; ?>;
-			jQuery("#contador").html("Resultados: "+members.length);
+			jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
 			initPagination();
 		}
 	});
@@ -250,22 +251,19 @@ function pageselectCallback (page_index, jq) {
 			var descripcion = members[i].name;
 			var largo = 33;
 			var trimmed = descripcion.substring(0, largo);
-		newcontent += '<h4><a href="' + link + '">' + trimmed + '</h4></a>';
-		newcontent += '<span>' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
-		newcontent += '<span>' + members[i].producer+'</span>';
+		newcontent += '<span class="tituloProy"><h4><a href="' + link + '">' + trimmed + '</h4></a></span>';
+		newcontent += '<span class="catSubCat">' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
+		newcontent += '<span class="productor">' + members[i].producer+'</span>';
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '<div class="avatar">';
 		newcontent += '<a href="' + link + '">';
 		newcontent += '<img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" /></a></div>';
 		newcontent += '<div class="descripcion">';
-		newcontent += '<div class="inner">';
-			var descripcion = members[i].description;
-			var largo = 80;
-			var trimmed = descripcion.substring(0, largo);
-		newcontent += '<div class="descText">' + trimmed + '</div>';
-		newcontent += '<span>Estado: ' + members[i].statusName + '</span><p class="readmore">';
-		newcontent += '<a href="' + link + '" class="leerText">' + "Ver más...";
+		newcontent += '<div class="inner">';			
+		newcontent += '<div class="descText">' + members[i].description + '</div>';
+		newcontent += '<span class="statusP">Estado: ' + members[i].statusName + '</span><p class="readmore">';
+		newcontent += '<a href="' + link + '" class="leerText">' + "Ver más";
 		newcontent += '</a>';
 		newcontent += '</p>';
 		newcontent += '</div>';

@@ -8,6 +8,10 @@
  * @return {Object} jQuery Object
  */
 jQuery.fn.pagination = function(maxentries, opts){
+	jQuery('#rt-mainbody').css('background','none');
+	jQuery('#rt-mainbody').css('box-shadow','none');
+	jQuery('#rt-mainbody').css('padding','0px');
+	jQuery('#rt-block').css('padding','0px');
 	
 	opts = jQuery.extend({
 		items_per_page:9,
@@ -15,8 +19,8 @@ jQuery.fn.pagination = function(maxentries, opts){
 		current_page:0,
 		num_edge_entries:0,
 		link_to:"#",
-		prev_text:"Ant",
-		next_text:"Sig",
+		prev_text:"&lt;Ant",
+		next_text:"Sig&gt;",
 		ellipse_text:"...",
 		prev_show_always:true,
 		next_show_always:true,
