@@ -13,6 +13,9 @@ if ($usuario->guest == 1) {
 jimport('trama.class');
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
+require_once 'components/com_jumi/files/crear_proyecto/classIncludes/validacionFiscal.php';
+
+validacionFiscal($usuario);
 
 $categoria = JTrama::getAllCatsPadre();
 $subCategorias = JTrama::getAllSubCats();

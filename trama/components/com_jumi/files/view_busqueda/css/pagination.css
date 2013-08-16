@@ -147,7 +147,16 @@ div.proyecto > .inner {
 .proyecto .readmore {
 	text-align: right;
 }
-
+.imgPerfil{
+	float:left;
+	width:127px;
+	height:100px;
+	overflow:hidden;
+}
+.datosPerfil{
+	float:left;
+	padding-left:5px;
+}
 @media screen and (min-width: 721px) and (max-width: 1216px) {
 	.ancho {width: 50%;}
 }
