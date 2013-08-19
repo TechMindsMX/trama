@@ -26,8 +26,8 @@
 .sprocket-headlines-navigation .arrow {position: absolute;display: block;width: 40px;height: 40px;top: 50%;margin-top: -20px;border-radius: 4px;opacity: 0.5;cursor: pointer;z-index: 10;text-align: center;font-size: 24px;line-height: 38px;-webkit-transform: translateZ(0);}
 .sprocket-headlines-navigation .arrow span {display: none;}
 .sprocket-headlines-navigation .arrow:hover {opacity: 1;}
-.sprocket-headlines-navigation .prev {left: -50px;}
-.sprocket-headlines-navigation .next {right: -50px;}
+.sprocket-headlines-navigation .prev {left: 10px;}
+.sprocket-headlines-navigation .next {right: 10px;}
 .sprocket-headlines-navigation .arrow.next:before {content: '\f105';font-family: FontAwesome;}
 .sprocket-headlines-navigation .arrow.prev:before {content: '\f104';font-family: FontAwesome;}
 
