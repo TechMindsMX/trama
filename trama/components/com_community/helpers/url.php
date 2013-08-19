@@ -104,14 +104,21 @@ class CUrlHelper
 	{
 		$config		= CFactory::getConfig();
 
+		$ruta = $file;
+		$hostr =& JURI::getInstance( $ruta );
+		
 		// Default avatar
 		if (empty($file) || !JFile::exists(JPATH_ROOT.'/'.$file))
-		{
-
-			$template = new CTemplateHelper();
-			$asset = $template->getTemplateAsset($default, 'images');
-			$uri   = $asset->url;
-			return $uri;
+		{	
+			if($hostr->getHost() == MIDDLE) {
+				$uri = $file;
+				return $uri;
+			} else {
+				$template = new CTemplateHelper();
+				$asset = $template->getTemplateAsset($default, 'images');
+				$uri   = $asset->url;
+				return $uri;
+			}
 		}
 
 		// Strip cdn path if exists.
