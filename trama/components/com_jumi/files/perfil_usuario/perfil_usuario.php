@@ -59,9 +59,9 @@ $promedio = $objuserdata->scoreUser($userid);
 				<?php 
 			    	echo $datosgenerales->nomNombre." ".$datosgenerales->nomApellidoPaterno;
 			    	echo "<br/>";
-			    	echo $datosgenerales->nomNombre;
+			    	echo $datosgenerales->nomNombre; //cambiar por puesto
 			    	echo "<br/>";			    	
-			    	echo $datosgenerales->nomNombre;
+			    	echo $datosgenerales->nomNombre; // cambiar por empresa
 			 	?>
 			  	</div>
 			  	<?php 

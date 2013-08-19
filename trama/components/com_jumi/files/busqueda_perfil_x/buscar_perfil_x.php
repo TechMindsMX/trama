@@ -153,10 +153,16 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="inner">';
 		newcontent += '<div class="titulo">';
 		newcontent += '<div class="tituloText inner">';
-		newcontent += '<h4><a href="' + link + '">' + members[i].nomNombre + ' ' + members[i].nomApellidoPaterno +'</h4></a>';
 		newcontent += '<div class="fotoPerfil">';
 		newcontent += '<a href="' + link + '">';
-		newcontent += '<img src="' + members[i].Foto + '" alt="Foto" /></a></div>';
+		newcontent += '<div class="imgPerfil"><img style="width:175px;" src="' + members[i].Foto + '" alt="Foto" /></div>';
+		newcontent += '<div class="datosPerfil">';
+		newcontent += '<h4>' + members[i].nomNombre + ' ' + members[i].nomApellidoPaterno +'</h4>';
+		newcontent += '<h4>' + members[i].nomNombre + '</h4>';
+		newcontent += '<h4>' + members[i].nomNombre + '</h4>';
+		newcontent += '</div>';
+		newcontent += '<div style="clear:both;"></div>';
+		newcontent += '</a></div>';
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '</div>';
