@@ -2,6 +2,7 @@
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 
 $accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25';
+$accion = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveProvider';
 /**
  *
  */
@@ -9,6 +10,7 @@ class AltaProveedores {
 
 	function __construct() {
 		$this -> usuario = JFactory::getUser();
+		$this -> sesion = JFactory::getSession();
 		$app = JFactory::getApplication();
 
 		if ($this -> usuario -> guest == 1) {
@@ -23,13 +25,18 @@ class AltaProveedores {
 		$this -> objDatos = claseTraerDatos::getDatos('project', (!empty($proyId)) ? $proyId : null);
 
 		$this -> getMoreData();
+		$this -> getEditable();
+		
+		if (!$this->editable) {
+			// $app -> redirect('index.php ',JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+		}
+		
 		$this -> getMiembrosGrupo();
-		$this -> editable();
-		$this->fechas();
+		$this -> fechas();
 
 	}
 
-	function editable() {
+	function getEditable() {
 		$checkUser = ($this -> usuario -> id == $this -> objDatos -> userId);
 		$checkStatus = ($this -> objDatos -> status == 2 || $this -> objDatos -> status == 0);
 		$this -> editable = ($checkUser && $checkStatus);
@@ -61,13 +68,17 @@ class AltaProveedores {
 
 			$this->miembrosGrupo = $results2;
 		}
+$results2[0] =(object) array('memberid' => 379, 'name' => 'Usuario1');
+$results2[1] =(object) array('memberid' => 380, 'name' => 'Usuario2');
+
+			$this->miembrosGrupo = $results2;
 	}
 	function fechas() {
 		$startDate = $this -> objDatos -> productionStartDate;
 		$endDate = $this -> objDatos -> premiereStartDate;
 		for ($i = strtotime($startDate); $i <= strtotime($endDate); $i = strtotime('+1 day', $i)) {
 		  if (date('N', $i) == 2) //Martes == 2
-		    $fechasPago[] = date('l Y-m-d', $i);
+		    $fechasPago[] = date('Y-m-d', $i);
 		}
 		$this->fechasPago = $fechasPago;
 	}
@@ -75,55 +86,121 @@ class AltaProveedores {
 }
 
 $proyecto = new AltaProveedores;
-var_dump($proyecto);
 
 $doc = JFactory::getDocument();
-$path = 'components/com_jumi/files/alta_proyectos/';
-$doc->addStyleSheet($path.'alta_proyectos.css');
+$path = 'components/com_jumi/files/alta_proveedores/';
+$doc->addStyleSheet($path.'alta_proveedores.css');
+$doc->addScript($path.'js/modernizr.custom.13578.js');
 ?>
 
 
 <h2><?php echo JText::_('ALTA_PROVEEDORES'); ?></h2>
-<form action="<?php echo $accion ?>" method="post" class="" id="">
+<form action="<?php echo $accion ?>" method="post" class="" id="proveedores" >
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
 	<p>catName=<?php echo $proyecto -> objDatos -> catName; ?></p>
 	<p>subCatName=<?php echo $proyecto -> objDatos -> subCatName; ?></p>
 	<p>productionStartDate=<?php echo $proyecto -> objDatos -> productionStartDate; ?></p>
 	<p>premiereStartDate=<?php echo $proyecto -> objDatos -> premiereStartDate; ?></p>
 	<p>Status=<?php echo $proyecto -> objDatos -> statusName; ?></p>
-	<div id="agregados"></div>
 	
-	<input type="submit" value="Enviar" />
+	<input type="hidden" value="" name="projectProvider" id="data_send"/>
+	
+	<input type="submit" value="Enviar" id="guardar" />
 </form>
+	<form id="agregados">
+		<input type="hidden" value="<?php echo $proyecto -> objDatos -> id; ?>" name="projectId" id="proyid"/>
+	</form>
 
-<div class="todos_miembros_grupo">
-	<h3><?php echo JText::_('USUARIOS_MIEMROS'); ?></h3>
-	<?php 
-	if (isset($proyecto->miembrosGrupo)) {
-		foreach ($proyecto->miembrosGrupo as $key => $value) {
-		echo '<div>'.
-			'<p class="miembro_grupo" id="'.$value->memberid.'">Miembroid='.$value->name.'</p>'.
-			'<input type="hidden" name="memberid[]" value="'.$value->memberid.'" />'.
-			'</div>';
-		}
+<div id="todos_miembros_grupo">
+	<h3><?php echo JText::_('PROVEEDOR_USUARIOS_MIEMROS'); ?></h3>
+<?php 
+if (isset($proyecto->miembrosGrupo)) {
+	foreach ($proyecto->miembrosGrupo as $key => $value) {
+
+	$member = $proyecto->miembrosGrupo[$key];
+
+	$html = '<div class="inputs '. $member->memberid .'">
+			<div class="nombre">
+			<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
+			</div>
+			<div class="rt-grid-4">
+			<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
+			<input type="hidden" name="providerId" value="'. $member->memberid.'" />
+			<label for="advanceDate">'.JText::_('JDATE').'</label>
+			<select name="advanceDate" id="fecha">'; 
+	foreach ($proyecto->fechasPago as $key => $value) {
+		$html .= '<option value="'.$value.'">'.$value.'</option>';
 	}
-	?>
-</div>
-<div class="inputs">
-	<input type="checkbox" name="check" /><label for="check"><?php echo $proyecto->objDatos->name; ?></label>
-	<select>
-		<?php foreach ($proyecto->fechasPago as $key => $value) {
-			echo '<option value="'.$value.'">'.$value.'</option>';
-		}
-		?>
-	</select>
+	$html .= '</select>
+			<label for="advanceQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
+			<input name="advanceQuantity" type="number" min="1000" id="monto" />
+			</div>
+			<div class="rt-grid-4">
+			<p>'.JText::_('PROVEEDOR_LIQUIDACION').'</p>
+			<label for="settlementDate">'.JText::_('JDATE').'</label>
+			<select name="settlementDate" id="fecha">';
+	foreach ($proyecto->fechasPago as $key => $value) {
+		$html .= '<option value="'.$value.'">'.$value.'</option>';
+	}
+	$html .= '</select>
+			<label for="settlementQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
+			<input name="settlementQuantity" type="number" min="1000" id="monto" />
+			</div>
+		<div style="clear: both;"></div>'.
+		'</div>';
+	echo $html;
+	}
+}
+?>
 </div>
 
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		jQuery('.miembro_grupo').click(function(){
-			jQuery(this).parent().appendTo('#agregados');
-			jQUery('.inputs').insertAfter(this);
+		jQuery(".nombre").siblings().hide();
+		jQuery('.icon-circle-arrow-up').click(function(){
+			if (jQuery(this).hasClass('icon-circle-arrow-up')) {
+				jQuery(this).parent().parent().parent().appendTo('#agregados');
+				jQuery(this).removeClass('icon-circle-arrow-up');
+				jQuery(this).addClass('icon-circle-arrow-down');
+				jQuery(this).parent().parent().siblings().show('slow');
+			}
+			else {
+			jQuery(this).parent().parent().parent().appendTo('#todos_miembros_grupo');
+			jQuery(this).removeClass('icon-circle-arrow-down');
+			jQuery(this).addClass('icon-circle-arrow-up');
+			jQuery(this).parent().parent().siblings().hide();
+			}
+		});
+		jQuery('span.icon-circle-arrow-down').click(function(){
+		});
+	});
+</script>
+
+<script>
+	jQuery(document).ready(function(){		
+
+		jQuery("#guardar").click(function (){
+			
+			var count = 0;
+			data = {};
+			dataArray = new Array();
+			jQuery.each(jQuery("#agregados").serializeArray(), function () {
+				data[this.name] = this.value;
+				if (this.name == 'settlementQuantity') {
+					dataArray[count] = JSON.stringify(data) ;
+					count++;
+				}
+			});
+			json = dataArray.join(",");
+			
+			if (dataArray.length > 1) {
+				json = '{projectProviders:[' + json + ']}';
+			}
+			jQuery("#data_send").val(json);
+			
+			jQuery("#proveedores").submit(function(){
+				// return false;
+			});
 		});
 	});
 </script>
