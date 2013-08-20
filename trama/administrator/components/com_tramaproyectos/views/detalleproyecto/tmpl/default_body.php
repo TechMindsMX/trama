@@ -8,6 +8,17 @@ $adminId = JFactory::getUser();
 $proyeto = $this->items;
 $urls = new JTrama;
 $urls1 = $urls->getEditUrl($proyeto);
+
+if( !isset($proyeto->projectBusinessCase->name) ) {
+	$bussinesCase = '';
+} else {
+	$bussinesCase = '<div style="margin-bottom:10px">
+		<a href="'.MIDDLE.BCASE.'/'.$proyeto->projectBusinessCase->name.'.xlsx" target="blank">
+			Business Case
+		</a>
+	</div>';
+}
+
 ?>
 <input type="hidden" name="task" value="" />
 <tr class="row">
@@ -20,11 +31,7 @@ $urls1 = $urls->getEditUrl($proyeto);
 				<?php echo JTrama::tipoProyProd($proyeto).' - '.$urls::getStatusName($proyeto->status); ?>			
 			</div>
 			
-			<div style="margin-bottom:10px">
-				<a href="<?php echo MIDDLE.BCASE.'/'.$proyeto->projectBusinessCase->name; ?>.xlsx" target="blank">
-					Business Case
-				</a>
-			</div>
+			<?php echo $bussinesCase; ?>			
 			
 			<div>
 				<p>Descripcion del proyecto</p>
