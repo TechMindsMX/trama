@@ -3,12 +3,16 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed"
 
 $accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25';
 $accion = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveProvider';
+$diaPagoProveedores = 2;
 /**
  *
  */
 class AltaProveedores {
+	
+	protected $editable;
+	protected $providers;
 
-	function __construct() {
+	public function __construct() {
 		$this -> usuario = JFactory::getUser();
 		$this -> sesion = JFactory::getSession();
 		$app = JFactory::getApplication();
@@ -33,10 +37,34 @@ class AltaProveedores {
 		
 		$this -> getMiembrosGrupo();
 		$this -> fechas();
+		$this -> getProviders();
 
 	}
+	protected function getProviders()
+	{
+$results2[0] =(object) array('memberid' => 382, 'name' => 'Usuario1');
+$results2[1] =(object) array('memberid' => 383, 'name' => 'Usuario2');
+$results2[2] =(object) array('memberid' => 379, 'name' => 'Usuario3');
+$this->miembrosGrupo = $results2;
+		
+$proveedores[0] =(object) array('providerId' => 382 , 'advanceDate' => '2013-10-10','advanceQuantity' => 1000,'settlementDate' => '2013-10-17','settlementQuantity' => 2000);
+$proveedores[1] =(object) array('providerId' => 383 , 'advanceDate' => '2013-11-20','advanceQuantity' => 3000,'settlementDate' => '2013-11-27','settlementQuantity' => 4000);
+		
+		foreach ($proveedores as $keyProv => $valueProv) {
+			foreach ($this->miembrosGrupo as $keyMiem => $valueMiem) {
+					echo 'keym='.$keyMiem.'mem='.$valueMiem->memberid;
+				if ($valueProv->providerId == $valueMiem->memberid) {
+					$this->miembrosGrupo[$keyMiem]->advanceDate = $valueProv->advanceDate;
+					$this->miembrosGrupo[$keyMiem]->advanceQuantity = $valueProv->advanceQuantity;
+					$this->miembrosGrupo[$keyMiem]->settlementDate = $valueProv->settlementDate;
+					$this->miembrosGrupo[$keyMiem]->settlementQuantity = $valueProv->settlementQuantity;
+				}
+			}
+		}
+		$this -> providers = $proveedores;
+	}
 
-	function getEditable() {
+	protected function getEditable() {
 		$checkUser = ($this -> usuario -> id == $this -> objDatos -> userId);
 		$checkStatus = ($this -> objDatos -> status == 2 || $this -> objDatos -> status == 0);
 		$this -> editable = ($checkUser && $checkStatus);
@@ -49,7 +77,7 @@ class AltaProveedores {
 		$this -> objDatos -> statusName = JTrama::getStatusName($this -> objDatos -> status);
 	}
 
-	function getMiembrosGrupo() {
+	public function getMiembrosGrupo() {
 		$db = JFactory::getDbo();
 		$query = $db -> getQuery(true);
 		$query	-> select('id') 
@@ -68,16 +96,12 @@ class AltaProveedores {
 
 			$this->miembrosGrupo = $results2;
 		}
-$results2[0] =(object) array('memberid' => 379, 'name' => 'Usuario1');
-$results2[1] =(object) array('memberid' => 380, 'name' => 'Usuario2');
-
-			$this->miembrosGrupo = $results2;
 	}
-	function fechas() {
+	public function fechas() {
 		$startDate = $this -> objDatos -> productionStartDate;
 		$endDate = $this -> objDatos -> premiereStartDate;
 		for ($i = strtotime($startDate); $i <= strtotime($endDate); $i = strtotime('+1 day', $i)) {
-		  if (date('N', $i) == 2) //Martes == 2
+		  if (date('N', $i) == $diaPagoProveedores ) //Martes == 2
 		    $fechasPago[] = date('Y-m-d', $i);
 		}
 		$this->fechasPago = $fechasPago;
@@ -91,6 +115,9 @@ $doc = JFactory::getDocument();
 $path = 'components/com_jumi/files/alta_proveedores/';
 $doc->addStyleSheet($path.'alta_proveedores.css');
 $doc->addScript($path.'js/modernizr.custom.13578.js');
+
+var_dump($proyecto);
+
 ?>
 
 
@@ -103,9 +130,9 @@ $doc->addScript($path.'js/modernizr.custom.13578.js');
 	<p>premiereStartDate=<?php echo $proyecto -> objDatos -> premiereStartDate; ?></p>
 	<p>Status=<?php echo $proyecto -> objDatos -> statusName; ?></p>
 	
-	<input type="hidden" value="" name="projectProvider" id="data_send"/>
+	<!-- <input type="hidden" value="" name="projectProvider" id="data_send"/> -->
 	
-	<input type="submit" value="Enviar" id="guardar" />
+	<input type="submit" value="Enviar" id="guardar" class="button" />
 </form>
 	<form id="agregados">
 		<input type="hidden" value="<?php echo $proyecto -> objDatos -> id; ?>" name="projectId" id="proyid"/>
