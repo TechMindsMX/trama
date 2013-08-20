@@ -107,10 +107,12 @@ class CUrlHelper
 		$ruta = $file;
 		$hostr =& JURI::getInstance( $ruta );
 		
+		$hostMiddle =& JURI::getInstance( MIDDLE );
+		
 		// Default avatar
 		if (empty($file) || !JFile::exists(JPATH_ROOT.'/'.$file))
 		{	
-			if($hostr->getHost() == MIDDLE) {
+			if($hostr->getHost() == $hostMiddle->getHost()) {
 				$uri = $file;
 				return $uri;
 			} else {

@@ -89,7 +89,7 @@ $db =& JFactory::getDBO();
 $query = $db->getQuery(true);
 
 $query
-	->select('nomNombre, nomApellidoPaterno, nomApellidoMaterno, Foto, users_id')
+	->select('nomNombre, nomApellidoPaterno, nomApellidoMaterno, Foto, users_id, nomJobTitle, nomCompania')
 	->from('perfil_persona')
 	->where('users_id IN ('.$Ids.') && perfil_tipoContacto_idtipoContacto = 1');
 
