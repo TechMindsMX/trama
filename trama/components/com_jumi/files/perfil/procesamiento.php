@@ -258,11 +258,16 @@ class procesamiento extends manejoImagenes {
 				$campos = ' avatar = "'.$data['Foto'].'", thumb = "'.$data['Foto'].'"';
 				$conditions = ' userid = '.$usuario->id;
 				$resultado->updateFields('c3rn2_community_users', $campos, $conditions);
-			}
-			
-			foreach ($data as $key => $value) {
 				
-				if (!empty($value) ) {//|| $data['nomApellidoMaterno'] == "") {
+				if( isset($data['freelance']) ) {
+					$data['nomCompania'] = 'Independiente';
+				}else{
+					$data['freelance'] = 0;
+				}
+			}
+
+			foreach ($data as $key => $value) {
+				if (!empty($value) || $data['freelance'] == 0 ) {					
 			        $col[] = mysql_real_escape_string($key);
 					$val[] = "'".mysql_real_escape_string($value)."'";
 				}
@@ -332,7 +337,7 @@ class procesamiento extends manejoImagenes {
 				for($i = 0; $i < $contador; $i++) {
 					$fields[] = $col[$i].'='.$val[$i];
 				}
-				
+
 				$fields = implode($fields,',');
 
 				if ($tabladb == 'perfil_persona') {
@@ -494,6 +499,7 @@ if ($form == 'perfil') {
 	$mailGen = $datos->get_mailsGeneral($objDatos);
 	
 	$dataGeneral = $objDatos->datosGenerales($usuario->id, 1);
+
 	if ($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 2 || $dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 3){
 		$allDone =& JFactory::getApplication();
 		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13', 'Sus datos fueron grabados exitosamente' );
