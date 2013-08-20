@@ -138,7 +138,9 @@ function pageselectCallback (page_index, jq) {
 
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
-		var link = 'index.php?option=com_jumi&view=appliction&fileid=17&userid=' + members[i].users_id;
+		var link = 'index.php?option=com_jumi&view=appliction&fileid=17&userid=' + members[i].users_id;		
+		var nomJobTitle = members[i].nomJobTitle != null ? members[i].nomJobTitle : " "; 
+		var nomCompania = members[i].nomCompania != null ? members[i].nomCompania : " "; 
 		
 		countCol++;
 		if (countCol == columnas) {
@@ -158,8 +160,8 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="imgPerfil"><img style="width:175px;" src="' + members[i].Foto + '" alt="Foto" /></div>';
 		newcontent += '<div class="datosPerfil">';
 		newcontent += '<h4>' + members[i].nomNombre + ' ' + members[i].nomApellidoPaterno +'</h4>';
-		newcontent += '<h4>' + members[i].nomJobTitle + '</h4>';
-		newcontent += '<h4>' + members[i].nomCompania + '</h4>';
+		newcontent += '<h4>' + nomJobTitle + '</h4>';
+		newcontent += '<h4>' + nomCompania + '</h4>';
 		newcontent += '</div>';
 		newcontent += '<div style="clear:both;"></div>';
 		newcontent += '</a></div>';
