@@ -27,52 +27,173 @@
 .inner {
 	margin: 1em;
 }
-#ligasprod{
-	background: #b3b3b3;
-	border-radius: 4px;
-	padding: 5px 5px 5px 17px;
-	margin-left: 14px;
-	max-width:610px;
-	font-weight:bold;
-	text-shadow:none;
-	color:black;
-}
-#contador{
-	color:#e1001a;
-}
-#contador span{
-	color:#000;
-}
-#filtrar{
-	float: left;
-	margin-right: 10px;
-	background: #2c9ad9;
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
-	padding: 5px 0px 5px 17px;
-	width: 75px;
-	height: 23px;
-	margin-top: -5px;
-	margin-left: -17px;
-	font-weight: bold;
-	color: #fff;
-}
-#triangle {
-	width: 0;
-	height: 0;
-	border-top: 17px solid transparent;
-	border-left: 11px solid #2c9ad9;
-	border-bottom: 16px solid transparent;
-	margin-top: -5px;
-	margin-left: -10px;
-}
-.botonLimpio input[type=button]{
- font-size: 14px;
- border: none;
- background: none;
- font-family:inherit;
- font-weight:bold;
- margin-top:-3px;
+
+	#ligasprod{
+		padding: 5px 5px 5px 17px;
+		margin-left: 14px;
+		max-width:780px;
+		font-weight:bold;
+		text-shadow:none;
+		color:black;
+	}
+	.barraProy input[type=checkbox]{
+		margin-top:-2px !important;
+	}
+	.barraProd input[type=checkbox]{
+		margin-top:-2px !important;
+	}
+	.barraRep input[type=checkbox]{
+		margin-top:-2px !important;
+	}
+	#contador span{
+		color:#000;
+	}
+	#filtrar{
+		float: left;
+		margin-right: 10px;
+		background: #2c9ad9;
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		padding: 5px 0px 5px 17px;
+		width: 75px;
+		height: 23px;
+		margin-top: -5px;
+		margin-left: -17px;
+		font-weight: bold;
+		color: #fff;
+	}
+	#triangle {
+		width: 0;
+		height: 0;
+		border-top: 17px solid transparent;
+		border-left: 11px solid #2c9ad9;
+		border-bottom: 16px solid transparent;
+		margin-top: -5px;
+		margin-left: -10px;
+		background-color:#b3b3b3;
+	}
+	.botonLimpio input[type=button]{
+		font-size: 14px;
+		border: none;
+		background: none;
+		font-family: inherit;
+		font-weight: bold;
+		margin-right: 10px;
+		background: #b3b3b3;
+		width: 113px;
+		height: 33px;
+		margin-top: -5px;
+		margin-left: -7px;
+		padding: 1px 5px 0px 6px;
+	 
+	}
+	.barraProy{
+		float: left;
+		margin-right: 10px;
+		background: #b3b3b3;
+		height: 28px;
+		margin-top: -5px;
+		margin-left: -10px;
+		padding: 5px 9px 0px 13px;
+	}
+	.barraProd{
+		float: left;
+		margin-right: 10px;
+		background: #b3b3b3;
+		height: 28px;
+		margin-top: -5px;
+		margin-left: -7px;
+		padding: 5px 9px 0px 14px;
+	}
+	.barraRep{
+		float: left;
+		margin-right: 10px;
+		background: #b3b3b3;
+		height: 28px;
+		margin-top: -5px;
+		margin-left: -7px;
+		padding: 5px 9px 0px 14px;
+	}
+	#contador{
+		float: left;
+		margin-right: 10px;
+		background: #b3b3b3;
+		height: 28px;
+		margin-top: -5px;
+		margin-left: -17px;
+		padding: 5px 15px 0px 13px;
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+		color:#e1001a;
+	}
+
+@media screen and (max-width: 768px)  {
+	#ligasprod{
+		background: #b3b3b3;
+		border-radius: 4px;
+		padding: 5px 5px 5px 17px;
+		margin-left: 14px;
+		max-width:610px;
+		font-weight:bold;
+		text-shadow:none;
+		color:black;
+		float:left;
+		margin-bottom:15px;
+	}
+	#contador{
+		color:#e1001a;
+	}
+	#contador span{
+		color:#000;
+	}
+	#filtrar{
+		float: left;
+		margin-right: 10px;
+		background: #2c9ad9;
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		padding: 5px 0px 5px 17px;
+		width: 75px;
+		height: 23px;
+		margin-top: -5px;
+		margin-left: -17px;
+		font-weight: bold;
+		color: #fff;
+	}
+	#triangle {
+		width: 0;
+		height: 0;
+		border-top: 17px solid transparent;
+		border-left: 11px solid #2c9ad9;
+		border-bottom: 16px solid transparent;
+		margin-top: -5px;
+		margin-left: -10px;
+	}
+	.botonLimpio input[type=button]{
+	 font-size: 14px;
+	 border: none;
+	 background: none;
+	 font-family:inherit;
+	 font-weight:bold;
+	 margin-top:-3px;
+	}
+	.barraProy{
+		float: left;
+		margin-right: 10px;
+	}
+	.barraProd{
+		float: left;
+		margin-right: 10px;
+		margin-top: 1px;
+	}
+	.barraRep{
+		float: left;
+		margin-right: 10px;
+	}
+	#contador{
+		margin-right: 10px;
+		color:#e1001a;
+	}
 }
 div.proyecto > .inner {
  	margin: 0 5px 0 1em; 	
@@ -141,7 +262,7 @@ div.proyecto > .inner {
 .descText {
 	margin: 2em 0;
 	line-height: 1.5em;
-	height:66px;
+	height:55px;
 	overflow:hidden;
 }
 .proyecto .readmore {
@@ -163,3 +284,4 @@ div.proyecto > .inner {
 @media screen and (max-width: 976px) {
 	.ancho {width: 100%;}
 }
+
