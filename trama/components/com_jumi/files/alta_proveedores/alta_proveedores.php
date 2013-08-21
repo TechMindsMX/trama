@@ -3,12 +3,13 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed"
 
 $accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25';
 $accion = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveProvider';
-$diaPagoProveedores = 2;
+// $accion = 'ajax.php';
 /**
  *
  */
 class AltaProveedores {
 	
+	public $diaPagoProveedores = 2; //Martes == 2
 	protected $editable;
 	protected $providers;
 
@@ -101,7 +102,7 @@ $proveedores[1] =(object) array('providerId' => 383 , 'advanceDate' => '2013-11-
 		$startDate = $this -> objDatos -> productionStartDate;
 		$endDate = $this -> objDatos -> premiereStartDate;
 		for ($i = strtotime($startDate); $i <= strtotime($endDate); $i = strtotime('+1 day', $i)) {
-		  if (date('N', $i) == $diaPagoProveedores ) //Martes == 2
+		  if (date('N', $i) == $this -> diaPagoProveedores ) 
 		    $fechasPago[] = date('Y-m-d', $i);
 		}
 		$this->fechasPago = $fechasPago;
@@ -116,8 +117,6 @@ $path = 'components/com_jumi/files/alta_proveedores/';
 $doc->addStyleSheet($path.'alta_proveedores.css');
 $doc->addScript($path.'js/modernizr.custom.13578.js');
 
-var_dump($proyecto);
-
 ?>
 
 
@@ -129,8 +128,9 @@ var_dump($proyecto);
 	<p>productionStartDate=<?php echo $proyecto -> objDatos -> productionStartDate; ?></p>
 	<p>premiereStartDate=<?php echo $proyecto -> objDatos -> premiereStartDate; ?></p>
 	<p>Status=<?php echo $proyecto -> objDatos -> statusName; ?></p>
+	<p>Presupuesto=<?php echo $proyecto -> objDatos -> budget; ?></p>
 	
-	<!-- <input type="hidden" value="" name="projectProvider" id="data_send"/> -->
+	<input type="hidden" value="" name="projectProvider" id="data_send"/>
 	
 	<input type="submit" value="Enviar" id="guardar" class="button" />
 </form>
@@ -151,27 +151,28 @@ if (isset($proyecto->miembrosGrupo)) {
 			<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
 			</div>
 			<div class="rt-grid-4">
+			<span class="monto_total"></span>
 			<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
-			<input type="hidden" name="providerId" value="'. $member->memberid.'" />
+			<input type="hidden" name="providerId" value="'.$member->memberid.'" />
+			<label for="advanceQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
+			<input name="advanceQuantity" type="number" min="1000" id="monto" />
 			<label for="advanceDate">'.JText::_('JDATE').'</label>
 			<select name="advanceDate" id="fecha">'; 
 	foreach ($proyecto->fechasPago as $key => $value) {
 		$html .= '<option value="'.$value.'">'.$value.'</option>';
 	}
 	$html .= '</select>
-			<label for="advanceQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
-			<input name="advanceQuantity" type="number" min="1000" id="monto" />
 			</div>
 			<div class="rt-grid-4">
 			<p>'.JText::_('PROVEEDOR_LIQUIDACION').'</p>
+			<label for="settlementQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
+			<input name="settlementQuantity" type="number" min="1000" id="monto" />
 			<label for="settlementDate">'.JText::_('JDATE').'</label>
 			<select name="settlementDate" id="fecha">';
 	foreach ($proyecto->fechasPago as $key => $value) {
 		$html .= '<option value="'.$value.'">'.$value.'</option>';
 	}
 	$html .= '</select>
-			<label for="settlementQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
-			<input name="settlementQuantity" type="number" min="1000" id="monto" />
 			</div>
 		<div style="clear: both;"></div>'.
 		'</div>';
@@ -200,11 +201,17 @@ if (isset($proyecto->miembrosGrupo)) {
 		});
 		jQuery('span.icon-circle-arrow-down').click(function(){
 		});
+	
+		jQuery('input[type="number"]').focusout(function() {
+			var aaa = jQuery(this).prevAll('input[type="number"]').val();
+			jQuery(this).prevAll('span.monto_total:first').text(aaa);
+		});
+	
 	});
 </script>
 
 <script>
-	jQuery(document).ready(function(){		
+	jQuery(document).ready(function(){
 
 		jQuery("#guardar").click(function (){
 			
@@ -223,6 +230,8 @@ if (isset($proyecto->miembrosGrupo)) {
 			if (dataArray.length > 1) {
 				json = '{projectProviders:[' + json + ']}';
 			}
+			json = JSON.stringify(jQuery("#agregados").serializeArray());
+			
 			jQuery("#data_send").val(json);
 			
 			jQuery("#proveedores").submit(function(){
@@ -231,3 +240,7 @@ if (isset($proyecto->miembrosGrupo)) {
 		});
 	});
 </script>
+
+<?php 
+var_dump($proyecto);
+?>
