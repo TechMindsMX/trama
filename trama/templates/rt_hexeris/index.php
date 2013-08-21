@@ -17,11 +17,11 @@ $gantry->init();
 
 // get the current preset
 $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
-
 ?>
 <!doctype html>
 <html xml:lang="<?php echo $gantry->language; ?>" lang="<?php echo $gantry->language;?>" >
 <head>
+	<script src="<?php echo JURI::base();?>templates/rt_hexeris/js/jquery-1.9.1.js" type="text/javascript"></script>
 	<?php if ($gantry->get('layout-mode') == '960fixed') : ?>
 	<meta name="viewport" content="width=960px">
 	<?php elseif ($gantry->get('layout-mode') == '1200fixed') : ?>
@@ -33,14 +33,12 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
     <?php
         $gantry->displayHead();
 
-		$gantry->addScript('jquery-1.9.1.js');
-
 		$user = JFactory::getUser();
 		$name = explode(' ',$user->name);
 		if (!$user->guest) {
 			echo '<script>';
 			echo 'jQuery(document).ready( function(){';
-			//echo 'jQuery(".desc").text("'.$name[0].'");';
+			echo 'jQuery(".desc").text("Salir");';
 			echo 'jQuery(".logo-block").after("<div class=\"bienvenidaUsuario\">Hola '.$name[0].'</div>")';
 			echo '});';
 			echo '</script>';
