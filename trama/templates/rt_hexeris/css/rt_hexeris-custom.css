@@ -49,5 +49,40 @@ div.compacto {
 	font-size:16px;
 	font-weight:bold;	
 	margin-bottom:10px;
+	position:absolute;
+}
+.videoHead{
+	height: 458px;
+	width: 720px;
+	float: left;
+}
+.tituloHead{
+	float: left;
+	font-weight: bolder;
+	font-size: 50px;
+	max-width: 300px;
+	text-shadow: 2px 1px #000000;
+	margin-left: 20px;
+	margin-top: 50px;
+	line-height: 50px;
+}
+.subTituloHead{
+	float: left;
+	font-weight: bolder;
+	font-size: 25px;
+	max-width: 300px;
+	text-shadow: 2px 1px #000000;
+	margin-left: 20px;
+	margin-top: 15px;
+	line-height: 30px;
+}
+.textoHead{
+	float: left;
+	font-size: 25px;
+	max-width: 300px;
+	text-shadow: 2px 1px #000000;
+	margin-left: 20px;
+	line-height: 35px;
+	margin-top: 20px;
 }
 /*** fin Modulos compactos class sufix ****/
