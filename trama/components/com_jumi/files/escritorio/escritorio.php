@@ -44,41 +44,84 @@ $id_datos_generales = $datosgenerales->id;
 $promedio = $objuserdata->scoreUser($userid);
 
 ?>
-
+<style>
+.comentariosMedia{
+			display:none;
+		}
+.editMedia {
+	display:none;
+}
+		
+@media all and (max-width: 720px){
+	.comentarios{
+		display:none;
+	}
+	.comentariosMedia{
+		display:inline;
+	}
+	.editTabla{
+		display:none;
+	}
+	.editMedia{
+		display:inline;
+	}
+}
+</style>
     <body>
         
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
       <div id="contenido">  
-			<section class="ac-container2">
-				
+			<section class="ac-container2" style="max-width: 100%;">
 				<div>
 					<input id="ac-2a" name="accordion-2" type="radio" />
 					<label for="ac-2a">Proyectos</label>
 					<article class="ac-medium">
-						<p> 
+						<table width="100%" frame="box" rules="all" style="text-align: center">
+							<tr>
+								<th>Nombre</th>
+								<th>Creación</th>
+								<th>Status</th>
+								<th>Grupo</th>
+								<th>
+									<span class="comentarios">Comentarios</span>
+									<span class="comentariosMedia">
+										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
+									</span>
+								</th>
+								<th>
+									<span class="editTabla">Editar</span>
+									<span class="editMedia">
+								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
+	  							    </span>
+								</th>
+							</tr>
 							<?php 
-								foreach ($proyectos as $key => $value ) {							
+								foreach ($proyectos as $key => $value ) {
 									if ($value->type == 'PROJECT' && $value->status!=4) {
-										
 										$fecha = $value->timeCreated/1000;
-										echo "<ul>";
-										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
-											if ($usuario->id == $value->userId) {
-												if($value->status == 0 || $value->status == 2) {
-													echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';
+										echo '<tr>';
+											
+											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
+											echo '<td>'.date('d/M/Y',$fecha).'</td>';
+											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
+											echo '<td><span class="button">ir</span></td>';
+											echo '<td>';
+												if ( !empty($value->logs) ) {
+													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
 												}
-												echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
-											}
-											if ( !empty($value->logs) ) {
-												echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
-											}
-										echo ' Creado <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
-										echo "</ul>";
+											echo '</td>';
+											echo '<td>';
+												if($value->status == 0 || $value->status == 2) {
+													echo '<a class="button" href="'.$value->editUrl.'">Ir</a>';
+												}
+											echo '</td>';
+											
+										echo "</tr>";
 									}
-							?>
+							?>							
 							<div class="divcontent" id="divContent<?php echo $count; ?>">
-									<?php
+							<?php
 									foreach ($value->logs as $indice => $valor) {
 										$fechacreacion = $valor->timestamp/1000;
 										echo '<div style="margin-bottom: 10px;">'.
@@ -94,35 +137,56 @@ $promedio = $objuserdata->scoreUser($userid);
 							<?php
 									$count = $count + 1;
 								}
-							?>	
-							
-							
-						</p>
+							?>
+						</table>
 					</article>
 				</div>
+				
 				<div>
 					<input id="ac-3a" name="accordion-2" type="radio" />
 					<label for="ac-3a">Productos</label>
 					<article class="ac-large">
-						<p>
+						<table width="100%" frame="box" rules="all" style="text-align: center;">
+							<tr>
+								<th>Nombre</th>
+								<th>Creación</th>
+								<th>Status</th>
+								<th>Grupo</th>
+								<th>
+									<span class="comentarios">Comentarios</span>
+									<span class="comentariosMedia">
+										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
+									</span>
+								</th>
+								<th>
+									<span class="editTabla"><?php echo JText::_('EDIT'); ?></span>
+									<span class="editMedia">
+								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
+	  							    </span>
+								</th>
+							</tr>
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type == 'PRODUCT' && $value->status != 4) {
-										
 										$fecha = $value->timeCreated/1000;
-										echo "<ul>";
-										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
-											if ($usuario->id == $value->userId) {
-												if($value->status == 0 || $value->status == 2) {
-													echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';
+										echo "<tr>";
+										
+											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
+											echo '<td>'.date('d/M/Y',$fecha).'</td>';
+											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
+											echo '<td><span class="button">Ir</span></td>';
+											echo "<td>";
+												if ( !empty($value->logs) ) {
+													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
 												}
-												echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
-											}
-											if ( !empty($value->logs) ) {
-												echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
-											}
-										echo ' Creado <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
-										echo "</ul>";
+											echo '</td>';
+											echo "<td>";
+												if($value->status == 0 || $value->status == 2) {
+													echo '<a class="button editar" href="'.$value->editUrl.'">Ir</a>';
+												}
+											echo "</td>";
+
+										echo "</tr>";
 									}
 							?>
 							<div class="divcontent" id="divContent<?php echo $count; ?>">
@@ -143,52 +207,74 @@ $promedio = $objuserdata->scoreUser($userid);
 									$count = $count + 1;
 								}
 							?>	
-							
-								
-						</p>
+						</table>
 					</article>
 				</div>
+				
 				<div>
 					<input id="ac-4a" name="accordion-2" type="radio" />
 					<label for="ac-4a">Repertorio</label>
-					<article class="ac-small">						
+					<article class="ac-small">
+						<table width="100%" frame="box" rules="all" style="text-align: center;">
+							<tr>
+								<th>Nombre</th>
+								<th>
+									<span class="editTabla"><?php echo JText::_('EDIT'); ?></span>
+									<span class="editMedia">
+								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
+	  							    </span>
+								</th>
+							</tr>
 							<?php 
 								foreach ($proyectos as $key => $value) {
-									
 									if ($value->type == 'REPERTORY') {
-										echo '<p><a href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></p>';
-										if ( $usuario->id == $value->userId ) {
-											echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';	
-										}
-										echo '<p>'.$value->description.'</p>';
+										echo '<tr>';
+										echo '	<td><a href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></td>';
+										echo '	<td><a class="button" href="'.$value->editUrl.'">Ir</a></td>';	
+										echo "</tr>";
 									}
 								}
-		       				?>		       				
+		       				?>
+		       			</table> 				
 					</article>
-                    </div>
-                    <div>
+                </div>
+                    
+               	<div>
                     <input id="ac-5a" name="accordion-2" type="radio" />
 					<label for="ac-5a">Suspendidos</label>
 					<article class="ac-large">
-						<p>
+						<table width="100%" frame="box" rules="all" style="text-align: center;">
+							<tr>
+								<th>Nombre</th>
+								<th>Creación</th>
+								<th>Grupo</th>
+								<th>
+									<span class="comentarios">Comentarios</span>
+									<span class="comentariosMedia">
+										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
+									</span>
+								</th>
+								<th>
+									<span class="editTabla">Editar</span>
+									<span class="editMedia">
+								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
+	  							    </span>
+								</th>
+							</tr>
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type != 'REPERTORY' && $value->status == 4) {
 										
 										$fecha = $value->timeCreated/1000;
-										echo "<ul>";
-										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
-											if ($usuario->id == $value->userId) {
-												if($value->status == 0 || $value->status == 2) {
-													echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';
-												}
-												echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
-											}
-											if ( !empty($value->logs) ) {
-												echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
-											}
-										echo ' Creado <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
-										echo "</ul>";
+										echo "<tr>";
+										echo '	<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a>algo</td>';
+										echo '	<td>'.date('d/M/Y',$fecha).'</td>';
+										echo '	<td>';
+													if ( !empty($value->logs) ) {
+														echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
+													}
+										echo '	</td>';
+										echo '</tr>';
 									}
 							?>
 							<div class="divcontent" id="divContent<?php echo $count; ?>">
@@ -209,7 +295,7 @@ $promedio = $objuserdata->scoreUser($userid);
 									$count = $count + 1;
 								}
 							?>							
-						</p>
+						</table>
 					</article>
 				</div>
 				
