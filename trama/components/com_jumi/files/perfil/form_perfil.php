@@ -136,7 +136,7 @@
 					maxlength="25" />
 			</div>
 			
-			<div class="_25">
+			<div class="_100">
 				<label for="daGr_nomJobTitle"><?php echo JText::_('TITULO'); ?>:</label>
 				<input 
 					name="daGr_nomJobTitle" 
@@ -146,23 +146,23 @@
 					maxlength="25" />
 			</div>
 			
-			<div class="_25">
-				<?php echo JText::_('FREELANCE'); ?>: 
-				<input 
-					name="daGr_freelance" 
-					type="checkbox" 
-					id="freelance"
-					value="1" 
-					maxlength="25" />
-			</div>
-			
-			<div class="_25" id="compania">
+			<div class="_100" id="compania">
 				<label for="daGr_nomCompania"><?php echo JText::_('COMPANIA'); ?>:</label>
 				<input 
 					name="daGr_nomCompania" 
 					class="validate[custom[onlyLetterSp]]" 
 					type="text" 
 					id="daGr_nomCompania" 
+					maxlength="25" />
+			</div>
+			
+			<div class="_50">
+				<?php echo JText::_('FREELANCE'); ?>: 
+				<input 
+					name="daGr_freelance" 
+					type="checkbox" 
+					id="freelance"
+					value="1" 
 					maxlength="25" />
 			</div>
 			
