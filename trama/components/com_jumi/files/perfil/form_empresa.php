@@ -100,7 +100,7 @@
             </div>
             
             <div class="_50" style="text-align: right;">
-            	<input name="Copiar" id="copiarDatos" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
+            	<input name="Copiar" class="button" id="copiarDatos" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
             </div>
             
             <div class="_50">
@@ -147,7 +147,7 @@
 			</div>
 			
 			<div>
-				<input name="Enviar" type="submit" onclick="return validar();" value="<?php echo JText::_('ENVIAR'); ?>" />
+				<input name="Enviar" class="button" type="submit" onclick="return validar();" value="<?php echo JText::_('ENVIAR'); ?>" />
 			</div>
 		
 		</form>

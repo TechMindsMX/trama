@@ -644,7 +644,7 @@ if ( isset ($objDatosProducto) ) {
 	?>
 	 
 	<span id="writeroot"></span> 
-	<input type="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS');  ?>" /> <br /> 
+	<input type="button" class="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS');  ?>" /> <br /> 
 	<br /> 
 	
 	<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('PRODUCTO'); ?>*:</label> 
@@ -704,7 +704,7 @@ if ( isset ($objDatosProducto) ) {
 	<br />
 	<br />
 	
-	<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
-	<input type="button" id="guardar" value="<?php echo JText::_('ENVIAR');  ?>">
-	<input type="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION');  ?>">
+	<input type="button" class="button" value="Cancelar" onclick="javascript:window.history.back()">
+	<input type="button" class="button" id="guardar" value="<?php echo JText::_('ENVIAR');  ?>">
+	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION');  ?>">
 </form>

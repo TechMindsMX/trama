@@ -352,7 +352,7 @@ if ( isset ($objDatosProyecto) ) {
 	<br />
 	<br />
 	<label for="banner"><?php echo JText::_('BANNER').JText::_('PROYECTO'); ?>*:</label>
-	<input type="file" id="banner" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">	
+	<input type="file"  id="banner" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">	
 	
 	<?php echo $banner; ?>
 	<br />
@@ -659,7 +659,7 @@ if ( isset ($objDatosProyecto) ) {
 	?>
 	 
 	<span id="writeroot"></span> 
-	<input type="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS')?>" /> <br /> 
+	<input type="button" class="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS')?>" /> <br /> 
 	<br /> 
 	
 	<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('PROYECTO'); ?>*:</label> 
@@ -728,7 +728,7 @@ if ( isset ($objDatosProyecto) ) {
 	<br />
 	<br /> 
 	
-	<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
-	<input type="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
-	<input type="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
+	<input type="button" class="button" value="Cancelar" onclick="javascript:window.history.back()">
+	<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
+	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
 </form>

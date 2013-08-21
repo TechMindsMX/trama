@@ -433,7 +433,7 @@
             </div>
             
             <div>
-            	<input name="Enviar" type="submit" value="<?php echo JText::_('ENVIAR'); ?>" />
+            	<input name="Enviar" class="button" type="submit" value="<?php echo JText::_('ENVIAR'); ?>" />
             </div>  
         </form>
     </div>

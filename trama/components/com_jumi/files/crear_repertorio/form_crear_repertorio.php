@@ -373,5 +373,5 @@ if ( isset ($objDatosRepertorio) ) {
 	<br />
 	
 	
-	<input type="submit" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
+	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
 </form>
