@@ -100,12 +100,17 @@ $promedio = $objuserdata->scoreUser($userid);
 								foreach ($proyectos as $key => $value ) {
 									if ($value->type == 'PROJECT' && $value->status!=4) {
 										$fecha = $value->timeCreated/1000;
+										$groupId = JTrama::searchGroup($usuario->id, $value->id);
 										echo '<tr>';
 											
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
 											echo '<td>'.date('d/M/Y',$fecha).'</td>';
 											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
-											echo '<td><span class="button">ir</span></td>';
+											echo '<td>
+													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
+														ir
+													</a>
+												  </td>';
 											echo '<td>';
 												if ( !empty($value->logs) ) {
 													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
@@ -169,12 +174,17 @@ $promedio = $objuserdata->scoreUser($userid);
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type == 'PRODUCT' && $value->status != 4) {
 										$fecha = $value->timeCreated/1000;
+										$groupId = JTrama::searchGroup($usuario->id, $value->id);
 										echo "<tr>";
 										
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
 											echo '<td>'.date('d/M/Y',$fecha).'</td>';
 											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
-											echo '<td><span class="button">Ir</span></td>';
+											echo '<td>
+													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
+														ir
+													</a>
+												  </td>';
 											echo "<td>";
 												if ( !empty($value->logs) ) {
 													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
@@ -264,14 +274,19 @@ $promedio = $objuserdata->scoreUser($userid);
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type != 'REPERTORY' && $value->status == 4) {
-										
+										$groupId = JTrama::searchGroup($usuario->id, $value->id);
 										$fecha = $value->timeCreated/1000;
 										echo "<tr>";
-										echo '	<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a>algo</td>';
+										echo '	<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
 										echo '	<td>'.date('d/M/Y',$fecha).'</td>';
+										echo '<td>
+													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
+														ir
+													</a>
+												  </td>';
 										echo '	<td>';
 													if ( !empty($value->logs) ) {
-														echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
+														echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
 													}
 										echo '	</td>';
 										echo '</tr>';

@@ -147,5 +147,22 @@ class JTrama
 	return $tipoEtiqueta;
 }
 
+	public static function searchGroup($userId,$id){
+	
+	$db =& JFactory::getDBO();
+	$query = $db->getQuery(true);
+	
+	$query
+	->select('id')
+	->from('#__community_groups')
+	->where('ownerid = '.$userId.' && proyid = '.$id);
+	
+	$db->setQuery( $query );
+	
+	$idGroup = $db->loadObject();
+	
+	return $idGroup;
+	
+}
 }
 ?>
