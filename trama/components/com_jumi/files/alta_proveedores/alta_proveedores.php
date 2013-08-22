@@ -115,7 +115,6 @@ $proyecto = new AltaProveedores;
 $doc = JFactory::getDocument();
 $path = 'components/com_jumi/files/alta_proveedores/';
 $doc->addStyleSheet($path.'alta_proveedores.css');
-$doc->addScript($path.'js/modernizr.custom.13578.js');
 
 ?>
 
@@ -135,6 +134,7 @@ $doc->addScript($path.'js/modernizr.custom.13578.js');
 	<input type="submit" value="Enviar" id="guardar" class="button" />
 </form>
 	<form id="agregados">
+		<span class="total_proveedor"><?php echo JText::_('TOTAL'); ?></span> = <span class="total"></span>
 		<input type="hidden" value="<?php echo $proyecto -> objDatos -> id; ?>" name="projectId" id="proyid"/>
 	</form>
 
@@ -149,13 +149,13 @@ if (isset($proyecto->miembrosGrupo)) {
 	$html = '<div class="inputs '. $member->memberid .'">
 			<div class="nombre">
 			<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
+			<span class="total_proveedor">'.JText::_('TOTAL_PROVEEDOR').'</span> = <span class="sub_total"></span>
 			</div>
 			<div class="rt-grid-4">
-			<span class="monto_total"></span>
 			<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
 			<input type="hidden" name="providerId" value="'.$member->memberid.'" />
 			<label for="advanceQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
-			<input name="advanceQuantity" type="number" min="1000" id="monto" />
+			<input name="advanceQuantity" type="number" min="1000" id="monto" class="validate[custom[onlyNumberSp]]" />
 			<label for="advanceDate">'.JText::_('JDATE').'</label>
 			<select name="advanceDate" id="fecha">'; 
 	foreach ($proyecto->fechasPago as $key => $value) {
@@ -166,7 +166,7 @@ if (isset($proyecto->miembrosGrupo)) {
 			<div class="rt-grid-4">
 			<p>'.JText::_('PROVEEDOR_LIQUIDACION').'</p>
 			<label for="settlementQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
-			<input name="settlementQuantity" type="number" min="1000" id="monto" />
+			<input name="settlementQuantity" type="number" min="1000" id="monto" class="validate[custom[onlyNumberSp]]" />
 			<label for="settlementDate">'.JText::_('JDATE').'</label>
 			<select name="settlementDate" id="fecha">';
 	foreach ($proyecto->fechasPago as $key => $value) {
@@ -199,12 +199,19 @@ if (isset($proyecto->miembrosGrupo)) {
 			jQuery(this).parent().parent().siblings().hide();
 			}
 		});
-		jQuery('span.icon-circle-arrow-down').click(function(){
-		});
-	
+
 		jQuery('input[type="number"]').focusout(function() {
-			var aaa = jQuery(this).prevAll('input[type="number"]').val();
-			jQuery(this).prevAll('span.monto_total:first').text(aaa);
+			var aaa = 0;
+			jQuery(this).parent().parent().find('input[type="number"]').each(function() {
+				aaa += parseInt(jQuery(this).val()) || 0;
+			});
+			jQuery(this).parent().siblings('.nombre').children('span.sub_total:first').text(aaa);
+
+			var total = 0 ;
+			jQuery(this).parent().parent().parent().find('input[type="number"]').each(function() {
+				total += parseInt(jQuery(this).val()) || 0;
+			});
+			jQuery('#agregados').children('span.total').text(total);
 		});
 	
 	});
@@ -220,18 +227,15 @@ if (isset($proyecto->miembrosGrupo)) {
 			dataArray = new Array();
 			jQuery.each(jQuery("#agregados").serializeArray(), function () {
 				data[this.name] = this.value;
-				if (this.name == 'settlementQuantity') {
+				if (this.name == 'settlementDate') {
 					dataArray[count] = JSON.stringify(data) ;
 					count++;
 				}
 			});
 			json = dataArray.join(",");
 			
-			if (dataArray.length > 1) {
-				json = '{projectProviders:[' + json + ']}';
-			}
-			json = JSON.stringify(jQuery("#agregados").serializeArray());
-			
+			json = '{"projectProviders":[' + json + ']}';
+
 			jQuery("#data_send").val(json);
 			
 			jQuery("#proveedores").submit(function(){
@@ -242,5 +246,5 @@ if (isset($proyecto->miembrosGrupo)) {
 </script>
 
 <?php 
-var_dump($proyecto);
+// var_dump($proyecto);
 ?>
