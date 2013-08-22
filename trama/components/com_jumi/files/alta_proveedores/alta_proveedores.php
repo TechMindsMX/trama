@@ -213,7 +213,23 @@ if (isset($proyecto->miembrosGrupo)) {
 			});
 			jQuery('#agregados').children('span.total').text(total);
 		});
+		
+		$('select').change(function(){
+	        if(this.name == 'advanceDate') {
+	            var fecha1 = new Date($(this).val());
+	            var selectLiquidacion = $(this).parent().next().children('select');
 	
+	            $.each(selectLiquidacion[0], function(index, value){
+	                var fechaOption = new Date($(value).val());
+	                if(fecha1 >= fechaOption) {
+	                    console.log(this);
+	                    $(this).prop('disabled', true);
+	                }else{
+	                    $(this).prop('disabled', false);
+	                }
+	            })
+	        }
+	    });
 	});
 </script>
 
