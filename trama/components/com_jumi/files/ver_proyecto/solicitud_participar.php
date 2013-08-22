@@ -3,7 +3,7 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed"
 ?>
 
 <?php
-function participar($json) {
+function participar($json,$botonContactar) {
 	
 	$usuario = JFactory::getUser();
 	
@@ -15,7 +15,7 @@ function participar($json) {
 	// Add a onclick action to any link to send a message
 	// Here, we assume $usrid contain the id of the user we want to send message to
 	$onclick = CMessaging::getPopup($id);
-	$html = '<a class="button" onclick="'.$onclick.'" href="#">'.JText::_('SOLICITA_PARTICIPAR').'</a>';	
+	$html = '<a class="button" onclick="'.$onclick.'" href="#">'.$botonContactar.'</a>';	
 	
 		return $html;
 }

@@ -14,12 +14,16 @@ if ($usuario->guest == 1) {
 jimport("trama.class");
 jimport("trama.jsocial");
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
+
+$botonContactar= JText::_('SOLICITA_CONTACTO');
 require_once 'components/com_jumi/files/ver_proyecto/solicitud_participar.php';
 $input = JFactory::getApplication()->input;
 $userid = $input->get("userid",0,"int");
 
 $objuserdata = new UserData;
 $userid = ($userid==0)? $usuario->id: $userid ;
+
+
 
 $document = JFactory::getDocument();
 $base = JUri::base();
@@ -72,7 +76,7 @@ $promedio = $objuserdata->scoreUser($userid);
 				</div>
 				<?php 
 		  		echo '<div style= "float:left; margin-top:10px;">'.
-			  			participar($datosgenerales).
+			  			participar($datosgenerales,$botonContactar).
 			  			'</div>';
 			  	?>
 				</div>

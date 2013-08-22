@@ -77,9 +77,11 @@ ul.sprocket-lists-container span.sprocket-lists-item {
 .sprocket-lists .sprocket-lists-title .indicator:before {
 	color: #ffffff;
 	text-shadow: none;
+	font-family: verdana;
+	font-size: 20px;
 	content: "+";
-	padding-top: 4px;
-	padding-left: 2px;
+	padding-top: 3px;
+	padding-left: 0px;
 	display: block;
 }
 

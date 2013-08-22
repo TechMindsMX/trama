@@ -268,12 +268,16 @@ function encabezado($data) {
 function informacionTmpl($data, $params) {
 	 $mapa= '<div id="map-wrapper" style="height: 300px; max-width:350px;"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
   	 <p style="max-width:300px;">'.$data->showground.'</p>';
+	 $botonContactar= JText::_('SOLICITA_PARTICIPAR');
  	require_once 'solicitud_participar.php';
+ 	
+ 	
+ 	
 	switch ($params) {
 		case 'finanzas':
 			$izquierda = avatar($data).
 				'<div class="gantry-width-spacer flotado">'.
-		  		participar($data).
+		  		participar($data,$botonContactar).
 				'</div>'.
 				'<div class="gantry-width-spacer flotado">'.
 				irGrupo($data).
@@ -286,7 +290,7 @@ function informacionTmpl($data, $params) {
 		default:
 			$izquierda = avatar($data).
 				'<div class="gantry-width-spacer flotado">'.
-		  		participar($data).
+		  		participar($data,$botonContactar).
 				'</div>'.
 				
 				'<div class="gantry-width-spacer flotado">'.

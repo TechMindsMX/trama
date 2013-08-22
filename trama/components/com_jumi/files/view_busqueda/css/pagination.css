@@ -38,12 +38,15 @@
 	}
 	.barraProy input[type=checkbox]{
 		margin-top:-2px !important;
+		box-shadow: 0px 0px 4px #000;
 	}
 	.barraProd input[type=checkbox]{
 		margin-top:-2px !important;
+		box-shadow: 0px 0px 4px #000;
 	}
 	.barraRep input[type=checkbox]{
 		margin-top:-2px !important;
+		box-shadow: 0px 0px 4px #000;
 	}
 	#contador span{
 		color:#000;
@@ -243,7 +246,6 @@ div.proyecto > .inner {
 	line-height: 1.5em;
 }
 .avatar {
-	max-width:370px;
 	overflow: hidden;
 }
 .avatar:before {
