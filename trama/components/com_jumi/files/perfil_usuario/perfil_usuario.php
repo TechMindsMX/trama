@@ -64,17 +64,19 @@ $promedio = $objuserdata->scoreUser($userid);
 			    	echo $datosgenerales->nomCompania;
 			 	?>
 			  	</div>
-			  	<?php 
-			  		echo '<div>'.
-			  			participar($datosgenerales).
-			  			'</div>';
-			  	?>
+			  	
 			  	<div id="raty">
 		  			<div id="calif"></div>
 					<div id="texto"><?php echo number_format($promedio->score ,1); ?></div>
 					
 				</div>
+				<?php 
+		  		echo '<div style= "float:left; margin-top:10px;">'.
+			  			participar($datosgenerales).
+			  			'</div>';
+			  	?>
 				</div>
+				
 				<div>
 					<div style="clear: both"></div>
 					<input id="ac-2" name="accordion-1" type="radio" />

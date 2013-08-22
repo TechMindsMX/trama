@@ -34,7 +34,11 @@
 /* Layout - Sprocket Headlines - Colors */
 .sprocket-headlines {background: transparent; margin: 0 45px;}
 .sprocket-headlines-navigation .arrow {box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);}
-
+@media screen and (max-width: 600px)  {
+	.sprocket-headlines {background: transparent; margin-left: -20px;}
+	.sprocket-headlines-navigation .prev {left: 10px; top:240px;}
+	.sprocket-headlines-navigation .next {right: 10px; top:240px;}	
+}
 /* Layout - Sprocket Headlines - Transitions */
 .animation-slideandfade .sprocket-headlines-item.active {-webkit-transition: margin 0.3s ease-out, opacity 0.4s ease-in;-moz-transition: margin 0.3s ease-out, opacity 0.4s ease-in;-o-transition: margin 0.3s ease-out, opacity 0.4s ease-in;transition: margin 0.3s ease-out, opacity 0.4s ease-in;}
 .animation-fade .sprocket-headlines-item.active {-webkit-transition: opacity 0.4s ease-in;-moz-transition: opacity 0.4s ease-in;-o-transition: opacity 0.4s ease-in;transition: opacity 0.4s ease-in;}
