@@ -2,11 +2,8 @@
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 
 $accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25';
-$accion = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveProvider';
-// $accion = 'ajax.php';
-/**
- *
- */
+$accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
+
 class AltaProveedores {
 	
 	public $diaPagoProveedores = 2; //Martes == 2
@@ -33,7 +30,7 @@ class AltaProveedores {
 		$this -> getEditable();
 		
 		if (!$this->editable) {
-			// $app -> redirect('index.php ',JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app -> redirect('index.php ',JText::_('JERROR_ALERTNOAUTHOR'), 'error');
 		}
 		
 		$this -> getMiembrosGrupo();
@@ -43,13 +40,13 @@ class AltaProveedores {
 	}
 	protected function getProviders()
 	{
-$results2[0] =(object) array('memberid' => 382, 'name' => 'Usuario1');
-$results2[1] =(object) array('memberid' => 383, 'name' => 'Usuario2');
-$results2[2] =(object) array('memberid' => 379, 'name' => 'Usuario3');
-$this->miembrosGrupo = $results2;
-		
-$proveedores[0] =(object) array('providerId' => 382 , 'advanceDate' => '2013-10-10','advanceQuantity' => 1000,'settlementDate' => '2013-10-17','settlementQuantity' => 2000);
-$proveedores[1] =(object) array('providerId' => 383 , 'advanceDate' => '2013-11-20','advanceQuantity' => 3000,'settlementDate' => '2013-11-27','settlementQuantity' => 4000);
+// $results2[0] =(object) array('memberid' => 382, 'name' => 'Usuario1');
+// $results2[1] =(object) array('memberid' => 383, 'name' => 'Usuario2');
+// $results2[2] =(object) array('memberid' => 379, 'name' => 'Usuario3');
+// $this->miembrosGrupo = $results2;
+// 		
+// $proveedores[0] =(object) array('providerId' => 382 , 'advanceDate' => '2013-10-10','advanceQuantity' => 1000,'settlementDate' => '2013-10-17','settlementQuantity' => 2000);
+// $proveedores[1] =(object) array('providerId' => 383 , 'advanceDate' => '2013-11-20','advanceQuantity' => 3000,'settlementDate' => '2013-11-27','settlementQuantity' => 4000);
 		
 		foreach ($proveedores as $keyProv => $valueProv) {
 			foreach ($this->miembrosGrupo as $keyMiem => $valueMiem) {
@@ -262,5 +259,5 @@ if (isset($proyecto->miembrosGrupo)) {
 </script>
 
 <?php 
-// var_dump($proyecto);
+var_dump($proyecto);
 ?>
