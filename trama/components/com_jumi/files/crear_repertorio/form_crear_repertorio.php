@@ -19,6 +19,7 @@ $categoria = JTrama::getAllCatsPadre();
 $subCategorias = JTrama::getAllSubCats();
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
+$token = claseTraerDatos::token();
 $objDatosRepertorio = claseTraerDatos::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null);
 
 //definicion de campos del formulario
@@ -118,6 +119,8 @@ if ( isset ($objDatosRepertorio) ) {
 			jQuery("#inventario").val(capacity.join(","));
 
 			emptyKeys();
+
+			jQuery('#token').val('<?php echo $token;?>');
 			
 			jQuery("#form2").submit();
 		});
@@ -143,6 +146,12 @@ if ( isset ($objDatosRepertorio) ) {
 		id="type"
 		value="REPERTORY"
 		name="type" />
+		
+	<input
+		type="hidden"
+		value=""
+		name="token"
+		id="token" />
 		
 	<input 
 		type="hidden"

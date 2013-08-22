@@ -20,6 +20,14 @@ class claseTraerDatos
 
 		return $respuesta;
 	}
+	
+	public static function token(){
+		
+		$url = MIDDLE.':7171/trama-middleware/rest/security/getKey';
+		$token = file_get_contents($url);
+		
+		return $token;
+	}
 }
 
 ?>

@@ -22,6 +22,7 @@ $categoria = JTrama::getAllCatsPadre();
 $subCategorias = JTrama::getAllSubCats();
 JHtml::_('behavior.modal');
 //si proyid no esta vacio traigo los datos del proyecto del servicio del middleware
+$token = claseTraerDatos::token();
 $objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
 
 //definicion de los valores de campos del formulario
@@ -167,6 +168,8 @@ if ( isset ($objDatosProyecto) ) {
 			jQuery("#inventario").val(capacity.join(","));
 
 			emptyKeys();
+
+			jQuery('#token').val('<?php echo $token;?>');
 			
 			if( this.id == 'revision' ) {
 				if( jQuery('#status').val() == 0 ) {
@@ -302,6 +305,12 @@ if ( isset ($objDatosProyecto) ) {
 		type="hidden"
 		value="<?php echo $usuario->id; ?>"
 		name="userId" />
+		
+	<input
+		type="hidden"
+		value=""
+		name="token"
+		id="token" />
 		   
 	<input 
 		type = "hidden" 
