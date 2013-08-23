@@ -100,7 +100,7 @@ $promedio = $objuserdata->scoreUser($userid);
 								foreach ($proyectos as $key => $value ) {
 									if ($value->type == 'PROJECT' && $value->status!=4) {
 										$fecha = $value->timeCreated/1000;
-										$groupId = JTrama::searchGroup($usuario->id, $value->id);
+										$groupId = JTrama::searchGroup($value->id);
 										echo '<tr>';
 											
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
