@@ -3,7 +3,9 @@
 defined('_JEXEC') or die('Restricted Access');
  
 jimport('trama.class');
+require_once '../components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 
+$token = claseTraerDatos::token();
 $adminId = JFactory::getUser();
 $proyeto = $this->items;
 $urls = new JTrama;
@@ -21,6 +23,7 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 
 ?>
 <input type="hidden" name="task" value="" />
+<input type="hidden" name="token" value="<?php echo $token;?>" />
 <tr class="row">
 	<td width="100%" valign="top">
 		<div style="padding-right: 20px;">
