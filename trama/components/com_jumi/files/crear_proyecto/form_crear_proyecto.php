@@ -50,14 +50,25 @@ $avatar = '';
 $opcionesSubCat = '';
 $ligasVideos = '';
 $ligasAudios = '';
+$ligaEditProveedores = '';
 //termina los definicion de campos del formularios
 
 if ( isset ($objDatosProyecto) ) {
 	if( ($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) && ($objDatosProyecto) && ($objDatosProyecto->userId == $usuario->id) ) {
-			
 		if($objDatosProyecto->status == 2) {
 			$comentarios = '<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>';
 		}
+		
+		if(empty($objDatosProyecto->providers)){
+			$ligaEditProveedores = '<span class="ligacomentarios">
+										<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$objDatosProyecto->id.'">Alta de Proveedores</a>
+								    </span>';
+		} else {
+			$ligaEditProveedores = '<span class="ligacomentarios">
+										<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$objDatosProyecto->id.'">Editar de Proveedores</a>
+								    </span>';
+		}
+		
 		$urlProy = $objDatosProyecto->url;
 		$status_proyecto = $objDatosProyecto->status;
 		$hiddenIdProyecto = '<input type="hidden" value="'.$objDatosProyecto->id.'" name="id" />';
@@ -296,6 +307,10 @@ if ( isset ($objDatosProyecto) ) {
 
 <?php echo $comentarios; ?>
 
+<div>
+	<?php echo $ligaEditProveedores; ?>
+</div>
+
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<?php 
 		echo $hiddenIdProyecto;
@@ -362,7 +377,7 @@ if ( isset ($objDatosProyecto) ) {
 	<br />
 	<label for="banner"><?php echo JText::_('BANNER').JText::_('PROYECTO'); ?>*:</label>
 	<input type="file"  id="banner" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">	
-	
+	<br />
 	<?php echo $banner; ?>
 	<br />
 	

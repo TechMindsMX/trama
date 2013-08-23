@@ -1,17 +1,13 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 
-$accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25';
-$accion = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveProvider'; 
-// $accion = 'ajax.php';
-/**
- *
- */
+//$accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid=7';
+$accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
+
 class AltaProveedores {
 	
 	public $diaPagoProveedores = 2; //Martes == 2
 	protected $editable;
-	protected $providers;
 
 	public function __construct() {
 		$this -> usuario = JFactory::getUser();
@@ -33,37 +29,15 @@ class AltaProveedores {
 		$this -> getEditable();
 		
 		if (!$this->editable) {
-			// $app -> redirect('index.php ',JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app -> redirect('index.php ',JText::_('JERROR_ALERTNOAUTHOR'), 'error');
 		}
 		
 		$this -> getMiembrosGrupo();
 		$this -> fechas();
-		$this -> getProviders();
+		//$this -> getProviders();
 
 	}
-	protected function getProviders()
-	{
-$results2[0] =(object) array('memberid' => 382, 'name' => 'Usuario1');
-$results2[1] =(object) array('memberid' => 383, 'name' => 'Usuario2');
-$results2[2] =(object) array('memberid' => 379, 'name' => 'Usuario3');
-$this->miembrosGrupo = $results2;
-		
-$proveedores[0] =(object) array('providerId' => 382 , 'advanceDate' => '2013-10-10','advanceQuantity' => 1000,'settlementDate' => '2013-10-17','settlementQuantity' => 2000);
-$proveedores[1] =(object) array('providerId' => 383 , 'advanceDate' => '2013-11-20','advanceQuantity' => 3000,'settlementDate' => '2013-11-27','settlementQuantity' => 4000);
-		
-		foreach ($proveedores as $keyProv => $valueProv) {
-			foreach ($this->miembrosGrupo as $keyMiem => $valueMiem) {
-					echo 'keym='.$keyMiem.'mem='.$valueMiem->memberid;
-				if ($valueProv->providerId == $valueMiem->memberid) {
-					$this->miembrosGrupo[$keyMiem]->advanceDate = $valueProv->advanceDate;
-					$this->miembrosGrupo[$keyMiem]->advanceQuantity = $valueProv->advanceQuantity;
-					$this->miembrosGrupo[$keyMiem]->settlementDate = $valueProv->settlementDate;
-					$this->miembrosGrupo[$keyMiem]->settlementQuantity = $valueProv->settlementQuantity;
-				}
-			}
-		}
-		$this -> providers = $proveedores;
-	}
+	
 
 	protected function getEditable() {
 		$checkUser = ($this -> usuario -> id == $this -> objDatos -> userId);
@@ -115,22 +89,53 @@ $proyecto = new AltaProveedores;
 $doc = JFactory::getDocument();
 $path = 'components/com_jumi/files/alta_proveedores/';
 $doc->addStyleSheet($path.'alta_proveedores.css');
-
+$proveedores = $proyecto->objDatos->providers;
 ?>
 
 
 <h2><?php echo JText::_('ALTA_PROVEEDORES'); ?></h2>
 <form action="<?php echo $accion ?>" method="post" class="" id="proveedores" >
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
-	<p>catName=<?php echo $proyecto -> objDatos -> catName; ?></p>
-	<p>subCatName=<?php echo $proyecto -> objDatos -> subCatName; ?></p>
-	<p>productionStartDate=<?php echo $proyecto -> objDatos -> productionStartDate; ?></p>
-	<p>premiereStartDate=<?php echo $proyecto -> objDatos -> premiereStartDate; ?></p>
-	<p>Status=<?php echo $proyecto -> objDatos -> statusName; ?></p>
-	<p>Presupuesto=<?php echo $proyecto -> objDatos -> budget; ?></p>
+	
+	<p><?php echo JText::_('CATEGORIA').' = '.$proyecto -> objDatos -> catName; ?></p>
+	<p><?php echo JText::_('SUBCATEGORIA').' = '.$proyecto -> objDatos -> subCatName; ?></p>
+	<p><?php echo JText::_('FECHA_INICIO_PRODUCCION').' = '.$proyecto -> objDatos -> productionStartDate; ?></p>
+	<p><?php echo JText::_('PREMIER_DATE').' = '.$proyecto -> objDatos -> premiereStartDate; ?></p>
+	<p><?php echo JText::_('STATUS').' = '.$proyecto -> objDatos -> statusName; ?></p>
+	<p><?php echo JText::_('PRESUPUESTO_VISTAS').' = $'.$proyecto -> objDatos -> budget; ?></p>
 	
 	<input type="hidden" value="" name="projectProvider" id="data_send"/>
-	
+	<!-- Tabla con proveedores-->
+	<div style="margin-bottom: 10px;">
+		<table width="100%" style="text-align: center;" frame="box" rules="all">
+			<tr>
+				<th></th>
+				<th colspan="2"><?php echo JText::_('ANTICIPO'); ?></th>
+				<th colspan="2"><?php echo JText::_('LIQUIDACION'); ?></th>
+			</tr>
+			<tr>
+				<th><?php echo JText::_('PROVEEDOR'); ?></th>
+				<th><?php echo JText::_('FECHA'); ?></th>
+				<th><?php echo JText::_('MONTO'); ?></th>
+				<th><?php echo JText::_('FECHA'); ?></th>
+				<th><?php echo JText::_('MONTO'); ?></th>
+			</tr>
+			<?php
+			foreach ($proveedores as $key => $value) {
+			?>
+			<tr>
+				<td><?php echo JFactory::getUser($value->providerId)->name; ?></td>
+				<td><?php echo $value->advanceDate; ?></td>
+				<td>$<?php echo $value->advanceQuantity; ?></td>
+				<td><?php echo $value->settlementDate; ?></td>
+				<td>$<?php echo $value->settlementQuantity; ?></td>
+			</tr>
+			<?php
+			}
+			?>
+		</table>
+	</div>
+	<!--Fin de tabla-->
 	<input type="submit" value="Enviar" id="guardar" class="button" />
 </form>
 	<form id="agregados">
@@ -213,7 +218,22 @@ if (isset($proyecto->miembrosGrupo)) {
 			});
 			jQuery('#agregados').children('span.total').text(total);
 		});
+		
+		$('select').change(function(){
+	        if(this.name == 'advanceDate') {
+	            var fecha1 = new Date($(this).val());
+	            var selectLiquidacion = $(this).parent().next().children('select');
 	
+	            $.each(selectLiquidacion[0], function(index, value){
+	                var fechaOption = new Date($(value).val());
+	                if(fecha1 >= fechaOption) {
+	                    $(this).prop('disabled', true);
+	                }else{
+	                    $(this).prop('disabled', false);
+	                }
+	            })
+	        }
+	    });
 	});
 </script>
 
@@ -244,7 +264,3 @@ if (isset($proyecto->miembrosGrupo)) {
 		});
 	});
 </script>
-
-<?php 
-// var_dump($proyecto);
-?>
