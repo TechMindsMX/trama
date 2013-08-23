@@ -13,11 +13,11 @@ defined('_JEXEC') or die();
  <div id="latest-members-nav" class="app-box-filter">
  	<i class="loading cFloat-R"></i>
 	<a class="newest-member active-state" href="javascript:void(0);"><?php echo JText::_('COM_COMMUNITY_NEWEST_MEMBERS') ?></a>
-	<b>&middot;</b>
+	<b>&#124;</b>
 	<a class="featured-member" href="javascript:void(0);"><?php echo JText::_('COM_COMMUNITY_FEATURED') ?></a>
-	<b>&middot;</b>
+	<b>&#124;</b>
 	<a class="active-member" href="javascript:void(0);"><?php echo JText::_('COM_COMMUNITY_ACTIVE_MEMBERS') ?></a>
-	<b>&middot;</b>
+	<b>&#124;</b>
 	<a class="popular-member" href="javascript:void(0);"><?php echo JText::_('COM_COMMUNITY_POPULAR_MEMBERS') ?></a>
 </div>
 
