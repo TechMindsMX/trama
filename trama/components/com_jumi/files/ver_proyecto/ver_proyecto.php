@@ -62,24 +62,24 @@ function tipoProyProd($data) {
 }
 
 function buttons($data, $user) {
-	$share = '<span style="cursor: pointer; padding-right:15px;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
+	$share = '<span style="cursor: pointer;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
 	
 	if ( $user->id == strval($data->userId) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
 		$proyid = '&proyid='.$data->id;
 		if( ($data->status == 0) || ($data->status == 2)) {
 			$html = '<div id="buttons">'.
-					'<div><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a></span>'
-					.$share
-					.JTramaSocial::inviteToGroup($data->id).'</div>';
+					'<div class="arrecho" ><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a></span></div>'.
+					'<div class="arrecho" >'.$share.'</div>'.
+					'<div class="arrecho" >'.JTramaSocial::inviteToGroup($data->id).'</div></div>';
 		}else{
 			$html = '<div id="buttons">'.
-					'<div>'.JTramaSocial::inviteToGroup($data->id)
-					.$share
+					'<div class="arrecho" >'.JTramaSocial::inviteToGroup($data->id).'</div>'
+					.'<div class="arrecho" >'.$share.'</div>'
 					.'</div>';
 		}
 	} else {
-		$html = '<div id="buttons">'.$share.'</div>';
+		$html = '<div style="margin-top:-90px" id="buttons"><div class="arrecho">'.$share.'</div></div>';
 	}
 	return $html;
 }
@@ -372,7 +372,7 @@ function userName($data) {
 		scrollwrapper();
 		jQuery(".ver_proyecto").hide();
 		jQuery("#banner").show();
-
+		jQuery("#rt-mainbody").css( "margin-top","55px" );
 		jQuery(".menu-item").hover(
 			function(){
 				jQuery(this).addClass("over");
@@ -623,7 +623,7 @@ function codeAddress() {
 					var objShare = eval('('+result+')');
 
 					if (!objShare.shared) {
-						$('.editButton').append('<span style="padding-left: 15px;">  Proyecto Compartido</span>');
+						$('.shareButton').parent().append('<span>Proyecto Compartido</span>');
 						$('.shareButton').remove();
 					} else {
 						alert(objShare.name+' ya habias compartido esto antes');
