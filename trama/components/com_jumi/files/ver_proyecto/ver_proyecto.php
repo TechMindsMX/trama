@@ -15,10 +15,7 @@
 	jimport('trama.class');
 	jimport('trama.jsocial');
 	jimport('trama.jfactoryext');
-	require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 	
-	//Traemos el token del formulario
-	$token = claseTraerDatos::token();
 
 	// chequeamos si el usuario es Special
 	$isSpecial = '';
