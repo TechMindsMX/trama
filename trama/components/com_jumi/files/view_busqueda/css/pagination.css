@@ -25,13 +25,15 @@
 	margin-right: 5px;
 	margin-bottom: 5px;
 }
-.pagination .current {
-	color: #e1001a !important;
+.pagination .currento {
+	color: #e1001a;
+	text-decoration: underline;
 }
 .pagination .currento.prev,.pagination .currento.next {
 	color: #666;
 	font-weight:bold;
 	font-size:16px;
+	text-decoration: none;
 	}
 .ancho {
 	width: 33%;
@@ -46,20 +48,18 @@
 	#ligasprod{
 		padding: 5px 0px 5px 17px;
 		margin-left: -4px;
-		max-width:780px;
 		font-weight:bold;
 		text-shadow:none;
 		color:black;
 	}
 	.barra-top input[type="checkbox"], .barra-top input[type="button"] {
-		margin-top:-2px !important;
-		box-shadow: 0px 0px 4px #000;
 	}
 	.barra-top input[type="button"] {
 		border: 0;
 		box-shadow: 0 0 0;
 		background: transparent;
 		font-weight: bold;
+		margin-top: -2px !important;
 	}
 	.barra-top > div {
 		float: left;
@@ -79,8 +79,7 @@
 		background: #2c9ad9;
 		border-top-left-radius: 4px;
 		border-bottom-left-radius: 4px;
-		padding: 5px 0px 5px 17px;
-		width: 75px;
+		padding: 5px 5px 5px 17px;
 		height: 23px;
 		font-weight: bold;
 		color: #fff;
@@ -124,21 +123,19 @@ div.proyecto > .inner {
 	font-weight:bold;
 }
 .tituloProy a{
-	font-size:22px;
+  font-size: 171%;
 }
 .catSubCat {
-	font-size:15px !important;
+  font-size: 129%;
 	text-transform: uppercase;
 }
-.productor a, .descripcion {
-	font-size:14px !important;
+.descripcion {
+  font-size: 114%;
 }
 .statusP{
-	font-size:13px !important;
 }
 .titulo span, .descripcion span {
 	display: block;
-	font-size: 86%;
 	line-height: 1.5em;
 }
 .avatar {
@@ -158,7 +155,7 @@ div.proyecto > .inner {
 	width: 100%;
 }
 .descText {
-	margin: 2em 0;
+	margin: 2em 0 1em;
 	line-height: 1.5em;
 	height:55px;
 	overflow:hidden;

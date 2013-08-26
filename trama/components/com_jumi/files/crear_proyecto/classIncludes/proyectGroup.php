@@ -2,14 +2,13 @@
 defined('_JEXEC') OR die( "Direct Access Is Not Allowed" );
 
 jimport('trama.class');
-require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
 
 $subCategorias = JTrama::getAllSubCats();
 
-$objDatosProyecto = claseTraerDatos::getDatos('project', (!empty($_GET['projectId']))?$_GET['projectId']:null, $subCategorias);
+$objDatosProyecto = JTrama::getDatos('project', (!empty($_GET['projectId']))?$_GET['projectId']:null, $subCategorias);
 
-$grupoExistente = searchGroup($objDatosProyecto->userId,$objDatosProyecto->id);
+$grupoExistente = JTrama::searchGroup($objDatosProyecto->id);
 
 if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 
@@ -32,7 +31,7 @@ if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 	
 	if ($resultGroup) {
 		
-		$idGroup = searchGroup($objDatosProyecto->userId,$objDatosProyecto->id);
+		$idGroup = JTrama::searchGroup($objDatosProyecto->id);
 		
 		$memberGroup = new stdClass();
 		
@@ -69,27 +68,9 @@ if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 
 } else {
 	
-	$idGroup = searchGroup($objDatosProyecto->userId,$objDatosProyecto->id);
+	$idGroup = JTrama::searchGroup($objDatosProyecto->id);
 	$allDone =& JFactory::getApplication();
 	$allDone->redirect('index.php?option=com_community&view=groups&task=viewgroup&groupid='.$idGroup->id);
-	
-}
-	
-function searchGroup($userId,$id){
-	
-	$db =& JFactory::getDBO();
-	$query = $db->getQuery(true);
-	
-	$query
-	->select('id')
-	->from('#__community_groups')
-	->where('ownerid = '.$userId.' && proyid = '.$id);
-	
-	$db->setQuery( $query );
-	
-	$idGroup = $db->loadObject();
-	
-	return $idGroup;
 	
 }
 	

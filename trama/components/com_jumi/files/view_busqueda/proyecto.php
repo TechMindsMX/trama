@@ -251,9 +251,8 @@ function pageselectCallback (page_index, jq) {
 			var descripcion = members[i].name;
 			var largo = 33;
 			var trimmed = descripcion.substring(0, largo);
-		newcontent += '<span class="tituloProy"><h4><a href="' + link + '">' + trimmed + '</h4></a></span>';
+		newcontent += '<span class="tituloProy"><a href="' + link + '">' + trimmed + '</a></span>';
 		newcontent += '<span class="catSubCat">' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
-		newcontent += '<span class="productor">' + members[i].producer+'</span>';
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '<div class="avatar">';
@@ -262,7 +261,8 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="descripcion">';
 		newcontent += '<div class="inner">';			
 		newcontent += '<div class="descText">' + members[i].description + '</div>';
-		newcontent += '<span class="statusP">Estado: ' + members[i].statusName + '</span><p class="readmore">';
+		newcontent += '<span class="productor">' + members[i].producer+'</span>';
+		newcontent += '<p class="readmore">';
 		newcontent += '<a href="' + link + '" class="leerText">' + "Ver más";
 		newcontent += '</a>';
 		newcontent += '</p>';
