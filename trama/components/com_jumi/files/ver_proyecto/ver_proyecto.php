@@ -80,7 +80,7 @@ function buttons($data, $user) {
 					.'</div>';
 		}
 	} else {
-		$html = '<div style="margin-top:-90px" id="buttons"><div class="arrecho">'.$share.'</div></div>';
+		$html = '<div id="buttons"><div class="arrecho">'.$share.'</div></div>';
 	}
 	return $html;
 }
