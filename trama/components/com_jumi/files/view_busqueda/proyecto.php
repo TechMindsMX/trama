@@ -16,15 +16,15 @@ $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
 $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
 
 if ( !$tipoPP ) {
-	$ligasPP = '<div id="ligasprod">'.
+	$ligasPP = '<div id="ligasprod" class="barra-top clearfix">'.
 			   '<div id="filtrar" style="float:left;">Filtrar por: </div>'.
-			   '<div id="triangle" style="float:left; margin-right:10px;"> </div>'.
+			   '<div id="triangle"> </div>'.
 			   '<div class="barraProy">Proyectos <input  type="checkbox" id="proyecto" /></div>'.
 			   '<div class="barraProd">Productos <input type="checkbox" id="producto" /></div>'.
 			   '<div class="barraRep">Repertorios <input type="checkbox" id="repertorio" /></div>'.
-			   '<div class="botonLimpio" style="float:left; margin-right:10px;"><input type="button" value="Limpiar Filtro" /></div>'.
-			   '<div id="contador"></div>'.
-			   '</div><br />';
+			   '<div class="botonLimpio"><input type="button" value="Limpiar Filtro" /></div>'.
+			   '<div class="clearfix" id="contador"></div>'.
+			   '</div>';
 }
 
 function prodProy ($tipo) {

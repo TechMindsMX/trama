@@ -147,7 +147,7 @@ class JTrama
 	return $tipoEtiqueta;
 }
 
-	public static function searchGroup($userId,$id){
+	public static function searchGroup($id){
 	
 	$db =& JFactory::getDBO();
 	$query = $db->getQuery(true);
@@ -155,7 +155,7 @@ class JTrama
 	$query
 	->select('id')
 	->from('#__community_groups')
-	->where('ownerid = '.$userId.' && proyid = '.$id);
+	->where('proyid = '.$id);
 	
 	$db->setQuery( $query );
 	

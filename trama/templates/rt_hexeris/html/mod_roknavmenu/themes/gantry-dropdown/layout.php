@@ -375,7 +375,7 @@ class GantryDropdownLayout extends AbstractRokMenuLayout
         <?php } else { $this->renderItem($item, $menu);}?>
     <?php endforeach; ?>
     <li>
-    	<a class="item" href="#" data-rokbox="" data-rokbox-element="#rt-popuplogin"> <span class="desc">Acceso</span> </a>
+    	<a id="trama-login" class="item" href="#" data-rokbox="" data-rokbox-element="#rt-popuplogin"> <span class="desc">Acceso</span> </a>
     </li>
 </ul>
 <?php

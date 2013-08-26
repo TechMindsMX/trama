@@ -72,7 +72,7 @@ $promedio = $objuserdata->scoreUser($userid);
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
       <div id="contenido">  
-			<section class="ac-container2" style="max-width: 100%;">
+			<section class="ac-container" style="max-width: 100%;">
 				<div>
 					<input id="ac-2a" name="accordion-2" type="radio" />
 					<label for="ac-2a">Proyectos</label>
@@ -174,7 +174,7 @@ $promedio = $objuserdata->scoreUser($userid);
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type == 'PRODUCT' && $value->status != 4) {
 										$fecha = $value->timeCreated/1000;
-										$groupId = JTrama::searchGroup($usuario->id, $value->id);
+										$groupId = JTrama::searchGroup($value->id);
 										echo "<tr>";
 										
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';

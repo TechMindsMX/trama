@@ -54,18 +54,15 @@ $promedio = $objuserdata->scoreUser($userid);
         
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
-      <div id="contenido"><div style="float:left; width:100%"><?php echo JTramaSocial::addFriendJS($userid, $usuario); ?></div>
-			
+      <div id="contenido">
+		<div class="rt-inner mitad">
 			<section class="ac-container">
-				<div class="bussines-card">
+				<div class="business-card">
 				<div id="foto"><img src="<?php echo $datosgenerales->Foto; ?>"  /></div>
 				<div id="datos">
-				<?php 
-			    	echo $datosgenerales->nomNombre." ".$datosgenerales->nomApellidoPaterno;
-			    	echo "<br/>";
-			    	echo $datosgenerales->nomJobTitle;
-			    	echo "<br/>";			    	
-			    	echo $datosgenerales->nomCompania;
+				<?php echo '<h2>'.$datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.'</h2>'.
+			    		'<span id="job_title">'.$datosgenerales->nomJobTitle.'</span>'.			    	
+			    		'<span id="company_name">'.$datosgenerales->nomCompania.'</span>';
 			 	?>
 			  	</div>
 			  	
@@ -75,10 +72,12 @@ $promedio = $objuserdata->scoreUser($userid);
 					
 				</div>
 				<?php 
-		  		echo '<div style= "float:left; margin-top:10px;">'.
+		  		echo '<div id="contactar">'.
 			  			participar($datosgenerales,$botonContactar).
 			  			'</div>';
 			  	?>
+				<div id="agrega_amigo" class="button"><?php echo JTramaSocial::addFriendJS($userid, $usuario); ?></div>
+				<div style="clear: both;"></div>
 				</div>
 				
 				<div>
@@ -112,11 +111,10 @@ $promedio = $objuserdata->scoreUser($userid);
 					</article>
 				</div>
 			</section>
-       
+       </div>
    
-		       
-		       
-			<section class="ac-container2">
+		<div class="mitad rt-inner">
+			<section class="ac-container ac-container-color2">
 				
 				<div>
 					<input id="ac-2a" name="accordion-2" type="radio" checked />
@@ -205,7 +203,8 @@ $promedio = $objuserdata->scoreUser($userid);
 				</div>
 				
 			</section>
-        <div style="clear: both"></div>
+			</div>
+			<div style="clear: both"></div>
        </div>
        
        <script type="text/javascript">
