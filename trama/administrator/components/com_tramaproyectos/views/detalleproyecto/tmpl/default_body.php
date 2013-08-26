@@ -3,9 +3,8 @@
 defined('_JEXEC') or die('Restricted Access');
  
 jimport('trama.class');
-require_once '../components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 
-$token = claseTraerDatos::token();
+$token = JTrama::token();
 $adminId = JFactory::getUser();
 $proyeto = $this->items;
 $urls = new JTrama;
