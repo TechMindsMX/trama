@@ -129,40 +129,64 @@ class JTrama
 	}
 	
 	public static function tipoProyProd($data) {
-	$tipo = $data->type;
-	switch ($tipo) {
-		case 'PRODUCT':
-			$tipoEtiqueta = JText::_('PRODUCT');
-			$data->editUrl = '12';
-			break;
-		case 'REPERTORY':
-			$tipoEtiqueta = JText::_('REPERTORIO');
-			$data->editUrl = '14';
-			break;
-		default:
-			$tipoEtiqueta = JText::_('PROJECT');
-			$data->editUrl = '9';
-			break;
+		$tipo = $data->type;
+		switch ($tipo) {
+			case 'PRODUCT':
+				$tipoEtiqueta = JText::_('PRODUCT');
+				$data->editUrl = '12';
+				break;
+			case 'REPERTORY':
+				$tipoEtiqueta = JText::_('REPERTORIO');
+				$data->editUrl = '14';
+				break;
+			default:
+				$tipoEtiqueta = JText::_('PROJECT');
+				$data->editUrl = '9';
+				break;
+		}
+		return $tipoEtiqueta;
 	}
-	return $tipoEtiqueta;
-}
 
 	public static function searchGroup($id){
 	
-	$db =& JFactory::getDBO();
-	$query = $db->getQuery(true);
+		$db =& JFactory::getDBO();
+		$query = $db->getQuery(true);
+		
+		$query
+		->select('id')
+		->from('#__community_groups')
+		->where('proyid = '.$id);
+		
+		$db->setQuery( $query );
+		
+		$idGroup = $db->loadObject();
+		
+		return $idGroup;
+		
+	}
 	
-	$query
-	->select('id')
-	->from('#__community_groups')
-	->where('proyid = '.$id);
+	public static function getDatos ( $tipo, $id ) {
+		
+		if( isset($id) ) {	
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
+			$json = file_get_contents($url);
+			$jsonDecode = json_decode($json); 
+			
+			$respuesta = $jsonDecode;
+		} else {
+				
+			$respuesta = null;
+		}
+
+		return $respuesta;
+	}
 	
-	$db->setQuery( $query );
-	
-	$idGroup = $db->loadObject();
-	
-	return $idGroup;
-	
-}
+	public static function token(){
+		
+		$url = MIDDLE.':7171/trama-middleware/rest/security/getKey';
+		$token = file_get_contents($url);
+		
+		return $token;
+	}
 }
 ?>

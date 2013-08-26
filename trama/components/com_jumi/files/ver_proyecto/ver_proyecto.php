@@ -27,11 +27,11 @@
 	$pathJumi = Juri::base().'components/com_jumi/files/ver_proyecto/';
 	$proyecto = $jinput->get('proyid', '', 'INT');
 	
-	//$document->addScript($pathJumi.'js/jquery.nivo.slider.js');
 	$document->addStyleSheet($pathJumi.'css/themes/bar/bar.css');
 	$document->addStyleSheet($pathJumi.'css/nivo-slider.css');
 	$document->addStyleSheet($pathJumi.'css/style.css');
-	//$document->addScript('components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js');
+
+	$token = JTrama::token();
 ?> 
 
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
