@@ -158,8 +158,6 @@ class JTramaSocial extends CommunityGroupsController {
 			$results2 = $db->loadResult();
 			
 			return $results2;
-		}else{
-			echo 'no existe el grupo';
 		}
 	}
 }

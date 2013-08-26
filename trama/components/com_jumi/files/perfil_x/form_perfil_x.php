@@ -93,18 +93,24 @@ function habilita(campo) {
 <form action="<?php echo $accion; ?>" id="perfilX" method="post" name="perfilX">
 
 <?php
-echo '<div id="GremiosoInstituciones">'; 
+echo '<div id="GremiosoInstituciones" class="barra-top">'; 
 if ( $tablaParam == 'perfilx_catalogoperfil' ) {
 	$gremios = pintaGremiosInstituciones($tablaParam, 'Gremios');
 	$instituciones = pintaGremiosInstituciones($tablaParam, 'Instituciones');
 ?>	
-	<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" />
-	<span> Es usted un gremio</span>&nbsp;&nbsp;
-	<input type="checkbox" class="esgremio" name="<?php echo $instituciones->nomNombreCategoria; ?>" value="<?php echo $instituciones->idcatalogoPerfil; ?>" />
-	<span> Es usted una Institución</span>
+	<div id="filtrar"><?php echo JText::_('TRAMA_DEFINE'); ?></div>
+	<div id="triangle"> </div>
+	<div>
+		<span>Es usted un gremio</span>&nbsp;&nbsp;
+		<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" />
+	</div>
+	<div>
+		<span>Es usted una Institución</span>
+		<input type="checkbox" class="esgremio" name="<?php echo $instituciones->nomNombreCategoria; ?>" value="<?php echo $instituciones->idcatalogoPerfil; ?>" />
+	</div>
 <?php
 }
-echo '</div>';
+echo '</div><div class="clearfix"></div>';
 ?>
 <div id="tree">
 	
@@ -113,11 +119,13 @@ $datosGrabados = buscarUsuarioExistente($tablaGrabacion, $usuario->id);
 generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, $descripcionParam);
 ?>
 </div>
+	<div class="centrado">
 		<input type="hidden" name="campo" value="<?php echo $campoTabla ?>" />
 		<input type="hidden" name="usuario" value="<?php echo $usuario->id; ?>" />
 		<input type="hidden" name="controlador" value="<?php if(!empty($datosGrabados[0]->idperfilx_respuestas)) { echo $datosGrabados[0]->idperfilx_respuestas; } ?>" />
-		<input type="button" id="uncheckAll" value="Limpiar Seleccion" />
-		<input type="submit" value="Enviar" />
+		<input class="button" type="button" id="uncheckAll" value="Limpiar Seleccion" />
+		<input class="button" type="submit" value="Enviar" />
+	</div>
 	</form>
 	
 <div style="clear: both;"></div>
