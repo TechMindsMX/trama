@@ -280,8 +280,8 @@
 
 #community-wrap .cToolBar .cMenu-Text>a.active,#community-wrap .cToolBar .cMenu-Text:hover>a
 	{
-	background: #2C9AD9;
-	border-color: #4f661d;
+	background: #33CCFF;
+	border-color: #33CCFF;
 	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
 	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
 	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset
@@ -370,8 +370,7 @@
 }
 
 #community-wrap .cSubmenu {
-	background: #f5f5f5;
-	border: solid 1px #ccc;
+	background: #ddd;
 	border-bottom-color: #bbb;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -380,8 +379,7 @@
 	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 	margin: 0 0 20px;
-	padding: 7px;
-	font-size: 11px
+	font-size: 14px
 }
 
 #community-wrap .cSubmenu li {
@@ -389,9 +387,7 @@
 }
 
 #community-wrap .cSubmenu li+li {
-	border-left: 1px solid #ccc;
-	margin: 0 0 0 7px;
-	padding: 0 0 0 7px
+	border-left: 1px solid #fff;
 }
 
 #community-wrap .cSubmenu li a {
@@ -399,7 +395,8 @@
 	color: #159;
 	display: inline-block;
 	line-height: 13px;
-	text-decoration: none
+	text-decoration: none;
+	padding: 10px;
 }
 
 #community-wrap .cSubmenu li a:hover {
@@ -408,9 +405,12 @@
 }
 
 #community-wrap .cSubmenu li a.active {
-	color: #555;
+	color: #fff;
 	cursor: default;
-	text-decoration: none !important
+	text-decoration: none !important;
+	background: #2c9ad9;
+	border-radius: 5px;
+	box-shadow: 0px 1px 1px grey;
 }
 
 #community-wrap .cSubmenu li.action {
@@ -467,7 +467,12 @@
 }
 
 #community-wrap .cFilter .filters li+li {
-	margin: 0 0 0 3px
+	margin: 0 0 0 5px;
+	border-left: 1px solid #f18700;
+}
+
+.filter a {
+color: #666 !important;
 }
 
 #community-wrap .cFilter .filters li a {
@@ -484,10 +489,8 @@
 	text-decoration: underline
 }
 
-#community-wrap .cFilter .filters li.active a,#community-wrap .cFilter .filters li.active a:hover
-	{
-	background: #888;
-	color: #fff;
+#community-wrap .cFilter .filters li.active a,#community-wrap .cFilter .filters li.active a:hover {
+	color: #33CCFF !important;
 	text-decoration: none
 }
 
@@ -537,16 +540,9 @@
 }
 
 #community-wrap .cIndex-Box {
-	border: 1px solid #dadada;
-	border-bottom-color: #ccc;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 	padding: 10px;
-	position: relative
+	position: relative;
+	background: #f2f2f2;
 }
 
 #community-wrap .cIndex-Avatar {
@@ -3264,8 +3260,7 @@
 }
 
 #community-wrap .cToolBox {
-	background: #f3f3f3;
-	border: 1px solid #ddd;
+	border-bottom: 1px solid #666;
 	border-bottom-color: #ccc;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;

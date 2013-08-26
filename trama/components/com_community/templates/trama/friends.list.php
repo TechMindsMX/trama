@@ -59,7 +59,7 @@ defined('_JEXEC') or die();
 						<a href="<?php echo CRoute::_('index.php?option=com_community&view=friends&userid=' . $user->id );?>"><?php echo JText::sprintf( (CStringHelper::isPlural($user->friendsCount)) ? 'COM_COMMUNITY_FRIENDS_COUNT_MANY' : 'COM_COMMUNITY_FRIENDS_COUNT' , $user->friendsCount);?></a>
 					</div>
 					<?php if( $isMine ): ?>
-					<div class="cFloat-R">
+					<div>
 						<i class="com-icon-groups-delete"></i>
 						<a href="javascript:void(0);" onclick="joms.friends.confirmFriendRemoval(<?php echo $user->id; ?>);">
 							<?php echo JText::_('COM_COMMUNITY_REMOVE_FRIEND'); ?>
