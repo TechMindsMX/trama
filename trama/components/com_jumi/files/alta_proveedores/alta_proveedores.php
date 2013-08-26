@@ -90,6 +90,8 @@ $doc = JFactory::getDocument();
 $path = 'components/com_jumi/files/alta_proveedores/';
 $doc->addStyleSheet($path.'alta_proveedores.css');
 $proveedores = $proyecto->objDatos->providers;
+$token = JTrama::token();
+
 ?>
 
 
@@ -105,6 +107,7 @@ $proveedores = $proyecto->objDatos->providers;
 	<p><?php echo JText::_('PRESUPUESTO_VISTAS').' = $'.$proyecto -> objDatos -> budget; ?></p>
 	
 	<input type="hidden" value="" name="projectProvider" id="data_send"/>
+	<input type="hidden" value="<?php echo $token;?>" name="token">
 	<!-- Tabla con proveedores-->
 	<div style="margin-bottom: 10px;">
 		<table width="100%" style="text-align: center;" frame="box" rules="all">
@@ -145,7 +148,7 @@ $proveedores = $proyecto->objDatos->providers;
 
 <div id="todos_miembros_grupo">
 	<h3><?php echo JText::_('PROVEEDOR_USUARIOS_MIEMROS'); ?></h3>
-<?php 
+<?php
 if (isset($proyecto->miembrosGrupo)) {
 	foreach ($proyecto->miembrosGrupo as $key => $value) {
 
