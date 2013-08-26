@@ -114,12 +114,11 @@
 }
 
 #community-wrap .cAlert {
-	background-color: #fcf8e3;
-	border: 1px solid #ddc8a5;
+	border: 1px solid #666;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	color: #c09853;
+	color: #666;
 	margin: 0 0 20px;
 	padding: 10px
 }
