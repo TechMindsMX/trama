@@ -97,7 +97,7 @@ div.proyecto > .inner {
 .descText {
 	margin: 2em 0 1em;
 	line-height: 1.5em;
-	height:55px;
+	height:55px !important;
 	overflow:hidden;
 }
 .proyecto .readmore {
