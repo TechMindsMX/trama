@@ -19,14 +19,21 @@ foreach($this->items as $i => $item):
 			$fecha = '';
 		}
 		
+		
 		$item->producerName = JFactory::getUser($item->userId)->name;
+		
+		if($item->status != 0){
+			$html = '<a href="index.php?option=com_tramaproyectos&view=detalleproyecto&id='.$item->id.'">'.$item->name.'</a>';
+		} else {
+			$html = $item->name;
+		}
  ?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
                 <td>
                 	<?php echo $item->id; ?>
                 </td>
                 <td>
-                	<a href="index.php?option=com_tramaproyectos&view=detalleproyecto&id=<?php echo $item->id; ?>"><?php echo $item->name; ?></a>
+            		<?php echo $html; ?>
                 </td>
                 <td>
                 	<?php echo $item->producerName; ?>
