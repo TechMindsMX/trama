@@ -66,10 +66,12 @@ function habilita(campo) {
 generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, $descripcionParam);
 ?>
 </div>
+	<div class="centrado">
 		<input type="hidden" name="campo" value="<?php echo $campoTabla ?>" />
 		<input type="hidden" name="usuario" value="<?php echo $usuario->id; ?>" />
-		<input type="button" id="uncheckAll" value="Limpiar Seleccion" />
-		<input type="submit" value="Buscar" />
+		<input class="button" type="button" id="uncheckAll" value="Limpiar Seleccion" />
+		<input class="button" type="submit" value="Buscar" />
+	</div>
 	</form>
 	
 <div style="clear: both;"></div>
