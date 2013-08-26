@@ -246,8 +246,8 @@ function rating($data) {
 		$rating = $data->rating;
 	}
 	
-	$html = '<div id="rating" style="float:left; margin-top:8px;"></div>'.
-			'<div id="texto"style="float: left; font-size: 50px; position: relative; text-align: center; width: 30%; top: 10px;">'.
+	$html = '<div id="rating" style="float: left; margin-top: 8px; margin-left: 26px; width: 100px;"></div>'.
+			'<div id="texto"style="float: left; font-size: 50px; position: relative; text-align: center; width: 30%; margin-left: 15px; top: 15px;">'.
 			number_format($rating, 1).
 			'</div>';
 	
@@ -267,7 +267,7 @@ function encabezado($data) {
 }
 
 function informacionTmpl($data, $params) {
-	 $mapa= '<div id="map-wrapper" style="height: 300px; max-width:350px;"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
+	 $mapa= '<div id="map-wrapper" style="height: 300px; width: 120%; margin-top: 30px;"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
   	 <p style="max-width:300px;">'.$data->showground.'</p>';
 	 $botonContactar= JText::_('SOLICITA_PARTICIPAR');
  	require_once 'solicitud_participar.php';
