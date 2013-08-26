@@ -3,6 +3,7 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed"
 
 //$accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid=7';
 $accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
+jimport('trama.class');
 
 class AltaProveedores {
 	
@@ -21,9 +22,8 @@ class AltaProveedores {
 			$app -> redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 		}
 
-		require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
 		$proyId = $app -> input -> get('proyid', '', 'INT');
-		$this -> objDatos = claseTraerDatos::getDatos('project', (!empty($proyId)) ? $proyId : null);
+		$this -> objDatos = JTrama::getDatos('project', (!empty($proyId)) ? $proyId : null);
 
 		$this -> getMoreData();
 		$this -> getEditable();
