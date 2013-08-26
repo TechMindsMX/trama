@@ -26,13 +26,15 @@
 
 #community-wrap .componentheading {
 	font-size: 24px;
-	margin-bottom: 20px
+	margin-bottom: 20px;
+	text-transform: uppercase;  
 }
 
 #community-wrap .small,#community-wrap small {
 	color: #999;
 	font-size: 90% !important;
-	margin: auto
+	margin: auto;
+
 }
 
 #community-wrap .cResetList,#community-wrap .cResetList li {

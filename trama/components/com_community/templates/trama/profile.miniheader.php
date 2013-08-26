@@ -19,7 +19,7 @@ defined('_JEXEC') or die();
 		</a>
 	</div>
 
-	<ul class="cToolBox-Options cFloatedList cResetList cFloat-R">
+	<ul class="cToolBox-Options cFloatedList cResetList">
 		<?php if(!$isFriend && !$isMine) { ?>
 		<li>
 			<a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $user->id;?>')">

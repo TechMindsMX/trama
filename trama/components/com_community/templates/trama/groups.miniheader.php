@@ -18,7 +18,7 @@ defined('_JEXEC') or die();
 			<?php echo JText::_('COM_COMMUNITY_GROUPS_BACK_BUTTON'); ?>
 		</a>
 	</div>
-	<ul class="cToolBox-Options cFloatedList cResetList cFloat-R">
+	<ul class="cToolBox-Options cFloatedList cResetList">
 		<?php if($allowCreateEvent && $config->get('group_events') && $config->get('enableevents') && ($config->get('createevents'))): ?>
 		<li>
 			<a href="<?php echo CRoute::_('index.php?option=com_community&view=events&groupid='.$group->id); ?>">
