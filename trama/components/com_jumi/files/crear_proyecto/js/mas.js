@@ -140,7 +140,7 @@ function loadImage(input1) {
     }
 
     function imageLoaded() {
-		if(img.width < 800 || img.width > 1920 || img.height < 600 || img.height > 1200 || peso > 4096000){
+		if(img.width > 1920 || img.height > 1200 || img.width < 800 || img.height < 600 || peso  > 4096000){
 			
 			
 		alert ("Solo se aceptan imagenes de resolucion entre 800 x 600, 1920 x 1080 y con un peso no mayor a 4 mb, su imagen no sera subida. ");
@@ -194,10 +194,10 @@ function loadImage2(input1) {
     }
 
     function imageLoaded() {
-		if(img.width != 1280 || img.height != 800 || peso > 4096000){
+		if(img.width > 600 || img.height > 600 || img.width < 360 || img.height < 360 || peso  > 4096000){
 			
 			
-		alert ("Solo se aceptan imagenes de resolucion 1920 x 1080 y con un peso no mayor a 4 mb, su imagen no sera subida. ");
+		alert ("Solo se aceptan imagenes de resolución entre 1920x1200 y 800x600, y con un peso no mayor a 4 mb, su imagen no sera subida. ");
 		$fileupload = $('#'+input1.id);  
 		$fileupload.replaceWith($fileupload.clone(true)); 
 		$('#'+input1.id).val(""); 
@@ -207,6 +207,4 @@ function loadImage2(input1) {
         img = undefined;}
         
     }
-
-
 }

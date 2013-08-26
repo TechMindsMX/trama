@@ -235,7 +235,7 @@ if ( isset ($objDatosRepertorio) ) {
 	<br />
 	
 	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('REPERTORIO'); ?>*:</label> 
-	<input type="file" id="avatar" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
+	<input type="file" id="avatar" onchange='loadImage2(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
 	<br />
 	<?php echo $avatar; ?>
 	<br />

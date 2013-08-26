@@ -171,59 +171,6 @@ if ( isset ($objDatosProducto) ) {
 		
 	});
 	
-	function loadImage(input1) {
-        var input, file, fr, img;
-
-        if (typeof window.FileReader !== 'function') {
-            write("The file API isn't supported on this browser yet.");
-            return;
-        }
-
-        input = document.getElementById(input1.id);
-        if (!input) {
-            write("Um, couldn't find the imgfile element.");
-        }
-        else if (!input.files) {
-            write("This browser doesn't seem to support the `files` property of file inputs.");
-        }
-        else if (!input.files[0]) {
-            write("Please select a file before clicking 'Load'");
-        }
-        else {
-            file = input.files[0];
-            fr = new FileReader();
-            fr.onload = createImage;
-            fr.readAsDataURL(file);
-        }
-		
-		var fileInput = jQuery('#'+input1.id)[0];
-        peso = fileInput.files[0].size;
-		
-        function createImage() {
-            img = document.createElement('img');
-            img.onload = imageLoaded;
-            img.style.display = 'none'; // If you don't want it showing
-            img.src = fr.result;
-            document.body.appendChild(img);
-        }
-	
-        function imageLoaded() {
-			if(img.width != 1920 || img.height != 1080 || peso > 4096000){
-				
-				
-			alert ("Solo se aceptan imagenes de resolucion 1920 x 1080 y con un peso no mayor a 4 mb, su imagen no sera subida. ");
-			$fileupload = $('#'+input1.id);  
-			$fileupload.replaceWith($fileupload.clone(true)); 
-			$('#'+input1.id).val(""); 
-            // This next bit removes the image, which is obviously optional -- perhaps you want
-            // to do something with it!
-            img.parentNode.removeChild(img);
-            img = undefined;}
-            
-        }
-
- 
-    }
 </script>
 
 <!--DIV DE AGREGAR CAMPOS-->
@@ -353,7 +300,7 @@ if ( isset ($objDatosProducto) ) {
 	<br />
 	
 	<label for="avatar"><?php echo JText::_('AVATAR').JText::_('PRODUCTO'); ?>*:</label> 
-	<input type="file" id="avatar" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
+	<input type="file" id="avatar" onchange='loadImage2(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
 	<br />
 	<?php echo $avatar; ?>
 	<br />
