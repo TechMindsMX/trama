@@ -50,23 +50,32 @@ $opcionesSubCat = '';
 $ligasVideos = '';
 $ligasAudios = '';
 $ligaEditProveedores = '';
+$ligaCostosVariable = '';
 //termina los definicion de campos del formularios
 
 if ( isset ($objDatosProyecto) ) {
 	if( ($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) && ($objDatosProyecto) && ($objDatosProyecto->userId == $usuario->id) ) {
 		if($objDatosProyecto->status == 2) {
-			$comentarios = '<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>';
+			$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.
+			JText::_('JCOMENTARIOS').'</a></span>';
 		}
 		
 		if(empty($objDatosProyecto->providers)){
-			$ligaEditProveedores = '<span class="ligacomentarios">
-										<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$objDatosProyecto->id.'">Alta de Proveedores</a>
-								    </span>';
+			$mensaje = JText::_('ALTA_PROVEEDPORES');
 		} else {
-			$ligaEditProveedores = '<span class="ligacomentarios">
-										<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$objDatosProyecto->id.'">Editar de Proveedores</a>
-								    </span>';
+			$mensaje = JText::_('EDITAR_PROVEEDPORES');
 		}
+		$ligaEditProveedores = '<span class="liga">
+								<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$objDatosProyecto->id.'">'.$mensaje.'</a>
+						   		</span>';
+		if(empty($objDatosProyecto->variablecost)){
+			$mensaje = JText::_('ALTA_COSTOS_VARIABLES');
+		} else {
+			$mensaje = JText::_('EDITAR_COSTOS_VARIABLES');
+		}
+		$ligaCostosVariable = '<span class="liga">
+								<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$objDatosProyecto->id.'">'.$mensaje.'</a>'.
+						   		'</span>';
 		
 		$urlProy = $objDatosProyecto->url;
 		$status_proyecto = $objDatosProyecto->status;
@@ -108,11 +117,11 @@ if ( isset ($objDatosProyecto) ) {
 		$jsonStatus = json_decode((file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list')));
 		
 		if( !($objDatosProyecto->userId == $usuario->id) ) {
-			$mensaje = 'No es propietario del proyecto';
+			$mensaje = JText::_('JERROR_ALERTNOAUTHOR');
 		}else {
 			foreach ($jsonStatus as $key => $value) {
 				if($objDatosProyecto->status == $value->id) {
-					$mensaje = 'El status del proyecto '.$value->name.', no permite edición.';
+					$mensaje = JText::_('EL_STATUS_DEL_PROY').$value->name.JText::_('NO_PERMITE_EDIC');
 				}
 			}
 		}
@@ -239,9 +248,9 @@ if ( isset ($objDatosProyecto) ) {
 			$fechacreacion = $value->timestamp/1000;
 			echo '<div style="margin-bottom: 10px;">'.
 				 '<li>'.
-				 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-				 '<div><strong>Status</strong>: '.JTrama::getStatusName($value->status).'</div>'.
-				 '<div align="justify"><strong>Comentario</strong>: '.$value->comment.'</div>'.
+				 '<div><strong>'.JText::_('COM_CONTENT_MODIFIED_DATE').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+				 '<div><strong>'.JText::_('JSTATUS').'</strong>: '.JTrama::getStatusName($value->status).'</div>'.
+				 '<div align="justify"><strong>'.JText::_('COMMENTARIOS').'</strong>: '.$value->comment.'</div>'.
 				 '</li>'.
 				 '</div>';
 		}
@@ -249,13 +258,7 @@ if ( isset ($objDatosProyecto) ) {
 	?>
 </div>
 
-<h3><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h3>
-
-<?php echo $comentarios; ?>
-
-<div>
-	<?php echo $ligaEditProveedores; ?>
-</div>
+<h1><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h1>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<?php 
@@ -340,11 +343,11 @@ if ( isset ($objDatosProyecto) ) {
 		value="<?php echo $urlProy; ?>"
 		name="url"
 		maxlength="100" > 
-	<br> 
 	<br />
+	<h2><?php echo JText::_('LABEL_VIDEOS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
 	<input 
 		type="radio" 
 		name="videoPublic" 
@@ -374,9 +377,10 @@ if ( isset ($objDatosProyecto) ) {
 	?>
 	</fieldset>
 	<br />
+	<h2><?php echo JText::_('LABEL_AUDIOS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
 	<input 
 		type="radio" 
 		name="audioPublic" 
@@ -404,9 +408,10 @@ if ( isset ($objDatosProyecto) ) {
 	?>
 	</fieldset>
 	<br />
+	<h2><?php echo JText::_('LABEL_IMAGES'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
 	<input 
 		type="radio" 
 		name="imagePublic"
@@ -443,14 +448,13 @@ if ( isset ($objDatosProyecto) ) {
 	}
 	?> 
 	<br />
-	<div style="max-width:430px;"><strong>NOTA</strong>: Para una mejor calidad del contenido las im&aacute;genes deben tener un tamaño no menor a 800x600 ni mayor a 1920x1200.</div>  
+	<div style="max-width:430px;"><?php echo JText::_('NOTE_IMAGES'); ?></div>  
 	</fieldset>
-	
 	<br /> 
-	
+	<h2><?php echo JText::_('LABEL_GENERALES'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
 	<input 
 		type="radio" 
 		name="infoPublic" 
@@ -528,9 +532,10 @@ if ( isset ($objDatosProyecto) ) {
 	
 	</fieldset>
 	<br />
+	<h2><?php echo JText::_('LABEL_FINANZAS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
 	<input 
 		type="radio" 
 		name="numberPublic" 
@@ -696,9 +701,20 @@ if ( isset ($objDatosProyecto) ) {
 	?></textarea>
 	</fieldset>
 	<br />
+
+<div class="barra-top" id="otras_ligas">
+	<?php 
+		echo $ligaEditProveedores;
+		echo $ligaCostosVariable;
+		echo $comentarios; 
+	?>
+</div>
 	<br /> 
 	
 	<input type="button" class="button" value="Cancelar" onclick="javascript:window.history.back()">
 	<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
 	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
+
+
 </form>
+
