@@ -183,7 +183,7 @@
                     "alertText": "* Sólo números,la tasa debe ser entre 1 y 10% y hasta 2 decimales"
                 },
                 "onlyNumberSOGEM": {
-                    "regex": /^(?:20(?:\.0)?|[1-9](?:\.[0-9][0-9]?)?|1[1-9](?:\.[0-9][0-9]?)?|1?\.[0-9][0-9]?)$/,
+                    "regex": /^(?:20(?:\.0)?|[1-9](?:\.[0-9][0-9]?)?|1[0-9](?:\.[0-9][0-9]?)?|1?\.[0-9][0-9]?)$/,
                     "alertText": "* Sólo números,la tasa debe ser entre 1 y 20% y hasta 2 decimales"
                 },
 			    "onlyLetterSp": {

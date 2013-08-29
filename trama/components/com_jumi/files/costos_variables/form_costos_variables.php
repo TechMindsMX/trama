@@ -18,9 +18,14 @@ require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token = JTrama::token();
 
+$input = JFactory::getApplication()->input;
+$proyid= $input->get("proyid",0,"int");
+$servEdicion = json_decode( file_get_contents( MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyid ) );
+
+$existe = $servEdicion->variableCosts;
 
 //definicion de campos del formulario
-$action = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveVariableCosts';
+$action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 //$action = 'components/com_jumi/files/costos_variables/post.php';
 ?>
 
@@ -36,15 +41,50 @@ $action = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveVariableC
 
 		jQuery("#agregarOtros").click(function(){
 			jQuery('#otros').append('<div><input type="text" id="agregado" onChange="cambio(this)" /> <input class="validate[custom[onlyNumberRenta]]" type="text" id="campo" />%</div>');
+		
 		});
+		
+		<?php
+	
+	if(!empty($existe)){
+		
+		foreach ($servEdicion->variableCosts as $key => $value) {
+			switch ($value->name) {
+				case 'rent':
+					echo "jQuery('#renta').val('".$value->value."');";
+					break;
+				case 'isep':
+					echo "jQuery('#ISEP').val('".$value->value."');";
+					break;
+				case 'tiketService':
+					echo "jQuery('#tiketService').val('".$value->value."');";
+					break;
+				case 'sacm':
+					echo "jQuery('#sacm').val('".$value->value."');";
+					break;
+				case 'sogem':
+					echo "jQuery('#sogem').val('".$value->value."');";
+					break;
+				
+				default:
+					$inputs = "<div>";
+					$inputs .= "<input type='text' id='agregado' value='".$value->name."' onChange='cambio(this)' />"; 
+					$inputs .= "<input class='validate[custom[onlyNumberRenta]]' type='text' name='".$value->name."' value='".$value->value."' id='campo' />%";
+					$inputs .= "</div>";
+					
+					echo 'jQuery("#otros").append("'.$inputs.'");';					
+					break;
+			}
+		}
+	}
+	?>
+		
 	});
 
 	function cambio(input) {
 		campo = jQuery(input).next();
 		campo.attr('name', input.value);
-	}
-
-		
+	}	
 </script>
 <h3><?php echo JText::_('COSTOS_VARIABLES');  ?></h3>
 
@@ -102,7 +142,7 @@ $action = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveVariableC
 	<label for="SOGEM"> <?php echo JText::_('SOGEM');  ?>: </label> 
 	<input 
 		type="text"
-		id="SOGEM"
+		id="sogem"
 		class="validate[custom[onlyNumberSOGEM]]"
 		maxlength="5"
 		name="sogem" /> %
@@ -110,7 +150,7 @@ $action = 'http://192.168.0.114:7171/trama-middleware/rest/project/saveVariableC
 	
 	<div id="otros"></div>
 	
-	<input type="button" value="Agregar" id="agregarOtros" />
+	<input type="button" class="button" value="Agregar" id="agregarOtros" />
 	<br />
 	<br />
 	
