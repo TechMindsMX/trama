@@ -20,6 +20,10 @@ $token = JTrama::token();
 
 $input = JFactory::getApplication()->input;
 $proyid= $input->get("proyid",0,"int");
+$error1= $input->get("error",0,"int");
+if($error1 ==1){
+	echo "<div style='color: red;'>ERROR revisa la información capturada</div>";
+}
 $servEdicion = json_decode( file_get_contents( MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyid ) );
 
 $existe = $servEdicion->variableCosts;
@@ -87,8 +91,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	}	
 </script>
 <h3><?php echo JText::_('COSTOS_VARIABLES');  ?></h3>
-
-<form id="form2" action="<?php echo $action; ?>" method="POST">
+<div>
+<form id="form_costos" action="<?php echo $action; ?>" method="POST">
 	<input
 		type="hidden"
 		value="<?php echo $_GET['proyid']; ?>"
@@ -101,6 +105,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		name="token"
 		id="token" />	
 	
+	<div style="height: 46px;">
 	<label for="renta"> <?php echo JText::_('RENTA');  ?>: </label> 
 	<input 
 		type="text"
@@ -108,8 +113,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		class="validate[custom[onlyNumberRenta]]"
 		maxlength="5"
 		name="rent" /> %
-	<br />
-	
+	</div>
+	<div style="height: 46px;">
 	<label for="ISEP"> <?php echo JText::_('IMPUESTOS_ISEP');  ?>: </label>  
 	<input 
 		type="text"
@@ -118,8 +123,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		maxlength="5"
 		value="8"
 		name="isep" /> %
-	<br />
-	
+	</div>
+	<div style="height: 46px;">
 	<label for="tiketService"> <?php echo JText::_('BOLETAJE');  ?>: </label>  
 	<input 
 		type="text"
@@ -128,8 +133,9 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		maxlength="5"
 		value="3.5"
 		name="tiketService" /> %
-	<br />
-<h3><?php echo JText::_('DERECHOS_AUTOR');  ?></h3>
+	</div>
+<div><h3><?php echo JText::_('DERECHOS_AUTOR');  ?></h3></div>
+	<div>
 	<label for="renta"> <?php echo JText::_('SACM');  ?>: </label> 
 	<input 
 		type="text"
@@ -137,8 +143,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		maxlength="5"
 		value="6"
 		name="sacm" readonly /> %
-	<br />
-	
+	</div>
 	<label for="SOGEM"> <?php echo JText::_('SOGEM');  ?>: </label> 
 	<input 
 		type="text"
@@ -146,14 +151,12 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		class="validate[custom[onlyNumberSOGEM]]"
 		maxlength="5"
 		name="sogem" /> %
-	<br />
 	
 	<div id="otros"></div>
 	
 	<input type="button" class="button" value="Agregar" id="agregarOtros" />
-	<br />
-	<br />
 	
 	
 	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
 </form>
+</div>
