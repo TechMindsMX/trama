@@ -75,22 +75,22 @@ $promedio = $objuserdata->scoreUser($userid);
 			<section class="ac-container" style="max-width: 100%;">
 				<div>
 					<input id="ac-2a" name="accordion-2" type="radio" />
-					<label for="ac-2a">Proyectos</label>
+			<label for="ac-2a"><?php echo JText::_('LABEL_PROYECTOS');?></label>
 					<article class="ac-medium">
 						<table width="100%" frame="box" rules="all" style="text-align: center">
 							<tr>
-								<th>Nombre</th>
-								<th>Creación</th>
-								<th>Status</th>
-								<th>Grupo</th>
+								<th><?php echo JText::_('LABEL_NAME');?></th>
+								<th><?php echo JText::_('LABEL_CREACION');?></th>
+								<th><?php echo JText::_('LABEL_STATUS');?></th>
+								<th><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></th>
 								<th>
-									<span class="comentarios">Comentarios</span>
+									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</th>
 								<th>
-									<span class="editTabla">Editar</span>
+									<span class="editTabla"><?php echo JText::_('EDIT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
@@ -131,9 +131,9 @@ $promedio = $objuserdata->scoreUser($userid);
 										$fechacreacion = $valor->timestamp/1000;
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
-											 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-											 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
-											 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
+											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
 											 '</div>';
 										}
@@ -149,16 +149,16 @@ $promedio = $objuserdata->scoreUser($userid);
 				
 				<div>
 					<input id="ac-3a" name="accordion-2" type="radio" />
-					<label for="ac-3a">Productos</label>
+					<label for="ac-3a"><?php echo JText::_('LABEL_PRODUCTOS');?></label>
 					<article class="ac-large">
 						<table width="100%" frame="box" rules="all" style="text-align: center;">
 							<tr>
-								<th>Nombre</th>
-								<th>Creación</th>
-								<th>Status</th>
+								<th><?php echo JText::_('LABEL_NAME');?></th>
+								<th><?php echo JText::_('LABEL_CREACION');?></th>
+								<th><?php echo JText::_('LABEL_STATUS');?></th>
 								<th>Grupo</th>
 								<th>
-									<span class="comentarios">Comentarios</span>
+									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
@@ -205,9 +205,9 @@ $promedio = $objuserdata->scoreUser($userid);
 										$fechacreacion = $valor->timestamp/1000;
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
-											 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-											 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
-											 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
+											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
 											 '</div>';
 										}
@@ -223,11 +223,11 @@ $promedio = $objuserdata->scoreUser($userid);
 				
 				<div>
 					<input id="ac-4a" name="accordion-2" type="radio" />
-					<label for="ac-4a">Repertorio</label>
+					<label for="ac-4a"><?php echo JText::_('LABEL_REPERTORIO');?></label>
 					<article class="ac-small">
 						<table width="100%" frame="box" rules="all" style="text-align: center;">
 							<tr>
-								<th>Nombre</th>
+								<th><?php echo JText::_('LABEL_NAME');?></th>
 								<th>
 									<span class="editTabla"><?php echo JText::_('EDIT'); ?></span>
 									<span class="editMedia">
@@ -251,21 +251,21 @@ $promedio = $objuserdata->scoreUser($userid);
                     
                	<div>
                     <input id="ac-5a" name="accordion-2" type="radio" />
-					<label for="ac-5a">Suspendidos</label>
+					<label for="ac-5a"><?php echo JText::_('LABEL_SUSPENDIDOS');?></label>
 					<article class="ac-large">
 						<table width="100%" frame="box" rules="all" style="text-align: center;">
 							<tr>
-								<th>Nombre</th>
-								<th>Creación</th>
+								<th><?php echo JText::_('LABEL_NAME');?></th>
+								<th><?php echo JText::_('LABEL_CREACION');?></th>
 								<th>Grupo</th>
 								<th>
-									<span class="comentarios">Comentarios</span>
+									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</th>
 								<th>
-									<span class="editTabla">Editar</span>
+									<span class="editTabla"><?php echo JText::_('EDIT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
@@ -298,9 +298,9 @@ $promedio = $objuserdata->scoreUser($userid);
 										$fechacreacion = $valor->timestamp/1000;
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
-											 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-											 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
-											 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
+											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
 											 '</div>';
 										}

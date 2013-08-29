@@ -43,6 +43,11 @@ $json = json_decode(file_get_contents($url));
 $json->etiquetaTipo = tipoProyProd($json);
 $json->acceso = JTramaSocial::checkUserGroup($proyecto, $usuario->id);
 
+if($json->name) {
+	$mydoc =& JFactory::getDocument();
+	$mydoc->setTitle($json->name);
+}
+
 function tipoProyProd($data) {
 	$tipo = $data->type;
 	switch ($tipo) {
