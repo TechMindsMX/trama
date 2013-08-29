@@ -35,12 +35,12 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 
 <script>
 	jQuery(document).ready(function(){
-		jQuery("#form2").validationEngine();
+		jQuery("#form_costos").validationEngine();
 
 		jQuery("#enviar").click(function (){
 			jQuery('#token').val('<?php echo $token;?>');
 			
-			jQuery("#form2").submit();
+			jQuery("#form_costos").submit();
 		});
 
 		jQuery("#agregarOtros").click(function(){
