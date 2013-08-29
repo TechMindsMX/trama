@@ -72,7 +72,9 @@ br {
 	display: block;
 }
 
-
+#form_costos label {
+	width: 222px;
+}
 
 
 @media screen and (max-width:770px) {
