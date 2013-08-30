@@ -102,11 +102,11 @@ if ( $tablaParam == 'perfilx_catalogoperfil' ) {
 	<div id="triangle"> </div>
 	<div>
 		<span>Es usted un gremio</span>&nbsp;&nbsp;
-		<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" />
+		<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" id="<?php echo $instituciones->idcatalogoPerfil; ?>"/>
 	</div>
 	<div>
 		<span>Es usted una Institución</span>
-		<input type="checkbox" class="esgremio" name="<?php echo $instituciones->nomNombreCategoria; ?>" value="<?php echo $instituciones->idcatalogoPerfil; ?>" />
+		<input type="checkbox" class="esgremio" name="<?php echo $instituciones->nomNombreCategoria; ?>" value="<?php echo $instituciones->idcatalogoPerfil; ?>" id="<?php echo $instituciones->idcatalogoPerfil; ?>"/>
 	</div>
 <?php
 }
@@ -151,7 +151,14 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 				if (typeof orig != 'undefined') {
 				var aaa = orig.split(',');
 					jQuery.each(aaa, function(index, value) {
-						jQuery('#' + value).prop("checked", true);
+						if(value == 166 || value == 151){
+							jQuery('#' + value).prop("checked", true);
+							
+							jQuery('#tree input').prop('disabled', true);
+							jQuery('#tree input').prop('checked', false);
+						} else {
+							jQuery('#' + value).prop("checked", true);
+						}
 					});
 				}
 				
