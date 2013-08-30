@@ -156,6 +156,8 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 							
 							jQuery('#tree input').prop('disabled', true);
 							jQuery('#tree input').prop('checked', false);
+							
+							return
 						} else {
 							jQuery('#' + value).prop("checked", true);
 						}
