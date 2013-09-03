@@ -1,12 +1,14 @@
+.ancho-col {
+	width: 454px;
+	margin-right: 20px;
+}
 #content {
 	width: 100%;
 }
-
 #menu {
 	clear: both;
 	margin: 1em 0;
 }
-
 .menu-item {
 	width: 217px;
 	height: 151px;
@@ -15,7 +17,6 @@
 	margin-bottom: 1em;
 	margin-right:20px;
 }
-
 .menu-item:hover {
 	background-position-y: center;
 }
@@ -54,13 +55,14 @@
 	border: 1px solid #FFF;
 	background-position-y: -148px;
 }
-
 .cerrar {
 	position: absolute;
 	top: 30px;
 	right: 30px;
 }
-
+.avatar {
+	width: 100%;
+}
 .video {
 	background-image: url('../images/icon-video.png');
 }
@@ -92,12 +94,10 @@
 	background-position: left bottom;
 	border: 0;
 }
-
-.content-banner {
+.content-banner, #content_player, #video-player {
 	max-width: 1165px;
 	width: 100%;
 }
-
 .info-banner {
 	position: absolute;
 	width: 100%;
@@ -106,16 +106,14 @@
 	margin: 3em;
 }
 .tipo_proy_prod {
-	float: right;
+	margin-top: 1em !important;
 }
-
 #banner {
 	position: relative;
 }
 
 .fechacreacion {
 	margin-top: -10px;
-    position: absolute;
 }
 div#banner div.rt-inner {
 	color: #FFF;
@@ -141,14 +139,7 @@ div#banner div.rt-inner a {
 	font-size:14px;
 }
 
-#content_player {
-	max-width: 1150px;
-	max-width: 100%;
-}
-
 #video-player {
-	max-width: 1150px;
-	width: 100%;
 	margin: auto;
 	height: 600px;
 }
@@ -180,6 +171,26 @@ div#banner div.rt-inner a {
 	font-size: 0px;
 	height: 120px;
 }
+.gantry-width-spacer {
+	margin-left: 0 !important;
+}
+#tablafinanzas td {
+	padding: 5px;
+}
+#contenido-detalle ul li span:first-of-type {
+	width: 61%;
+	display: inline-block;
+}
+.encabezado h2, .encabezado h3 {
+	margin: 0 0 0.5em 0;
+	line-height: 100%;
+}
+.encabezado h1, .encabezado h2, .encabezado p {
+	margin: 0;
+}
+.encabezado {
+ 	margin-bottom: 1em;
+}    
 
 @media screen and (max-width:1200px) {
 	#menu-player {
@@ -233,7 +244,11 @@ div#banner div.rt-inner a {
 }
 
 #contenido-detalle {
+	margin-bottom: 10px;
 	height: 500px;
 	overflow-y: scroll;
 }
+#finanzas #contenido-detalle {
+	height: 355px;
 }
+
