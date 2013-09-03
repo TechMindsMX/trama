@@ -494,7 +494,7 @@ function userName($data) {
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
-				<h3>Informacion</h3>
+				<<h1 class="mayusc">>Informacion</h1>
 				
 				<div class="detalleDescripcion">
 					<?php 
