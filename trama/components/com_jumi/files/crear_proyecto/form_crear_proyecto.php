@@ -258,9 +258,10 @@ if ( isset ($objDatosProyecto) ) {
 	?>
 </div>
 
-<h1><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h1>
+<div style="margin-left:15px;"><h1><?php echo JText::_('CREAR').JText::_('PROYECTO'); ?></h1></div>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
+	<div class="datos_proy">
 	<?php 
 		echo $hiddenIdProyecto;
 		echo $hiddenphotosIds; 
@@ -341,13 +342,16 @@ if ( isset ($objDatosProyecto) ) {
 		class="validate[custom[url]]"
 		id="url"
 		value="<?php echo $urlProy; ?>"
+		placeholder="<?php echo JText::_('URL_VAL'); ?>"
 		name="url"
 		maxlength="100" > 
-	<br />
+	</div>
+	<div class="datos_proy">
 	<h2><?php echo JText::_('LABEL_VIDEOS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<label class="label_public" for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="videoPublic" 
@@ -360,10 +364,11 @@ if ( isset ($objDatosProyecto) ) {
 		value="0" 
 		id="videoPublic"
 		<?php echo $checkedvideos?'':'checked="checked"';?>>No</input>
+	</div>
 	</LEGEND>
-	<br />
+	<div style="padding:15px 0px;">
 	<?php echo JText::_('VIDEOSP'); ?>
-	<br />
+	</div>
 	 
 	<?php
 	for ( $i = 0; $i < $limiteVideos; $i++ ) {
@@ -376,11 +381,13 @@ if ( isset ($objDatosProyecto) ) {
 	}
 	?>
 	</fieldset>
-	<br />
+	</div>
+	<div class="datos_proy">
 	<h2><?php echo JText::_('LABEL_AUDIOS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<label class="label_public" for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="audioPublic" 
@@ -394,9 +401,11 @@ if ( isset ($objDatosProyecto) ) {
 		value="0" 
 		id="audioPublic"
 		<?php echo $checkedsound?'':'checked="checked"';?>>No</input>
+		</div>
 	</LEGEND>
-	<br /> <?php echo JText::_('AUDIOSP'); ?>
-	<br /> 
+	<div style="padding:15px 0px;">
+		<?php echo JText::_('AUDIOSP'); ?>
+	</div>
 	
 	<?php
 	for ( $i = 0; $i < $limiteSound; $i++ ) {
@@ -407,11 +416,13 @@ if ( isset ($objDatosProyecto) ) {
 	}
 	?>
 	</fieldset>
-	<br />
+	</div>
+	<div class="datos_proy">
 	<h2><?php echo JText::_('LABEL_IMAGES'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<label class="label_public" for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="imagePublic"
@@ -424,9 +435,11 @@ if ( isset ($objDatosProyecto) ) {
 		value="0"
 		id="imagePublic"
 		<?php echo $checkedimages?'':'checked="checked"';?>>No</input>
+	</div>
 	</LEGEND>
 	<br />
-	<label for="fotos" id="labelImagenes"><?php echo JText::_('TRAMA_FOTOS'); ?><span id="maximoImg"><?php echo $countImgs; ?></span>*:</label> 
+	<div style="margin-bottom: 15px;"><?php echo JText::_('TRAMA_FOTOS_LIMITE'); ?><span id="maximoImg"><?php echo $countImgs; ?></span></div>
+	<label for="fotos" id="labelImagenes"><?php echo JText::_('TRAMA_FOTOS'); ?>*:</label> 
 	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo" />
 	
 	<?php
@@ -447,14 +460,15 @@ if ( isset ($objDatosProyecto) ) {
 		echo '</div>';
 	}
 	?> 
-	<br />
-	<div style="max-width:430px;"><?php echo JText::_('NOTE_IMAGES'); ?></div>  
+	<div style="max-width:430px; font-size:12px;"><?php echo JText::_('NOTE_IMAGES'); ?></div>  
 	</fieldset>
-	<br /> 
+	</div>
+	<div id="datos_generales_proy">
 	<h2><?php echo JText::_('LABEL_GENERALES'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<label class="label_public" for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="infoPublic" 
@@ -467,9 +481,10 @@ if ( isset ($objDatosProyecto) ) {
 		value="0" 
 		id="infoPublic"
 		<?php echo $checkedinfo?'':'checked="checked"';?>>No</input>
+	</div>
 	</LEGEND>
 	<br />
-	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?>*:</label> <br />	
+	<label  for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?>*:</label> <br />	
 	<div style= "max-width:420px;">
 		<?php
 			$editor =& JFactory::getEditor('tinymce');
@@ -531,11 +546,13 @@ if ( isset ($objDatosProyecto) ) {
 	<br />
 	
 	</fieldset>
-	<br />
+	</div>
+	<div id="datos_finanzas_proy">
 	<h2><?php echo JText::_('LABEL_FINANZAS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<label class="label_public" for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="numberPublic" 
@@ -548,8 +565,11 @@ if ( isset ($objDatosProyecto) ) {
 		value="0" 
 		id="numberPublic"
 		<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
-	</LEGEND>
-	<br />
+	</div>
+	</LEGEND><br />	
+	
+	<div><?php echo JText::_('PLANTILLAS_EXCEL'); ?></div>
+	
 	<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label> 
 	<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 	<br />
@@ -686,7 +706,7 @@ if ( isset ($objDatosProyecto) ) {
 	<br /> 
 	<br />
 	
-	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 9px;">(separarlas por comas)</span></label>
+	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 12px;">(separarlas por comas)</span></label>
 	<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
 		if( isset($objDatosProyecto) && !empty($objDatosProyecto->tags)) {
 			foreach ($objDatosProyecto->tags as $key => $value) {
@@ -700,7 +720,7 @@ if ( isset ($objDatosProyecto) ) {
 		}
 	?></textarea>
 	</fieldset>
-	<br />
+	</div>
 
 <div class="barra-top" id="otras_ligas">
 	<?php 
