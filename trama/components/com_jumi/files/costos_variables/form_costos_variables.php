@@ -24,7 +24,7 @@ $error1= $input->get("error",0,"int");
 if($error1 ==1){
 	echo "<div style='color: red;'>ERROR revisa la información capturada</div>";
 }
-$servEdicion = json_decode( file_get_contents( MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyid ) );
+$servEdicion = JTrama::getDatos($proyid );
 
 $existe = $servEdicion->variableCosts;
 

@@ -165,14 +165,30 @@ class JTrama
 		
 	}
 	
-	public static function getDatos ( $tipo, $id ) {
+	public static function allProjects(){
+		
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
+		$jsonAllProjects = file_get_contents($url);
+		$json = json_decode($jsonAllProjects);
+		
+		foreach ($json as $key => $value) {
+			JTrama::formatDatosProy($value);
+		}
+		
+		return $json;
+	}
+
+	public static function getDatos ( $id ) {
 		
 		if( isset($id) ) {	
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
 			$json = file_get_contents($url);
 			$jsonDecode = json_decode($json); 
-			
+						
 			$respuesta = $jsonDecode;
+			
+			JTrama::formatDatosProy($respuesta);
+			
 		} else {
 				
 			$respuesta = null;
@@ -181,6 +197,34 @@ class JTrama
 		return $respuesta;
 	}
 	
+	public static function formatDatosProy ($value)
+	{
+		$value->fundStartDate = 1370284000000; // SIMULADOS
+		$value->fundEndDate = 1385284000000; // SIMULADOS
+
+		$value->fundStartDateCode = $value->fundStartDate;
+		$value->fundEndDateCode = $value->fundEndDate;
+		$value->productionStartDateCode = $value->productionStartDate;
+		$value->premiereStartDateCode = $value->premiereStartDate;
+		$value->premiereEndDateCode = $value->premiereEndDate;
+
+		if (isset($value->fundStartDate)) {
+			$value->fundStartDate = date('d-m-Y', ($value->fundStartDateCode/1000) );
+		}
+		if (isset($value->fundEndDate)) {
+			$value->fundEndDate = date('d-m-Y', ($value->fundEndDate/1000) );
+		}
+		if (isset($value->productionStartDate)) {
+			$value->productionStartDate = date('d-m-Y', ($value->productionStartDate/1000) );
+		}
+		if (isset($value->premiereStartDate)) {
+			$value->premiereStartDate = date('d-m-Y', ($value->premiereStartDate/1000) );
+		}
+		if (isset($value->premiereEndDate)) {
+			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDate/1000) );
+		}
+	}
+
 	public static function token(){
 		
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/security/getKey';

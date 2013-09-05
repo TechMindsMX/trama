@@ -39,8 +39,8 @@
 <script type="text/javascript" src="libraries/trama/js/jquery.number.min.js"></script>
 
 <?php
-$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
-$json = json_decode(file_get_contents($url));
+
+$json = JTrama::getDatos($proyecto);
 $json->etiquetaTipo = tipoProyProd($json);
 $json->acceso = JTramaSocial::checkUserGroup($proyecto, $usuario->id);
 
@@ -370,6 +370,8 @@ function userName($data) {
 	
 	return $result;
 }
+
+
 ?>
 	<script type="text/javascript">
 	function scrollwrapper(){
@@ -494,7 +496,7 @@ function userName($data) {
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
-				<<h1 class="mayusc">>Informacion</h1>
+				<h1 class="mayusc">>Informacion</h1>
 				
 				<div class="detalleDescripcion">
 					<?php 
