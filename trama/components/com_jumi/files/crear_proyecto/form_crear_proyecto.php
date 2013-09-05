@@ -610,7 +610,7 @@ if ( isset ($objDatosProyecto) ) {
 		type="text"
 		id="inventario" 
 		class="validate[required,custom[onlyNumberSp]]"
-		value="<?php echo isset($objDatosProyecto) ? $datosRecintos[0]->capacity : ''; ?>"  
+		value="<?php echo isset($objDatosProyecto) ? $datosRecintos[0]->unit : ''; ?>"  
 		name="capacity"> 
 	<br />
 	<br />
@@ -619,7 +619,7 @@ if ( isset ($objDatosProyecto) ) {
 		for($i = 1; $i < $countunitSales; $i++) {
 			$valorSection = isset($objDatosProyecto) ? $datosRecintos[$i]->section : '';
 			$valorUnitSales = isset($objDatosProyecto) ? $datosRecintos[$i]->unitSale : '';
-			$valorCapacity = isset($objDatosProyecto) ? $datosRecintos[$i]->capacity : '';
+			$valorCapacity = isset($objDatosProyecto) ? $datosRecintos[$i]->unit : '';
 			
 			$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('SECCION').'*:</label>';
 			$unitsales .= '<input'; 
