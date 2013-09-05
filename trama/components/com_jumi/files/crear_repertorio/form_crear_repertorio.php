@@ -127,9 +127,10 @@ if ( isset ($objDatosRepertorio) ) {
 
 	
 </script>
-<h3><?php echo JText::_('CREAR').JText::_('REPERTORIO');  ?></h3>
+<div style="margin-left:15px;"><h1><?php echo JText::_('CREAR').JText::_('REPERTORIO'); ?></h1></div>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
+	<div class="datos_proy">
 	<?php 
 		echo $hiddenIdRepertorio;
 		echo $hiddenphotosIds; 
@@ -247,10 +248,9 @@ if ( isset ($objDatosRepertorio) ) {
 		value=""
 		name="url"
 		maxlength="100" /> 
-	<br> 
-	<br>
-	
-	<!-- ligas videos -->
+	</div>
+	<div class="datos_proy">
+	<h2><?php echo JText::_('LABEL_VIDEOS'); ?></h2>
 	<?php echo JText::_('VIDEOSP');  ?>
 	<br />
 	<?php
@@ -263,12 +263,11 @@ if ( isset ($objDatosRepertorio) ) {
 		echo $inputVideos = '<input type="text" id="linkYt'.($i+1).'" class="'.$obligatorio.'" value = "'.$urlVideo.'"	name="videoLink'.($i+1).'" /><br />';
 	}
 	?>
-	<br />
-	
-	<!-- ligas sonido -->
+	</div>
+	<div class="datos_proy">
+	<h2><?php echo JText::_('LABEL_AUDIOS'); ?></h2>
 	<?php echo JText::_('AUDIOSP');  ?>
-	<br />
-	
+	<br />	
 	<?php
 	for ( $i = 0; $i < $limiteSound; $i++ ) {
 		$urlSound = isset($ligasAudios[$i]) ? $ligasAudios[$i]->url : '';
@@ -277,9 +276,11 @@ if ( isset ($objDatosRepertorio) ) {
 		echo $inputSound = '<input type="text" id="linkSc1'.($i+1).'" class="validate[custom[sc]]" value = "'.$urlSound.'"	name="soundCloudLink'.($i+1).'" /><br />';
 	}
 	?>
-	
-	<br />
-	<label for="fotos" id="labelImagenes"><?php echo JText::_('TRAMA_FOTOS'); ?><span id="maximoImg"><?php echo $countImgs; ?></span>*:</label> 
+	</div>
+	<div class="datos_proy">
+	<h2><?php echo JText::_('LABEL_IMAGES'); ?></h2>
+	<div style="margin-bottom: 15px;"><?php echo JText::_('TRAMA_FOTOS_LIMITE'); ?><span id="maximoImg"><?php echo $countImgs; ?></span></div>
+	<label for="fotos" id="labelImagenes"><?php echo JText::_('TRAMA_FOTOS'); ?>*:</label> 
 	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo" />
 	
 	<?php
@@ -301,8 +302,10 @@ if ( isset ($objDatosRepertorio) ) {
 	}
 	?> 
 	<br />
-	<div style="max-width:430px;"><strong>NOTA</strong>: Para una mejor calidad del contenido las im&aacute;genes deben tener un tamaño no menor a 800x600 ni mayor a 1920x1200.</div>  
-	<br />
+	<div style="max-width:430px; font-size:12px;"><?php echo JText::_('NOTE_IMAGES'); ?></div>    
+	</div>
+	<div id="datos_generales_proy">
+	<h2><?php echo JText::_('LABEL_GENERALES'); ?></h2>
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('REPERTORIO'); ?>*:</label> <br />
 	<div style= "max-width:420px;">
 		<?php
@@ -378,7 +381,7 @@ if ( isset ($objDatosRepertorio) ) {
 			echo '';
 		}
 	?></textarea>
-	<br />
+	</div>
 	
 	
 	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">

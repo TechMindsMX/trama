@@ -222,11 +222,12 @@ if ( isset ($objDatosProducto) ) {
 	?>
 </div>
 
-<h3><?php echo JText::_('CREAR').JText::_('PRODUCTO');  ?></h3>
+<div style="margin-left:15px;"><h1><?php echo JText::_('CREAR').JText::_('PRODUCTO'); ?></h1></div>
 
 <?php echo $comentarios; ?>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
+	<div class="datos_proy">
 	<?php 
 		echo $hiddenIdProducto;
 		echo $hiddenphotosIds; 
@@ -303,21 +304,22 @@ if ( isset ($objDatosProducto) ) {
 	<br />
 	<?php echo $avatar; ?>
 	<br />
-	<br />
 	<label for="url"><?php echo JText::_('URL_PROY'); ?>: </label> 
 	<input 
 		type="text" 
 		class="validate[custom[url]]"
 		id="url"
 		value=""
+		placeholder="<?php echo JText::_('URL_VAL'); ?>"
 		name="url"
 		maxlength="100" > 
-		<br />
-		<br />
-	<!-- ligas videos -->
+	</div>
+	<div class="datos_proy">	
+	<h2><?php echo JText::_('LABEL_VIDEOS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label class="label_public"for="priv">¿Hacer estos datos públicos?</label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="videoPublic" 
@@ -330,10 +332,11 @@ if ( isset ($objDatosProducto) ) {
 		value="0" 
 		id="videoPublic"
 		<?php echo $checkedvideos?'':'checked="checked"';?>>No</input>
+		</div>
 	</LEGEND>
-	<br />
-	<?php echo JText::_('VIDEOSP');  ?>
-	<br />
+	<div style="padding:15px 0px;">
+	<?php echo JText::_('VIDEOSP'); ?>
+	</div>
 	<?php
 	for ( $i = 0; $i < $limiteVideos; $i++ ) {
 		$urlVideo = isset($ligasVideos[$i]) ? $ligasVideos[$i]->url : '';
@@ -345,10 +348,13 @@ if ( isset ($objDatosProducto) ) {
 	}
 	?>
 	</fieldset>
-	<br />
+	</div>
+	<div class="datos_proy">
+	<h2><?php echo JText::_('LABEL_AUDIOS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label class="label_public" for="priv">¿Hacer estos datos públicos?</label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="audioPublic" 
@@ -362,10 +368,11 @@ if ( isset ($objDatosProducto) ) {
 		value="0" 
 		id="audioPublic"
 		<?php echo $checkedsound?'':'checked="checked"';?>>No</input>
+	</div>
 	</LEGEND>
-	<!-- ligas sonido -->
-	<?php echo JText::_('AUDIOSP');  ?>
-	<br />
+	<div style="padding:15px 0px;">
+		<?php echo JText::_('AUDIOSP'); ?>
+	</div>
 	
 	<?php
 	for ( $i = 0; $i < $limiteSound; $i++ ) {
@@ -376,10 +383,13 @@ if ( isset ($objDatosProducto) ) {
 	}
 	?>
 	</fieldset>
-	<br />
+	</div>
+	<div class="datos_proy">
+	<h2><?php echo JText::_('LABEL_IMAGES'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label class="label_public" for="priv">¿Hacer estos datos públicos?</label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="imagePublic"
@@ -392,9 +402,11 @@ if ( isset ($objDatosProducto) ) {
 		value="0"
 		id="imagePublic"
 		<?php echo $checkedimages?'':'checked="checked"';?>>No</input>
+	</div>
 	</LEGEND>
 	<br />
-	<label for="fotos" id="labelImagenes"><?php echo JText::_('TRAMA_FOTOS'); ?><span id="maximoImg"><?php echo $countImgs; ?></span>*:</label> 
+	<div style="margin-bottom: 15px;"><?php echo JText::_('TRAMA_FOTOS_LIMITE'); ?><span id="maximoImg"><?php echo $countImgs; ?></span></div>
+	<label for="fotos" id="labelImagenes"><?php echo JText::_('TRAMA_FOTOS'); ?>*:</label> 
 	<input class="multi <?php echo $validacion; ?>" id="fotos" accept="gif|jpg|x-png" type="file" maxlength="10" name="photo" />
 	
 	<?php
@@ -416,12 +428,15 @@ if ( isset ($objDatosProducto) ) {
 	}
 	?> 
 	<br />
-	<div style="max-width:430px;"><strong>NOTA</strong>: Para una mejor calidad del contenido las im&aacute;genes deben tener un tamaño no menor a 800x600 ni mayor a 1920x1200.</div>  
+	<div style="max-width:430px; font-size:12px;"><?php echo JText::_('NOTE_IMAGES'); ?></div>    
 	</fieldset>
-	<br />
+	</div>
+	<div id="datos_generales_proy">
+	<h2><?php echo JText::_('LABEL_GENERALES'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label class="label_public" for="priv">¿Hacer estos datos públicos?</label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="infoPublic" 
@@ -434,6 +449,7 @@ if ( isset ($objDatosProducto) ) {
 		value="0" 
 		id="infoPublic"
 		<?php echo $checkedinfo?'':'checked="checked"';?>>No</input>
+	</div>
 	</LEGEND>
 	<br />
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PRODUCTO'); ?>*:</label> <br />
@@ -497,10 +513,13 @@ if ( isset ($objDatosProducto) ) {
     <div id="map-canvas" style="height: 400px; max-width: 420px"></div>
 	<br />
 		</fieldset>
-	<br> 
+	</div>
+	<div id="datos_finanzas_proy">
+	<h2><?php echo JText::_('LABEL_FINANZAS'); ?></h2>
 	<fieldset class="fieldset">
 	<LEGEND class="legend">
-	<label for="priv">¿Hacer estos datos públicos?</label>
+	<label class="label_public" for="priv">¿Hacer estos datos públicos?</label>
+	<div class="radios_public">
 	<input 
 		type="radio" 
 		name="numberPublic" 
@@ -513,6 +532,7 @@ if ( isset ($objDatosProducto) ) {
 		value="0" 
 		id="numberPublic"
 		<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
+	</div>
 	</LEGEND>
 	<br />
 	<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label> 
@@ -656,7 +676,7 @@ if ( isset ($objDatosProducto) ) {
 		}
 	?></textarea>
 	</fieldset>
-	<br />
+	</div>
 	<br />
 	
 	<input type="button" class="button" value="Cancelar" onclick="javascript:window.history.back()">
