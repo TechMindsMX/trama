@@ -76,80 +76,62 @@
 	<div id="contenedor">
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
             
-            <div id="nombre"><h3><?php echo JText::_('DATOS_FISCALES'); ?></h3></div>           
-            
+            <div style="margin-left:15px; text-transform:uppercase;"><h1><?php echo JText::_('DATOS_FISCALES'); ?></h1></div>           
+            <div class="datos_proy">
             <div id="datosFiscales">
-				<div class="_100">
 	                <label for="daFi_nomRazonSocial"><?php echo JText::_('RAZON_SOCIAL'); ?>:</label>
 	                <input name="daFi_nomRazonSocial" type="text" id="daFi_nomRazonSocial" maxlength="50" />
-	            </div>
-            	<div class="_25">
 	                <label for="daFi_rfcRFC">RFC(May&uacute;sculas)*:</label>
 	                <input name="daFi_rfcRFC" class="validate[required,custom[rfc]]" type="text" id="daFi_rfcRFC" maxlength="14" />
-	            </div>
-	            <div class="_75">
 	                <label for="daFi_nomNombreComercial"><?php echo JText::_('NOMBRE_COMERCIAL'); ?>:</label>
 	                <input name="daFi_nomNombreComercial" type="text" id="daFi_nomNombreComercial" maxlength="50" />
-	            </div>
+	            
             </div>             
-            
-            <div id="nombre"><h3><?php echo JText::_('DOM_FISCAL'); ?></h3></div>            
-            
-            <div class="_50">
-            	<label for="datosPrev"><?php echo JText::_('COPIAR_INFO'); ?></label>
             </div>
-            
-            <div class="_50" style="text-align: right;">
+            <div style="margin-left:15px; text-transform:uppercase;"><h1><?php echo JText::_('DOM_FISCAL'); ?></h1></div>            
+           		<div class="datos_proy">
+           		<div style="padding: 10px">
+            	<?php echo JText::_('COPIAR_INFO'); ?>            
             	<input name="Copiar" class="button" id="copiarDatos" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
-            </div>
-            
-            <div class="_50">
+            	</div>
+             
                	<label for="doFi_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
                 <input name="doFi_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doFi_nomCalle" maxlength="70" />
-            </div>
-            
-            <div class="_25">
+				<div class="juntos">
                	<label for="doFi_noExterior"><?php echo JText::_('NUM_EXT'); ?>*:</label>
-               	<input name="doFi_noExterior" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doFi_noExterior" size="10" maxlength="5" />
-            </div>
-            
-            <div class="_25">
+               	<input name="doFi_noExterior" class="validate[required,custom[onlyLetterNumber]] input_chica" type="text" id="doFi_noExterior" size="10" maxlength="5" />
+				</div>
+				<div class="juntos">
                	<label for="doFi_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
-               	<input name="doFi_noInterior" class="validate[custom[onlyLetterNumber]]" type="text" id="doFi_noInterior" size="10" maxlength="5" />
-            </div>
-            
-            <div class="_25">
+               	<input name="doFi_noInterior" class="validate[custom[onlyLetterNumber]] input_chica" type="text" id="doFi_noInterior" size="10" maxlength="5" />
+    			</div>
+    			<div>
                	<label for="doFi_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
-               	<input name="doFi_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]]"  type="text" id="doFi_iniCodigoPostal" size="10" maxlength="5" />
-            </div>
-            
-            <div class="_75">
+               	<input name="doFi_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]] input_chica"  type="text" id="doFi_iniCodigoPostal" size="10" maxlength="5" />
+				</div>
+				<div>
                	<label for="doFi_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
                	<!--input name="doFi_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doFi_nomColonias" maxlength="50" /-->
                	<select name="doFi_perfil_colonias_idcolonias" class="validate[required]" id="doFi_nomColonias"></select>
-            </div>
-            
-            <div class="_50">
+				</div>
+				<div>
             	<label for="doFi_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
-            	<input name="doFi_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" type="text" id="doFi_nomDelegacion" maxlength="50" />
-            </div> 
-            
-            <div class="_25">
+            	<input name="doFi_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doFi_nomDelegacion" maxlength="50" />
+				</div>
+				<div>
                	<label for="doFi_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
                	<select name="doFi_perfil_estado_idestado" id="doFi_nomEstado" class="validate[required]" ></select>
-            </div>
-            
-            <div class="_25">
+				</div>
+				<div>
                	<label for="doFi_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                	<select name="doFi_perfil_pais_idpais" id="doFi_nomPais" class="validate[required]">
                		<option value="1" selected="selected">M&eacute;xico</option>
 				</select>
-			</div>
-			
+				</div>
 			<div>
 				<input name="Enviar" class="button" type="submit" onclick="return validar();" value="<?php echo JText::_('ENVIAR'); ?>" />
 			</div>
-		
+		</div>
 		</form>
 	</div>
 </body>
