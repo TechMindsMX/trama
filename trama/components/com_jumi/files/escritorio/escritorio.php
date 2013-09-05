@@ -192,7 +192,7 @@ $promedio = $objuserdata->scoreUser($userid);
 											echo '</td>';
 											echo "<td>";
 												if($value->status == 0 || $value->status == 2) {
-													echo '<a class="button editar" href="'.$value->editUrl.'">Ir</a>';
+													echo '<a class="button" href="'.$value->editUrl.'">Ir</a>';
 												}
 											echo "</td>";
 
