@@ -39,6 +39,7 @@ class JTrama
 		}
 		return $nomCat;
 	}
+
 	public function getCatName($data) {
 		$cats = JTrama::fetchAllCats();
 		foreach ($cats as $key => $value) {

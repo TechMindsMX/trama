@@ -220,7 +220,7 @@ function tablaFinanzas($data) {
 		$html .= '<tr>';
 		$html .= $opentag.$value->section.$closetag;
 		$html .= $opentag.'<span class="number">'.$value->unitSale.'</span>'.$closetag;
-		$html .= $opentag.'<span class="number">'.$value->capacity.'</span>'.$closetag;
+		$html .= $opentag.'<span class="number">'.$value->unit.'</span>'.$closetag;
 		$html .= '</tr>';
 	}
 	$html .= '</table>';
@@ -572,10 +572,10 @@ function codeAddress() {
 			$('#rating').raty({
 				click: function(score, evt) {
 					var request = $.ajax({
-						url:"http://192.168.0.122:7070/trama-middleware/rest/project/rate",
+						url:"<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/rate",
 						data: {
 							"score": score,
-							"projectId": "<?php echo $_GET['proyid']; ?>",
+							"projectId": "<?php echo $proyecto; ?>",
 							"token": "<?php echo $token; ?>",
 							"userId": <?php echo $usuario->id; ?>
 						},
