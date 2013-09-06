@@ -364,7 +364,7 @@
 			<div class="datos_proy_cv">
             	<label for="daGr_dscDescripcionPersonal"><?php echo JText::_('DESC_EMP'); ?></label>            
                 
-                <div style= "max-width:630px;">
+                <div style= "max-width:7550px;">
 				<?php
 					$editor =& JFactory::getEditor('tinymce');
 					$contenidoDescription = isset($generales) ? $generales->dscDescripcionPersonal : '';
@@ -384,7 +384,7 @@
            <br />
             	<label for="daGr_dscCurriculum"><?php echo JText::_('CV'); ?></label>            
                 
-                <div style= "max-width:630px;">
+                <div style= "max-width:750px;">
 				<?php
 					$editor =& JFactory::getEditor('tinymce');
 					$contenidoCv = isset($generales) ? $generales->dscCurriculum : '';

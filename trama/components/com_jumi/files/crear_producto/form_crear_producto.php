@@ -453,7 +453,7 @@ if ( isset ($objDatosProducto) ) {
 	</LEGEND>
 	<br />
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('PRODUCTO'); ?>*:</label> <br />
-	<div style= "max-width:420px;">
+	<div style= "max-width:755px;">
 		<?php
 			$editor =& JFactory::getEditor('tinymce');
 			$contenidoDescription = isset($objDatosProducto) ? $objDatosProducto->description : '';
@@ -474,7 +474,7 @@ if ( isset ($objDatosProducto) ) {
 	<br /> 
 	<br />
 	<label for="elenco"><?php echo JText::_('ELENCO'); ?>:</label> <br />
-	<div style= "max-width:420px;">
+	<div style= "max-width:755px;">
 		<?php
 			$editor =& JFactory::getEditor('tinymce');
 			$contenidoCast = isset($objDatosProducto) ? $objDatosProducto->cast : '';
@@ -506,7 +506,7 @@ if ( isset ($objDatosProducto) ) {
 	<br>
 	
 	<br />
-	<div id="panel" style="max-width: 420px">
+	<div id="panel" >
 		<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
       <input name="showground" class="validate[required]" value="<?php echo isset($objDatosProducto) ? $objDatosProducto->showground : ''; ?>" id="searchTextField" type="text" size="50">
        </div>

@@ -307,7 +307,7 @@ if ( isset ($objDatosRepertorio) ) {
 	<div id="datos_generales_proy">
 	<h2><?php echo JText::_('LABEL_GENERALES'); ?></h2>
 	<label for="descProy"><?php echo JText::_('DESCRIPCION').JText::_('REPERTORIO'); ?>*:</label> <br />
-	<div style= "max-width:420px;">
+	<div style= "max-width:755px;">
 		<?php
 			$editor =& JFactory::getEditor('tinymce');
 			$contenidoDescription = isset($objDatosRepertorio) ? $objDatosRepertorio->description : '';
@@ -330,7 +330,7 @@ if ( isset ($objDatosRepertorio) ) {
 	<br />
 		<label for="elenco">
 		<?php echo JText::_('ELENCO'); ?>:</label> <br />
-		<div style= "max-width:420px;">
+		<div style= "max-width:755px;">
 		<?php
 			$editor =& JFactory::getEditor('tinymce');
 			$contenidoCast = isset($objDatosRepertorio) ? $objDatosRepertorio->cast : '';
@@ -361,7 +361,7 @@ if ( isset ($objDatosRepertorio) ) {
 		<br>
 	
 	<br />
-	<div id="panel" style="max-width: 420px">
+	<div id="panel" >
 		<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
       <input name="showground" class="validate[required]" value="<?php echo isset($objDatosRepertorio) ? $objDatosRepertorio->showground : ''; ?>" id="searchTextField" type="text" size="50">
        </div>

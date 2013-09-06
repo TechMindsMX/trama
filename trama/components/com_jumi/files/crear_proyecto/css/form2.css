@@ -2,7 +2,8 @@ label {
 	float: left;
 	width:155px;
 }
-input#nomProy {
+
+input#nomProy, input#nameRecinto, input#searchTextField {
 	width: 100% !important;
 	margin-bottom: 5px;
 	max-width:550px;
