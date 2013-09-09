@@ -77,7 +77,7 @@ class AltaProveedores {
 		$endDate = $this -> objDatos -> premiereStartDate;
 		for ($i = strtotime($startDate); $i <= strtotime($endDate); $i = strtotime('+1 day', $i)) {
 		  if (date('N', $i) == $this -> diaPagoProveedores ) 
-		    $fechasPago[] = date('Y-m-d', $i);
+		    $fechasPago[] = date('d-m-Y', $i);
 		}
 		$this->fechasPago = $fechasPago;
 	}
@@ -224,11 +224,14 @@ if (isset($proyecto->miembrosGrupo)) {
 		
 		$('select').change(function(){
 	        if(this.name == 'advanceDate') {
-	            var fecha1 = new Date($(this).val());
+	        	var date1 = $(this).val().split('-');
+	            var fecha1 = new Date(date1[2]+'-'+date1[1]+'-'+date1[0]);
 	            var selectLiquidacion = $(this).parent().next().children('select');
-	
+
 	            $.each(selectLiquidacion[0], function(index, value){
-	                var fechaOption = new Date($(value).val());
+	                var date2 = $(value).val().split('-');
+	                var fechaOption = new Date(date2[2]+'-'+date2[1]+'-'+date2[0]);
+
 	                if(fecha1 >= fechaOption) {
 	                    $(this).prop('disabled', true);
 	                }else{

@@ -647,7 +647,7 @@ if ( isset ($objDatosProducto) ) {
 		type = "text" 
 	    id = "premiereStartDate" 
 	    class = "validate[required, custom[date], custom[funciondate]]"
-	    value = "<?php echo isset($objDatosProducto) ? $fechaFin[2].'/'.$fechaFin[1].'/'.$fechaFin[0] : ''; ?>" 
+	    value = "<?php echo isset($objDatosProducto) ? $objDatosProducto->productionStartDate : ''; ?>" 
 	    name = "premiereStartDate" />
 	       
 	<br> 
@@ -657,7 +657,7 @@ if ( isset ($objDatosProducto) ) {
 		type = "text" 
 		id = "premiereEndDate" 
 		class = "validate[required], custom[date], custom[cierre]"
-		value = "<?php echo isset($objDatosProducto) ? $fechaCierre[2].'/'.$fechaCierre[1].'/'.$fechaCierre[0] : ''; ?>" 
+		value = "<?php echo isset($objDatosProducto) ? $objDatosProducto->premiereEndDate : ''; ?>" 
 		name = "premiereEndDate">
 	<br /> 
 	<br />

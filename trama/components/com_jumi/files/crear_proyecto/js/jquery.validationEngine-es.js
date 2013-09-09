@@ -25,12 +25,12 @@
                 		var respuesta = true;
                 		
                 		if(validaFechaDDMMAAAA(field.val())){
-                			valorCampo = field.val().split('/');
+                			valorCampo = field.val().split('-');
 							fechaCampo.setFullYear(valorCampo[2],valorCampo[1]-1,valorCampo[0])                		
                 		}
                 		return ( hoy <= fechaCampo ) ? true : false;
                 	},
-                	"alertText": "* La fecha no puede ser menor a "+new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
+                	"alertText": "* La fecha no puede ser menor a "+new Date().getDate()+'-'+(new Date().getMonth()+1)+'-'+new Date().getFullYear()
                 },
                 "valitiny": {
                 	"func":function (field) {
@@ -52,8 +52,8 @@
                 		if(validaFechaDDMMAAAA(field.val())){
 						    var fecha = field.val();
 						    var fechaminima = jQuery('#productionStartDate').val();
-						    var arrayfecha = fecha.split('/');
-						    var arrayfechamin = fechaminima.split('/');
+						    var arrayfecha = fecha.split('-');
+						    var arrayfechamin = fechaminima.split('-');
 						    var date1 = new Date();
 						    var date2 = new Date();
 						    var date3 = new Date();
@@ -72,8 +72,8 @@
                 		if(validaFechaDDMMAAAA(field.val())){
 						    var fecha = field.val();
 						    var fechaminima = jQuery('#premiereStartDate').val();
-						    var arrayfecha = fecha.split('/');
-						    var arrayfechamin = fechaminima.split('/');
+						    var arrayfecha = fecha.split('-');
+						    var arrayfechamin = fechaminima.split('-');
 						    var date1 = new Date();
 						    var date2 = new Date();
 						    
@@ -247,7 +247,7 @@
 })(jQuery);
 
 function validaFechaDDMMAAAA(fecha){
-	var dtCh= "/";
+	var dtCh= "-";
 	var minYear=1900;
 	var maxYear=2100;
 	function isInteger(s){
