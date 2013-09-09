@@ -155,7 +155,7 @@ class JTrama
 		
 		$query
 		->select('id')
-		->from('#__community_groups')
+		->from('c3rn2_community_groups')
 		->where('proyid = '.$id);
 		
 		$db->setQuery( $query );
@@ -210,19 +210,19 @@ class JTrama
 		$value->premiereEndDateCode = $value->premiereEndDate;
 
 		if (isset($value->fundStartDate)) {
-			$value->fundStartDate = date('d-m-Y', ($value->fundStartDateCode/1000) );
+			$value->fundStartDate = date('d/m/Y', ($value->fundStartDateCode/1000) );
 		}
 		if (isset($value->fundEndDate)) {
-			$value->fundEndDate = date('d-m-Y', ($value->fundEndDate/1000) );
+			$value->fundEndDate = date('d/m/Y', ($value->fundEndDate/1000) );
 		}
 		if (isset($value->productionStartDate)) {
-			$value->productionStartDate = date('d-m-Y', ($value->productionStartDate/1000) );
+			$value->productionStartDate = date('d/m/Y', ($value->productionStartDate/1000) );
 		}
 		if (isset($value->premiereStartDate)) {
-			$value->premiereStartDate = date('d-m-Y', ($value->premiereStartDate/1000) );
+			$value->premiereStartDate = date('d/m/Y', ($value->premiereStartDate/1000) );
 		}
 		if (isset($value->premiereEndDate)) {
-			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDate/1000) );
+			$value->premiereEndDate = date('d/m/Y', ($value->premiereEndDate/1000) );
 		}
 	}
 

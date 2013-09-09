@@ -88,10 +88,6 @@ if ( isset ($objDatosProyecto) ) {
 		$ligasVideos = $objDatosProyecto->projectVideos;
 		$ligasAudios = $objDatosProyecto->projectSoundclouds;
 		
-		$fechaIniProd = explode('-',$objDatosProyecto->productionStartDate);
-		$fechaFin = explode('-',$objDatosProyecto->premiereStartDate);
-		$fechaCierre = explode('-',$objDatosProyecto->premiereEndDate);
-		
 		$countunitSales = count($objDatosProyecto->projectUnitSales);
 		$datosRecintos = $objDatosProyecto->projectUnitSales;
 		
@@ -682,7 +678,7 @@ if ( isset ($objDatosProyecto) ) {
 		type = "text" 
 	    id = "productionStartDate" 
 	    class = "validate[required, custom[date], custom[funciondate]]"
-	    value = "<?php echo isset($objDatosProyecto) ? $fechaIniProd[2].'/'.$fechaIniProd[1].'/'.$fechaIniProd[0] : ''; ?>" 
+	    value = "<?php echo isset($objDatosProyecto) ? $objDatosProyecto->productionStartDate : ''; ?>" 
 	    name = "productionStartDate" /> 
 	<br>
 	
@@ -691,7 +687,7 @@ if ( isset ($objDatosProyecto) ) {
 		type = "text" 
 	    id = "premiereStartDate" 
 	    class = "validate[required, custom[date], custom[fininicio]]"
-	    value = "<?php echo isset($objDatosProyecto) ? $fechaFin[2].'/'.$fechaFin[1].'/'.$fechaFin[0] : ''; ?>" 
+	    value = "<?php echo isset($objDatosProyecto) ? $objDatosProyecto->premiereStartDate : ''; ?>" 
 	    name = "premiereStartDate" />
 	       
 	<br> 
@@ -701,7 +697,7 @@ if ( isset ($objDatosProyecto) ) {
 		type = "text" 
 		id = "premiereEndDate" 
 		class = "validate[required, custom[date], custom[cierre]]"
-		value = "<?php echo isset($objDatosProyecto) ? $fechaCierre[2].'/'.$fechaCierre[1].'/'.$fechaCierre[0] : ''; ?>" 
+		value = "<?php echo isset($objDatosProyecto) ? $objDatosProyecto->premiereEndDate : ''; ?>" 
 		name = "premiereEndDate">
 	<br /> 
 	<br />
