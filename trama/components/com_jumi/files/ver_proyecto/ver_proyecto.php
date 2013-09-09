@@ -266,7 +266,7 @@ function encabezado($data) {
 		'<h1>'.$data->name.'</h2>'.
 		'<h2 class="mayusc">'.JTrama::getSubCatName($data->subcategory).'</h3>'.
 		'<p id="productor">'.JTrama::getProducerProfile($data->userId).'</p>'.
-		'<p class="fechacreacion"> Creado '.date('d/M/Y', $fechacreacion).'</p>'.
+		'<p class="fechacreacion"> Creado '.date('d-M-Y', $fechacreacion).'</p>'.
 		'<h3 class="tipo_proy_prod mayusc">'.$data->etiquetaTipo.' - '.JTrama::getStatusName($data->status).'</h3>'.
 		'</div>';
 	
@@ -450,7 +450,7 @@ function userName($data) {
 				}
 				?>
 				</div>
-			<a class="cerrar">cerrar</a>
+			<a class="cerrar"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></a>
 			</div>
 			<div id="gallery" class="ver_proyecto">
 			<div id="wrapper">
@@ -468,7 +468,7 @@ function userName($data) {
 				}
 				?>
         	</div>
-				<a class="cerrar">cerrar</a>
+				<a class="cerrar"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></a>
 			</div>
 			<div id="audios" class="ver_proyecto">
 				<?php
@@ -478,25 +478,25 @@ function userName($data) {
 					echo JText::_('CONTENIDO_PRIVADO');
 				}
 				?>
-				<a class="cerrar">cerrar</a>
+				<a class="cerrar"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></a>
 			</div>
 			<div id="finanzas" class="ver_proyecto">
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->numberPublic == 1) || ($json->userId == $usuario->id) ){
-					echo '<h1 class="mayusc">'.JText::_('FINANZAS').'</h1>';
+					echo '<h1 class="mayusc">'.JText::_('LABEL_FINANZAS').'</h1>';
 					echo informacionTmpl($json, "finanzas"); 
 				}elseif( ($json->acceso == null) || ($json->numberPublic == 0) ) {
 					echo JText::_('CONTENIDO_PRIVADO');
 				}
 				?>
-				<a class="cerrar">cerrar</a>
+				<a class="cerrar"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></a>
 			</div>
 			
 			<div id="info" class="ver_proyecto">
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
-				<h1 class="mayusc">Informacion</h1>
+				<h1 class="mayusc"><?php echo JText::_('LABEL_INFO'); ?></h1>
 				
 				<div class="detalleDescripcion">
 					<?php 
@@ -543,7 +543,7 @@ function codeAddress() {
     </script>
  	
 				</div>
-				<a class="cerrar">cerrar</a>
+				<a class="cerrar"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></a>
 			</div>
 		</div>
 		<div id="menu">
