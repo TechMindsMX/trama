@@ -170,6 +170,7 @@ if ( isset ($objDatosProducto) ) {
 		});
 		
 	});
+
 	
 </script>
 
@@ -680,8 +681,8 @@ if ( isset ($objDatosProducto) ) {
 	</fieldset>
 	</div>
 	<br />
-	
-	<input type="button" class="button" value="Cancelar" onclick="javascript:window.history.back()">
+	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		javascript:window.history.back();">
 	<input type="button" class="button" id="guardar" value="<?php echo JText::_('ENVIAR');  ?>">
 	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION');  ?>">
 </form>

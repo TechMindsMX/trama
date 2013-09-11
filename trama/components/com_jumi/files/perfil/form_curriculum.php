@@ -138,6 +138,8 @@
             </span>
             <input type="button" onclick="moreFieldsProy(this,true)" value="<?php echo JText::_('AGREGAR_PROY'); ?>" /><br /><br />
 			<div>
+				<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+			javascript:window.history.back();">
 				<input name="Enviar" type="submit" onclick="return validar();" value="<?php echo JText::_('ENVIAR'); ?>" />
 			</div>
 		</form>
