@@ -116,6 +116,8 @@ if ( isset ($objDatosProducto) ) {
 		jQuery("#form2").validationEngine();
 
 		jQuery("#guardar, #revision").click(function (){
+
+			if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
 			var form = jQuery("#form2")[0];
 			var total = form.length;
 			
@@ -167,6 +169,7 @@ if ( isset ($objDatosProducto) ) {
 			}
 
 			jQuery("#form2").submit();
+			}
 		});
 		
 	});
