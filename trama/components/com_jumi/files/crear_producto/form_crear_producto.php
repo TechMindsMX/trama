@@ -113,6 +113,9 @@ if ( isset ($objDatosProducto) ) {
 		$allDone->redirect('index.php', $mensaje );
 	}
 }
+if ($status_producto == 4){
+	$deshabilitado = 'disabled="disabled"';
+}
 ?>
 <script>
 	jQuery(document).ready(function(){

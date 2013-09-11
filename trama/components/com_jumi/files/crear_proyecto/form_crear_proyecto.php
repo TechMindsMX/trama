@@ -132,6 +132,9 @@ if ( isset ($objDatosProyecto) ) {
 		
 	}
 }
+if ($status_proyecto == 4){
+	$deshabilitado = 'disabled="disabled"';
+}
 ?>
 <script>
 	jQuery(document).ready(function(){	
