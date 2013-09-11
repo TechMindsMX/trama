@@ -38,10 +38,10 @@
 			
 			jQuery('#freelance').change(function () {
 				if(!this.checked) {
-					jQuery('#compania').fadeIn();
+					jQuery('#companiadiv').fadeIn();
 				} else {
-					jQuery('#compania').fadeOut();
-					jQuery('#compania input').val('');
+					jQuery('#companiadiv').fadeOut();
+					jQuery('#companiadiv input').val('');
 				}
 			});
 
@@ -62,6 +62,7 @@
 						echo "jQuery('#freelance').prop('checked', true);";
 						echo "jQuery('#daGr_nomCompania').val('');";
 						echo "jQuery('#compania').hide();";
+						
 					}
 					
 					for ($i=0; $i < count($email); $i++) {
@@ -139,15 +140,15 @@
 					type="text" 
 					id="daGr_nomJobTitle" 
 					maxlength="25" />
-
+				<div id="companiadiv">
 				<label for="daGr_nomCompania"><?php echo JText::_('COMPANIA'); ?>:</label>
 				<input 
 					name="daGr_nomCompania" 
 					class="validate[custom[onlyLetterSp]]" 
 					type="text" 
-					id="daGr_nomCompania" 
+					id="compania" 
 					maxlength="25" />
-	
+				</div>
 				<label for="daGr_freelance"><?php echo JText::_('FREELANCE'); ?>:</label>
 				<input 
 					name="daGr_freelance" 
