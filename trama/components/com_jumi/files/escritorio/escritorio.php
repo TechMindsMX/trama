@@ -68,7 +68,7 @@ $promedio = $objuserdata->scoreUser($userid);
 }
 </style>
     <body>
-        
+        <h1><?php echo JText::_('MI_ESCRITORIO');?></h1>
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
       <div id="contenido">  

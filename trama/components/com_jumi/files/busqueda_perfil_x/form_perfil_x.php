@@ -57,7 +57,7 @@ function habilita(campo) {
 	}
 }
 </script>
-	
+	<h1><?php echo $titulo?></h1>
 <form action="<?php echo $accion; ?>" id="perfilX" method="post" name="perfilX">
 
 <div id="tree">
