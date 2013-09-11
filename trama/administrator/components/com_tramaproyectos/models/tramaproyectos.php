@@ -16,7 +16,7 @@ class TramaProyectosModelTramaProyectos extends JModelList
          */
         public function getDatos()
         {
-			$query = JTrama::getDatos($temporal);
+			$query = JTrama::allProjects();
 			
 			return $query;
         }
