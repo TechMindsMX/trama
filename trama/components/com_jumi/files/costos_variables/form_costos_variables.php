@@ -125,14 +125,14 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		name="isep" /> %
 	</div>
 	<div style="height: 46px;">
-	<label for="tiketService"> <?php echo JText::_('BOLETAJE');  ?>: </label>  
+	<label for="ticketService"> <?php echo JText::_('BOLETAJE');  ?>: </label>  
 	<input 
 		type="text"
 		id="tiketService"
 		class="validate[custom[onlyNumberTiket]]"
 		maxlength="5"
 		value="3.5"
-		name="tiketService" /> %
+		name="ticketService" /> %
 	</div>
 <div><h3><?php echo JText::_('DERECHOS_AUTOR');  ?></h3></div>
 	<div>
