@@ -24,6 +24,11 @@ JHtml::_('behavior.modal');
 $token = JTrama::token();
 $objDatosProyecto = JTrama::getDatos( (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
 
+$deshabilitado = '';
+if (count($objDatosProyecto->logs) > 2){
+	$deshabilitado = 'disabled="disabled"';
+}
+
 //definicion de los valores de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
 $hiddenphotosIds = '<input type="hidden" name="projectPhotosIds" id="projectPhotosIds" value= ""/>';
@@ -52,7 +57,6 @@ $ligasAudios = '';
 $ligaEditProveedores = '';
 $ligaCostosVariable = '';
 //termina los definicion de campos del formularios
-
 if ( isset ($objDatosProyecto) ) {
 	if( ($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) && ($objDatosProyecto) && ($objDatosProyecto->userId == $usuario->id) ) {
 		if($objDatosProyecto->status == 2) {
@@ -737,7 +741,7 @@ if ( isset ($objDatosProyecto) ) {
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
 	<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
-	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
+	<input type="button" class="button" id="revision" <?php echo $deshabilitado ?> value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
 
 
 </form>

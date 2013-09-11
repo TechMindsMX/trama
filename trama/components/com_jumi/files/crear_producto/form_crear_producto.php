@@ -23,6 +23,10 @@ $subCategorias = JTrama::getAllSubCats();
 $token = JTrama::token();
 $objDatosProducto = JTrama::getDatos( (!empty($_GET['proyid']))?$_GET['proyid']:null);
 
+$deshabilitado = '';
+if (count($objDatosProducto->logs) > 2){
+	$deshabilitado = 'disabled="disabled"';
+}
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
 $hiddenphotosIds = '<input type="hidden" name="projectPhotosIds" id="projectPhotosIds" value= ""/>';
@@ -687,5 +691,5 @@ if ( isset ($objDatosProducto) ) {
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
 	<input type="button" class="button" id="guardar" value="<?php echo JText::_('ENVIAR');  ?>">
-	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION');  ?>">
+	<input type="button" class="button" id="revision" <?php echo $deshabilitado ?> value="<?php echo JText::_('ENVIAR_REVISION');  ?>">
 </form>
