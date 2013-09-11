@@ -33,6 +33,7 @@
 	
 	<script>
 		jQuery(document).ready(function(){
+			jQuery("#formID").find(".toggle-editor").css("display","none");
 			jQuery("#formID").validationEngine();
 			
 			jQuery('#freelance').change(function () {

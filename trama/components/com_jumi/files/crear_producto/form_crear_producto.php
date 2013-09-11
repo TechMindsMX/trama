@@ -112,6 +112,7 @@ if ( isset ($objDatosProducto) ) {
 ?>
 <script>
 	jQuery(document).ready(function(){
+		jQuery("#form2").find(".toggle-editor").css("display","none");
 		jQuery("#form2").validationEngine();
 
 		jQuery("#guardar, #revision").click(function (){
@@ -535,6 +536,7 @@ if ( isset ($objDatosProducto) ) {
 	</div>
 	</LEGEND>
 	<br />
+	<div><a href="#"><?php echo JText::_('PLANTILLAS_EXCEL'); ?></a></div>
 	<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label> 
 	<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 	<br />

@@ -77,6 +77,7 @@ if ( isset ($objDatosRepertorio) ) {
 	jQuery(document).ready(function(){
 		jQuery('#description').addClass('validate[required,custom[tiny]]');
 		jQuery("#tinymce").addClass( "validate[required]");
+		jQuery("#form2").find(".toggle-editor").css("display","none");
 		jQuery("#form2").validationEngine();
 
 		jQuery("#enviar").click(function (){
