@@ -25,9 +25,7 @@ $token = JTrama::token();
 $objDatosProyecto = JTrama::getDatos( (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
 
 $deshabilitado = '';
-if (count($objDatosProyecto->logs) > 2){
-	$deshabilitado = 'disabled="disabled"';
-}
+
 
 //definicion de los valores de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
@@ -58,6 +56,9 @@ $ligaEditProveedores = '';
 $ligaCostosVariable = '';
 //termina los definicion de campos del formularios
 if ( isset ($objDatosProyecto) ) {
+	if (count($objDatosProyecto->logs) > 2){
+		$deshabilitado = 'disabled="disabled"';
+	}
 	if( ($objDatosProyecto->status == 0 || $objDatosProyecto->status == 2) && ($objDatosProyecto) && ($objDatosProyecto->userId == $usuario->id) ) {
 		if($objDatosProyecto->status == 2) {
 			$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.

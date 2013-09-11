@@ -155,7 +155,7 @@
                     "func": function (field){
                 		return validaFechaDDMMAAAA(field.val());
                 	},
-                    "alertText": "* Fecha inválida, por favor utilize el formato DD/MM/AAAA"
+                    "alertText": "* Fecha inválida, por favor utilize el formato DD-MM-AAAA"
                 },
                 "ipv4": {
                 	"func": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,

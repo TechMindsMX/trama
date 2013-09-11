@@ -24,9 +24,7 @@ $token = JTrama::token();
 $objDatosProducto = JTrama::getDatos( (!empty($_GET['proyid']))?$_GET['proyid']:null);
 
 $deshabilitado = '';
-if (count($objDatosProducto->logs) > 2){
-	$deshabilitado = 'disabled="disabled"';
-}
+
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';
 $hiddenphotosIds = '<input type="hidden" name="projectPhotosIds" id="projectPhotosIds" value= ""/>';
@@ -54,6 +52,9 @@ $ligasAudios = '';
 //termina los definicion de campos del formularios
 
 if ( isset ($objDatosProducto) ) {
+	if (count($objDatosProducto->logs) > 2){
+		$deshabilitado = 'disabled="disabled"';
+	}
 	if( ($objDatosProducto->status == 0 || $objDatosProducto->status == 2) && ($objDatosProducto->userId == $usuario->id) ) {
 		if($objDatosProducto->status == 2) {
 			$comentarios = '<span class="ligacomentarios"><a data-rokbox href="#" data-rokbox-element="#divContent">Comentarios</a></span>';

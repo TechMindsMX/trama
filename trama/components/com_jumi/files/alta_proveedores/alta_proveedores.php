@@ -96,7 +96,7 @@ $token = JTrama::token();
 
 
 <h2><?php echo JText::_('ALTA_PROVEEDORES'); ?></h2>
-<form action="<?php echo $accion ?>" method="post" class="" id="proveedores" >
+	
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
 	
 	<p><?php echo JText::_('CATEGORIA').' = '.$proyecto -> objDatos -> catName; ?></p>
@@ -106,43 +106,8 @@ $token = JTrama::token();
 	<p><?php echo JText::_('STATUS').' = '.$proyecto -> objDatos -> statusName; ?></p>
 	<p><?php echo JText::_('PRESUPUESTO_VISTAS').' = $'.$proyecto -> objDatos -> budget; ?></p>
 	
-	<input type="hidden" value="" name="projectProvider" id="data_send"/>
-	<input type="hidden" value="<?php echo $token;?>" name="token">
-	<!-- Tabla con proveedores-->
-	<div style="margin-bottom: 10px;">
-		<table width="100%" style="text-align: center;" frame="box" rules="all">
-			<tr>
-				<th></th>
-				<th colspan="2"><?php echo JText::_('ANTICIPO'); ?></th>
-				<th colspan="2"><?php echo JText::_('LIQUIDACION'); ?></th>
-			</tr>
-			<tr>
-				<th><?php echo JText::_('PROVEEDOR'); ?></th>
-				<th><?php echo JText::_('FECHA'); ?></th>
-				<th><?php echo JText::_('MONTO'); ?></th>
-				<th><?php echo JText::_('FECHA'); ?></th>
-				<th><?php echo JText::_('MONTO'); ?></th>
-			</tr>
-			<?php
-			foreach ($proveedores as $key => $value) {
-			?>
-			<tr>
-				<td><?php echo JFactory::getUser($value->providerId)->name; ?></td>
-				<td><?php echo $value->advanceDate; ?></td>
-				<td>$<?php echo $value->advanceQuantity; ?></td>
-				<td><?php echo $value->settlementDate; ?></td>
-				<td>$<?php echo $value->settlementQuantity; ?></td>
-			</tr>
-			<?php
-			}
-			?>
-		</table>
-	</div>
-	<!--Fin de tabla-->
-	<input type="submit" value="Enviar" id="guardar" class="button" />
-</form>
 	<form id="agregados">
-		<span class="total_proveedor"><?php echo JText::_('TOTAL'); ?></span> = <span class="total"></span>
+		<span class="total_proveedor"><?php echo JText::_('TOTAL_PROVEDORES'); ?></span> = <span class="total"></span>
 		<input type="hidden" value="<?php echo $proyecto -> objDatos -> id; ?>" name="projectId" id="proyid"/>
 	</form>
 
@@ -270,3 +235,41 @@ if (isset($proyecto->miembrosGrupo)) {
 		});
 	});
 </script>
+<form action="<?php echo $accion ?>" method="post" class="" id="proveedores" >
+	
+	
+	<input type="hidden" value="" name="projectProvider" id="data_send"/>
+	<input type="hidden" value="<?php echo $token;?>" name="token">
+	<!-- Tabla con proveedores-->
+	<div style="margin-bottom: 10px;">
+		<table width="100%" style="text-align: center;" frame="box" rules="all">
+			<tr>
+				<th></th>
+				<th colspan="2"><?php echo JText::_('ANTICIPO'); ?></th>
+				<th colspan="2"><?php echo JText::_('LIQUIDACION'); ?></th>
+			</tr>
+			<tr>
+				<th><?php echo JText::_('PROVEEDOR'); ?></th>
+				<th><?php echo JText::_('FECHA'); ?></th>
+				<th><?php echo JText::_('MONTO'); ?></th>
+				<th><?php echo JText::_('FECHA'); ?></th>
+				<th><?php echo JText::_('MONTO'); ?></th>
+			</tr>
+			<?php
+			foreach ($proveedores as $key => $value) {
+			?>
+			<tr>
+				<td><?php echo JFactory::getUser($value->providerId)->name; ?></td>
+				<td><?php echo $value->advanceDate; ?></td>
+				<td>$<?php echo $value->advanceQuantity; ?></td>
+				<td><?php echo $value->settlementDate; ?></td>
+				<td>$<?php echo $value->settlementQuantity; ?></td>
+			</tr>
+			<?php
+			}
+			?>
+		</table>
+	</div>
+	<!--Fin de tabla-->
+	<input type="submit" value="Enviar" id="guardar" class="button" />
+</form>
