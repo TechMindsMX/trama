@@ -59,44 +59,16 @@ $datosObj = JTrama::getDatos($proyid);
 					}
 				}
 				
+				for(i=0; i<total; i++) {
+					console.log(form[i].name+' --- '+form[i].value);
+				}
+				
 				jQuery("#form2").submit();
 //			}
 		});
 	});
         
 </script>
-
-<!--DIV DE AGREGAR CAMPOS-->
-<div id="readroot" style="display: none">
-	<label for=""><?php echo JText::_('SECCION'); ?>*:</label> 
-	<input 
-		type="text" 
-		class="validate[required,custom[onlyLetterNumber]]"
-		name="section0">
-	<br />
-	
-	<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
-	<input 
-		type="text" 
-		class="validate[required,custom[onlyNumberSp]]" 
-		name="unitSale0" step="any"> 
-	<br>
-	
-	<label for=""><?php echo JText::_('INVENTARIOPP'); ?>:</label> 
-	<input 
-		type="text" 
-		class="validate[required,custom[onlyNumberSp]]" 
-		value=""
-		name="capacity0"> 
-	<br /> 
-	
-	<input 
-		type="button" 
-		value="<?php echo JText::_('QUITAR_CAMPOS'); ?>" 
-		onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
-	<br /><br />
-</div>
-<!--FIN DIV DE AGREGAR CAMPOS-->
 
 <div style="margin-left:15px;"><h1><?php echo $titulo; ?></h1></div>
 
@@ -384,7 +356,7 @@ $datosObj = JTrama::getDatos($proyid);
 				type="text" 
 				class="validate[required]" 
 				id="nameRecinto"
-				value="<?php echo isset($objDatos) ? $objDatos->inclosure : ''; ?>" 
+				value="" 
 				name="inclosure"
 				maxlength="100" /> 
 			<br>
@@ -392,7 +364,7 @@ $datosObj = JTrama::getDatos($proyid);
 			<br />
 			<div id="panel" >
 				<label for="direccion"><?php echo JText::_('DIRECCION_RECINTO'); ?>*: </label> 
-				<input name="showground" class="validate[required]" value="<?php echo isset($objDatos) ? $objDatos->showground : ''; ?>" id="searchTextField" type="text" size="50">
+				<input name="showground" class="validate[required]" value="" id="searchTextField" type="text" size="50">
 			</div>
 			<div id="map-canvas" style="height: 400px; max-width: 420px"></div>
 			<br />
