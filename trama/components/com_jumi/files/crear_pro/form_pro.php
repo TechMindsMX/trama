@@ -171,12 +171,12 @@ $datosObj = JTrama::getDatos($proyid);
 		<br />
 		<label for="banner"><?php echo JText::_('BANNER').$textPro; ?>*:</label>
 		<input type="file"  id="banner" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">
-		<div style="max-width:430px; font-size:12px;"><?php echo JText::_('NOTE_BANNER'); ?></div>
+		<div style="max-width:425px; font-size:12px;"><?php echo JText::_('NOTE_BANNER'); ?></div>
 		<br />
 		
 		<label for="avatar"><?php echo JText::_('AVATAR').$textPro; ?>*:</label> 
 		<input type="file" id="avatar" onchange='loadImage2(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
-		<div style="max-width:430px; font-size:12px;"><?php echo JText::_('NOTE_AVATER'); ?></div>
+		<div style="max-width:419px; font-size:12px;"><?php echo JText::_('NOTE_AVATAR'); ?></div>
 		<br />
 	
 		<label for="url"><?php echo JText::_('URL_PROY'); ?>: </label> 
