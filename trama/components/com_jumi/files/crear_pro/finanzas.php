@@ -1,3 +1,103 @@
+<?php
+$usuario = JFactory::getUser();
+$app = JFactory::getApplication();
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
+	$url    = 'index.php?option=com_users&view=login';
+	$url   .= '&return='.base64_encode($return);
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+}
+defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+
+jimport('trama.class');
+
+require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
+require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
+
+validacionFiscal($usuario);
+
+$categoria = JTrama::getAllCatsPadre();
+$subCategorias = JTrama::getAllSubCats();
+JHtml::_('behavior.modal');
+
+$token = JTrama::token();
+
+$input = JFactory::getApplication()->input;
+$proyid = $input->get("proyid",0,"int");
+
+$datosObj = JTrama::getDatos($proyid);
+
+var_dump($datosObj);
+?>
+
+<script>
+	jQuery(document).ready(function(){
+		jQuery("#form2").validationEngine();
+		
+			var form = jQuery("#form2")[0];
+			var total = form.length;
+			
+			var section = new Array();
+			var unitSale = new Array();
+			var capacity = new Array();
+			var sec = 0;
+			var unit = 0;
+			var cap = 0;
+			
+			for (i=0; i < total; i++) {
+			    seccion = form[i].name.substring(0,7);
+			    capayuni = form[i].name.substring(0,8);
+			    
+			    if(seccion == 'section') {
+			    	if(form[i].value != ''){
+			        	section[sec] = form[i].value;
+			        	sec++;
+			        }
+			    }else if(capayuni == 'unitSale'){
+			        if(form[i].value != ''){
+			        	unitSale[unit] = form[i].value;
+			        	unit++
+			        }
+			    }else if(capayuni == 'capacity'){
+			        if(form[i].value != ''){
+			        	capacity[cap] = form[i].value;
+			        	cap++;
+			        }
+			    }
+			}
+			
+			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
+			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
+			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
+			
+			jQuery("#seccion").val(section.join(","));
+			jQuery("#unidad").val(unitSale.join(","));
+			jQuery("#inventario").val(capacity.join(","));
+
+			emptyKeys();
+
+			jQuery('#token').val('<?php echo $token;?>');
+			
+			if( this.id == 'revision' ) {
+				if( jQuery('#status').val() == 0 ) {
+					jQuery('#status').val(9);
+				} else if( jQuery('#status').val() == 2 ){
+					jQuery('#status').val(3);
+				}
+			} else if(this.id == 'guardar') {
+				if( jQuery('#status').val() != <?php echo $status_pro; ?> ) {
+					
+					jQuery('#status').val(<?php echo $status_pro; ?>);
+				}
+			}
+			
+			console.log( jQuery("#form2") );
+			
+			//jQuery("#form2").submit();
+		});
+	});
+</script>
+
 <div id="datos_finanzas_proy">
 	<h2><?php echo JText::_('LABEL_FINANZAS'); ?></h2>
 	<fieldset class="fieldset">
@@ -157,18 +257,6 @@
 	<br /> 
 	<br />
 	
-	<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 12px;">(separarlas por comas)</span></label>
-	<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
-		if( isset($objDatosProyecto) && !empty($objDatosProyecto->tags)) {
-			foreach ($objDatosProyecto->tags as $key => $value) {
-				$array[] = $value->tag;
-			}
-			$tags = implode($array, ', ');
-			echo $tags;
-			
-		}else {
-			echo '';
-		}
-	?></textarea>
+	
 	</fieldset>
 	</div>

@@ -24,6 +24,10 @@ JHtml::_('behavior.modal');
 
 $token = JTrama::token();
 
+$input = JFactory::getApplication()->input;
+$proyid = $input->get("proyid",0,"int");
+
+$datosObj = JTrama::getDatos($proyid);
 ?>
 <script>
 	jQuery(document).ready(function(){	
@@ -31,81 +35,32 @@ $token = JTrama::token();
 		jQuery("#form2").validationEngine();
 		
 		<?php
-			//codigo para llenar el form
 		?>
 		
 		jQuery("#guardar, #revision").click(function (){
 
-			if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
-				
-			var form = jQuery("#form2")[0];
-			var total = form.length;
-			
-			var section = new Array();
-			var unitSale = new Array();
-			var capacity = new Array();
-			var projectPhothosIds = new Array();
-			var sec = 0;
-			var unit = 0;
-			var cap = 0;
-			var photos = 0;
-			
-			for (i=0; i < total; i++) {
-			    seccion = form[i].name.substring(0,7);
-			    capayuni = form[i].name.substring(0,8);
-			    
-			    if(seccion == 'section') {
-			    	if(form[i].value != ''){
-			        	section[sec] = form[i].value;
-			        	sec++;
-			        }
-			    }else if(capayuni == 'unitSale'){
-			        if(form[i].value != ''){
-			        	unitSale[unit] = form[i].value;
-			        	unit++
-			        }
-			    }else if(capayuni == 'capacity'){
-			        if(form[i].value != ''){
-			        	capacity[cap] = form[i].value;
-			        	cap++;
-			        }
-			    }else if(capayuni == 'photoids') {
-			         if ( form[i].checked ){
-			             projectPhothosIds[photos] = form[i].value;
-			              photos++
-			         }
-			    }
-			}
-			jQuery("#projectPhotosIds").val(projectPhothosIds.join(","));
-			
-			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
-			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
-			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
-			
-			jQuery("#seccion").val(section.join(","));
-			jQuery("#unidad").val(unitSale.join(","));
-			jQuery("#inventario").val(capacity.join(","));
+//			if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
+				var form = jQuery("#form2")[0];
+				var total = form.length;
+	
+				jQuery('#token').val('<?php echo $token;?>');
 
-			emptyKeys();
-
-			jQuery('#token').val('<?php echo $token;?>');
-			
-			if( this.id == 'revision' ) {
-				if( jQuery('#status').val() == 0 ) {
-					jQuery('#status').val(9);
-				} else if( jQuery('#status').val() == 2 ){
-					jQuery('#status').val(3);
-				}
-			} else if(this.id == 'guardar') {
-				if( jQuery('#status').val() != <?php echo $status_pro; ?> ) {
+				if( this.id == 'revision' ) {
 					
-					jQuery('#status').val(<?php echo $status_pro; ?>);
-				}
-			}
+					if( jQuery('#status').val() == 0 ) {
+						jQuery('#status').val(9);
+					} else if( jQuery('#status').val() == 2 ){
+						jQuery('#status').val(3);
+					}
+				} else if(this.id == 'guardar') {
+					if( jQuery('#status').val() != <?php echo $status_pro; ?> ) {
 						
-			jQuery("#form2").submit();
-
-			}
+						jQuery('#status').val(<?php echo $status_pro; ?>);
+					}
+				}
+				
+				jQuery("#form2").submit();
+//			}
 		});
 	});
         
@@ -143,32 +98,11 @@ $token = JTrama::token();
 </div>
 <!--FIN DIV DE AGREGAR CAMPOS-->
 
-<div class="divcontent" id="divContent">
-	<?php 
-	if( isset($objDatos) ){
-		foreach ($objDatos->logs as $key => $value) {
-			$fechacreacion = $value->timestamp/1000;
-			echo '<div style="margin-bottom: 10px;">'.
-				 '<li>'.
-				 '<div><strong>'.JText::_('COM_CONTENT_MODIFIED_DATE').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-				 '<div><strong>'.JText::_('JSTATUS').'</strong>: '.JTrama::getStatusName($value->status).'</div>'.
-				 '<div align="justify"><strong>'.JText::_('COMMENTARIOS').'</strong>: '.$value->comment.'</div>'.
-				 '</li>'.
-				 '</div>';
-		}
-	}
-	?>
-</div>
-
 <div style="margin-left:15px;"><h1><?php echo $titulo; ?></h1></div>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<div class="datos_proy">
-		<input 
-			type="hidden"
-			value=""
-			name="id"
-			id="idPro" />
+		
 		
 		<input 
 			type="hidden"
@@ -236,11 +170,13 @@ $token = JTrama::token();
 		<br />
 		<br />
 		<label for="banner"><?php echo JText::_('BANNER').$textPro; ?>*:</label>
-		<input type="file"  id="banner" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">	
+		<input type="file"  id="banner" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">
+		<div style="max-width:430px; font-size:12px;"><?php echo JText::_('NOTE_BANNER'); ?></div>
 		<br />
 		
 		<label for="avatar"><?php echo JText::_('AVATAR').$textPro; ?>*:</label> 
 		<input type="file" id="avatar" onchange='loadImage2(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
+		<div style="max-width:430px; font-size:12px;"><?php echo JText::_('NOTE_AVATER'); ?></div>
 		<br />
 	
 		<label for="url"><?php echo JText::_('URL_PROY'); ?>: </label> 
@@ -460,6 +396,9 @@ $token = JTrama::token();
 			</div>
 			<div id="map-canvas" style="height: 400px; max-width: 420px"></div>
 			<br />
+			
+			<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 12px;">(separarlas por comas)</span></label>
+			<textarea id="tagsArea" name="tags" cols="60" rows="5"></textarea>
 		</fieldset>
 	</div>
 	
@@ -470,3 +409,6 @@ $token = JTrama::token();
 	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
 	
 </form>
+<?php 
+var_dump($datosObj);
+?>
