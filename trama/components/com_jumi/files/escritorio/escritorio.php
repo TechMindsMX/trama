@@ -104,7 +104,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										echo '<tr>';
 											
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
-											echo '<td>'.date('d/M/Y',$fecha).'</td>';
+											echo '<td>'.date('d-M-Y',$fecha).'</td>';
 											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
 											echo '<td>
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
@@ -131,7 +131,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										$fechacreacion = $valor->timestamp/1000;
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
-											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
 											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
 											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
@@ -178,7 +178,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										echo "<tr>";
 										
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
-											echo '<td>'.date('d/M/Y',$fecha).'</td>';
+											echo '<td>'.date('d-M-Y',$fecha).'</td>';
 											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
 											echo '<td>
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
@@ -205,7 +205,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										$fechacreacion = $valor->timestamp/1000;
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
-											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
 											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
 											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
@@ -278,7 +278,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										$fecha = $value->timeCreated/1000;
 										echo "<tr>";
 										echo '	<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
-										echo '	<td>'.date('d/M/Y',$fecha).'</td>';
+										echo '	<td>'.date('d-M-Y',$fecha).'</td>';
 										echo '<td>
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
@@ -298,7 +298,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										$fechacreacion = $valor->timestamp/1000;
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
-											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
 											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
 											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
