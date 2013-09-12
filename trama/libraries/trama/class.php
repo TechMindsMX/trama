@@ -149,7 +149,6 @@ class JTrama
 	}
 
 	public static function searchGroup($id){
-	
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
 		
@@ -167,7 +166,6 @@ class JTrama
 	}
 	
 	public static function allProjects(){
-		
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
 		$jsonAllProjects = file_get_contents($url);
 		$json = json_decode($jsonAllProjects);
@@ -180,26 +178,26 @@ class JTrama
 	}
 
 	public static function getDatos ( $id ) {
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
+		$json = file_get_contents($url);
+		$respuesta = json_decode($json); 
 		
-		if( isset($id) ) {	
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
-			$json = file_get_contents($url);
-			$jsonDecode = json_decode($json); 
-						
-			$respuesta = $jsonDecode;
+		JTrama::checkValidId($respuesta);
+		JTrama::formatDatosProy($respuesta);
 			
-			JTrama::formatDatosProy($respuesta);
-			
-		} else {
-				
-			$respuesta = null;
-		}
-
 		return $respuesta;
 	}
+
+	public static function checkValidId($data) {
+		$app = JFactory::getApplication();
+		if(!isset($data->id)) {
+			$url = 'index.php';
+			$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+		}
+	}
 	
-	public static function formatDatosProy ($value)
-	{
+	
+	public static function formatDatosProy ($value) {
 		$value->fundStartDate = 1370284000000; // SIMULADOS
 		$value->fundEndDate = 1385284000000; // SIMULADOS
 
@@ -227,7 +225,6 @@ class JTrama
 	}
 
 	public static function token(){
-		
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/security/getKey';
 		$token = file_get_contents($url);
 		
