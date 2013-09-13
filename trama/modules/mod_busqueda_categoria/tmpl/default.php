@@ -1,14 +1,14 @@
 <?php
 defined( '_JEXEC' ) or die( 'Restricted access' );
-$document = JFactory::getDocument();
+$doc = JFactory::getDocument();
 
-$document->addScript('templates/rt_hexeris/js/jquery-1.9.1.js');
-$document->addScript('modules/mod_busqueda_categoria/js/jquery.chained.js');
-$document->addStyleSheet('modules/mod_busqueda_categoria/css/busq_cat.css');
+$doc->addScript('templates/rt_hexeris/js/jquery-1.9.1.js');
+$doc->addScript('modules/mod_busqueda_categoria/js/jquery.chained.js');
+$doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css');
 $scriptJS = 'jQuery(function() {
 	jQuery("#selectSubCat").chained("#selectCat");	
 });';
-$document->addScriptDeclaration($scriptJS);
+$doc->addScriptDeclaration($scriptJS);
 
 $input = JFactory::getApplication()->input;
 $tipoPP = $input->get('typeId',null,'int');
