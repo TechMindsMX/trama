@@ -1,5 +1,4 @@
 function initialize() {
-		console.log('ago');
   var mapOptions = {
     center: new google.maps.LatLng(21.657428, -100.415039),
     zoom: 5,

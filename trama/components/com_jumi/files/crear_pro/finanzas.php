@@ -79,6 +79,7 @@ JHtml::_('behavior.modal');
 			for(i=0;i<total;i++) {
 				console.log( form[i].name+' -- '+form[i].value);
 			}
+			
 			jQuery("#form2").submit();
 		});
 	});
