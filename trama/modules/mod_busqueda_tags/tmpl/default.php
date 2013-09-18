@@ -34,7 +34,7 @@ $doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css'
 	}); 
 </script>
 
-<form action="<?php echo $url; ?>" id="busqueda_tags" name="busqueda_tags" method="post">
+<form action="<?php echo $url; ?>" id="busqueda_tags" name="busqueda_tags" method="post" target="_parent">
 
 	<input type="text" name="tags" id="tags" size="30" class="validate[required]" />
 	<input type="submit" class="button" id="busqueda_tags" value="<?php echo JText::_('BUSCAR'); ?>" />
