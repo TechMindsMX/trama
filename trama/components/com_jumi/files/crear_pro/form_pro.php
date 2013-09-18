@@ -32,6 +32,30 @@ emptyKeys();
 		
 		<?php
 		if( !is_null($datosObj) ) {
+			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj) && ($datosObj->userId == $usuario->id) ) {
+				if($datosObj->status == 2) {
+					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.
+					JText::_('JCOMENTARIOS').'</a></span>';
+				}
+				
+				if(empty($datosObj->providers)){
+					$mensaje = JText::_('ALTA_PROVEEDPORES');
+				} else {
+					$mensaje = JText::_('EDITAR_PROVEEDPORES');
+				}
+				$ligaEditProveedores = '<span class="liga">
+										<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+								   		</span>';
+				if(empty($datosObj->variablecost)){
+					$mensaje = JText::_('ALTA_COSTOS_VARIABLES');
+				} else {
+					$mensaje = JText::_('EDITAR_COSTOS_VARIABLES');
+				}
+				$ligaCostosVariable = '<span class="liga">
+										<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
+								   		'</span>';
+			}
+			
 			$app = JFactory::getApplication();
 			if( $datosObj->userId != $usuario->id ) {
 				$url = 'index.php';
@@ -55,8 +79,8 @@ emptyKeys();
 			echo 'jQuery("#nomProy").val("'.$datosObj->name.'");';
 			echo 'jQuery("#selectCategoria").val('.$categoriaJS.').trigger("click").trigger("change");';
 			echo 'jQuery("#subcategoria").val('.$datosObj->subcategory.').trigger("click").trigger("change");';
-			echo 'jQuery("#miniaturaBanner").html(\'<img src="'.MIDDLE.BANNER.'/'.$datosObj->projectBanner->name.'" width="100" />\');';
-			echo 'jQuery("#miniaturaAvatar").html(\'<img src="'.MIDDLE.BANNER.'/'.$datosObj->projectAvatar->name.'" width="100" />\');';
+			echo 'jQuery("#miniaturaBanner").html(\'<img src="/trama/'.BANNER.'/'.$datosObj->projectBanner->name.'" width="100" />\');';
+			echo 'jQuery("#miniaturaAvatar").html(\'<img src="/trama/'.AVATAR.'/'.$datosObj->projectAvatar->name.'" width="100" />\');';
 			echo 'jQuery("#url").val("'.$datosObj->url.'");';
 			
 			foreach ($datosObj->projectVideos as $key => $value) {
@@ -300,7 +324,7 @@ emptyKeys();
 							class="projectPhotosIds" 
 							value="'.$value->id.'" 
 							checked="checked" />
-							<img alt="'.$datosObj->name.'" src="'.MIDDLE.PHOTO.'/'.$value->name.'" width="100" /><br /><br />';
+							<img alt="'.$datosObj->name.'" src="/trama/'.PHOTO.'/'.$value->name.'" width="100" /><br /><br />';
 				}
 				
 				echo '</div>';

@@ -13,7 +13,6 @@ jimport('trama.class');
 
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
-require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
 
 validacionFiscal($usuario);
 
@@ -33,6 +32,8 @@ JHtml::_('behavior.modal');
 		
 		<?php
 		if( !is_null($datosObj) ) {
+			require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
+			
 			$app = JFactory::getApplication();
 			if( $datosObj->userId != $usuario->id ) {
 				$url = 'index.php';
