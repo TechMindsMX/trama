@@ -1,14 +1,10 @@
 <?php
 defined('_JEXEC') OR die( "Direct Access Is Not Allowed" );
-
-jimport('trama.class');
-require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
-
-$subCategorias = JTrama::getAllSubCats();
-
-$objDatosProyecto = JTrama::getDatos((!empty($_GET['projectId']))?$_GET['projectId']:null, $subCategorias);
-
-$grupoExistente = JTrama::searchGroup($objDatosProyecto->id);
+$subCategorias 		= JTrama::getAllSubCats();
+$input 				= JFactory::getApplication()->input;
+$proyid 			= $input->get("proyid", 0, "int");
+$objDatosProyecto 	= JTrama::getDatos($proyid);
+$grupoExistente 	= JTrama::searchGroup($objDatosProyecto->id);
 
 if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 
@@ -45,7 +41,7 @@ if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 		if ($resultMember) {
 			
 			$allDone =& JFactory::getApplication();
-			$allDone->redirect('index.php?option=com_community&view=groups&task=viewgroup&groupid='.$idGroup->id, 'Grupo creado con exito');
+			//$allDone->redirect('index.php?option=com_community&view=groups&task=viewgroup&groupid='.$idGroup->id, 'Grupo creado con exito');
 		
 		} else {
 			
@@ -70,8 +66,7 @@ if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 	
 	$idGroup = JTrama::searchGroup($objDatosProyecto->id);
 	$allDone =& JFactory::getApplication();
-	$allDone->redirect('index.php?option=com_community&view=groups&task=viewgroup&groupid='.$idGroup->id);
-	
+	//$allDone->redirect('index.php?option=com_community&view=groups&task=viewgroup&groupid='.$idGroup->id);
 }
 	
 	

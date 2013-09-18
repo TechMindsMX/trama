@@ -23,12 +23,6 @@ $token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $proyid 		= $input->get("proyid",0,"int");
 $datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
-
-// $app = JFactory::getApplication();
-// if(!isset($data->id)) {
-	// $url = 'index.php';
-	// $app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
-// }
 ?>
 <script>
 emptyKeys();
@@ -38,13 +32,19 @@ emptyKeys();
 		
 		<?php
 		if( !is_null($datosObj) ) {
+			$app = JFactory::getApplication();
+			if( $datosObj->userId != $usuario->id ) {
+				$url = 'index.php';
+				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+			}
+			
 			foreach ($subCategorias as $key => $value) {
 				if($value->id == $datosObj->subcategory) {
 					$categoriaJS = $value->father;
 				}
 			}
 			$validacion 	= '';
-			$checkedvideos 	= $datosObj->videoPublic;
+			$checkedvideos 	= $datosObj->videoPublic;	
 			$checkedsound 	= $datosObj->audioPublic;
 			$checkedimages 	= $datosObj->imagePublic;
 			$checkedinfo	= $datosObj->infoPublic;

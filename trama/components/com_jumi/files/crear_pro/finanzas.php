@@ -13,6 +13,7 @@ jimport('trama.class');
 
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
+require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
 
 validacionFiscal($usuario);
 
@@ -32,6 +33,12 @@ JHtml::_('behavior.modal');
 		
 		<?php
 		if( !is_null($datosObj) ) {
+			$app = JFactory::getApplication();
+			if( $datosObj->userId != $usuario->id ) {
+				$url = 'index.php';
+				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+			}
+
 			if($datosObj->type == 'PROJECT'){
 				$fechasPro = '<label for="productionStartDate">'.JText::_('FECHA_INICIO_PRODUCCION').'*:</label>
 				              <input
