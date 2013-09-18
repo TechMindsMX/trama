@@ -32,30 +32,6 @@ emptyKeys();
 		
 		<?php
 		if( !is_null($datosObj) ) {
-			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj) && ($datosObj->userId == $usuario->id) ) {
-				if($datosObj->status == 2) {
-					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.
-					JText::_('JCOMENTARIOS').'</a></span>';
-				}
-				
-				if(empty($datosObj->providers)){
-					$mensaje = JText::_('ALTA_PROVEEDPORES');
-				} else {
-					$mensaje = JText::_('EDITAR_PROVEEDPORES');
-				}
-				$ligaEditProveedores = '<span class="liga">
-										<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
-								   		</span>';
-				if(empty($datosObj->variablecost)){
-					$mensaje = JText::_('ALTA_COSTOS_VARIABLES');
-				} else {
-					$mensaje = JText::_('EDITAR_COSTOS_VARIABLES');
-				}
-				$ligaCostosVariable = '<span class="liga">
-										<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
-								   		'</span>';
-			}
-			
 			$app = JFactory::getApplication();
 			if( $datosObj->userId != $usuario->id ) {
 				$url = 'index.php';
