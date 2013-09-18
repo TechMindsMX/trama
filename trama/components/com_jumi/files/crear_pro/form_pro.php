@@ -23,9 +23,15 @@ $token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $proyid 		= $input->get("proyid",0,"int");
 $datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
+
+// $app = JFactory::getApplication();
+// if(!isset($data->id)) {
+	// $url = 'index.php';
+	// $app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+// }
 ?>
 <script>
-
+emptyKeys();
 	jQuery(document).ready(function(){	
 		jQuery("#form2").find(".toggle-editor").css("display","none");	
 		jQuery("#form2").validationEngine();
@@ -37,6 +43,14 @@ $datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
 					$categoriaJS = $value->father;
 				}
 			}
+			$validacion 	= '';
+			$checkedvideos 	= $datosObj->videoPublic;
+			$checkedsound 	= $datosObj->audioPublic;
+			$checkedimages 	= $datosObj->imagePublic;
+			$checkedinfo	= $datosObj->infoPublic;
+			
+			echo 'emptyKeys();';
+			echo 'jQuery("#camposHidden").append(\'<input type="hidden" value="'.$datosObj->id.'" name="id" />\');';
 			echo 'jQuery("#status").val('.$datosObj->status.');';
 			echo 'jQuery("#nomProy").val("'.$datosObj->name.'");';
 			echo 'jQuery("#selectCategoria").val('.$categoriaJS.').trigger("click").trigger("change");';
@@ -55,38 +69,31 @@ $datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
 			
 			echo 'jQuery("#nameRecinto").val("'.$datosObj->inclosure.'");';
 			echo 'jQuery("#searchTextField").val("'.$datosObj->showground.'");';
-		
 		}
 		?>
 		
 		jQuery("#guardar, #revision").click(function (){
-
-//			if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
-				var form = jQuery("#form2")[0];
-				var total = form.length;
+			var form = jQuery("#form2")[0];
+			var total = form.length;
 	
-				jQuery('#token').val('<?php echo $token;?>');
+			jQuery('#token').val('<?php echo $token;?>');
 
-				if( this.id == 'revision' ) {
-					
+			if( this.id == 'revision' ) {
+				if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
 					if( jQuery('#status').val() == 0 ) {
 						jQuery('#status').val(9);
 					} else if( jQuery('#status').val() == 2 ){
 						jQuery('#status').val(3);
 					}
-				} else if(this.id == 'guardar') {
-					if( jQuery('#status').val() != <?php echo $status_pro; ?> ) {
-						
-						jQuery('#status').val(<?php echo $status_pro; ?>);
-					}
+				}else {
+					return false;
 				}
-				
-				for(i=0; i<total; i++) {
-					console.log(form[i].name+' --- '+form[i].value);
+			} else if(this.id == 'guardar') {
+				if( jQuery('#status').val() != <?php echo $status_pro; ?> ) {
+					jQuery('#status').val(<?php echo $status_pro; ?>);
 				}
-				
-				jQuery("#form2").submit();
-//			}
+			}
+			jQuery("#form2").submit();
 		});
 	});
         
@@ -96,34 +103,35 @@ $datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<div class="datos_proy">
-		<input 
-			type="hidden"
-			name="projectPhotosIds"
-			id="projectPhotosIds"
-			value= ""/>
-		
-		<input 
-			type="hidden"
-			value="<?php echo $usuario->id; ?>"
-			name="userId" />
+		<span id="camposHidden">
+			<input 
+				type="hidden"
+				name="projectPhotosIds"
+				id="projectPhotosIds"
+				value= ""/>
 			
-		<input
-			type="hidden"
-			value=""
-			name="token"
-			id="token" />
-			   
-		<input 
-			type = "hidden" 
-			value = "0"
-			name = "status"
-			id = "status" />
-			   
-		<input
-			type="hidden"
-			value="<?php echo $type; ?>"
-			name="type"
-			id="type" />
+			<input 
+				type="hidden"
+				value="<?php echo $usuario->id; ?>"
+				name="userId" />
+				
+			<input
+				type="hidden"
+				name="token"
+				id="token" />
+				   
+			<input 
+				type = "hidden" 
+				value = "0"
+				name = "status"
+				id = "status" />
+				   
+			<input
+				type="hidden"
+				value="<?php echo $type; ?>"
+				name="type"
+				id="type" />
+		</span>
 		
 		<label for="nomProy"><?php echo JText::_('NOMBRE').' '.$textPro; ?>*:</label>
 		<input 
@@ -387,8 +395,7 @@ $datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
 			<br />
 			
 			<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 12px;">(separarlas por comas)</span></label>
-			<textarea id="tagsArea" name="tags" cols="60" rows="5">
-				<?php
+			<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
 				if( isset($datosObj) && !empty($datosObj->tags)) {
 					foreach ($datosObj->tags as $key => $value) {
 						$array[] = $value->tag;
@@ -399,8 +406,7 @@ $datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
 				}else {
 					echo '';
 				}
-				?>
-			</textarea>
+				?></textarea>
 		</fieldset>
 	</div>
 	
@@ -411,6 +417,3 @@ $datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
 	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
 	
 </form>
-<?php 
-var_dump($datosObj);
-?>

@@ -20,7 +20,7 @@ $categoria 		= JTrama::getAllCatsPadre();
 $subCategorias 	= JTrama::getAllSubCats();
 $token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
-$proyid 		= $input->get("projectId", 0, "int");
+$proyid 		= $input->get("proyid", 0, "int");
 $datosObj 		= JTrama::getDatos($proyid);
 
 JHtml::_('behavior.modal');
@@ -29,6 +29,75 @@ JHtml::_('behavior.modal');
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form2").validationEngine();
+		
+		<?php
+		if( !is_null($datosObj) ) {
+			if($datosObj->type == 'PROJECT'){
+				$fechasPro = '<label for="productionStartDate">'.JText::_('FECHA_INICIO_PRODUCCION').'*:</label>
+				              <input
+								type = "text" 
+								id = "productionStartDate" 
+								class = "validate[required, custom[date], custom[funciondate]]"
+								name = "productionStartDate" /> 
+							  <br>
+							
+							  <label for="premiereStartDate">'.JText::_('FECHA_FIN_INICIO').':</label> 
+							  <input 
+						  		type = "text" 
+						  		id = "premiereStartDate" 
+						  		class = "validate[required, custom[date], custom[fininicio]]"
+							    name = "premiereStartDate" />
+							       
+							<br> 
+							
+							  <label for="premiereEndDate">'.JText::_('FECHA_CIERRE').'*:</label> 
+							  <input 
+								type = "text" 
+								id = "premiereEndDate" 
+								class = "validate[required, custom[date], custom[cierre]]"
+								name = "premiereEndDate" />';
+			}else{					
+				$fechasPro = '<label for="premiereStartDate">'.JText::_('FECHA_LANZAMIENTO').'</label> 
+								<input 
+								  type = "text" 
+								  id = "premiereStartDate" 
+								  class = "validate[required, custom[date], custom[funciondate]]"
+								  name = "premiereStartDate" />
+								       
+								<br> 
+								
+								<label for="premiereEndDate">'.JText::_('FECHA_CIERRE').'*:</label> 
+								<input 
+								  type = "text" 
+								  id = "premiereEndDate" 
+								  class = "validate[required], custom[date], custom[cierre]"
+								  name = "premiereEndDate" />';
+			}
+
+			if( !is_null($datosObj->projectBusinessCase) ){	
+				$validacion = '';
+			}
+			
+			echo 'jQuery("#presupuesto").val('.$datosObj->budget.');';
+			
+			if( !empty($datosObj->projectUnitSales) ){
+				$countunitSales = count($datosObj->projectUnitSales);
+				
+				echo 'jQuery("#seccion2").val("'.$datosObj->projectUnitSales[0]->section.'");';
+				echo 'jQuery("#unidad2").val("'.$datosObj->projectUnitSales[0]->unitSale.'");';
+				echo 'jQuery("#inventario2").val("'.$datosObj->projectUnitSales[0]->unit.'");';
+			}
+			
+			echo 'jQuery("#productionStartDate").val("'.$datosObj->productionStartDate.'");';
+			echo 'jQuery("#premiereStartDate").val("'.$datosObj->premiereStartDate.'");';
+			echo 'jQuery("#premiereEndDate").val("'.$datosObj->premiereEndDate.'");';
+			echo 'jQuery("#potenciales").val("'.$datosObj->revenuePotential.'");';
+			echo 'jQuery("#equilibrio").val("'.$datosObj->breakeven.'");';
+			echo 'jQuery("#equilibrio").val("'.$datosObj->breakeven.'");';
+			
+			$checkednumbers = $datosObj->numberPublic; 
+		}
+		?>
 		
 		jQuery("#guardar, #revision").click(function (){
 			var form 		= jQuery("#form2")[0];
@@ -60,26 +129,16 @@ JHtml::_('behavior.modal');
 			        	cap++;
 			        }
 			    }
+			    
+			    console.log(form[i].id, form[i].value);
 			}
-			
-			jQuery("#seccion").removeClass("validate[required,custom[onlyLetterNumber]]");
-			jQuery("#unidad").removeClass("validate[required,custom[onlyNumberSp]]");
-			jQuery("#inventario").removeClass("validate[required,custom[onlyNumberSp]]");
-			
+
 			jQuery("#seccion").val(section.join(","));
 			jQuery("#unidad").val(unitSale.join(","));
 			jQuery("#inventario").val(capacity.join(","));
-
-			emptyKeys();
-			
-			console.log( emptyKeys() );
 			
 			jQuery('#token').val('<?php echo $token;?>');
-			
-			for(i=0;i<total;i++) {
-				console.log( form[i].name+' -- '+form[i].value);
-			}
-			
+
 			jQuery("#form2").submit();
 		});
 	});
@@ -172,27 +231,69 @@ JHtml::_('behavior.modal');
 			<label for="seccion"><?php echo JText::_('SECCION'); ?>*:</label>
 			<input 
 				type="text" 
-				id="seccion" 
+				id="seccion2" 
 				class="validate[required,custom[onlyLetterNumber]]"
-				name="section"> 
+				name="section_N"> 
 			<br />
 			
 			<label for="unidad"><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
 			<input 
 				type="text" 
-				id="unidad" 
+				id="unidad2" 
 				class="validate[required,custom[onlyNumberSp]]"
-				name="unitSale"> 
+				name="unitSale_N"> 
 			<br> 
 			
 			<label for="inventario"><?php echo JText::_('INVENTARIOPP'); ?>*:</label>
 			<input 
 				type="text"
-				id="inventario" 
+				id="inventario2" 
 				class="validate[required,custom[onlyNumberSp]]"
-				name="capacity"> 
+				name="capacity_N"> 
 			<br />
 			<br />
+			
+			<input type="hidden" id="seccion" name="section"> 
+			<input type="hidden" id="unidad" name="unitSale"> 
+			<input type="hidden" id="inventario" name="capacity"> 
+			
+			<?php
+			for($i = 1; $i < $countunitSales; $i++) {
+				$valorSection = isset($datosObj) ? $datosObj->projectUnitSales[$i]->section : '';
+				$valorUnitSales = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unitSale : '';
+				$valorCapacity = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unit : '';
+				
+				$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('SECCION').'*:</label>';
+				$unitsales .= '<input'; 
+				$unitsales .= '		type = "text"'; 
+				$unitsales .= '		id = "seccion_E'.$i.'"'; 
+				$unitsales .= '		class = "validate[required,custom[onlyLetterNumber]]"'; 
+				$unitsales .= '		value = "'.$valorSection.'"';
+				$unitsales .= '		name = "section_E'.$i.'"/>'; 
+				$unitsales .= '	<br />';
+					
+				$unitsales .= '	<label for="unidad_E'.$i.'">'.JText::_('PRECIO_UNIDAD').'*:</label>'; 
+				$unitsales .= '	<input ';
+				$unitsales .= '		type="text" ';
+				$unitsales .= '		id="unidad_E'.$i.'" ';
+				$unitsales .= '		class="validate[required,custom[onlyNumberSp]]"';
+				$unitsales .= '		value="'.$valorUnitSales.'"';
+				$unitsales .= '		name = "unitSale_E'.$i.'" />'; 
+				$unitsales .= '	<br> ';
+					
+				$unitsales .= '	<label for="inventario_E'.$i.'">'.JText::_('INVENTARIOPP').'*:</label>';
+				$unitsales .= '	<input ';
+				$unitsales .= '		type="text" id="inventario"';
+				$unitsales .= '		id="inventario_E'.$i.'" ';
+				$unitsales .= '		class="validate[required,custom[onlyNumberSp]]"';
+				$unitsales .= '		value="'.$valorCapacity.'"';
+				$unitsales .= '		name = "capacity_E'.$i.'" />'; 
+				$unitsales .= '	<br />';
+				$unitsales .= '	<br />';
+				
+				echo $unitsales;
+			}
+		?>
 				 
 			<span id="writeroot"></span> 
 			<input type="button" class="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS')?>" /> <br /> 
@@ -216,29 +317,7 @@ JHtml::_('behavior.modal');
 				step="any" /> 
 			<br>
 			
-			<label for="productionStartDate"><?php echo JText::_('FECHA_INICIO_PRODUCCION')?>*:</label> 
-			<input
-				type = "text" 
-			    id = "productionStartDate" 
-			    class = "validate[required, custom[date], custom[funciondate]]"
-			    name = "productionStartDate" /> 
-			<br>
-			
-			<label for="premiereStartDate"><?php echo JText::_('FECHA_FIN_INICIO')?>*:</label> 
-			<input 
-				type = "text" 
-			    id = "premiereStartDate" 
-			    class = "validate[required, custom[date], custom[fininicio]]"
-			    name = "premiereStartDate" />
-			       
-			<br> 
-			
-			<label for="premiereEndDate"><?php echo JText::_('FECHA_CIERRE')?>*:</label> 
-			<input 
-				type = "text" 
-				id = "premiereEndDate" 
-				class = "validate[required, custom[date], custom[cierre]]"
-				name = "premiereEndDate">
+			<?php echo $fechasPro; ?>
 		</fieldset>
 	</div>
 		
@@ -246,7 +325,3 @@ JHtml::_('behavior.modal');
 		javascript:window.history.back();" />
 	<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
 </form>
-	
-<?php
-var_dump($datosObj);
-?>

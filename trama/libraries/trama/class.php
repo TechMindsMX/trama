@@ -198,6 +198,12 @@ class JTrama
 	
 	
 	public static function formatDatosProy ($value) {
+		foreach ($value->projectFinancialData as $key => $valor) {
+			if($key != 'id'){	
+				$value->$key = $valor;
+			}
+		}
+		
 		$value->fundStartDate = 1370284000000; // SIMULADOS
 		$value->fundEndDate = 1385284000000; // SIMULADOS
 
@@ -211,17 +217,18 @@ class JTrama
 			$value->fundStartDate = date('d-m-Y', ($value->fundStartDateCode/1000) );
 		}
 		if (isset($value->fundEndDate)) {
-			$value->fundEndDate = date('d-m-Y', ($value->fundEndDate/1000) );
+			$value->fundEndDate = date('d-m-Y', ($value->fundEndDateCode/1000) );
 		}
 		if (isset($value->productionStartDate)) {
-			$value->productionStartDate = date('d-m-Y', ($value->productionStartDate/1000) );
+			$value->productionStartDate = date('d-m-Y', ($value->productionStartDateCode/1000) );
 		}
 		if (isset($value->premiereStartDate)) {
-			$value->premiereStartDate = date('d-m-Y', ($value->premiereStartDate/1000) );
+			$value->premiereStartDate = date('d-m-Y', ($value->premiereStartDateCode/1000) );
 		}
 		if (isset($value->premiereEndDate)) {
-			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDate/1000) );
+			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDateCode/1000) );
 		}
+		$value->projectFinancialData = null;
 	}
 
 	public static function token(){
