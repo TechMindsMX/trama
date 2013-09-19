@@ -57,14 +57,6 @@ JHtml::_('behavior.modal');
 				$ligaCostosVariable = '<span class="liga">
 									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
 								   	  '</span>';
-									  
-				if(!is_null($datosObj->breakeven)){
-					$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
-
-					$ligaFinantialData = '<span class="liga">
-										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
-									   	  '</span>';
-				}
 			}
 
 			if($datosObj->type == 'PROJECT'){
