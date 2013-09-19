@@ -283,6 +283,12 @@ div#banner div.rt-inner a {
 	.menu-item {
 		width: 100%;
 	}
+	#contenido-detalle {
+		margin-bottom: 10px;
+		width:450px;
+		height: 300px;
+		overflow-y: scroll;
+	}
 }
 
 #contenido-detalle {
