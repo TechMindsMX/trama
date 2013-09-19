@@ -41,7 +41,18 @@ emptyKeys();
 				$url = 'index.php';
 				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
 			}
+
+			$count = 0;
+			foreach ($datosObj->logs as $key => $value) {
+				if ( $value->status == 2 ) {
+					$count++;
+				}
+			}
 			
+			if($count == 2) {
+				$botonRevision = '';
+			}
+
 			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
 				if($datosObj->status == 2) {
 					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
@@ -133,6 +144,23 @@ emptyKeys();
 	});
         
 </script>
+
+<div class="divcontent" id="divContent">
+	<?php 
+	if( isset($datosObj) ){
+		foreach ($datosObj->logs as $key => $value) {
+			$fechacreacion = $value->timestamp/1000;
+			echo '<div style="margin-bottom: 10px;">'.
+				 '<li>'.
+				 '<div><strong>'.JText::_('COM_CONTENT_MODIFIED_DATE').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+				 '<div><strong>'.JText::_('JSTATUS').'</strong>: '.JTrama::getStatusName($value->status).'</div>'.
+				 '<div align="justify"><strong>'.JText::_('COMMENTARIOS').'</strong>: '.$value->comment.'</div>'.
+				 '</li>'.
+				 '</div>';
+		}
+	}
+	?>
+</div>
 
 <div style="margin-left:15px;"><h1><?php echo $titulo; ?></h1></div>
 
