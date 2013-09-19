@@ -26,6 +26,7 @@ $datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
 $comentarios			= '';
 $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
+$ligaFinantialData		= '';
 ?>
 <script>
 emptyKeys();
@@ -62,6 +63,14 @@ emptyKeys();
 				$ligaCostosVariable = '<span class="liga">
 									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
 								   	  '</span>';
+									  
+				if(!is_null($datosObj->breakeven)){
+					$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
+
+					$ligaFinantialData = '<span class="liga">
+										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
+									   	  '</span>';
+				}
 			}
 			
 			foreach ($subCategorias as $key => $value) {
@@ -81,8 +90,8 @@ emptyKeys();
 			echo 'jQuery("#nomProy").val("'.$datosObj->name.'");';
 			echo 'jQuery("#selectCategoria").val('.$categoriaJS.').trigger("click").trigger("change");';
 			echo 'jQuery("#subcategoria").val('.$datosObj->subcategory.').trigger("click").trigger("change");';
-			echo 'jQuery("#miniaturaBanner").html(\'<img src="'.BANNER.'/'.$datosObj->projectBanner->name.'" width="100" />\');';
-			echo 'jQuery("#miniaturaAvatar").html(\'<img src="'.AVATAR.'/'.$datosObj->projectAvatar->name.'" width="100" />\');';
+			echo 'jQuery("#miniaturaBanner").html(\'<img src="/trama/'.BANNER.'/'.$datosObj->projectBanner->name.'" width="100" />\');';
+			echo 'jQuery("#miniaturaAvatar").html(\'<img src="/trama/'.AVATAR.'/'.$datosObj->projectAvatar->name.'" width="100" />\');';
 			echo 'jQuery("#url").val("'.$datosObj->url.'");';
 			
 			foreach ($datosObj->projectVideos as $key => $value) {
@@ -440,6 +449,7 @@ emptyKeys();
 		<?php 
 			echo $ligaEditProveedores;
 			echo $ligaCostosVariable;
+			echo $ligaFinantialData;
 			echo $comentarios; 
 		?>
 	</div>

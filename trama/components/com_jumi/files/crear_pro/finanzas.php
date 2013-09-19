@@ -22,6 +22,8 @@ $token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $proyid 		= $input->get("proyid", 0, "int");
 $datosObj 		= JTrama::getDatos($proyid);
+$ligaPro		= '';
+$ligaCostosVariable		= '';
 
 JHtml::_('behavior.modal');
 ?>
@@ -38,6 +40,31 @@ JHtml::_('behavior.modal');
 			if( $datosObj->userId != $usuario->id ) {
 				$url = 'index.php';
 				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+			}
+			
+			$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
+			$ligaPro = '<span class="liga">
+							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+						</span>';
+			
+			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
+				if(empty($datosObj->variablecost)){
+					$mensaje = JText::_('ALTA_COSTOS_VARIABLES');
+				} else {
+					$mensaje = JText::_('EDITAR_COSTOS_VARIABLES');
+				}
+				
+				$ligaCostosVariable = '<span class="liga">
+									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
+								   	  '</span>';
+									  
+				if(!is_null($datosObj->breakeven)){
+					$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
+
+					$ligaFinantialData = '<span class="liga">
+										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
+									   	  '</span>';
+				}
 			}
 
 			if($datosObj->type == 'PROJECT'){
@@ -151,6 +178,9 @@ JHtml::_('behavior.modal');
 		});
 	});
 </script>
+
+<div style="margin-left:15px;"><h1><?php echo $titulo; ?></h1></div>
+
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<input
 		type="hidden"
@@ -327,6 +357,13 @@ JHtml::_('behavior.modal');
 			
 			<?php echo $fechasPro; ?>
 		</fieldset>
+	</div>
+	
+	<div class="barra-top" id="otras_ligas">
+		<?php 
+			echo $ligaPro;
+			echo $ligaCostosVariable;
+		?>
 	</div>
 		
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
