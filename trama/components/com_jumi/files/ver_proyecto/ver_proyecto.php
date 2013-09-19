@@ -239,7 +239,8 @@ function descripcion ($data) {
 }
 
 function irGrupo($data) {
-	$html = '<a class="button" >'.JText::_('IR_GRUPO').'</a>';
+	$data->proyGroupUrl = JTramaSocial::getProyGroupUrl($data->id);
+	$html = '<a href="'.$data->proyGroupUrl.'" alt="'.$data->name.'" class="button" >'.JText::_('IR_GRUPO').'</a>';
 	
 	return $html;
 }

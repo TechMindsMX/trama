@@ -138,7 +138,7 @@ class JTramaSocial extends CommunityGroupsController {
 	return $addFriendHtml;
 	}
 
-	public static function checkUserGroup($group, $userid){
+	public static function checkUserGroup($group, $userid) {
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query
@@ -160,5 +160,26 @@ class JTramaSocial extends CommunityGroupsController {
 			return $results2;
 		}
 	}
+
+	public static function getProyGroupId($proyid) {
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query
+			->select('id')
+		    ->from('#__community_groups')
+		    ->where('proyid = '.$proyid);
+		$db->setQuery($query);
+		$results = $db->loadResult();
+
+		return $results;
+	}
+	
+	public static function getProyGroupUrl($proyid) {
+		$id = JTramaSocial::getProyGroupId($proyid);
+		$url = 'index.php?option=com_community&view=groups&task=viewgroup&groupid='.$id;
+		
+		return $url;		
+	}
+
 }
 ?>
