@@ -17,12 +17,15 @@ JHtml::_('behavior.modal');
 
 validacionFiscal($usuario);
 
-$categoria 		= JTrama::getAllCatsPadre();
-$subCategorias 	= JTrama::getAllSubCats();
-$token 			= JTrama::token();
-$input 			= JFactory::getApplication()->input;
-$proyid 		= $input->get("proyid",0,"int");
-$datosObj 		= $proyid == 0 ? null: JTrama::getDatos($proyid);
+$categoria 				= JTrama::getAllCatsPadre();
+$subCategorias 			= JTrama::getAllSubCats();
+$token 					= JTrama::token();
+$input 					= JFactory::getApplication()->input;
+$proyid 				= $input->get("proyid",0,"int");
+$datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
+$comentarios			= '';
+$ligaEditProveedores	= '';
+$ligaCostosVariable		= '';
 ?>
 <script>
 emptyKeys();
@@ -38,13 +41,36 @@ emptyKeys();
 				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
 			}
 			
+			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
+				if($datosObj->status == 2) {
+					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
+				}
+				
+				if(empty($datosObj->providers)){
+					$mensaje = JText::_('ALTA_PROVEEDPORES');
+				} else {
+					$mensaje = JText::_('EDITAR_PROVEEDPORES');
+				}
+				$ligaEditProveedores = '<span class="liga">
+											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+								   		</span>';
+				if(empty($datosObj->variablecost)){
+					$mensaje = JText::_('ALTA_COSTOS_VARIABLES');
+				} else {
+					$mensaje = JText::_('EDITAR_COSTOS_VARIABLES');
+				}
+				$ligaCostosVariable = '<span class="liga">
+									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
+								   	  '</span>';
+			}
+			
 			foreach ($subCategorias as $key => $value) {
 				if($value->id == $datosObj->subcategory) {
 					$categoriaJS = $value->father;
 				}
 			}
 			$validacion 	= '';
-			$checkedvideos 	= $datosObj->videoPublic;	
+			$checkedvideos 	= $datosObj->videoPublic;
 			$checkedsound 	= $datosObj->audioPublic;
 			$checkedimages 	= $datosObj->imagePublic;
 			$checkedinfo	= $datosObj->infoPublic;
@@ -410,10 +436,16 @@ emptyKeys();
 		</fieldset>
 	</div>
 	
-	
+	<div class="barra-top" id="otras_ligas">
+		<?php 
+			echo $ligaEditProveedores;
+			echo $ligaCostosVariable;
+			echo $comentarios; 
+		?>
+	</div>
+
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
 	<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
-	<input type="button" class="button" id="revision" value="<?php echo JText::_('ENVIAR_REVISION'); ?>" />
-	
+	<?php echo $botonRevision; ?>	
 </form>
