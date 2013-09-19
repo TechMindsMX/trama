@@ -28,7 +28,7 @@ define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
 define("MIDDLE", "http://192.168.0.122");
 define("PUERTO", ":7070");
-define("AVATAR", "/avatar");
-define("BANNER", "/banner");
-define("BCASE", "/businessCase");
-define("PHOTO", "/photo");
+define("AVATAR", "avatar");
+define("BANNER", "banner");
+define("BCASE", "businessCase");
+define("PHOTO", "photo");

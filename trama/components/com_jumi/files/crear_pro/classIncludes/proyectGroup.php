@@ -18,8 +18,8 @@ if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 		$grupo->name = $objDatosProyecto->name;
 		$grupo->description = $objDatosProyecto->description;
 		$grupo->created = $fecha;
-		$grupo->avatar = MIDDLE.AVATAR.'/'.$objDatosProyecto->projectAvatar->name;
-		$grupo->thumb = MIDDLE.AVATAR.'/'.$objDatosProyecto->projectAvatar->name;
+		$grupo->avatar = AVATAR.'/'.$objDatosProyecto->projectAvatar->name;
+		$grupo->thumb = AVATAR.'/'.$objDatosProyecto->projectAvatar->name;
 		$grupo->approvals = 1;
 		$grupo->params = '{"discussordering":1,"photopermission":1,"videopermission":1,"eventpermission":1,"grouprecentphotos":6,"grouprecentvideos":6,"grouprecentevents":6,"newmembernotification":1,"joinrequestnotification":1,"wallnotification":1,"removeactivities":0,"groupdiscussionfilesharing":1,"groupannouncementfilesharing":1,"stream":1}';
 	
