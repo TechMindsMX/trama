@@ -81,8 +81,8 @@ emptyKeys();
 			echo 'jQuery("#nomProy").val("'.$datosObj->name.'");';
 			echo 'jQuery("#selectCategoria").val('.$categoriaJS.').trigger("click").trigger("change");';
 			echo 'jQuery("#subcategoria").val('.$datosObj->subcategory.').trigger("click").trigger("change");';
-			echo 'jQuery("#miniaturaBanner").html(\'<img src="/trama/'.BANNER.'/'.$datosObj->projectBanner->name.'" width="100" />\');';
-			echo 'jQuery("#miniaturaAvatar").html(\'<img src="/trama/'.AVATAR.'/'.$datosObj->projectAvatar->name.'" width="100" />\');';
+			echo 'jQuery("#miniaturaBanner").html(\'<img src="'.BANNER.'/'.$datosObj->projectBanner->name.'" width="100" />\');';
+			echo 'jQuery("#miniaturaAvatar").html(\'<img src="'.AVATAR.'/'.$datosObj->projectAvatar->name.'" width="100" />\');';
 			echo 'jQuery("#url").val("'.$datosObj->url.'");';
 			
 			foreach ($datosObj->projectVideos as $key => $value) {
