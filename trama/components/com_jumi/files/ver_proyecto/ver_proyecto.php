@@ -54,15 +54,15 @@ function tipoProyProd($data) {
 	switch ($tipo) {
 		case 'PRODUCT':
 			$tipoEtiqueta = JText::_('PRODUCT');
-			$data->editUrl = '12';
+			$data->editUrl = '29';
 			break;
 		case 'REPERTORY':
 			$tipoEtiqueta = JText::_('REPERTORIO');
-			$data->editUrl = '14';
+			$data->editUrl = '30';
 			break;
 		default:
 			$tipoEtiqueta = JText::_('PROJECT');
-			$data->editUrl = '9';
+			$data->editUrl = '27';
 			break;
 	}
 	return $tipoEtiqueta;
