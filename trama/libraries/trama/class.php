@@ -116,13 +116,13 @@ class JTrama
 		$value->viewUrl = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$value->id;
 		switch ($value->type) {
 			case 'PROJECT':
-				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=9&proyid='.$value->id;
+				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$value->id;
 				break;
 			case 'PRODUCT':
-				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=12&proyid='.$value->id;
+				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=29&proyid='.$value->id;
 				break;
 			case 'REPERTORY':
-				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=14&proyid='.$value->id;
+				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=30&proyid='.$value->id;
 				break;
 			}
 		$this->proy = $value;
