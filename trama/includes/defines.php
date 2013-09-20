@@ -34,5 +34,5 @@ define("MIDDLE", "http://162.209.56.86");
 define("PUERTO", ":7070");
 define("AVATAR", "avatar");
 define("BANNER", "banner");
-define("BCASE", "businessCase");
+define("BCASE", "businesscase");
 define("PHOTO", "photo");
