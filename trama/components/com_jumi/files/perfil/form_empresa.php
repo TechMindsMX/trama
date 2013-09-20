@@ -128,7 +128,7 @@
                		<option value="1" selected="selected">M&eacute;xico</option>
 				</select>
 				</div>
-			<div>
+			<div class="boton_enviar">
 				<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 			javascript:window.history.back();">
 				<input name="Enviar" class="button" type="submit" onclick="return validar();" value="<?php echo JText::_('ENVIAR'); ?>" />

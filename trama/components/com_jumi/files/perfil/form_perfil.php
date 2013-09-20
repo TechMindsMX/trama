@@ -405,7 +405,7 @@
 				</div>
           
             <br />
-            <div style="margin-top: 15px;">   
+            <div class="boton_enviar">  
             <input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">         	
             	<input name="Enviar" class="button" type="submit" value="<?php echo JText::_('ENVIAR'); ?>" />
