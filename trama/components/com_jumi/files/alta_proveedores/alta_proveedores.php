@@ -95,7 +95,7 @@ $token = JTrama::token();
 ?>
 
 
-<h2><?php echo JText::_('ALTA_PROVEEDORES'); ?></h2>
+<h1><?php echo JText::_('ALTA_PROVEEDORES'); ?></h1>
 	
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
 	
@@ -271,7 +271,9 @@ if (isset($proyecto->miembrosGrupo)) {
 		</table>
 	</div>
 	<!--Fin de tabla-->
+	<div class="boton_enviar">
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-	<input type="submit" value="Enviar" id="guardar" class="button" />
+	<input type="submit" value="<?php echo JText::_('ENVIAR');  ?>" id="guardar" class="button" />
+	</div>
 </form>

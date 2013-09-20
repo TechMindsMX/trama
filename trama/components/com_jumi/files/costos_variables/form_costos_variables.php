@@ -90,7 +90,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		campo.attr('name', input.value);
 	}	
 </script>
-<h3><?php echo JText::_('COSTOS_VARIABLES');  ?></h3>
+<h1><?php echo JText::_('COSTOS_VARIABLES');  ?></h1>
 <div>
 <form id="form_costos" action="<?php echo $action; ?>" method="POST">
 	<input
@@ -153,7 +153,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		name="sogem" /> %
 	
 	<div id="otros"></div>
-	<div style="margin-bottom: 10px;">
+	<div class="boton_enviar">
 	<input type="button" class="button" value="Agregar" id="agregarOtros" />
 	</div>
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
