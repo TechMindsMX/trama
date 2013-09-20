@@ -25,7 +25,6 @@ if($error1 ==1){
 	echo "<div style='color: red;'>ERROR revisa la información capturada</div>";
 }
 $servEdicion = JTrama::getDatos($proyid );
-
 $existe = $servEdicion->variableCosts;
 
 //definicion de campos del formulario
@@ -91,6 +90,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	}	
 </script>
 <h1><?php echo JText::_('COSTOS_VARIABLES');  ?></h1>
+
+<h3><?php echo $servEdicion -> name; ?></h3>
 <div>
 <form id="form_costos" action="<?php echo $action; ?>" method="POST">
 	<input
