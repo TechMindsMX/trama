@@ -271,5 +271,7 @@ if (isset($proyecto->miembrosGrupo)) {
 		</table>
 	</div>
 	<!--Fin de tabla-->
+	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		javascript:window.history.back();">
 	<input type="submit" value="Enviar" id="guardar" class="button" />
 </form>
