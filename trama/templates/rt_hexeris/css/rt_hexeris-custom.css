@@ -56,6 +56,9 @@ div.compacto {
 	width: 720px;
 	float: left;
 }
+.espaciado_titulo{
+	margin-left:15px;
+}
 .tituloHead{
 	float: left;
 	font-weight: bolder;

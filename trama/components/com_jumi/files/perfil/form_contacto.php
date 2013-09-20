@@ -179,7 +179,7 @@
 <body>
 	<div id="contenedor">
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
-			<div style="margin-left:15px;"><h1><?php echo JText::_('REPRESENTANTE'); ?></h1></div>            
+			<div class="espaciado_titulo"><h1><?php echo JText::_('REPRESENTANTE'); ?></h1></div>            
 			<div class="datos_proy">
 				<label for="repr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
 				<input name="repr_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="repr_nomNombre" maxlength="25" />
@@ -190,7 +190,7 @@
 				<label for="repr_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
 				<input name="repr_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="repr_nomApellidoMaterno" maxlength="25" />
 			</div>
-			<div style="margin-left:15px; "><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
+			<div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
 			<div class="datos_proy">
 				<div style="padding: 10px">
             	<?php echo JText::_('COPIAR_INFO'); ?>          
@@ -228,7 +228,7 @@
                 <input name="teRe_extension" class="validate[onlyNumberSp] input_chica" type="text" id="teRe_extension" maxlength="5" size="8" />
  				</div>
  			</div>
-           	<div style="margin-left:15px; "><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
+           	<div class="espaciado_titulo"><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
 			<div class="datos_proy">
 				<div style="padding: 10px">
             	<?php echo JText::_('COPIAR_INFO'); ?>
@@ -267,7 +267,7 @@
 				</select>
 				</div>
          	 </div>			
-			<div style="margin-left:15px; "><h1><?php echo JText::_('CONT'); ?></h1></div>            
+			<div class="espaciado_titulo"><h1><?php echo JText::_('CONT'); ?></h1></div>            
 			<div class="datos_proy">
 				<label for="daCo_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
 				<input name="daCo_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="daCo_nomNombre" maxlength="25" />
@@ -278,7 +278,7 @@
 				<label for="daCo_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
 				<input name="daCo_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="daCo_nomApellidoMaterno" maxlength="25" />
 			</div>
-			<div style="margin-left:15px; "><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
+			<div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
 			<div class="datos_proy">
 				<div style="padding: 10px">
             	<?php echo JText::_('COPIAR_INFO'); ?> 
@@ -316,7 +316,7 @@
                 <input name="teCo_extension" class="validate[onlyNumberSp] input_chica" type="text" id="teCo_extension" maxlength="5" size="8" />
                 </div>
          	</div>           	
-           	<div style="margin-left:15px; "><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
+           	<div class="espaciado_titulo"><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
      		<div class="datos_proy">
      			<div style="padding: 10px">
             	<?php echo JText::_('COPIAR_INFO'); ?>         

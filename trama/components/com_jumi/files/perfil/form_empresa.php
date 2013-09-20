@@ -76,7 +76,7 @@
 	<div id="contenedor">
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
             
-            <div style="margin-left:15px; "><h1><?php echo JText::_('DATOS_FISCALES'); ?></h1></div>           
+            <div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_FISCALES'); ?></h1></div>           
             <div class="datos_proy">
             <div id="datosFiscales">
 	                <label for="daFi_nomRazonSocial"><?php echo JText::_('RAZON_SOCIAL'); ?>:</label>
@@ -88,7 +88,7 @@
 	            
             </div>             
             </div>
-            <div style="margin-left:15px; "><h1><?php echo JText::_('DOM_FISCAL'); ?></h1></div>            
+            <div class="espaciado_titulo"><h1><?php echo JText::_('DOM_FISCAL'); ?></h1></div>            
            		<div class="datos_proy">
            		<div style="padding: 10px">
             	<?php echo JText::_('COPIAR_INFO'); ?>            

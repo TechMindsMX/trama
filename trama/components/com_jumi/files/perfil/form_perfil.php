@@ -106,7 +106,7 @@
 			
 			<input name="daGr_Foto_guardada" id="daGr_Foto_guardada" type="hidden" value="" />
 			
-			<div style="margin-left:15px;"><h1><?php echo JText::_('DATOS_GR'); ?></h1></div>            
+			<div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_GR'); ?></h1></div>            
 			<div class="datos_proy">
 				<label for="daGr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
 				<input 
@@ -164,7 +164,7 @@
 					type="file" />
 
 			</div>
-			<div style="margin-left:15px; "><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
+			<div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
 			
 			<div class="datos_proy">
 				<label for="daGr_nomPaginaWeb"><?php echo JText::_('PAGINA_WEB'); ?></label>
@@ -260,7 +260,7 @@
                 	size="8" />  
                 </div>    
            	</div>
-           	<div style="margin-left:15px; "><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
+           	<div class="espaciado_titulo"><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
             
            	<div class="datos_proy">
             	<div>
@@ -361,7 +361,7 @@
             		<?php echo JText::_('FISICA_EMP'); ?>
            		</div>
             </div>
-            <div style="margin-left:15px; "><h1><?php echo JText::_('EMPRESA_PER'); ?></h1></div>
+            <div class="espaciado_titulo"><h1><?php echo JText::_('EMPRESA_PER'); ?></h1></div>
             
 			<div class="datos_proy_cv">
             	<label for="daGr_dscDescripcionPersonal"><?php echo JText::_('DESC_EMP'); ?></label>            
