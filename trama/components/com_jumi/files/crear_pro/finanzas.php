@@ -176,6 +176,11 @@ JHtml::_('behavior.modal');
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<input
 		type="hidden"
+		name="callback"
+		id="callback"
+		value="<?php echo $callback;  ?>" />
+	<input
+		type="hidden"
 		name="projectId"
 		id="projectId"
 		value="<?php echo $proyid;  ?>" />

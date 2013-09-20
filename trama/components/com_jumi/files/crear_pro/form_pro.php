@@ -167,6 +167,12 @@ emptyKeys();
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<div class="datos_proy">
 		<span id="camposHidden">
+			<input
+				type="hidden"
+				name="callback"
+				id="callback"
+				value= "<?php echo $callback; ?>"/>
+				
 			<input 
 				type="hidden"
 				name="projectPhotosIds"
