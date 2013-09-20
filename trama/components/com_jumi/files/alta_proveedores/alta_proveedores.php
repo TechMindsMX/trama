@@ -3,6 +3,7 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed"
 
 //$accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid=7';
 $accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
+$callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid=';
 jimport('trama.class');
 
 class AltaProveedores {
@@ -22,8 +23,8 @@ class AltaProveedores {
 			$app -> redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 		}
 
-		$proyId = $app -> input -> get('proyid', '', 'INT');
-		$this -> objDatos = JTrama::getDatos((!empty($proyId)) ? $proyId : null);
+		$proyId = $app -> input -> get('proyid', null, 'INT');
+		$this -> objDatos = JTrama::getDatos($proyId);
 
 		$this -> getMoreData();
 		$this -> getEditable();
@@ -236,8 +237,7 @@ if (isset($proyecto->miembrosGrupo)) {
 	});
 </script>
 <form action="<?php echo $accion ?>" method="post" class="" id="proveedores" >
-	
-	
+	<input type="hidden" value="<?php echo $callback; ?>" name='callback' />
 	<input type="hidden" value="" name="projectProvider" id="data_send"/>
 	<input type="hidden" value="<?php echo $token;?>" name="token">
 	<!-- Tabla con proveedores-->

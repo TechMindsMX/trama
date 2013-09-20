@@ -13,8 +13,6 @@ if ($usuario->guest == 1) {
 jimport('trama.class');
 require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
 
-
-
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token = JTrama::token();
 
@@ -29,7 +27,6 @@ $existe = $servEdicion->variableCosts;
 
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
-//$action = 'components/com_jumi/files/costos_variables/post.php';
 ?>
 
 <script>
@@ -94,6 +91,12 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 <h3><?php echo $servEdicion -> name; ?></h3>
 <div>
 <form id="form_costos" action="<?php echo $action; ?>" method="POST">
+	<input
+		type="hidden"
+		name="callback"
+		id="callback"
+		value= "<?php echo $callback; ?>"/>
+		
 	<input
 		type="hidden"
 		value="<?php echo $_GET['proyid']; ?>"

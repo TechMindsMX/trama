@@ -182,7 +182,7 @@ class JTrama
 		$json = file_get_contents($url);
 		$respuesta = json_decode($json); 
 		
-		JTrama::checkValidId($respuesta);
+		//JTrama::checkValidId($respuesta);
 		JTrama::formatDatosProy($respuesta);
 			
 		return $respuesta;
@@ -207,11 +207,11 @@ class JTrama
 		$value->fundStartDate = 1370284000000; // SIMULADOS
 		$value->fundEndDate = 1385284000000; // SIMULADOS
 
-		$value->fundStartDateCode = $value->fundStartDate;
-		$value->fundEndDateCode = $value->fundEndDate;
+		$value->fundStartDateCode 		= $value->fundStartDate;
+		$value->fundEndDateCode 		= $value->fundEndDate;
 		$value->productionStartDateCode = $value->productionStartDate;
-		$value->premiereStartDateCode = $value->premiereStartDate;
-		$value->premiereEndDateCode = $value->premiereEndDate;
+		$value->premiereStartDateCode 	= $value->premiereStartDate;
+		$value->premiereEndDateCode 	= $value->premiereEndDate;
 
 		if (isset($value->fundStartDate)) {
 			$value->fundStartDate = date('d-m-Y', ($value->fundStartDateCode/1000) );
@@ -227,6 +227,28 @@ class JTrama
 		}
 		if (isset($value->premiereEndDate)) {
 			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDateCode/1000) );
+		}
+		
+		if($value->providers){
+			foreach ($value->providers as $clave => $valor) {
+				$valor->advanceDateCode 		= $valor->advanceDate; 
+				$valor->settlementDateCode 		= $valor->settlementDate;
+				$valor->advancePaidDateCode 	= $valor->advancePaidDate;
+				$valor->settlementPaidDateCode 	= $valor->settlementPaidDate;
+				
+				if( !is_null($valor->advanceDate) ){
+					$valor->advanceDate = date('d-m-Y', ($valor->advanceDateCode/1000) );
+				}
+				if( !is_null($valor->settlementDate) ){
+					$valor->settlementDate = date('d-m-Y', ($valor->settlementDateCode/1000) );
+				}
+				if( !is_null($valor->advancePaidDate) ){
+					$valor->advancePaidDate = date('d-m-Y', ($valor->advancePaidDateCode/1000) );
+				}
+				if( !is_null($valor->settlementPaidDate) ){
+					$valor->settlementPaidDate = date('d-m-Y', ($valor->settlementPaidDateCode/1000) );
+				}
+			}	
 		}
 		$value->projectFinancialData = null;
 	}
