@@ -153,10 +153,11 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		name="sogem" /> %
 	
 	<div id="otros"></div>
-	
+	<div style="margin-bottom: 10px;">
 	<input type="button" class="button" value="Agregar" id="agregarOtros" />
-	
-	
+	</div>
+	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		javascript:window.history.back();">
 	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
 </form>
 </div>
