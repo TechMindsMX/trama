@@ -27,6 +27,7 @@ class TramaProyectosViewDetalleProyecto extends JView
             // Assign data to the view
             $this->items = $items;
 			
+			$this->items->callback = JURI::base().'index.php?option=com_tramaproyectos';
 			$this->addToolBar();
 			
             // Display the template

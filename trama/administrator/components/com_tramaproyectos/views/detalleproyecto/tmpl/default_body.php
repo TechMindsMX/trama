@@ -14,13 +14,14 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 	$bussinesCase = '';
 } else {
 	$bussinesCase = '<div style="margin-bottom:10px">
-		<a href="'.JURI::root().BCASE.'/'.$proyeto->projectBusinessCase->name.'.xlsx" target="blank">
+		<a href="'.MIDDLE.BCASE.'/'.$proyeto->projectBusinessCase->name.'.xlsx" target="blank">
 			Business Case
 		</a>
 	</div>';
 }
 
 ?>
+<input type="hidden" name="callback" value="<?php echo $proyeto->callback ?>" />
 <input type="hidden" name="task" value="" />
 <input type="hidden" name="token" value="<?php echo $token;?>" />
 <tr class="row">
