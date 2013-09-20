@@ -88,12 +88,14 @@ class JTrama
 	public static function getStatusName ($string) {
 		$allNames = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 		
-		foreach ($allNames as $llave => $valor) {
-			if ($valor->id == $string) {
-				if($valor->name == 'Listo'){
-					$statusName = 'Listo para revision';
-				} else {
-					$statusName = $valor->name;
+		if (!empty($allNames)) {
+			foreach ($allNames as $llave => $valor) {
+				if ($valor->id == $string) {
+					if($valor->name == 'Listo'){
+						$statusName = 'Listo para revision';
+					} else {
+						$statusName = $valor->name;
+					}
 				}
 			}
 		}
@@ -170,10 +172,11 @@ class JTrama
 		$jsonAllProjects = file_get_contents($url);
 		$json = json_decode($jsonAllProjects);
 		
-		foreach ($json as $key => $value) {
-			JTrama::formatDatosProy($value);
+		if (!empty($json)) {
+			foreach ($json as $key => $value) {
+				JTrama::formatDatosProy($value);
+			}
 		}
-		
 		return $json;
 	}
 
