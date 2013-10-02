@@ -40,7 +40,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		});
 
 		jQuery("#agregarOtros").click(function(){
-			jQuery('#otros').append('<div><input type="text" id="agregado" onChange="cambio(this)" /> <input class="validate[custom[onlyNumberRenta]]" type="text" id="campo" />%</div>');
+			jQuery('#otros').append('<div><input type="text" placeholder="<?php echo JText::_('CONCEPT');?>" id="agregado" onChange="cambio(this)" /> <input placeholder="<?php echo JText::_('PORCENTAJE_COSTOS');?>" class="validate[custom[onlyNumberRenta]]" type="text" id="campo" />%</div>');
 		
 		});
 		
@@ -156,7 +156,9 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		maxlength="5"
 		name="sogem" /> %
 	
-	<div id="otros"></div>
+	<div id="otros">
+		<h3><?php echo JText::_('OTROS');  ?></h3>
+	</div>
 	<div class="boton_enviar">
 	<input type="button" class="button" value="Agregar" id="agregarOtros" />
 	</div>
