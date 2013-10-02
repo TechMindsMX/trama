@@ -34,5 +34,8 @@ define("MIDDLE", "http://162.209.56.86");
 define("PUERTO", ":7070");
 define("AVATAR", "avatar");
 define("BANNER", "banner");
-define("BCASE", "businesscase");
+define("BCASE", "businessCase");
 define("PHOTO", "photo");
+define("SOUNDCLOUD_CLIENT_ID","52bdfab59cb4719ea8d5ea626efae0da");
+define("SOUNDCLOUD_CLIENT_SECRET","7688bd528138b2de5daf52edffc091c5");
+
