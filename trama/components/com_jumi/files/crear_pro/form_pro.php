@@ -481,9 +481,9 @@ emptyKeys();
 	
 	<div class="barra-top" id="otras_ligas">
 		<?php 
-			echo $ligaEditProveedores;
+			echo $ligaFinantialData;			
 			echo $ligaCostosVariable;
-			echo $ligaFinantialData;
+			echo $ligaEditProveedores;
 			echo $comentarios; 
 		?>
 	</div>

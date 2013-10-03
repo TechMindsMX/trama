@@ -19,6 +19,12 @@ $token = JTrama::token();
 $input = JFactory::getApplication()->input;
 $proyid= $input->get("proyid",0,"int");
 $error1= $input->get("error",0,"int");
+$datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
+$comentarios			= '';
+$ligaEditProveedores	= '';
+$ligaCostosVariable		= '';
+$ligaFinantialData		= '';
+
 if($error1 ==1){
 	echo "<div style='color: red;'>ERROR revisa la información capturada</div>";
 }
@@ -45,6 +51,48 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		});
 		
 		<?php
+		
+		if( !is_null($datosObj) ) {
+			require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
+				
+			$app = JFactory::getApplication();
+			if( $datosObj->userId != $usuario->id ) {
+				$url = 'index.php';
+				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+			}
+				
+			$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
+			$ligaPro = '<span class="liga">
+							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+						</span>';
+				
+			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
+				if($datosObj->status == 2) {
+					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
+				}
+		
+				if(empty($datosObj->providers)){
+					$mensaje = JText::_('ALTA_PROVEEDPORES');
+				} else {
+					$mensaje = JText::_('EDITAR_PROVEEDPORES');
+				}
+				$ligaEditProveedores = '<span class="liga">
+											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+								   		</span>';
+		
+				if(!is_null($datosObj->breakeven)){
+					$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
+				
+					$ligaFinantialData = '<span class="liga">
+										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
+														  	'</span>';
+				}
+		
+				$ligaCostosVariable = '<span class="liga">
+									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
+											  	'</span>';
+			}
+		}
 	
 	if(!empty($existe)){
 		
@@ -158,6 +206,14 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	
 	<div id="otros">
 		<h3><?php echo JText::_('OTROS');  ?></h3>
+	</div>
+	<div class="barra-top" id="otras_ligas">
+		<?php 
+			echo $ligaPro;
+			echo $ligaFinantialData;
+			echo $ligaEditProveedores;
+			echo $comentarios; 
+		?>
 	</div>
 	<div class="boton_enviar">
 	<input type="button" class="button" value="Agregar" id="agregarOtros" />

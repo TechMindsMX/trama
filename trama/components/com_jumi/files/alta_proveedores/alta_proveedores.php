@@ -5,7 +5,8 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed"
 $accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
 $callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid=';
 jimport('trama.class');
-
+require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
+$usuario = JFactory::getUser();
 class AltaProveedores {
 	
 	public $diaPagoProveedores = 2; //Martes == 2
@@ -92,7 +93,13 @@ $path = 'components/com_jumi/files/alta_proveedores/';
 $doc->addStyleSheet($path.'alta_proveedores.css');
 $proveedores = $proyecto->objDatos->providers;
 $token = JTrama::token();
-
+$input 					= JFactory::getApplication()->input;
+$proyid 				= $input->get("proyid",0,"int");
+$datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
+$comentarios			= '';
+$ligaEditProveedores	= '';
+$ligaCostosVariable		= '';
+$ligaFinantialData		= '';
 ?>
 
 
@@ -100,8 +107,7 @@ $token = JTrama::token();
 	
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
 	
-	<p><?php echo JText::_('CATEGORIA').' = '.$proyecto -> objDatos -> catName; ?></p>
-	<p><?php echo JText::_('SUBCATEGORIA').' = '.$proyecto -> objDatos -> subCatName; ?></p>
+	
 	<p><?php echo JText::_('FECHA_INICIO_PRODUCCION').' = '.$proyecto -> objDatos -> productionStartDate; ?></p>
 	<p><?php echo JText::_('PREMIER_DATE').' = '.$proyecto -> objDatos -> premiereStartDate; ?></p>
 	<p><?php echo JText::_('STATUS').' = '.$proyecto -> objDatos -> statusName; ?></p>
@@ -211,7 +217,50 @@ if (isset($proyecto->miembrosGrupo)) {
 
 <script>
 	jQuery(document).ready(function(){
+			<?php 
+			if( !is_null($datosObj) ) {
+				require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
+			
+				$app = JFactory::getApplication();
+				if( $datosObj->userId != $usuario->id ) {
+					$url = 'index.php';
+					$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+				}
+			
+				$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
+				$ligaPro = '<span class="liga">
+							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+						</span>';
+			
+				if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
+					if($datosObj->status == 2) {
+						$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
+					}
+			
+					if(empty($datosObj->providers)){
+						$mensaje = JText::_('ALTA_PROVEEDPORES');
+					} else {
+						$mensaje = JText::_('EDITAR_PROVEEDPORES');
+					}
+					$ligaEditProveedores = '<span class="liga">
+											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+								   		</span>';
+			
+					if(!is_null($datosObj->breakeven)){
+						$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
+			
+						$ligaFinantialData = '<span class="liga">
+										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
+													  	'</span>';
+					}
+			
+					$ligaCostosVariable = '<span class="liga">
+									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
+												  	'</span>';
+				}
+			}
 
+			?>
 		jQuery("#guardar").click(function (){
 			
 			var count = 0;
@@ -271,6 +320,14 @@ if (isset($proyecto->miembrosGrupo)) {
 		</table>
 	</div>
 	<!--Fin de tabla-->
+	<div class="barra-top" id="otras_ligas">
+		<?php 
+			echo $ligaPro;
+			echo $ligaFinantialData;			
+			echo $ligaCostosVariable;
+			echo $comentarios; 
+		?>
+	</div>
 	<div class="boton_enviar">
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
