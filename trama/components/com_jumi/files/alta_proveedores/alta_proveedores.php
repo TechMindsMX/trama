@@ -1,12 +1,27 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
-
-//$accion = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid=7';
-$accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
-$callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid=';
 jimport('trama.class');
-require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 $usuario = JFactory::getUser();
+$doc = JFactory::getDocument();
+
+$proyecto = new AltaProveedores;
+
+$path = 'components/com_jumi/files/alta_proveedores/';
+require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
+$doc->addStyleSheet($path.'alta_proveedores.css');
+$proveedores = $proyecto->objDatos->providers;
+$token = JTrama::token();
+$input 					= JFactory::getApplication()->input;
+$proyid 				= $input->get("proyid",0,"int");
+$datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
+$comentarios			= '';
+$ligaEditProveedores	= '';
+$ligaCostosVariable		= '';
+$ligaFinantialData		= '';
+$accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
+$callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid='.$proyid;
+
+
 class AltaProveedores {
 	
 	public $diaPagoProveedores = 2; //Martes == 2
@@ -86,27 +101,11 @@ class AltaProveedores {
 
 }
 
-$proyecto = new AltaProveedores;
-
-$doc = JFactory::getDocument();
-$path = 'components/com_jumi/files/alta_proveedores/';
-$doc->addStyleSheet($path.'alta_proveedores.css');
-$proveedores = $proyecto->objDatos->providers;
-$token = JTrama::token();
-$input 					= JFactory::getApplication()->input;
-$proyid 				= $input->get("proyid",0,"int");
-$datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
-$comentarios			= '';
-$ligaEditProveedores	= '';
-$ligaCostosVariable		= '';
-$ligaFinantialData		= '';
 ?>
-
 
 <h1><?php echo JText::_('ALTA_PROVEEDORES'); ?></h1>
 	
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
-	
 	
 	<p><?php echo JText::_('FECHA_INICIO_PRODUCCION').' = '.$proyecto -> objDatos -> productionStartDate; ?></p>
 	<p><?php echo JText::_('PREMIER_DATE').' = '.$proyecto -> objDatos -> premiereStartDate; ?></p>
@@ -115,17 +114,29 @@ $ligaFinantialData		= '';
 	
 	<form id="agregados">
 		<span class="total_proveedor"><?php echo JText::_('TOTAL_PROVEDORES'); ?></span> = <span class="total"></span>
-		<input type="hidden" value="<?php echo $proyecto -> objDatos -> id; ?>" name="projectId" id="proyid"/>
-	</form>
-
-<div id="todos_miembros_grupo">
+	
 	<h3><?php echo JText::_('PROVEEDOR_USUARIOS_MIEMROS'); ?></h3>
 <?php
 if (isset($proyecto->miembrosGrupo)) {
+
+	$provedores= $proyecto->objDatos->providers;
+	
 	foreach ($proyecto->miembrosGrupo as $key => $value) {
 
 	$member = $proyecto->miembrosGrupo[$key];
-
+	$advanceQuantity='';
+	$settlementQuantity='';
+	$fechaAnticipo='';
+	$fechaLiquidacion='';
+	if(isset($provedores)){
+		foreach ($provedores as $indice =>$valor){
+			$advanceQuantity= ($valor->providerId == $member->memberid) ? $valor->advanceQuantity : '';
+			$settlementQuantity= ($valor->providerId == $member->memberid) ? $valor->settlementQuantity : '';
+			$fechaAnticipo= ($valor->providerId == $member->memberid) ? $valor->advanceDate : '';
+			$fechaLiquidacion= ($valor->providerId == $member->memberid) ? $valor->settlementDate : '';
+		}
+	}
+	
 	$html = '<div class="inputs '. $member->memberid .'">
 			<div class="nombre">
 			<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
@@ -135,22 +146,24 @@ if (isset($proyecto->miembrosGrupo)) {
 			<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
 			<input type="hidden" name="providerId" value="'.$member->memberid.'" />
 			<label for="advanceQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
-			<input name="advanceQuantity" type="number" min="1000" id="monto" class="validate[custom[onlyNumberSp]]" />
+			<input name="advanceQuantity" type="number" min="1000" id="monto" value="'.$advanceQuantity.'" />
 			<label for="advanceDate">'.JText::_('JDATE').'</label>
 			<select name="advanceDate" id="fecha">'; 
 	foreach ($proyecto->fechasPago as $key => $value) {
-		$html .= '<option value="'.$value.'">'.$value.'</option>';
+		$selected=($value == $fechaAnticipo ) ? 'selected' : '';
+		$html .= '<option value="'.$value.'" '.$selected.' >'.$value.'</option>';
 	}
 	$html .= '</select>
 			</div>
 			<div class="rt-grid-4">
 			<p>'.JText::_('PROVEEDOR_LIQUIDACION').'</p>
 			<label for="settlementQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
-			<input name="settlementQuantity" type="number" min="1000" id="monto" class="validate[custom[onlyNumberSp]]" />
+			<input name="settlementQuantity" type="number" min="1000" id="monto" value="'.$settlementQuantity.'" />
 			<label for="settlementDate">'.JText::_('JDATE').'</label>
 			<select name="settlementDate" id="fecha">';
 	foreach ($proyecto->fechasPago as $key => $value) {
-		$html .= '<option value="'.$value.'">'.$value.'</option>';
+		$selected=($value == $fechaLiquidacion ) ? 'selected' : '';
+		$html .= '<option value="'.$value.'" '.$selected.' >'.$value.'</option>';
 	}
 	$html .= '</select>
 			</div>
@@ -160,39 +173,67 @@ if (isset($proyecto->miembrosGrupo)) {
 	}
 }
 ?>
-</div>
+		<input type="hidden" value="<?php echo $proyecto -> objDatos -> id; ?>" name="projectId" id="proyid"/>
+	</form>
 
 <script type="text/javascript">
 	jQuery(document).ready(function() {
+		jQuery("#agregados").validationEngine();
+		sumatotal();
+		
 		jQuery(".nombre").siblings().hide();
 		jQuery('.icon-circle-arrow-up').click(function(){
 			if (jQuery(this).hasClass('icon-circle-arrow-up')) {
-				jQuery(this).parent().parent().parent().appendTo('#agregados');
 				jQuery(this).removeClass('icon-circle-arrow-up');
 				jQuery(this).addClass('icon-circle-arrow-down');
 				jQuery(this).parent().parent().siblings().show('slow');
+				jQuery(this).parent().parent().parent().find('input[type="number"]').each(function() {
+    				jQuery(this).addClass('validate[required,custom[onlyNumberSp]]');
+				});
 			}
 			else {
-			jQuery(this).parent().parent().parent().appendTo('#todos_miembros_grupo');
+			var error = 0;
+			jQuery(this).parent().parent().parent().find('input[type="number"]').each(function() {
+				if (jQuery(this).val() == '') {
+					error++;
+				}
+			});
+			if (error == 1 ) { 
+				alert('LLene toda la mierda');
+				return false;
+			};
 			jQuery(this).removeClass('icon-circle-arrow-down');
 			jQuery(this).addClass('icon-circle-arrow-up');
 			jQuery(this).parent().parent().siblings().hide();
+			jQuery(this).parent().parent().parent().find('input[type="number"]').each(function() {
+				jQuery(this).removeClass('validate[required,custom[onlyNumberSp]]');
+			});
 			}
 		});
 
 		jQuery('input[type="number"]').focusout(function() {
+			suma(this);
+		});
+
+		function suma (campo){
 			var aaa = 0;
-			jQuery(this).parent().parent().find('input[type="number"]').each(function() {
+			jQuery(campo).parent().parent().find('input[type="number"]').each(function() {
 				aaa += parseInt(jQuery(this).val()) || 0;
 			});
-			jQuery(this).parent().siblings('.nombre').children('span.sub_total:first').text(aaa);
+			jQuery(campo).parent().siblings('.nombre').children('span.sub_total:first').text(aaa);
 
+			sumatotal();
+		}
+
+		function sumatotal (){
 			var total = 0 ;
-			jQuery(this).parent().parent().parent().find('input[type="number"]').each(function() {
+			jQuery('#agregados').find('input[type="number"]').each(function() {
 				total += parseInt(jQuery(this).val()) || 0;
 			});
 			jQuery('#agregados').children('span.total').text(total);
-		});
+			
+			}
+
 		
 		$('select').change(function(){
 	        if(this.name == 'advanceDate') {
@@ -262,6 +303,13 @@ if (isset($proyecto->miembrosGrupo)) {
 
 			?>
 		jQuery("#guardar").click(function (){
+
+			jQuery('#agregados').find('input[type="number"]').each(function() {
+			    if (jQuery(this).val() == '' ) {
+			    var parent = jQuery(this).parent().parent();
+			        jQuery(parent).remove();
+			    }
+			});
 			
 			var count = 0;
 			data = {};
