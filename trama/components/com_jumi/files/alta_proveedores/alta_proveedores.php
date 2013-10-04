@@ -173,14 +173,21 @@ if (isset($proyecto->miembrosGrupo)) {
 	}
 }
 ?>
-		<input type="hidden" value="<?php echo $proyecto -> objDatos -> id; ?>" name="projectId" id="proyid"/>
 	</form>
 
 <script type="text/javascript">
+function noboton(){
+	var totalpro	= parseInt( jQuery('#agregados').children('span.total').text());
+	var budgetphp	= parseInt(<?php echo $proyecto -> objDatos -> budget;?>);
+	
+	if (totalpro != budgetphp){
+alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
+	}				
+}
 	jQuery(document).ready(function() {
+		
 		jQuery("#agregados").validationEngine();
 		sumatotal();
-		
 		jQuery(".nombre").siblings().hide();
 		jQuery('.icon-circle-arrow-up').click(function(){
 			if (jQuery(this).hasClass('icon-circle-arrow-up')) {
@@ -199,7 +206,7 @@ if (isset($proyecto->miembrosGrupo)) {
 				}
 			});
 			if (error == 1 ) { 
-				alert('LLene toda la mierda');
+				alert('Debe llenar los dos campos');
 				return false;
 			};
 			jQuery(this).removeClass('icon-circle-arrow-down');
@@ -233,7 +240,6 @@ if (isset($proyecto->miembrosGrupo)) {
 			jQuery('#agregados').children('span.total').text(total);
 			
 			}
-
 		
 		$('select').change(function(){
 	        if(this.name == 'advanceDate') {
@@ -304,6 +310,8 @@ if (isset($proyecto->miembrosGrupo)) {
 			?>
 		jQuery("#guardar").click(function (){
 
+			noboton();
+
 			jQuery('#agregados').find('input[type="number"]').each(function() {
 			    if (jQuery(this).val() == '' ) {
 			    var parent = jQuery(this).parent().parent();
@@ -327,19 +335,18 @@ if (isset($proyecto->miembrosGrupo)) {
 
 			jQuery("#data_send").val(json);
 			
-			jQuery("#proveedores").submit(function(){
-				// return false;
-			});
+			jQuery("#proveedores").submit();
 		});
 	});
 </script>
 <form action="<?php echo $accion ?>" method="post" class="" id="proveedores" >
+	<input type="hidden" value="<?php echo $proyecto -> objDatos -> id; ?>" name="projectId" id="proyid"/>
 	<input type="hidden" value="<?php echo $callback; ?>" name='callback' />
 	<input type="hidden" value="" name="projectProvider" id="data_send"/>
 	<input type="hidden" value="<?php echo $token;?>" name="token">
 	<!-- Tabla con proveedores-->
 	<div style="margin-bottom: 10px;">
-		<table width="100%" style="text-align: center;" frame="box" rules="all">
+		<table class="table table-striped" width="100%" style="text-align: center;" frame="box" rules="all">
 			<tr>
 				<th></th>
 				<th colspan="2"><?php echo JText::_('ANTICIPO'); ?></th>
@@ -379,6 +386,6 @@ if (isset($proyecto->miembrosGrupo)) {
 	<div class="boton_enviar">
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-	<input type="submit" value="<?php echo JText::_('ENVIAR');  ?>" id="guardar" class="button" />
+	<input type="button" value="<?php echo JText::_('ENVIAR');  ?>" id="guardar" class="button" />
 	</div>
 </form>
