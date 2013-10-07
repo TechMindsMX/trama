@@ -262,5 +262,26 @@ class JTrama
 		
 		return $token;
 	}
+	
+	public static function isEditable($data, $user){
+		if($data === null){
+			return false;
+		}
+		
+		$app = JFactory::getApplication();
+		
+		$editableStatuses = array(0,2);
+		$editable = in_array($data->status, $editableStatuses);
+		if ($editable === false) {
+			$url = 'index.php';
+			$mensaje = JText::_('EL_STATUS_DEL_PROY').JText::_('NO_PERMITE_EDIC');
+		}
+
+		if( $datosObj->userId != $usuario->id ) {
+			$url = 'index.php';
+			$mensaje = JText::_('ITEM_DOES_NOT_EXIST');
+		}
+		$app->redirect($url, $mensaje, 'error');
+	}
 }
 ?>

@@ -25,6 +25,8 @@ $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
 
+JTrama::isEditable($datosObj, $usuario);
+
 if($error1 ==1){
 	echo "<div style='color: red;'>ERROR revisa la información capturada</div>";
 }
@@ -54,12 +56,6 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		
 		if( !is_null($datosObj) ) {
 			require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
-				
-			$app = JFactory::getApplication();
-			if( $datosObj->userId != $usuario->id ) {
-				$url = 'index.php';
-				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
-			}
 				
 			$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
 			$ligaPro = '<span class="liga">

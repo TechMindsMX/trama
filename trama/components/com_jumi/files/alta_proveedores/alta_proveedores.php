@@ -21,6 +21,7 @@ $ligaFinantialData		= '';
 $accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
 $callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid='.$proyid;
 
+JTrama::isEditable($datosObj, $usuario);
 
 class AltaProveedores {
 	
