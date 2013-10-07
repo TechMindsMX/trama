@@ -143,7 +143,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		
 	<input
 		type="hidden"
-		value="<?php echo $_GET['proyid']; ?>"
+		value="<?php echo $proyid; ?>"
 		name="projectId"
 		id="projectId" />
 		

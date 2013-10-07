@@ -277,11 +277,13 @@ class JTrama
 			$mensaje = JText::_('EL_STATUS_DEL_PROY').JText::_('NO_PERMITE_EDIC');
 		}
 
-		if( $datosObj->userId != $usuario->id ) {
+		if( $data->userId != $user->id ) {
 			$url = 'index.php';
 			$mensaje = JText::_('ITEM_DOES_NOT_EXIST');
 		}
-		$app->redirect($url, $mensaje, 'error');
+		if (isset($mensaje)) {
+			$app->redirect($url, $mensaje, 'error');
+		}
 	}
 }
 ?>
