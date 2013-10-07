@@ -186,7 +186,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 	}				
 }
 	jQuery(document).ready(function() {
-		
+		suma(jQuery('input[type="number"]'));
 		jQuery("#agregados").validationEngine();
 		sumatotal();
 		jQuery(".nombre").siblings().hide();
