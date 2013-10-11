@@ -2,8 +2,8 @@
 defined('_JEXEC') OR die( "Direct Access Is Not Allowed" );
 
 jimport('trama.class');
-require_once 'components/com_jumi/files/crear_proyecto/classIncludes/clase.php';
-require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
+require_once 'components/com_jumi/files/crear_pro/classIncludes/clase.php';
+require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 
 $subCategorias = JTrama::getAllSubCats();
 

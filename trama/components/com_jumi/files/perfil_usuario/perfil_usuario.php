@@ -52,7 +52,7 @@ $promedio = $objuserdata->scoreUser($userid);
 
     <body>
         
-      <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
+      <script type="text/javascript" src="components/com_jumi/files/crear_pro/js/raty/jquery.raty.js"></script>
         
       <div id="contenido">
 		<div class="rt-inner mitad">
@@ -208,7 +208,7 @@ $promedio = $objuserdata->scoreUser($userid);
        </div>
        
        <script type="text/javascript">
-		var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
+		var ruta = "components/com_jumi/files/crear_pro/js/raty/img/"
 
 		jQuery(document).ready(function () {
 			jQuery('#calif').raty({
