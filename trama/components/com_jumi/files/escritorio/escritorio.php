@@ -264,12 +264,6 @@ $promedio = $objuserdata->scoreUser($userid);
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</th>
-								<th>
-									<span class="editTabla"><?php echo JText::_('EDIT');?></span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
-								</th>
 							</tr>
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
