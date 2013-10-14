@@ -65,6 +65,8 @@ $statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/res
 
 jimport('trama.class');
 foreach ($json as $key => $value) {
+	$string = strip_tags($value->description);
+	$value->description = (strlen($string) > 93) ? substr($string,0,90).'...' : $string;
 	$value->nomCat = JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
 	$value->producer = JTrama::getProducerProfile($value->userId);

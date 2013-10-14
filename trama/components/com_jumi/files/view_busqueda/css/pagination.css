@@ -58,7 +58,7 @@ div.proyecto > .inner {
 	color:fff;
 	content: "\f0d7";
 }
-.tituloProy a, .catSubCat, .productor a, .descripcion {
+.tituloProy a, .catSubCat {
 	color:#000 !important;
 	font-weight:bold;
 }
@@ -96,8 +96,8 @@ div.proyecto > .inner {
 }
 .descText {
 	margin: 2em 0 1em;
-	line-height: 1.5em;
-	height:55px !important;
+	line-height: 22px;
+	height: 72px !important;
 	overflow:hidden;
 }
 .proyecto .readmore {
