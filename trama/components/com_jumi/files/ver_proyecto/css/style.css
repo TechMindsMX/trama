@@ -113,11 +113,13 @@
 	width: 100%;
 }
 .info-banner div.rt-inner {
-	margin: 3em;
 	padding: 0.5em 1em;
-	background: rgba( 80, 80, 80, 0.3 );
+	background: rgba( 0, 0, 0, 0.4 );
 	display: inline-block;
 	border-radius: 3px;
+	margin-top: 65px;
+	padding-left: 26px;
+	padding-right: 17px;
 }
 #banner .info-banner div.rt-inner h1,
 #banner .info-banner div.rt-inner h2,

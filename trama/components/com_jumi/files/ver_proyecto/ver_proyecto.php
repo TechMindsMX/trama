@@ -317,8 +317,8 @@ function informacionTmpl($data, $params) {
 				'<div class="granty-width-spacer flotado">'.
 				$mapa.
 				'</div>';
-			$derecha = $data->description.
-				'<br /><h3>Elenco</h3><p>'.$data->cast.'</p>';
+			$derecha = '<br /><h3>'.JText::_('PRO_DESCRIPTION').'</h3><p>'.$data->description.'</p>
+				<br /><h3>'.JText::_('PRO_CAST').'</h3><p>'.$data->cast.'</p>';
 			
 			break;
 	}
