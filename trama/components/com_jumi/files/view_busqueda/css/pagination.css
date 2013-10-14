@@ -72,6 +72,9 @@ div.proyecto > .inner {
 .descripcion {
   font-size: 114%;
 }
+.descText {
+	color:#000 !important;
+}
 .statusP{
 }
 .titulo span, .descripcion span {
