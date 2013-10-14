@@ -14,7 +14,6 @@ div.bussines-card{
 	margin-bottom:20px;
 	float: right;
 }
-
 #datos{
 	color:#666;
 	font-weight:bold;
@@ -155,7 +154,6 @@ div.bussines-card{
 	-o-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
 	-ms-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
 	transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
-	box-shadow: 0px 0px 0px 1px rgba(155,155,155,0.3);
 }
 .ac-container input:checked ~ article.ac-small{
 	height: auto;
@@ -191,4 +189,13 @@ div.business-card div#datos span {
 }
 #agrega_amigo {
 	margin: 1em 0 0 0;
+}
+.escritorio{
+	margin-bottom:9px;
+}
+.escritorio td{
+	padding:3px;
+}
+.escritorio a{
+	font-weight:bolder;
 }
