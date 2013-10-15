@@ -295,7 +295,7 @@ div#banner div.rt-inner a {
 
 #contenido-detalle {
 	margin-bottom: 10px;
-	height: 500px;
+	height: 690px;
 	overflow-y: scroll;
 	width: 630px;
 }
@@ -324,4 +324,7 @@ div#banner div.rt-inner a {
 		height: 300px;
 		overflow-y: scroll;
 	}
+}
+h3.line-space{
+	line-height: 70%;
 }

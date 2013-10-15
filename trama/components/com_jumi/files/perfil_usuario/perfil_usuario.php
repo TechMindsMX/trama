@@ -85,29 +85,25 @@ $promedio = $objuserdata->scoreUser($userid);
 					<input id="ac-2" name="accordion-1" type="radio" />
 					<label for="ac-2">Perfil Extendido</label>
 					<article class="ac-medium">
-						<p>
 						<?php
 						 $objuserdata->generacampos(0, 'perfilx_catalogoperfil', 'idcatalogoPerfil', 'idcatalogoPerfilPadre', 'nomNombreCategoria', 'respuestaPerfil', $userid); 
 						 ?>
-						 </p>
 					</article>
 				</div>
 				<div>
 					<input id="ac-3" name="accordion-1" type="radio" />
 					<label for="ac-3">Funciograma</label>
 					<article class="ac-large">
-						<p>
 							<?php $objuserdata->generacampos(0, 'perfilx_catalogofuncion', 'idcatalogoFuncion', 'idcatalogoFuncionPadre', 'nomNombreCategoria', 'respuestaFuncion', $userid); ?>
-						 </p>
+	
 					</article>
 				</div>
 				<div>
 					<input id="ac-4" name="accordion-1" type="radio" />
 					<label for="ac-4">Producci&oacute;n</label>
 					<article class="ac-large">
-						<p>
 							<?php $objuserdata->generacampos(0, 'perfilx_catalogoproduccion', 'idcatalogoProduccion', 'idcatalogoProduccionPadre', 'nomNombreCategoria', 'respuestaProduccion', $userid); ?>
-						 </p>
+						
 					</article>
 				</div>
 			</section>
@@ -120,22 +116,18 @@ $promedio = $objuserdata->scoreUser($userid);
 					<input id="ac-2a" name="accordion-2" type="radio" checked />
 					<label for="ac-2a">Descripci&oacute;n</label>
 					<article class="ac-medium">
-						<p> 
 							<?php 
 		      					echo $datosgenerales->dscDescripcionPersonal;		       
 		       				?>	
-						</p>
 					</article>
 				</div>
 				<div>
 					<input id="ac-3a" name="accordion-2" type="radio" />
 					<label for="ac-3a">Curr&iacute;culum</label>
 					<article class="ac-large">
-						<p>
 							<?php 
 		      					echo $datosgenerales->dscCurriculum;		       
-		       				?>		
-						</p>
+		       				?>	
 					</article>
 				</div>
 				<div>
@@ -160,7 +152,6 @@ $promedio = $objuserdata->scoreUser($userid);
                     <input id="ac-5a" name="accordion-2" type="radio" />
 					<label for="ac-5a">Proyectos actuales</label>
 					<article class="ac-large">
-						<p>
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type != 'REPERTORY') {
@@ -197,8 +188,7 @@ $promedio = $objuserdata->scoreUser($userid);
 							<?php
 									$count = $count + 1;
 								}
-							?>							
-						</p>
+							?>
 					</article>
 				</div>
 				
