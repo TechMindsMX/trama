@@ -16,7 +16,7 @@ $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
 $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
 
 if ( !$tipoPP ) {
-	$ligasPP = '<div id="ligasprod" class="barra-top clearfix">'.
+	$ligasPP = '<div id="ligasprod" class="barra-top2 clearfix">'.
 			   '<div id="filtrar" style="float:left;">Filtrar por: </div>'.
 			   '<div id="triangle"> </div>'.
 			   '<div class="barraProy">Proyectos <input  type="checkbox" id="proyecto" /></div>'.

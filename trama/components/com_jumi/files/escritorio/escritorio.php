@@ -77,19 +77,19 @@ $promedio = $objuserdata->scoreUser($userid);
 					<input id="ac-2a" name="accordion-2" type="radio" />
 			<label for="ac-2a"><?php echo JText::_('LABEL_PROYECTOS');?></label>
 					<article class="ac-medium">
-						<table class="escritorio" width="100%" frame="box" rules="all" style="text-align: center">
+						<table class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center">
 							<tr>
 								<th><?php echo JText::_('LABEL_NAME');?></th>
 								<th><?php echo JText::_('LABEL_CREACION');?></th>
 								<th><?php echo JText::_('LABEL_STATUS');?></th>
-								<th><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></th>
-								<th>
+								<th width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></th>
+								<th width="15%">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</th>
-								<th>
+								<th width="15%">
 									<span class="editTabla"><?php echo JText::_('EDIT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
@@ -151,19 +151,19 @@ $promedio = $objuserdata->scoreUser($userid);
 					<input id="ac-3a" name="accordion-2" type="radio" />
 					<label for="ac-3a"><?php echo JText::_('LABEL_PRODUCTOS');?></label>
 					<article class="ac-large">
-						<table class="escritorio" width="100%" frame="box" rules="all" style="text-align: center;">
+						<table class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center;">
 							<tr>
 								<th><?php echo JText::_('LABEL_NAME');?></th>
 								<th><?php echo JText::_('LABEL_CREACION');?></th>
 								<th><?php echo JText::_('LABEL_STATUS');?></th>
-								<th>Grupo</th>
-								<th>
+								<th width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></th>
+								<th width="15%">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</th>
-								<th>
+								<th width="15%">
 									<span class="editTabla"><?php echo JText::_('EDIT'); ?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
@@ -225,7 +225,7 @@ $promedio = $objuserdata->scoreUser($userid);
 					<input id="ac-4a" name="accordion-2" type="radio" />
 					<label for="ac-4a"><?php echo JText::_('LABEL_REPERTORIO');?></label>
 					<article class="ac-small">
-						<table class="escritorio" width="100%" frame="box" rules="all" style="text-align: center;">
+						<table class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center;">
 							<tr>
 								<th><?php echo JText::_('LABEL_NAME');?></th>
 								<th>
@@ -253,12 +253,12 @@ $promedio = $objuserdata->scoreUser($userid);
                     <input id="ac-5a" name="accordion-2" type="radio" />
 					<label for="ac-5a"><?php echo JText::_('LABEL_SUSPENDIDOS');?></label>
 					<article class="ac-large">
-						<table class="escritorio" width="100%" frame="box" rules="all" style="text-align: center;">
+						<table class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center;">
 							<tr>
 								<th><?php echo JText::_('LABEL_NAME');?></th>
 								<th><?php echo JText::_('LABEL_CREACION');?></th>
-								<th>Grupo</th>
-								<th>
+								<th width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></th>
+								<th width="15%">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
@@ -282,8 +282,6 @@ $promedio = $objuserdata->scoreUser($userid);
 													if ( !empty($value->logs) ) {
 														echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
 													}
-										echo '	</td>';
-										echo '	<td>';
 										echo '	</td>';
 										echo '</tr>';
 									}

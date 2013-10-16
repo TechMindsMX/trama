@@ -155,7 +155,6 @@ div.bussines-card{
 	-o-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
 	-ms-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
 	transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
-	
 	box-shadow: 0px 0px 0px 1px rgba(155, 155, 155, 0.3);
 }
 .ac-container input:checked ~ article.ac-small{
@@ -168,8 +167,8 @@ div.bussines-card{
 	height: auto;
 }
 .editar {
-	position: absolute;
-	margin: -2.5em 0 0 85%;
+	position: absolute;	
+	margin: -16px 0 0 465px;
 }
 .statusproyecto {
 	font-weight: bold;
@@ -194,11 +193,21 @@ div.business-card div#datos span {
 	margin: 1em 0 0 0;
 }
 .escritorio{
-	margin-bottom:9px;
+	margin-bottom:9px !important;
 }
 .escritorio td{
 	padding:3px;
-}
+ } 
 .escritorio a{
 	font-weight:bolder;
+}
+.space-text{
+	padding:7px 10px 5px 7px;
+}
+@media (max-width: 600px) {
+	.editar {
+	margin-top: -28px;
+	margin-left: 195px;
+	position: absolute;
+}
 }

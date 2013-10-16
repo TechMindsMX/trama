@@ -116,29 +116,34 @@ $promedio = $objuserdata->scoreUser($userid);
 					<input id="ac-2a" name="accordion-2" type="radio" checked />
 					<label for="ac-2a">Descripci&oacute;n</label>
 					<article class="ac-medium">
+							<div class="space-text">
 							<?php 
 		      					echo $datosgenerales->dscDescripcionPersonal;		       
 		       				?>	
+		       				</div>
 					</article>
 				</div>
 				<div>
 					<input id="ac-3a" name="accordion-2" type="radio" />
 					<label for="ac-3a">Curr&iacute;culum</label>
 					<article class="ac-large">
+							<div class="space-text">
 							<?php 
 		      					echo $datosgenerales->dscCurriculum;		       
 		       				?>	
+		       				</div>
 					</article>
 				</div>
 				<div>
 					<input id="ac-4a" name="accordion-2" type="radio" />
 					<label for="ac-4a">Repertorio</label>
 					<article class="ac-large">
+							<div class="space-text">
 							<?php 
 								foreach ($proyectos as $key => $value) {
 									
 									if ($value->type == 'REPERTORY') {
-										echo '<h4><a href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></h4>';
+										echo '<h4><a style="margin-left:10px;" href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></h4>';
 										if ( $usuario->id == $value->userId ) {
 											echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';	
 										}
@@ -146,12 +151,14 @@ $promedio = $objuserdata->scoreUser($userid);
 									}
 								}
 		       				?>	
+		       				</div>
 					</article>
                     </div>
                     <div>
                     <input id="ac-5a" name="accordion-2" type="radio" />
 					<label for="ac-5a">Proyectos actuales</label>
 					<article class="ac-large">
+							<div class="space-text">
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
 									if ($value->type != 'REPERTORY') {
@@ -171,6 +178,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										echo "</ul>";
 									}
 							?>
+							
 							<div class="divcontent" id="divContent<?php echo $count; ?>">
 									<?php
 									foreach ($value->logs as $indice => $valor) {
@@ -189,6 +197,7 @@ $promedio = $objuserdata->scoreUser($userid);
 									$count = $count + 1;
 								}
 							?>
+							</div>
 					</article>
 				</div>
 				
