@@ -126,7 +126,7 @@ emptyKeys();
 			}
 			$presupuesto 	= $datosObj->budget;
 			$breakeven 		= $datosObj->breakeven;
-			$breakevenCalc 	= $datosObj->breakeven;;
+			$breakevenCalc 	= $datosObj->breakeven+5;
 			
 			echo 'var breakeven = '.$breakeven.';';
 			echo 'var breakevencalc = '.$breakevenCalc.';';
@@ -153,9 +153,16 @@ emptyKeys();
 						return false;
 					}
 				}else{
-					alert('La suma de los pagos a proveedores debe ser igual al presupuesto: Proveedores= '+suma+' Presupuesto= '+presupuesto);
+					if( suma != presupuesto ){
+						alert('<?php echo JText::_('ERROR_PRESUPUESTO'); ?>');
+					}
+					
+					if( breakeven != breakevencalc ) {
+						alert('<?php echo JText::_('ERROR_BREAKEVEN'); ?>');
+					}
 					return false;
 				}
+				
 			} else if(this.id == 'guardar') {
 				if( jQuery('#status').val() != <?php echo $status_pro; ?> ) {
 					jQuery('#status').val(<?php echo $status_pro; ?>);

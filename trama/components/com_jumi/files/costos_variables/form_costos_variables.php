@@ -216,6 +216,6 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	</div>
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('ENVIAR');  ?>">
+	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('GUARDAR');  ?>">
 </form>
 </div>

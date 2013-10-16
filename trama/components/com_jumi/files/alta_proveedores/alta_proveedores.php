@@ -387,6 +387,6 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 	<div class="boton_enviar">
 	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-	<input type="button" value="<?php echo JText::_('ENVIAR');  ?>" id="guardar" class="button" />
+	<input type="button" value="<?php echo JText::_('GUARDAR');  ?>" id="guardar" class="button" />
 	</div>
 </form>
