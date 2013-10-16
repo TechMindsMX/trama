@@ -63,6 +63,32 @@ div.dropdown .item, input {
 }
 @link-color: #000;
 
+.barra-top2 {
+  float:left;
+  margin: 0;
+  width:100%;
+  font-weight: bold;
+  color:black;
+  > div, > span, > li {
+    float: left;
+    margin: 0 2px 2px 0;
+    background: #b3b3b3;
+    height: 28px;
+    padding: 5px 9px 0px 13px;
+    text-shadow: none;
+    text-transform: capitalize;
+    a {
+      color: @link-color;
+        &:hover {
+           color: @link-color;
+        }
+        &:before {
+          content: "" !important;
+          margin: 0 !important;
+        }
+    }
+  }
+}
 .barra-top {
   float:left;
   margin: 0;
@@ -152,9 +178,7 @@ div.dropdown .item, input {
 	text-shadow:none;
 	color:black;
 }
-.barra-top input[type="checkbox"], .barra-top input[type="button"] {
-}
-.barra-top input[type="button"] {
+.barra-top2 input[type="button"] {
   color: #000;
   border: 0;
   box-shadow: 0 0 0;
