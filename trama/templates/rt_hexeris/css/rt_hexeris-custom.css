@@ -2,7 +2,9 @@
 	position: absolute;
 	left: 3000px;
 }
-
+#rt-header {
+	margin-bottom: 60px;	
+}
 /*** com_users registration ***/
 #terminos a:link, #terminos a:visited, #terminos a:hover {
 	padding: 5px 10px;
@@ -46,10 +48,12 @@ div.compacto {
 .bienvenidaUsuario{
 	color:#2c9ad9;
 	margin-left:14px;
-	font-size:16px;
-	font-weight:bold;	
-	margin-bottom:10px;
+	font-size:25px;
+	font-weight:bold;
+	margin-top:14px;	
+	margin-bottom:14px;
 	position:absolute;
+	text-transform:capitalize;
 }
 .videoHead{
 	height: 458px;
@@ -100,6 +104,9 @@ div.compacto {
 	}
 }
 @media screen and (max-width: 767px)  {
+	#rt-header {
+		margin-bottom: -35px;
+	}
 	.videoHead{
 	  	height: 300px;
 		width: 360px;
