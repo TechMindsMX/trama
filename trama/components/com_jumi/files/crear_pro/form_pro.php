@@ -27,8 +27,10 @@ $comentarios			= '';
 $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
-
-JTrama::isEditable($datosObj, $usuario);
+$suma 					= 0;
+$presupuesto			= 0;
+$breakeven				= 0;
+$breakevenCalc			= 0;
 
 ?>
 <script>
@@ -39,6 +41,11 @@ emptyKeys();
 		
 		<?php
 		if( !is_null($datosObj) ) {
+			$app = JFactory::getApplication();
+			if( $datosObj->userId != $usuario->id ) {
+				$url = 'index.php';
+				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+			}
 
 			$count = 0;
 			foreach ($datosObj->logs as $key => $value) {
@@ -113,23 +120,40 @@ emptyKeys();
 			
 			echo 'jQuery("#nameRecinto").val("'.$datosObj->inclosure.'");';
 			echo 'jQuery("#searchTextField").val("'.$datosObj->showground.'");';
+			
+			foreach ($datosObj->providers as $key => $value) {
+				$suma = $value->advanceQuantity+$value->settlementQuantity+$suma;
+			}
+			$presupuesto 	= $datosObj->budget;
+			$breakeven 		= $datosObj->breakeven;
+			$breakevenCalc 	= $datosObj->breakeven;;
+			
+			echo 'var breakeven = '.$breakeven.';';
+			echo 'var breakevencalc = '.$breakevenCalc.';';
+			echo 'var suma = '.$suma.';';
+			echo 'var presupuesto = '.$presupuesto.';';
 		}
 		?>
 		
-		jQuery("#guardar, #revision").click(function (){
+		jQuery("#guardar, #revision").click(function (){			
 			var form = jQuery("#form2")[0];
 			var total = form.length;
 	
 			jQuery('#token').val('<?php echo $token;?>');
 
 			if( this.id == 'revision' ) {
-				if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
-					if( jQuery('#status').val() == 0 ) {
-						jQuery('#status').val(9);
-					} else if( jQuery('#status').val() == 2 ){
-						jQuery('#status').val(3);
+				if( (suma == presupuesto) && (breakeven == breakevencalc) ) {
+					if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
+						if( jQuery('#status').val() == 0 ) {
+							jQuery('#status').val(9);
+						} else if( jQuery('#status').val() == 2 ){
+							jQuery('#status').val(3);
+						}
+					}else {
+						return false;
 					}
-				}else {
+				}else{
+					alert('La suma de los pagos a proveedores debe ser igual al presupuesto: Proveedores= '+suma+' Presupuesto= '+presupuesto);
 					return false;
 				}
 			} else if(this.id == 'guardar') {
@@ -416,7 +440,7 @@ emptyKeys();
 								    null, 
 								    null, 
 								    null, 
-								    array('mode'=> 'simple'));
+								    array('mode' => 'simple'));
 					?>
 			</div>
 			<br />
@@ -479,9 +503,9 @@ emptyKeys();
 	
 	<div class="barra-top" id="otras_ligas">
 		<?php 
-			echo $ligaFinantialData;			
-			echo $ligaCostosVariable;
 			echo $ligaEditProveedores;
+			echo $ligaCostosVariable;
+			echo $ligaFinantialData;
 			echo $comentarios; 
 		?>
 	</div>
