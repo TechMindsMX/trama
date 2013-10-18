@@ -333,7 +333,9 @@ function informacionTmpl($data, $params) {
 			encabezado($data).
 			'</div>'.
 			'<div id="contenido-detalle">'.
+			'<div id="inside-detalle">'.
 			$derecha.
+			'</div>'.
 			'</div>'.
 			
 			'</div>';
