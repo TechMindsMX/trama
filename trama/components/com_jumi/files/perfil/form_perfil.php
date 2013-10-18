@@ -58,10 +58,10 @@
 					echo "jQuery('#daGr_Foto_guardada').val('".$generales->Foto."');";
 					echo "jQuery('#daGr_nomPaginaWeb').val('".$generales->nomPaginaWeb."');";
 					
-					if($generales->freelance == 1) {
+					if($generales->freelance == 0) {
 						echo "jQuery('#freelance').prop('checked', true);";
 						echo "jQuery('#daGr_nomCompania').val('');";
-						echo "jQuery('#compania').hide();";
+						echo "jQuery('#companiadiv').hide();";
 						
 					}
 					

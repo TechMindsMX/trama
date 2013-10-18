@@ -42,7 +42,7 @@
 			jQuery('#copiarDatos').click(function(){
 					jQuery('#doFi_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 					jQuery('#doFi_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
-					jQuery('#doFi_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');					
+					jQuery('#doFi_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');
 					jQuery('option', jQuery('#doFi_nomColonias')).remove();
 					jQuery('#doFi_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));					
 					jQuery('#doFi_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');

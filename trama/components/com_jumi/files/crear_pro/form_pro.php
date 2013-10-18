@@ -17,6 +17,7 @@ JHtml::_('behavior.modal');
 
 validacionFiscal($usuario);
 
+$userMiddleId 			= JTrama::getUserMiddlewareId($usuario->id);
 $categoria 				= JTrama::getAllCatsPadre();
 $subCategorias 			= JTrama::getAllSubCats();
 $token 					= JTrama::token();
@@ -31,21 +32,16 @@ $suma 					= 0;
 $presupuesto			= 0;
 $breakeven				= 0;
 $breakevenCalc			= 0;
-
 ?>
 <script>
-emptyKeys();
+	emptyKeys();
 	jQuery(document).ready(function(){	
 		jQuery("#form2").find(".toggle-editor").css("display","none");	
 		jQuery("#form2").validationEngine();
 		
 		<?php
 		if( !is_null($datosObj) ) {
-			$app = JFactory::getApplication();
-			if( $datosObj->userId != $usuario->id ) {
-				$url = 'index.php';
-				$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
-			}
+			JTrama::isEditable($datosObj, $userMiddleId);
 
 			$count = 0;
 			foreach ($datosObj->logs as $key => $value) {
@@ -210,7 +206,7 @@ emptyKeys();
 			
 			<input 
 				type="hidden"
-				value="<?php echo $usuario->id; ?>"
+				value="<?php echo $userMiddleId; ?>"
 				name="userId" />
 				
 			<input

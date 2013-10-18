@@ -16,18 +16,19 @@ require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal
 
 validacionFiscal($usuario);
 
-$categoria 		= JTrama::getAllCatsPadre();
-$subCategorias 	= JTrama::getAllSubCats();
-$token 			= JTrama::token();
-$input 			= JFactory::getApplication()->input;
-$proyid 		= $input->get("proyid", 0, "int");
-$datosObj 		= JTrama::getDatos($proyid);
-$ligaPro		= '';
+$categoria 				= JTrama::getAllCatsPadre();
+$subCategorias 			= JTrama::getAllSubCats();
+$miidlewareId			= JTrama::getUserMiddlewareId($usuario->id);
+$token 					= JTrama::token();
+$input 					= JFactory::getApplication()->input;
+$proyid 				= $input->get("proyid", 0, "int");
+$datosObj 				= JTrama::getDatos($proyid);
+$ligaPro				= '';
 $ligaCostosVariable		= '';
 $comentarios			= '';
 $ligaEditProveedores	= '';
 
-JTrama::isEditable($datosObj, $usuario);
+JTrama::isEditable($datosObj, $miidlewareId);
 
 JHtml::_('behavior.modal');
 ?>

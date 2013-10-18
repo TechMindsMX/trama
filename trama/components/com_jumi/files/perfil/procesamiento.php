@@ -25,19 +25,6 @@ class procesamiento extends manejoImagenes {
 	var $persona;
 	
 	function agrupacion($campos){
-		
-		// if(isset($generales) && $generales->perfil_personalidadJuridica_idpersonalidadJuridica != 1){
-			// $validacion_rfc = $this->validacionRFC( $generales->perfil_personalidadJuridica_idpersonalidadJuridica,$campos['daFi_rfcRFC']);
-			
-			// if(!$validacion_rfc){
-				// header("Location: {$_SERVER['HTTP_REFERER']}");
-				// $error = "<p>RFC INVALIDO</p>";
-					// $application = JFactory::getApplication();
-					// $application->enqueueMessage(JText::_($error), 'error');
-				// exit;
-			// }
-		// }
-				
 		$claves = array_keys($campos);
 				
 		foreach($claves as $clave ) {
@@ -240,6 +227,7 @@ class procesamiento extends manejoImagenes {
 			return FALSE;
 		}
 	}
+	
 	function grabarDatosPerfil($data, $tabladb, $tipoContacto, $resultado) {
 		$db =& JFactory::getDBO();
 		$usuario =& JFactory::getUser();

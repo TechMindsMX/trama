@@ -8,6 +8,7 @@ class JTrama
 	
 	public $nomCatPadre = null;
 
+	//Metodos que usan Servicios MIDDLEWARE
 	public function	getAllSubCats() {
 		$url = MIDDLE . PUERTO . '/trama-middleware/rest/category/subcategories/all';
 		$subcats = json_decode(@file_get_contents($url));
@@ -22,6 +23,81 @@ class JTrama
 		return $cats;
 	}
 
+	public static function getStatusName ($string) {
+		$allNames = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+		
+		if (!empty($allNames)) {
+			foreach ($allNames as $llave => $valor) {
+				if ($valor->id == $string) {
+					if($valor->name == 'Listo'){
+						$statusName = 'Listo para revision';
+					} else {
+						$statusName = $valor->name;
+					}
+				}
+			}
+		}
+		return $statusName;
+	}
+	
+	public static function getStatus(){
+		$status = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+		
+		return $status;
+	}
+	
+	public function getProjectsByUser ($userid) {
+		$projectList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByUser/'.$userid));
+		
+		return $projectList;
+	}
+	
+	public static function allProjects(){
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
+		$jsonAllProjects = file_get_contents($url);
+		$json = json_decode($jsonAllProjects);
+		
+		if (!empty($json)) {
+			foreach ($json as $key => $value) {
+				JTrama::formatDatosProy($value);
+			}
+		}
+		return $json;
+	}
+
+	public static function getDatos ( $id ) {
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
+		$json = file_get_contents($url);
+		$respuesta = json_decode($json); 
+		
+		//JTrama::checkValidId($respuesta);
+		JTrama::formatDatosProy($respuesta);
+			
+		return $respuesta;
+	}
+	
+	public static function token(){
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/security/getKey';
+		$token = file_get_contents($url);
+		
+		return $token;
+	}
+
+	//Metodos que no usan servicios MIDDLEWARE
+	public static function getUserMiddlewareId($userId) {
+		$db = JFactory::getDBO();
+		
+		$query = $db->getQuery(true);
+		$query->select($db->quoteName('idMiddleware'));
+		$query->from($db->quoteName('#__users_middleware'));
+		$query->where('idJoomla = '.$userId);
+		
+		$db->setQuery( $query );
+		$id = $db->loadResult();
+		
+		return (int) $id;
+	}
+	
 	public function fetchAllCats()	{
 		$cats = JTrama::getAllSubCats();
 		$subcats = JTrama::getAllCatsPadre();
@@ -85,35 +161,6 @@ class JTrama
 		return $html;
 	}
 	
-	public static function getStatusName ($string) {
-		$allNames = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
-		
-		if (!empty($allNames)) {
-			foreach ($allNames as $llave => $valor) {
-				if ($valor->id == $string) {
-					if($valor->name == 'Listo'){
-						$statusName = 'Listo para revision';
-					} else {
-						$statusName = $valor->name;
-					}
-				}
-			}
-		}
-		return $statusName;
-	}
-	
-	public static function getStatus(){
-		$status = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
-		
-		return $status;
-	}
-	
-	public function getProjectsByUser ($userid) {
-		$projectList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByUser/'.$userid));
-		
-		return $projectList;
-	}
-	
 	public function getEditUrl($value) {
 		$value->viewUrl = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$value->id;
 		switch ($value->type) {
@@ -167,30 +214,6 @@ class JTrama
 		
 	}
 	
-	public static function allProjects(){
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
-		$jsonAllProjects = file_get_contents($url);
-		$json = json_decode($jsonAllProjects);
-		
-		if (!empty($json)) {
-			foreach ($json as $key => $value) {
-				JTrama::formatDatosProy($value);
-			}
-		}
-		return $json;
-	}
-
-	public static function getDatos ( $id ) {
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
-		$json = file_get_contents($url);
-		$respuesta = json_decode($json); 
-		
-		//JTrama::checkValidId($respuesta);
-		JTrama::formatDatosProy($respuesta);
-			
-		return $respuesta;
-	}
-
 	public static function checkValidId($data) {
 		$app = JFactory::getApplication();
 		if(!isset($data->id)) {
@@ -198,7 +221,6 @@ class JTrama
 			$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
 		}
 	}
-	
 	
 	public static function formatDatosProy ($value) {
 		foreach ($value->projectFinancialData as $key => $valor) {
@@ -255,13 +277,6 @@ class JTrama
 		}
 		$value->projectFinancialData = null;
 	}
-
-	public static function token(){
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/security/getKey';
-		$token = file_get_contents($url);
-		
-		return $token;
-	}
 	
 	public static function isEditable($data, $user){
 		if($data === null){
@@ -276,8 +291,7 @@ class JTrama
 			$url = 'index.php';
 			$mensaje = JText::_('EL_STATUS_DEL_PROY').JText::_('NO_PERMITE_EDIC');
 		}
-
-		if( $data->userId != $user->id ) {
+		if( $data->userId != $user ) {
 			$url = 'index.php';
 			$mensaje = JText::_('ITEM_DOES_NOT_EXIST');
 		}

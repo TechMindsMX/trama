@@ -22,6 +22,7 @@ $userid = ($userid==0)? $usuario->id: $userid ;
 
 $document = JFactory::getDocument();
 $base = JUri::base();
+//Cambia a enviar el email del usuario 
 $proyectos = JTrama::getProjectsByUser($userid);
 foreach ($proyectos as $key => $value) {
 	$entity = new JTrama;

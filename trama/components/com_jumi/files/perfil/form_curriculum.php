@@ -79,14 +79,14 @@
 <body>
 <!--DIVS OCULTOS QUE AGREGAN CAMPOS-->
 	<div class="_100" id="readrootProy" style="display: none">                  
-            <input name="prPa_idHistorialProyectos" type="hidden" id="prPa_idHistorialProyectos" value="<?php echo 'NULL';?>" />
-            <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('PROYECTO'); ?></label>
-            <input name="prPa_nomNombreProyecto"  type="text" id="prPa_nomNombreProyecto" maxlength="70" />            
-            <label for="prPa_urlProyectosPasados"><?php echo JText::_('URL_PROY'); ?></label>
-            <input name="prPa_urlProyectosPasados" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados" maxlength="70" />           
-            <label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?></label> <br />         
-            <textarea name="prPa_dscDescripcionProyecto" id="prPa_dscDescripcionProyecto" cols="100" rows="6" maxlength="250"></textarea>  
-            <input type="button" value="<?php echo JText::_('QUITAR_PROY'); ?>" onclick="moreFieldsProy(this,false)" />          
+	    <input name="prPa_idHistorialProyectos" type="hidden" id="prPa_idHistorialProyectos" value="<?php echo 'NULL';?>" />
+	    <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('PROYECTO'); ?></label>
+	    <input name="prPa_nomNombreProyecto"  type="text" id="prPa_nomNombreProyecto" maxlength="70" />            
+	    <label for="prPa_urlProyectosPasados"><?php echo JText::_('URL_PROY'); ?></label>
+	    <input name="prPa_urlProyectosPasados" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados" maxlength="70" />           
+	    <label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?></label> <br />         
+	    <textarea name="prPa_dscDescripcionProyecto" id="prPa_dscDescripcionProyecto" cols="100" rows="6" maxlength="250"></textarea>  
+	    <input type="button" value="<?php echo JText::_('QUITAR_PROY'); ?>" onclick="moreFieldsProy(this,false)" />
 	</div>
 
 	<div id="contenedor">

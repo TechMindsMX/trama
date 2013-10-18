@@ -59,7 +59,9 @@
 				for ($i=0; $i<count($emailRepresentante); $i++) {
 					echo "jQuery('#maRe_coeEmail".$i."').val('".$emailRepresentante[$i]->coeEmail."');";
 				}
+				
 				for ($i=0; $i<count($telefonoRepresentante); $i++) {
+						
 					if ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 1 && $telefonoRepresentante[$i]->telTelefono != 0) {
 						echo "jQuery('#teRe_telTelefono0').val('".$telefonoRepresentante[$i]->telTelefono."');";
 					} elseif ($telefonoRepresentante[$i]->perfil_tipoTelefono_idtipoTelefono == 2 && $telefonoRepresentante[$i]->telTelefono != 0) {
@@ -84,7 +86,7 @@
 				echo "jQuery('#daCo_nomApellidoPaterno').val('".$contacto->nomApellidoPaterno."');";
 				echo "jQuery('#daCo_nomApellidoMaterno').val('".$contacto->nomApellidoMaterno."');";
 
-								for ($i=0; $i<count($emailContacto); $i++) {
+				for ($i=0; $i<count($emailContacto); $i++) {
 					echo "jQuery('#maCo_coeEmail".$i."').val('".$emailContacto[$i]->coeEmail."');";
 				}
 
@@ -179,7 +181,9 @@
 <body>
 	<div id="contenedor">
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
+			
 			<div class="espaciado_titulo"><h1><?php echo JText::_('REPRESENTANTE'); ?></h1></div>            
+			
 			<div class="datos_proy">
 				<label for="repr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
 				<input name="repr_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="repr_nomNombre" maxlength="25" />
@@ -190,84 +194,90 @@
 				<label for="repr_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
 				<input name="repr_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="repr_nomApellidoMaterno" maxlength="25" />
 			</div>
+			
 			<div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
+			
 			<div class="datos_proy">
 				<div style="padding: 10px">
-            	<?php echo JText::_('COPIAR_INFO'); ?>          
-            	<input name="Copiar" class="button" id="copiarForContactoRepresentante" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
+            		<?php echo JText::_('COPIAR_INFO'); ?>          
+            		<input name="Copiar" class="button" id="copiarForContactoRepresentante" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
             	</div>
             	<div>
-				<label for="maRe_coeEmail0"><?php echo JText::_('CORREO'); ?> *:</label>
-				<input name="maRe_coeEmail0" class="validate[required,custom[email]] input_chica" type="text" id="maRe_coeEmail0" maxlength="100" />
+					<label for="maRe_coeEmail0"><?php echo JText::_('CORREO'); ?> *:</label>
+					<input name="maRe_coeEmail0" class="validate[required,custom[email]] input_chica" type="text" id="maRe_coeEmail0" maxlength="100" />
 				</div>
             	<div>
-				<label for="maRe_coeEmail1"><?php echo JText::_('CORREO'); ?> :</label>
-				<input name="maRe_coeEmail1" class="validate[custom[email]] input_chica" type="text" id="maRe_coeEmail1" maxlength="100" />
+					<label for="maRe_coeEmail1"><?php echo JText::_('CORREO'); ?> :</label>
+					<input name="maRe_coeEmail1" class="validate[custom[email]] input_chica" type="text" id="maRe_coeEmail1" maxlength="100" />
 				</div>
             	<div>
-				<label for="maRe_coeEmail2"><?php echo JText::_('CORREO'); ?> :</label>
-				<input name="maRe_coeEmail2" class="validate[custom[email]] input_chica" type="text" id="maRe_coeEmail2" maxlength="100" />
+					<label for="maRe_coeEmail2"><?php echo JText::_('CORREO'); ?> :</label>
+					<input name="maRe_coeEmail2" class="validate[custom[email]] input_chica" type="text" id="maRe_coeEmail2" maxlength="100" />
 				</div>
             	<div>
-               	<label for="teRe_telTelefono0"><?php echo JText::_('TELEFONO_CASA'); ?>:</label>
-               	<input name="teRe_telTelefono0" class="validate[custom[phone]] input_chica" type="text" id="teRe_telTelefono0" maxlength="10" />
-               	<input name="teRe_perfil_tipoTelefono_idtipoTelefono0" id="teRe_nomTipoTelefono0" value="1" type="hidden" />
+               		<label for="teRe_telTelefono0"><?php echo JText::_('TELEFONO_CASA'); ?>:</label>
+               		<input name="teRe_telTelefono0" class="validate[custom[phone]] input_chica" type="text" id="teRe_telTelefono0" maxlength="10" />
+               		<input name="teRe_perfil_tipoTelefono_idtipoTelefono0" id="teRe_nomTipoTelefono0" value="1" type="hidden" />
            		</div>
             	<div>
-               	<label for="teRe_telTelefono1"><?php echo JText::_('TELEFONO_CELULAR'); ?>:</label>
-               	<input name="teRe_telTelefono1" class="validate[custom[phone]] input_chica" type="text" id="teRe_telTelefono1" maxlength="10" />
-               	<input name="teRe_perfil_tipoTelefono_idtipoTelefono1" id="teRe_nomTipoTelefono1" value="2" type="hidden" />
-           		</div>
-            	<div class="juntos">
-               	<label for="teRe_telTelefono2"><?php echo JText::_('TELEFONO_OFICINA'); ?>:</label>
-               	<input name="teRe_telTelefono2" class="validate[custom[phone]] input_chica" type="text" id="teRe_telTelefono2" maxlength="10" />
-               	<input name="teRe_perfil_tipoTelefono_idtipoTelefono2" id="teRe_nomTipoTelefono2" value="3" type="hidden" />
+               		<label for="teRe_telTelefono1"><?php echo JText::_('TELEFONO_CELULAR'); ?>:</label>
+               		<input name="teRe_telTelefono1" class="validate[custom[phone]] input_chica" type="text" id="teRe_telTelefono1" maxlength="10" />
+               		<input name="teRe_perfil_tipoTelefono_idtipoTelefono1" id="teRe_nomTipoTelefono1" value="2" type="hidden" />
            		</div>
             	<div class="juntos">
-                <label for="teRe_extension"><?php echo JText::_('EXT'); ?></label> 
-                <input name="teRe_extension" class="validate[onlyNumberSp] input_chica" type="text" id="teRe_extension" maxlength="5" size="8" />
+               		<label for="teRe_telTelefono2"><?php echo JText::_('TELEFONO_OFICINA'); ?>:</label>
+               		<input name="teRe_telTelefono2" class="validate[custom[phone]] input_chica" type="text" id="teRe_telTelefono2" maxlength="10" />
+               		<input name="teRe_perfil_tipoTelefono_idtipoTelefono2" id="teRe_nomTipoTelefono2" value="3" type="hidden" />
+           		</div>
+            	<div class="juntos">
+                	<label for="teRe_extension"><?php echo JText::_('EXT'); ?></label> 
+                	<input name="teRe_extension" class="validate[onlyNumberSp] input_chica" type="text" id="teRe_extension" maxlength="5" size="8" />
  				</div>
  			</div>
+ 			
            	<div class="espaciado_titulo"><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
+			
 			<div class="datos_proy">
 				<div style="padding: 10px">
-            	<?php echo JText::_('COPIAR_INFO'); ?>
-            	<input name="Copiar" class="button" id="copiarDireccionRepresentante" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
+            		<?php echo JText::_('COPIAR_INFO'); ?>
+            		<input name="Copiar" class="button" id="copiarDireccionRepresentante" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
           		</div>
-               	<label for="doRe_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
-                <input name="doRe_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doRe_nomCalle" maxlength="70" />
+               		<label for="doRe_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
+                	<input name="doRe_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doRe_nomCalle" maxlength="70" />
         		<div class="juntos">
-               	<label for="doRe_noExterior"><?php echo JText::_('NUM_EXT'); ?>*:</label>
-               	<input name="doRe_noExterior" class="validate[required,custom[onlyLetterNumber]] input_chica" type="text" id="doRe_noExterior" size="10" maxlength="5" />
+               		<label for="doRe_noExterior"><?php echo JText::_('NUM_EXT'); ?>*:</label>
+               		<input name="doRe_noExterior" class="validate[required,custom[onlyLetterNumber]] input_chica" type="text" id="doRe_noExterior" size="10" maxlength="5" />
             	</div>
             	<div class="juntos">
-               	<label for="doRe_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
-               	<input name="doRe_noInterior" class="validate[custom[onlyLetterNumber]] input_chica" type="text" id="doRe_noInterior" size="10" maxlength="5" />
+               		<label for="doRe_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
+               		<input name="doRe_noInterior" class="validate[custom[onlyLetterNumber]] input_chica" type="text" id="doRe_noInterior" size="10" maxlength="5" />
             	</div>
             	<div>
-               	<label for="doRe_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
-               	<input name="doRe_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]] input_chica"  type="text" id="doRe_iniCodigoPostal" size="10" maxlength="5" />
+               		<label for="doRe_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
+               		<input name="doRe_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]] input_chica"  type="text" id="doRe_iniCodigoPostal" size="10" maxlength="5" />
            		</div>
             	<div>
-               	<label for="doRe_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
-               	<select name="doRe_perfil_colonias_idcolonias" class="validate[required]" id="doRe_nomColonias"></select>
+               		<label for="doRe_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
+               		<select name="doRe_perfil_colonias_idcolonias" class="validate[required]" id="doRe_nomColonias"></select>
            		</div>
             	<div>
-            	<label for="doRe_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
-            	<input name="doRe_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doRe_nomDelegacion" maxlength="50" />
+            		<label for="doRe_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
+            		<input name="doRe_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doRe_nomDelegacion" maxlength="50" />
             	</div>
             	<div>
-               	<label for="doRe_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
-               	<select name="doRe_perfil_estado_idestado" id="doRe_nomEstado" class="validate[required]" ></select>
+               		<label for="doRe_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
+               		<select name="doRe_perfil_estado_idestado" id="doRe_nomEstado" class="validate[required]" ></select>
            		</div>
             	<div>
-               	<label for="doRe_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
-               	<select name="doRe_perfil_pais_idpais" id="doRe_nomPais" class="validate[required]">
-               		<option value="México" selected="selected">M&eacute;xico</option>
-				</select>
+	               	<label for="doRe_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
+	               	<select name="doRe_perfil_pais_idpais" id="doRe_nomPais" class="validate[required]">
+	               		<option value="México" selected="selected">M&eacute;xico</option>
+					</select>
 				</div>
          	 </div>			
+			
 			<div class="espaciado_titulo"><h1><?php echo JText::_('CONT'); ?></h1></div>            
+			
 			<div class="datos_proy">
 				<label for="daCo_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
 				<input name="daCo_nomNombre" class="validate[required,custom[onlyLetterSp]]" type="text" id="daCo_nomNombre" maxlength="25" />
@@ -278,90 +288,103 @@
 				<label for="daCo_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
 				<input name="daCo_nomApellidoMaterno" class="validate[custom[onlyLetterSp]]" type="text" id="daCo_nomApellidoMaterno" maxlength="25" />
 			</div>
+			
 			<div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
+			
 			<div class="datos_proy">
 				<div style="padding: 10px">
-            	<?php echo JText::_('COPIAR_INFO'); ?> 
-            	<input name="Copiar" class="button" id="copiarForContactoContacto" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
+            		<?php echo JText::_('COPIAR_INFO'); ?> 
+            		<input name="Copiar" class="button" id="copiarForContactoContacto" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
   				</div>
   				<div>
-				<label for="maCo_coeEmail0"><?php echo JText::_('CORREO'); ?> *:</label>
-				<input name="maCo_coeEmail0" class="validate[required,custom[email]] input_chica" type="text" id="maCo_coeEmail0" maxlength="100" />
+					<label for="maCo_coeEmail0"><?php echo JText::_('CORREO'); ?> *:</label>
+					<input name="maCo_coeEmail0" class="validate[required,custom[email]] input_chica" type="text" id="maCo_coeEmail0" maxlength="100" />
 				</div>
 				<div>
-				<label for="maCo_coeEmail1"><?php echo JText::_('CORREO'); ?> :</label>
-				<input name="maCo_coeEmail1" class="validate[custom[email]] input_chica" type="text" id="maCo_coeEmail1" maxlength="100" />
+					<label for="maCo_coeEmail1"><?php echo JText::_('CORREO'); ?> :</label>
+					<input name="maCo_coeEmail1" class="validate[custom[email]] input_chica" type="text" id="maCo_coeEmail1" maxlength="100" />
 				</div>
 				<div>
-				<label for="maCo_coeEmail2"><?php echo JText::_('CORREO'); ?> :</label>
-				<input name="maCo_coeEmail2" class="validate[custom[email]] input_chica" type="text" id="maCo_coeEmail2" maxlength="100" />
+					<label for="maCo_coeEmail2"><?php echo JText::_('CORREO'); ?> :</label>
+					<input name="maCo_coeEmail2" class="validate[custom[email]] input_chica" type="text" id="maCo_coeEmail2" maxlength="100" />
 				</div>
 				<div>
-               	<label for="teCo_telTelefono0"><?php echo JText::_('TELEFONO_CASA'); ?>:</label>
-               	<input name="teCo_telTelefono0" class="validate[custom[phone]] input_chica" type="text" id="teCo_telTelefono0" maxlength="10" />
-               	<input name="teCo_perfil_tipoTelefono_idtipoTelefono0" id="teCo_nomTipoTelefono0" value="1" type="hidden" />
+	               	<label for="teCo_telTelefono0"><?php echo JText::_('TELEFONO_CASA'); ?>:</label>
+    	           	<input name="teCo_telTelefono0" class="validate[custom[phone]] input_chica" type="text" id="teCo_telTelefono0" maxlength="10" />
+        	       	<input name="teCo_perfil_tipoTelefono_idtipoTelefono0" id="teCo_nomTipoTelefono0" value="1" type="hidden" />
     			</div>
 				<div>
-               	<label for="teCo_telTelefono1"><?php echo JText::_('TELEFONO_CELULAR'); ?>:</label>
-               	<input name="teCo_telTelefono1" class="validate[custom[phone]] input_chica" type="text" id="teCo_telTelefono1" maxlength="10" />
-               	<input name="teCo_perfil_tipoTelefono_idtipoTelefono1" id="teCo_nomTipoTelefono1" value="2" type="hidden" />
+ 	              	<label for="teCo_telTelefono1"><?php echo JText::_('TELEFONO_CELULAR'); ?>:</label>
+    	           	<input name="teCo_telTelefono1" class="validate[custom[phone]] input_chica" type="text" id="teCo_telTelefono1" maxlength="10" />
+        	       	<input name="teCo_perfil_tipoTelefono_idtipoTelefono1" id="teCo_nomTipoTelefono1" value="2" type="hidden" />
     			</div>
 				<div class="juntos">
                	<label for="teCo_telTelefono2"><?php echo JText::_('TELEFONO_OFICINA'); ?>:</label>
-               	<input name="teCo_telTelefono2" class="validate[custom[phone]] input_chica" type="text" id="teCo_telTelefono2" maxlength="10" />
-               	<input name="teCo_perfil_tipoTelefono_idtipoTelefono2" id="teCo_nomTipoTelefono2" value="3" type="hidden" />
+ 	              	<input name="teCo_telTelefono2" class="validate[custom[phone]] input_chica" type="text" id="teCo_telTelefono2" maxlength="10" />
+    	           	<input name="teCo_perfil_tipoTelefono_idtipoTelefono2" id="teCo_nomTipoTelefono2" value="3" type="hidden" />
            		</div>
 				<div class="juntos">
-                <label for="teCo_extension"><?php echo JText::_('EXT'); ?></label> 
-                <input name="teCo_extension" class="validate[onlyNumberSp] input_chica" type="text" id="teCo_extension" maxlength="5" size="8" />
+         	       <label for="teCo_extension"><?php echo JText::_('EXT'); ?></label> 
+            	    <input name="teCo_extension" class="validate[onlyNumberSp] input_chica" type="text" id="teCo_extension" maxlength="5" size="8" />
                 </div>
          	</div>           	
+           
            	<div class="espaciado_titulo"><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
+     		
      		<div class="datos_proy">
      			<div style="padding: 10px">
-            	<?php echo JText::_('COPIAR_INFO'); ?>         
-            	<input name="Copiar" class="button" id="copiarDireccionContacto" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
+        	    	<?php echo JText::_('COPIAR_INFO'); ?>         
+    	        	<input name="Copiar" class="button" id="copiarDireccionContacto" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
           		</div>
           		<div>
-               	<label for="doCo_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
-                <input name="doCo_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doCo_nomCalle" maxlength="70" />
+   	            	<label for="doCo_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
+	                <input name="doCo_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doCo_nomCalle" maxlength="70" />
          		</div>
 				<div class="juntos">
-               	<label for="doCo_noExterior"><?php echo JText::_('NUM_EXT'); ?>*:</label>
-               	<input name="doCo_noExterior" class="validate[required,custom[onlyLetterNumber]] input_chica" type="text" id="doCo_noExterior" size="10" maxlength="5" />
+               		<label for="doCo_noExterior"><?php echo JText::_('NUM_EXT'); ?>*:</label>
+               		<input name="doCo_noExterior" class="validate[required,custom[onlyLetterNumber]] input_chica" type="text" id="doCo_noExterior" size="10" maxlength="5" />
            		</div>
 				<div class="juntos">
-               	<label for="doCo_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
-               	<input name="doCo_noInterior" class="validate[custom[onlyLetterNumber]] input_chica" type="text" id="doCo_noInterior" size="10" maxlength="5" />
+               		<label for="doCo_noInterior"><?php echo JText::_('NUM_INT'); ?>:</label>
+               		<input name="doCo_noInterior" class="validate[custom[onlyLetterNumber]] input_chica" type="text" id="doCo_noInterior" size="10" maxlength="5" />
             	</div>
 				<div>
-               	<label for="doCo_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
-               	<input name="doCo_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]] input_chica"  type="text" id="doCo_iniCodigoPostal" size="10" maxlength="5" />
+               		<label for="doCo_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
+               		<input name="doCo_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]] input_chica"  type="text" id="doCo_iniCodigoPostal" size="10" maxlength="5" />
            		</div>
 				<div>
-               	<label for="doCo_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
-               	<select name="doCo_perfil_colonias_idcolonias" class="validate[required]" id="doCo_nomColonias"></select>
+               		<label for="doCo_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
+               		<select name="doCo_perfil_colonias_idcolonias" class="validate[required]" id="doCo_nomColonias"></select>
            		</div>
 				<div>
-            	<label for="doCo_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
-            	<input name="doCo_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doCo_nomDelegacion" maxlength="50" />
+            		<label for="doCo_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
+            		<input name="doCo_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doCo_nomDelegacion" maxlength="50" />
             	</div>
 				<div>
-               	<label for="doCo_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
-               	<select name="doCo_perfil_estado_idestado" id="doCo_nomEstado" class="validate[required]" ></select>
+               		<label for="doCo_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
+	               	<select name="doCo_perfil_estado_idestado" id="doCo_nomEstado" class="validate[required]" ></select>
       			</div>
 				<div>
-               	<label for="doCo_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
-               	<select name="doCo_perfil_pais_idpais" id="doCo_nomPais" class="validate[required]">
-               		<option value="México" selected="selected">M&eacute;xico</option>
-				</select>
+    	           	<label for="doCo_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
+        	       	<select name="doCo_perfil_pais_idpais" id="doCo_nomPais" class="validate[required]">
+            	   		<option value="México" selected="selected">M&eacute;xico</option>
+					</select>
 				</div>
             
-            <div class="boton_enviar">
-            	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
-		javascript:window.history.back();">
-            	<input name="Enviar" class="button" type="submit" onclick="return validar();" value="<?php echo JText::_('ENVIAR'); ?>" />
-            </div>  
+	            <div class="boton_enviar">
+	            	<input 
+	            		type="button" 
+	            		class="button" 
+	            		value="<?php echo JText::_('CANCELAR');  ?>" 
+	            		onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>')) javascript:window.history.back();">
+	            		
+	            	<input 
+	            		name="Enviar" 
+	            		class="button" 
+	            		type="submit" 
+	            		onclick="return validar();" 
+	            		value="<?php echo JText::_('ENVIAR'); ?>" />
+	            </div>
         	</div>
         </form>
     </div>

@@ -14,25 +14,24 @@ jimport('trama.class');
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
-$token = JTrama::token();
-
-$input = JFactory::getApplication()->input;
-$proyid= $input->get("proyid",0,"int");
-$error1= $input->get("error",0,"int");
+$token 					= JTrama::token();
+$middlewareId			= JTrama::getUserMiddlewareId($usuario->id);
+$input					= JFactory::getApplication()->input;
+$proyid					= $input->get("proyid",0,"int");
+$error1					= $input->get("error",0,"int");
 $datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
 $comentarios			= '';
 $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
 
-JTrama::isEditable($datosObj, $usuario);
+JTrama::isEditable($datosObj, $middlewareId);
 
 if($error1 ==1){
 	echo "<div style='color: red;'>ERROR revisa la información capturada</div>";
 }
 $servEdicion = JTrama::getDatos($proyid );
 $existe = $servEdicion->variableCosts;
-
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 ?>
@@ -56,9 +55,11 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		
 		if( !is_null($datosObj) ) {
 			require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
-				
-			$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
-			$ligaPro = '<span class="liga">
+			
+			$callback	.= $datosObj->id;			
+			
+			$mensaje	= JText::_('EDIT').' '.JText::_($datosObj->type);
+			$ligaPro	= '<span class="liga">
 							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
 						</span>';
 				

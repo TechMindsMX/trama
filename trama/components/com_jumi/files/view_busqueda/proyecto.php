@@ -70,6 +70,8 @@ foreach ($json as $key => $value) {
 	$value->nomCat = JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
 	$value->producer = JTrama::getProducerProfile($value->userId);
+	var_dump($value->userId);
+	exit;
 	$value->statusName = JTrama::getStatusName($value->status);
 }
 
