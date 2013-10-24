@@ -11,13 +11,14 @@ if ($usuario->guest == 1) {
 }
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 jimport('trama.class');
+jimport('trama.usuario_class');
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
 JHtml::_('behavior.modal');
 
 validacionFiscal($usuario);
 
-$userMiddleId 			= JTrama::getUserMiddlewareId($usuario->id);
+$userMiddleId 			= UserData::getUserMiddlewareId($usuario->id);
 $categoria 				= JTrama::getAllCatsPadre();
 $subCategorias 			= JTrama::getAllSubCats();
 $token 					= JTrama::token();
@@ -41,7 +42,7 @@ $breakevenCalc			= 0;
 		
 		<?php
 		if( !is_null($datosObj) ) {
-			JTrama::isEditable($datosObj, $userMiddleId);
+			JTrama::isEditable($datosObj, $userMiddleId->idMiddleware);
 
 			$count = 0;
 			foreach ($datosObj->logs as $key => $value) {
@@ -206,7 +207,7 @@ $breakevenCalc			= 0;
 			
 			<input 
 				type="hidden"
-				value="<?php echo $userMiddleId; ?>"
+				value="<?php echo $userMiddleId->idMiddleware; ?>"
 				name="userId" />
 				
 			<input

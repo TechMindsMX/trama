@@ -11,11 +11,12 @@ if ($usuario->guest == 1) {
 }
 
 jimport('trama.class');
+jimport('trama.usuario_class');
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token 					= JTrama::token();
-$middlewareId			= JTrama::getUserMiddlewareId($usuario->id);
+$middlewareId			= UserData::getUserMiddlewareId($usuario->id);
 $input					= JFactory::getApplication()->input;
 $proyid					= $input->get("proyid",0,"int");
 $error1					= $input->get("error",0,"int");
@@ -25,7 +26,7 @@ $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
 
-JTrama::isEditable($datosObj, $middlewareId);
+JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 
 if($error1 ==1){
 	echo "<div style='color: red;'>ERROR revisa la información capturada</div>";

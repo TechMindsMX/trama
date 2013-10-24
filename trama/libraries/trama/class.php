@@ -48,7 +48,7 @@ class JTrama
 	
 	public function getProjectsByUser ($userid) {
 		$projectList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByUser/'.$userid));
-		
+
 		return $projectList;
 	}
 	
@@ -84,20 +84,6 @@ class JTrama
 	}
 
 	//Metodos que no usan servicios MIDDLEWARE
-	public static function getUserMiddlewareId($userId) {
-		$db = JFactory::getDBO();
-		
-		$query = $db->getQuery(true);
-		$query->select($db->quoteName('idMiddleware'));
-		$query->from($db->quoteName('#__users_middleware'));
-		$query->where('idJoomla = '.$userId);
-		
-		$db->setQuery( $query );
-		$id = $db->loadResult();
-		
-		return (int) $id;
-	}
-	
 	public function fetchAllCats()	{
 		$cats = JTrama::getAllSubCats();
 		$subcats = JTrama::getAllCatsPadre();
@@ -278,20 +264,21 @@ class JTrama
 		$value->projectFinancialData = null;
 	}
 	
-	public static function isEditable($data, $user){
+	public static function isEditable($data, $userMiddleware){
 		if($data === null){
 			return false;
 		}
 		
 		$app = JFactory::getApplication();
-		
+
 		$editableStatuses = array(0,2);
 		$editable = in_array($data->status, $editableStatuses);
+		
 		if ($editable === false) {
 			$url = 'index.php';
 			$mensaje = JText::_('EL_STATUS_DEL_PROY').JText::_('NO_PERMITE_EDIC');
 		}
-		if( $data->userId != $user ) {
+		if( $data->userId != $userMiddleware ) {
 			$url = 'index.php';
 			$mensaje = JText::_('ITEM_DOES_NOT_EXIST');
 		}

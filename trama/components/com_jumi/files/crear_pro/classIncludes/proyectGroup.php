@@ -4,6 +4,7 @@ $subCategorias 		= JTrama::getAllSubCats();
 $input 				= JFactory::getApplication()->input;
 $proyid 			= $input->get("proyid", 0, "int");
 $objDatosProyecto 	= JTrama::getDatos($proyid);
+$objDatosProyecto->idJoomla = UserData::getUserJoomlaId($objDatosProyecto->userId);
 $grupoExistente 	= JTrama::searchGroup($objDatosProyecto->id);
 
 if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
@@ -13,7 +14,7 @@ if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 	
 		$grupo->published = 1;
 		$grupo->proyid = $objDatosProyecto->id;
-		$grupo->ownerid = $objDatosProyecto->userId;
+		$grupo->ownerid = $objDatosProyecto->idJoomla;
 		$grupo->categoryid = 1;
 		$grupo->name = $objDatosProyecto->name;
 		$grupo->description = $objDatosProyecto->description;
@@ -32,7 +33,7 @@ if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 		$memberGroup = new stdClass();
 		
 			$memberGroup->groupid = $idGroup->id;
-			$memberGroup->memberid = $objDatosProyecto->userId;
+			$memberGroup->memberid = $objDatosProyecto->idJoomla;
 			$memberGroup->approved = 1;
 			$memberGroup->permissions = 1;
 			

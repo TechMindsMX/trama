@@ -15,7 +15,7 @@
 	jimport('trama.class');
 	jimport('trama.jsocial');
 	jimport('trama.jfactoryext');
-	
+	jimport('trama.usuario_class');
 
 	// chequeamos si el usuario es Special
 	$isSpecial = '';
@@ -30,7 +30,8 @@
 	$document->addStyleSheet($pathJumi.'css/themes/bar/bar.css');
 	$document->addStyleSheet($pathJumi.'css/nivo-slider.css');
 	$document->addStyleSheet($pathJumi.'css/style.css');
-
+	
+	$middlewareId = UserData::getUserMiddlewareId($usuario->id);
 	$token = JTrama::token();
 ?> 
 
@@ -39,10 +40,9 @@
 <script type="text/javascript" src="libraries/trama/js/jquery.number.min.js"></script>
 
 <?php
-
-$json = JTrama::getDatos($proyecto);
+$json 				= JTrama::getDatos($proyecto);
 $json->etiquetaTipo = tipoProyProd($json);
-$json->acceso = JTramaSocial::checkUserGroup($proyecto, $usuario->id);
+$json->acceso 		= JTramaSocial::checkUserGroup($proyecto, $usuario->id);
 
 if($json->name) {
 	$mydoc =& JFactory::getDocument();
@@ -71,7 +71,7 @@ function tipoProyProd($data) {
 function buttons($data, $user) {
 	$share = '<span style="cursor: pointer;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
 	
-	if ( $user->id == strval($data->userId) ) {
+	if ( $user->id == strval(UserData::getUserJoomlaId($data->userId)) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
 		$proyid = '&proyid='.$data->id;
 		if( ($data->status == 0) || ($data->status == 2)) {
@@ -155,7 +155,7 @@ function imagenes($data) {
 	$array = $data->projectPhotos;
 	foreach ( $array as $key => $value ) {
 		$imagen = "/".$value->name;
-		$html .= '<img width="100" height="100" src="'.PHOTO.$imagen.'" alt="" />';	
+		$html .= '<img width="100" height="100" src="http://192.168.0.122/'.PHOTO.$imagen.'" alt="" />';	
 	}
 
 	return $html;
@@ -196,7 +196,7 @@ function audios($data) {
 
 function avatar($data) {
 	$avatar = $data->projectAvatar->name;
-	$html = '<img class="avatar" src="'.AVATAR.'/'.$avatar.'" />';
+	$html = '<img class="avatar" src="http://192.168.0.122/'.AVATAR.'/'.$avatar.'" />';
 	
 	return $html;
 }
@@ -270,7 +270,7 @@ function encabezado($data) {
 	$html = '<div class="encabezado">'.
 		'<h1>'.$data->name.'</h2>'.
 		'<h2 class="mayusc">'.JTrama::getSubCatName($data->subcategory).'</h3>'.
-		'<p id="productor">'.JTrama::getProducerProfile($data->userId).'</p>'.
+		'<p id="productor">'.JTrama::getProducerProfile(UserData::getUserJoomlaId($data->userId)).'</p>'.
 		'<p class="fechacreacion"> Creado '.date('d-M-Y', $fechacreacion).'</p>'.
 		'<h3 class="tipo_proy_prod mayusc">'.$data->etiquetaTipo.' - '.JTrama::getStatusName($data->status).'</h3>'.
 		'</div>';
@@ -434,13 +434,13 @@ function userName($data) {
 					</div>
 				</div>
 				<div class="content-banner">
-					<img src="<?php echo BANNER.'/'.$json->projectBanner->name ?>" />
+					<img src="http://192.168.0.122/<?php echo BANNER.'/'.$json->projectBanner->name ?>" />
 				</div>
 			</div>
 			<div id="video" class="ver_proyecto">
 				<div id="content_player">
 				<?php
-				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->videoPublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->videoPublic == 1) || (UserData::getUserJoomlaId($json->userId) == $usuario->id) ){
 				?>
 					<div id="video-player">
 						<div id="menu-player">
@@ -461,7 +461,7 @@ function userName($data) {
 			<div id="gallery" class="ver_proyecto">
 			<div id="wrapper">
 				<?php
-				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->imagePublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->imagePublic == 1) || (UserData::getUserJoomlaId($json->userId) == $usuario->id) ){
 				?>
 				<div class="slider-wrapper theme-bar">
             		<div id="slider" class="nivoSlider">
@@ -478,7 +478,7 @@ function userName($data) {
 			</div>
 			<div id="audios" class="ver_proyecto">
 				<?php
-				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->audioPublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->audioPublic == 1) || (UserData::getUserJoomlaId($json->userId) == $usuario->id) ){
 					echo audios($json);
 				}elseif( ($json->acceso == null) || ($json->audioPublic == 0) ) {
 					echo JText::_('CONTENIDO_PRIVADO');
@@ -488,7 +488,7 @@ function userName($data) {
 			</div>
 			<div id="finanzas" class="ver_proyecto">
 				<?php
-				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->numberPublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->numberPublic == 1) || (UserData::getUserJoomlaId($json->userId) == $usuario->id) ){
 					echo '<h1 class="mayusc">'.JText::_('LABEL_FINANZAS').'</h1>';
 					echo informacionTmpl($json, "finanzas"); 
 				}elseif( ($json->acceso == null) || ($json->numberPublic == 0) ) {
@@ -500,7 +500,7 @@ function userName($data) {
 			
 			<div id="info" class="ver_proyecto">
 				<?php
-				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
+				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || (UserData::getUserJoomlaId($json->userId) == $usuario->id) ){
 				?>
 				<h1 class="mayusc"><?php echo JText::_('LABEL_INFO'); ?></h1>
 				

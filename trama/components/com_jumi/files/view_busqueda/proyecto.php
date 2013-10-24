@@ -1,15 +1,13 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
-$path = AVATAR."/";
-
-$usuario =& JFactory::getUser();
-$base =& JUri::base();
-$document =& JFactory::getDocument();
-
-$pathJumi = Juri::base().'components/com_jumi/files';
-$busquedaPor = array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTORY' );
-$ligasPP = '';
+$path			= AVATAR."/";
+$usuario		=& JFactory::getUser();
+$base 			=& JUri::base();
+$document	 	=& JFactory::getDocument();
+$pathJumi 		= Juri::base().'components/com_jumi/files';
+$busquedaPor	= array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTORY' );
+$ligasPP 		= '';
 
 $tipoPP = isset($_GET['typeId']) ? $_GET['typeId'] : 0;
 $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
@@ -64,14 +62,14 @@ $json = json_decode(prodProy($busquedaPor[$tipoPP]));
 $statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 
 jimport('trama.class');
+jimport('trama.usuario_class');
+
 foreach ($json as $key => $value) {
 	$string = strip_tags($value->description);
 	$value->description = (strlen($string) > 113) ? substr($string,0,110).'...' : $string;
 	$value->nomCat = JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
-	$value->producer = JTrama::getProducerProfile($value->userId);
-	var_dump($value->userId);
-	exit;
+	$value->producer = JTrama::getProducerProfile(UserData::getUserJoomlaId($value->userId));
 	$value->statusName = JTrama::getStatusName($value->status);
 }
 
@@ -234,7 +232,7 @@ function pageselectCallback (page_index, jq) {
 	var columnas = 3;
 	var ancho = Math.floor(100/columnas);
 	var countCol = 0;
-
+	
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;

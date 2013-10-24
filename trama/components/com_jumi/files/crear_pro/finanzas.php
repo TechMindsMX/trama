@@ -10,6 +10,7 @@ if ($usuario->guest == 1) {
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
 jimport('trama.class');
+jimport('trama.usuario_class');
 
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
@@ -18,7 +19,7 @@ validacionFiscal($usuario);
 
 $categoria 				= JTrama::getAllCatsPadre();
 $subCategorias 			= JTrama::getAllSubCats();
-$miidlewareId			= JTrama::getUserMiddlewareId($usuario->id);
+$middlewareId			= UserData::getUserMiddlewareId($usuario->id);
 $token 					= JTrama::token();
 $input 					= JFactory::getApplication()->input;
 $proyid 				= $input->get("proyid", 0, "int");
@@ -28,7 +29,7 @@ $ligaCostosVariable		= '';
 $comentarios			= '';
 $ligaEditProveedores	= '';
 
-JTrama::isEditable($datosObj, $miidlewareId);
+JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 
 JHtml::_('behavior.modal');
 ?>
@@ -41,6 +42,7 @@ JHtml::_('behavior.modal');
 		if( !is_null($datosObj) ) {
 			require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
 			
+			$callback .= $datosObj->id;
 			$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
 			$ligaPro = '<span class="liga">
 							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
@@ -133,6 +135,10 @@ JHtml::_('behavior.modal');
 			echo 'jQuery("#potenciales").val("'.$datosObj->revenuePotential.'");';
 			echo 'jQuery("#equilibrio").val("'.$datosObj->breakeven.'");';
 			echo 'jQuery("#equilibrio").val("'.$datosObj->breakeven.'");';
+			
+			if($datosObj->productionStartDate != null) {
+				echo 'jQuery("#productionStartDate").prop("class", "validate[required, custom[date]")';
+			}
 			
 			$checkednumbers = $datosObj->numberPublic; 
 		}

@@ -1,6 +1,7 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 jimport('trama.class');
+jimport('trama.usuario_class');
 $usuario = JFactory::getUser();
 $doc = JFactory::getDocument();
 
@@ -9,8 +10,9 @@ $proyecto = new AltaProveedores;
 $path = 'components/com_jumi/files/alta_proveedores/';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 $doc->addStyleSheet($path.'alta_proveedores.css');
-$proveedores = $proyecto->objDatos->providers;
-$token = JTrama::token();
+
+$proveedores 			= $proyecto->objDatos->providers;
+$token 					= JTrama::token();
 $input 					= JFactory::getApplication()->input;
 $proyid 				= $input->get("proyid",0,"int");
 $datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
@@ -20,8 +22,6 @@ $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
 $accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
 $callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid='.$proyid;
-
-JTrama::isEditable($datosObj, $usuario);
 
 class AltaProveedores {
 	
@@ -45,7 +45,7 @@ class AltaProveedores {
 
 		$this -> getMoreData();
 		$this -> getEditable();
-		
+
 		if (!$this->editable) {
 			$app -> redirect('index.php ',JText::_('JERROR_ALERTNOAUTHOR'), 'error');
 		}
@@ -56,9 +56,8 @@ class AltaProveedores {
 
 	}
 	
-
 	protected function getEditable() {
-		$checkUser = ($this -> usuario -> id == $this -> objDatos -> userId);
+		$checkUser = ($this -> usuario -> id == UserData::getUserJoomlaId($this -> objDatos -> userId));
 		$checkStatus = ($this -> objDatos -> status == 2 || $this -> objDatos -> status == 0);
 		$this -> editable = ($checkUser && $checkStatus);
 	}
@@ -90,6 +89,7 @@ class AltaProveedores {
 			$this->miembrosGrupo = $results2;
 		}
 	}
+	
 	public function fechas() {
 		$startDate = $this -> objDatos -> productionStartDate;
 		$endDate = $this -> objDatos -> premiereStartDate;
@@ -270,10 +270,6 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 				require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
 			
 				$app = JFactory::getApplication();
-				if( $datosObj->userId != $usuario->id ) {
-					$url = 'index.php';
-					$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
-				}
 			
 				$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
 				$ligaPro = '<span class="liga">
@@ -364,7 +360,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 			foreach ($proveedores as $key => $value) {
 			?>
 			<tr>
-				<td><?php echo JFactory::getUser($value->providerId)->name; ?></td>
+				<td><?php echo JFactory::getUser(UserData::getUserJoomlaId($value->providerId))->name; ?></td>
 				<td><?php echo $value->advanceDate; ?></td>
 				<td>$<?php echo $value->advanceQuantity; ?></td>
 				<td><?php echo $value->settlementDate; ?></td>

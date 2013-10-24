@@ -12,38 +12,32 @@ if ($usuario->guest == 1) {
 }
 
 jimport("trama.class");
+jimport("trama.usuario_class");
 jimport("trama.jsocial");
-require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
-$input = JFactory::getApplication()->input;
-$userid = $input->get("userid",0,"int");
 
-$objuserdata = new UserData;
-$userid = ($userid==0)? $usuario->id: $userid ;
+$input 			= JFactory::getApplication()->input;
+$userid 		= $input->get("userid",0,"int");
+$userid 		= ($userid==0)? $usuario->id: $userid ;
+$userMiddleId	= UserData::getUserMiddlewareId($userid);
+$document 		= JFactory::getDocument();
+$base 			= JUri::base();
+$proyectos 		= JTrama::getProjectsByUser($userMiddleId->idMiddleware);
 
-$document = JFactory::getDocument();
-$base = JUri::base();
-//Cambia a enviar el email del usuario 
-$proyectos = JTrama::getProjectsByUser($userid);
 foreach ($proyectos as $key => $value) {
 	$entity = new JTrama;
-	
 	$entity->getEditUrl($value);
 }
 
-
 $pathJumi = $base.'components/com_jumi/files/perfil_usuario/';
 $document->addStyleSheet($pathJumi.'css/style.css');
-
-$datosgenerales = $objuserdata::datosGr($userid);
+$datosgenerales = UserData::datosGr($userid);
 
 if(is_null($datosgenerales)){
 	$app->redirect('index.php', 'No hay datos de usuario','notice');
 }
 
 $id_datos_generales = $datosgenerales->id;
-
-$promedio = $objuserdata->scoreUser($userid);
-
+$promedio = UserData::scoreUser($userMiddleId->idJoomla);
 ?>
 <style>
 .comentariosMedia{
