@@ -102,8 +102,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 				case 'isep':
 					echo "jQuery('#ISEP').val('".$value->value."');";
 					break;
-				case 'tiketService':
-					echo "jQuery('#tiketService').val('".$value->value."');";
+				case 'ticketService':
+					echo "jQuery('#ticketService').val('".$value->value."');";
 					break;
 				case 'sacm':
 					echo "jQuery('#sacm').val('".$value->value."');";
@@ -178,7 +178,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	<label for="ticketService"> <?php echo JText::_('BOLETAJE');  ?>: </label>  
 	<input 
 		type="text"
-		id="tiketService"
+		id="ticketService"
 		class="validate[custom[onlyNumberTiket]]"
 		maxlength="5"
 		value="3.5"
