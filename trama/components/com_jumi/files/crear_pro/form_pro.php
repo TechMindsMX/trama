@@ -136,8 +136,6 @@ $breakevenCalc			= 0;
 			var form = jQuery("#form2")[0];
 			var total = form.length;
 	
-			jQuery('#token').val('<?php echo $token;?>');
-
 			if( this.id == 'revision' ) {
 				if( (suma == presupuesto) && (breakeven == breakevencalc) ) {
 					if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
@@ -212,6 +210,7 @@ $breakevenCalc			= 0;
 				
 			<input
 				type="hidden"
+				value="<?php echo $token; ?>"
 				name="token"
 				id="token" />
 				   

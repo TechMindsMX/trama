@@ -125,6 +125,7 @@ if (isset($proyecto->miembrosGrupo)) {
 	foreach ($proyecto->miembrosGrupo as $key => $value) {
 
 	$member = $proyecto->miembrosGrupo[$key];
+		$member->memberid = UserData::getUserMiddlewareId($member->memberid)->idMiddleware;
 	$advanceQuantity='';
 	$settlementQuantity='';
 	$fechaAnticipo='';
@@ -137,7 +138,7 @@ if (isset($proyecto->miembrosGrupo)) {
 			$fechaLiquidacion= ($valor->providerId == $member->memberid) ? $valor->settlementDate : '';
 		}
 	}
-	
+
 	$html = '<div class="inputs '. $member->memberid .'">
 			<div class="nombre">
 			<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
