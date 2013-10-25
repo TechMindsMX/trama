@@ -125,17 +125,19 @@ if (isset($proyecto->miembrosGrupo)) {
 	foreach ($proyecto->miembrosGrupo as $key => $value) {
 
 	$member = $proyecto->miembrosGrupo[$key];
-		$member->memberid = UserData::getUserMiddlewareId($member->memberid)->idMiddleware;
+	$member->memberid = UserData::getUserMiddlewareId($member->memberid)->idMiddleware;
 	$advanceQuantity='';
 	$settlementQuantity='';
 	$fechaAnticipo='';
 	$fechaLiquidacion='';
 	if(isset($provedores)){
 		foreach ($provedores as $indice =>$valor){
-			$advanceQuantity= ($valor->providerId == $member->memberid) ? $valor->advanceQuantity : '';
-			$settlementQuantity= ($valor->providerId == $member->memberid) ? $valor->settlementQuantity : '';
-			$fechaAnticipo= ($valor->providerId == $member->memberid) ? $valor->advanceDate : '';
-			$fechaLiquidacion= ($valor->providerId == $member->memberid) ? $valor->settlementDate : '';
+			if($valor->providerId == $member->memberid) {
+				$advanceQuantity = $valor->advanceQuantity ;
+				$settlementQuantity = $valor->settlementQuantity ;
+				$fechaAnticipo = $valor->advanceDate ;
+				$fechaLiquidacion = $valor->settlementDate ;
+			}
 		}
 	}
 
@@ -187,7 +189,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 	}				
 }
 	jQuery(document).ready(function() {
-		suma(jQuery('input[type="number"]'));
+		suma();
 		jQuery("#agregados").validationEngine();
 		sumatotal();
 		jQuery(".nombre").siblings().hide();
@@ -225,11 +227,13 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 		});
 
 		function suma (campo){
-			var aaa = 0;
-			jQuery(campo).parent().parent().find('input[type="number"]').each(function() {
-				aaa += parseInt(jQuery(this).val()) || 0;
+			jQuery('.inputs').each(function(){
+			    var aaa = 0;
+			    jQuery(jQuery(this).find('input[type="number"]')).each(function() {
+			       aaa += parseFloat(jQuery(this).val());
+			    });
+			    jQuery(this).find('.sub_total').text(aaa);
 			});
-			jQuery(campo).parent().siblings('.nombre').children('span.sub_total:first').text(aaa);
 
 			sumatotal();
 		}

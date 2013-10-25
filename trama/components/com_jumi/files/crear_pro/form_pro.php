@@ -119,7 +119,7 @@ $breakevenCalc			= 0;
 			foreach ($datosObj->providers as $key => $value) {
 				$suma = $value->advanceQuantity+$value->settlementQuantity+$suma;
 			}
-			$presupuesto 	= $datosObj->budget;
+			$presupuesto 	= $datosObj->budget == null? 0: $datosObj->budget;
 			$breakeven 		= $datosObj->breakeven == null? 0: $datosObj->breakeven;
 			$breakevenCalc 	= $datosObj->breakeven == null? 0: $datosObj->breakeven + 5;//Dato simulado
 			
