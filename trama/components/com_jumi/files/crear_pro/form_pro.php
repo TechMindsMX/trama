@@ -77,13 +77,11 @@ $breakevenCalc			= 0;
 									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
 								   	  '</span>';
 									  
-				if(!is_null($datosObj->breakeven)){
 					$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
 
 					$ligaFinantialData = '<span class="liga">
 										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
 									   	  '</span>';
-				}
 			}
 			
 			foreach ($subCategorias as $key => $value) {
