@@ -120,8 +120,8 @@ $breakevenCalc			= 0;
 				$suma = $value->advanceQuantity+$value->settlementQuantity+$suma;
 			}
 			$presupuesto 	= $datosObj->budget;
-			$breakeven 		= $datosObj->breakeven;
-			$breakevenCalc 	= $datosObj->breakeven+5;
+			$breakeven 		= $datosObj->breakeven == null? 0: $datosObj->breakeven;
+			$breakevenCalc 	= $datosObj->breakeven == null? 0: $datosObj->breakeven + 5;//Dato simulado
 			
 			echo 'var breakeven = '.$breakeven.';';
 			echo 'var breakevencalc = '.$breakevenCalc.';';
