@@ -4,12 +4,11 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 <?php 
 jimport('trama.class');
+jimport('trama.usuario_class');
 $urls = new JTrama;
-
 foreach($this->items as $i => $item):
 	if ( $item->type != 'REPERTORY' ) {
 		$user_revision = $item->logs;
-				
 		if (!empty($user_revision)) {
 			$revisado_por = JFactory::getUser($user_revision[0]->userId)->name;
 			$fecha = date('d/M/Y',$user_revision[0]->timestamp/1000);
@@ -19,8 +18,9 @@ foreach($this->items as $i => $item):
 			$fecha = '';
 		}
 		
+		$item->joomlaId = UserData::getUserJoomlaId($item->userId);
 		
-		$item->producerName = JFactory::getUser($item->userId)->name;
+		$item->producerName = JFactory::getUser($item->joomlaId)->name;
 		
 		if($item->status != 0){
 			$html = '<a href="index.php?option=com_tramaproyectos&view=detalleproyecto&id='.$item->id.'">'.$item->name.'</a>';

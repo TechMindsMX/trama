@@ -121,12 +121,12 @@ $breakevenCalc			= 0;
 			}
 			$presupuesto 	= $datosObj->budget == null? 0: $datosObj->budget;
 			$breakeven 		= $datosObj->breakeven == null? 0: $datosObj->breakeven;
-			$breakevenCalc 	= $datosObj->breakeven == null? 0: $datosObj->breakeven + 5;//Dato simulado
+			$breakevenCalc 	= $datosObj->calculatedBreakeven == null? 0: $datosObj->calculatedBreakeven;
 			
-			echo 'var breakeven = '.$breakeven.';';
-			echo 'var breakevencalc = '.$breakevenCalc.';';
-			echo 'var suma = '.$suma.';';
-			echo 'var presupuesto = '.$presupuesto.';';
+			echo 'var breakeven 		= '.$breakeven.';';
+			echo 'var breakevencalc 	= '.$breakevenCalc.';';
+			echo 'var suma 				= '.$suma.';';
+			echo 'var presupuesto 		= '.$presupuesto.';';
 		}
 		?>
 		
@@ -135,7 +135,10 @@ $breakevenCalc			= 0;
 			var total = form.length;
 	
 			if( this.id == 'revision' ) {
-				if( (suma == presupuesto) && (breakeven == breakevencalc) ) {
+				var breakcapt = parseInt(breakeven);
+				var breakcalc = parseInt(breakevencalc);
+				
+				if( (suma == presupuesto) && (breakcapt == breakcalc) ) {
 					if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
 						if( jQuery('#status').val() == 0 ) {
 							jQuery('#status').val(9);

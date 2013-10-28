@@ -146,9 +146,9 @@
                     "regex": /^[\-\+]?\d+$/,
                     "alertText": "* No es un valor entero válido"
                 },
-                "number": {
+               "number": {
                     // Number, including positive, negative, and floating decimal. credit: orefalo
-                    "regex": /^[\-\+]?((([0-9]{1,3})([,][0-9]{3})*)|([0-9]+))?([\.]([0-9]+))?$/,
+                    "regex": /^\d{1,9}(\.\d{0,2})?$/,
                     "alertText": "* No es un valor decimal válido"
                 },
                 "date": {

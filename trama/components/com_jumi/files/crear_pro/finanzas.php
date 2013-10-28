@@ -32,6 +32,7 @@ $ligaEditProveedores	= '';
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 
 JHtml::_('behavior.modal');
+
 ?>
 
 <script>
@@ -365,7 +366,7 @@ JHtml::_('behavior.modal');
 			<input
 				type = "number" 
 				id = "equilibrio"
-				class = "validate[required,custom[onlyNumberSp]]"
+				class = "validate[required,custom[number]]"
 				name = "breakeven"
 				step="any" /> 
 			<br>

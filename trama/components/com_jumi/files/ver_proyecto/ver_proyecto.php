@@ -155,7 +155,7 @@ function imagenes($data) {
 	$array = $data->projectPhotos;
 	foreach ( $array as $key => $value ) {
 		$imagen = "/".$value->name;
-		$html .= '<img width="100" height="100" src="http://192.168.0.122/'.PHOTO.$imagen.'" alt="" />';	
+		$html .= '<img width="100" height="100" src="'.PHOTO.$imagen.'" alt="" />';	
 	}
 
 	return $html;
@@ -196,7 +196,7 @@ function audios($data) {
 
 function avatar($data) {
 	$avatar = $data->projectAvatar->name;
-	$html = '<img class="avatar" src="http://192.168.0.122/'.AVATAR.'/'.$avatar.'" />';
+	$html = '<img class="avatar" src="'.AVATAR.'/'.$avatar.'" />';
 	
 	return $html;
 }
@@ -434,7 +434,7 @@ function userName($data) {
 					</div>
 				</div>
 				<div class="content-banner">
-					<img src="http://192.168.0.122/<?php echo BANNER.'/'.$json->projectBanner->name ?>" />
+					<img src="<?php echo BANNER.'/'.$json->projectBanner->name ?>" />
 				</div>
 			</div>
 			<div id="video" class="ver_proyecto">
