@@ -95,7 +95,7 @@ function habilita(campo) {
 <form action="<?php echo $accion; ?>" id="perfilX" method="post" name="perfilX">
 
 <?php
-echo '<div id="GremiosoInstituciones" class="barra-top">'; 
+echo '<div id="GremiosoInstituciones" class="barra-top2">'; 
 if ( $tablaParam == 'perfilx_catalogoperfil' ) {
 	$gremios = pintaGremiosInstituciones($tablaParam, 'Gremios');
 	$instituciones = pintaGremiosInstituciones($tablaParam, 'Instituciones');

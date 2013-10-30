@@ -401,7 +401,7 @@ $breakevenCalc			= 0;
 				echo '</div>';
 			}
 			?> 
-			<div style="max-width:430px; font-size:12px;"><?php echo JText::_('NOTE_IMAGES'); ?></div>  
+			<div style="max-width:430px; font-size:12px; clear: both;"><?php echo JText::_('NOTE_IMAGES'); ?></div>  
 		</fieldset>
 	</div>
 	
@@ -427,7 +427,7 @@ $breakevenCalc			= 0;
 			</LEGEND>
 			<br />
 			
-			<label  for="descProy"><?php echo JText::_('DESCRIPCION').$textPro; ?>*:</label> 
+			<label id="label-large"  for="descProy"><?php echo JText::_('DESCRIPCION').$textPro; ?>*:</label> 
 			<br />	
 			
 			<div style= "max-width:755px;">

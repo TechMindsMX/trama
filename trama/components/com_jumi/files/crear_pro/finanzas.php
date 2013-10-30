@@ -235,6 +235,7 @@ JHtml::_('behavior.modal');
 		
 		<input 
 			type="button" 
+			class="button"
 			value="<?php echo JText::_('QUITAR_CAMPOS'); ?>" 
 			onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
 		<br /><br />
