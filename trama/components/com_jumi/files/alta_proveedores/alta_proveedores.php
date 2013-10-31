@@ -111,10 +111,10 @@ class AltaProveedores {
 	<p><?php echo JText::_('FECHA_INICIO_PRODUCCION').' = '.$proyecto -> objDatos -> productionStartDate; ?></p>
 	<p><?php echo JText::_('PREMIER_DATE').' = '.$proyecto -> objDatos -> premiereStartDate; ?></p>
 	<p><?php echo JText::_('STATUS').' = '.$proyecto -> objDatos -> statusName; ?></p>
-	<p><?php echo JText::_('PRESUPUESTO_VISTAS').' = $'.$proyecto -> objDatos -> budget; ?></p>
+	<p><?php echo JText::_('PRESUPUESTO_VISTAS').' = $<span class="number">'.$proyecto -> objDatos -> budget.'</span>' ?></p>
 	
 	<form id="agregados">
-		<span class="total_proveedor"><?php echo JText::_('TOTAL_PROVEDORES'); ?></span> = <span class="total"></span>
+		<span class="total_proveedor"><?php echo JText::_('TOTAL_PROVEDORES'); ?></span> = $<div class="total1"></div>
 	
 	<h3><?php echo JText::_('PROVEEDOR_USUARIOS_MIEMROS'); ?></h3>
 <?php
@@ -144,7 +144,7 @@ if (isset($proyecto->miembrosGrupo)) {
 	$html = '<div class="inputs '. $member->memberid .'">
 			<div class="nombre">
 			<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
-			<span class="total_proveedor">'.JText::_('TOTAL_PROVEEDOR').'</span> = <span class="sub_total"></span>
+			<span class="total_proveedor">'.JText::_('TOTAL_PROVEEDOR').'</span> = $<span class="sub_total"></span>
 			</div>
 			<div class="rt-grid-4">
 			<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
@@ -199,7 +199,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 				jQuery(this).addClass('icon-circle-arrow-down');
 				jQuery(this).parent().parent().siblings().show('slow');
 				jQuery(this).parent().parent().parent().find('input[type="number"]').each(function() {
-    				jQuery(this).addClass('validate[required,custom[onlyNumberSp]]');
+    				jQuery(this).addClass('validate[required,custom[number]]');
 				});
 			}
 			else {
@@ -217,7 +217,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 			jQuery(this).addClass('icon-circle-arrow-up');
 			jQuery(this).parent().parent().siblings().hide();
 			jQuery(this).parent().parent().parent().find('input[type="number"]').each(function() {
-				jQuery(this).removeClass('validate[required,custom[onlyNumberSp]]');
+				jQuery(this).removeClass('validate[required,custom[number]]');
 			});
 			}
 		});
@@ -243,7 +243,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 			jQuery('#agregados').find('input[type="number"]').each(function() {
 				total += parseInt(jQuery(this).val()) || 0;
 			});
-			jQuery('#agregados').children('span.total').text(total);
+			jQuery('#agregados').children('div.total1').html('<span class="number">'+total+'</span>');
 			
 			}
 		
@@ -367,9 +367,9 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 			<tr>
 				<td><?php echo JFactory::getUser(UserData::getUserJoomlaId($value->providerId))->name; ?></td>
 				<td><?php echo $value->advanceDate; ?></td>
-				<td>$<?php echo $value->advanceQuantity; ?></td>
+				<td>$<span class="number"><?php echo $value->advanceQuantity; ?></span></td>
 				<td><?php echo $value->settlementDate; ?></td>
-				<td>$<?php echo $value->settlementQuantity; ?></td>
+				<td>$<span class="number"><?php echo $value->settlementQuantity; ?></span></td>
 			</tr>
 			<?php
 			}
