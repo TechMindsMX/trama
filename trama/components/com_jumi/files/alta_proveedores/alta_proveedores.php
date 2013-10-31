@@ -114,7 +114,7 @@ class AltaProveedores {
 	<p><?php echo JText::_('PRESUPUESTO_VISTAS').' = $<span class="number">'.$proyecto -> objDatos -> budget.'</span>' ?></p>
 	
 	<form id="agregados">
-		<span class="total_proveedor"><?php echo JText::_('TOTAL_PROVEDORES'); ?></span> = $<div class="total1"></div>
+		<span class="total_proveedor"><?php echo JText::_('TOTAL_PROVEDORES'); ?></span> = $<span class="total1"></span>
 	
 	<h3><?php echo JText::_('PROVEEDOR_USUARIOS_MIEMROS'); ?></h3>
 <?php
@@ -144,7 +144,7 @@ if (isset($proyecto->miembrosGrupo)) {
 	$html = '<div class="inputs '. $member->memberid .'">
 			<div class="nombre">
 			<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
-			<span class="total_proveedor">'.JText::_('TOTAL_PROVEEDOR').'</span> = $<span class="sub_total"></span>
+			<span class="total_proveedor">'.JText::_('TOTAL_PROVEEDOR').'</span> = $<span class="number sub_total"></span>
 			</div>
 			<div class="rt-grid-4">
 			<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
@@ -224,6 +224,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 
 		jQuery('input[type="number"]').focusout(function() {
 			suma(this);
+			formatoNumero();
 		});
 
 		function suma (campo){
@@ -243,7 +244,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 			jQuery('#agregados').find('input[type="number"]').each(function() {
 				total += parseInt(jQuery(this).val()) || 0;
 			});
-			jQuery('#agregados').children('div.total1').html('<span class="number">'+total+'</span>');
+			jQuery('#agregados').children('span.total1').html('<span class="number">'+total+'</span>');
 			
 			}
 		
