@@ -156,7 +156,17 @@ br {
 #label-large{
 	width:200px !important;
 }
-
+.plantillas{
+	font-size: 16px;
+	font-weight: bolder;
+	border-bottom-style: solid;
+	border-top-style: solid;
+	border-color: #2c9ad9;
+	border-width: 1px;
+}
+div.plantillas label{
+	font-size: 16px !important;
+}
 @media screen and (max-width:770px) {
 	#descProy, #elenco{
 		width: 205px;

@@ -205,9 +205,9 @@ function finanzas ($data) {
 	$html = '';
 	
 	$html = '<ul id="finanzas_general">'.
-			'<li><span>'.JText::_('BUDGET').'</span> <span class="number">'.$data->budget.'</span></li>'.
-			'<li><span>'.JText::_('BREAKEVEN').'</span> <span class="number">'.$data->breakeven.'</span></li>'.
-			'<li><span>'.JText::_('REVE_POTENTIAL').'</span> <span class="number">'.$data->revenuePotential.'</span></li>'.
+			'<li><span>'.JText::_('BUDGET').'</span> $<span class="number">'.$data->budget.'</span></li>'.
+			'<li><span>'.JText::_('BREAKEVEN').'</span> $<span class="number">'.$data->breakeven.'</span></li>'.
+			'<li><span>'.JText::_('REVE_POTENTIAL').'</span> $<span class="number">'.$data->revenuePotential.'</span></li>'.
 			'</ul>';
 	return $html;
 }
@@ -223,8 +223,8 @@ function tablaFinanzas($data) {
 	foreach ($data->projectUnitSales as $key => $value) {
 		$html .= '<tr>';
 		$html .= $opentag.$value->section.$closetag;
-		$html .= $opentag.'<span class="number">'.$value->unitSale.'</span>'.$closetag;
-		$html .= $opentag.'<span class="number">'.$value->unit.'</span>'.$closetag;
+		$html .= $opentag.'$<span class="number">'.$value->unitSale.'</span>'.$closetag;
+		$html .= $opentag.$value->unit.$closetag;
 		$html .= '</tr>';
 	}
 	$html .= '</table>';
@@ -647,7 +647,7 @@ function codeAddress() {
 			});
 			
 			
-			jQuery('span.number').number( true, 0, ',','.' )
+		
 
 		});
 		

@@ -221,7 +221,7 @@ JHtml::_('behavior.modal');
 		<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
 		<input 
 			type="text" 
-			class="validate[required,custom[onlyNumberSp]]" 
+			class="validate[required,custom[number]]" 
 			name="unitSale0" step="any"> 
 		<br>
 		
@@ -262,18 +262,19 @@ JHtml::_('behavior.modal');
 					<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
 				</div>
 			</LEGEND>
-			<br />	
 			
+			<div class="plantillas">
 			<div><a href="media/trama-bcase.xlsx"><?php echo JText::_('PLANTILLAS_EXCEL'); ?></a></div>
-			
-			<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label> 
-			<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 			<br />
+			<label for="plantilla"><?php echo JText::_('BUSINESS_CASE'); ?>*:</label>
 			
+			<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
+			</div>
+			<br />
 			<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('PROYECTO'); ?>*:</label> 
 			<input 
 				type="number" 
-				class="validate[required]"
+				class="validate[required,custom[number]]"
 				id="presupuesto"
 				name="budget" /> 
 			<br /> 
@@ -295,7 +296,7 @@ JHtml::_('behavior.modal');
 			<input 
 				type="text" 
 				id="unidad2" 
-				class="validate[required,custom[onlyNumberSp]]"
+				class="validate[required,custom[number]]"
 				name="unitSale_N"> 
 			<br> 
 			
@@ -331,7 +332,7 @@ JHtml::_('behavior.modal');
 				$unitsales .= '	<input ';
 				$unitsales .= '		type="text" ';
 				$unitsales .= '		id="unidad_E'.$i.'" ';
-				$unitsales .= '		class="validate[required,custom[onlyNumberSp]]"';
+				$unitsales .= '		class="validate[required,custom[number]]"';
 				$unitsales .= '		value="'.$valorUnitSales.'"';
 				$unitsales .= '		name = "unitSale_E'.$i.'" />'; 
 				$unitsales .= '	<br> ';
@@ -358,7 +359,7 @@ JHtml::_('behavior.modal');
 			<input 
 				type="number" 
 				id="potenciales"
-				class="validate[required,custom[onlyNumberSp]]"
+				class="validate[required,custom[number]]"
 				name="revenuePotential"
 				step="any" /> 
 			<br>
