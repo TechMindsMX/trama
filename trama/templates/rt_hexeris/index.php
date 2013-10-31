@@ -42,9 +42,9 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 							jQuery(".desc").text("Salir");
 							jQuery(".logo-block").after("<div class=\"bienvenidaUsuario\">Hola '.$name[0].'</div>")
 							formatoNumero();
-						})
+						});
 						function formatoNumero() {
-							jQuery("span.number").number( true, 2, ".","," )
+							jQuery("span.number").number( true, 2, ".","," );
 						}
 						</script>';
 			echo $codigo;
