@@ -22,7 +22,9 @@ foreach($this->items as $i => $item):
 		
 		$item->producerName = JFactory::getUser($item->joomlaId)->name;
 		
-		if($item->status != 0){
+		$editableAdminStatuses = array(9,3,1);
+		
+		if(in_array($item->status, $editableAdminStatuses)){
 			$html = '<a href="index.php?option=com_tramaproyectos&view=detalleproyecto&id='.$item->id.'">'.$item->name.'</a>';
 		} else {
 			$html = $item->name;
