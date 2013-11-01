@@ -44,7 +44,7 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 							formatoNumero();
 						});
 						function formatoNumero() {
-							jQuery("span.number").number( true, 2, ".","," );
+							jQuery("span.number").number( true, 2 );
 						}
 						</script>';
 			echo $codigo;
