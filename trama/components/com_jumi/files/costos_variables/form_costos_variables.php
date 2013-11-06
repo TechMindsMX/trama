@@ -12,6 +12,7 @@ if ($usuario->guest == 1) {
 
 jimport('trama.class');
 jimport('trama.usuario_class');
+jimport('trama.error_class');
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
@@ -19,7 +20,8 @@ $token 					= JTrama::token();
 $middlewareId			= UserData::getUserMiddlewareId($usuario->id);
 $input					= JFactory::getApplication()->input;
 $proyid					= $input->get("proyid",0,"int");
-$error1					= $input->get("error",0,"int");
+$errorCode		 		= $input->get("error",0,"int");
+$from		 			= $input->get("from",0,"int");
 $datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
 $comentarios			= '';
 $ligaEditProveedores	= '';
@@ -27,10 +29,8 @@ $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
 
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
+errorClass::manejoError($errorCode, $from, $proyid);
 
-if($error1 ==1){
-	echo "<div style='color: red;'>ERROR revisa la información capturada</div>";
-}
 $servEdicion = JTrama::getDatos($proyid );
 $existe = $servEdicion->variableCosts;
 //definicion de campos del formulario
@@ -64,7 +64,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
 						</span>';
 				
-			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
+			if( ($datosObj->status == 0 || $datosObj->status == 2) ) {
 				if($datosObj->status == 2) {
 					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
 				}
@@ -74,6 +74,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 				} else {
 					$mensaje = JText::_('EDITAR_PROVEEDPORES');
 				}
+				
 				$ligaEditProveedores = '<span class="liga">
 											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
 								   		</span>';
@@ -85,10 +86,6 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
 														  	'</span>';
 				}
-		
-				$ligaCostosVariable = '<span class="liga">
-									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
-											  	'</span>';
 			}
 		}
 	

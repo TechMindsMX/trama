@@ -62,7 +62,7 @@ errorClass::manejoError($errorCode, $from, $proyid);
 				$botonRevision = '';
 			}
 
-			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
+			if( ($datosObj->status == 0 || $datosObj->status == 2) ) {
 				if($datosObj->status == 2) {
 					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
 				}

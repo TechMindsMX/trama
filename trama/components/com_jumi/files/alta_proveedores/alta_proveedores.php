@@ -2,6 +2,7 @@
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 jimport('trama.class');
 jimport('trama.usuario_class');
+jimport('trama.error_class');
 $usuario = JFactory::getUser();
 $doc = JFactory::getDocument();
 
@@ -15,13 +16,17 @@ $proveedores 			= $proyecto->objDatos->providers;
 $token 					= JTrama::token();
 $input 					= JFactory::getApplication()->input;
 $proyid 				= $input->get("proyid",0,"int");
+$errorCode		 		= $input->get("error",0,"int");
+$from		 			= $input->get("from",0,"int");
 $datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
 $comentarios			= '';
 $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
 $accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
-$callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&proyid='.$proyid;
+$callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&from=25&proyid='.$proyid;
+
+errorClass::manejoError($errorCode, $from, $proyid);
 
 class AltaProveedores {
 	
@@ -282,7 +287,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
 						</span>';
 			
-				if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
+				if( ($datosObj->status == 0 || $datosObj->status == 2) ) {
 					if($datosObj->status == 2) {
 						$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
 					}
@@ -303,7 +308,12 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
 													  	'</span>';
 					}
-			
+					
+					if(empty($datosObj->variableCosts)){
+						$mensaje =  JText::_('ALTA_COSTOS_VARIABLES');
+					} else {
+						$mensaje =  JText::_('EDITAR_COSTOS_VARIABLES');
+					}
 					$ligaCostosVariable = '<span class="liga">
 									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
 												  	'</span>';

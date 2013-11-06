@@ -31,12 +31,9 @@ $ligaCostosVariable		= '';
 $comentarios			= '';
 $ligaEditProveedores	= '';
 
-errorClass::manejoError($errorCode, $from, $proyid);
-
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
-
+errorClass::manejoError($errorCode, $from, $proyid);
 JHtml::_('behavior.modal');
-
 ?>
 
 <script>
@@ -53,7 +50,7 @@ JHtml::_('behavior.modal');
 							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
 						</span>';
 			
-			if( ($datosObj->status == 0 || $datosObj->status == 2) && ($datosObj->type == 'PROJECT')) {
+			if( ($datosObj->status == 0 || $datosObj->status == 2) ) {
 				if($datosObj->status == 2) {
 					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
 				}
