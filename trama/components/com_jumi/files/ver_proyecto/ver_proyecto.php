@@ -16,6 +16,7 @@
 	jimport('trama.jsocial');
 	jimport('trama.jfactoryext');
 	jimport('trama.usuario_class');
+	jimport('trama.error_class');
 
 	// chequeamos si el usuario es Special
 	$isSpecial = '';
@@ -24,8 +25,12 @@
 		$isSpecial = ($value == $grupos->getSpecialViewlevel()) ? 1 : 0;
 	}
 	
-	$pathJumi = Juri::base().'components/com_jumi/files/ver_proyecto/';
-	$proyecto = $jinput->get('proyid', '', 'INT');
+	$pathJumi 	= Juri::base().'components/com_jumi/files/ver_proyecto/';
+	$proyecto 	= $jinput->get('proyid', '', 'INT');
+	$errorCode	= $jinput->get("error",0,"int");
+	$from		= $jinput->get("from",0,"int");
+	
+	errorClass::manejoError($errorCode, $from, $proyecto);
 	
 	$document->addStyleSheet($pathJumi.'css/themes/bar/bar.css');
 	$document->addStyleSheet($pathJumi.'css/nivo-slider.css');
