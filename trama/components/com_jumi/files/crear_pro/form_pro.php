@@ -12,6 +12,7 @@ if ($usuario->guest == 1) {
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 jimport('trama.class');
 jimport('trama.usuario_class');
+jimport('trama.error_class');
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
 JHtml::_('behavior.modal');
@@ -24,6 +25,8 @@ $subCategorias 			= JTrama::getAllSubCats();
 $token 					= JTrama::token();
 $input 					= JFactory::getApplication()->input;
 $proyid 				= $input->get("proyid",0,"int");
+$errorCode		 		= $input->get("error",0,"int");
+$from		 			= $input->get("from",0,"int");
 $datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
 $comentarios			= '';
 $ligaEditProveedores	= '';
@@ -33,6 +36,9 @@ $suma 					= 0;
 $presupuesto			= 0;
 $breakeven				= 0;
 $breakevenCalc			= 0;
+
+errorClass::manejoError($errorCode, $from, $proyid);
+
 ?>
 <script>
 	emptyKeys();
@@ -43,7 +49,8 @@ $breakevenCalc			= 0;
 		<?php
 		if( !is_null($datosObj) ) {
 			JTrama::isEditable($datosObj, $userMiddleId->idMiddleware);
-
+			$callback .= $proyid;
+			
 			$count = 0;
 			foreach ($datosObj->logs as $key => $value) {
 				if ( $value->status == 2 ) {

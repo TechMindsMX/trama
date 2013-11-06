@@ -11,7 +11,7 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed
 
 jimport('trama.class');
 jimport('trama.usuario_class');
-
+jimport('trama.error_class');
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
 
@@ -23,11 +23,15 @@ $middlewareId			= UserData::getUserMiddlewareId($usuario->id);
 $token 					= JTrama::token();
 $input 					= JFactory::getApplication()->input;
 $proyid 				= $input->get("proyid", 0, "int");
+$errorCode		 		= $input->get("error",0,"int");
+$from		 			= $input->get("from",0,"int");
 $datosObj 				= JTrama::getDatos($proyid);
 $ligaPro				= '';
 $ligaCostosVariable		= '';
 $comentarios			= '';
 $ligaEditProveedores	= '';
+
+errorClass::manejoError($errorCode, $from, $proyid);
 
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 
