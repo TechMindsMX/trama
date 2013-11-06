@@ -283,9 +283,20 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 				$app = JFactory::getApplication();
 			
 				$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
+				switch( $datosObj->type) {
+					case 'PROJECT':
+						$fileid = 27;
+						break;
+					case 'PRODUCT':
+						$fileid = 29;
+						break;
+					case 'REPERTORY':
+						$fileid = 30;
+						break;
+				}
 				$ligaPro = '<span class="liga">
-							<a href="index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$datosObj->id.'">'.$mensaje.'</a>
-						</span>';
+								<a href="index.php?option=com_jumi&view=appliction&fileid='.$fileid.'&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+							</span>';
 			
 				if( ($datosObj->status == 0 || $datosObj->status == 2) ) {
 					if($datosObj->status == 2) {
