@@ -389,9 +389,9 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 			<tr>
 				<td><?php echo JFactory::getUser(UserData::getUserJoomlaId($value->providerId))->name; ?></td>
 				<td><?php echo $value->advanceDate; ?></td>
-				<td>$<span class="number"><?php echo $value->advanceQuantity; ?></span></td>
+				<td style="text-align:right;" >$<span class="number"><?php echo $value->advanceQuantity; ?></span></td>
 				<td><?php echo $value->settlementDate; ?></td>
-				<td>$<span class="number"><?php echo $value->settlementQuantity; ?></span></td>
+				<td style="text-align:right;" >$<span class="number"><?php echo $value->settlementQuantity; ?></span></td>
 			</tr>
 			<?php
 			}

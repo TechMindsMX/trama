@@ -400,7 +400,7 @@ JHtml::_('behavior.modal');
 		?>
 	</div>
 		
-	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+	<input type="button" id="cancelar" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();" />
 	<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
 </form>
