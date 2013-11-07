@@ -587,7 +587,7 @@ function codeAddress() {
 						data: {
 							"score": score,
 							"projectId": "<?php echo $proyecto; ?>",
-							"token": "<?php echo $token; ?>",
+							"token": "<?php echo JTrama::token(); ?>",
 							"userId": <?php echo $usuario->id; ?>
 						},
 						type: 'post'
@@ -595,23 +595,29 @@ function codeAddress() {
 					
 					request.done(function(result){
 						var obj = eval('(' + result + ')');
-												
-						if (obj.resultType == 'SUCCESS') {
-							jQuery('#rating').raty({
-								readOnly: true,
-								path 	: ruta,
-								score 	: score,
-								target		: '#texto',
-								targetText	: obj.rate
-							});
-						} else if(obj.resultType == 'FAIL') {
-							jQuery('#rating').raty({
-								readOnly: true,
-								path 	: ruta,
-								score 	: obj.rate,
-								target		: '#texto',
-								targetText	: obj.rate
-							});
+						
+						if(obj.error == "1") {
+							alert('el token no sirve');
+							
+						} else {
+							
+							if (obj.resultType == 'SUCCESS') {
+								jQuery('#rating').raty({
+									readOnly: true,
+									path 	: ruta,
+									score 	: obj.rate,
+									target		: '#texto',
+									targetText	: obj.rate
+								});
+							} else if(obj.resultType == 'FAIL') {
+								jQuery('#rating').raty({
+									readOnly: true,
+									path 	: ruta,
+									score 	: obj.rate,
+									target		: '#texto',
+									targetText	: obj.rate
+								});
+							}
 						}
 					});
 					
