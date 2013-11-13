@@ -26,6 +26,8 @@ $proyid 				= $input->get("proyid", 0, "int");
 $errorCode		 		= $input->get("error",0,"int");
 $from		 			= $input->get("from",0,"int");
 $datosObj 				= JTrama::getDatos($proyid);
+//SIMULACION DE DATO FAVOR DE QUITAR FOCA PENDEJA
+$datosObj->eventCode	= "fs78f78ds";
 $ligaPro				= '';
 $ligaCostosVariable		= '';
 $comentarios			= '';
@@ -134,6 +136,7 @@ JHtml::_('behavior.modal');
 			}
 			
 			echo 'jQuery("#presupuesto").val('.$datosObj->budget.');';
+			echo 'jQuery("#event_code").val("'.$datosObj->eventCode.'");';
 			
 			if( !empty($datosObj->projectUnitSales) ){
 				$countunitSales = count($datosObj->projectUnitSales);
@@ -164,16 +167,20 @@ JHtml::_('behavior.modal');
 			var section 	= new Array();
 			var unitSale 	= new Array();
 			var capacity 	= new Array();
+			var Codesection = new Array();
 			var sec 		= 0;
 			var unit 		= 0;
 			var cap 		= 0;
+			var sC	 		= 0;
 			
 			for (i=0; i < total; i++) {
 			    seccion = form[i].name.substring(0,7);
 			    capayuni = form[i].name.substring(0,8);
-			    
+			    coSection	= form[i].name.substring(0,11);
+
 			    if(seccion == 'section') {
-			    	if(form[i].value != ''){
+		        	console.log(seccion, coSection,form[i].value);
+			    if(form[i].value != ''){
 			        	section[sec] = form[i].value;
 			        	sec++;
 			        }
@@ -187,9 +194,14 @@ JHtml::_('behavior.modal');
 			        	capacity[cap] = form[i].value;
 			        	cap++;
 			        }
+			    }else if(coSection == 'codeSection'){
+			        if(form[i].value != ''){
+			        	codeSection[sC] = form[i].value;
+			        	sC++;
+			        	console.log(coSection,form[i].value);
+			       }
 			    }
-			    
-			    console.log(form[i].id, form[i].value);
+			    console.log(codeSection);
 			}
 
 			jQuery("#seccion").val(section.join(","));
@@ -198,7 +210,7 @@ JHtml::_('behavior.modal');
 			
 			jQuery('#token').val('<?php echo $token;?>');
 
-			jQuery("#form2").submit();
+			//jQuery("#form2").submit();
 		});
 	});
 </script>
@@ -244,6 +256,13 @@ JHtml::_('behavior.modal');
 			class="validate[required,custom[onlyNumberSp]]" 
 			value=""
 			name="capacity0"> 
+		<br /> 
+		<label for=""><?php echo JText::_('SECTION_CODE'); ?>:</label> 
+		<input 
+			type="text" 
+			class="validate[required,custom[sectionCode]]" 
+			value=""
+			name="sectionCode0"> 
 		<br /> 
 		
 		<input 
@@ -291,6 +310,13 @@ JHtml::_('behavior.modal');
 				id="presupuesto"
 				name="budget" /> 
 			<br /> 
+			<label for="event_code"><?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:</label> 
+			<input 
+				type="text" 
+				class="validate[required,custom[eventCode]]"
+				id="event_code"
+				name="event_code" /> 
+			<br /> 
 			<br /> 
 			
 			<?php echo JText::_('PRECIOS_SALIDA').JText::_('PROYECTO')?>*: 
@@ -320,6 +346,14 @@ JHtml::_('behavior.modal');
 				class="validate[required,custom[onlyNumberSp]]"
 				name="capacity_N"> 
 			<br />
+			
+			<label for="inventario"><?php echo JText::_('SECTION_CODE'); ?>*:</label>
+			<input 
+				type="text"
+				id="codeSection2" 
+				class="validate[required,custom[sectionCode]]"
+				name="codeSection2"> 
+			<br />
 			<br />
 			
 			<input type="hidden" id="seccion" name="section"> 
@@ -331,6 +365,7 @@ JHtml::_('behavior.modal');
 				$valorSection = isset($datosObj) ? $datosObj->projectUnitSales[$i]->section : '';
 				$valorUnitSales = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unitSale : '';
 				$valorCapacity = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unit : '';
+				$sectionCode = 'h74kd8';
 				
 				$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('SECCION').'*:</label>';
 				$unitsales .= '<input'; 
@@ -358,7 +393,16 @@ JHtml::_('behavior.modal');
 				$unitsales .= '		value="'.$valorCapacity.'"';
 				$unitsales .= '		name = "capacity_E'.$i.'" />'; 
 				$unitsales .= '	<br />';
-				$unitsales .= '	<br />';
+				
+				$unitsales .= '	<label for="sectionCode_E'.$i.'">'.JText::_('SECTION_CODE').'*:</label>';
+				$unitsales .= '	<input ';
+				$unitsales .= '		type="text" ';
+				$unitsales .= '		id="sectionCode_E'.$i.'" ';
+				$unitsales .= '		class="validate[required,custom[sectionCode]]"';
+				$unitsales .= '		value="'.$sectionCode.'"';
+				$unitsales .= '		name = "sectionCode_E'.$i.'" />';
+				$unitsales .= '	<br> ';
+				$unitsales .= '	<br> ';
 				
 				echo $unitsales;
 			}

@@ -218,6 +218,14 @@
                     "regex": /^[0-9a-zA-Z ñ Ñ á Á éÉ íÍ óÓ úÚ . ]+$/,
                     "alertText": "* No se permiten caracteres especiales"
                 },
+                "eventCode": {
+                	"regex": /^[0-9 a-zA-Z]{8,9}$/,
+                    "alertText": "* No es un código de evento valido"
+                },
+                "sectionCode": {
+                	"regex": /^[0-9 a-zA-Z]{6}$/,
+                    "alertText": "* No es un código de evento valido"
+                },
 				// --- CUSTOM RULES -- Those are specific to the demos, they can be removed or changed to your likings
                 "ajaxUserCall": {
                     "url": "ajaxValidateFieldUser",
