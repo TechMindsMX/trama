@@ -66,7 +66,7 @@ jimport('trama.usuario_class');
 
 foreach ($json as $key => $value) {
 	$string = strip_tags($value->description);
-	$value->description = (strlen($string) > 113) ? substr($string,0,110).'...' : $string;
+	$value->description = strlen($string) > 113 ? substr($string,0,110).'...' : $string;
 	$value->nomCat = JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
 	$value->producer = JTrama::getProducerProfile(UserData::getUserJoomlaId($value->userId));
