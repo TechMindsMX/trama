@@ -224,7 +224,7 @@
                 },
                 "sectionCode": {
                 	"regex": /^[0-9 a-zA-Z]{6}$/,
-                    "alertText": "* No es un código de evento valido"
+                    "alertText": "* No es un código de sección valido"
                 },
 				// --- CUSTOM RULES -- Those are specific to the demos, they can be removed or changed to your likings
                 "ajaxUserCall": {

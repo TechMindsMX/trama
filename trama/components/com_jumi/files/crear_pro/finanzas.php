@@ -167,50 +167,74 @@ JHtml::_('behavior.modal');
 			var section 	= new Array();
 			var unitSale 	= new Array();
 			var capacity 	= new Array();
-			var Codesection = new Array();
+			var codeSection = new Array();
+			var repetidos 	= false;
 			var sec 		= 0;
 			var unit 		= 0;
 			var cap 		= 0;
 			var sC	 		= 0;
+			var count 		= 0;
 			
 			for (i=0; i < total; i++) {
-			    seccion = form[i].name.substring(0,7);
-			    capayuni = form[i].name.substring(0,8);
-			    coSection	= form[i].name.substring(0,11);
+			    fieldName = form[i].name.substring(0,5);
 
-			    if(seccion == 'section') {
-		        	console.log(seccion, coSection,form[i].value);
-			    if(form[i].value != ''){
-			        	section[sec] = form[i].value;
-			        	sec++;
-			        }
-			    }else if(capayuni == 'unitSale'){
-			        if(form[i].value != ''){
-			        	unitSale[unit] = form[i].value;
-			        	unit++
-			        }
-			    }else if(capayuni == 'capacity'){
-			        if(form[i].value != ''){
-			        	capacity[cap] = form[i].value;
-			        	cap++;
-			        }
-			    }else if(coSection == 'codeSection'){
-			        if(form[i].value != ''){
-			        	codeSection[sC] = form[i].value;
-			        	sC++;
-			        	console.log(coSection,form[i].value);
-			       }
-			    }
-			    console.log(codeSection);
+				switch(fieldName){
+					case "secti":
+						if(form[i].value != ''){
+				        	section[sec] = form[i].value;
+				        	sec++;
+				        }
+				        break;
+					case "unitS":
+						if(form[i].value != ''){
+				        	unitSale[unit] = form[i].value;
+				        	unit++
+				        }
+				        break;
+					case "capac":
+						if(form[i].value != ''){
+				        	capacity[cap] = form[i].value;
+				        	cap++;
+				        }
+				        break;
+					case "codeS":
+						 if(form[i].value != ''){
+					     	codeSection[sC] = form[i].value;
+					        sC++;
+					     }
+					     break;
+				}
 			}
 
+			jQuery.each(codeSection, function(indice, valor){
+			    jQuery.each(codeSection, function(index, value){
+			        if(valor==value){
+			            count = count+1;
+			        }
+			        
+			        if(count > 1){
+			            repetidos = true;
+			            return false;
+			        }
+			    });	
+			    
+			    count = 0;
+			    
+			    if(repetidos){
+			        alert('Los codigos de sección deben ser unicos, favor de revisar sus entradas.');
+			        return false;
+			    }
+			});
 			jQuery("#seccion").val(section.join(","));
 			jQuery("#unidad").val(unitSale.join(","));
 			jQuery("#inventario").val(capacity.join(","));
+			jQuery("#codeSection").val(codeSection.join(","));
 			
 			jQuery('#token').val('<?php echo $token;?>');
-
-			//jQuery("#form2").submit();
+			
+			if (!repetidos){
+				jQuery("#form2").submit();
+			}
 		});
 	});
 </script>
@@ -262,7 +286,7 @@ JHtml::_('behavior.modal');
 			type="text" 
 			class="validate[required,custom[sectionCode]]" 
 			value=""
-			name="sectionCode0"> 
+			name="codeSection0"> 
 		<br /> 
 		
 		<input 
@@ -359,6 +383,7 @@ JHtml::_('behavior.modal');
 			<input type="hidden" id="seccion" name="section"> 
 			<input type="hidden" id="unidad" name="unitSale"> 
 			<input type="hidden" id="inventario" name="capacity"> 
+			<input type="hidden" id="codeSection" name="codeSection"> 
 			
 			<?php
 			for($i = 1; $i < $countunitSales; $i++) {
@@ -394,13 +419,13 @@ JHtml::_('behavior.modal');
 				$unitsales .= '		name = "capacity_E'.$i.'" />'; 
 				$unitsales .= '	<br />';
 				
-				$unitsales .= '	<label for="sectionCode_E'.$i.'">'.JText::_('SECTION_CODE').'*:</label>';
+				$unitsales .= '	<label for="codeSection_E'.$i.'">'.JText::_('SECTION_CODE').'*:</label>';
 				$unitsales .= '	<input ';
 				$unitsales .= '		type="text" ';
-				$unitsales .= '		id="sectionCode_E'.$i.'" ';
+				$unitsales .= '		id="codeSection_E'.$i.'" ';
 				$unitsales .= '		class="validate[required,custom[sectionCode]]"';
 				$unitsales .= '		value="'.$sectionCode.'"';
-				$unitsales .= '		name = "sectionCode_E'.$i.'" />';
+				$unitsales .= '		name = "codeSection_E'.$i.'" />';
 				$unitsales .= '	<br> ';
 				$unitsales .= '	<br> ';
 				

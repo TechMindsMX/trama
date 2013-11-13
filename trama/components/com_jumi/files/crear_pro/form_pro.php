@@ -36,6 +36,8 @@ $suma 					= 0;
 $presupuesto			= 0;
 $breakeven				= 0;
 $breakevenCalc			= 0;
+$eventCode				= '';
+$codeSection			= '';
 
 errorClass::manejoError($errorCode, $from, $proyid);
 
@@ -129,11 +131,15 @@ errorClass::manejoError($errorCode, $from, $proyid);
 			$presupuesto 	= $datosObj->budget == null? 0: $datosObj->budget;
 			$breakeven 		= $datosObj->breakeven == null? 0: $datosObj->breakeven;
 			$breakevenCalc 	= $datosObj->calculatedBreakeven == null? 0: $datosObj->calculatedBreakeven;
+			$eventCode      = "simulado";
+			$codeSection    = "simulado2";
 			
 			echo 'var breakeven 		= '.$breakeven.';';
 			echo 'var breakevencalc 	= '.$breakevenCalc.';';
 			echo 'var suma 				= '.$suma.';';
 			echo 'var presupuesto 		= '.$presupuesto.';';
+			echo 'var eventCode 		= '.$eventCode.';';
+			echo 'var codeSection 		= '.$codeSection.';';
 		}
 		?>
 		
@@ -145,7 +151,7 @@ errorClass::manejoError($errorCode, $from, $proyid);
 				var breakcapt = parseInt(breakeven);
 				var breakcalc = parseInt(breakevencalc);
 				
-				if( (suma == presupuesto) && (breakcapt == breakcalc) ) {
+				if( (suma == presupuesto) && (breakcapt == breakcalc) && (!empty(eventCode)) && (!empty(codeSection)) ) {
 					if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
 						if( jQuery('#status').val() == 0 ) {
 							jQuery('#status').val(9);
@@ -162,6 +168,14 @@ errorClass::manejoError($errorCode, $from, $proyid);
 					
 					if( breakeven != breakevencalc ) {
 						alert('<?php echo JText::_('ERROR_BREAKEVEN'); ?>');
+					}
+					
+					if( empty(eventCode) ) {
+						alert('<?php echo JText::_('ERROR_EVENT_CODE'); ?>');
+					}
+					
+					if( empty(codeSection) ) {
+						alert('<?php echo JText::_('ERROR_SECTION'); ?>');
 					}
 					return false;
 				}
