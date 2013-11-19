@@ -62,7 +62,6 @@ class plgUserFFAccount extends JPlugin
 	}
 	
 	function sendToMiddle ($email , $name) {
-		
 		$data =   array('email' => $email, 
 						'name' => $name,
 						'token' => $this->token
@@ -80,7 +79,7 @@ class plgUserFFAccount extends JPlugin
 		$server_output = curl_exec ($ch);
 		
 		curl_close ($ch);
- //echo $server_output;exit;		
+// echo $server_output;exit;		
 		return $server_output;
 
 	}
