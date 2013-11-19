@@ -41,7 +41,7 @@ class plgUserFFAccount extends JPlugin
 
 		if( $isnew ){
 			// chequea que el usuario este activado y no este bloqueado y envia al middleware
-			$respuesta = $this->sendToMiddle($user['email']); 
+			$respuesta = $this->sendToMiddle($user['email'],$user['name']); 
 		
 			$this->saveUserMiddle(json_decode($respuesta),$user);
 		}
@@ -61,9 +61,10 @@ class plgUserFFAccount extends JPlugin
 		$db->query();
 	}
 	
-	function sendToMiddle ($email) {
+	function sendToMiddle ($email , $name) {
 		
 		$data =   array('email' => $email, 
+						'name' => $name,
 						'token' => $this->token
 				  );
 				  
