@@ -284,7 +284,7 @@ JHtml::_('behavior.modal');
 		<label for=""><?php echo JText::_('SECTION_CODE'); ?>:</label> 
 		<input 
 			type="text" 
-			class="validate[required,custom[sectionCode]]" 
+			class="validate[custom[sectionCode]]" 
 			value=""
 			name="codeSection0"> 
 		<br /> 
@@ -337,7 +337,7 @@ JHtml::_('behavior.modal');
 			<label for="event_code"><?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:</label> 
 			<input 
 				type="text" 
-				class="validate[required,custom[eventCode]]"
+				class="validate[custom[eventCode]]"
 				id="event_code"
 				name="event_code" /> 
 			<br /> 
@@ -375,7 +375,7 @@ JHtml::_('behavior.modal');
 			<input 
 				type="text"
 				id="codeSection2" 
-				class="validate[required,custom[sectionCode]]"
+				class="validate[custom[sectionCode]]"
 				name="codeSection2"> 
 			<br />
 			<br />
@@ -423,7 +423,7 @@ JHtml::_('behavior.modal');
 				$unitsales .= '	<input ';
 				$unitsales .= '		type="text" ';
 				$unitsales .= '		id="codeSection_E'.$i.'" ';
-				$unitsales .= '		class="validate[required,custom[sectionCode]]"';
+				$unitsales .= '		class="validate[custom[sectionCode]]"';
 				$unitsales .= '		value="'.$sectionCode.'"';
 				$unitsales .= '		name = "codeSection_E'.$i.'" />';
 				$unitsales .= '	<br> ';
