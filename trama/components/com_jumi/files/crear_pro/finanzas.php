@@ -27,7 +27,7 @@ $errorCode		 		= $input->get("error",0,"int");
 $from		 			= $input->get("from",0,"int");
 $datosObj 				= JTrama::getDatos($proyid);
 //SIMULACION DE DATO FAVOR DE QUITAR FOCA PENDEJA
-$datosObj->eventCode	= "fs78f78ds";
+$datosObj->eventCode	= "";
 $ligaPro				= '';
 $ligaCostosVariable		= '';
 $comentarios			= '';
@@ -339,7 +339,7 @@ JHtml::_('behavior.modal');
 				type="text" 
 				class="validate[custom[eventCode]]"
 				id="event_code"
-				name="event_code" /> 
+				name="eventCode" /> 
 			<br /> 
 			<br /> 
 			
@@ -390,7 +390,7 @@ JHtml::_('behavior.modal');
 				$valorSection = isset($datosObj) ? $datosObj->projectUnitSales[$i]->section : '';
 				$valorUnitSales = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unitSale : '';
 				$valorCapacity = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unit : '';
-				$sectionCode = 'h74kd8';
+				$sectionCode = '';
 				
 				$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('SECCION').'*:</label>';
 				$unitsales .= '<input'; 
