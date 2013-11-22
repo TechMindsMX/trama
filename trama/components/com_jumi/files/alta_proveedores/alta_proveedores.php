@@ -3,12 +3,11 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed"
 jimport('trama.class');
 jimport('trama.usuario_class');
 jimport('trama.error_class');
-$usuario = JFactory::getUser();
-$doc = JFactory::getDocument();
 
-$proyecto = new AltaProveedores;
-
-$path = 'components/com_jumi/files/alta_proveedores/';
+$usuario 	= JFactory::getUser();
+$doc 		= JFactory::getDocument();
+$proyecto 	= new AltaProveedores;
+$path 		= 'components/com_jumi/files/alta_proveedores/';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
 $doc->addStyleSheet($path.'alta_proveedores.css');
 
@@ -23,8 +22,8 @@ $comentarios			= '';
 $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
-$accion = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
-$callback = JURI::base().'index.php?option=com_jumi&view=application&fileid=25&from=25&proyid='.$proyid;
+$accion 				= MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
+$callback 				= JURI::base().'index.php?option=com_jumi&view=application&fileid=25&from=25&proyid='.$proyid;
 
 errorClass::manejoError($errorCode, $from, $proyid);
 
@@ -128,57 +127,62 @@ if (isset($proyecto->miembrosGrupo)) {
 	$provedores= $proyecto->objDatos->providers;
 	
 	foreach ($proyecto->miembrosGrupo as $key => $value) {
-
-	$member = $proyecto->miembrosGrupo[$key];
-	$member->memberid = UserData::getUserMiddlewareId($member->memberid)->idMiddleware;
-	$advanceQuantity='';
-	$settlementQuantity='';
-	$fechaAnticipo='';
-	$fechaLiquidacion='';
-	if(isset($provedores)){
-		foreach ($provedores as $indice =>$valor){
-			if($valor->providerId == $member->memberid) {
-				$advanceQuantity = $valor->advanceQuantity ;
-				$settlementQuantity = $valor->settlementQuantity ;
-				$fechaAnticipo = $valor->advanceDate ;
-				$fechaLiquidacion = $valor->settlementDate ;
+		$member 			= $proyecto->miembrosGrupo[$key];
+		$member->memberid 	= UserData::getUserMiddlewareId($member->memberid)->idMiddleware;
+		$advanceQuantity	= '';
+		$settlementQuantity	= '';
+		$fechaAnticipo		= '';
+		$fechaLiquidacion	= '';
+		
+		if(isset($provedores)){
+			foreach ($provedores as $indice =>$valor){
+				if($valor->providerId == $member->memberid) {
+					$advanceQuantity 	= $valor->advanceQuantity ;
+					$settlementQuantity = $valor->settlementQuantity ;
+					$fechaAnticipo 		= $valor->advanceDate ;
+					$fechaLiquidacion 	= $valor->settlementDate ;
+				}
 			}
 		}
-	}
-
-	$html = '<div class="inputs '. $member->memberid .'">
-			<div class="nombre">
-			<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
-			<span class="total_proveedor">'.JText::_('TOTAL_PROVEEDOR').'</span> = $<span class="number sub_total"></span>
-			</div>
-			<div class="rt-grid-4">
-			<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
-			<input type="hidden" name="providerId" value="'.$member->memberid.'" />
-			<label for="advanceQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
-			<input name="advanceQuantity" type="number" min="1000" id="monto" value="'.$advanceQuantity.'" />
-			<label for="advanceDate">'.JText::_('JDATE').'</label>
-			<select name="advanceDate" id="fecha">'; 
-	foreach ($proyecto->fechasPago as $key => $value) {
-		$selected=($value == $fechaAnticipo ) ? 'selected' : '';
-		$html .= '<option value="'.$value.'" '.$selected.' >'.$value.'</option>';
-	}
-	$html .= '</select>
-			</div>
-			<div class="rt-grid-4">
-			<p>'.JText::_('PROVEEDOR_LIQUIDACION').'</p>
-			<label for="settlementQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
-			<input name="settlementQuantity" type="number" min="1000" id="monto" value="'.$settlementQuantity.'" />
-			<label for="settlementDate">'.JText::_('JDATE').'</label>
-			<select name="settlementDate" id="fecha">';
-	foreach ($proyecto->fechasPago as $key => $value) {
-		$selected=($value == $fechaLiquidacion ) ? 'selected' : '';
-		$html .= '<option value="'.$value.'" '.$selected.' >'.$value.'</option>';
-	}
-	$html .= '</select>
-			</div>
-		<div style="clear: both;"></div>'.
-		'</div>';
-	echo $html;
+	
+		$html = '<div class="inputs '. $member->memberid .'" id="div'. $member->memberid .'">
+				 	<div class="nombre">
+						<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
+						<span class="total_proveedor">'.JText::_('TOTAL_PROVEEDOR').'</span> = $<span class="number sub_total"></span>
+				</div>
+				<div class="rt-grid-4">
+					<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
+					<input type="hidden" name="providerId" value="'.$member->memberid.'" />
+					<label for="advanceQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
+					<input name="advanceQuantity" type="number" min="1000" id="monto" value="'.$advanceQuantity.'" />
+					<label for="advanceDate">'.JText::_('JDATE').'</label>
+					<select name="advanceDate" id="fecha">'; 
+		
+		foreach ($proyecto->fechasPago as $key => $value) {
+			$selected 	= ($value == $fechaAnticipo ) ? 'selected' : '';
+			$html 		.= '<option value="'.$value.'" '.$selected.' >'.$value.'</option>';
+		}
+		
+		$html .= '	</select>
+				</div>
+				<div class="rt-grid-4">
+					<p>'.JText::_('PROVEEDOR_LIQUIDACION').'</p>
+					<label for="settlementQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
+					<input name="settlementQuantity" type="number" min="1000" id="monto" value="'.$settlementQuantity.'" />
+					<label for="settlementDate">'.JText::_('JDATE').'</label>
+					<select name="settlementDate" id="fecha">';
+				
+		foreach ($proyecto->fechasPago as $key => $value) {
+			$selected = ($value == $fechaLiquidacion ) ? 'selected' : '';
+			$html .= '<option value="'.$value.'" '.$selected.' >'.$value.'</option>';
+		}
+		
+		$html .= '	</select>
+				</div>
+				<div style="clear: both;"></div>'.
+			'	</div>';
+			
+		echo $html;
 	}
 }
 ?>
@@ -359,7 +363,7 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 
 			jQuery("#data_send").val(json);
 			
-			jQuery("#proveedores").submit();
+			//jQuery("#proveedores").submit();
 		});
 	});
 </script>
