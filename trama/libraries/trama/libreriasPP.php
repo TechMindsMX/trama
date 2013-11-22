@@ -2,7 +2,7 @@
 	$usuario = JFactory::getUser();
 	$document = JFactory::getDocument();
 	$base = JUri::base();
-	$pathJumi = $base.'/libraries/trama/';
+	$pathJumi = $base.'libraries/trama/';
 	
 	$scriptselect = 'jQuery(function() {
 		jQuery("#subcategoria").chained("#selectCategoria");	
