@@ -194,7 +194,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
    </div>
    
    <script type="text/javascript">
-	var ruta = "components/com_jumi/files/crear_pro/js/raty/img/"
+	var ruta = "libraries/trama/js/raty/img/"
 
 	jQuery(document).ready(function () {
 		jQuery('#calif').raty({
