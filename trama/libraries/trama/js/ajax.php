@@ -1,7 +1,12 @@
 <?php
+if ($_SERVER['SERVER_ADDR'] != 'localhost') {
+	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070');
+} else {
+	define('MIDDLE', 'http://192.168.0.122:7070');
+}
 $fun = is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
+include('../../../configuration.php');
 
-include('../../../includes/defines.php');
 $configuracion = new JConfig;
 $bd = new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
 
@@ -49,7 +54,7 @@ switch ($fun) {
 		break;
 		
 	case 2:
-		$url = MIDDLE.PUERTO."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
+		$url = MIDDLE."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
 		echo file_get_contents($url);
 		break;
 		
