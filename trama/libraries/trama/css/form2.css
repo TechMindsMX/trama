@@ -6,7 +6,7 @@ label {
 input#nomProy, input#nameRecinto, input#searchTextField {
 	width: 100% !important;
 	margin-bottom: 5px;
-	max-width:550px;
+	max-width:535px;
 }
 
 input[type = 'file'], input[type = 'number'], input[type = 'text'], select{

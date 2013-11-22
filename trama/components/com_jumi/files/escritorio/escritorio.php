@@ -64,7 +64,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 </style>
     <body>
         <h1><?php echo JText::_('MI_ESCRITORIO');?></h1>
-      <script type="text/javascript" src="components/com_jumi/files/crear_pro/js/raty/jquery.raty.js"></script>
+      <script type="text/javascript" src="libraries/trama/js/raty/jquery.raty.js"></script>
         
       <div id="contenido">  
 			<section class="ac-container" style="max-width: 100%;">

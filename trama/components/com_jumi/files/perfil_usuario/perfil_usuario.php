@@ -40,7 +40,7 @@ foreach ($proyectos as $key => $value) {
 
 $document->addStyleSheet($pathJumi.'css/style.css');
 ?>
-  <script type="text/javascript" src="components/com_jumi/files/crear_pro/js/raty/jquery.raty.js"></script>
+  <script type="text/javascript" src="libraries/trama/js/raty/jquery.raty.js"></script>
   <div id="contenido">
 	<div class="rt-inner mitad">
 		<section class="ac-container">

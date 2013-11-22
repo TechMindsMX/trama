@@ -1,7 +1,7 @@
 <?php
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "doFict Access Is Not Allowed" );
 	include_once 'utilidades.php';
-	
+	require_once 'libraries/trama/libreriasPP.php';
 	$pathJumi		 	= 'components/com_jumi/files/perfil';
 	$datosgenerales 	= new getDatosObj;
 	$usuario 			= JFactory::getUser();
@@ -24,13 +24,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Registro de Perfil</title>
-	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>	
-	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/form.css" type="text/css"/>
-
-	<script src="<?php echo $pathJumi ?>/js/misjs.js" type="text/javascript"></script>
-	<script src="<?php echo $pathJumi ?>/js/jquery.js" type="text/javascript"></script>    
-	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
-	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+	
 
 	<script>
 		jQuery(document).ready(function(){

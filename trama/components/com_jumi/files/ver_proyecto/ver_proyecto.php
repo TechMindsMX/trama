@@ -17,7 +17,8 @@
 	jimport('trama.jfactoryext');
 	jimport('trama.usuario_class');
 	jimport('trama.error_class');
-
+	
+	
 	// chequeamos si el usuario es Special
 	$isSpecial = '';
 	$grupos = new JFactoryExtended;
@@ -41,7 +42,7 @@
 ?> 
 
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
-<script type="text/javascript" src="components/com_jumi/files/crear_pro/js/raty/jquery.raty.js"></script>
+<script type="text/javascript" src="libraries/trama/js/raty/jquery.raty.js"></script>
 <script type="text/javascript" src="libraries/trama/js/jquery.number.min.js"></script>
 
 <?php
@@ -579,7 +580,7 @@ function codeAddress() {
 	 }
 	 
 		$(document).ready(function() {
-			var ruta = "components/com_jumi/files/crear_pro/js/raty/img/"
+			var ruta = "libraries/trama/js/raty/img/"
 			$('#rating').raty({
 				click: function(score, evt) {
 					var request = $.ajax({

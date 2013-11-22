@@ -12,7 +12,7 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed
 jimport('trama.class');
 jimport('trama.usuario_class');
 jimport('trama.error_class');
-require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
+require_once 'libraries/trama/libreriasPP.php';
 require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
 
 validacionFiscal($usuario);

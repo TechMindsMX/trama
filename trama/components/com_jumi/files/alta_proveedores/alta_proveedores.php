@@ -8,7 +8,7 @@ $usuario 	= JFactory::getUser();
 $doc 		= JFactory::getDocument();
 $proyecto 	= new AltaProveedores;
 $path 		= 'components/com_jumi/files/alta_proveedores/';
-require_once 'components/com_jumi/files/crear_pro/classIncludes/libreriasPP.php';
+require_once 'libraries/trama/libreriasPP.php';
 $doc->addStyleSheet($path.'alta_proveedores.css');
 
 $proveedores 			= $proyecto->objDatos->providers;
