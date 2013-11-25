@@ -92,6 +92,13 @@ class AltaProveedores {
 			$db -> setQuery($query2);
 			$results2 = $db -> loadObjectList();
 
+			foreach ($results2 as $key => $value) {
+				if( $this->usuario->id == $value->memberid ) {
+					unset($results2[$key]);
+					array_unshift($results2, $value);
+				}
+			}
+			
 			$this->miembrosGrupo = $results2;
 		}
 	}
@@ -191,15 +198,46 @@ if (isset($proyecto->miembrosGrupo)) {
 	</form>
 
 <script type="text/javascript">
-function noboton(){
-	var totalpro	= parseFloat( jQuery('#agregados').children('span.total1').text());
-	var budgetphp	= parseInt(<?php echo $proyecto -> objDatos -> budget;?>);
-	
-	console.log(totalpro , budgetphp);
-	if (totalpro != budgetphp){
-		alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
-	}				
-}
+	function suma (campo){
+			jQuery('.inputs').each(function(){
+			    var aaa = 0;
+			    jQuery(jQuery(this).find('input[type="number"]')).each(function() {
+			       aaa += parseFloat(jQuery(this).val());
+			    });
+			   	
+			   	if( isNaN(aaa) ) {
+			   		aaa = 0
+			   	}
+			   	
+			   	jQuery(this).find('.sub_total').text(aaa);
+			});
+
+			sumatotal();
+		}
+
+		function sumatotal (){
+			var total = 0 ;
+			jQuery('#agregados').find('input[type="number"]').each(function() {
+				total += parseInt(jQuery(this).val()) || 0;
+			});
+			this.total = total;
+			
+			console.log(this.total)
+			jQuery('#agregados').children('span.total1').html('<span class="number">'+total+'</span>');
+			
+		}
+		
+		function noboton(){
+			var totalpro	= parseFloat( jQuery('#agregados').children('span.total1').text());
+			var totalpro	= new sumatotal();
+			var budgetphp	= parseInt(<?php echo $proyecto -> objDatos -> budget;?>);
+			
+			console.log(totalpro);
+			if (totalpro.total != budgetphp){
+				alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
+			}				
+		}
+		
 	jQuery(document).ready(function() {
 		suma();
 		jQuery("#agregados").validationEngine();
@@ -239,32 +277,6 @@ function noboton(){
 			formatoNumero();
 		});
 
-		function suma (campo){
-			jQuery('.inputs').each(function(){
-			    var aaa = 0;
-			    jQuery(jQuery(this).find('input[type="number"]')).each(function() {
-			       aaa += parseFloat(jQuery(this).val());
-			    });
-			   	
-			   	if( isNaN(aaa) ) {
-			   		aaa = 0
-			   	}
-			   	
-			   	jQuery(this).find('.sub_total').text(aaa);
-			});
-
-			sumatotal();
-		}
-
-		function sumatotal (){
-			var total = 0 ;
-			jQuery('#agregados').find('input[type="number"]').each(function() {
-				total += parseInt(jQuery(this).val()) || 0;
-			});
-			jQuery('#agregados').children('span.total1').html('<span class="number">'+total+'</span>');
-			
-			}
-		
 		$('select').change(function(){
 	        if(this.name == 'advanceDate') {
 	        	var date1 = $(this).val().split('-');
