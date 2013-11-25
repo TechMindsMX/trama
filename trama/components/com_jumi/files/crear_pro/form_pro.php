@@ -152,6 +152,7 @@ errorClass::manejoError($errorCode, $from, $proyid);
 					if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
 						if( jQuery('#status').val() == 0 ) {
 							jQuery('#status').val(9);
+							jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
 						} else if( jQuery('#status').val() == 2 ){
 							jQuery('#status').val(3);
 						}
