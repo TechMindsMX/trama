@@ -27,7 +27,6 @@ $errorCode		 		= $input->get("error",0,"int");
 $from		 			= $input->get("from",0,"int");
 $datosObj 				= JTrama::getDatos($proyid);
 //SIMULACION DE DATO FAVOR DE QUITAR FOCA PENDEJA
-$datosObj->eventCode	= "";
 $ligaPro				= '';
 $ligaCostosVariable		= '';
 $comentarios			= '';
@@ -70,9 +69,9 @@ JHtml::_('behavior.modal');
 				}
 				
 				if(empty($datosObj->providers)){
-					$mensaje = JText::_('ALTA_PROVEEDPORES');
+					$mensaje = JText::_('ALTA_PROVEEDORES');
 				} else {
-					$mensaje = JText::_('EDITAR_PROVEEDPORES');
+					$mensaje = JText::_('EDITAR_PROVEEDORES');
 				}
 				$ligaEditProveedores = '<span class="liga">
 											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
@@ -144,6 +143,7 @@ JHtml::_('behavior.modal');
 				echo 'jQuery("#seccion2").val("'.$datosObj->projectUnitSales[0]->section.'");';
 				echo 'jQuery("#unidad2").val("'.$datosObj->projectUnitSales[0]->unitSale.'");';
 				echo 'jQuery("#inventario2").val("'.$datosObj->projectUnitSales[0]->unit.'");';
+				echo 'jQuery("#codeSection2").val("'.$datosObj->projectUnitSales[0]->codeSection.'");';
 			}
 			
 			echo 'jQuery("#productionStartDate").val("'.$datosObj->productionStartDate.'");';
@@ -334,7 +334,7 @@ JHtml::_('behavior.modal');
 				id="presupuesto"
 				name="budget" /> 
 			<br /> 
-			<label for="event_code"><?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:</label> 
+			<label for="event_code"><?php echo JText::_('CODIGO_EVENTO_TM'); ?>:</label> 
 			<input 
 				type="text" 
 				class="validate[custom[eventCode]]"
@@ -371,7 +371,7 @@ JHtml::_('behavior.modal');
 				name="capacity_N"> 
 			<br />
 			
-			<label for="inventario"><?php echo JText::_('SECTION_CODE'); ?>*:</label>
+			<label for="inventario"><?php echo JText::_('SECTION_CODE'); ?>:</label>
 			<input 
 				type="text"
 				id="codeSection2" 
@@ -390,7 +390,7 @@ JHtml::_('behavior.modal');
 				$valorSection = isset($datosObj) ? $datosObj->projectUnitSales[$i]->section : '';
 				$valorUnitSales = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unitSale : '';
 				$valorCapacity = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unit : '';
-				$sectionCode = '';
+				$sectionCode = isset($datosObj) ? $datosObj->projectUnitSales[$i]->codeSection : '';;
 				
 				$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('SECCION').'*:</label>';
 				$unitsales .= '<input'; 
