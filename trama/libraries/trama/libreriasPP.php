@@ -11,12 +11,13 @@
 	$document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
 	$document->addStyleSheet($pathJumi.'css/form2.css');
 	$document->addStyleSheet($pathJumi.'css/form.css');
-if(isset($libreriaGoogle)){
-	echo '<script src="'.$pathJumi.'js/maps.js"> </script>';
-}
-if(isset($libreriaAgregar)){
-	echo '<script src="'.$pathJumi.'js/agregar.js"> </script>';
-}
+	
+	if(isset($libreriaGoogle)){
+		echo '<script src="'.$pathJumi.'js/maps.js"> </script>';
+	}
+	if(isset($libreriaAgregar)){
+		echo '<script src="'.$pathJumi.'js/agregar.js"> </script>';
+	}
 	
 	echo '<script src="'.$pathJumi.'js/misjs.js"> </script>';
 	echo '<script src="'.$pathJumi.'js/mas.js"> </script>';

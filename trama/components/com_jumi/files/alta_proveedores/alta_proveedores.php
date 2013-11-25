@@ -8,7 +8,9 @@ $usuario 	= JFactory::getUser();
 $doc 		= JFactory::getDocument();
 $proyecto 	= new AltaProveedores;
 $path 		= 'components/com_jumi/files/alta_proveedores/';
+
 require_once 'libraries/trama/libreriasPP.php';
+
 $doc->addStyleSheet($path.'alta_proveedores.css');
 
 $proveedores 			= $proyecto->objDatos->providers;
@@ -190,11 +192,12 @@ if (isset($proyecto->miembrosGrupo)) {
 
 <script type="text/javascript">
 function noboton(){
-	var totalpro	= parseInt( jQuery('#agregados').children('span.total').text());
+	var totalpro	= parseFloat( jQuery('#agregados').children('span.total1').text());
 	var budgetphp	= parseInt(<?php echo $proyecto -> objDatos -> budget;?>);
 	
+	console.log(totalpro , budgetphp);
 	if (totalpro != budgetphp){
-alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
+		alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 	}				
 }
 	jQuery(document).ready(function() {
@@ -339,31 +342,41 @@ alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 		jQuery("#guardar").click(function (){
 
 			noboton();
+var suma = 0;
+var budget = parseFloat(<?php echo $proyecto -> objDatos -> budget; ?>) * .2;
 
-			jQuery('#agregados').find('input[type="number"]').each(function() {
-			    if (jQuery(this).val() == '' ) {
-			    var parent = jQuery(this).parent().parent();
-			        jQuery(parent).remove();
-			    }
-			});
-			
-			var count = 0;
-			data = {};
-			dataArray = new Array();
-			jQuery.each(jQuery("#agregados").serializeArray(), function () {
-				data[this.name] = this.value;
-				if (this.name == 'settlementDate') {
-					dataArray[count] = JSON.stringify(data) ;
-					count++;
-				}
-			});
-			json = dataArray.join(",");
-			
-			json = '{"projectProviders":[' + json + ']}';
+jQuery('#div<?php echo UserData::getUserMiddlewareId($usuario->id)->idMiddleware; ?>').find('input[type="number"]').each(function(){
+	suma += parseFloat(jQuery(this).val()); 
+});
 
-			jQuery("#data_send").val(json);
-			
-			//jQuery("#proveedores").submit();
+		if(suma <= budget){
+				jQuery('#agregados').find('input[type="number"]').each(function() {
+				    if (jQuery(this).val() == '' ) {
+					    var parent = jQuery(this).parent().parent();
+				        jQuery(parent).remove();
+				    }
+				});
+				
+				var count = 0;
+				data = {};
+				dataArray = new Array();
+				jQuery.each(jQuery("#agregados").serializeArray(), function () {
+					data[this.name] = this.value;
+					if (this.name == 'settlementDate') {
+						dataArray[count] = JSON.stringify(data) ;
+						count++;
+					}
+				});
+				json = dataArray.join(",");
+				
+				json = '{"projectProviders":[' + json + ']}';
+	
+				jQuery("#data_send").val(json);
+				
+				//jQuery("#proveedores").submit();
+			} else {
+				alert('El pago al proveedor no puede ser mayor al 20%');
+			}
 		});
 	});
 </script>
