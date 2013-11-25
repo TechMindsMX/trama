@@ -328,9 +328,9 @@ if (isset($proyecto->miembrosGrupo)) {
 					}
 			
 					if(empty($datosObj->providers)){
-						$mensaje = JText::_('ALTA_PROVEEDPORES');
+						$mensaje = JText::_('ALTA_PROVEEDOORES');
 					} else {
-						$mensaje = JText::_('EDITAR_PROVEEDPORES');
+						$mensaje = JText::_('EDITAR_PROVEEDOORES');
 					}
 					$ligaEditProveedores = '<span class="liga">
 											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
