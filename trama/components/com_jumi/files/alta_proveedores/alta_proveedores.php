@@ -373,7 +373,7 @@ jQuery('#div<?php echo UserData::getUserMiddlewareId($usuario->id)->idMiddleware
 	
 				jQuery("#data_send").val(json);
 				
-				//jQuery("#proveedores").submit();
+				jQuery("#proveedores").submit();
 			} else {
 				alert('El pago al proveedor no puede ser mayor al 20%');
 			}
