@@ -97,7 +97,7 @@ class AltaProveedores {
 	}
 	
 	public function fechas() {
-		$startDate = $this -> objDatos -> productionStartDate;
+		$startDate = isset($this -> objDatos -> productionStartDate) ? $this -> objDatos -> productionStartDate: date('d-m-Y');
 		$endDate = $this -> objDatos -> premiereStartDate;
 		for ($i = strtotime($startDate); $i <= strtotime($endDate); $i = strtotime('+1 day', $i)) {
 		  if (date('N', $i) == $this -> diaPagoProveedores ) 
@@ -245,7 +245,12 @@ function noboton(){
 			    jQuery(jQuery(this).find('input[type="number"]')).each(function() {
 			       aaa += parseFloat(jQuery(this).val());
 			    });
-			    jQuery(this).find('.sub_total').text(aaa);
+			   	
+			   	if( isNaN(aaa) ) {
+			   		aaa = 0
+			   	}
+			   	
+			   	jQuery(this).find('.sub_total').text(aaa);
 			});
 
 			sumatotal();
