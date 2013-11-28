@@ -71,9 +71,9 @@ errorClass::manejoError($errorCode, $from, $proyid);
 				}
 				
 				if(empty($datosObj->providers)){
-					$mensaje = JText::_('ALTA_PROVEEDOORES');
+					$mensaje = JText::_('ALTA_PROVEEDORES');
 				} else {
-					$mensaje = JText::_('EDITAR_PROVEEDOORES');
+					$mensaje = JText::_('EDITAR_PROVEEDORES');
 				}
 				$ligaEditProveedores = '<span class="liga">
 											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
