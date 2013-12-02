@@ -233,35 +233,41 @@ JHtml::_('behavior.modal');
 			jQuery('#token').val('<?php echo $token;?>');
 			
 			if (!repetidos){
-				//jQuery("#form2").submit();
+				jQuery("#form2").submit();
 			}
 		});
 		
 		jQuery('#reqCode').change(function(){
-			
-			jQuery('[id^="codeSection"]').prop('disabled', false)
-			
-			if(this.checked){
-				jQuery('.eventCodeReq').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:');
-				jQuery('.eventCodeReq').next().addClass('validate[required,custom[eventCode]]');
-				jQuery('.eventCodeReq').next().prop('disabled', false);
-				
-				jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:');
-				jQuery('.obligatorioCodeSeccion').next().addClass('validate[required,custom[onlyLetterNumber]]');
-				jQuery('[id^="codeSection"]').prop('disabled', false);
-			}else{
-				jQuery('.eventCodeReq').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>:');
-				jQuery('.eventCodeReq').next('.formError').remove();
-				jQuery('.eventCodeReq').next().removeClass();
-				jQuery('.eventCodeReq').next().attr('disabled', 'disabled');
-				
-				jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>:');
-				jQuery('.obligatorioCodeSeccion').next('.formError').remove();
-				jQuery('.obligatorioCodeSeccion').next('').removeClass();
-				jQuery('[id^="codeSection"]').attr('disabled', 'disabled');
-			}
+			regCodeChk(this);
 		});
+		
+	function regCodeChk(obj){
+		jQuery('[id^="codeSection"]').prop('disabled', false);
+
+		if( jQuery(obj).prop('checked') ){
+			jQuery('.eventCodeReq').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:');
+			jQuery('.eventCodeReq').next().addClass('validate[required,custom[eventCode]]');
+			jQuery('.eventCodeReq').next().prop('disabled', false);
+			
+			jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:');
+			jQuery('.obligatorioCodeSeccion').next().addClass('validate[required,custom[onlyLetterNumber]]');
+			jQuery('[id^="codeSection"]').prop('disabled', false);
+		}else{
+			jQuery('.eventCodeReq').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>:');
+			jQuery('.eventCodeReq').next('.formError').remove();
+			jQuery('.eventCodeReq').next().removeClass();
+			jQuery('.eventCodeReq').next().attr('disabled', 'disabled');
+			
+			jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>:');
+			jQuery('.obligatorioCodeSeccion').next('.formError').remove();
+			jQuery('.obligatorioCodeSeccion').next('').removeClass();
+			jQuery('[id^="codeSection"]').attr('disabled', 'disabled');
+		}
+	}
+
+	regCodeChk(jQuery('#reqCode'));
 	});
+
 </script>
 
 <div style="margin-left:15px;"><h1><?php echo $titulo; ?></h1></div>
