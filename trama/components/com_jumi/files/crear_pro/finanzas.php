@@ -233,7 +233,32 @@ JHtml::_('behavior.modal');
 			jQuery('#token').val('<?php echo $token;?>');
 			
 			if (!repetidos){
-				jQuery("#form2").submit();
+				//jQuery("#form2").submit();
+			}
+		});
+		
+		jQuery('#reqCode').change(function(){
+			
+			jQuery('[id^="codeSection"]').prop('disabled', false)
+			
+			if(this.checked){
+				jQuery('.eventCodeReq').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:');
+				jQuery('.eventCodeReq').next().addClass('validate[required,custom[eventCode]]');
+				jQuery('.eventCodeReq').next().prop('disabled', false);
+				
+				jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:');
+				jQuery('.obligatorioCodeSeccion').next().addClass('validate[required,custom[onlyLetterNumber]]');
+				jQuery('[id^="codeSection"]').prop('disabled', false);
+			}else{
+				jQuery('.eventCodeReq').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>:');
+				jQuery('.eventCodeReq').next('.formError').remove();
+				jQuery('.eventCodeReq').next().removeClass();
+				jQuery('.eventCodeReq').next().attr('disabled', 'disabled');
+				
+				jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>:');
+				jQuery('.obligatorioCodeSeccion').next('.formError').remove();
+				jQuery('.obligatorioCodeSeccion').next('').removeClass();
+				jQuery('[id^="codeSection"]').attr('disabled', 'disabled');
 			}
 		});
 	});
@@ -281,12 +306,12 @@ JHtml::_('behavior.modal');
 			value=""
 			name="capacity0"> 
 		<br /> 
-		<label for=""><?php echo JText::_('SECTION_CODE'); ?>:</label> 
+		<label class="obligatorioCodeSeccion" for=""><?php echo JText::_('SECTION_CODE'); ?>:</label> 
 		<input 
 			type="text" 
-			class="validate[custom[sectionCode]]" 
+			class="" 
 			value=""
-			name="codeSection0"> 
+			name="codeSection0" /> 
 		<br /> 
 		
 		<input 
@@ -334,10 +359,20 @@ JHtml::_('behavior.modal');
 				id="presupuesto"
 				name="budget" /> 
 			<br /> 
-			<label for="event_code"><?php echo JText::_('CODIGO_EVENTO_TM'); ?>:</label> 
+			<label for="reqCode"><?php echo JText::_('CODIGO_EVENTO_REQ'); ?>:</label> 
+			<input 
+				type="checkbox" 
+				class=""
+				checked="checked"
+				id="reqCode"
+				name="" /> 
+			<br />
+			<br /> 
+			
+			<label class="eventCodeReq" for="event_code"><?php echo JText::_('CODIGO_EVENTO_TM'); ?>:</label> 
 			<input 
 				type="text" 
-				class="validate[custom[eventCode]]"
+				class=""
 				id="event_code"
 				name="eventCode" /> 
 			<br /> 
@@ -371,11 +406,11 @@ JHtml::_('behavior.modal');
 				name="capacity_N"> 
 			<br />
 			
-			<label for="inventario"><?php echo JText::_('SECTION_CODE'); ?>:</label>
+			<label class="obligatorioCodeSeccion" for="inventario"><?php echo JText::_('SECTION_CODE'); ?>:</label>
 			<input 
 				type="text"
 				id="codeSection2" 
-				class="validate[custom[sectionCode]]"
+				class=""
 				name="codeSection2"> 
 			<br />
 			<br />
@@ -419,11 +454,11 @@ JHtml::_('behavior.modal');
 				$unitsales .= '		name = "capacity_E'.$i.'" />'; 
 				$unitsales .= '	<br />';
 				
-				$unitsales .= '	<label for="codeSection_E'.$i.'">'.JText::_('SECTION_CODE').'*:</label>';
+				$unitsales .= '	<label class="obligatorioCodeSeccion" for="codeSection_E'.$i.'">'.JText::_('SECTION_CODE').':</label>';
 				$unitsales .= '	<input ';
 				$unitsales .= '		type="text" ';
 				$unitsales .= '		id="codeSection_E'.$i.'" ';
-				$unitsales .= '		class="validate[custom[sectionCode]]"';
+				$unitsales .= '		class=""';
 				$unitsales .= '		value="'.$sectionCode.'"';
 				$unitsales .= '		name = "codeSection_E'.$i.'" />';
 				$unitsales .= '	<br> ';
