@@ -18,6 +18,7 @@
 	jimport('trama.usuario_class');
 	jimport('trama.error_class');
 	
+	$usuario->idMiddleware = ( $usuario->id != 0 ) ? UserData::getUserMiddlewareId($usuario->id)->idMiddleware : null;
 	
 	// chequeamos si el usuario es Special
 	$isSpecial = '';
@@ -589,7 +590,7 @@ function codeAddress() {
 							"score": score,
 							"projectId": "<?php echo $proyecto; ?>",
 							"token": "<?php echo JTrama::token(); ?>",
-							"userId": <?php echo $usuario->id; ?>
+							"userId": <?php echo $usuario->idMiddleware; ?>
 						},
 						type: 'post'
 					});
