@@ -228,7 +228,12 @@ JHtml::_('behavior.modal');
 			jQuery("#seccion").val(section.join(","));
 			jQuery("#unidad").val(unitSale.join(","));
 			jQuery("#inventario").val(capacity.join(","));
-			jQuery("#codeSection").val(codeSection.join(","));
+			if( jQuery('#reqCode').prop('checked') ){
+				jQuery("#codeSection").val(codeSection.join(","));
+			} else {
+				jQuery("#codeSection").prop('disabled', false);
+				jQuery("#codeSection").val('');
+			}
 			
 			jQuery('#token').val('<?php echo $token;?>');
 			
