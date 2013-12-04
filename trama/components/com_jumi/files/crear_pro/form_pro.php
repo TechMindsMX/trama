@@ -15,7 +15,7 @@ jimport('trama.usuario_class');
 jimport('trama.error_class');
 $libreriaGoogle= true;
 require_once 'libraries/trama/libreriasPP.php';
-require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
+require_once 'components/com_jumi/files/libreriasPHP/validacionFiscal.php';
 JHtml::_('behavior.modal');
 
 validacionFiscal($usuario);

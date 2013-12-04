@@ -13,7 +13,7 @@ jimport('trama.class');
 jimport('trama.usuario_class');
 jimport('trama.error_class');
 require_once 'libraries/trama/libreriasPP.php';
-require_once 'components/com_jumi/files/crear_pro/classIncludes/validacionFiscal.php';
+require_once 'components/com_jumi/files/libreriasPHP/validacionFiscal.php';
 
 validacionFiscal($usuario);
 
@@ -43,7 +43,7 @@ JHtml::_('behavior.modal');
 		
 		<?php
 		if( !is_null($datosObj) ) {
-			require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
+			require_once 'components/com_jumi/files/libreriasPHP/proyectGroup.php';
 			
 			$callback .= $datosObj->id;
 			$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
