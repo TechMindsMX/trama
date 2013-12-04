@@ -25,7 +25,6 @@
 	echo '<script src="'.$pathJumi.'js/jquery.validationEngine-es.js"> </script>';
 	echo '<script src="'.$pathJumi.'js/jquery.validationEngine.js"> </script>';
 	echo '<script src="'.$pathJumi.'js/jquery.MultiFile.js"> </script>';
-	echo '<script src="'.$pathJumi.'js/jquery.MultiFile2.js"> </script>';
 	echo '<script src="'.$pathJumi.'js/jquery.chained.js"> </script>';
 	$document->addScriptDeclaration($scriptselect);
 ?>

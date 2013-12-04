@@ -258,7 +258,12 @@
           
           // Hide this element (NB: display:none is evil!)
           $(this).css({ position:'absolute', top: '-3000px' });
-          
+
+// CAMBIO RICARDO
+var nombre = 'photo'+ slave_count;   
+$(this).attr('name', nombre);
+// FIN CAMBIO RICARDO
+
           // Add new element to the form
           slave.after(newEle);
           
@@ -600,7 +605,4 @@ $('#imagenes input').click(function () {
 /*# AVOID COLLISIONS #*/
 })(jQuery);
 
-function deshabilita (elemento) {
-	console.log('algo');
-}
 /*# AVOID COLLISIONS #*/
