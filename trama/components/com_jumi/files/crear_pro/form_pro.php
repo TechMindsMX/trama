@@ -43,7 +43,7 @@ $codeSection			= '';
 errorClass::manejoError($errorCode, $from, $proyid);
 
 $action = 'index.php?option=com_jumi&view=application&fileid=31';
-var_dump($datosObj);
+
 ?>
 <script>
 	emptyKeys();
@@ -55,6 +55,8 @@ var_dump($datosObj);
 		if( !is_null($datosObj) ) {
 			JTrama::isEditable($datosObj, $userMiddleId->idMiddleware);
 			$callback .= $proyid;
+			
+			$countImgs = $countImgs - count($datosObj->projectPhotos);
 			
 			$count = 0;
 			foreach ($datosObj->logs as $key => $value) {
@@ -109,12 +111,14 @@ var_dump($datosObj);
 
 			echo 'emptyKeys();';
 			echo 'jQuery("#camposHidden").append(\'<input type="hidden" value="'.$datosObj->id.'" name="id" />\');';
+			echo 'jQuery("#avatarSave").val("'.$datosObj->avatar.'");';
+			echo 'jQuery("#bannerSave").val("'.$datosObj->banner.'");';
 			echo 'jQuery("#status").val('.$datosObj->status.');';
 			echo 'jQuery("#nomProy").val("'.$datosObj->name.'");';
 			echo 'jQuery("#selectCategoria").val('.$categoriaJS.').trigger("click").trigger("change");';
 			echo 'jQuery("#subcategoria").val('.$datosObj->subcategory.').trigger("click").trigger("change");';
-			echo 'jQuery("#miniaturaBanner").html(\'<img src="'.$datosObj->banner.'" width="100" />\');';
-			echo 'jQuery("#miniaturaAvatar").html(\'<img src="'.$datosObj->avatar.'" width="100" />\');';
+			echo 'jQuery("#miniaturaBanner").html(\'<img src="'.BANNER.'/'.$datosObj->banner.'" width="100" />\');';
+			echo 'jQuery("#miniaturaAvatar").html(\'<img src="'.AVATAR.'/'.$datosObj->avatar.'" width="100" />\');';
 			echo 'jQuery("#url").val("'.$datosObj->url.'");';
 			
 			foreach ($datosObj->projectVideos as $key => $value) {
@@ -143,9 +147,19 @@ var_dump($datosObj);
 		?>
 		
 		jQuery("#guardar, #revision").click(function (){
-			var form = jQuery("#form2")[0];
-			var total = form.length;
-	
+			var photos = new Array();
+			var count = 0;
+
+			jQuery('[name ^= "photoids_"]').each(function(){
+			    if ( jQuery(this).prop('checked') ){
+			        photos[count] = jQuery(this).val();
+			        count++;
+			    } 
+			});
+			
+			
+			jQuery('#projectPhotosIds').val( photos.join(',') );
+
 			if( this.id == 'revision' ) {
 				var breakcapt = parseInt(breakeven);
 				var breakcalc = parseInt(breakevencalc);
@@ -178,6 +192,7 @@ var_dump($datosObj);
 					jQuery('#status').val(<?php echo $status_pro; ?>);
 				}
 			}
+			
 			jQuery("#form2").submit();
 		});
 	});
@@ -240,6 +255,18 @@ var_dump($datosObj);
 				value="<?php echo $type; ?>"
 				name="type"
 				id="type" />
+				
+			<input
+				type="hidden"
+				value=""
+				name="avatarSave"
+				id="avatarSave" />
+				
+			<input
+				type="hidden"
+				value=""
+				name="bannerSave"
+				id="bannerSave" />
 		</span>
 		
 		<label for="nomProy"><?php echo JText::_('NOMBRE').' '.$textPro; ?>*:</label>
@@ -407,9 +434,9 @@ var_dump($datosObj);
 							id = "photosids"
 							name = "photoids_'.$value->id.'"  
 							class="projectPhotosIds" 
-							value="'.$value->id.'" 
+							value="'.$value->url.'" 
 							checked="checked" />
-							<img alt="'.$datosObj->name.'" src="'.$value->url.'" width="100" /><br /><br />';
+							<img alt="'.$datosObj->name.'" src="'.PHOTO.'/'.$value->url.'" width="100" /><br /><br />';
 				}
 				
 				echo '</div>';

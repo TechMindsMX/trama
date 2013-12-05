@@ -15,44 +15,56 @@ if ($usuario->guest == 1) {
 $imagen 			= new manejoImagenes;
 $envio 				= $app->input->getArray($_POST);
 $envio['token'] 	= JTrama::token();
-var_dump($envio);exit;
-
 
 foreach ($_FILES as $key => $value) {
-	$fileName = explode(' ', microtime());
-	$fileName = str_replace('.', '', $fileName[1].$fileName[0]);
-
-	if( $_FILES[$key]['type'] == 'image/png' ){
-		$tipo = 'png';	
-	}elseif( $_FILES[$key]['type'] == 'image/jpg' || $_FILES[$key]['type'] == 'image/jpeg' ){
-		$tipo = 'jpg';
-	}elseif( $_FILES[$key]['type'] == 'image/gif' ){
-		$tipo = 'gif';
-	}
-
-	if($key == 'banner'){
-		$alto 		= 655; 
-		$ancho	 	= 1165;
-		$ruta		= 'images/imgs/banner/';
-		$banner 	= $fileName.'.jpg';
-	} elseif($key == 'avatar'){
-		$alto 		= 454;
-		$ancho 		= 454;
-		$ruta		= 'images/imgs/avatar/';
-		$avatar 	= $fileName.'.jpg';
-	} else{
-		$alto 		= 700;
-		$ancho 		= 1165;
-		$ruta		= 'images/imgs/photo/';
-		$archivos[] = $fileName.'.jpg';
-	}
+	if($_FILES[$key]['error'] != 4){
+		$fileName = explode(' ', microtime());
+		$fileName = str_replace('.', '', $fileName[1].$fileName[0]);
 	
-	$imagen->resize($_FILES[$key]['tmp_name'], $ruta, $tipo, $fileName.'.', $ancho, $alto);
+		if( $_FILES[$key]['type'] == 'image/png' ){
+			$tipo = 'png';	
+		}elseif( $_FILES[$key]['type'] == 'image/jpg' || $_FILES[$key]['type'] == 'image/jpeg' ){
+			$tipo = 'jpg';
+		}elseif( $_FILES[$key]['type'] == 'image/gif' ){
+			$tipo = 'gif';
+		}
+	
+		if($key == 'banner'){
+			$alto 				= 655; 
+			$ancho	 			= 1165;
+			$ruta				= BANNER.'/';
+			$envio['banner'] 	= $fileName.'.jpg';
+		} elseif($key == 'avatar'){
+			$alto 				= 454;
+			$ancho 				= 454;
+			$ruta				= AVATAR.'/';
+			$envio['avatar'] 	= $fileName.'.jpg';
+		} else{
+			$alto 				= 700;
+			$ancho 				= 1165;
+			$ruta				= PHOTO.'/';
+			$archivos[] 		= $fileName.'.jpg';
+		}		
+		$imagen->resize($_FILES[$key]['tmp_name'], $ruta, $tipo, $fileName.'.', $ancho, $alto);
+	}else{
+		if( $envio['bannerSave'] != '' && $_FILES['banner']['error'] != 0 ){
+			$envio['banner'] = $envio['bannerSave'];
+			$envio['bannerSave'] = '';
+		}
+		
+		if( $envio['avatarSave'] != '' && $_FILES['avatar']['error'] != 0 ){
+			$envio['avatar'] = $envio['avatarSave'];
+			$envio['avatarSave'] = '';
+		}
+		
+		if( $envio['projectPhotosIds'] != ''){
+			$archivos[] = $envio['projectPhotosIds'];
+			$envio['projectPhotosIds'] = '';
+		}
+	}
 }
 $images = join(',', $archivos);
 
-$envio['banner'] 	= $banner;
-$envio['avatar'] 	= $avatar;
 $envio['photos'] 	= $images;
 
 $ch					= curl_init($envio['callback']);
@@ -69,5 +81,10 @@ curl_close ($ch);
 
 $respuesta = json_decode($server_output);
 
+var_dump(JTrama::getDatos($respuesta->response));
+
+if( isset($envio['id']) ){
+	$respuesta = '';
+}
 $app->redirect($envio['callback'].$respuesta->response, 'Datos almacenados correctamente', 'message');
 ?>
