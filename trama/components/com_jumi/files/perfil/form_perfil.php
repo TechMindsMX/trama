@@ -3,6 +3,13 @@
 	include_once 'utilidades.php';
 	require_once 'libraries/trama/libreriasPP.php';
 	$usuario =& JFactory::getUser();
+$app = JFactory::getApplication();
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
+	$url    = 'index.php?option=com_users&view=login';
+	$url   .= '&return='.base64_encode($return);
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+}
 	$getdatos = new getDatosObj;
 	$tipoUsuario = 1;
  	$pathJumi = 'components/com_jumi/files/perfil';
@@ -15,6 +22,7 @@
 		$telefono = $getdatos->telefono($generales->id);
 		$direccion = $getdatos->domicilio($generales->id, $tipoUsuario);
 	}
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -70,15 +78,17 @@
 						}
 					}
  					
- 					echo "jQuery('#dire_nomCalle').val('".$direccion->nomCalle."');\n";
- 					echo "jQuery('#dire_noExterior').val('".$direccion->noExterior."');\n";
- 					echo "jQuery('#dire_noInterior').val('".$direccion->noInterior."');\n";
-  					echo "jQuery('#dire_nomColonias').append(new Option('".$direccion->perfil_colonias_idcolonias."', '".$direccion->perfil_colonias_idcolonias."'));\n";
-  					echo "jQuery('#dire_nomEstado').append(new Option('".$direccion->perfil_estado_idestado."', '".$direccion->perfil_estado_idestado."'));\n";
- 					echo "jQuery('#dire_iniCodigoPostal').val('".$direccion->perfil_codigoPostal_idcodigoPostal."');\n";
- 					echo "jQuery('#dire_nomDelegacion').val('".$direccion->perfil_delegacion_iddelegacion."');\n";
- 					echo "jQuery('#dire_nomPais').val('".$direccion->perfil_pais_idpais."');\n";
- 					echo "jQuery('input[name=daGr_perfil_personalidadJuridica_idpersonalidadJuridica][value=".$generales->perfil_personalidadJuridica_idpersonalidadJuridica."]').attr('checked', true);\n";
+					if (!is_null($direccion)) {
+	 					echo "jQuery('#dire_nomCalle').val('".$direccion->nomCalle."');\n";
+	 					echo "jQuery('#dire_noExterior').val('".$direccion->noExterior."');\n";
+	 					echo "jQuery('#dire_noInterior').val('".$direccion->noInterior."');\n";
+	  					echo "jQuery('#dire_nomColonias').append(new Option('".$direccion->perfil_colonias_idcolonias."', '".$direccion->perfil_colonias_idcolonias."'));\n";
+	  					echo "jQuery('#dire_nomEstado').append(new Option('".$direccion->perfil_estado_idestado."', '".$direccion->perfil_estado_idestado."'));\n";
+	 					echo "jQuery('#dire_iniCodigoPostal').val('".$direccion->perfil_codigoPostal_idcodigoPostal."');\n";
+	 					echo "jQuery('#dire_nomDelegacion').val('".$direccion->perfil_delegacion_iddelegacion."');\n";
+	 					echo "jQuery('#dire_nomPais').val('".$direccion->perfil_pais_idpais."');\n";
+	 					echo "jQuery('input[name=daGr_perfil_personalidadJuridica_idpersonalidadJuridica][value=".$generales->perfil_personalidadJuridica_idpersonalidadJuridica."]').attr('checked', true);\n";
+ 					}
 					
  					if ($generales->perfil_personalidadJuridica_idpersonalidadJuridica == 1) {
 						 echo 'jQuery("li:contains(\'Empresa\')").hide();';

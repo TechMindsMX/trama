@@ -4,6 +4,13 @@
 	require_once 'libraries/trama/libreriasPP.php';
 	$datos 					= new getDatosObj;
 	$usuario 				= JFactory::getUser();
+$app = JFactory::getApplication();
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
+	$url    = 'index.php?option=com_users&view=login';
+	$url   .= '&return='.base64_encode($return);
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+}
 	$generales				= $datos->datosGenerales($usuario->id, 1);
 	$emailGeneral			= $datos->email($generales->id);
 	$telefonoGeneral 		= $datos->telefono($generales->id);
