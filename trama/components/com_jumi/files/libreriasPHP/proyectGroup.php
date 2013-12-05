@@ -1,11 +1,11 @@
 <?php
 defined('_JEXEC') OR die( "Direct Access Is Not Allowed" );
-$subCategorias 		= JTrama::getAllSubCats();
-$input 				= JFactory::getApplication()->input;
-$proyid 			= $input->get("proyid", 0, "int");
-$objDatosProyecto 	= JTrama::getDatos($proyid);
+$subCategorias 				= JTrama::getAllSubCats();
+$input 						= JFactory::getApplication()->input;
+$proyid			 			= $input->get("proyid", 0, "int");
+$objDatosProyecto 			= JTrama::getDatos($proyid);
 $objDatosProyecto->idJoomla = UserData::getUserJoomlaId($objDatosProyecto->userId);
-$grupoExistente 	= JTrama::searchGroup($objDatosProyecto->id);
+$grupoExistente 			= JTrama::searchGroup($objDatosProyecto->id);
 
 if (!isset($grupoExistente) && $objDatosProyecto->type != 'REPERTORY') {
 

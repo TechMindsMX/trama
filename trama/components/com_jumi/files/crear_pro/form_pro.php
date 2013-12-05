@@ -1,6 +1,7 @@
 <link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet">
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <?php
+defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $usuario = JFactory::getUser();
 $app = JFactory::getApplication();
 if ($usuario->guest == 1) {
@@ -9,15 +10,14 @@ if ($usuario->guest == 1) {
 	$url   .= '&return='.base64_encode($return);
 	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
-defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+
 jimport('trama.class');
 jimport('trama.usuario_class');
 jimport('trama.error_class');
-$libreriaGoogle= true;
+$libreriaGoogle = true;
 require_once 'libraries/trama/libreriasPP.php';
 require_once 'components/com_jumi/files/libreriasPHP/validacionFiscal.php';
 JHtml::_('behavior.modal');
-
 validacionFiscal($usuario);
 
 $userMiddleId 			= UserData::getUserMiddlewareId($usuario->id);
@@ -42,6 +42,8 @@ $codeSection			= '';
 
 errorClass::manejoError($errorCode, $from, $proyid);
 
+$action = 'index.php?option=com_jumi&view=application&fileid=31';
+var_dump($datosObj);
 ?>
 <script>
 	emptyKeys();
@@ -104,15 +106,15 @@ errorClass::manejoError($errorCode, $from, $proyid);
 			$checkedsound 	= $datosObj->audioPublic;
 			$checkedimages 	= $datosObj->imagePublic;
 			$checkedinfo	= $datosObj->infoPublic;
-			
+
 			echo 'emptyKeys();';
 			echo 'jQuery("#camposHidden").append(\'<input type="hidden" value="'.$datosObj->id.'" name="id" />\');';
 			echo 'jQuery("#status").val('.$datosObj->status.');';
 			echo 'jQuery("#nomProy").val("'.$datosObj->name.'");';
 			echo 'jQuery("#selectCategoria").val('.$categoriaJS.').trigger("click").trigger("change");';
 			echo 'jQuery("#subcategoria").val('.$datosObj->subcategory.').trigger("click").trigger("change");';
-			echo 'jQuery("#miniaturaBanner").html(\'<img src="'.BANNER.'/'.$datosObj->projectBanner->name.'" width="100" />\');';
-			echo 'jQuery("#miniaturaAvatar").html(\'<img src="'.AVATAR.'/'.$datosObj->projectAvatar->name.'" width="100" />\');';
+			echo 'jQuery("#miniaturaBanner").html(\'<img src="'.$datosObj->banner.'" width="100" />\');';
+			echo 'jQuery("#miniaturaAvatar").html(\'<img src="'.$datosObj->avatar.'" width="100" />\');';
 			echo 'jQuery("#url").val("'.$datosObj->url.'");';
 			
 			foreach ($datosObj->projectVideos as $key => $value) {
@@ -407,7 +409,7 @@ errorClass::manejoError($errorCode, $from, $proyid);
 							class="projectPhotosIds" 
 							value="'.$value->id.'" 
 							checked="checked" />
-							<img alt="'.$datosObj->name.'" src="'.PHOTO.'/'.$value->name.'" width="100" /><br /><br />';
+							<img alt="'.$datosObj->name.'" src="'.$value->url.'" width="100" /><br /><br />';
 				}
 				
 				echo '</div>';
