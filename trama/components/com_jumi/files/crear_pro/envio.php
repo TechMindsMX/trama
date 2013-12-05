@@ -34,17 +34,17 @@ foreach ($_FILES as $key => $value) {
 		$alto 		= 655; 
 		$ancho	 	= 1165;
 		$ruta		= 'images/imgs/banner/';
-		$banner 	= $ruta.$fileName.'.jpg';
+		$banner 	= $fileName.'.jpg';
 	} elseif($key == 'avatar'){
 		$alto 		= 454;
 		$ancho 		= 454;
 		$ruta		= 'images/imgs/avatar/';
-		$avatar 	= $ruta.$fileName.'.jpg';
+		$avatar 	= $fileName.'.jpg';
 	} else{
 		$alto 		= 700;
 		$ancho 		= 1165;
 		$ruta		= 'images/imgs/photo/';
-		$archivos[] = $ruta.$fileName.'.jpg';
+		$archivos[] = $fileName.'.jpg';
 	}
 	
 	$imagen->resize($_FILES[$key]['tmp_name'], $ruta, $tipo, $fileName.'.', $ancho, $alto);
