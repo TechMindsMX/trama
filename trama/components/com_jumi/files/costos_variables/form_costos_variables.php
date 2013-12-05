@@ -55,7 +55,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		<?php
 		
 		if( !is_null($datosObj) ) {
-			require_once 'components/com_jumi/files/crear_pro/classIncludes/proyectGroup.php';
+			require_once 'components/com_jumi/files/libreriasPHP/proyectGroup.php';
 			
 			$callback	.= $datosObj->id;			
 			
