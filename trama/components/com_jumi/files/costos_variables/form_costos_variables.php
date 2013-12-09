@@ -81,9 +81,9 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 				}
 		
 				if(empty($datosObj->providers)){
-					$mensaje = JText::_('ALTA_PROVEEDOORES');
+					$mensaje = JText::_('ALTA_PROVEEDORES');
 				} else {
-					$mensaje = JText::_('EDITAR_PROVEEDOORES');
+					$mensaje = JText::_('EDITAR_PROVEEDORES');
 				}
 				
 				$ligaEditProveedores = '<span class="liga">
