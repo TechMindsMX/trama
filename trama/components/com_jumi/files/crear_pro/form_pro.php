@@ -222,7 +222,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 	?>
 </div>
 
-<div style="margin-left:15px;"><h1><?php echo $titulo; ?></h1></div>
+<div class="left15"><h1><?php echo $titulo; ?></h1></div>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<div class="datos_proy">

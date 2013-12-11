@@ -26,11 +26,8 @@ $proyid 				= $input->get("proyid", 0, "int");
 $errorCode		 		= $input->get("error",0,"int");
 $from		 			= $input->get("from",0,"int");
 $datosObj 				= JTrama::getDatos($proyid);
-//SIMULACION DE DATO FAVOR DE QUITAR FOCA PENDEJA
-$ligaPro				= '';
-$ligaCostosVariable		= '';
 $comentarios			= '';
-$ligaEditProveedores	= '';
+$secMaxLenght			= 6;
 
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 errorClass::manejoError($errorCode, $from, $proyid);
@@ -275,7 +272,7 @@ JHtml::_('behavior.modal');
 
 </script>
 
-<div style="margin-left:15px;"><h1><?php echo $titulo; ?></h1></div>
+<h1 class="left15"><?php echo $titulo; ?></h1>
 
 <form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<input
@@ -322,6 +319,7 @@ JHtml::_('behavior.modal');
 			type="text" 
 			class="" 
 			value=""
+			maxlength="<?php echo $secMaxLenght; ?>"
 			name="codeSection0" /> 
 		<br /> 
 		
@@ -335,7 +333,7 @@ JHtml::_('behavior.modal');
 	<!--FIN DIV DE AGREGAR CAMPOS-->
 	
 	<div id="datos_finanzas_proy">
-		<h2><?php echo JText::_('LABEL_FINANZAS'); ?></h2>
+		<h2><?php echo $datosObj->name; ?></h2>
 			<fieldset class="fieldset">
 			<LEGEND class="legend">
 				<label class="label_public" for="priv"><?php echo JText::_('DATA_PUBLIC'); ?></label>
@@ -345,13 +343,13 @@ JHtml::_('behavior.modal');
 					name="numberPublic" 
 					value="1" 
 					id="numberPublic" 
-					<?php echo $checkednumbers?'checked="checked"':'';?>>Si</input>
+					<?php echo $checkednumbers?'checked="checked"':'';?>><?php echo JText::_('JYES'); ?></input>
 				<input 
 					type="radio" 
 					name="numberPublic" 
 					value="0" 
 					id="numberPublic"
-					<?php echo $checkednumbers?'':'checked="checked"';?>>No</input>
+					<?php echo $checkednumbers?'':'checked="checked"';?>><?php echo JText::_('JNO'); ?></input>
 				</div>
 			</LEGEND>
 			
@@ -422,6 +420,7 @@ JHtml::_('behavior.modal');
 				type="text"
 				id="codeSection2" 
 				class=""
+				maxlength="<?php echo $secMaxLenght; ?>"
 				name="codeSection2"> 
 			<br />
 			<br />
@@ -471,6 +470,7 @@ JHtml::_('behavior.modal');
 				$unitsales .= '		id="codeSection_E'.$i.'" ';
 				$unitsales .= '		class=""';
 				$unitsales .= '		value="'.$sectionCode.'"';
+				$unitsales .= '		maxlenght="'.$secMaxLenght.'"';
 				$unitsales .= '		name = "codeSection_E'.$i.'" />';
 				$unitsales .= '	<br> ';
 				$unitsales .= '	<br> ';
@@ -508,8 +508,8 @@ JHtml::_('behavior.modal');
 	<div class="barra-top" id="otras_ligas">
 		<?php 
 			echo $ligaPro;
-			echo $ligaCostosVariable;
 			echo $ligaEditProveedores;
+			echo $ligaCostosVariable;
 			echo $comentarios;
 			
 		?>

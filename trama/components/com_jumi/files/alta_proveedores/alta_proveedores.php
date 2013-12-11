@@ -11,8 +11,6 @@ $path 		= 'components/com_jumi/files/alta_proveedores/';
 
 require_once 'libraries/trama/libreriasPP.php';
 
-$doc->addStyleSheet($path.'alta_proveedores.css');
-
 $proveedores 			= $proyecto->objDatos->providers;
 $token 					= JTrama::token();
 $input 					= JFactory::getApplication()->input;
@@ -117,8 +115,9 @@ class AltaProveedores {
 
 ?>
 
-<h1><?php echo JText::_('ALTA_PROVEEDORES'); ?></h1>
+<h1 class="left15"><?php echo JText::_('ALTA_PROVEEDORES'); ?></h1>
 	
+<div class="datos_proy">
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
 	
 	<p><?php echo JText::_('FECHA_INICIO_PRODUCCION').' = '.$proyecto -> objDatos -> productionStartDate; ?></p>
@@ -159,8 +158,8 @@ if (isset($proyecto->miembrosGrupo)) {
 						<label class=""><span class="icon-circle-arrow-up">    '. $member->name .'</label></span>
 						<span class="total_proveedor">'.JText::_('TOTAL_PROVEEDOR').'</span> = $<span class="number sub_total"></span>
 				</div>
-				<div class="rt-grid-4">
-					<p>'.JText::_('PROVEEDOR_ANTICIPO').'</p>
+				<div class="mitad">
+					<h4>'.JText::_('PROVEEDOR_ANTICIPO').'</h4>
 					<input type="hidden" name="providerId" value="'.$member->memberid.'" />
 					<label for="advanceQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
 					<input name="advanceQuantity" type="number" min="1000" id="monto" value="'.$advanceQuantity.'" />
@@ -174,8 +173,8 @@ if (isset($proyecto->miembrosGrupo)) {
 		
 		$html .= '	</select>
 				</div>
-				<div class="rt-grid-4">
-					<p>'.JText::_('PROVEEDOR_LIQUIDACION').'</p>
+				<div class="mitad">
+					<h4>'.JText::_('PROVEEDOR_LIQUIDACION').'</h4>
 					<label for="settlementQuantity">'.JText::_('PROVEEDOR_MONTO').'</label>
 					<input name="settlementQuantity" type="number" min="1000" id="monto" value="'.$settlementQuantity.'" />
 					<label for="settlementDate">'.JText::_('JDATE').'</label>
@@ -434,8 +433,8 @@ if (isset($proyecto->miembrosGrupo)) {
 	<div class="barra-top" id="otras_ligas">
 		<?php 
 			echo $ligaPro;
-			echo $ligaFinantialData;			
 			echo $ligaCostosVariable;
+			echo $ligaFinantialData;			
 			echo $comentarios; 
 		?>
 	</div>
@@ -445,3 +444,4 @@ if (isset($proyecto->miembrosGrupo)) {
 	<input type="button" value="<?php echo JText::_('LBL_GUARDAR');  ?>" id="guardar" class="button" />
 	</div>
 </form>
+</div>

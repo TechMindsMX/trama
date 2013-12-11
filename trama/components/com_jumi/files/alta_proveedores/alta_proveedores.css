@@ -1,9 +1,0 @@
-#agregados label {
-	float: none;
-}
-label {
-	width:200px;
-	font-size: 14px;
-	font-weight: bolder !important;
-	line-height: 20px;
-}

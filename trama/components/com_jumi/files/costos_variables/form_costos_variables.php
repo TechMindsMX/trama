@@ -140,7 +140,10 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		campo.attr('name', input.value);
 	}	
 </script>
-<h1><?php echo JText::_('COSTOS_VARIABLES');  ?></h1>
+
+<h1 class="left15"><?php echo JText::_('COSTOS_VARIABLES'); ?></h1>
+
+<div class="datos_proy">
 
 <h3><?php echo $servEdicion -> name; ?></h3>
 <div>
@@ -163,8 +166,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		name="token"
 		id="token" />	
 	
-	<div style="height: 46px;">
-	<label for="renta"> <?php echo JText::_('LBL_RENTA');  ?>: </label> 
+	<div>
+	<label for="renta"> <?php echo JText::_('LBL_RENTA'); ?>: </label> 
 	<input 
 		type="text"
 		id="renta"
@@ -172,8 +175,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		maxlength="5"
 		name="rent" /> %
 	</div>
-	<div style="height: 46px;">
-	<label for="ISEP"> <?php echo JText::_('IMPUESTOS_ISEP');  ?>: </label>  
+	<div>
+	<label for="ISEP"> <?php echo JText::_('IMPUESTOS_ISEP'); ?>: </label>  
 	<input 
 		type="text"
 		id="ISEP"
@@ -182,8 +185,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		value="8"
 		name="isep" /> %
 	</div>
-	<div style="height: 46px;">
-	<label for="ticketService"> <?php echo JText::_('LBL_BOLETAJE');  ?>: </label>  
+	<div>
+	<label for="ticketService"> <?php echo JText::_('LBL_BOLETAJE'); ?>: </label>  
 	<input 
 		type="text"
 		id="ticketService"
@@ -192,9 +195,9 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		value="3.5"
 		name="ticketService" /> %
 	</div>
-<div><h3><?php echo JText::_('DERECHOS_AUTOR');  ?></h3></div>
+<div><h3><?php echo JText::_('DERECHOS_AUTOR'); ?></h3></div>
 	<div>
-	<label for="renta"> <?php echo JText::_('LBL_SACM');  ?>: </label> 
+	<label for="renta"> <?php echo JText::_('LBL_SACM'); ?>: </label> 
 	<input 
 		type="text"
 		id="SACM"
@@ -202,7 +205,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		value="6"
 		name="sacm" readonly /> %
 	</div>
-	<label for="SOGEM"> <?php echo JText::_('LBL_SOGEM');  ?>: </label> 
+	<label for="SOGEM"> <?php echo JText::_('LBL_SOGEM'); ?>: </label> 
 	<input 
 		type="text"
 		id="sogem"
@@ -211,7 +214,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		name="sogem" /> %
 	
 	<div id="otros">
-		<h3><?php echo JText::_('LBL_OTROS');  ?></h3>
+		<h3><?php echo JText::_('LBL_OTROS'); ?></h3>
 	</div>
 	<div class="barra-top" id="otras_ligas">
 		<?php 
@@ -222,10 +225,12 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		?>
 	</div>
 	<div class="boton_enviar">
-	<input type="button" class="button" value="Agregar" id="agregarOtros" />
+	<input type="button" class="button" value="<?php echo JText::_('AGREGAR_CAMPOS'); ?>" id="agregarOtros" />
 	</div>
-	<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+	<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
 		javascript:window.history.back();">
-	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('LBL_GUARDAR');  ?>">
+	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('LBL_GUARDAR'); ?>">
 </form>
+</div>
+
 </div>
