@@ -35,7 +35,7 @@ class TramaProyectosViewDetalleProyecto extends JView
         }
 		
 		protected function addToolBar() {
-                JToolBarHelper::title(JText::_('COM_TRAMPROYECTOS_MANAGER_TRAMA_DETALLE'));
-                JToolBarHelper::back('Cancelar');
+                JToolBarHelper::title(JText::_('COM_TRAMAPROYECTOS_MANAGER_TRAMA_DETALLE'));
+                JToolBarHelper::back(JText::_('COM_TRAMAPROYECTOS_CANCEL'));
 		}
 }

@@ -94,8 +94,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 					$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
 				
 					$ligaFinantialData = '<span class="liga">
-										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
-														  	'</span>';
+										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>
+										</span>';
 				}
 			}
 		}
@@ -224,7 +224,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	<div class="boton_enviar">
 	<input type="button" class="button" value="Agregar" id="agregarOtros" />
 	</div>
-	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+	<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
 	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('GUARDAR');  ?>">
 </form>

@@ -11,7 +11,7 @@ foreach($this->items as $i => $item):
 		$user_revision = $item->logs;
 		if (!empty($user_revision)) {
 			$revisado_por = JFactory::getUser($user_revision[0]->userId)->name;
-			$fecha = date('d/M/Y',$user_revision[0]->timestamp/1000);
+			$fecha = date('d-M-Y',$user_revision[0]->timestamp/1000);
 			
 		} else {
 			$revisado_por = '';

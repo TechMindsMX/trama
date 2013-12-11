@@ -122,14 +122,14 @@ class AltaProveedores {
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
 	
 	<p><?php echo JText::_('FECHA_INICIO_PRODUCCION').' = '.$proyecto -> objDatos -> productionStartDate; ?></p>
-	<p><?php echo JText::_('PREMIER_DATE').' = '.$proyecto -> objDatos -> premiereStartDate; ?></p>
-	<p><?php echo JText::_('STATUS').' = '.$proyecto -> objDatos -> statusName; ?></p>
-	<p><?php echo JText::_('PRESUPUESTO_VISTAS').' = $<span class="number">'.$proyecto -> objDatos -> budget.'</span>' ?></p>
+	<p><?php echo JText::_('ALTA_PRO_PREMIER_DATE').' = '.$proyecto -> objDatos -> premiereStartDate; ?></p>
+	<p><?php echo JText::_('ALTA_PRO_STATUS').' = '.$proyecto -> objDatos -> statusName; ?></p>
+	<p><?php echo JText::_('ALTA_PRO_PRESUPUESTO_VISTAS').' = $<span class="number">'.$proyecto -> objDatos -> budget.'</span>' ?></p>
 	
 	<form id="agregados">
 		<span class="total_proveedor"><?php echo JText::_('TOTAL_PROVEDORES'); ?></span> = $<span class="total1"></span>
 	
-	<h3><?php echo JText::_('PROVEEDOR_USUARIOS_MIEMROS'); ?></h3>
+	<h3><?php echo JText::_('PROVEEDOR_USUARIOS_MIEMBROS'); ?></h3>
 <?php
 if (isset($proyecto->miembrosGrupo)) {
 
@@ -222,7 +222,6 @@ if (isset($proyecto->miembrosGrupo)) {
 			});
 			this.total = total;
 			
-			console.log(this.total)
 			jQuery('#agregados').children('span.total1').html('<span class="number">'+total+'</span>');
 			
 		}
@@ -232,7 +231,6 @@ if (isset($proyecto->miembrosGrupo)) {
 			var totalpro	= new sumatotal();
 			var budgetphp	= parseInt(<?php echo $proyecto -> objDatos -> budget;?>);
 			
-			console.log(totalpro);
 			if (totalpro.total != budgetphp){
 				alert('<?php echo JText::_('CONFIRMAR_PRO'); ?>');
 			}				
@@ -260,7 +258,7 @@ if (isset($proyecto->miembrosGrupo)) {
 				}
 			});
 			if (error == 1 ) { 
-				alert('Debe llenar los dos campos');
+				alert('<?php echo JText::_('PROVEEDOR_MONTO'); ?>');
 				return false;
 			};
 			jQuery(this).removeClass('icon-circle-arrow-down');
@@ -359,14 +357,14 @@ if (isset($proyecto->miembrosGrupo)) {
 		jQuery("#guardar").click(function (){
 
 			noboton();
-var suma = 0;
-var budget = parseFloat(<?php echo $proyecto -> objDatos -> budget; ?>) * .2;
+			var suma = 0;
+			var budget = parseFloat(<?php echo $proyecto -> objDatos -> budget; ?>) * .2;
+			
+			jQuery('#div<?php echo UserData::getUserMiddlewareId($usuario->id)->idMiddleware; ?>').find('input[type="number"]').each(function(){
+				suma += parseFloat(jQuery(this).val()); 
+			});
 
-jQuery('#div<?php echo UserData::getUserMiddlewareId($usuario->id)->idMiddleware; ?>').find('input[type="number"]').each(function(){
-	suma += parseFloat(jQuery(this).val()); 
-});
-
-		if(suma <= budget){
+			if(suma <= budget){
 				jQuery('#agregados').find('input[type="number"]').each(function() {
 				    if (jQuery(this).val() == '' ) {
 					    var parent = jQuery(this).parent().parent();
@@ -407,15 +405,15 @@ jQuery('#div<?php echo UserData::getUserMiddlewareId($usuario->id)->idMiddleware
 		<table class="table table-striped" width="100%" style="text-align: center;" frame="box" rules="all">
 			<tr>
 				<th></th>
-				<th colspan="2"><?php echo JText::_('ANTICIPO'); ?></th>
-				<th colspan="2"><?php echo JText::_('LIQUIDACION'); ?></th>
+				<th colspan="2"><?php echo JText::_('ALTA_PRO_ANTICIPO'); ?></th>
+				<th colspan="2"><?php echo JText::_('ALTA_PRO_LIQUIDACION'); ?></th>
 			</tr>
 			<tr>
-				<th><?php echo JText::_('PROVEEDOR'); ?></th>
-				<th><?php echo JText::_('FECHA'); ?></th>
-				<th><?php echo JText::_('MONTO'); ?></th>
-				<th><?php echo JText::_('FECHA'); ?></th>
-				<th><?php echo JText::_('MONTO'); ?></th>
+				<th><?php echo JText::_('ALTA_PRO_PROVEEDOR'); ?></th>
+				<th><?php echo JText::_('ALTA_PRO_FECHA'); ?></th>
+				<th><?php echo JText::_('ALTA_PRO_MONTO'); ?></th>
+				<th><?php echo JText::_('ALTA_PRO_FECHA'); ?></th>
+				<th><?php echo JText::_('ALTA_PRO_MONTO'); ?></th>
 			</tr>
 			<?php
 			foreach ($proveedores as $key => $value) {
@@ -442,8 +440,8 @@ jQuery('#div<?php echo UserData::getUserMiddlewareId($usuario->id)->idMiddleware
 		?>
 	</div>
 	<div class="boton_enviar">
-	<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+	<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-	<input type="button" value="<?php echo JText::_('GUARDAR');  ?>" id="guardar" class="button" />
+	<input type="button" value="<?php echo JText::_('LBL_GUARDAR');  ?>" id="guardar" class="button" />
 	</div>
 </form>

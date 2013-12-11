@@ -46,7 +46,7 @@ JHtml::_('behavior.tooltip');
 					</td>
 					<td>
 						<?php echo $item->name; ?>
-						<a target="_blank" href="<?php echo $link. $item->id; ?>" style="margin-left: 1em; font-size: 0.9em;">Ver perfíl </a>
+						<a target="_blank" href="<?php echo $link. $item->id; ?>" style="margin-left: 1em; font-size: 0.9em;"><?php echo JText::_('COM_TRAMAGREMIOS_VIEW_PROFILE'); ?> </a>
 					</td>
 					<td>
 						<?php echo $item->registerDate; ?>

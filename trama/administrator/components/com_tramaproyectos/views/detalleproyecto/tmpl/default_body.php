@@ -15,7 +15,7 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 } else {
 	$bussinesCase = '<div style="margin-bottom:10px">
 		<a href="'.JURI::root().BCASE.'/'.$proyeto->projectBusinessCase->name.'.xlsx" target="blank">
-			Business Case
+			'.JText::_("COM_TRAMAPROYECTOS_BCASE").'
 		</a>
 	</div>';
 }
@@ -33,20 +33,18 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 			<div style="margin-bottom:10px; color:#FF0000;">
 				<?php echo JTrama::tipoProyProd($proyeto).' - '.$urls::getStatusName($proyeto->status); ?>			
 			</div>
-			
 			<?php echo $bussinesCase; ?>			
-			
 			<div>
-				<p>Descripcion del proyecto</p>
+				<p><?php echo JText::_('COM_TRAMAPROYECTOS_PROY_DESC'); ?></p>
 				<p align="justify"><?php echo $proyeto->description; ?></p>
 			</div>
 			
 			<div style="margin-bottom: 10px;">
-				<a href="../<?php echo $urls1->viewUrl; ?>" target="blank">Ver mas</a>
+				<a href="../<?php echo $urls1->viewUrl; ?>" target="blank"><?php echo JText::_('COM_TRAMAPROYECTOS_MORE'); ?></a>
 			</div>
 			
 			<div>
-				<h4 align="center">Cambiar Estatus</h4>
+				<h4 align="center"><?php echo JText::_('COM_TRAMAPROYECTOS_CHANGE_STATUS'); ?></h4>
 				<input type="hidden" name="userId" value="<?php echo $adminId->id; ?>" />
 				<input type="hidden" name="projectId" value="<?php echo $proyeto->id; ?>" />
 				<div>
@@ -70,13 +68,13 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 				</div>		
 				
 				<div>
-					Comentarios<br />
+					<?php echo JText::_('COM_TRAMAPROYECTOS_COMMENTS'); ?><br />
 					<textarea name="comment" rows="15" cols="100"></textarea>
 				</div>
 				
 				<div style="margin-top:10px;">
-					<input type="button" value="Cancelar" onclick="javascript:window.history.back()">
-					<input type="submit" value="Enviar" />
+					<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_CANCEL'); ?>" onclick="javascript:window.history.back()">
+					<input type="submit" value="<?php echo JText::_('COM_TRAMAPROYECTOS_SEND'); ?>" />
 				</div>
 			</div>
 			
@@ -84,16 +82,16 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 			if( !empty($proyeto->logs) ) {
 			?>
 			<div>
-				<h4 align="center">Bitacora de Cambios</h4>
+				<h4 align="center"><?php echo JText::_('COM_TRAMAPROYECTOS_CHANGES'); ?></h4>
 				<ul>
 					<?php
 					foreach ($proyeto->logs as $key => $value) {
 						$fechacreacion = $value->timestamp/1000;
 						echo '<div style="margin-bottom: 10px;">'.
 							 '<li>'.
-							 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-							 '<div><strong>Status</strong>: '.JTrama::getStatusName($value->status).'</div>'.
-							 '<div align="justify"><strong>Comentario</strong>: '.$value->comment.'</div>'.
+							 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_MODIFIED").'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
+							 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_STATUS").'</strong>: '.JTrama::getStatusName($value->status).'</div>'.
+							 '<div align="justify"><strong>'.JText::_("COM_TRAMAPROYECTOS_COMMENT").'</strong>: '.$value->comment.'</div>'.
 							 '</li>'.
 							 '</div>';
 					}

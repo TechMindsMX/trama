@@ -374,7 +374,7 @@ if ($usuario->guest == 1) {
 	            	<input 
 	            		type="button" 
 	            		class="button" 
-	            		value="<?php echo JText::_('CANCELAR');  ?>" 
+	            		value="<?php echo JText::_('LBL_CANCELAR');  ?>" 
 	            		onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>')) javascript:window.history.back();">
 	            		
 	            	<input 
@@ -382,7 +382,7 @@ if ($usuario->guest == 1) {
 	            		class="button" 
 	            		type="submit" 
 	            		onclick="return validar();" 
-	            		value="<?php echo JText::_('ENVIAR'); ?>" />
+	            		value="<?php echo JText::_('LBL_ENVIAR'); ?>" />
 	            </div>
         	</div>
         </form>

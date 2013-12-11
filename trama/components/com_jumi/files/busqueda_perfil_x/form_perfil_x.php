@@ -69,7 +69,7 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 	<div class="centrado">
 		<input type="hidden" name="campo" value="<?php echo $campoTabla ?>" />
 		<input type="hidden" name="usuario" value="<?php echo $usuario->id; ?>" />
-		<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
 		<input class="button" type="button" id="uncheckAll" value="Limpiar Seleccion" />
 		<input class="button" type="submit" value="Buscar" />

@@ -21,7 +21,7 @@ jimport('trama.class');
         	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_STATUS'); ?>
         	<div style="margin: 10px;">
         		<select id="filtroStatus" name="filtro_status">
-        			<option value="all">Seleccione un filtro</option>
+        			<option value="all"><?php echo JText::_('COM_TRAMAPROYECTOS_SELECT_FILTER'); ?></option>
 	        		<?php
 	        		foreach (JTrama::getStatus() as $key => $value) {
 	        			echo '<option value="'.$value->id.'">'.$value->name.'</option>';
