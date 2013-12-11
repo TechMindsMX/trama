@@ -147,18 +147,24 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 		?>
 		
 		jQuery("#guardar, #revision").click(function (){
-			var photos = new Array();
-			var count = 0;
+			var photos 			= new Array();
+			var deletePhotos 	= new Array();
+			var count 			= 0;
+			var delet 			= 0;
 
 			jQuery('[name ^= "photoids_"]').each(function(){
 			    if ( jQuery(this).prop('checked') ){
 			        photos[count] = jQuery(this).val();
 			        count++;
-			    } 
+			    }else{
+			    	deletePhotos[delet] = jQuery(this).val();
+			        delet++;
+			    }
 			});
 			
 			
 			jQuery('#projectPhotosIds').val( photos.join(',') );
+			jQuery('#deleteprojectPhotosIds').val( deletePhotos.join(',') );
 
 			if( this.id == 'revision' ) {
 				var breakcapt = parseInt(breakeven);
@@ -231,6 +237,12 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 				type="hidden"
 				name="projectPhotosIds"
 				id="projectPhotosIds"
+				value= ""/>
+			
+			<input 
+				type="hidden"
+				name="deleteprojectPhotosIds"
+				id="deleteprojectPhotosIds"
 				value= ""/>
 			
 			<input 

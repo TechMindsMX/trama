@@ -46,6 +46,7 @@ foreach ($_FILES as $key => $value) {
 			$archivos[] 		= $fileName.'.jpg';
 		}		
 		$imagen->resize($_FILES[$key]['tmp_name'], $ruta, $tipo, $fileName.'.', $ancho, $alto);
+		
 	}else{
 		if( $envio['bannerSave'] != '' && $_FILES['banner']['error'] != 0 ){
 			$envio['banner'] = $envio['bannerSave'];
@@ -65,6 +66,13 @@ foreach ($_FILES as $key => $value) {
 }
 $images = join(',', $archivos);
 
+if($envio['deleteprojectPhotosIds'] != ''){
+	$deletePhotos = explode(',', $envio['deleteprojectPhotosIds']);
+	foreach ($deletePhotos as $key => $value) {
+		unlink('media/trama/photo/'.$value);
+	}
+}
+
 $envio['photos'] 	= $images;
 
 $ch					= curl_init($envio['callback']);
@@ -80,8 +88,6 @@ $server_output = curl_exec ($ch);
 curl_close ($ch);
 
 $respuesta = json_decode($server_output);
-
-var_dump(JTrama::getDatos($respuesta->response));
 
 if( isset($envio['id']) ){
 	$respuesta = '';
