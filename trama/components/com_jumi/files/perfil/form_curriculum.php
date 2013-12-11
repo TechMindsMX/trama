@@ -25,12 +25,6 @@ if ($usuario->guest == 1) {
 	}
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Registro de Perfil</title>
-
 	<?php
  		$pathJumi = 'components/com_jumi/files/perfil';
  		$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=curri';
@@ -81,9 +75,7 @@ if ($usuario->guest == 1) {
 			}
 		}
     </script>
-</head>
 
-<body>
 <!--DIVS OCULTOS QUE AGREGAN CAMPOS-->
 	<div class="_100" id="readrootProy" style="display: none">                  
 	    <input name="prPa_idHistorialProyectos" type="hidden" id="prPa_idHistorialProyectos" value="<?php echo 'NULL';?>" />
@@ -151,5 +143,3 @@ if ($usuario->guest == 1) {
 			</div>
 		</form>
 	</div>
-</body>
-</html>

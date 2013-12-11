@@ -93,10 +93,10 @@ if ($usuario->guest == 1) {
            		<div class="datos_proy">
            		<div style="padding: 10px">
             	<?php echo JText::_('COPIAR_INFO'); ?>            
-            	<input name="Copiar" class="button" id="copiarDatos" type="button" value="<?php echo JText::_('COPIAR'); ?>" />
+            	<input name="Copiar" class="button" id="copiarDatos" type="button" value="<?php echo JText::_('COPIAR_DATOS'); ?>" />
             	</div>
              
-               	<label for="doFi_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
+               	<label for="doFi_nomCalle"><?php echo JText::_('LBL_CALLE'); ?> *:</label>
                 <input name="doFi_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doFi_nomCalle" maxlength="70" />
 				<div class="juntos">
                	<label for="doFi_noExterior"><?php echo JText::_('NUM_EXT'); ?>*:</label>
@@ -107,24 +107,24 @@ if ($usuario->guest == 1) {
                	<input name="doFi_noInterior" class="validate[custom[onlyLetterNumber]] input_chica" type="text" id="doFi_noInterior" size="10" maxlength="5" />
     			</div>
     			<div>
-               	<label for="doFi_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
+               	<label for="doFi_iniCodigoPostal"><?php echo JText::_('LBL_CP'); ?> *:</label>
                	<input name="doFi_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]] input_chica"  type="text" id="doFi_iniCodigoPostal" size="10" maxlength="5" />
 				</div>
 				<div>
-               	<label for="doFi_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
+               	<label for="doFi_nomColonias"><?php echo JText::_('LBL_COLONIA'); ?> *:</label>
                	<!--input name="doFi_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doFi_nomColonias" maxlength="50" /-->
                	<select name="doFi_perfil_colonias_idcolonias" class="validate[required]" id="doFi_nomColonias"></select>
 				</div>
 				<div>
-            	<label for="doFi_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
+            	<label for="doFi_nomDelegacion"><?php echo JText::_('LBL_DELEGACION'); ?> *:</label>
             	<input name="doFi_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doFi_nomDelegacion" maxlength="50" />
 				</div>
 				<div>
-               	<label for="doFi_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
+               	<label for="doFi_nomEstado"><?php echo JText::_('LBL_ESTADO'); ?> *:</label>
                	<select name="doFi_perfil_estado_idestado" id="doFi_nomEstado" class="validate[required]" ></select>
 				</div>
 				<div>
-               	<label for="doFi_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
+               	<label for="doFi_nomPais"><?php echo JText::_('LBL_PAIS'); ?> *:</label>
                	<select name="doFi_perfil_pais_idpais" id="doFi_nomPais" class="validate[required]">
                		<option value="1" selected="selected">M&eacute;xico</option>
 				</select>

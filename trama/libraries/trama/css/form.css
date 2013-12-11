@@ -21,7 +21,7 @@ select {
 }
 .juntos{
 	display: inline-block;
-	width: 358px;
+	width: 198px;
 }
 .juntos_radio{
 	display: inline-block;
@@ -78,18 +78,59 @@ select {
 br {
 	clear: left;
 }
+.left15 {
+	margin-left: 15px;
+}
+/*alta proveedores*/
+#agregados label {
+	float: none;
+}
+label {
+	width:200px;
+	font-size: 14px;
+	font-weight: bolder !important;
+	line-height: 20px;
+}
+#agregados .inputs:nth-child(2n) {
+    background: none repeat scroll 0 0 #F0f0f0;
+}
+#agregados .inputs {
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+div.inputs input#monto {
+	width: 200px;
+}
+.mitad {
+	width: 40%;
+	margin-right:9%;
+	display: inline-block;
+}
+
+/*fin alta proveedores*/
+
+/*costos variables*/
+div#otros > div {
+	margin-bottom:15px; 
+}
+/* fincostos variables*/
+
 
 
 @media screen and (max-width:770px) {
 	
 	.datos_proy{
-	
-	padding-left:0px;
+		padding-left:0px;
 	}
 	.juntos{
-	display: inline-block;
-	width: 340px;
-}
-
+		display: inline-block;
+		width: 340px;
+	}
+	.mitad {
+		min-width: 320px;
+	}
+	.juntos{
+		display: block;
+	}
 
 }

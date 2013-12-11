@@ -33,7 +33,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 $datosgenerales = UserData::datosGr($userid);
 
 if(is_null($datosgenerales)){
-	$app->redirect('index.php', 'No hay datos de usuario','notice');
+	$app->redirect('index.php', ''.JText::_("JSIN_DATOS_USUARIO").'','notice');
 }
 
 $id_datos_generales = $datosgenerales->id;
@@ -41,8 +41,8 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 ?>
 <style>
 .comentariosMedia{
-			display:none;
-		}
+	display:none;
+}
 .editMedia {
 	display:none;
 }
@@ -108,12 +108,12 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 												  </td>';
 											echo '<td>';
 												if ( !empty($value->logs) ) {
-													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
+													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
 												}
 											echo '</td>';
 											echo '<td>';
 							 					if($value->status == 0 || $value->status == 2) {
-													echo '<a class="button" href="'.$value->editUrl.'">Ir</a>';
+													echo '<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>';
 												}
 											echo '</td>';
 											
@@ -182,12 +182,12 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 												  </td>';
 											echo "<td>";
 												if ( !empty($value->logs) ) {
-													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
+													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
 												}
 											echo '</td>';
 											echo "<td>";
 												if($value->status == 0 || $value->status == 2) {
-													echo '<a class="button" href="'.$value->editUrl.'">Ir</a>';
+													echo '<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>';
 												}
 											echo "</td>";
 
@@ -235,7 +235,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 									if ($value->type == 'REPERTORY') {
 										echo '<tr>';
 										echo '	<td><a href="'.$value->viewUrl.'">'.$value->name.'</a></td>';
-										echo '	<td><a class="button" href="'.$value->editUrl.'">Ir</a></td>';	
+										echo '	<td><a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a></td>';	
 										echo "</tr>";
 									}
 								}
@@ -275,7 +275,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 												  </td>';
 										echo '	<td>';
 													if ( !empty($value->logs) ) {
-														echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
+														echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
 													}
 										echo '	</td>';
 										echo '</tr>';

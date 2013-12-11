@@ -281,7 +281,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 				id="bannerSave" />
 		</span>
 		
-		<label for="nomProy"><?php echo JText::_('NOMBRE').' '.$textPro; ?>*:</label>
+		<label for="nomProy"><?php echo JText::_('LBL_NOMBRE').' '.$textPro; ?>*:</label>
 		<input 
 			type="text"
 			id="nomProy"

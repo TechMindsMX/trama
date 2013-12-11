@@ -57,7 +57,8 @@ function habilita(campo) {
 	}
 }
 </script>
-	<h1><?php echo $titulo?></h1>
+
+	<h1><?php echo $titulo; ?></h1>
 <form action="<?php echo $accion; ?>" id="perfilX" method="post" name="perfilX">
 
 <div id="tree">
@@ -72,7 +73,7 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 		<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
 		javascript:window.history.back();">
 		<input class="button" type="button" id="uncheckAll" value="<?php echo JText::_('CLEAR_SELECTED'); ?>" />
-		<input class="button" type="submit" value="Buscar" />
+		<input class="button" type="submit" value="<?php echo JText::_('LBL_BUSCAR'); ?>" />
 	</div>
 	</form>
 	

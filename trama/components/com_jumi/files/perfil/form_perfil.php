@@ -25,14 +25,6 @@ if ($usuario->guest == 1) {
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Registro de Perfil</title>
-
-	
-	
 	<script>
 		jQuery(document).ready(function(){
 			jQuery("#formID").find(".toggle-editor").css("display","none");
@@ -102,9 +94,7 @@ if ($usuario->guest == 1) {
 			?>
 		});
     </script>
-</head>
 
-<body>
 	<div id="contenedor">
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
 			
@@ -112,7 +102,7 @@ if ($usuario->guest == 1) {
 			
 			<div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_GR'); ?></h1></div>            
 			<div class="datos_proy">
-				<label for="daGr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
+				<label for="daGr_nomNombre"><?php echo JText::_('LBL_NOMBRE'); ?> *:</label>   
 				<input 
 					name="daGr_nomNombre" 
 					class="validate[required,custom[onlyLetterSp]]" 
@@ -137,7 +127,7 @@ if ($usuario->guest == 1) {
 					id="daGr_nomApellidoMaterno" 
 					maxlength="25" />
 
-				<label for="daGr_nomJobTitle"><?php echo JText::_('TITULO'); ?>:</label>
+				<label for="daGr_nomJobTitle"><?php echo JText::_('LBL_TITULO'); ?>:</label>
 				<input 
 					name="daGr_nomJobTitle" 
 					class="validate[custom[onlyLetterSp]]" 
@@ -145,7 +135,7 @@ if ($usuario->guest == 1) {
 					id="daGr_nomJobTitle" 
 					maxlength="25" />
 				<div id="companiadiv">
-				<label for="daGr_nomCompania"><?php echo JText::_('COMPANIA'); ?>:</label>
+				<label for="daGr_nomCompania"><?php echo JText::_('LBL_COMPANIA'); ?>:</label>
 				<input 
 					name="daGr_nomCompania" 
 					class="validate[custom[onlyLetterSp]]" 
@@ -153,7 +143,7 @@ if ($usuario->guest == 1) {
 					id="compania" 
 					maxlength="25" />
 				</div>
-				<label for="daGr_freelance"><?php echo JText::_('FREELANCE'); ?>:</label>
+				<label for="daGr_freelance"><?php echo JText::_('LBL_FREELANCE'); ?>:</label>
 				<input 
 					name="daGr_freelance" 
 					type="checkbox" 
@@ -161,7 +151,7 @@ if ($usuario->guest == 1) {
 					value="1" 
 					maxlength="25" />
 					<br>
-				<label for="daGr_Foto"><?php echo JText::_('FOTO'); ?>:</label>
+				<label for="daGr_Foto"><?php echo JText::_('LBL_FOTO'); ?>:</label>
 				<input 
 					name="daGr_Foto"
 					id="daGr_Foto"
@@ -180,7 +170,7 @@ if ($usuario->guest == 1) {
 					id="daGr_nomPaginaWeb" 
 					maxlength="100" />
 				<div>
-				<label for="maGr_coeEmail0"><?php echo JText::_('CORREO'); ?> *:</label>
+				<label for="maGr_coeEmail0"><?php echo JText::_('LBL_CORREO'); ?> *:</label>
 				<input 
 					name="maGr_coeEmail0" 
 					class="validate[required,custom[email]] input_chica" 
@@ -190,7 +180,7 @@ if ($usuario->guest == 1) {
 				</div>	
 				<div>
 				<?php if ($existe == 'true' && isset($email[1])) { echo '<input name="maGr_idemail00" type="hidden" id="maGr_idemail00" value="'.$email[1]->idemail.'" />'; }?>
-				<label for="maGr_coeEmail1"><?php echo JText::_('CORREO'); ?> :</label>
+				<label for="maGr_coeEmail1"><?php echo JText::_('LBL_CORREO'); ?> :</label>
 				<input 
 					name="maGr_coeEmail1"
 					class="validate[custom[email]] input_chica"
@@ -201,7 +191,7 @@ if ($usuario->guest == 1) {
 				<?php if ($existe == 'true' && isset($email[2])) { echo '<input name="maGr_idemail01" type="hidden" id="maGr_idemail01" value="'.$email[2]->idemail.'" />'; }?>
 				</div>
 				<div>
-				<label for="maGr_coeEmail2"><?php echo JText::_('CORREO'); ?> :</label>
+				<label for="maGr_coeEmail2"><?php echo JText::_('LBL_CORREO'); ?> :</label>
 				<input 
 					name="maGr_coeEmail2" 
 					class="validate[custom[email]] input_chica" 
@@ -254,7 +244,7 @@ if ($usuario->guest == 1) {
                		type="hidden" />
            		</div>
            		<div class="juntos">
-                <label for="teGr_extension"><?php echo JText::_('EXT'); ?></label> 
+                <label for="teGr_extension"><?php echo JText::_('LBL_EXT'); ?></label> 
                 <input 
                 	name="teGr_extension" 
                 	class="validate[onlyNumberSp] input_chica" 
@@ -264,11 +254,11 @@ if ($usuario->guest == 1) {
                 	size="8" />  
                 </div>    
            	</div>
-           	<div class="espaciado_titulo"><h1><?php echo JText::_('DIRECCION'); ?></h1></div>
+           	<div class="espaciado_titulo"><h1><?php echo JText::_('LBL_DIRECCION'); ?></h1></div>
             
            	<div class="datos_proy">
             	<div>
-               	<label for="dire_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
+               	<label for="dire_nomCalle"><?php echo JText::_('LBL_CALLE'); ?> *:</label>
                 <input 
                 	name="dire_nomCalle"
                 	class="validate[required,custom[onlyLetterNumber]]" 
@@ -297,7 +287,7 @@ if ($usuario->guest == 1) {
                		maxlength="5" />
            		</div>
            		<div>
-               	<label for="dire_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
+               	<label for="dire_iniCodigoPostal"><?php echo JText::_('LBL_CP'); ?> *:</label>
                	<input 
                		type="text"
                		name="dire_perfil_codigoPostal_idcodigoPostal"
@@ -307,12 +297,12 @@ if ($usuario->guest == 1) {
                		maxlength="5" />
             	</div>
             	<div>
-               	<label for="dire_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
+               	<label for="dire_nomColonias"><?php echo JText::_('LBL_COLONIA'); ?> *:</label>
                	<select name="dire_perfil_colonias_idcolonias" class="validate[required]" id="dire_nomColonias">
                	</select>
             	</div>
             	<div>
-            	<label for="dire_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
+            	<label for="dire_nomDelegacion"><?php echo JText::_('LBL_DELEGACION'); ?> *:</label>
             	<input
             		readonly="readonly"
             		name="dire_perfil_delegacion_iddelegacion"
@@ -322,11 +312,11 @@ if ($usuario->guest == 1) {
             		maxlength="50" />
            		</div>
            		<div>
-               	<label for="dire_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
+               	<label for="dire_nomEstado"><?php echo JText::_('LBL_ESTADO'); ?> *:</label>
                	<select name="dire_perfil_estado_idestado" id="dire_nomEstado" class="validate[required]" ></select>
             	</div>
             	<div>
-               	<label for="dire_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
+               	<label for="dire_nomPais"><?php echo JText::_('LBL_PAIS'); ?> *:</label>
                	
                	<select name="dire_perfil_pais_idpais" id="dire_nomPais" class="validate[required]"> 
                		<option value="1" selected="selected">M&eacute;xico</option>
@@ -342,7 +332,7 @@ if ($usuario->guest == 1) {
             		type="radio" 
             		value="1" 
             		id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" />
-            		<?php echo JText::_('FISICA'); ?>
+            		<?php echo JText::_('LBL_FISICA'); ?>
             	</div>
            		<div class="juntos_radio">
             	
@@ -352,7 +342,7 @@ if ($usuario->guest == 1) {
             		type="radio" 
             		value="2" 
             		id="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" />
-            		<?php echo JText::_('MORAL'); ?>
+            		<?php echo JText::_('LBL_MORAL'); ?>
             	</div>
           		<div class="juntos_radio">
             	
@@ -410,12 +400,10 @@ if ($usuario->guest == 1) {
           
             <br />
             <div class="boton_enviar">  
-            <input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+            <input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">         	
             	<input name="Enviar" class="button" type="submit" value="<?php echo JText::_('LBL_ENVIAR'); ?>" />
             </div>  
               </div>
         </form>
     </div>
-</body>
-</html>
