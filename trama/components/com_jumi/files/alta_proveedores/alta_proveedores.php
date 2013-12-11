@@ -304,7 +304,7 @@ if (isset($proyecto->miembrosGrupo)) {
 			
 				$app = JFactory::getApplication();
 			
-				$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
+				$mensaje = JText::_('LBL_EDIT').' '.JText::_($datosObj->type);
 				switch( $datosObj->type) {
 					case 'PROJECT':
 						$fileid = 27;

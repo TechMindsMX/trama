@@ -92,5 +92,5 @@ $respuesta = json_decode($server_output);
 if( isset($envio['id']) ){
 	$respuesta = '';
 }
-$app->redirect($envio['callback'].$respuesta->response, 'Datos almacenados correctamente', 'message');
+$app->redirect($envio['callback'].$respuesta->response, ''.JText::_('SAVED_SUCCESSFUL').'', 'message');
 ?>

@@ -46,7 +46,7 @@ JHtml::_('behavior.modal');
 			require_once 'components/com_jumi/files/libreriasPHP/proyectGroup.php';
 			
 			$callback .= $datosObj->id;
-			$mensaje = JText::_('EDIT').' '.JText::_($datosObj->type);
+			$mensaje = JText::_('LBL_EDIT').' '.JText::_($datosObj->type);
 			
 			switch( $datosObj->type) {
 				case 'PROJECT':

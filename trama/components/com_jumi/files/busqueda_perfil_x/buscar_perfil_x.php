@@ -48,7 +48,7 @@ function agrupacionIds($tabla, $valor, $campo){
 		} else {
 			
 			$allDone =& JFactory::getApplication();
-			$allDone->redirect($_SERVER['HTTP_REFERER'], 'No se encontro ningun resultado' );
+			$allDone->redirect($_SERVER['HTTP_REFERER'], ''.JText::_('NO_RESULTS').'' );
 		
 		}
 				
@@ -74,7 +74,7 @@ foreach ($var as $key => $value) {
 
 if(empty($valor)) {
 	$allDone =& JFactory::getApplication();
-	$allDone->redirect($_SERVER['HTTP_REFERER'], 'No se selecciono ninguna busqueda' );
+	$allDone->redirect($_SERVER['HTTP_REFERER'], ''.JText::_('NO_SELECTION').'' );
 }
 
 $agrupacionIds = agrupacionIds($tabla, $valor, $campo);

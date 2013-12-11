@@ -85,7 +85,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 									</span>
 								</th>
 								<th width="15%">
-									<span class="editTabla"><?php echo JText::_('EDIT');?></span>
+									<span class="editTabla"><?php echo JText::_('LBL_EDIT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
@@ -159,7 +159,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 									</span>
 								</th>
 								<th width="15%">
-									<span class="editTabla"><?php echo JText::_('EDIT'); ?></span>
+									<span class="editTabla"><?php echo JText::_('LBL_EDIT'); ?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
@@ -224,7 +224,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 							<tr>
 								<th><?php echo JText::_('LABEL_NAME');?></th>
 								<th>
-									<span class="editTabla"><?php echo JText::_('EDIT'); ?></span>
+									<span class="editTabla"><?php echo JText::_('LBL_EDIT'); ?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>

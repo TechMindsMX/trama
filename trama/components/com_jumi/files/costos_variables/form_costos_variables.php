@@ -59,7 +59,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 			
 			$callback	.= $datosObj->id;			
 			
-			$mensaje	= JText::_('EDIT').' '.JText::_($datosObj->type);
+			$mensaje	= JText::_('LBL_EDIT').' '.JText::_($datosObj->type);
 			switch( $datosObj->type) {
 				case 'PROJECT':
 					$fileid = 27;
@@ -164,7 +164,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		id="token" />	
 	
 	<div style="height: 46px;">
-	<label for="renta"> <?php echo JText::_('RENTA');  ?>: </label> 
+	<label for="renta"> <?php echo JText::_('LBL_RENTA');  ?>: </label> 
 	<input 
 		type="text"
 		id="renta"
@@ -183,7 +183,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		name="isep" /> %
 	</div>
 	<div style="height: 46px;">
-	<label for="ticketService"> <?php echo JText::_('BOLETAJE');  ?>: </label>  
+	<label for="ticketService"> <?php echo JText::_('LBL_BOLETAJE');  ?>: </label>  
 	<input 
 		type="text"
 		id="ticketService"
@@ -194,7 +194,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	</div>
 <div><h3><?php echo JText::_('DERECHOS_AUTOR');  ?></h3></div>
 	<div>
-	<label for="renta"> <?php echo JText::_('SACM');  ?>: </label> 
+	<label for="renta"> <?php echo JText::_('LBL_SACM');  ?>: </label> 
 	<input 
 		type="text"
 		id="SACM"
@@ -202,7 +202,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		value="6"
 		name="sacm" readonly /> %
 	</div>
-	<label for="SOGEM"> <?php echo JText::_('SOGEM');  ?>: </label> 
+	<label for="SOGEM"> <?php echo JText::_('LBL_SOGEM');  ?>: </label> 
 	<input 
 		type="text"
 		id="sogem"
@@ -211,7 +211,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		name="sogem" /> %
 	
 	<div id="otros">
-		<h3><?php echo JText::_('OTROS');  ?></h3>
+		<h3><?php echo JText::_('LBL_OTROS');  ?></h3>
 	</div>
 	<div class="barra-top" id="otras_ligas">
 		<?php 
@@ -226,6 +226,6 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	</div>
 	<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('GUARDAR');  ?>">
+	<input type="submit" class="button" id="enviar" value="<?php echo JText::_('LBL_GUARDAR');  ?>">
 </form>
 </div>
