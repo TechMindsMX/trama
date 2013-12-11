@@ -542,7 +542,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 			<div id="map-canvas" style="height: 400px; max-width: 420px"></div>
 			<br />
 			
-			<label for="tags"><?php echo JText::_('KEYWORDS'); ?><br /><span style="font-size: 12px;">(separarlas por comas)</span></label>
+			<label for="tags"><?php echo JText::_('LBL_KEYWORDS'); ?><br /><span style="font-size: 12px;"><?php echo JText::_('LBL_COMAS_SEPARADOS'); ?></span></label>
 			<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
 				if( isset($datosObj) && !empty($datosObj->tags)) {
 					foreach ($datosObj->tags as $key => $value) {
@@ -567,9 +567,9 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 		?>
 	</div>
 	<div class="boton_enviar">
-	<input type="button" id="cancelar" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+	<input type="button" id="cancelar" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-	<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>">
+	<input type="button" class="button" id="guardar" value="<?php echo JText::_('LBL_GUARDAR'); ?>">
 	</div>
 	<?php echo $botonRevision; ?>	
 </form>
