@@ -290,7 +290,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 			name="name" /> 
 		<br />
 		
-		<label for="categoria"><?php echo JText::_('CATEGORIA'); ?>: </label>
+		<label for="categoria"><?php echo JText::_('LBL_CATEGORIA'); ?>: </label>
 		<select id="selectCategoria" name="categoria">
 			<?php		
 			foreach ( $categoria as $key => $value ) {
@@ -301,7 +301,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 		</select>
 		<br />
 		
-		<label for="subcategory"><?php echo JText::_('SUBCATEGORIA'); ?>: </label>
+		<label for="subcategory"><?php echo JText::_('LBL_SUBCATEGORIA'); ?>: </label>
 		<select id="subcategoria" name="subcategory">
 			<option value="all">Todas</option>
 			<?php
@@ -315,13 +315,13 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 		<br />
 		
 		
-		<label for="banner"><?php echo JText::_('BANNER').$textPro; ?>*:</label>
+		<label for="banner"><?php echo JText::_('LBL_BANNER').$textPro; ?>*:</label>
 		<input type="file"  id="banner" onchange='loadImage(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="banner">
 		<div id="miniaturaBanner"></div>
 		<div style="max-width:460px; font-size:12px;"><?php echo JText::_('NOTE_BANNER'); ?></div>
 		<br />
 		
-		<label for="avatar"><?php echo JText::_('AVATAR').$textPro; ?>*:</label> 
+		<label for="avatar"><?php echo JText::_('LBL_AVATAR').$textPro; ?>*:</label> 
 		<input type="file" id="avatar" onchange='loadImage2(this);' accept="gif|jpg|x-png" class="<?php echo $validacion; ?>" name="avatar">
 		<div id="miniaturaAvatar"></div>
 		<div style="max-width:460px; font-size:12px;"><?php echo JText::_('NOTE_AVATAR'); ?></div>
@@ -503,7 +503,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 			<br />
 			<br />
 			
-			<label for="elenco"><?php echo JText::_('ELENCO'); ?>:</label> <br />
+			<label for="elenco"><?php echo JText::_('LBL_ELENCO'); ?>:</label> <br />
 			<div style= "max-width:755px;">
 				<?php
 					$editor =& JFactory::getEditor('tinymce');
@@ -524,7 +524,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 			
 			<br />
 			<br />
-			<label for="direccion"><?php echo JText::_('RECINTO'); ?>*: </label> 
+			<label for="direccion"><?php echo JText::_('LBL_RECINTO'); ?>*: </label> 
 			<input 
 				type="text" 
 				class="validate[required]" 

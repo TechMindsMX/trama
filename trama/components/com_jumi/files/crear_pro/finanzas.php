@@ -221,7 +221,7 @@ JHtml::_('behavior.modal');
 			    count = 0;
 			    
 			    if(repetidos){
-			        alert('Los codigos de sección deben ser unicos, favor de revisar sus entradas.');
+			        alert('<?php echo JText::_("UNIQUE_CODES"); ?>');
 			        return false;
 			    }
 			});
@@ -296,7 +296,7 @@ JHtml::_('behavior.modal');
 		
 	<!--DIV DE AGREGAR CAMPOS-->
 	<div id="readroot" style="display: none">
-		<label for=""><?php echo JText::_('SECCION'); ?>*:</label> 
+		<label for=""><?php echo JText::_('LBL_SECCION'); ?>*:</label> 
 		<input 
 			type="text" 
 			class="validate[required,custom[onlyLetterNumber]]"
@@ -363,7 +363,7 @@ JHtml::_('behavior.modal');
 			<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 			</div>
 			<br />
-			<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('PROYECTO'); ?>*:</label> 
+			<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('LBL_PROYECTO'); ?>*:</label> 
 			<input 
 				type="number" 
 				class="validate[required,custom[number]]"
@@ -389,11 +389,11 @@ JHtml::_('behavior.modal');
 			<br /> 
 			<br /> 
 			
-			<?php echo JText::_('PRECIOS_SALIDA').JText::_('PROYECTO')?>*: 
+			<?php echo JText::_('PRECIOS_SALIDA').JText::_('LBL_PROYECTO'); ?>*: 
 			<br />
 			<br /> 
 			
-			<label for="seccion"><?php echo JText::_('SECCION'); ?>*:</label>
+			<label for="seccion"><?php echo JText::_('LBL_SECCION'); ?>*:</label>
 			<input 
 				type="text" 
 				id="seccion2" 
@@ -438,7 +438,7 @@ JHtml::_('behavior.modal');
 				$valorCapacity = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unit : '';
 				$sectionCode = isset($datosObj) ? $datosObj->projectUnitSales[$i]->codeSection : '';;
 				
-				$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('SECCION').'*:</label>';
+				$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('LBL_SECCION').'*:</label>';
 				$unitsales .= '<input'; 
 				$unitsales .= '		type = "text"'; 
 				$unitsales .= '		id = "seccion_E'.$i.'"'; 
@@ -483,7 +483,7 @@ JHtml::_('behavior.modal');
 			<input type="button" class="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS')?>" /> <br /> 
 			<br /> 
 			
-			<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('PROYECTO'); ?>*:</label> 
+			<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('LBL_PROYECTO'); ?>*:</label> 
 			<input 
 				type="number" 
 				id="potenciales"

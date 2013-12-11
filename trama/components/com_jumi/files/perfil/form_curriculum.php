@@ -87,11 +87,11 @@ if ($usuario->guest == 1) {
 <!--DIVS OCULTOS QUE AGREGAN CAMPOS-->
 	<div class="_100" id="readrootProy" style="display: none">                  
 	    <input name="prPa_idHistorialProyectos" type="hidden" id="prPa_idHistorialProyectos" value="<?php echo 'NULL';?>" />
-	    <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('PROYECTO'); ?></label>
+	    <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('LBL_PROYECTO'); ?></label>
 	    <input name="prPa_nomNombreProyecto"  type="text" id="prPa_nomNombreProyecto" maxlength="70" />            
 	    <label for="prPa_urlProyectosPasados"><?php echo JText::_('URL_PROY'); ?></label>
 	    <input name="prPa_urlProyectosPasados" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados" maxlength="70" />           
-	    <label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?></label> <br />         
+	    <label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('LBL_PROYECTO'); ?></label> <br />         
 	    <textarea name="prPa_dscDescripcionProyecto" id="prPa_dscDescripcionProyecto" cols="100" rows="6" maxlength="250"></textarea>  
 	    <input type="button" value="<?php echo JText::_('QUITAR_PROY'); ?>" onclick="moreFieldsProy(this,false)" />
 	</div>
@@ -103,7 +103,7 @@ if ($usuario->guest == 1) {
             <span>
 	            <div class="_100">
 	            	<?php if ($existe == 'true') { echo '<input name="prPa_idHistorialProyectos" type="hidden" id="prPa_idHistorialProyectos" value="'.$proyectosPasados[0]->idHistorialProyectos.'" />'; }?>
-	                <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('PROYECTO'); ?></label>
+	                <label for="prPa_nomNombreProyecto"><?php echo JText::_('NOMBREPR').JText::_('LBL_PROYECTO'); ?></label>
 	                <input name="prPa_nomNombreProyecto" type="text" id="prPa_nomNombreProyecto" maxlength="70" 
 	                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->nomNombreProyecto.'"';}?>/>
 	            </div>
@@ -113,7 +113,7 @@ if ($usuario->guest == 1) {
 	                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->urlProyectosPasados.'"';}?>/>
 	            </div>
 	            <div class="_100">
-	            	<label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('PROYECTO'); ?></label> <br />           
+	            	<label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('LBL_PROYECTO'); ?></label> <br />           
 	            	<textarea name="prPa_dscDescripcionProyecto"  id="prPa_dscDescripcionProyecto" cols="100" rows="6"><?php 
 	            	if (!empty($proyectosPasados)) {echo $proyectosPasados[0]->dscDescripcionProyecto;}
 	            	?></textarea>
@@ -127,7 +127,7 @@ if ($usuario->guest == 1) {
             	for ($i = 1; $i < $noProyectos; $i++) {
 					echo '<span><div class="_100">
 						<input name="prPa_idHistorialProyectos'.($i-1).'" type="hidden" id="prPa_idHistorialProyectos'.($i-1).'" value="'.$proyectosPasados[$i]->idHistorialProyectos.'" />
-						<label for="prPa_nomNombreProyecto'.($i-1).'">'.JText::_('NOMBREPR').JText::_('PROYECTO').'</label>
+						<label for="prPa_nomNombreProyecto'.($i-1).'">'.JText::_('NOMBREPR').JText::_('LBL_PROYECTO').'</label>
                 		<input name="prPa_nomNombreProyecto'.($i-1).'" type="text" id="prPa_nomNombreProyecto'.($i-1).'" maxlength="70" value="'.$proyectosPasados[$i]->nomNombreProyecto.'" />
 		            </div>
 		            <div class="_100">
@@ -135,7 +135,7 @@ if ($usuario->guest == 1) {
 		                <input name="prPa_urlProyectosPasados'.($i-1).'" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados'.($i-1).'" maxlength="70" value="'.$proyectosPasados[$i]->urlProyectosPasados.'"/>
 		            </div>
 		            <div class="_100">
-		            	<label for="prPa_dscDescripcionProyecto'.($i-1).'">'.JText::_('DESCRIPCION').JText::_('PROYECTO').'</label> <br />           
+		            	<label for="prPa_dscDescripcionProyecto'.($i-1).'">'.JText::_('DESCRIPCION').JText::_('LBL_PROYECTO').'</label> <br />           
 		            	<textarea name="prPa_dscDescripcionProyecto'.($i-1).'"  id="prPa_dscDescripcionProyecto'.($i-1).'" cols="100" rows="6">'.$proyectosPasados[$i]->dscDescripcionProyecto.'</textarea>
 						<input type="button" value="'.JText::_('QUITAR_PROY').'" class="btnEliminar" />
 			</div></span>';
