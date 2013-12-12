@@ -173,33 +173,35 @@ JHtml::_('behavior.modal');
 			var count 		= 0;
 			
 			for (i=0; i < total; i++) {
-			    fieldName = form[i].name.substring(0,5);
-
-				switch(fieldName){
-					case "secti":
-						if(form[i].value != ''){
-				        	section[sec] = form[i].value;
-				        	sec++;
-				        }
-				        break;
-					case "unitS":
-						if(form[i].value != ''){
-				        	unitSale[unit] = form[i].value;
-				        	unit++
-				        }
-				        break;
-					case "capac":
-						if(form[i].value != ''){
-				        	capacity[cap] = form[i].value;
-				        	cap++;
-				        }
-				        break;
-					case "codeS":
-						 if(form[i].value != ''){
-					     	codeSection[sC] = form[i].value;
-					        sC++;
-					     }
-					     break;
+				if(form[i].name !== undefined){
+				    fieldName = form[i].name.substring(0,5);
+	
+					switch(fieldName){
+						case "secti":
+							if(form[i].value != ''){
+					        	section[sec] = form[i].value;
+					        	sec++;
+					        }
+					        break;
+						case "unitS":
+							if(form[i].value != ''){
+					        	unitSale[unit] = form[i].value;
+					        	unit++
+					        }
+					        break;
+						case "capac":
+							if(form[i].value != ''){
+					        	capacity[cap] = form[i].value;
+					        	cap++;
+					        }
+					        break;
+						case "codeS":
+							 if(form[i].value != ''){
+						     	codeSection[sC] = form[i].value;
+						        sC++;
+						     }
+						     break;
+					}
 				}
 			}
 
