@@ -7,8 +7,7 @@ class manejoImagenes {
 			$this->resize("images/fotoPerfil/".$usuario.".jpg", $usuario.".jpg", 400, 300);
 		}else{
 			echo 'no es imagen o el archivo esta corrupto <br />';
-		} 
-		
+		}
 	}
 	
 	function resize($ruta,$nombre, $max_ancho, $max_alto){

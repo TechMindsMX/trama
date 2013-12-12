@@ -480,7 +480,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 			</LEGEND>
 			<br />
 			
-			<label id="label-large"  for="descProy"><?php echo JText::_('DESCRIPCION').$textPro; ?>*:</label> 
+			<label id="label-large"  for="descProy"><?php echo JText::_('LBL_DESCRIPCION').$textPro; ?>*:</label> 
 			<br />	
 			
 			<div style= "max-width:755px;">

@@ -26,13 +26,6 @@ if ($usuario->guest == 1) {
 	$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=empresa';
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Registro de Perfil</title>
-	
-
 	<script>
 		jQuery(document).ready(function(){
 			datosxCP();
@@ -71,9 +64,7 @@ if ($usuario->guest == 1) {
 			?>
 		});
     </script>
-</head>
 
-<body>
 	<div id="contenedor">
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
             
@@ -82,11 +73,10 @@ if ($usuario->guest == 1) {
             <div id="datosFiscales">
 	                <label for="daFi_nomRazonSocial"><?php echo JText::_('RAZON_SOCIAL'); ?>:</label>
 	                <input name="daFi_nomRazonSocial" type="text" id="daFi_nomRazonSocial" maxlength="50" />
-	                <label for="daFi_rfcRFC">RFC(May&uacute;sculas)*:</label>
+	                <label for="daFi_rfcRFC"><?php echo JText::_('LBL_RFC'); ?>*:</label>
 	                <input name="daFi_rfcRFC" class="validate[required,custom[rfc]]" type="text" id="daFi_rfcRFC" maxlength="14" />
 	                <label for="daFi_nomNombreComercial"><?php echo JText::_('NOMBRE_COMERCIAL'); ?>:</label>
 	                <input name="daFi_nomNombreComercial" type="text" id="daFi_nomNombreComercial" maxlength="50" />
-	            
             </div>             
             </div>
             <div class="espaciado_titulo"><h1><?php echo JText::_('DOM_FISCAL'); ?></h1></div>            
@@ -95,7 +85,6 @@ if ($usuario->guest == 1) {
             	<?php echo JText::_('COPIAR_INFO'); ?>            
             	<input name="Copiar" class="button" id="copiarDatos" type="button" value="<?php echo JText::_('COPIAR_DATOS'); ?>" />
             	</div>
-             
                	<label for="doFi_nomCalle"><?php echo JText::_('LBL_CALLE'); ?> *:</label>
                 <input name="doFi_nomCalle" class="validate[required,custom[onlyLetterNumber]]" type="text" id="doFi_nomCalle" maxlength="70" />
 				<div class="juntos">
@@ -112,7 +101,6 @@ if ($usuario->guest == 1) {
 				</div>
 				<div>
                	<label for="doFi_nomColonias"><?php echo JText::_('LBL_COLONIA'); ?> *:</label>
-               	<!--input name="doFi_perfil_colonias_idcolonias" class="validate[required,custom[onlyLetterSp]]" type="text" id="doFi_nomColonias" maxlength="50" /-->
                	<select name="doFi_perfil_colonias_idcolonias" class="validate[required]" id="doFi_nomColonias"></select>
 				</div>
 				<div>
@@ -128,7 +116,7 @@ if ($usuario->guest == 1) {
                	<select name="doFi_perfil_pais_idpais" id="doFi_nomPais" class="validate[required]">
                		<option value="1" selected="selected">M&eacute;xico</option>
 				</select>
-				</div>
+			</div>
 			<div class="boton_enviar">
 				<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 			javascript:window.history.back();">

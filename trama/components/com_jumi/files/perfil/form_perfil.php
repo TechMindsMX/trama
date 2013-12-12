@@ -109,7 +109,6 @@ if ($usuario->guest == 1) {
 					type="text" 
 					id="daGr_nomNombre" 
 					maxlength="25" />
-			
 				<label for="daGr_nomApellidoPaterno"><?php echo JText::_('APEPAT'); ?>*:</label>
 				<input 
 					name="daGr_nomApellidoPaterno" 
@@ -117,8 +116,6 @@ if ($usuario->guest == 1) {
 					type="text" 
 					id="daGr_nomApellidoPaterno" 
 					maxlength="25" />
-			
-	
 				<label for="daGr_nomApellidoMaterno"><?php echo JText::_('APEMAT'); ?>:</label>
 				<input 
 					name="daGr_nomApellidoMaterno" 
@@ -126,7 +123,6 @@ if ($usuario->guest == 1) {
 					type="text" 
 					id="daGr_nomApellidoMaterno" 
 					maxlength="25" />
-
 				<label for="daGr_nomJobTitle"><?php echo JText::_('LBL_TITULO'); ?>:</label>
 				<input 
 					name="daGr_nomJobTitle" 
@@ -156,7 +152,6 @@ if ($usuario->guest == 1) {
 					name="daGr_Foto"
 					id="daGr_Foto"
 					type="file" />
-
 			</div>
 			<div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_FORMAS_CONTACTO'); ?></h1></div>
 			
@@ -187,7 +182,6 @@ if ($usuario->guest == 1) {
 					type="text" 
 					id="maGr_coeEmail1" 
 					maxlength="100" />
-					
 				<?php if ($existe == 'true' && isset($email[2])) { echo '<input name="maGr_idemail01" type="hidden" id="maGr_idemail01" value="'.$email[2]->idemail.'" />'; }?>
 				</div>
 				<div>
@@ -221,7 +215,6 @@ if ($usuario->guest == 1) {
                		type="text"
                		id="teGr_telTelefono1"
                		maxlength="10" />
-               		
                	<input 
                		name="teGr_perfil_tipoTelefono_idtipoTelefono1"
                		id="teGr_nomTipoTelefono1" 
@@ -236,7 +229,6 @@ if ($usuario->guest == 1) {
                		type="text" 
                		id="teGr_telTelefono2" 
                		maxlength="10" />
-               		
                	<input 
                		name="teGr_perfil_tipoTelefono_idtipoTelefono2" 
                		id="teGr_nomTipoTelefono2" 
@@ -335,7 +327,6 @@ if ($usuario->guest == 1) {
             		<?php echo JText::_('LBL_FISICA'); ?>
             	</div>
            		<div class="juntos_radio">
-            	
             	<input 
             		name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica" 
             		class="validate[required]" 
@@ -345,7 +336,6 @@ if ($usuario->guest == 1) {
             		<?php echo JText::_('LBL_MORAL'); ?>
             	</div>
           		<div class="juntos_radio">
-            	
             	<input 
             		name="daGr_perfil_personalidadJuridica_idpersonalidadJuridica"
             		class="validate[required]"
@@ -397,7 +387,6 @@ if ($usuario->guest == 1) {
 								    array('mode' => 'simple'));
 					?>
 				</div>
-          
             <br />
             <div class="boton_enviar">  
             <input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))

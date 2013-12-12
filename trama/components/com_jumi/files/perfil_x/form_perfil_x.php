@@ -103,11 +103,11 @@ if ( $tablaParam == 'perfilx_catalogoperfil' ) {
 	<div id="filtrar"><?php echo JText::_('TRAMA_DEFINE'); ?></div>
 	<div id="triangle"> </div>
 	<div>
-		<span>Es usted un gremio</span>&nbsp;&nbsp;
+		<span><?php echo JText::_('ES_GREMIO'); ?></span>&nbsp;&nbsp;
 		<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" id="<?php echo $instituciones->idcatalogoPerfil; ?>"/>
 	</div>
 	<div>
-		<span>Es usted una Institución</span>
+		<span><?php echo JText::_('ES_INSTITUCION'); ?></span>
 		<input type="checkbox" class="esgremio" name="<?php echo $instituciones->nomNombreCategoria; ?>" value="<?php echo $instituciones->idcatalogoPerfil; ?>" id="<?php echo $instituciones->idcatalogoPerfil; ?>"/>
 	</div>
 <?php
@@ -125,10 +125,10 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 		<input type="hidden" name="campo" value="<?php echo $campoTabla ?>" />
 		<input type="hidden" name="usuario" value="<?php echo $usuario->id; ?>" />
 		<input type="hidden" name="controlador" value="<?php if(!empty($datosGrabados[0]->idperfilx_respuestas)) { echo $datosGrabados[0]->idperfilx_respuestas; } ?>" />
-		<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
 		javascript:window.history.back();">
-		<input class="button" type="button" id="uncheckAll" value="Limpiar Seleccion" />
-		<input class="button" type="submit" value="Enviar" />
+		<input class="button" type="button" id="uncheckAll" value="<?php echo JText::_('ES_INSTITUCION'); ?>" />
+		<input class="button" type="submit" value="<?php echo JText::_('LBL_ENVIAR'); ?>" />
 	</div>
 	</form>
 	

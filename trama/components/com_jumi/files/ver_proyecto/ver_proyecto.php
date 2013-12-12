@@ -548,7 +548,7 @@ function codeAddress() {
      });
     } else {
     	map.setCenter(latlng);
-    	jQuery('#map-canvas').append('<p>No hay dirección</p>');
+    	jQuery('#map-canvas').append('<p><?php echo JText::_('NO_ADDRESS'); ?></p>');
     }
   });
 }
@@ -599,7 +599,7 @@ function codeAddress() {
 						var obj = eval('(' + result + ')');
 						
 						if(obj.error == "1") {
-							alert('el token no sirve');
+							alert('<?php echo JText::_("ERROR_TOKEN"); ?>');
 							
 						} else {
 							
@@ -624,7 +624,7 @@ function codeAddress() {
 					});
 					
 					request.fail(function (jqXHR, textStatus) {
-						console.log('Surguieron problemas al almacenar tu calificación');
+						alert('<?php echo JText::_("RATING_ERROR"); ?>');
 					});
 				},
 				score		: rating,
@@ -651,10 +651,10 @@ function codeAddress() {
 					var objShare = eval('('+result+')');
 
 					if (!objShare.shared) {
-						$('.shareButton').parent().append('<span>Proyecto Compartido</span>');
+						$('.shareButton').parent().append('<span><?php echo JText::_('SHARED_SUCCESS'); ?></span>');
 						$('.shareButton').remove();
 					} else {
-						alert(objShare.name+' ya habias compartido esto antes');
+						alert('<?php echo JText::_('SHARED_ALREADY'); ?>');
 					}
 				});
 			});
@@ -669,6 +669,3 @@ function codeAddress() {
 		});
     </script>
 
-<?php
-//var_dump($json);
- ?>

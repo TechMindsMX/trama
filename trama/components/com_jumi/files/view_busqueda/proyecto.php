@@ -15,12 +15,12 @@ $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
 
 if ( !$tipoPP ) {
 	$ligasPP = '<div id="ligasprod" class="barra-top2 clearfix">'.
-			   '<div id="filtrar" style="float:left;">Filtrar por: </div>'.
+			   '<div id="filtrar" style="float:left;">'.JText::_('FILTER_BY').'</div>'.
 			   '<div id="triangle"> </div>'.
-			   '<div class="barraProy">Proyectos <input  type="checkbox" id="proyecto" /></div>'.
+			   '<div class="barraProy">Proyectos <input type="checkbox" id="proyecto" /></div>'.
 			   '<div class="barraProd">Productos <input type="checkbox" id="producto" /></div>'.
 			   '<div class="barraRep">Repertorios <input type="checkbox" id="repertorio" /></div>'.
-			   '<div class="botonLimpio"><input type="button" value="Limpiar Filtro" /></div>'.
+			   '<div class="botonLimpio"><input type="button" value="'.JText::_('CLEAR_FILTER').'" /></div>'.
 			   '<div class="clearfix" id="contador"></div>'.
 			   '</div>';
 }
@@ -137,7 +137,7 @@ function tagLimpia ($data) {
 var members = <?php echo $jsonJS; ?>;
 
 $(document).ready(function(){
-	jQuery('#contador').html("<span>RESULTADOS: </span>"+members.length);
+	jQuery('#contador').html("<span>'.JText::_('LBL_RESULTADOS').' </span>"+members.length);
 	initPagination();
 	
 	jQuery("#ligasprod input").click(function () {		
@@ -151,20 +151,20 @@ $(document).ready(function(){
 				<?php 
 				if (isset($proyectos)) {
 					echo 'members = '.$proyectos.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 					initPagination();';
 				}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert("'.JText::_('FILTER_NO_RESULTS').'");'.
 						 'jQuery("#ligasprod in/home/lutek/workspaceput").prop("checked",false);';
 				} ?>
 			}else if (producto && !proyecto && !repertorio) {
 				<?php 
 				if (isset($productos)) {
 					echo 'members = '.$productos.';
-					jQuery("#contador").html("<span>RESULTADOS: </span>"+members.length);
+					jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').' </span>"+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert("'.JText::_('FILTER_NO_RESULTS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				} 
 			 	?>
@@ -172,10 +172,10 @@ $(document).ready(function(){
 				<?php
 				if (isset($repertorio)) {
 					echo 'members = '.$repertorio.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert("'.JText::_('FILTER_NO_RESULTS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';;
 				}
 				?>
@@ -183,10 +183,10 @@ $(document).ready(function(){
 				<?php
 				if (isset($prodProy)) {
 					echo 'members = '.$prodProy.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert("'.JText::_('FILTER_NO_RESULTS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				}
 				?>
@@ -194,32 +194,32 @@ $(document).ready(function(){
 				<?php
 				if (isset($repertorioProduc)) {
 					echo 'members = '.$repertorioProduc.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert("'.JText::_('FILTER_NO_RESULTS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				}?>	
 			}else if(!producto && proyecto && repertorio) {
 				<?php if (isset($repertProy)) {
 					echo 'members = '.$repertProy.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 					initPagination();';
 			 	}
 			 	else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert("'.JText::_('FILTER_NO_RESULTS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				}?>
 			 	
 			}else if( (repertorio && proyecto && producto) || (!repertorio && !proyecto && !producto) ){
 				members = <?php echo $jsonJS; ?>;
-				jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+				jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 				initPagination();
 			}
 		}else{
 			jQuery('#ligasprod input').prop('checked',false);
 			members = <?php echo $jsonJS; ?>;
-			jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+			jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 			initPagination();
 		}
 	});

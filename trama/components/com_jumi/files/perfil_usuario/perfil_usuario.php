@@ -34,10 +34,6 @@ foreach ($proyectos as $key => $value) {
 	$entity->getEditUrl($value);
 }
 
-// if(is_null($datosgenerales)){
-	// $app->redirect('index.php', 'No hay datos de usuario','notice');
-// }
-
 $document->addStyleSheet($pathJumi.'css/style.css');
 ?>
   <script type="text/javascript" src="libraries/trama/js/raty/jquery.raty.js"></script>
@@ -70,7 +66,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 			<div>
 				<div style="clear: both"></div>
 				<input id="ac-2" name="accordion-1" type="radio" />
-				<label for="ac-2">Perfil Extendido</label>
+				<label for="ac-2"><?php echo JText::_('PERFIL_EXTENDIDO'); ?></label>
 				<article class="ac-medium">
 					<?php
 					 UserData::generacampos(0, 'perfilx_catalogoperfil', 'idcatalogoPerfil', 'idcatalogoPerfilPadre', 'nomNombreCategoria', 'respuestaPerfil', $userid); 
@@ -79,7 +75,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 			</div>
 			<div>
 				<input id="ac-3" name="accordion-1" type="radio" />
-				<label for="ac-3">Funciograma</label>
+				<label for="ac-3"><?php echo JText::_('LBL_FUNCIOGRAMA'); ?></label>
 				<article class="ac-large">
 						<?php UserData::generacampos(0, 'perfilx_catalogofuncion', 'idcatalogoFuncion', 'idcatalogoFuncionPadre', 'nomNombreCategoria', 'respuestaFuncion', $userid); ?>
 
@@ -87,7 +83,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 			</div>
 			<div>
 				<input id="ac-4" name="accordion-1" type="radio" />
-				<label for="ac-4">Producci&oacute;n</label>
+				<label for="ac-4"><?php echo JText::_('PRODUCCION_FORM'); ?></label>
 				<article class="ac-large">
 						<?php UserData::generacampos(0, 'perfilx_catalogoproduccion', 'idcatalogoProduccion', 'idcatalogoProduccionPadre', 'nomNombreCategoria', 'respuestaProduccion', $userid); ?>
 					
@@ -101,7 +97,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 			
 			<div>
 				<input id="ac-2a" name="accordion-2" type="radio" checked />
-				<label for="ac-2a">Descripci&oacute;n</label>
+				<label for="ac-2a"><?php echo JText::_('PRO_DESCRIPTION'); ?></label>
 				<article class="ac-medium">
 						<div class="space-text">
 						<?php 
@@ -112,7 +108,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 			</div>
 			<div>
 				<input id="ac-3a" name="accordion-2" type="radio" />
-				<label for="ac-3a">Curr&iacute;culum</label>
+				<label for="ac-3a"><?php echo JText::_('LBL_CV'); ?></label>
 				<article class="ac-large">
 						<div class="space-text">
 						<?php 
@@ -123,7 +119,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 			</div>
 			<div>
 				<input id="ac-4a" name="accordion-2" type="radio" />
-				<label for="ac-4a">Repertorio</label>
+				<label for="ac-4a"><?php echo JText::_('LBL_REPERTORY'); ?></label>
 				<article class="ac-large">
 						<div class="space-text">
 						<?php 
@@ -143,7 +139,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
                 </div>
                 <div>
                 <input id="ac-5a" name="accordion-2" type="radio" />
-				<label for="ac-5a">Proyectos actuales</label>
+				<label for="ac-5a"><?php echo JText::_('PROY_ACTUALES'); ?></label>
 				<article class="ac-large">
 						<div class="space-text">
 						<?php 
@@ -158,10 +154,10 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 											}
 											echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
 											if ( !empty($value->logs) ) {
-												echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
+												echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JCOMENTARIOS').'</a>';
 											}
 										}
-									echo ' Creado <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
+									echo ' '.JText::_('CREATED').' <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
 									echo "</ul>";
 								}
 						?>
@@ -172,9 +168,9 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 									$fechacreacion = $valor->timestamp/1000;
 									echo '<div style="margin-bottom: 10px;">'.
 										 '<li>'.
-										 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-										 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
-										 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
+										 '<div><strong>'.JText::_('LABEL_MODIFIED').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+										 '<div><strong>'.JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+										 '<div align="justify"><strong>'.JText::_('JCOMENTARIO').'</strong>: '.$valor->comment.'</div>'.
 										 '</li>'.
 										 '</div>';
 									}
@@ -224,7 +220,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 				});
 		
 				request.fail(function (jqXHR, textStatus) {
-		 			console.log('Surguieron problemas al almacenar tu calificación');
+		 			alert('<?php echo JText::_("RATING_ERROR"); ?>');
 		    	});
 		   },
 		   score  : <?php echo $datosgenerales->score; ?>,

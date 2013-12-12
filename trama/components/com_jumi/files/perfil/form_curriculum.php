@@ -49,7 +49,7 @@ if ($usuario->guest == 1) {
 				}
 			?>
 			jQuery('.btnEliminar').click(function(){
-				var confirmar = confirm('Esta seguro que deseas eliminar este proyecto');
+				var confirmar = confirm('<?php echo JText::_("CONFIRM_REMOVE_PROY"); ?>');
 				if (confirmar){
 					eliminaProy += jQuery(this).parent().parent().children().children(':first-child').val() + ',';
 					jQuery(this).parent().parent().remove();
@@ -83,7 +83,7 @@ if ($usuario->guest == 1) {
 	    <input name="prPa_nomNombreProyecto"  type="text" id="prPa_nomNombreProyecto" maxlength="70" />            
 	    <label for="prPa_urlProyectosPasados"><?php echo JText::_('URL_PROY'); ?></label>
 	    <input name="prPa_urlProyectosPasados" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados" maxlength="70" />           
-	    <label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('LBL_PROYECTO'); ?></label> <br />         
+	    <label for="prPa_dscDescripcionProyecto"><?php echo JText::_('LBL_DESCRIPCION').JText::_('LBL_PROYECTO'); ?></label> <br />         
 	    <textarea name="prPa_dscDescripcionProyecto" id="prPa_dscDescripcionProyecto" cols="100" rows="6" maxlength="250"></textarea>  
 	    <input type="button" value="<?php echo JText::_('QUITAR_PROY'); ?>" onclick="moreFieldsProy(this,false)" />
 	</div>
@@ -105,7 +105,7 @@ if ($usuario->guest == 1) {
 	                <?php if (!empty($proyectosPasados)) {echo 'value = "'.$proyectosPasados[0]->urlProyectosPasados.'"';}?>/>
 	            </div>
 	            <div class="_100">
-	            	<label for="prPa_dscDescripcionProyecto"><?php echo JText::_('DESCRIPCION').JText::_('LBL_PROYECTO'); ?></label> <br />           
+	            	<label for="prPa_dscDescripcionProyecto"><?php echo JText::_('LBL_DESCRIPCION').JText::_('LBL_PROYECTO'); ?></label> <br />           
 	            	<textarea name="prPa_dscDescripcionProyecto"  id="prPa_dscDescripcionProyecto" cols="100" rows="6"><?php 
 	            	if (!empty($proyectosPasados)) {echo $proyectosPasados[0]->dscDescripcionProyecto;}
 	            	?></textarea>
@@ -127,7 +127,7 @@ if ($usuario->guest == 1) {
 		                <input name="prPa_urlProyectosPasados'.($i-1).'" class="validate[custom[url]]"  type="text" id="prPa_urlProyectosPasados'.($i-1).'" maxlength="70" value="'.$proyectosPasados[$i]->urlProyectosPasados.'"/>
 		            </div>
 		            <div class="_100">
-		            	<label for="prPa_dscDescripcionProyecto'.($i-1).'">'.JText::_('DESCRIPCION').JText::_('LBL_PROYECTO').'</label> <br />           
+		            	<label for="prPa_dscDescripcionProyecto'.($i-1).'">'.JText::_('LBL_DESCRIPCION').JText::_('LBL_PROYECTO').'</label> <br />           
 		            	<textarea name="prPa_dscDescripcionProyecto'.($i-1).'"  id="prPa_dscDescripcionProyecto'.($i-1).'" cols="100" rows="6">'.$proyectosPasados[$i]->dscDescripcionProyecto.'</textarea>
 						<input type="button" value="'.JText::_('QUITAR_PROY').'" class="btnEliminar" />
 			</div></span>';
@@ -136,7 +136,7 @@ if ($usuario->guest == 1) {
             ?>
             </span>
             <input type="button" onclick="moreFieldsProy(this,true)" value="<?php echo JText::_('AGREGAR_PROY'); ?>" /><br /><br />
-			<div>
+			<div class="boton_enviar">
 				<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 			javascript:window.history.back();">
 				<input name="Enviar" type="submit" onclick="return validar();" value="<?php echo JText::_('LBL_ENVIAR'); ?>" />
