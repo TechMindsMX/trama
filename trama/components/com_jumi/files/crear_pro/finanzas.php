@@ -28,6 +28,7 @@ $from		 			= $input->get("from",0,"int");
 $datosObj 				= JTrama::getDatos($proyid);
 $comentarios			= '';
 $secMaxLenght			= 6;
+$disabled				= '';
 
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 errorClass::manejoError($errorCode, $from, $proyid);
@@ -37,7 +38,7 @@ JHtml::_('behavior.modal');
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form2").validationEngine();
-		
+
 		<?php
 		if( !is_null($datosObj) ) {
 			require_once 'components/com_jumi/files/libreriasPHP/proyectGroup.php';
@@ -129,6 +130,11 @@ JHtml::_('behavior.modal');
 
 			if( !is_null($datosObj->projectBusinessCase) ){	
 				$validacion = '';
+			}
+			
+			if(is_null($datosObj->eventCode)){
+				echo 'jQuery("#reqCode").prop("checked", "");';
+				$disabled = 'disabled="disabled"';
 			}
 			
 			echo 'jQuery("#presupuesto").val('.$datosObj->budget.');';
@@ -237,7 +243,7 @@ JHtml::_('behavior.modal');
 			jQuery('#token').val('<?php echo $token;?>');
 			
 			if (!repetidos){
-				jQuery("#form2").submit();
+				//jQuery("#form2").submit();
 			}
 		});
 		
@@ -322,7 +328,8 @@ JHtml::_('behavior.modal');
 			class="" 
 			value=""
 			maxlength="<?php echo $secMaxLenght; ?>"
-			name="codeSection0" /> 
+			name="codeSection0"
+			disabled="<?php echo $disabled; ?>" /> 
 		<br /> 
 		
 		<input 
@@ -380,12 +387,13 @@ JHtml::_('behavior.modal');
 			<br />
 			<br /> 
 			
-			<label class="eventCodeReq" for="event_code"><?php echo JText::_('CODIGO_EVENTO_TM'); ?>:</label> 
+			<label class="eventCodeReq" for="event_code"><?php echo JText::_('CODIGO_EVxENTO_TM'); ?>:</label> 
 			<input 
 				type="text" 
 				class=""
 				id="event_code"
-				name="eventCode" /> 
+				name="eventCode"
+				disabled="<?php echo $disabled; ?>" /> 
 			<br /> 
 			<br /> 
 			
@@ -423,7 +431,8 @@ JHtml::_('behavior.modal');
 				id="codeSection2" 
 				class=""
 				maxlength="<?php echo $secMaxLenght; ?>"
-				name="codeSection2"> 
+				name="codeSection2"
+				disabled="<?php echo $disabled; ?>" /> 
 			<br />
 			<br />
 			
@@ -473,7 +482,8 @@ JHtml::_('behavior.modal');
 				$unitsales .= '		class=""';
 				$unitsales .= '		value="'.$sectionCode.'"';
 				$unitsales .= '		maxlenght="'.$secMaxLenght.'"';
-				$unitsales .= '		name = "codeSection_E'.$i.'" />';
+				$unitsales .= '		name = "codeSection_E'.$i.'"';
+				$unitsales .= '		disabled="'.$disabled.'" />';
 				$unitsales .= '	<br> ';
 				$unitsales .= '	<br> ';
 				
