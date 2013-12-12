@@ -4,7 +4,7 @@ label {
 }
 
 input[type = 'file'], input[type = 'number'], input[type = 'text'], select{
-	width: 100% !important;
+	width: 100%;
 	max-width: 540px;
 }
 .input_chica  {
@@ -14,7 +14,6 @@ input[type = 'file'], input[type = 'number'], input[type = 'text'], select{
 	float:none;
 }
 select {
-	width: 100% !important;
 	margin-bottom: 5px;
 	max-width:190px;
 	float:none;
@@ -113,6 +112,13 @@ div.inputs input#monto {
 div#otros > div {
 	margin-bottom:15px; 
 }
+#form_costos label {
+	width: 365px;
+}
+#form_costos input {
+	width: 320px;
+}
+
 /* fincostos variables*/
 
 
