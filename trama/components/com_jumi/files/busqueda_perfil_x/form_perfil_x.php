@@ -85,7 +85,14 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 			jQuery(document).ready(function() {
 				jQuery('#tree').tree({
 					/* specify here your options */
-					dnd: false
+					dnd: false,
+					onCheck: {
+                        ancestors: 'checkIfFull',
+                        descendants: 'check'
+                    },
+                    onUncheck: {
+                        ancestors: 'uncheck'
+                    }
 				});
 			});
 		</script>
