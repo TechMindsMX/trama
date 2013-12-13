@@ -179,3 +179,18 @@ div#community-wrap.cProfile .cSubmenu li {
 	display: none;
 }
 /********  fin Jomsocial **********/
+
+.botonAccesoarrecho{
+	background: #BDCC00;
+	border-radius: 5px; float: left;
+	display: block;
+	text-align: center;
+	position: relative;
+	padding: 0;
+	font-size: 14px;
+	line-height: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	position: relative;
+	text-transform: uppercase;
+}
