@@ -194,3 +194,8 @@ div#community-wrap.cProfile .cSubmenu li {
 	position: relative;
 	text-transform: uppercase;
 }
+/*** modulo roksprocket home ******/
+#rt-top-surround .animation-slideandfade .sprocket-headlines-item {
+	margin-top:0;
+}
+/*** fin modulo roksprocket home ******/
