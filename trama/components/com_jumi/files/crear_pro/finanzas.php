@@ -132,7 +132,7 @@ JHtml::_('behavior.modal');
 				$validacion = '';
 			}
 			
-			if(is_null($datosObj->eventCode)){
+			if( is_null($datosObj->eventCode) && !is_null($datosObj->productionStartDate)){
 				echo 'jQuery("#reqCode").prop("checked", "");';
 				$disabled = 'disabled="disabled"';
 			}
@@ -329,7 +329,7 @@ JHtml::_('behavior.modal');
 			value=""
 			maxlength="<?php echo $secMaxLenght; ?>"
 			name="codeSection0"
-			disabled="<?php echo $disabled; ?>" /> 
+			<?php echo $disabled; ?> /> 
 		<br /> 
 		
 		<input 
