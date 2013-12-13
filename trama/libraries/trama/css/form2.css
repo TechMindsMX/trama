@@ -10,7 +10,7 @@ input#nomProy, input#nameRecinto, input#searchTextField {
 }
 
 input[type = 'file'], input[type = 'number'], input[type = 'text'], select{
-	width: 100% !important;
+	width: 100%;
 	max-width: 265px;
 }
 #datos_finanzas_proy input[type = 'file'],#datos_finanzas_proy input[type = 'number'],#datos_finanzas_proy input[type = 'text']{
@@ -129,7 +129,6 @@ br {
 }
 
 .fieldset {
-    
 }
 
 .legend {

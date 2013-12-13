@@ -173,3 +173,9 @@ input[disabled="disabled"] {
 #slider {
 	min-height: 846px;
 }
+
+/********  Jomsocial **********/
+div#community-wrap.cProfile .cSubmenu li {
+	display: none;
+}
+/********  fin Jomsocial **********/

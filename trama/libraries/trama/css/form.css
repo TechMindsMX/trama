@@ -115,10 +115,12 @@ div#otros > div {
 #form_costos label {
 	width: 365px;
 }
-#form_costos input {
+#form_costos input[type="text"], #form_costos input[type="number"] {
 	width: 320px;
 }
-
+#form_costos input#campo {
+margin-left: 29px;
+}
 /* fincostos variables*/
 
 
