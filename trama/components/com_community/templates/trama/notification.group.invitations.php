@@ -27,7 +27,10 @@ defined('_JEXEC') or die();
 				<?php echo JText::sprintf('COM_COMMUNITY_GROUPS_INVITED_NOTIFICATION' , $row->invitor->getDisplayName() ,  '<a href="'.$row->url.'">'.$row->name.'</a>'); ?>
 			</div>
 			<div class="cStream-Actions" id="noti-answer-group-<?php echo $row->groupid; ?>" class="notiAction" >
-				<a class="action" href="javascript:void(0);" onclick="joms.jQuery('#noti-answer-group-<?php echo $row->groupid; ?>').remove(); jax.call('community' , 'notification,ajaxGroupJoinInvitation' , '<?php echo $row->groupid ?>');">
+				
+				<!-- <a class="action" href="javascript:void(0);" onclick="joms.jQuery('#noti-answer-group-<?php echo $row->groupid; ?>').remove(); jax.call('community' , 'notification,ajaxGroupJoinInvitation' , '<?php echo $row->groupid ?>');"> -->
+				<a class="action" href="javascript:void(0);" onclick="joms.groups.invitation.accept('<?php echo $row->groupid; ?>').remove(); jax.call('community' , 'notification,ajaxGroupJoinInvitation' , '<?php echo $row->groupid ?>');">
+					
 					<?php echo JText::_('COM_COMMUNITY_EVENTS_ACCEPT'); ?>
 				</a>
 				<b>&middot;</b>
