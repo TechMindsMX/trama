@@ -393,7 +393,7 @@ JHtml::_('behavior.modal');
 				class=""
 				id="event_code"
 				name="eventCode"
-				disabled="<?php echo $disabled; ?>" /> 
+				<?php echo $disabled; ?> /> 
 			<br /> 
 			<br /> 
 			
@@ -432,7 +432,7 @@ JHtml::_('behavior.modal');
 				class=""
 				maxlength="<?php echo $secMaxLenght; ?>"
 				name="codeSection2"
-				disabled="<?php echo $disabled; ?>" /> 
+				<?php echo $disabled; ?> /> 
 			<br />
 			<br />
 			
@@ -483,7 +483,7 @@ JHtml::_('behavior.modal');
 				$unitsales .= '		value="'.$sectionCode.'"';
 				$unitsales .= '		maxlenght="'.$secMaxLenght.'"';
 				$unitsales .= '		name = "codeSection_E'.$i.'"';
-				$unitsales .= '		disabled="'.$disabled.'" />';
+				$unitsales .= 		$disabled.'" />';
 				$unitsales .= '	<br> ';
 				$unitsales .= '	<br> ';
 				
