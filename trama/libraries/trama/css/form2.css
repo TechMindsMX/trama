@@ -25,8 +25,11 @@ input[type = 'file'], input[type = 'number'], input[type = 'text'], select{
 	margin-left: 30px;
 }
 .label_public {
-	width: 205px !important;
+	width: 227px !important;
 	text-transform:uppercase;
+}
+#plantilla {
+	margin-bottom: 5px;
 }
 #titulo_form{
 	color:#666666 !important;
