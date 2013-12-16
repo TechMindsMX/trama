@@ -32,7 +32,7 @@ class GantryLayoutMod_Login extends GantryLayout {
     // XHTML LAYOUT
 ?>
 
-<div id="rt-popuplogin">
+<div id="rt-popuplogin" class="rt-popuplogin-ancho">
   <?php echo $rparams->contents; ?>
 </div>
 

@@ -171,6 +171,14 @@ JHtml::_('behavior.modal');
 			var unitSale 	= new Array();
 			var capacity 	= new Array();
 			var codeSection = new Array();
+			section.length 		= 0;
+			unitSale.length 	= 0;
+			capacity.length 	= 0;
+			codeSection.length 	= 0;
+			jQuery("#seccion").val("");
+			jQuery("#unidad").val("");
+			jQuery("#inventario").val("");
+			jQuery("#codeSection").val("");
 			var repetidos 	= false;
 			var sec 		= 0;
 			var unit 		= 0;
@@ -243,7 +251,7 @@ JHtml::_('behavior.modal');
 			jQuery('#token').val('<?php echo $token;?>');
 			
 			if (!repetidos){
-				//jQuery("#form2").submit();
+				jQuery("#form2").submit();
 			}
 		});
 		
