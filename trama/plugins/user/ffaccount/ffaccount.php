@@ -38,29 +38,43 @@ class plgUserFFAccount extends JPlugin
 		
 		$db->setQuery( $query );
 		$id = $db->loadResult();
+$data = date('d H:m:s').PHP_EOL.$user['email'].PHP_EOL.__FILE__.PHP_EOL.'Antes de validacion isNew'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "w+");
+fwrite($fp, $data);
+fclose($fp);
 
 		if( $isnew ){
-			// chequea que el usuario este activado y no este bloqueado y envia al middleware
-			$this->savePerfilPersona($user);
-			$respuesta = $this->sendToMiddle($user['email'],$user['name']); 
-		
-			$this->saveUserMiddle(json_decode($respuesta),$user);
+			
+$data = date('d H:m:s').PHP_EOL.$user['email'].PHP_EOL.__FILE__.PHP_EOL.'Antes de guardar en middleware'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "w+");
+fwrite($fp, $data);
+fclose($fp);
+			if(!is_null($user['name'])){
+				$this->savePerfilPersona($user);
+				$respuesta = $this->sendToMiddle($user['email'],$user['name']); 
+				$this->saveUserMiddle(json_decode($respuesta),$user);
+			}
 		}
 	}
 	
 	function savePerfilPersona($datosUsuario){
-		
+$data = date('d H:m:s').PHP_EOL.$datosUsuario['email'].PHP_EOL.__FILE__.PHP_EOL.'guardar perfil persona'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "a+");
+fwrite($fp, $data);
+fclose($fp);
 		$nombreCompleto = explode(' ', trim($datosUsuario['name']));
 
 		$columnas[] 	= 'nomNombre';
 		$columnas[] 	= 'nomApellidoPaterno';
 		$columnas[] 	= 'users_id';
+		$columnas[] 	= 'foto';
 		$columnas[] 	= 'perfil_tipoContacto_idtipoContacto';
 		$columnas[] 	= 'perfil_personalidadJuridica_idpersonalidadJuridica';
 		
 		$values[] 		= '"'.$nombreCompleto[0].'"';
 		$values[]		= '"'.$nombreCompleto[1].'"';
 		$values[]		= '"'.$datosUsuario['id'].'"';
+		$values[]		= '"images/fotoPerfil/default.jpg"';
 		$values[]		= '1';
 		$values[]		= '0';
 		
@@ -77,6 +91,10 @@ class plgUserFFAccount extends JPlugin
 	}
 
 	function saveUserMiddle($idMiddle, $user){
+$data = date('d H:m:s').PHP_EOL.$idMiddle->id.PHP_EOL.__FILE__.PHP_EOL.'guardar en la tabla middleware'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "a+");
+fwrite($fp, $data);
+fclose($fp);
 		$values = $idMiddle->id.','.$user['id'];
 		
 		$db =& JFactory::getDBO();
@@ -91,6 +109,10 @@ class plgUserFFAccount extends JPlugin
 	}
 	
 	function sendToMiddle ($email , $name) {
+$data = date('d H:m:s').PHP_EOL.$email.PHP_EOL.__FILE__.PHP_EOL.'Enviar al middleware'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "a+");
+fwrite($fp, $data);
+fclose($fp);
 		$data =   array('email' => $email, 
 						'name' => $name,
 						'token' => $this->token
