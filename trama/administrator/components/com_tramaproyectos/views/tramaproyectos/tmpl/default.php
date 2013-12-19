@@ -4,7 +4,21 @@ defined('_JEXEC') or die('Restricted Access');
  
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
-$document = JFactory::getDocument();
+jimport('trama.class');
+
+$document 	= JFactory::getDocument();
+$app 		= JFactory::getApplication();
+$status		= $app->input->get('status', '', 'string');
+$name		= $app->input->get('name', '', 'string');
+
+if($status != '' && $name != ''){
+	foreach($this->items as $key => $value){
+		if($value->id == $name){
+			$name = $value->name;
+		}
+	}
+	$app->enqueueMessage('"'.$name.'"'.JText::_('COM_TRAMAPROYECTOS_LISTADO_MSG').JTrama::getStatusName($status), 'message');
+}
 $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 ?>
 <script>

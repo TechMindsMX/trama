@@ -10,7 +10,6 @@ class TramaProyectosModelDetalleProyecto extends JModelList
 			$temporal = $temporal->get('id');
 			
 			$datos = JTrama::getDatos($temporal);
-			
 			return $datos;
 		}
 }
