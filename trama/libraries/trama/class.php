@@ -28,23 +28,10 @@ class JTrama
 		
 		if (!empty($allNames)) {
 			foreach ($allNames as $llave => $valor) {
-				if ($valor->id == $id) {
-					switch ($valor->id) {
-						case 9:
-							$valor->fullName = JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
-							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
-							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
-							break;
-						case 10:
-							$valor->fullName = JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
-							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
-							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
-							break;
-						default:
-							$valor->fullName = JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
-							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
-							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
-					}
+				if ( $valor->id == $id ) {
+					$valor->fullName 		= JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
+					$valor->tooltipTitle 	= JText::_('TIP_'.strtoupper($valor->name).'_TITLE');
+					$valor->tooltipText 	= JText::_('TIP_'.strtoupper($valor->name).'_TEXT');
 				break;
 				}
 			}
