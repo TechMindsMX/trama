@@ -70,7 +70,7 @@ class AltaProveedores {
 		jimport('trama.class');
 		$this -> objDatos -> catName = JTrama::getCatName($this -> objDatos -> subcategory);
 		$this -> objDatos -> subCatName = JTrama::getSubCatName($this -> objDatos -> subcategory);
-		$this -> objDatos -> statusName = JTrama::getStatusName($this -> objDatos -> status);
+		$this -> objDatos -> statusName = JTrama::getStatusName($this -> objDatos -> status)->fullName;
 	}
 
 	public function getMiembrosGrupo() {

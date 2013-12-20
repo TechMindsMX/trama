@@ -17,7 +17,8 @@ jimport('trama.error_class');
 $libreriaGoogle = true;
 require_once 'libraries/trama/libreriasPP.php';
 require_once 'components/com_jumi/files/libreriasPHP/validacionFiscal.php';
-JHtml::_('behavior.modal');
+JHTML::_('behavior.tooltip');
+
 validacionFiscal($usuario);
 
 $userMiddleId 			= UserData::getUserMiddlewareId($usuario->id);
@@ -210,10 +211,11 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 	if( isset($datosObj) ){
 		foreach ($datosObj->logs as $key => $value) {
 			$fechacreacion = $value->timestamp/1000;
+			$statusName = JTrama::getStatusName($value->status);
 			echo '<div style="margin-bottom: 10px;">'.
 				 '<li>'.
 				 '<div><strong>'.JText::_('COM_CONTENT_MODIFIED_DATE').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-				 '<div><strong>'.JText::_('JSTATUS').'</strong>: '.JTrama::getStatusName($value->status).'</div>'.
+				 '<div><strong>'.JText::_('JSTATUS').'</strong>: '.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>'.
 				 '<div align="justify"><strong>'.JText::_('COMMENTARIOS').'</strong>: '.$value->comment.'</div>'.
 				 '</li>'.
 				 '</div>';

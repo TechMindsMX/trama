@@ -15,6 +15,8 @@ jimport("trama.class");
 jimport("trama.jsocial");
 jimport("trama.usuario_class");
 require_once 'components/com_jumi/files/ver_proyecto/solicitud_participar.php';
+JHTML::_('behavior.tooltip');
+
 
 $botonContactar		= JText::_('SOLICITA_CONTACTO');
 $input 				= JFactory::getApplication()->input;
@@ -152,7 +154,8 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 											if($value->status == 0 || $value->status == 2) {
 												echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('LBL_EDIT').'</a></span>';
 											}
-											echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
+											$statusName = JTrama::getStatusName($value->status);
+											echo 'Status <span class="statusproyecto">'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</span> ';
 											if ( !empty($value->logs) ) {
 												echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JCOMENTARIOS').'</a>';
 											}
@@ -166,10 +169,12 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 								<?php
 								foreach ($value->logs as $indice => $valor) {
 									$fechacreacion = $valor->timestamp/1000;
+									$statusName = JTrama::getStatusName($valor->status);
+									
 									echo '<div style="margin-bottom: 10px;">'.
 										 '<li>'.
 										 '<div><strong>'.JText::_('LABEL_MODIFIED').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-										 '<div><strong>'.JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+										 '<div><strong>'.JText::_('LABEL_STATUS').'</strong>: '.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>'.
 										 '<div align="justify"><strong>'.JText::_('JCOMENTARIO').'</strong>: '.$valor->comment.'</div>'.
 										 '</li>'.
 										 '</div>';

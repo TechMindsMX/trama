@@ -17,6 +17,7 @@
 	jimport('trama.jfactoryext');
 	jimport('trama.usuario_class');
 	jimport('trama.error_class');
+	JHTML::_('behavior.tooltip');
 	
 	$usuario->idMiddleware = ( $usuario->id != 0 ) ? UserData::getUserMiddlewareId($usuario->id)->idMiddleware : null;
 	
@@ -274,12 +275,14 @@ function rating($data) {
 
 function encabezado($data) {
 	$fechacreacion = $data->timeCreated/1000;
+	$statusName = JTrama::getStatusName($data->status);
+	
 	$html = '<div class="encabezado">'.
 		'<h1>'.$data->name.'</h2>'.
 		'<h2 class="mayusc">'.JTrama::getSubCatName($data->subcategory).'</h3>'.
 		'<p id="productor">'.JTrama::getProducerProfile(UserData::getUserJoomlaId($data->userId)).'</p>'.
 		'<p class="fechacreacion"> Creado '.date('d-M-Y', $fechacreacion).'</p>'.
-		'<h3 class="tipo_proy_prod mayusc">'.$data->etiquetaTipo.' - '.JTrama::getStatusName($data->status).'</h3>'.
+		'<h3 class="tipo_proy_prod mayusc">'.$data->etiquetaTipo.' - '.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</h3>'.
 		'</div>';
 	
 	return $html;
