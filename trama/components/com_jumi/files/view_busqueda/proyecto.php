@@ -137,7 +137,7 @@ function tagLimpia ($data) {
 var members = <?php echo $jsonJS; ?>;
 
 $(document).ready(function(){
-	jQuery('#contador').html("<span>'.JText::_('LBL_RESULTADOS').' </span>"+members.length);
+	jQuery('#contador').html("<span><?php echo JText::_('LBL_RESULTADOS'); ?></span>"+members.length);
 	initPagination();
 	
 	jQuery("#ligasprod input").click(function () {		
@@ -172,7 +172,7 @@ $(document).ready(function(){
 				<?php
 				if (isset($repertorio)) {
 					echo 'members = '.$repertorio.';
-					jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
+					jQuery("#contadoprojectAvatar.namer").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 					initPagination();';
 			 	}else {
 					echo 'alert("'.JText::_('FILTER_NO_RESULTS').'");'.
@@ -213,17 +213,18 @@ $(document).ready(function(){
 			 	
 			}else if( (repertorio && proyecto && producto) || (!repertorio && !proyecto && !producto) ){
 				members = <?php echo $jsonJS; ?>;
-				jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
+				jQuery("#contador").html("<span><?php echo JText::_('LBL_RESULTADOS'); ?></span> "+members.length);
 				initPagination();
 			}
 		}else{
 			jQuery('#ligasprod input').prop('checked',false);
 			members = <?php echo $jsonJS; ?>;
-			jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
+			jQuery("#contador").html("<span><?php echo JText::_('LBL_RESULTADOS'); ?></span> "+members.length);
 			initPagination();
 		}
 	});
 });
+console.log(members);
 
 function pageselectCallback (page_index, jq) {
 	var items_per_page = 9;
@@ -259,7 +260,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '</div>';
 		newcontent += '<div class="avatar">';
 		newcontent += '<a href="' + link + '">';
-		newcontent += '<img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" /></a></div>';
+		newcontent += '<img src="<?php echo $path; ?>' + members[i].avatar + '" alt="Avatar" /></a></div>';
 		newcontent += '<div class="descripcion">';
 		newcontent += '<div class="inner">';			
 		newcontent += '<div class="descText">' + members[i].description + '</div>';
