@@ -23,12 +23,12 @@ class JTrama
 		return $cats;
 	}
 
-	public static function getStatusName ($string) {
+	public static function getStatusName ($id) {
 		$allNames = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 		
 		if (!empty($allNames)) {
 			foreach ($allNames as $llave => $valor) {
-				if ($valor->id == $string) {
+				if ($valor->id == $id) {
 					switch ($valor->id) {
 						case 9:
 							$valor->fullName = JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
