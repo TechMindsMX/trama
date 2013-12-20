@@ -8,6 +8,12 @@ $document 	= JFactory::getDocument();
 $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 
 ?>
+<style>
+	input[type="button"]{
+		padding: 5px 10px;
+		font-size: 115%;
+	}
+</style>
 	<script language="JavaScript">
 		jQuery(document).ready(function(){
 			jQuery('.submit').click(function(){
