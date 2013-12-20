@@ -29,15 +29,27 @@ class JTrama
 		if (!empty($allNames)) {
 			foreach ($allNames as $llave => $valor) {
 				if ($valor->id == $string) {
-					if($valor->name == 'Listo'){
-						$statusName = 'Listo para revision';
-					} else {
-						$statusName = $valor->name;
+					switch ($valor->id) {
+						case 9:
+							$valor->fullName = 'Listo para revision';
+							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
+							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
+							break;
+						case 10:
+							$valor->fullName = 'Documentación Pendiente';
+							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
+							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
+							break;
+						default:
+							$valor->fullName = $valor->name;
+							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
+							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
 					}
+				break;
 				}
 			}
 		}
-		return $statusName;
+		return $valor;
 	}
 	
 	public static function getStatus(){
