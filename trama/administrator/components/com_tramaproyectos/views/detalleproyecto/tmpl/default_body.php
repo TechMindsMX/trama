@@ -57,7 +57,7 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 				<?php echo $proyeto->name; ?>
 			</div>
 			<div style="margin-bottom:10px; color:#FF0000;">
-				<?php echo JTrama::tipoProyProd($proyeto).' - '.$urls::getStatusName($proyeto->status); ?>			
+				<?php echo JTrama::tipoProyProd($proyeto).' - '.JTrama::getStatusName($proyeto->status)->fullName; ?>			
 			</div>
 			<?php echo $bussinesCase; ?>			
 			<div>
@@ -98,7 +98,7 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 						echo '<div style="margin-bottom: 10px;">'.
 							 '<li>'.
 							 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_MODIFIED").'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
-							 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_STATUS").'</strong>: '.JTrama::getStatusName($value->status).'</div>'.
+							 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_STATUS").'</strong>: '.JTrama::getStatusName($value->status)->fullName.'</div>'.
 							 '<div align="justify"><strong>'.JText::_("COM_TRAMAPROYECTOS_COMMENT").'</strong>: '.$value->comment.'</div>'.
 							 '</li>'.
 							 '</div>';

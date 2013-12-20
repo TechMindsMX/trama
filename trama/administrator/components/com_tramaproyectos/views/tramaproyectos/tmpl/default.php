@@ -17,7 +17,7 @@ if($status != '' && $name != ''){
 			$name = $value->name;
 		}
 	}
-	$app->enqueueMessage('"'.$name.'"'.JText::_('COM_TRAMAPROYECTOS_LISTADO_MSG').JTrama::getStatusName($status), 'message');
+	$app->enqueueMessage('"'.$name.'"'.JText::_('COM_TRAMAPROYECTOS_LISTADO_MSG').JTrama::getStatusName($status)->fullName, 'message');
 }
 $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 ?>

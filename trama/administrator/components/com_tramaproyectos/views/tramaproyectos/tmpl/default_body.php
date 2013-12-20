@@ -41,10 +41,10 @@ foreach($this->items as $i => $item):
                 	<?php echo $item->producerName; ?>
                 </td>
                 <td>
-                	<?php echo $urls::tipoProyProd($item); ?>
+                	<?php echo JTrama::tipoProyProd($item); ?>
                 </td>
                 <td>
-                	<?php echo $urls::getStatusName($item->status); ?>
+                	<?php echo JTrama::getStatusName($item->status)->fullName; ?>
                 </td>
                 <td>
                 	<?php echo $revisado_por; ?>
