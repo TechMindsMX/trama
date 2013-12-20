@@ -11,6 +11,7 @@ if ($usuario->guest == 1) {
 	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
 
+JHTML::_('behavior.tooltip');
 jimport("trama.class");
 jimport("trama.usuario_class");
 jimport("trama.jsocial");
@@ -69,7 +70,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
       <div id="contenido">  
 			<section class="ac-container" style="max-width: 100%;">
 				<div>
-					<input id="ac-2a" name="accordion-2" type="radio" />
+					<input id="ac-2a" name="accordion-2" type="radio" checked="checked" />
 			<label for="ac-2a"><?php echo JText::_('LABEL_PROYECTOS');?></label>
 					<article class="ac-medium">
 						<table class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center">
@@ -96,11 +97,13 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 									if ($value->type == 'PROJECT' && $value->status!=4) {
 										$fecha = $value->timeCreated/1000;
 										$groupId = JTrama::searchGroup($value->id);
+										$statusName = JTrama::getStatusName($value->status);
+
 										echo '<tr>';
 											
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
 											echo '<td>'.date('d-M-Y',$fecha).'</td>';
-											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
+											echo '<td>'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</td>';
 											echo '<td>
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
@@ -124,10 +127,12 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 							<?php
 									foreach ($value->logs as $indice => $valor) {
 										$fechacreacion = $valor->timestamp/1000;
+										$statusName = JTrama::getStatusName($value->status);
+										
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
 											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
-											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>'.
 											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
 											 '</div>';
@@ -170,11 +175,13 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 									if ($value->type == 'PRODUCT' && $value->status != 4) {
 										$fecha = $value->timeCreated/1000;
 										$groupId = JTrama::searchGroup($value->id);
+										$statusName = JTrama::getStatusName($value->status);
+										
 										echo "<tr>";
 										
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
 											echo '<td>'.date('d-M-Y',$fecha).'</td>';
-											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
+											echo '<td>'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</td>';
 											echo '<td>
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
@@ -201,7 +208,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
 											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
-											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>'.
 											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
 											 '</div>';
@@ -265,6 +272,8 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 									if ($value->type != 'REPERTORY' && $value->status == 4) {
 										$groupId = JTrama::searchGroup($value->id);
 										$fecha = $value->timeCreated/1000;
+										$statusName = JTrama::getStatusName($value->status);
+										
 										echo "<tr>";
 										echo '	<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
 										echo '	<td>'.date('d-M-Y',$fecha).'</td>';
@@ -288,7 +297,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
 											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
-											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>'.
 											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
 											 '</div>';
