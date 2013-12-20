@@ -31,17 +31,17 @@ class JTrama
 				if ($valor->id == $string) {
 					switch ($valor->id) {
 						case 9:
-							$valor->fullName = 'Listo para revision';
+							$valor->fullName = JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
 							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
 							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
 							break;
 						case 10:
-							$valor->fullName = 'Documentación Pendiente';
+							$valor->fullName = JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
 							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
 							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
 							break;
 						default:
-							$valor->fullName = $valor->name;
+							$valor->fullName = JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
 							$valor->tooltipTitle = 'TIP_'.strtoupper($valor->name).'_TITLE';
 							$valor->tooltipText = 'TIP_'.strtoupper($valor->name).'_TEXT';
 					}
