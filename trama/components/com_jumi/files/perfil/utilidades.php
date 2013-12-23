@@ -138,7 +138,7 @@ class getDatosObj {
 			->insert($db->quoteName($tabladb))
 			->columns($db->quoteName($col))
 			->values(implode(',', $val));
-		//echo $query.'<br />';
+		echo $query.'<br />';
 		$db->setQuery( $query );
 		$db->query();
 	}
@@ -150,7 +150,7 @@ class getDatosObj {
 			->update($db->quoteName($tabladb))
 			->set($fields)
 			->where($conditions);
-		//echo $query.'<br />';
+		echo $query.'<br />';
 		$db->setQuery( $query );
 		$db->query();
 	}
@@ -164,7 +164,7 @@ class getDatosObj {
 		$query
 			->delete($db->quoteName($tabladb))
 			->where($conditions);
-		//echo $query.'<br />';
+		echo $query.'<br />';
 		$db->setQuery($query);
 		$db->query();
 	}	

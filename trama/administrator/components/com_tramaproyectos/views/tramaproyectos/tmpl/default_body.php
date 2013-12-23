@@ -17,7 +17,7 @@ foreach($this->items as $i => $item):
 			$revisado_por = '';
 			$fecha = '';
 		}
-		
+
 		$item->joomlaId = UserData::getUserJoomlaId($item->userId);
 		
 		$item->producerName = JFactory::getUser($item->joomlaId)->name;
