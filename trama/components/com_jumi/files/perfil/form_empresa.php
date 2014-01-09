@@ -33,6 +33,9 @@ if ($usuario->guest == 1) {
 		// binds form submission and fields to the validation engine
 			jQuery("#formID").validationEngine();
 
+			<?php 
+			if(!is_null($direccionGeneral)){
+			?>
 			jQuery('#copiarDatos').click(function(){
 					jQuery('#doFi_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 					jQuery('#doFi_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
@@ -45,7 +48,10 @@ if ($usuario->guest == 1) {
 					jQuery('#doFi_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));					
 					jQuery('#doFi_nomPais').val('<?php echo $direccionGeneral->perfil_pais_idpais;?>');
 				});
-
+			<?php
+			}
+			?>
+			
 			<?php 		
 			if ($existe) {
 				echo "jQuery('#daFi_nomNombreComercial').val('".$datosFiscales->nomNombreComercial."');";
@@ -70,14 +76,12 @@ if ($usuario->guest == 1) {
             
             <div class="espaciado_titulo"><h1><?php echo JText::_('DATOS_FISCALES'); ?></h1></div>           
             <div class="datos_proy">
-            <div id="datosFiscales">
+            	<div id="datosFiscales">
 	                <label for="daFi_nomRazonSocial"><?php echo JText::_('RAZON_SOCIAL'); ?>:</label>
 	                <input name="daFi_nomRazonSocial" type="text" id="daFi_nomRazonSocial" maxlength="50" />
 	                <label for="daFi_rfcRFC"><?php echo JText::_('LBL_RFC'); ?>*:</label>
 	                <input name="daFi_rfcRFC" class="validate[required,custom[rfc]]" type="text" id="daFi_rfcRFC" maxlength="14" />
-	                <label for="daFi_nomNombreComercial"><?php echo JText::_('NOMBRE_COMERCIAL'); ?>:</label>
-	                <input name="daFi_nomNombreComercial" type="text" id="daFi_nomNombreComercial" maxlength="50" />
-            </div>             
+            	</div>             
             </div>
             <div class="espaciado_titulo"><h1><?php echo JText::_('DOM_FISCAL'); ?></h1></div>            
            		<div class="datos_proy">

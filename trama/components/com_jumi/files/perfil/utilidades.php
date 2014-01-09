@@ -37,6 +37,7 @@ class getDatosObj {
 		$db->setQuery( $query );
 	
 		$resultado = $db->loadObject();
+		
 		return $resultado;
 	
 	}
@@ -50,7 +51,6 @@ class getDatosObj {
 		->select('*')
 		->from('perfil_direccion')
 		->where('perfil_persona_idpersona = '.$idPersona.' && perfil_tipoDireccion_idtipoDireccion = ' .$tipoDireccion);
-	
 		$db->setQuery( $query );
 	
 		$resultado = $db->loadObject();
