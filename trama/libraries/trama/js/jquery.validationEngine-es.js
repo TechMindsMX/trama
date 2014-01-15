@@ -171,20 +171,24 @@
                 },
 
                 "onlyNumberRenta": {
-                    "regex": /^(?:100(?:\.0)?|[1-9][0-9]?(?:\.[0-9][0-9]?)?|1?\.[0-9][0-9]?)$/,
-                    "alertText": "* Sólo números,la tasa debe ser entre 1 y 100% y hasta 2 decimales"
+                    "regex": /^(?:100(?:\.0)?|[0-9][0-9]?(?:\.[0-9][0-9]?)?|1?\.[0-9][0-9]?)$/,
+                    "alertText": "* Sólo números,la tasa debe ser entre 0 y 100% y hasta 2 decimales"
                 },
                 "onlyNumberISEP": {
                     "regex": /^(?:12(?:\.0)?|[4-9](?:\.[0-9][0-9]?)?|1[01](?:\.[0-9][0-9]?)?|4?\.[0-9][0-9]?)$/,
                     "alertText": "* Sólo números,la tasa debe ser entre 4 y 12% y hasta 2 decimales"
                 },
+                "onlyNumberSACM": {
+                    "regex": /^(?:10(?:\.0)?|[0-9](?:\.[0-9][0-9]?)?|0[0](?:\.[0-9][0-9]?)?|4?\.[0-9][0-9]?)$/,
+                    "alertText": "* Sólo números,la tasa debe ser entre 0 y 10% y hasta 2 decimales"
+                },
                 "onlyNumberTiket": {
-                    "regex": /^(?:10(?:\.0)?|[1-9](?:\.[0-9][0-9]?)?|1?\.[0-9][0-9]?)$/,
-                    "alertText": "* Sólo números,la tasa debe ser entre 1 y 10% y hasta 2 decimales"
+                	"regex": /^(?:100(?:\.0)?|[0-9][0-9]?(?:\.[0-9][0-9]?)?|1?\.[0-9][0-9]?)$/,
+                    "alertText": "* Sólo números,la tasa debe ser entre 0 y 100% y hasta 2 decimales"
                 },
                 "onlyNumberSOGEM": {
-                    "regex": /^(?:20(?:\.0)?|[1-9](?:\.[0-9][0-9]?)?|1[0-9](?:\.[0-9][0-9]?)?|1?\.[0-9][0-9]?)$/,
-                    "alertText": "* Sólo números,la tasa debe ser entre 1 y 20% y hasta 2 decimales"
+                    "regex": /^(?:20(?:\.0)?|[0-9](?:\.[0-9][0-9]?)?|1[0-9]|2[0](?:\.[0-9][0-9]?)?|1?\.[0-9][0-9]?)$/,
+                    "alertText": "* Sólo números,la tasa debe ser entre 0 y 20% y hasta 2 decimales"
                 },
 			    "onlyLetterSp": {
                     "regex": /^[a-zA-Z ñ Ñ á Á éÉ íÍ óÓ úÚ \ . \']+$/,

@@ -201,9 +201,10 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	<input 
 		type="text"
 		id="SACM"
+		class="validate[custom[onlyNumberSACM]]"
 		maxlength="5"
 		value="6"
-		name="sacm" readonly /> %
+		name="sacm" /> %
 	</div>
 	<label for="SOGEM"> <?php echo JText::_('LBL_SOGEM'); ?>: </label> 
 	<input 
