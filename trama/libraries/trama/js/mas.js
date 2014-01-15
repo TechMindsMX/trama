@@ -38,48 +38,35 @@ jQuery("#form2 select").click(function() {
 });
 
 jQuery("#form2 select").change(function(){
-
 	var categoriaSeleccionada = jQuery(this).find('option:selected');
 	var selectedCategoria = categoriaSeleccionada.text();
 	var valortextarea = $('#tagsArea').val();
 
 	if (valortextarea == "") {
-
 	    $('#tagsArea').val(selectedCategoria);
-
 	} else {
-
-	    var arreglo = valortextarea.split(',');
-	    var cuantos = arreglo.length;
-	    	    
-	    arrayCat = findReplace(cuantos, selectedCategoria, arreglo, temp, tmpSub);
-	    valor_final = arrayCat.join(',');
-	    $('#tagsArea').val(valor_final);
-
+	    var arreglo 	= valortextarea.split(',');
+	    var cuantos 	= arreglo.length;
+	    var arrayCat 	= findReplace(cuantos, selectedCategoria, arreglo, temp, tmpSub);
+	    var uniqueList 	= jQuery.unique(arrayCat);
+	    console.log(uniqueList);
+		var valorFinal 	= uniqueList.join(',');
+		
+	    $('#tagsArea').val(valorFinal);
 	}
-
 });
 
+
 function findReplace(cuantos, valor, arreglo, tmpCategoriaSeleccionada, tmpSubCategoriaSeleccionada) {
-
 	for (var i = 0; i < cuantos; i++) {
-
 	    if (arreglo[i] == valor || arreglo[i] == tmpCategoriaSeleccionada || arreglo[i] == tmpSubCategoriaSeleccionada) {
-	    
 	        arreglo[i] = valor;
-	        
 	        break;
-
 	    } else if (i == cuantos-1){
-
 	        arreglo[cuantos] = valor;
-
 	    }
-
 	}
-
 	return arreglo;
-
 }
 
 emptyKeys();
@@ -102,6 +89,7 @@ function emptyKeys() {
 	}
 	
 }
+
 //validacion banner
 function loadImage(input1) {
     var input, file, fr, img;
