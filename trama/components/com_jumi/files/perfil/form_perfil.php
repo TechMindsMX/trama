@@ -134,7 +134,7 @@ if ($usuario->guest == 1) {
 				<label for="daGr_nomCompania"><?php echo JText::_('LBL_COMPANIA'); ?>:</label>
 				<input 
 					name="daGr_nomCompania" 
-					class="validate[custom[onlyLetterSp]]" 
+					class="validate[custom[onlyNumberSp]]" 
 					type="text" 
 					id="compania" 
 					maxlength="25" />
