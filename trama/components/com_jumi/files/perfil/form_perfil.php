@@ -32,9 +32,9 @@ if ($usuario->guest == 1) {
 			
 			jQuery('#freelance').change(function () {
 				if(!this.checked) {
-					jQuery('#companiadiv').fadeIn();
+					jQuery('#companiadiv').show();
 				} else {
-					jQuery('#companiadiv').fadeOut();
+					jQuery('#companiadiv').hide();
 					jQuery('#companiadiv input').val('');
 				}
 			});
@@ -134,7 +134,7 @@ if ($usuario->guest == 1) {
 				<label for="daGr_nomCompania"><?php echo JText::_('LBL_COMPANIA'); ?>:</label>
 				<input 
 					name="daGr_nomCompania" 
-					class="validate[custom[onlyNumberSp]]" 
+					class="validate[custom[onlyLetterNumber]]" 
 					type="text" 
 					id="compania" 
 					maxlength="25" />

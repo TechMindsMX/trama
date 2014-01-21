@@ -395,7 +395,7 @@ JHtml::_('behavior.modal');
 			<br />
 			<br /> 
 			
-			<label class="eventCodeReq" for="event_code"><?php echo JText::_('CODIGO_EVxENTO_TM'); ?>:</label> 
+			<label class="eventCodeReq" for="event_code"><?php echo JText::_('CODIGO_EVENTO_TM'); ?>:</label> 
 			<input 
 				type="text" 
 				class=""

@@ -151,6 +151,7 @@ class procesamiento extends manejoImagenes {
 	function get_direccion($dataGral){
 		$this->tabla = 'perfil_direccion';
 		$this->tipoContacto = 1;
+		
 		$this->grabarDatosPerfil($this->direccion, $this->tabla, $this->tipoContacto, $dataGral);
 	}
 	function get_datosFiscales($dataGral){

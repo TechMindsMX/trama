@@ -1,9 +1,9 @@
 <?php
 
 if ($_SERVER['SERVER_ADDR'] != 'localhost' && $_SERVER['SERVER_ADDR'] != '::1' ) {
-	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070');
+	define('MIDDLE', 'http://192.168.0.122:7272');
 } else {
-	define('MIDDLE', 'http://192.168.0.122:7070');
+	define('MIDDLE', 'http://192.168.0.122:7272');
 }
 $fun = is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
 include('../../../configuration.php');
