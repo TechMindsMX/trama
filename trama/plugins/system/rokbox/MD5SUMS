@@ -10,7 +10,7 @@ de4f52b567b311f1d129647fed581d0b assets/admin/css/fields.css
 962ec02cfe3ec4ad5b6e4e1cde547d02 assets/fonts/rokbox.eot
 8a3edb0428f11a404535d9134c90063f assets/index.html
 8a3edb0428f11a404535d9134c90063f assets/js/index.html
-bede230425522834d51c45ecd41c4c07 assets/js/rokbox.js
+0433a087a1ba7ec94603601f6fd766ef assets/js/rokbox.js
 8a3edb0428f11a404535d9134c90063f assets/styles/index.html
 ecac25ec24e63e38b48be41e6e9e477b assets/styles/rokbox.css
 8a3edb0428f11a404535d9134c90063f fields/assets/index.html
@@ -30,5 +30,5 @@ f1df38847eed39777d1bf0246104ce51 fields/textplus.php
 8a3edb0428f11a404535d9134c90063f language/index.html
 8a3edb0428f11a404535d9134c90063f lib/index.html
 f5ac375ef3a1b44720c512e68d72d913 lib/pq.php
-257fbbf62399a11152ee776296c341a6 rokbox.php
-84105c112a86804c01a13e0a254c0cab rokbox.xml
+1d63153a61b7c3f0aae01e5f89ef505c rokbox.php
+a49b57cc6b81ed5cfc15254c8a55a8fb rokbox.xml

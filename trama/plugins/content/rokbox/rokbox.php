@@ -1,6 +1,6 @@
 <?php
 /**
- * @version   $Id: rokbox.php 9547 2013-04-22 19:22:19Z djamil $
+ * @version   $Id: rokbox.php 14087 2013-10-03 01:30:39Z djamil $
  * @author    RocketTheme http://www.rockettheme.com
  * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 
 class plgContentRokbox extends JPlugin
 {
-    protected $_version = '2.0.4';
+    protected $_version = '2.0.6';
     protected $_basepath = '/plugins/content/rokbox/';
 
     function plgContentRokbox(&$subject, $params)
@@ -72,7 +72,7 @@ class plgContentRokbox extends JPlugin
             $href   = $element->attr('href');
 
             if (
-                !preg_match("/\.(jpe?g|png|gif|bmp|tiff?)$/", $href, $extension) ||
+                !preg_match("/\.(jpe?g|png|gif|bmp|tiff?)$/i", $href, $extension) ||
                 !is_file($href)
             ) continue;
 

@@ -2,12 +2,12 @@
 <extension group="system" method="upgrade" type="plugin" version="2.5">
 	<name>System - RokBox</name>
 	<author>RocketTheme, LLC</author>
-	<creationDate>May 30, 2013</creationDate>
+	<creationDate>November 5, 2013</creationDate>
 	<copyright>(C) 2005 - 2013 RocketTheme, LLC. All rights reserved.</copyright>
 	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>support@rockettheme.com</authorEmail>
 	<authorUrl>http://www.rockettheme.com</authorUrl>
-	<version>2.0.4</version>
+	<version>2.0.6</version>
 	<description><![CDATA[
         <div class="rokbox-description">
         <img src="../plugins/system/rokbox/assets/admin/images/rokbox.jpg" class="img-padding" /><h1>RokBox2</h1>

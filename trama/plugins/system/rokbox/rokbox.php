@@ -1,6 +1,6 @@
 <?php
 /**
- * @version   $Id: rokbox.php 9678 2013-04-24 18:01:22Z djamil $
+ * @version   $Id: rokbox.php 14085 2013-10-03 01:07:39Z djamil $
  * @author    RocketTheme http://www.rockettheme.com
  * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -16,7 +16,7 @@ class plgSystemRokBox extends JPlugin
 	/**
 	 * @var string
 	 */
-	protected $_version = '2.0.4';
+	protected $_version = '2.0.6';
 	/**
 	 * @var string
 	 */
@@ -55,7 +55,7 @@ class plgSystemRokBox extends JPlugin
 
 		$this->compileLess();
 		$this->compileJS();
-		$document->addScriptDeclaration("if (typeof RokBoxSettings == 'undefined') RokBoxSettings = {pc: '" . $this->params->get('viewport_pc', 100) . "'}");
+		$document->addScriptDeclaration("if (typeof RokBoxSettings == 'undefined') RokBoxSettings = {pc: '" . $this->params->get('viewport_pc', 100) . "'};");
 
 		self::$_assetsLoad = true;
 
