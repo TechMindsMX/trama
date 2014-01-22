@@ -40,11 +40,16 @@ $breakeven				= 0;
 $breakevenCalc			= 0;
 $eventCode				= '';
 $codeSection			= '';
+$style					= '';
 
 errorClass::manejoError($errorCode, $from, $proyid);
 
 $action = 'index.php?option=com_jumi&view=application&fileid=31';
 
+$mensajeRevision = JText::_('ENVIAR_REVISION');
+$ligaSendReview = '<span class="liga" id="revision">
+				     <a href="#">'.$mensajeRevision.'</a>'.
+				  '</span>';
 ?>
 <script>
 	emptyKeys();
@@ -69,10 +74,11 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 			if($count == 2) {
 				$botonRevision = '';
 			}
-
+			
 			if( ($datosObj->status == 0 || $datosObj->status == 2) ) {
 				if($datosObj->status == 2) {
 					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
+					$style = 'style="left:42.4%"';
 				}
 				
 				if(empty($datosObj->providers)){
@@ -92,11 +98,11 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
 								   	  '</span>';
 									  
-					$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
+				$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
 
-					$ligaFinantialData = '<span class="liga">
-										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
-									   	  '</span>';
+				$ligaFinantialData = '<span class="liga">
+									  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
+								   	  '</span>';
 			}
 			
 			foreach ($subCategorias as $key => $value) {
@@ -171,7 +177,7 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 				var breakcapt = parseInt(breakeven);
 				var breakcalc = parseInt(breakevencalc);
 				
-				if( (suma == presupuesto) && (breakcapt == breakcalc) ) {
+				if( (suma == presupuesto) && (breakcapt == breakcalc)  && (presupuesto > 0 && breakcapt > 0)  ) {
 					if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
 						if( jQuery('#status').val() == 0 ) {
 							jQuery('#status').val(9);
@@ -560,8 +566,9 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 		</fieldset>
 	</div>
 	
-	<div class="barra-top" id="otras_ligas">
+	<div class="barra-top" id="otras_ligas" <?php echo $style; ?>>
 		<?php 
+			echo $ligaSendReview;
 			echo $ligaEditProveedores;
 			echo $ligaCostosVariable;
 			echo $ligaFinantialData;
@@ -573,5 +580,5 @@ $action = 'index.php?option=com_jumi&view=application&fileid=31';
 		javascript:window.history.back();">
 	<input type="button" class="button" id="guardar" value="<?php echo JText::_('LBL_GUARDAR'); ?>">
 	</div>
-	<?php echo $botonRevision; ?>	
+	
 </form>
