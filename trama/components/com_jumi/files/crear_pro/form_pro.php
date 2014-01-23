@@ -167,8 +167,7 @@ $ligaSendReview = '<span class="liga" id="revision">
 			    	deletePhotos[delet] = jQuery(this).val();
 			        delet++;
 			    }
-			});
-			
+			});			
 			
 			jQuery('#projectPhotosIds').val( photos.join(',') );
 			jQuery('#deleteprojectPhotosIds').val( deletePhotos.join(',') );
