@@ -256,7 +256,7 @@ class procesamiento extends manejoImagenes {
 			}
 
 			foreach ($data as $key => $value) {
-				if (!empty($value) || $data['freelance'] == 0 ) {					
+				if (!empty($value)) {					
 			        $col[] = mysql_real_escape_string($key);
 					$val[] = "'".mysql_real_escape_string($value)."'";
 				}
@@ -340,7 +340,6 @@ class procesamiento extends manejoImagenes {
 				if( ($tabladb == 'perfil_direccion') && ($data['perfil_tipoDireccion_idtipoDireccion'] == 1) ){
 					$conditions = ($campoId. ' = '.$datosUsuario->id. '&& perfil_tipoDireccion_idtipoDireccion = 1');
 					$resultado->updateFields($tabladb, $fields, $conditions);
-
 				} elseif (($tabladb == 'perfil_direccion') && ($data['perfil_tipoDireccion_idtipoDireccion'] == 2)) {
 					$conditions = ($campoId. ' = '.$datosUsuario->id. ' && perfil_tipoDireccion_idtipoDireccion = 2');
 					$resultado->updateFields($tabladb, $fields, $conditions);
@@ -500,6 +499,7 @@ if ($form == 'perfil') {
 } elseif ($form == 'empresa') {
 	$datos_fiscales = $datos->get_datosFiscales($objDatos);
 	$domicilio_fiscales = $datos->get_domicilioFiscal($objDatos);
+
 	$allDone =& JFactory::getApplication();
 	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16', 'Sus datos fueron grabados exitosamente' );
 

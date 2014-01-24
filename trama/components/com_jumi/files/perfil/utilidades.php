@@ -132,39 +132,46 @@ class getDatosObj {
 	}
 	
 	function insertFields($tabladb, $col, $val){
+		var_dump($tabladb);
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query
 			->insert($db->quoteName($tabladb))
 			->columns($db->quoteName($col))
 			->values(implode(',', $val));
-		echo $query.'<br />';
+		
+		// echo $query.'<br />';
+		
 		$db->setQuery( $query );
 		$db->query();
 	}
 	
 	function updateFields($tabladb, $fields, $conditions){
+		var_dump($tabladb);
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query
 			->update($db->quoteName($tabladb))
 			->set($fields)
 			->where($conditions);
-		echo $query.'<br />';
+		
+		// echo $query.'<br />';
+		
 		$db->setQuery( $query );
 		$db->query();
 	}
 	
 	function deleteFields($tabladb, $conditions){
-	
-		$db = JFactory::getDBO();
-		
-		$query = $db->getQuery(true);
+		var_dump($tabladb);	
+		$db 	= JFactory::getDBO();
+		$query 	= $db->getQuery(true);
 		
 		$query
 			->delete($db->quoteName($tabladb))
 			->where($conditions);
-		echo $query.'<br />';
+		
+		// echo $query.'<br />';
+		
 		$db->setQuery($query);
 		$db->query();
 	}	
