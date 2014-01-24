@@ -58,8 +58,8 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 			</div>
 			<?php 
 	  		echo '<div id="contactar">'.
-		  			participar($datosgenerales,$botonContactar).
-		  			'</div>';
+	  			participar($datosgenerales->users_id, $botonContactar).
+	  			'</div>';
 		  	?>
 			<div id="agrega_amigo" class="button"><?php echo JTramaSocial::addFriendJS($userid, $usuario); ?></div>
 			<div style="clear: both;"></div>

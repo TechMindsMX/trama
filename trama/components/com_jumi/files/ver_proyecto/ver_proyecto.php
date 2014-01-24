@@ -301,7 +301,7 @@ function informacionTmpl($data, $params) {
 		case 'finanzas':
 			$izquierda = avatar($data).
 				'<div class="gantry-width-spacer flotado">'.
-		  		participar($data,$botonContactar).
+		  		participar($data->userIdJoomla,$botonContactar).
 				'</div>'.
 				'<div class="gantry-width-spacer flotado">'.
 				irGrupo($data).
@@ -314,7 +314,7 @@ function informacionTmpl($data, $params) {
 		default:
 			$izquierda = avatar($data).
 				'<div class="gantry-width-spacer flotado">'.
-		  		participar($data,$botonContactar).
+		  		participar($data->userIdJoomla,$botonContactar).
 				'</div>'.
 				
 				'<div class="gantry-width-spacer flotado">'.
