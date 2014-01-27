@@ -166,9 +166,9 @@ if (isset($proyecto->miembrosGrupo)) {
 					<label for="advanceDate">'.JText::_('JDATE').'</label>
 					<select name="advanceDate" id="fecha">'; 
 		
-		foreach ($proyecto->fechasPago as $key => $value) {
-			$selected 	= ($value == $fechaAnticipo ) ? 'selected' : '';
-			$html 		.= '<option value="'.$value.'" '.$selected.' >'.$value.'</option>';
+		foreach ($proyecto->fechasPago as $key => $value2) {
+			$selected 	= ($value2== $fechaAnticipo ) ? 'selected' : '';
+			$html 		.= '<option value="'.$value2.'" '.$selected.' >'.$value2.'</option>';
 		}
 		
 		$html .= '	</select>
@@ -179,10 +179,15 @@ if (isset($proyecto->miembrosGrupo)) {
 					<input name="settlementQuantity" type="number" min="1000" id="monto" value="'.$settlementQuantity.'" />
 					<label for="settlementDate">'.JText::_('JDATE').'</label>
 					<select name="settlementDate" id="fecha">';
-				
-		foreach ($proyecto->fechasPago as $key => $value) {
-			$selected = ($value == $fechaLiquidacion ) ? 'selected' : '';
-			$html .= '<option value="'.$value.'" '.$selected.' >'.$value.'</option>';
+		
+		if ($proyecto->objDatos->userId == $value->memberid) {
+			$value2 = ($proyecto->objDatos->premiereEndDate);
+			$html .= '<option value="'.$value2.'" '.$selected.' >'.$value2.'</option>';
+		} else {	
+			foreach ($proyecto->fechasPago as $key => $value2) {
+				$selected = ($value2 == $fechaLiquidacion ) ? 'selected' : '';
+				$html .= '<option value="'.$value2.'" '.$selected.' >'.$value2.'</option>';
+			}
 		}
 		
 		$html .= '	</select>

@@ -165,17 +165,15 @@ if ($usuario->guest == 1) {
 					id="daGr_nomPaginaWeb" 
 					maxlength="100" />
 				<div>
-					<label><?php echo JText::_('LBL_CORREO'); ?> *:</label>
+				<label for="maGr_coeEmail0"><?php echo JText::_('LBL_CORREO'); ?>:</label>
 					<p><?php echo $usuario->email; ?></p>
-				</div>
-				<div>
-				<label for="maGr_coeEmail0"><?php echo JText::_('LBL_CORREO'); ?> *:</label>
 				<input 
 					name="maGr_coeEmail0" 
 					class="validate[required,custom[email]] input_chica" 
-					type="text" 
+					type="hidden" 
 					id="maGr_coeEmail0" 
-					maxlength="100" />
+					maxlength="100"
+					value="<?php echo $usuario->email; ?>" />
 				</div>	
 				<div>
 				<?php if ($existe == 'true' && isset($email[1])) { echo '<input name="maGr_idemail00" type="hidden" id="maGr_idemail00" value="'.$email[1]->idemail.'" />'; }?>
