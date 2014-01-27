@@ -17,7 +17,6 @@ jimport("trama.usuario_class");
 require_once 'components/com_jumi/files/ver_proyecto/solicitud_participar.php';
 JHTML::_('behavior.tooltip');
 
-
 $botonContactar		= JText::_('SOLICITA_CONTACTO');
 $input 				= JFactory::getApplication()->input;
 $document 			= JFactory::getDocument();
@@ -29,6 +28,9 @@ $pathJumi 			= $base.'components/com_jumi/files/perfil_usuario/';
 $proyectos	 		= JTrama::getProjectsByUser($idMiddleware->idMiddleware);
 $promedio 			= UserData::scoreUser($idMiddleware->idJoomla);
 $datosgenerales 	= UserData::datosGr($idMiddleware->idJoomla);
+if(is_null($datosgenerales)){
+	$app->redirect('index.php', ''.JText::_("JSIN_DATOS_USUARIO").'','notice');
+}
 $id_datos_generales = $datosgenerales->id;
 
 foreach ($proyectos as $key => $value) {

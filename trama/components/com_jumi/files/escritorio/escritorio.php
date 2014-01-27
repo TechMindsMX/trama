@@ -104,11 +104,13 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
 											echo '<td>'.date('d-M-Y',$fecha).'</td>';
 											echo '<td>'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</td>';
-											echo '<td>
-													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
+											echo '<td>';
+											if (isset($groupId->id)) {
+												echo '<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
 													</a>
 												  </td>';
+											}
 											echo '<td>';
 												if ( !empty($value->logs) ) {
 													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
