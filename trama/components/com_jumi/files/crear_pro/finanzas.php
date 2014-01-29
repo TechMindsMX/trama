@@ -29,6 +29,7 @@ $datosObj 				= JTrama::getDatos($proyid);
 $comentarios			= '';
 $secMaxLenght			= 6;
 $disabled				= '';
+$buttonDelete			= '';
 
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 errorClass::manejoError($errorCode, $from, $proyid);
@@ -41,6 +42,7 @@ JHtml::_('behavior.modal');
 
 		<?php
 		if( !is_null($datosObj) ) {
+			$buttonDelete = '<input type="button" class="button deleteSection"  value="'.JText::_('CPROY_FINANZAS_DELETE_SECTION').'" />';
 			require_once 'components/com_jumi/files/libreriasPHP/proyectGroup.php';
 			
 			$callback .= $datosObj->id;
@@ -164,6 +166,14 @@ JHtml::_('behavior.modal');
 		}
 		?>
 		
+		jQuery('.deleteSection').click(function(){
+			if(confirm('<?php echo JText::_('CPROY_FINANZAS_CONFIRM_DELETE'); ?>')){
+				jQuery(this).parent().hide();
+			}else{
+				alert('god');
+			}
+		});
+		
 		jQuery("#guardar, #revision").click(function (){
 			var form 		= jQuery("#form2")[0];
 			var total 		= form.length;
@@ -267,7 +277,7 @@ JHtml::_('behavior.modal');
 			jQuery('.eventCodeReq').next().addClass('validate[required,custom[eventCode]]');
 			jQuery('.eventCodeReq').next().prop('disabled', false);
 			
-			jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>*:');
+			jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('SECTION_CODE'); ?>*:');
 			jQuery('.obligatorioCodeSeccion').next().addClass('validate[required,custom[onlyLetterNumber]]');
 			jQuery('[id^="codeSection"]').prop('disabled', false);
 		}else{
@@ -276,7 +286,7 @@ JHtml::_('behavior.modal');
 			jQuery('.eventCodeReq').next().removeClass();
 			jQuery('.eventCodeReq').next().attr('disabled', 'disabled');
 			
-			jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('CODIGO_EVENTO_TM'); ?>:');
+			jQuery('.obligatorioCodeSeccion').html('<?php echo JText::_('SECTION_CODE'); ?>:');
 			jQuery('.obligatorioCodeSeccion').next('.formError').remove();
 			jQuery('.obligatorioCodeSeccion').next('').removeClass();
 			jQuery('[id^="codeSection"]').attr('disabled', 'disabled');
@@ -409,40 +419,45 @@ JHtml::_('behavior.modal');
 			<br />
 			<br /> 
 			
-			<label for="seccion"><?php echo JText::_('LBL_SECCION'); ?>*:</label>
-			<input 
-				type="text" 
-				id="seccion2" 
-				class="validate[required,custom[onlyLetterNumber]]"
-				name="section_N"> 
-			<br />
-			
-			<label for="unidad"><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
-			<input 
-				type="text" 
-				id="unidad2" 
-				class="validate[required,custom[number]]"
-				name="unitSale_N"> 
-			<br> 
-			
-			<label for="inventario"><?php echo JText::_('INVENTARIOPP'); ?>*:</label>
-			<input 
-				type="text"
-				id="inventario2" 
-				class="validate[required,custom[onlyNumberSp]]"
-				name="capacity_N"> 
-			<br />
-			
-			<label class="obligatorioCodeSeccion" for="inventario"><?php echo JText::_('SECTION_CODE'); ?>:</label>
-			<input 
-				type="text"
-				id="codeSection2" 
-				class=""
-				maxlength="<?php echo $secMaxLenght; ?>"
-				name="codeSection2"
-				<?php echo $disabled; ?> /> 
-			<br />
-			<br />
+			<div class="section_prim">
+				<label for="seccion"><?php echo JText::_('LBL_SECCION'); ?>*:</label>
+				<input 
+					type="text" 
+					id="seccion2" 
+					class="validate[required,custom[onlyLetterNumber]]"
+					name="section_N"> 
+				<br />
+				
+				<label for="unidad"><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
+				<input 
+					type="text" 
+					id="unidad2" 
+					class="validate[required,custom[number]]"
+					name="unitSale_N"> 
+				<br> 
+				
+				<label for="inventario"><?php echo JText::_('INVENTARIOPP'); ?>*:</label>
+				<input 
+					type="text"
+					id="inventario2" 
+					class="validate[required,custom[onlyNumberSp]]"
+					name="capacity_N"> 
+				<br />
+				
+				<label class="obligatorioCodeSeccion" for="inventario"><?php echo JText::_('SECTION_CODE'); ?>:</label>
+				<input 
+					type="text"
+					id="codeSection2" 
+					class=""
+					maxlength="<?php echo $secMaxLenght; ?>"
+					name="codeSection2"
+					<?php echo $disabled; ?> />
+				<br />
+				
+				<?php echo $buttonDelete; ?>
+				<br />
+				<br />
+			</div>			
 			
 			<input type="hidden" id="seccion" name="section"> 
 			<input type="hidden" id="unidad" name="unitSale"> 
@@ -456,7 +471,8 @@ JHtml::_('behavior.modal');
 				$valorCapacity = isset($datosObj) ? $datosObj->projectUnitSales[$i]->unit : '';
 				$sectionCode = isset($datosObj) ? $datosObj->projectUnitSales[$i]->codeSection : '';;
 				
-				$unitsales = '<label for="seccion_E'.$i.'">'.JText::_('LBL_SECCION').'*:</label>';
+				$unitsales = '<div class=section_'.$i.'>';
+				$unitsales .= '<label for="seccion_E'.$i.'">'.JText::_('LBL_SECCION').'*:</label>';
 				$unitsales .= '<input'; 
 				$unitsales .= '		type = "text"'; 
 				$unitsales .= '		id = "seccion_E'.$i.'"'; 
@@ -493,7 +509,10 @@ JHtml::_('behavior.modal');
 				$unitsales .= '		name = "codeSection_E'.$i.'"';
 				$unitsales .= 		$disabled.'" />';
 				$unitsales .= '	<br> ';
+				$unitsales .= 	$buttonDelete;
 				$unitsales .= '	<br> ';
+				$unitsales .= '	<br> ';
+				$unitsales .= '	</div> ';
 				
 				echo $unitsales;
 			}
