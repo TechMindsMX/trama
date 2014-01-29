@@ -229,10 +229,44 @@ class procesamiento extends manejoImagenes {
 		}
 	}
 	
+	function existe($data, $tabladb, $objDatos, $tipoContacto){
+		$existe = 0;
+		
+		switch ($tabladb) {
+			case 'perfil_persona':
+				$existe = $objDatos->existingUser($data['users_id'], $tipoContacto);
+				break;
+				
+			case 'perfil_telefono':
+				$resultado = $objDatos->telefono($data['perfil_persona_idpersona']);
+				$existe = !empty($resultado)?1:0;
+				break;
+				
+			case 'perfil_direccion':
+				$resultado = $objDatos->domicilio($data['perfil_persona_idpersona'], $data['perfil_tipoDireccion_idtipoDireccion']);
+				$existe = !empty($resultado)?1:0;
+				break;
+				
+			case 'perfil_email':
+				$resultado = $objDatos->email($data['perfil_persona_idpersona']);
+				$existe = !empty($resultado)?1:0;
+				break;
+			case 'perfil_datosfiscales':
+				$resultado = $objDatos->datosFiscales($data['perfil_persona_idpersona']);
+				$existe = !empty($resultado)?1:0;
+			default:
+				$existe = 0;
+				break;
+		}
+		
+		return $existe;
+	}
+	
 	function grabarDatosPerfil($data, $tabladb, $tipoContacto, $resultado) {
 		$db =& JFactory::getDBO();
 		$usuario =& JFactory::getUser();
-		$existe = $_GET['exi'];
+		
+		//$existe = $_GET['exi'];
 
 		if (isset($data) && !empty($data)) {
 				
@@ -241,7 +275,9 @@ class procesamiento extends manejoImagenes {
 				$idPersona = $generales->id;
 				$data['perfil_persona_idpersona'] = $idPersona;
 			}
-
+			
+			$existe = $this->existe($data, $tabladb, $resultado, $tipoContacto);
+			
 			//Guarda la imagen de perfil en el perfil de Jomsocial.
 			if ($tabladb == 'perfil_persona' && $data['perfil_tipoContacto_idtipoContacto'] == 1){
 				$campos = ' avatar = "'.$data['Foto'].'", thumb = "'.$data['Foto'].'"';
@@ -262,7 +298,7 @@ class procesamiento extends manejoImagenes {
 				}
 			}
 			
-			if (!$existe) {
+			if ($existe==0) {
 				if ($tabladb == 'perfil_telefono') {
 					for ($i = 0; $i < 3; $i++) {
 						if($data['telTelefono'.$i] != '') {
@@ -480,14 +516,12 @@ $form = $_GET['form'];
 
 //llamar a las funciones de guardado
 if ($form == 'perfil') {
+	$generales 		= $datos->get_datosGenerales($objDatos);
+	$telsGen 		= $datos->get_telsGenerales($objDatos);
+	$direccion 		= $datos->get_direccion($objDatos);
+	$mailGen 		= $datos->get_mailsGeneral($objDatos);
+	$dataGeneral	= $objDatos->datosGenerales($usuario->id, 1);
 	
-	$generales = $datos->get_datosGenerales($objDatos);
-	$telsGen = $datos->get_telsGenerales($objDatos);
-	$direccion = $datos->get_direccion($objDatos);
-	$mailGen = $datos->get_mailsGeneral($objDatos);
-	
-	$dataGeneral = $objDatos->datosGenerales($usuario->id, 1);
-
 	if ($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 2 || $dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 3){
 		$allDone =& JFactory::getApplication();
 		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13', 'Sus datos fueron grabados exitosamente' );
@@ -495,25 +529,24 @@ if ($form == 'perfil') {
 		$allDone =& JFactory::getApplication();
 		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=17', 'Sus datos fueron grabados exitosamente' );
 	}
-	
 } elseif ($form == 'empresa') {
-	$datos_fiscales = $datos->get_datosFiscales($objDatos);
+	$datos_fiscales 	= $datos->get_datosFiscales($objDatos);
 	$domicilio_fiscales = $datos->get_domicilioFiscal($objDatos);
-
-	$allDone =& JFactory::getApplication();
+	$allDone 			=& JFactory::getApplication();
+	
 	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16', 'Sus datos fueron grabados exitosamente' );
 
 } elseif ($form == 'contac') {
-	$repr = $datos->get_representante($objDatos);
-	$domicilioRep = $datos->get_domicilioRepresentate($objDatos);
-	$telsRep = $datos->get_telsRepresentante($objDatos);
-	$mailRep = $datos->get_mailRepresentante($objDatos);
+	$repr 			= $datos->get_representante($objDatos);
+	$domicilioRep 	= $datos->get_domicilioRepresentate($objDatos);
+	$telsRep 		= $datos->get_telsRepresentante($objDatos);
+	$mailRep 		= $datos->get_mailRepresentante($objDatos);
 	
-	$dat_contacto = $datos->get_contacto($objDatos);
-	$dom_contacto = $datos->get_domicilioContacto($objDatos);
-	$telsCon = $datos->get_telsContacto($objDatos);
-	$mailCon = $datos->get_mailsContactos($objDatos);
+	$dat_contacto 	= $datos->get_contacto($objDatos);
+	$dom_contacto 	= $datos->get_domicilioContacto($objDatos);
+	$telsCon 		= $datos->get_telsContacto($objDatos);
+	$mailCon 		= $datos->get_mailsContactos($objDatos);
+	$allDone 		=& JFactory::getApplication($objDatos);
 	
-	$allDone =& JFactory::getApplication($objDatos);
 	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5', 'Sus datos fueron grabados exitosamente' );
 }

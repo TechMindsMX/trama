@@ -1,6 +1,6 @@
 <?php
 class getDatosObj {
-	function existingUser($idUsuario){
+	function existingUser($idUsuario, $tipoContacto=1){
 		
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
@@ -8,7 +8,7 @@ class getDatosObj {
 		$query
 			->select('users_id')
 			->from('perfil_persona')
-			->where('users_id = '.$idUsuario);
+			->where('users_id = '.$idUsuario.' && perfil_tipoContacto_idtipoContacto = '.$tipoContacto);
 		
 		$db->setQuery( $query );
 		
@@ -106,7 +106,6 @@ class getDatosObj {
 		->where('perfil_persona_idpersona = '.$idPersona);
 	
 		$db->setQuery( $query );
-	
 		$resultado = $db->loadObject();
 	
 		return $resultado;
@@ -132,7 +131,6 @@ class getDatosObj {
 	}
 	
 	function insertFields($tabladb, $col, $val){
-		var_dump($tabladb);
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query
@@ -140,14 +138,13 @@ class getDatosObj {
 			->columns($db->quoteName($col))
 			->values(implode(',', $val));
 		
-		// echo $query.'<br />';
+		echo $query.'<br />';
 		
 		$db->setQuery( $query );
 		$db->query();
 	}
 	
 	function updateFields($tabladb, $fields, $conditions){
-		var_dump($tabladb);
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query
@@ -155,22 +152,20 @@ class getDatosObj {
 			->set($fields)
 			->where($conditions);
 		
-		// echo $query.'<br />';
+		echo $query.'<br />';
 		
 		$db->setQuery( $query );
 		$db->query();
 	}
 	
 	function deleteFields($tabladb, $conditions){
-		var_dump($tabladb);	
 		$db 	= JFactory::getDBO();
 		$query 	= $db->getQuery(true);
-		
 		$query
 			->delete($db->quoteName($tabladb))
 			->where($conditions);
 		
-		// echo $query.'<br />';
+		echo $query.'<br />';
 		
 		$db->setQuery($query);
 		$db->query();
