@@ -1,13 +1,18 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
+jimport('trama.usuario_class');
+
 $usuario = JFactory::getUser();
 
 $base = JUri::base();
 $document = JFactory::getDocument();
 $pathJumi = Juri::base().'components/com_jumi/files';
 $accion= 'index.php?option=com_jumi&view=application&fileid=2';
-$tablaGrabacion = 'perfilx_respuestas';
+$tablaRespuestas = 'perfilx_respuestas';
+$idPersJuridcaGremioInst = array( 2,3 );
+
+$usuario->persJuridicaId = UserData::getPersonaAttr('perfil_personalidadJuridica_idpersonalidadJuridica', $usuario->id);
 
 function pintaGremiosInstituciones ($tabla, $need) {
 	$db = JFactory::getDbo();
@@ -18,9 +23,9 @@ function pintaGremiosInstituciones ($tabla, $need) {
 	->where('nomNombreCategoria = "'.$need.'" AND idcatalogoPerfilPadre = 0');
 	
 	$db->setQuery($query);
-	$results = $db->loadObjectList();
+	$results = $db->loadObject();
 	
-	return $results[0];
+	return $results;
 }
 
 function buscarUsuarioExistente($tabla, $userid){
@@ -96,7 +101,7 @@ function habilita(campo) {
 
 <?php
 echo '<div id="GremiosoInstituciones" class="barra-top2">'; 
-if ( $tablaParam == 'perfilx_catalogoperfil' ) {
+if ( $tablaParam == 'perfilx_catalogoperfil' && in_array($usuario->persJuridicaId, $idPersJuridcaGremioInst)) {
 	$gremios = pintaGremiosInstituciones($tablaParam, 'Gremios');
 	$instituciones = pintaGremiosInstituciones($tablaParam, 'Instituciones');
 ?>	
@@ -117,7 +122,7 @@ echo '</div><div class="clearfix"></div>';
 <div id="tree">
 	
 <?php
-$datosGrabados = buscarUsuarioExistente($tablaGrabacion, $usuario->id);
+$datosGrabados = buscarUsuarioExistente($tablaRespuestas, $usuario->id);
 generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, $descripcionParam);
 ?>
 </div>
@@ -127,7 +132,7 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 		<input type="hidden" name="controlador" value="<?php if(!empty($datosGrabados[0]->idperfilx_respuestas)) { echo $datosGrabados[0]->idperfilx_respuestas; } ?>" />
 		<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
 		javascript:window.history.back();">
-		<input class="button" type="button" id="uncheckAll" value="<?php echo JText::_('ES_INSTITUCION'); ?>" />
+		<input class="button" type="button" id="uncheckAll" value="<?php echo JText::_('CLEAR_SELECTED'); ?>" />
 		<input class="button" type="submit" value="<?php echo JText::_('LBL_ENVIAR'); ?>" />
 	</div>
 	</form>

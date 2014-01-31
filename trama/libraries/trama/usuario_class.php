@@ -51,6 +51,22 @@ class UserData {
 		return $resultado;
 	}
 	
+	public static function getPersonaAttr ($campo,$userid){
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		
+		$query
+		->select($campo)
+		->from("perfil_persona")
+		->where("users_id=".$userid);
+		
+		$db->setQuery( $query );
+	
+		$resultado = $db->loadResult();
+	
+		return $resultado;
+	}
+	
 	public static function etiquetas ($tabla,$campo,$userid){
 		
 		$respuestas = self::respuestasPerfilx($campo, $userid);
