@@ -52,7 +52,7 @@ if ($usuario->guest == 1) {
 					echo "jQuery('#daGr_Foto_guardada').val('".$generales->Foto."');";
 					echo "jQuery('#daGr_nomPaginaWeb').val('".$generales->nomPaginaWeb."');";
 					
-					if($generales->freelance == 0) {
+					if($generales->freelance == 1) {
 						echo "jQuery('#freelance').prop('checked', true);";
 						echo "jQuery('#daGr_nomCompania').val('');";
 						echo "jQuery('#companiadiv').hide();";
@@ -139,14 +139,18 @@ if ($usuario->guest == 1) {
 					id="compania" 
 					maxlength="25" />
 				</div>
-				<label for="daGr_freelance"><?php echo JText::_('LBL_FREELANCE'); ?>:</label>
-				<input 
-					name="daGr_freelance" 
-					type="checkbox" 
-					id="freelance"
-					value="1" 
-					maxlength="25" />
-					<br>
+				
+				<div>
+					<label for="daGr_freelance"><?php echo JText::_('LBL_FREELANCE'); ?>:</label>
+					<input 
+						name="daGr_freelance" 
+						type="checkbox" 
+						id="freelance"
+						value="1" 
+						maxlength="25" />
+				</div>
+				<br>
+				
 				<label for="daGr_Foto"><?php echo JText::_('LBL_FOTO'); ?>:</label>
 				<input 
 					name="daGr_Foto"
