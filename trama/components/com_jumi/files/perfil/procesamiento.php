@@ -266,8 +266,6 @@ class procesamiento extends manejoImagenes {
 		$db =& JFactory::getDBO();
 		$usuario =& JFactory::getUser();
 		
-		//$existe = $_GET['exi'];
-
 		if (isset($data) && !empty($data)) {
 				
 			if ($tabladb != 'perfil_persona') {

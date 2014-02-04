@@ -138,8 +138,6 @@ class getDatosObj {
 			->columns($db->quoteName($col))
 			->values(implode(',', $val));
 		
-		echo $query.'<br />';
-		
 		$db->setQuery( $query );
 		$db->query();
 	}
@@ -152,8 +150,6 @@ class getDatosObj {
 			->set($fields)
 			->where($conditions);
 		
-		echo $query.'<br />';
-		
 		$db->setQuery( $query );
 		$db->query();
 	}
@@ -164,8 +160,6 @@ class getDatosObj {
 		$query
 			->delete($db->quoteName($tabladb))
 			->where($conditions);
-		
-		echo $query.'<br />';
 		
 		$db->setQuery($query);
 		$db->query();

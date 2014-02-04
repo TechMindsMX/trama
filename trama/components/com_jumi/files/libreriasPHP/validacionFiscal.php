@@ -3,27 +3,19 @@
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
 function validacionFiscal($usuario){
-	
 	$userType = tipoUsuario($usuario->id);
 	
 	if(isset($userType) && $userType->perfil_personalidadJuridica_idpersonalidadJuridica != 1){
-
 		$datosFiscales = datosFiscales($userType->id);
 		
 		if(!isset($datosFiscales)){
-			
 			$allDone =& JFactory::getApplication();
 			$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13', 'Para poder crear un proyecto tienes que llenar tus datos fiscales' );
-		
 		}
-		
 	} else {
-		
 		$allDone =& JFactory::getApplication();
 		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5', 'Persona Fisica con Actividad Empresarial o Moral' );
-	
 	}
-	
 }
 
 function tipoUsuario($usuario){
