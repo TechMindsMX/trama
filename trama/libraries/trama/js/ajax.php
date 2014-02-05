@@ -100,6 +100,10 @@ switch ($fun) {
 		echo json_encode($respuesta);
 		break;
 	
+	case 7://Eliminar ya que se tenga el servicio
+		var_dump($_POST);
+		break;
+	
 	default:
 		echo 'error';
 		break;

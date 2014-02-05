@@ -34,6 +34,7 @@ $buttonDelete			= '';
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 errorClass::manejoError($errorCode, $from, $proyid);
 JHtml::_('behavior.modal');
+
 ?>
 
 <script>
@@ -145,6 +146,7 @@ JHtml::_('behavior.modal');
 			if( !empty($datosObj->projectUnitSales) ){
 				$countunitSales = count($datosObj->projectUnitSales);
 				
+				echo 'jQuery("#seccionId").val("'.$datosObj->projectUnitSales[0]->id.'");';
 				echo 'jQuery("#seccion2").val("'.$datosObj->projectUnitSales[0]->section.'");';
 				echo 'jQuery("#unidad2").val("'.$datosObj->projectUnitSales[0]->unitSale.'");';
 				echo 'jQuery("#inventario2").val("'.$datosObj->projectUnitSales[0]->unit.'");';
@@ -165,11 +167,25 @@ JHtml::_('behavior.modal');
 			$checkednumbers = $datosObj->numberPublic; 
 		}
 		?>
-		
+
 		jQuery('.deleteSection').click(function(){
 			if(confirm('<?php echo JText::_('CPROY_FINANZAS_CONFIRM_DELETE'); ?>')){
-				jQuery(this).parent().hide();
-			}else{
+				var seccionId = jQuery(this).parent().find('input:hidden').val()
+				
+				var request = $.ajax({
+					url:"libraries/trama/js/ajax.php",
+					data: {
+						"id"		: <?php echo $proyid; ?>,
+						"sectionId"	: seccionId,
+						"fun"		: 7
+					},
+					type: 'post'
+				});
+		
+				request.done(function(result){
+				
+				});
+  			}else{
 				alert('god');
 			}
 		});
@@ -420,6 +436,7 @@ JHtml::_('behavior.modal');
 			<br /> 
 			
 			<div class="section_prim">
+				<input type="hidden" id="seccionId" value="1" />
 				<label for="seccion"><?php echo JText::_('LBL_SECCION'); ?>*:</label>
 				<input 
 					type="text" 
@@ -472,6 +489,7 @@ JHtml::_('behavior.modal');
 				$sectionCode = isset($datosObj) ? $datosObj->projectUnitSales[$i]->codeSection : '';;
 				
 				$unitsales = '<div class=section_'.$i.'>';
+				$unitsales .= '<input type="hidden" value="1" />';
 				$unitsales .= '<label for="seccion_E'.$i.'">'.JText::_('LBL_SECCION').'*:</label>';
 				$unitsales .= '<input'; 
 				$unitsales .= '		type = "text"'; 
