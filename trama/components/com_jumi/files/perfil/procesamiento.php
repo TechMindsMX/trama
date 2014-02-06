@@ -251,21 +251,23 @@ class procesamiento extends manejoImagenes {
 				$resultado = $objDatos->email($data['perfil_persona_idpersona']);
 				$existe = !empty($resultado)?1:0;
 				break;
+
 			case 'perfil_datosfiscales':
 				$resultado = $objDatos->datosFiscales($data['perfil_persona_idpersona']);
 				$existe = !empty($resultado)?1:0;
+				break;
+
 			default:
 				$existe = 0;
 				break;
 		}
-		
 		return $existe;
 	}
 	
 	function grabarDatosPerfil($data, $tabladb, $tipoContacto, $resultado) {
 		$db =& JFactory::getDBO();
 		$usuario =& JFactory::getUser();
-		
+
 		if (isset($data) && !empty($data)) {
 				
 			if ($tabladb != 'perfil_persona') {
@@ -354,7 +356,7 @@ class procesamiento extends manejoImagenes {
 				} else {
 					$resultado->insertFields($tabladb, $col, $val);
 				}
-			} else {				
+			} else {
 				$contador = count($col);
 
 				for($i = 0; $i < $contador; $i++) {
@@ -378,7 +380,7 @@ class procesamiento extends manejoImagenes {
 					$conditions = ($campoId. ' = '.$datosUsuario->id. ' && perfil_tipoDireccion_idtipoDireccion = 2');
 					$resultado->updateFields($tabladb, $fields, $conditions);
 
-				} elseif($tabladb == 'perfil_telefono'){
+				} elseif($tabladb == 'perfil_telefono') {
 					$telefonos = $resultado->telefono($datosUsuario->id);
 					$noTelefonos = count($telefonos);
 					$countData = count($data);
@@ -522,17 +524,17 @@ if ($form == 'perfil') {
 	
 	if ($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 2 || $dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 3){
 		$allDone =& JFactory::getApplication();
-		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13', 'Sus datos fueron grabados exitosamente' );
+		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13&Itemid=200', 'Sus datos fueron grabados exitosamente' );
 	} else {
 		$allDone =& JFactory::getApplication();
-		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=17', 'Sus datos fueron grabados exitosamente' );
+		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=17&Itemid=220', 'Sus datos fueron grabados exitosamente' );
 	}
 } elseif ($form == 'empresa') {
 	$datos_fiscales 	= $datos->get_datosFiscales($objDatos);
 	$domicilio_fiscales = $datos->get_domicilioFiscal($objDatos);
 	$allDone 			=& JFactory::getApplication();
 	
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16&Itemid=201', 'Sus datos fueron grabados exitosamente' );
 
 } elseif ($form == 'contac') {
 	$repr 			= $datos->get_representante($objDatos);
@@ -546,5 +548,5 @@ if ($form == 'perfil') {
 	$mailCon 		= $datos->get_mailsContactos($objDatos);
 	$allDone 		=& JFactory::getApplication($objDatos);
 	
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5&Itemid=199', 'Sus datos fueron grabados exitosamente' );
 }
