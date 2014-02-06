@@ -174,12 +174,10 @@ JHtml::_('behavior.modal');
 				var boton = this;
 				
 				var request = $.ajax({
-					url:"libraries/trama/js/ajax.php",
+					url:"<?php echo MIDDLE.PUERTO.'/trama-middleware/rest/project/deleteProjectUnitSale' ?>",
 					data: {
-						"id"		: <?php echo $proyid; ?>,
-						"token"		: "<?php echo $token; ?>",
-						"sectionId"	: seccionId,
-						"fun"		: 7
+						"projectUnitSaleId":seccionId,
+						"token":'<?php echo $token; ?>'
 					},
 					type: 'post'
 				});
@@ -439,6 +437,7 @@ JHtml::_('behavior.modal');
 			<br /> 
 			
 			<div class="section_prim">
+				<input type="hidden" id="seccionId" />
 				<label for="seccion"><?php echo JText::_('LBL_SECCION'); ?>*:</label>
 				<input 
 					type="text" 
