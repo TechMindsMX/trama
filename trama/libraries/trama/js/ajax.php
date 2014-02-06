@@ -101,7 +101,7 @@ switch ($fun) {
 		break;
 	
 	case 7://Eliminar ya que se tenga el servicio
-		var_dump($_POST);
+		echo json_encode($_POST);
 		break;
 	
 	default:
