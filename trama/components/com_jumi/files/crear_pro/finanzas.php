@@ -363,13 +363,14 @@ JHtml::_('behavior.modal');
 			value=""
 			maxlength="<?php echo $secMaxLenght; ?>"
 			name="codeSection0"
+			id="codeSection0"
 			<?php echo $disabled; ?> /> 
 		<br /> 
 		
 		<input 
 			type="button" 
 			class="button"
-			value="<?php echo JText::_('QUITAR_CAMPOS'); ?>" 
+			value="<?php echo JText::_('CPROY_FINANZAS_DELETE_SECTION'); ?>" 
 			onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
 		<br /><br />
 	</div>
@@ -436,7 +437,6 @@ JHtml::_('behavior.modal');
 			<br /> 
 			
 			<div class="section_prim">
-				<input type="hidden" id="seccionId" value="1" />
 				<label for="seccion"><?php echo JText::_('LBL_SECCION'); ?>*:</label>
 				<input 
 					type="text" 
@@ -489,7 +489,7 @@ JHtml::_('behavior.modal');
 				$sectionCode = isset($datosObj) ? $datosObj->projectUnitSales[$i]->codeSection : '';;
 				
 				$unitsales = '<div class=section_'.$i.'>';
-				$unitsales .= '<input type="hidden" value="1" />';
+				$unitsales .= '<input type="hidden" value="'.$datosObj->projectUnitSales[$i]->id.'" />';
 				$unitsales .= '<label for="seccion_E'.$i.'">'.JText::_('LBL_SECCION').'*:</label>';
 				$unitsales .= '<input'; 
 				$unitsales .= '		type = "text"'; 
@@ -537,7 +537,7 @@ JHtml::_('behavior.modal');
 		?>
 				 
 			<span id="writeroot"></span> 
-			<input type="button" class="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_CAMPOS')?>" /> <br /> 
+			<input type="button" class="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_SECCION')?>" /> <br /> 
 			<br /> 
 			
 			<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('LBL_PROYECTO'); ?>*:</label> 
