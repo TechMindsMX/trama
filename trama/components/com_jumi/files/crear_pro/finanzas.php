@@ -171,11 +171,13 @@ JHtml::_('behavior.modal');
 		jQuery('.deleteSection').click(function(){
 			if(confirm('<?php echo JText::_('CPROY_FINANZAS_CONFIRM_DELETE'); ?>')){
 				var seccionId = jQuery(this).parent().find('input:hidden').val()
+				var boton = this;
 				
 				var request = $.ajax({
 					url:"libraries/trama/js/ajax.php",
 					data: {
 						"id"		: <?php echo $proyid; ?>,
+						"token"		: "<?php echo $token; ?>",
 						"sectionId"	: seccionId,
 						"fun"		: 7
 					},
@@ -183,7 +185,7 @@ JHtml::_('behavior.modal');
 				});
 		
 				request.done(function(result){
-				
+					jQuery(boton).parent().hide();
 				});
   			}else{
 				alert('god');
