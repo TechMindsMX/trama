@@ -2,9 +2,11 @@
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 	include_once 'utilidades.php';
 	require_once 'libraries/trama/libreriasPP.php';
+
 	$usuario =& JFactory::getUser();
-$app = JFactory::getApplication();
-if ($usuario->guest == 1) {
+	$app = JFactory::getApplication();
+
+	if ($usuario->guest == 1) {
 	$return = JURI::getInstance()->toString();
 	$url    = 'index.php?option=com_users&view=login';
 	$url   .= '&return='.base64_encode($return);
@@ -33,6 +35,7 @@ if ($usuario->guest == 1) {
 			jQuery('#freelance').change(function () {
 				if(!this.checked) {
 					jQuery('#companiadiv').show();
+					jQuery('#daGr_nomCompania').val('<?php echo $generales->nomCompania; ?>');
 				} else {
 					jQuery('#companiadiv').hide();
 					jQuery('#companiadiv input').val('');
@@ -43,19 +46,19 @@ if ($usuario->guest == 1) {
 
 			<?php 		
 				if ($existe) {
-					echo "jQuery('#daGr_Foto_guardada').val('".$generales->Foto."');";
-					echo "jQuery('#daGr_nomNombre').val('".$generales->nomNombre."');";
-					echo "jQuery('#daGr_nomApellidoPaterno').val('".$generales->nomApellidoPaterno."');";
-					echo "jQuery('#daGr_nomApellidoMaterno').val('".$generales->nomApellidoMaterno."');";
-					echo "jQuery('#daGr_nomJobTitle').val('".$generales->nomJobTitle."');";
-					echo "jQuery('#daGr_nomCompania').val('".$generales->nomCompania."');";
-					echo "jQuery('#daGr_Foto_guardada').val('".$generales->Foto."');";
-					echo "jQuery('#daGr_nomPaginaWeb').val('".$generales->nomPaginaWeb."');";
+					echo "jQuery('#daGr_Foto_guardada').val('".$generales->Foto."');
+							jQuery('#daGr_nomNombre').val('".$generales->nomNombre."');
+							jQuery('#daGr_nomApellidoPaterno').val('".$generales->nomApellidoPaterno."');
+							jQuery('#daGr_nomApellidoMaterno').val('".$generales->nomApellidoMaterno."');
+							jQuery('#daGr_nomJobTitle').val('".$generales->nomJobTitle."');
+							jQuery('#daGr_nomCompania').val('".$generales->nomCompania."');
+							jQuery('#daGr_Foto_guardada').val('".$generales->Foto."');
+							jQuery('#daGr_nomPaginaWeb').val('".$generales->nomPaginaWeb."');";
 					
 					if($generales->freelance == 1) {
-						echo "jQuery('#freelance').prop('checked', true);";
-						echo "jQuery('#daGr_nomCompania').val('');";
-						echo "jQuery('#companiadiv').hide();";
+						echo "jQuery('#freelance').prop('checked', true);
+							jQuery('#daGr_nomCompania').val('');
+							jQuery('#companiadiv').hide();";
 						
 					}
 					
@@ -83,13 +86,13 @@ if ($usuario->guest == 1) {
  					}
 					
  					if ($generales->perfil_personalidadJuridica_idpersonalidadJuridica == 1) {
-						 echo 'jQuery("li:contains(\'Empresa\')").hide();';
-						 echo 'jQuery("li:contains(\'Contacto\')").hide();';
+						 echo 'jQuery("ul.barra-top li:contains(\'Empresa\')").hide();';
+						 echo 'jQuery("ul.barra-top li:contains(\'Contacto\')").hide();';
 					}
  					
 				} else {
-					 echo 'jQuery("li:contains(\'Empresa\')").hide();';
-					 echo 'jQuery("li:contains(\'Contacto\')").hide();';
+					 echo 'jQuery("ul.barra-top li:contains(\'Empresa\')").hide();';
+					 echo 'jQuery("ul.barra-top li:contains(\'Contacto\')").hide();';
 				}
 			?>
 		});
@@ -136,7 +139,7 @@ if ($usuario->guest == 1) {
 					name="daGr_nomCompania" 
 					class="validate[custom[onlyLetterNumber]]" 
 					type="text" 
-					id="compania" 
+					id="daGr_nomCompania" 
 					maxlength="25" />
 				</div>
 				

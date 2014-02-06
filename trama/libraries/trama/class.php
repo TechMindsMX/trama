@@ -214,9 +214,6 @@ class JTrama
 			}
 		}
 		
-		$value->fundStartDate = 1370284000000; // SIMULADOS
-		$value->fundEndDate = 1385284000000; // SIMULADOS
-
 		$value->fundStartDateCode 		= $value->fundStartDate;
 		$value->fundEndDateCode 		= $value->fundEndDate;
 		$value->productionStartDateCode = $value->productionStartDate;
