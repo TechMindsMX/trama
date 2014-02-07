@@ -34,7 +34,7 @@ class listadoModellistado extends JModelList
 				if($value->userId == $valor->idMiddleware){
 					$value->idJoomla 		= $valor->idJoomla;
 					$value->prodName 		= $valor->name;
-					$value->ligaEdoResult 	= '<a href="index.php?option=com_edoresult&task=estadoderesultados&id='.$value->id.'" >'.$value->name.'</a>';
+					$value->ligaEdoResult 	= '<a href="index.php?option=com_edoresult&task=projectstatement&id='.$value->id.'" >'.$value->name.'</a>';
 				}
 			}
 		}		
