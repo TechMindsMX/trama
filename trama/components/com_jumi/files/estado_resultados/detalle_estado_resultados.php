@@ -222,3 +222,7 @@ if($usuario->id != $value['userIdJoomla']){
 		</td>
 	</tr>
 </table>
+<div>
+	<input type="button" id="cancelar" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		javascript:window.history.back();">
+</div>
