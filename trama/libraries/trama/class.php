@@ -284,22 +284,28 @@ class JTrama
 	}
 	
 	public static function getStateResult($proyId){
-		$dataProyecto				 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
-		$dataGral 						= self::getDatos($proyId);
-		$user							= UserData::getUserJoomlaId($dataGral->userId);
-		$usuario						= JFactory::getUser($user);
-		$objagrupado				 	= self::agrupaIngresosEgresos($dataProyecto);
-		$objagrupado				 	= self::sumatoriaIngresos($objagrupado);
-		$objagrupado					= self::sumatoriaEgresos($objagrupado);
-		$objagrupado					= self::operacionesEstadoResult($objagrupado,$dataGral);
-		$objagrupado['proyectName'] 	= $dataGral->name;
-		$objagrupado['producerName'] 	= $usuario->name;
-		$objagrupado['breakeven'] 		= $dataGral->breakeven;
-		$objagrupado['presupuesto'] 	= $dataGral->budget;
-		$objagrupado['balance'] 		= $dataGral->balance;
-		$objagrupado['tri'] 			= $dataGral->tri;
-		$objagrupado['trf']	 			= $dataGral->trf;
-		$objagrupado['cre'] 			= $dataGral->cre;
+		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
+		$dataGral 							= self::getDatos($proyId);
+		$user								= UserData::getUserJoomlaId($dataGral->userId);
+		$usuario							= JFactory::getUser($user);
+		$objagrupado					 	= self::agrupaIngresosEgresos($dataProyecto);
+		$objagrupado					 	= self::sumatoriaIngresos($objagrupado);
+		$objagrupado						= self::sumatoriaEgresos($objagrupado);
+		$objagrupado						= self::operacionesEstadoResult($objagrupado,$dataGral);
+		$objagrupado['userIdJoomla']		= $user; 
+		$objagrupado['proyectName'] 		= $dataGral->name;
+		$objagrupado['producerName'] 		= $usuario->name;
+		$objagrupado['breakeven'] 			= $dataGral->breakeven;
+		$objagrupado['presupuesto']		 	= $dataGral->budget;
+		$objagrupado['balance'] 			= $dataGral->balance;
+		$objagrupado['tri'] 				= $dataGral->tri;
+		$objagrupado['trf']	 				= $dataGral->trf;
+		$objagrupado['cre']		 			= $dataGral->cre;
+		$objagrupado['finFunding']			= $dataGral->fundEndDate;
+		$objagrupado['FechaInicioProduc']	= $dataGral->productionStartDate;	
+		$objagrupado['FechaEstreno']		= $dataGral->premiereStartDate;
+		$objagrupado['fechafin']			= $dataGral->premiereEndDate;
+		$objagrupado['ingresosPotenciales']	= $dataGral->revenuePotential;
 				
 		return $objagrupado;
 	}
