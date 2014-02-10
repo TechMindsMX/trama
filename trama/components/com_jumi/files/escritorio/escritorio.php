@@ -23,6 +23,7 @@ $userMiddleId	= UserData::getUserMiddlewareId($userid);
 $document 		= JFactory::getDocument();
 $base 			= JUri::base();
 $proyectos 		= JTrama::getProjectsByUser($userMiddleId->idMiddleware);
+$status 		= array(5,10,6,7,8,11);
 
 foreach ($proyectos as $key => $value) {
 	$entity = new JTrama;
@@ -91,6 +92,12 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
 								</th>
+								<th width="15%">
+									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span>
+									<span class="editMedia">
+								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
+	  							    </span>
+								</th>
 							</tr>
 							<?php 
 								foreach ($proyectos as $key => $value ) {
@@ -121,7 +128,11 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 													echo '<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>';
 												}
 											echo '</td>';
-											
+											echo '<td>';
+												if(in_array($value->status, $status)){
+													echo '<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>';
+												}
+											echo '</td>';
 										echo "</tr>";
 									}
 							?>							
@@ -171,6 +182,12 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
 								</th>
+								<th width="15%">
+									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span>
+									<span class="editMedia">
+								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
+	  							    </span>
+								</th>
 							</tr>
 							<?php 
 								foreach ($proyectos as $key => $value ) {							
@@ -199,6 +216,11 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 													echo '<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>';
 												}
 											echo "</td>";
+											echo '<td>';
+												if(in_array($value->status, $status)){
+													echo '<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>';
+												}
+											echo '</td>';
 
 										echo "</tr>";
 									}
