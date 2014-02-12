@@ -134,7 +134,7 @@
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
-                    "regex": /^[0-9]{10}$/,
+                    "regex": /^[1-9]{1}?[0-9]{9}$/,
                     "alertText": "* Número de teléfono inválido"
                 },
                 "email": {
