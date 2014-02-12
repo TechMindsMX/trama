@@ -31,6 +31,10 @@ $ligaFinantialData		= '';
 JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 errorClass::manejoError($errorCode, $from, $proyid);
 
+if($errorCode==0 && $from!=0){
+	$app->enqueueMessage(JText::_('SAVED_SUCCESSFUL').'', 'message');
+}
+
 $servEdicion = JTrama::getDatos($proyid );
 $existe = $servEdicion->variableCosts;
 //definicion de campos del formulario

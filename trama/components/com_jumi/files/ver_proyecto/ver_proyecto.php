@@ -35,6 +35,10 @@
 	
 	errorClass::manejoError($errorCode, $from, $proyecto);
 	
+	if($errorCode==0 && $from!=0){
+		$app->enqueueMessage(JText::_('SAVED_SUCCESSFUL').'', 'message');
+	}
+	
 	$document->addStyleSheet($pathJumi.'css/themes/bar/bar.css');
 	$document->addStyleSheet($pathJumi.'css/nivo-slider.css');
 	$document->addStyleSheet($pathJumi.'css/style.css');
