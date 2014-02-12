@@ -72,7 +72,7 @@ function dataRecord($tabla, $campo, $valor, $idjoom, $control){
 
 function redirecciona($msg) {
 	$app = JFactory::getApplication();
-	$link = Juri::base();
+	$link = Juri::base().'index.php?option=com_jumi&view=application&fileid=17&Itemid=220';
 	$app->redirect($link, $msg, $msgType='message');
 }
 
