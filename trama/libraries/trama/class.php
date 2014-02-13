@@ -298,8 +298,6 @@ class JTrama
 		$objagrupado['breakeven'] 			= $dataGral->breakeven;
 		$objagrupado['presupuesto']		 	= $dataGral->budget;
 		$objagrupado['balance'] 			= $dataGral->balance;
-		$objagrupado['tri'] 				= $dataGral->tri;
-		$objagrupado['trf']	 				= $dataGral->trf;
 		$objagrupado['cre']		 			= $dataGral->cre;
 		$objagrupado['finFunding']			= $dataGral->fundEndDate;
 		$objagrupado['FechaInicioProduc']	= $dataGral->productionStartDate;	
@@ -419,15 +417,15 @@ class JTrama
 		$objagrupado['porcVentas'] 		= ($objagrupado['totVentas'] + $objagrupado['toAporCap'])/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
 		$objagrupado['porcInver'] 		= ($objagrupado['totInvers'] + $objagrupado['totFundin'])/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
 		$objagrupado['fincol3'] 		= $objagrupado['resultadoIE'] * $objagrupado['porcVentas'];
-		$objagrupado['retornos']	 	= $dataGral->tri+$dataGral->trf;
 		$objagrupado['resultReden']		= $objagrupado['fincol3'] * 0.10;
-		$objagrupado['resultFinan']		= $objagrupado['fincol3'] - $objagrupado['resultReden'];
-		$objagrupado['resultInver']		= ($objagrupado['resultadoIE'] * $objagrupado['porcInver']);
+		$objagrupado['resultFinan']		= $objagrupado['totFundin'] * ($dataGral->tri + $dataGral->trf);
+		$objagrupado['resultInver']		= $objagrupado['totInvers'] * $dataGral->tri;
+		$objagrupado['retornos']	 	= $objagrupado['resultFinan'] + $objagrupado['resultInver'];
 		$objagrupado['resultComic']		= 0;
 		$objagrupado['resultOtros']		= 0;
 		$objagrupado['toResultado']		= $objagrupado['resultReden'] + $objagrupado['resultFinan'] + $objagrupado['resultInver'] + $objagrupado['resultComic'] + $objagrupado['resultOtros'];
-		$objagrupado['porcentaTRI']		=$objagrupado['resultadoIE']/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
-		$objagrupado['porcentaTRF']		=$objagrupado['resultFinan']/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
+		$objagrupado['porcentaTRI']		= $dataGral->tri*100;
+		$objagrupado['porcentaTRF']		= $dataGral->trf*100;
 		
 		return $objagrupado;
 	}
