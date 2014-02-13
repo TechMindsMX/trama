@@ -548,5 +548,5 @@ if ($form == 'perfil') {
 	$mailCon 		= $datos->get_mailsContactos($objDatos);
 	$allDone 		=& JFactory::getApplication($objDatos);
 	
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5&Itemid=199', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=17&Itemid=220', 'Sus datos fueron grabados exitosamente' );
 }
