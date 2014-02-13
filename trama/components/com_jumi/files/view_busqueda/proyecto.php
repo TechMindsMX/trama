@@ -17,9 +17,9 @@ if ( !$tipoPP ) {
 	$ligasPP = '<div id="ligasprod" class="barra-top2 clearfix">'.
 			   '<div id="filtrar" style="float:left;">'.JText::_('FILTER_BY').'</div>'.
 			   '<div id="triangle"> </div>'.
-			   '<div class="barraProy">Proyectos <input type="checkbox" id="proyecto" /></div>'.
-			   '<div class="barraProd">Productos <input type="checkbox" id="producto" /></div>'.
-			   '<div class="barraRep">Repertorios <input type="checkbox" id="repertorio" /></div>'.
+			   '<div class="barraProy">'.JText::_('LABEL_PROYECTOS').' <input type="checkbox" id="proyecto" /></div>'.
+			   '<div class="barraProd">'.JText::_('LABEL_PRODUCTOS').' <input type="checkbox" id="producto" /></div>'.
+			   '<div class="barraRep">'.JText::_('LABEL_REPERTORIO').' <input type="checkbox" id="repertorio" /></div>'.
 			   '<div class="botonLimpio"><input type="button" value="'.JText::_('CLEAR_FILTER').'" /></div>'.
 			   '<div class="clearfix" id="contador"></div>'.
 			   '</div>';
@@ -252,7 +252,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="titulo">';
 		newcontent += '<div class="tituloText inner">';
 			var descripcion = members[i].name;
-			var largo = 33;
+			var largo = 27;
 			var trimmed = descripcion.substring(0, largo);
 		newcontent += '<span class="tituloProy"><a href="' + link + '">' + trimmed + '</a></span>';
 		newcontent += '<span class="catSubCat">' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
