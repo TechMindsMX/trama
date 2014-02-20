@@ -75,6 +75,12 @@ if($envio['deleteprojectPhotosIds'] != ''){
 
 $envio['photos'] 	= $images;
 
+if ($envio['photos'] == '') {
+	$url = $_SERVER['HTTP_REFERER'];
+	JFactory::getApplication()->redirect($url, JText::_('SIN_FOTOS'), 'error');
+}
+
+
 $ch					= curl_init($envio['callback']);
 $url				= MIDDLE.PUERTO."/trama-middleware/rest/project/create";
  
