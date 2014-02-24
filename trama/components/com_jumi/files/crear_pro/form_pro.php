@@ -78,7 +78,7 @@ $ligaSendReview = '<span class="liga" id="revision">
 			if( ($datosObj->status == 0 || $datosObj->status == 2) ) {
 				if($datosObj->status == 2) {
 					$comentarios = '<span class="liga"><a data-rokbox href="#" data-rokbox-element="#divContent">'.JText::_('JCOMENTARIOS').'</a></span>';
-					$style = 'style="left:42.4%"';
+					$style = '';
 				}
 				
 				if(empty($datosObj->providers)){
@@ -565,7 +565,7 @@ $ligaSendReview = '<span class="liga" id="revision">
 		</fieldset>
 	</div>
 	
-	<div class="barra-top" id="otras_ligas" <?php echo $style; ?>>
+	<div class="barra-top" id="otras_ligas">
 		<?php 
 			echo $ligaSendReview;
 			echo $ligaEditProveedores;
