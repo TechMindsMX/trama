@@ -82,20 +82,20 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
 								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
 								<div class="clase-th"><?php echo JText::_('LABEL_STATUS');?></div>
-								<div class="clase-th" width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
-								<div class="clase-th" width="15%">
+								<div class="clase-th"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
+								<div class="clase-th">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</div>
-								<div class="clase-th" width="15%">
+								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDIT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
 								</div>
-								<div class="clase-th" width="15%">
+								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
@@ -173,20 +173,20 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
 								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
 								<div class="clase-th"><?php echo JText::_('LABEL_STATUS');?></div>
-								<div class="clase-th" width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
-								<div class="clase-th" width="15%">
+								<div class="clase-th"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
+								<div class="clase-th">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</div>
-								<div class="clase-th" width="15%">
+								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDIT'); ?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
 								</div>
-								<div class="clase-th" width="15%">
+								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
@@ -287,8 +287,8 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 							<div class="clase-tr">
 								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
 								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
-								<div class="clase-th" width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
-								<div class="clase-th" width="15%">
+								<div class="clase-th"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
+								<div class="clase-th">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
