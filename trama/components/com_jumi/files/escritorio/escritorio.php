@@ -78,24 +78,24 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 					<article class="ac-medium">
 						
 						<div class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center">
-							<div style="position:relative; width: 100%">
-								<div><?php echo JText::_('LABEL_NAME');?></div>
-								<div><?php echo JText::_('LABEL_CREACION');?></div>
-								<div><?php echo JText::_('LABEL_STATUS');?></div>
-								<div width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
-								<div width="15%">
+							<div class="clase-tr">
+								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
+								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
+								<div class="clase-th"><?php echo JText::_('LABEL_STATUS');?></div>
+								<div class="clase-th" width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
+								<div class="clase-th" width="15%">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</div>
-								<div width="15%">
+								<div class="clase-th" width="15%">
 									<span class="editTabla"><?php echo JText::_('LBL_EDIT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
 								</div>
-								<div width="15%">
+								<div class="clase-th" width="15%">
 									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
@@ -110,29 +110,29 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 										$groupId = JTrama::searchGroup($value->id);
 										$statusName = JTrama::getStatusName($value->status);
 
-										echo '<div style="position:relative;">';
+										echo '<div class="clase-tr">';
 											
-											echo '<div><a href="'.$value->viewUrl.'" >'.$value->name.'</a></div>';
-											echo '<div>'.date('d-M-Y',$fecha).'</div>';
-											echo '<div>'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>';
-											echo '<div>';
+											echo '<div class="clase-td"><a href="'.$value->viewUrl.'" >'.$value->name.'</a></div>';
+											echo '<div class="clase-td">'.date('d-M-Y',$fecha).'</div>';
+											echo '<div class="clase-td">'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>';
+											echo '<div class="clase-td">';
 											if (isset($groupId->id)) {
 												echo '<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
 													</a>
 												  </div>';
 											}
-											echo '<div>';
+											echo '<div class="clase-td">';
 												if ( !empty($value->logs) ) {
 													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
 												}
 											echo '</div>';
-											echo '<div>';
+											echo '<div class="clase-td">';
 							 					if($value->status == 0 || $value->status == 2) {
 													echo '<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>';
 												}
 											echo '</div>';
-											echo '<div>';
+											echo '<div class="clase-td">';
 												if(in_array($value->status, $status)){
 													echo '<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>';
 												}
@@ -169,24 +169,24 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 					<label for="ac-3a"><?php echo JText::_('LABEL_PRODUCTOS');?></label>
 					<article class="ac-large">
 						<div class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center;">
-							<div>
-								<div><?php echo JText::_('LABEL_NAME');?></div>
-								<div><?php echo JText::_('LABEL_CREACION');?></div>
-								<div><?php echo JText::_('LABEL_STATUS');?></div>
-								<div width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
-								<div width="15%">
+							<div class="clase-tr">
+								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
+								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
+								<div class="clase-th"><?php echo JText::_('LABEL_STATUS');?></div>
+								<div class="clase-th" width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
+								<div class="clase-th" width="15%">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
 									</span>
 								</div>
-								<div width="15%">
+								<div class="clase-th" width="15%">
 									<span class="editTabla"><?php echo JText::_('LBL_EDIT'); ?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
 	  							    </span>
 								</div>
-								<div width="15%">
+								<div class="clase-th" width="15%">
 									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
@@ -200,27 +200,27 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 										$groupId = JTrama::searchGroup($value->id);
 										$statusName = JTrama::getStatusName($value->status);
 										
-										echo "<div>";
+										echo "<div class='clase-tr'>";
 										
-											echo '<div><a href="'.$value->viewUrl.'" >'.$value->name.'</a></div>';
-											echo '<div>'.date('d-M-Y',$fecha).'</div>';
-											echo '<div>'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>';
+											echo '<div class="clase-td"><a href="'.$value->viewUrl.'" >'.$value->name.'</a></div>';
+											echo '<div class="clase-td">'.date('d-M-Y',$fecha).'</div>';
+											echo '<div class="clase-td">'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>';
 											echo '<div>
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
 													</a>
 												  </div>';
-											echo "<div>";
+											echo "<div class='clase-td'>";
 												if ( !empty($value->logs) ) {
 													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
 												}
 											echo '</div>';
-											echo "<div>";
+											echo "<div class='clase-td'>";
 												if($value->status == 0 || $value->status == 2) {
 													echo '<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>';
 												}
 											echo "</div>";
-											echo '<div>';
+											echo '<div class="clase-td">';
 												if(in_array($value->status, $status)){
 													echo '<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>';
 												}
@@ -256,9 +256,9 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 					<label for="ac-4a"><?php echo JText::_('LABEL_REPERTORIO');?></label>
 					<article class="ac-small">
 						<div class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center;">
-							<div>
-								<div><?php echo JText::_('LABEL_NAME');?></div>
-								<div>
+							<div class="clase-tr">
+								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
+								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDIT'); ?></span>
 									<span class="editMedia">
 								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
@@ -268,9 +268,9 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 							<?php 
 								foreach ($proyectos as $key => $value) {
 									if ($value->type == 'REPERTORY') {
-										echo '<div>';
-										echo '	<div><a href="'.$value->viewUrl.'">'.$value->name.'</a></div>';
-										echo '	<div><a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a></div>';	
+										echo '<div class="clase-tr">';
+										echo '	<div class="clase-td"><a href="'.$value->viewUrl.'">'.$value->name.'</a></div>';
+										echo '	<div class="clase-td"><a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a></div>';	
 										echo "</div>";
 									}
 								}
@@ -284,11 +284,11 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 					<label for="ac-5a"><?php echo JText::_('LABEL_SUSPENDIDOS');?></label>
 					<article class="ac-large">
 						<div class="escritorio table table-striped" width="100%" frame="box" rules="all" style="text-align: center;">
-							<div>
-								<div><?php echo JText::_('LABEL_NAME');?></div>
-								<div><?php echo JText::_('LABEL_CREACION');?></div>
-								<div width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
-								<div width="15%">
+							<div class="clase-tr">
+								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
+								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
+								<div class="clase-th" width="15%"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
+								<div class="clase-th" width="15%">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
 									<span class="comentariosMedia">
 										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
@@ -302,10 +302,10 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 										$fecha = $value->timeCreated/1000;
 										$statusName = JTrama::getStatusName($value->status);
 										
-										echo "<div>";
-										echo '	<div><a href="'.$value->viewUrl.'" >'.$value->name.'</a></div>';
-										echo '	<div>'.date('d-M-Y',$fecha).'</div>';
-										echo '<div>
+										echo "<div class='clase-td'>";
+										echo '	<div class="clase-td"><a href="'.$value->viewUrl.'" >'.$value->name.'</a></div>';
+										echo '	<div class="clase-td">'.date('d-M-Y',$fecha).'</div>';
+										echo '<div class="clase-td">
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
 													</a>
