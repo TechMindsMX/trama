@@ -24,7 +24,7 @@ $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 ?>
 <h1><?php echo $value['proyectName']; ?></h1>
 <h2><?php echo JText::_('LBL_EDO_RESULT'); ?></h2>
-		<div style="width:50%">
+		<div class="contenedor-resultados">
 	
 			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS'); ?></div>
 			<table class="table table-striped">
