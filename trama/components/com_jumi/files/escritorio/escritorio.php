@@ -77,7 +77,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 					
 					<article class="ac-medium">
 						
-						<div class="escritorio" width="100%" frame="box" rules="all" style="text-align: center">
+						<div class="escritorio" id="esc-proyectos" frame="box" rules="all" style="text-align: center">
 							<div class="clase-tr">
 								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
 								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
@@ -168,7 +168,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 					<input id="ac-3a" name="accordion-2" type="radio" />
 					<label for="ac-3a"><?php echo JText::_('LABEL_PRODUCTOS');?></label>
 					<article class="ac-large">
-						<div class="escritorio" width="100%" frame="box" rules="all" style="text-align: center;">
+						<div class="escritorio" id="esc-proyectos" frame="box" rules="all" style="text-align: center;">
 							<div class="clase-tr">
 								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
 								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
@@ -255,7 +255,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 					<input id="ac-4a" name="accordion-2" type="radio" />
 					<label for="ac-4a"><?php echo JText::_('LABEL_REPERTORIO');?></label>
 					<article class="ac-small">
-						<div class="escritorio" width="100%" frame="box" rules="all" style="text-align: center;">
+						<div class="escritorio" id="esc-repertorio" frame="box" rules="all" style="text-align: center;">
 							<div class="clase-tr">
 								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
 								<div class="clase-th">
@@ -283,7 +283,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
                     <input id="ac-5a" name="accordion-2" type="radio" />
 					<label for="ac-5a"><?php echo JText::_('LABEL_SUSPENDIDOS');?></label>
 					<article class="ac-large">
-						<div class="escritorio" width="100%" frame="box" rules="all" style="text-align: center;">
+						<div class="escritorio" id="esc-suspendidos"frame="box" rules="all" style="text-align: center;">
 							<div class="clase-tr">
 								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
 								<div class="clase-th"><?php echo JText::_('LABEL_CREACION');?></div>
@@ -302,7 +302,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 										$fecha = $value->timeCreated/1000;
 										$statusName = JTrama::getStatusName($value->status);
 										
-										echo "<div class='clase-td'>";
+										echo "<div class='clase-tr'>";
 										echo '	<div class="clase-td"><a href="'.$value->viewUrl.'" >'.$value->name.'</a></div>';
 										echo '	<div class="clase-td">'.date('d-M-Y',$fecha).'</div>';
 										echo '<div class="clase-td">
@@ -310,7 +310,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 														ir
 													</a>
 												  </div>';
-										echo '	<div>';
+										echo '	<div class="clase-td">';
 													if ( !empty($value->logs) ) {
 														echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
 													}
