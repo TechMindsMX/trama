@@ -41,29 +41,7 @@ if(is_null($datosgenerales)){
 $id_datos_generales = $datosgenerales->id;
 $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 ?>
-<style>
-.comentariosMedia{
-	display:none;
-}
-.editMedia {
-	display:none;
-}
-		 
-@media all and (max-width: 720px){
-	.comentarios{
-		display:none;
-	}
-	.comentariosMedia{
-		display:inline;
-	}
-	.editTabla{
-		display:none;
-	}
-	.editMedia{
-		display:inline;
-	}
-}
-</style>
+
     <body>
         <h1><?php echo JText::_('MI_ESCRITORIO');?></h1>
       <script type="text/javascript" src="libraries/trama/js/raty/jquery.raty.js"></script>
@@ -85,21 +63,13 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 								<div class="clase-th"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
 								<div class="clase-th">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
-									<span class="comentariosMedia">
-										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
-									</span>
+									
 								</div>
 								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDIT');?></span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
 								</div>
 								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
 								</div>
 							</div>
 							
@@ -117,26 +87,55 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 											echo '<div class="clase-td">'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>';
 											echo '<div class="clase-td">';
 											if (isset($groupId->id)) {
-												echo '<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
+												echo '<span class="boton-texto">
+														<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
 													</a>
+													</span>
+													<span class="boton-icono">
+														<a href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
+														<img width="30" src="components/com_jumi/files/escritorio/img/grupo.jpg" />
+														</a>
+													</span>
 												  </div>';
 											}
 											echo '<div class="clase-td">';
 												if ( !empty($value->logs) ) {
-													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
+													echo '<span class="boton-texto">
+															<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>
+														 </span>
+														<span class="boton-icono">
+															<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">
+        													<img width="30" src="components/com_jumi/files/escritorio/img/comentarios.jpg" />
+															</a>
+        												</span>';
 												}
 											echo '</div>';
 											echo '<div class="clase-td">';
 							 					if($value->status == 0 || $value->status == 2) {
-													echo '<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>';
+													echo '<span class="boton-texto">
+											      			<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a> 
+											      		</span>
+														<span class="boton-icono">
+															<a href="'.$value->editUrl.'">
+															<img width="30" src="components/com_jumi/files/escritorio/img/editar.jpg" />
+															</a>
+														</span>';
 												}
 											echo '</div>';
 											echo '<div class="clase-td">';
 												if(in_array($value->status, $status)){
-													echo '<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>';
+													echo '<span class="boton-texto">
+															<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>
+														</span>
+														<span class="boton-icono">
+															<a href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">
+															<img width="30" src="components/com_jumi/files/escritorio/img/resultados.jpg" />
+															</a>
+														</span>';
 												}
 											echo '</div>';
+											echo '	<div style="clear:both"></div>';
 										echo "</div>";
 									}
 							?>							
@@ -176,21 +175,12 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 								<div class="clase-th"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
 								<div class="clase-th">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
-									<span class="comentariosMedia">
-										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
-									</span>
 								</div>
 								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDIT'); ?></span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
 								</div>
 								<div class="clase-th">
-									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
+									<span class="editTabla"><?php echo JText::_('LBL_EDO_RESULT');?></span
 								</div>
 							</div>
 							<?php 
@@ -206,26 +196,53 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 											echo '<div class="clase-td">'.date('d-M-Y',$fecha).'</div>';
 											echo '<div class="clase-td">'.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>';
 											echo '<div class="clase-td">
+													<span class="boton-texto">
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														ir
 													</a>
+													</span>
+													<span class="boton-icono">
+															<a href="index.php?option=com_community&view=groups&task=viewgroup&groupid=">
+															<img width="30" src="components/com_jumi/files/escritorio/img/grupo.jpg" />
+															</a>
+													</span>
 												  </div>';
 											echo "<div class='clase-td'>";
 												if ( !empty($value->logs) ) {
-													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
+													echo '<span class="boton-texto">
+															<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>
+        												</span>
+													<span class="boton-icono">
+															<a href="#" data-rokbox-element="#divContent'.$count.'">
+																<img width="30" src="components/com_jumi/files/escritorio/img/comentarios.jpg" />
+															</a>
+													</span>';
 												}
 											echo '</div>';
 											echo "<div class='clase-td'>";
 												if($value->status == 0 || $value->status == 2) {
-													echo '<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>';
+													echo '<span class="boton-texto">
+															<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>
+														</span>
+													<span class="boton-icono">
+															<a href="'.$value->editUrl.'">
+																<img width="30" src="components/com_jumi/files/escritorio/img/editar.jpg" />
+															</a>
+													</span>';
 												}
 											echo "</div>";
 											echo '<div class="clase-td">';
 												if(in_array($value->status, $status)){
-													echo '<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>';
+													echo '<span class="boton-texto">
+																<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>
+															<span class="boton-icono">
+															<a href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">
+																<img width="30" src="components/com_jumi/files/escritorio/img/editar.jpg" />
+															</a>
+															</span>';
 												}
 											echo '</div>';
-
+										echo '	<div style="clear:both"></div>';
 										echo "</div>";
 									}
 							?>
@@ -260,9 +277,6 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 								<div class="clase-th"><?php echo JText::_('LABEL_NAME');?></div>
 								<div class="clase-th">
 									<span class="editTabla"><?php echo JText::_('LBL_EDIT'); ?></span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
 								</div>
 							</div>
 							<?php 
@@ -271,6 +285,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 										echo '<div class="clase-tr">';
 										echo '	<div class="clase-td"><a href="'.$value->viewUrl.'">'.$value->name.'</a></div>';
 										echo '	<div class="clase-td"><a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a></div>';	
+										echo '	<div style="clear:both"></div>';
 										echo "</div>";
 									}
 								}
@@ -290,9 +305,6 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 								<div class="clase-th"><?php echo JText::_('COM_COMMUNITY_SINGULAR_GROUP');?></div>
 								<div class="clase-th">
 									<span class="comentarios"><?php echo JText::_('JCOMENTARIOS');?></span>
-									<span class="comentariosMedia">
-										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
-									</span>
 								</div>
 							</div>
 							<?php 
@@ -306,15 +318,29 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 										echo '	<div class="clase-td"><a href="'.$value->viewUrl.'" >'.$value->name.'</a></div>';
 										echo '	<div class="clase-td">'.date('d-M-Y',$fecha).'</div>';
 										echo '<div class="clase-td">
+												<span class="boton-texto">
 													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.@$groupId->id.'">
 														ir
 													</a>
+												</span>
+													<span class="boton-icono">
+															<a href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.@$groupId->id.'">
+															<img width="30" src="components/com_jumi/files/escritorio/img/grupo.jpg" />
+															</a>
+													</span>
 												  </div>';
 										echo '	<div class="clase-td">';
 													if ( !empty($value->logs) ) {
-														echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>';
+														echo '<span class="boton-texto">
+																<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>
+															</span><span class="boton-icono">
+																<a href="#" data-rokbox-element="#divContent'.$count.'">
+																	<img width="30" src="components/com_jumi/files/escritorio/img/comentarios.jpg" />
+																</a>
+															</span>';
 													}
 										echo '	</div>';
+										echo '	<div style="clear:both"></div>';
 										echo '</div>';
 									}
 							?>
