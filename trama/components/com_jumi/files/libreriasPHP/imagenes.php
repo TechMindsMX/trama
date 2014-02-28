@@ -1,5 +1,7 @@
 <?php
+
 class manejoImagenes {
+
 	function cargar_imagen($tipo, $usuario){
 		$validaciones = ( ($tipo === 'image/jpeg') || ($tipo === 'image/gif') || ($tipo === 'image/png') );
 		if($validaciones && getimagesize($_FILES["daGr_Foto"]["tmp_name"])){

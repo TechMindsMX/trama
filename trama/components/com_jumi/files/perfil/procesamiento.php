@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 include_once 'utilidades.php';
-include_once 'imagenes.php';
+include_once 'components/com_jumi/files/libreriasPHP/imagenes.php';
 
 $objDatos = new getDatosObj;
 
