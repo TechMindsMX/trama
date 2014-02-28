@@ -9,6 +9,14 @@ $pathJumi 		= Juri::base().'components/com_jumi/files';
 $busquedaPor	= array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTORY' );
 $ligasPP 		= '';
 
+	$app = JFactory::getApplication();
+	if ($usuario->guest == 1) {
+		$return = JURI::getInstance()->toString();
+		$url    = 'index.php?option=com_users&view=login';
+		$url   .= '&return='.base64_encode($return);
+		$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+	}
+
 $tipoPP = isset($_GET['typeId']) ? $_GET['typeId'] : 0;
 $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
 $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
@@ -137,6 +145,7 @@ function tagLimpia ($data) {
 var members = <?php echo $jsonJS; ?>;
 
 $(document).ready(function(){
+	jQuery('#ligasprod').find('input[type="checkbox"]').prop('checked', false);
 	jQuery('#contador').html("<span><?php echo JText::_('LBL_RESULTADOS'); ?></span>"+members.length);
 	initPagination();
 	
@@ -172,7 +181,7 @@ $(document).ready(function(){
 				<?php
 				if (isset($repertorio)) {
 					echo 'members = '.$repertorio.';
-					jQuery("#contadoprojectAvatar.namer").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('LBL_RESULTADOS').'</span> "+members.length);
 					initPagination();';
 			 	}else {
 					echo 'alert("'.JText::_('FILTER_NO_RESULTS').'");'.
@@ -281,7 +290,7 @@ function pageselectCallback (page_index, jq) {
 	return false;
 }
             
-function initPagination() {			 
+function initPagination() {
 	var num_entries = members.length;
 	var pags = (members.length/num_entries) + 1;
 
