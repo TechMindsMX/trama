@@ -146,13 +146,13 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 				<label for="ac-5a"><?php echo JText::_('PROY_ACTUALES'); ?></label>
 				<article class="ac-large">
 						<div class="space-text">
-						<?php 
-							foreach ($proyectos as $key => $value ) {							
+						<?php
+							foreach ($proyectos as $key => $value ) {
 								if ($value->type != 'REPERTORY') {
 									$fecha = $value->timeCreated/1000;
 									echo "<ul>";
 									echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
-										if ($usuario->id == $value->userId) {
+										if ($idMiddleware->idMiddleware == $value->userId) {
 											if($value->status == 0 || $value->status == 2) {
 												echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('LBL_EDIT').'</a></span>';
 											}
