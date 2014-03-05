@@ -202,7 +202,7 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 													</a>
 													</span>
 													<span class="boton-icono">
-															<a href="index.php?option=com_community&view=groups&task=viewgroup&groupid=">
+															<a href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 															<img width="30" src="components/com_jumi/files/escritorio/img/grupo.jpg" />
 															</a>
 													</span>
