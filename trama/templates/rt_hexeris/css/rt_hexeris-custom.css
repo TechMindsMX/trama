@@ -221,12 +221,12 @@ div.compacto {
 		margin: 10px 0 30px 0;
 		position: static;
 	}
-	.menu-item {
+	/*.menu-item {
 		width: 17%;
-		margin-right: 3%;
+		margin-left: 3%;
 		height: 7.5em;
 		background-size: 100%;
-	}
+	}*/	
 	.info-banner div.rt-inner {
 		margin-top: 25px;
 		padding-left: 20px;
@@ -291,12 +291,6 @@ width: 35%;
 	}
 	#buttons {
 		margin-top: -55px;
-	}
-	.menu-item {
-		width: 17%;
-		margin-right: 3%;
-		height: 6em;
-		background-size: 100%;
 	}
 	.info-banner div.rt-inner {
 		margin-top: 25px;
@@ -548,12 +542,6 @@ width: 35%;
 	}
  	div#banner div.rt-inner {
 		display: none;
-	}
-	.menu-item {
-		width: 30%;
-		margin-right: 3%;
-		height: 4em;
-		background-size: 100%;
 	}
 	.theme-bar.slider-wrapper , #reproductor, #video-player {
 		height: 13em;
