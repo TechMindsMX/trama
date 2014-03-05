@@ -114,7 +114,7 @@ class JTramaSocial extends CommunityGroupsController {
 		return $enlace;
 		}
 
-	public static function addFriendJS($userid, $usuario){
+	public static function addFriendJS($userid, $nombre, $usuario){
 		include_once('components/com_community/libraries/core.php');
 		include_once('components/com_community/helpers/friends.php');
 		JFactory::getDocument()->addScript('components/com_community/assets/joms.jquery-1.8.1.min.js');
@@ -126,16 +126,24 @@ class JTramaSocial extends CommunityGroupsController {
 		$user				= CFactory::getUser( $userid );
 		$row->profileLink	= CRoute::_('index.php?option=com_community&view=profile&userid=' . $userid );
 		$row->friendsCount	= $user->getFriendCount();
-		$isFriend 			=  CFriendsHelper::isConnected ( $userid, $usuario->id );
+		$isFriend 			= CFriendsHelper::isConnected ( $userid, $usuario->id );
 	
 		$row->addFriend 	= ((! $isFriend) && ($usuario->id != 0) && $usuario->id != $userid) ? true : false;
+		$row->friendIsUser  = $usuario->id == $userid ? true : false;
+
 		if($row->addFriend == true) {
-			$addFriendHtml .= '<a href="javascript:void(0)" onclick="joms.friends.connect(\''. $user->id.'\')">'.
-						JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND').'</a>';
+			$addFriendHtml .= '<div id="agrega_amigo" class="button">'.
+							'<a href="javascript:void(0)" onclick="joms.friends.connect(\''. $user->id.'\')">'.
+								JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND').'</a>'.
+							'</div>';
+		} elseif ($row->friendIsUser) {
+			$addFriendHtml .='';
 		} else {
-			$addFriendHtml .='<i class="com-icon-tick"></i> <span>'.JText::_('COM_COMMUNITY_PROFILE_ADDED_AS_FRIEND').'</span>';
+			$addFriendHtml .='<i class="com-icon-tick"></i> <span>'.JText::_('PROFILE_YOU_ALREADY_FRIEND').
+				$nombre.' '.JText::_('PROFILE_ALREADY_FRIENDS').
+				'</span>';
 		}
-	return $addFriendHtml;
+		return $addFriendHtml;
 	}
 
 	public static function checkUserGroup($group, $userid) {

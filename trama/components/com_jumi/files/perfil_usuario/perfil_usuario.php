@@ -31,7 +31,8 @@ $datosgenerales 	= UserData::datosGr($idMiddleware->idJoomla);
 if(is_null($datosgenerales)){
 	$app->redirect('index.php', ''.JText::_("JSIN_DATOS_USUARIO").'','notice');
 }
-$id_datos_generales = $datosgenerales->id;
+$id_datos_generales 			= $datosgenerales->id;
+$datosgenerales->nomCompleto	= $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno;
 
 foreach ($proyectos as $key => $value) {
 	$entity = new JTrama;
@@ -47,7 +48,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 			<div class="business-card">
 			<div id="foto"><img src="<?php echo $datosgenerales->Foto; ?>"  /></div>
 			<div id="datos">
-			<?php echo '<h2>'.$datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.'</h2>'.
+			<?php echo '<h2>'.$datosgenerales->nomCompleto.'</h2>'.
 		    		'<span id="job_title">'.$datosgenerales->nomJobTitle.'</span>'.			    	
 		    		'<span id="company_name">'.$datosgenerales->nomCompania.'</span>';
 		 	?>
@@ -63,7 +64,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 	  			participar($datosgenerales->users_id, $botonContactar).
 	  			'</div>';
 		  	?>
-			<div id="agrega_amigo" class="button"><?php echo JTramaSocial::addFriendJS($userid, $usuario); ?></div>
+			<?php echo JTramaSocial::addFriendJS($userid, $datosgenerales->nomCompleto, $usuario); ?>
 			<div style="clear: both;"></div>
 			</div>
 			
@@ -81,16 +82,14 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 				<input id="ac-3" name="accordion-1" type="radio" />
 				<label for="ac-3"><?php echo JText::_('LBL_FUNCIOGRAMA'); ?></label>
 				<article class="ac-large">
-						<?php UserData::generacampos(0, 'perfilx_catalogofuncion', 'idcatalogoFuncion', 'idcatalogoFuncionPadre', 'nomNombreCategoria', 'respuestaFuncion', $userid); ?>
-
+					<?php UserData::generacampos(0, 'perfilx_catalogofuncion', 'idcatalogoFuncion', 'idcatalogoFuncionPadre', 'nomNombreCategoria', 'respuestaFuncion', $userid); ?>
 				</article>
 			</div>
 			<div>
 				<input id="ac-4" name="accordion-1" type="radio" />
 				<label for="ac-4"><?php echo JText::_('PRODUCCION_FORM'); ?></label>
 				<article class="ac-large">
-						<?php UserData::generacampos(0, 'perfilx_catalogoproduccion', 'idcatalogoProduccion', 'idcatalogoProduccionPadre', 'nomNombreCategoria', 'respuestaProduccion', $userid); ?>
-					
+					<?php UserData::generacampos(0, 'perfilx_catalogoproduccion', 'idcatalogoProduccion', 'idcatalogoProduccionPadre', 'nomNombreCategoria', 'respuestaProduccion', $userid); ?>
 				</article>
 			</div>
 		</section>
