@@ -628,6 +628,10 @@ div#community-wrap.cProfile .cSubmenu li {
 
 
 @media screen and (max-width : 960px) and (max-height : 640px) and (orientation: landscape) {  
+	.rt-container {
+		margin: 2px 3px;
+		width:97%;
+	}
 	.videoHead {
 		height: 216px;
 		width: 400px;
@@ -691,6 +695,10 @@ div#community-wrap.cProfile .cSubmenu li {
 	}
 }
 @media screen and (max-width : 960px) and (max-height : 640px) and (orientation: portrait) {  
+	.rt-container {
+		margin: 1px 3px;
+		width:96%;
+	}
 	.boton-icono{
 		display:block;
 	}
