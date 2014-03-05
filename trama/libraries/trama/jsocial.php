@@ -133,15 +133,17 @@ class JTramaSocial extends CommunityGroupsController {
 
 		if($row->addFriend == true) {
 			$addFriendHtml .= '<div id="agrega_amigo" class="button">'.
-							'<a href="javascript:void(0)" onclick="joms.friends.connect(\''. $user->id.'\')">'.
+								'<a href="javascript:void(0)" onclick="joms.friends.connect(\''. $user->id.'\')">'.
 								JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND').'</a>'.
-							'</div>';
+								'</div>';
 		} elseif ($row->friendIsUser) {
-			$addFriendHtml .='';
+			$addFriendHtml .= '';
 		} else {
-			$addFriendHtml .='<i class="com-icon-tick"></i> <span>'.JText::_('PROFILE_YOU_ALREADY_FRIEND').
-				$nombre.' '.JText::_('PROFILE_ALREADY_FRIENDS').
-				'</span>';
+			$addFriendHtml .= '<div id="agrega_amigo" class="button btn disabled">'.
+								'<i class="com-icon-tick"></i> <span>'.JText::_('PROFILE_YOU_ALREADY_FRIEND').
+								$nombre.' '.JText::_('PROFILE_ALREADY_FRIENDS').
+								'</span>'.
+								'</div>';
 		}
 		return $addFriendHtml;
 	}
