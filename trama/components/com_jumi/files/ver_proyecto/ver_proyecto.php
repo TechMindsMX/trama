@@ -531,9 +531,6 @@ function userName($data) {
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
     <script>
-function detectBrowser() {
-  return variables;
-}
 
 var geocoder;
 var map;
@@ -552,7 +549,6 @@ function initialize() {
     variables = {zoom: 14, center: latlng, disableDefaultUI: false, mapTypeId: google.maps.MapTypeId.ROADMAP};
   }
 
-	console.log(variables);
   geocoder = new google.maps.Geocoder();
   var latlng = new google.maps.LatLng(19.432684,-99.133359);
   var mapOptions = variables;
