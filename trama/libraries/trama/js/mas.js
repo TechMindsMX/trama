@@ -49,7 +49,6 @@ jQuery("#form2 select").change(function(){
 	    var cuantos 	= arreglo.length;
 	    var arrayCat 	= findReplace(cuantos, selectedCategoria, arreglo, temp, tmpSub);
 	    var uniqueList 	= jQuery.unique(arrayCat);
-	    console.log(uniqueList);
 		var valorFinal 	= uniqueList.join(',');
 		
 	    $('#tagsArea').val(valorFinal);

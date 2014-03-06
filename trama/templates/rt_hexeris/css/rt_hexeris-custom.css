@@ -289,8 +289,8 @@ width: 35%;
 	#rt-mainbody-surround #rt-mainbody {
 		margin: 40px -5px;
 	}
-	.barra-top {
-		margin-top: 50px !important;
+	div.barra-top {
+		margin-top: 50px;
 	}
 	#otras_ligas {
 		left: -2.6%;
@@ -496,6 +496,8 @@ width: 35%;
 	}	
 	.radios_public {
 		margin-left: 0px;
+		display: block;
+		position: relative;
 	}
  	div#banner div.rt-inner {
 		display: none;
@@ -522,7 +524,16 @@ width: 35%;
 		display: block;
 		float: none;
 		width: 200px;
+		border-radius: 5px;
+		margin-bottom: 1em;
 	}
+	#otras_ligas  span#revision {
+		margin-left:0;
+	}
+	div.barra-top {
+		margin-top: 50px;
+	}
+
 }
 
 input[type=checkbox] {
