@@ -109,7 +109,7 @@ class JTramaSocial extends CommunityGroupsController {
 		$results = $db->loadResult();
   		
 		$enlace = '<a href="javascript:void(0);" class="community-invite" '. 
-					'onclick="joms.invitation.showForm(\'\', \'groups,inviteUsers\',\''.$results.'\',\'1\',\'1\');">'.
+					'onclick="joms.invitation.showForm(\'\', \'groups,inviteUsers\',\''.$results.'\',\'1\',\'0\');">'.
 					JText::_('INVITE_TO_JGROUP').'</a>';
 		return $enlace;
 		}
