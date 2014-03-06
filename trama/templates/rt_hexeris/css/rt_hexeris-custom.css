@@ -182,12 +182,11 @@ div.compacto {
 	margin-bottom:10px;
 	margin-top:10px;
 }
-div#tree ul li.collapsed span {
-	-o-transform:rotate(-90deg);
-	-ms-transform:rotate(-90deg);
-	-moz-transform:rotate(-90deg);
-	-webkit-transform:rotate(-90deg);
-	filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=-1);
+div#tree ul li span {
+	background-position: top left;
+}
+div#tree ul li.expanded > span {
+	background-position: -22px -22px;
 }
 
 /*@media screen and (max-width : 800px) and (max-height : 1280px) and (orientation: portrait) {  
