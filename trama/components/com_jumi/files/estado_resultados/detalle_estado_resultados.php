@@ -176,6 +176,5 @@ $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 
 </div>
 <div>
-	<input type="button" id="cancelar" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
-		javascript:window.history.back();">
+	<input type="button" id="cancelar" class="button" value="<?php echo JText::_('LBL_GOBACK');  ?>" onClick="javascript:window.history.back();">
 </div>
