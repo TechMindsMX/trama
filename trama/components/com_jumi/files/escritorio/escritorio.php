@@ -96,9 +96,9 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 														<a href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
 														<img width="30" src="components/com_jumi/files/escritorio/img/grupo.jpg" />
 														</a>
-													</span>
-												  </div>';
+													</span>';
 											}
+											echo '</div>';
 											echo '<div class="clase-td">';
 												if ( !empty($value->logs) ) {
 													echo '<span class="boton-texto">
