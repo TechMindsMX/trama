@@ -65,7 +65,7 @@
 						
 						return (date1 < date2) && (date1 > date3) ? true : false;
                 	},
-                	"alertText": "* La Fecha no puede ser mayor de 120 dias del inicio de producción ni ser menor a la fecha de lanzamiento"
+                	"alertText": "* La Fecha no puede ser mayor de 120 dias del inicio de producción"
                 },
                 "cierre": {
                 	"func": function ( field ) {
