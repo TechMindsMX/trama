@@ -272,12 +272,6 @@ div#community-wrap.cProfile .cSubmenu li {
 		margin: 10px 0 30px 0;
 		position: static;
 	}
-	/*.menu-item {
-		width: 17%;
-		margin-left: 3%;
-		height: 7.5em;
-		background-size: 100%;
-	}*/	
 	.info-banner div.rt-inner {
 		margin-top: 25px;
 		padding-left: 20px;
@@ -372,6 +366,9 @@ div#community-wrap.cProfile .cSubmenu li {
 		overflow:hidden;
 	}
 	/*fin escritorio*/
+	.hide-phone {
+		display: none;
+	}
 }
 @media screen and (max-width: 600px)  {
 	.contenedor-resultados{

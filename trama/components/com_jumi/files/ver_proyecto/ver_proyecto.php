@@ -91,10 +91,10 @@ function buttons($data, $user) {
 			$html = '<div id="buttons">'.
 					'<div class="arrecho" ><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('LBL_EDIT').'</a></span></div>'.
 					'<div class="arrecho" >'.$share.'</div>'.
-					'<div class="arrecho foca-magica" >'.JTramaSocial::inviteToGroup($data->id).'</div></div>';
+					'<div class="arrecho hide-phone" >'.JTramaSocial::inviteToGroup($data->id).'</div></div>';
 		}else{
 			$html = '<div id="buttons">'.
-					'<div class="arrecho foca-magica" >'.JTramaSocial::inviteToGroup($data->id).'</div>'
+					'<div class="arrecho hide-phone" >'.JTramaSocial::inviteToGroup($data->id).'</div>'
 					.'<div class="arrecho" >'.$share.'</div>'
 					.'</div>';
 		}
