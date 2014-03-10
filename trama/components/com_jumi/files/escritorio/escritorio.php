@@ -99,7 +99,8 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 													</span>';
 											}
 											echo '</div>';
-											echo '<div class="clase-td">';
+											$mostrar = (!empty($value->logs))?'':'show_responsive';
+											echo '<div class="clase-td '.$mostrar.'">';
 												if ( !empty($value->logs) ) {
 													echo '<span class="boton-texto">
 															<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>
@@ -111,7 +112,8 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
         												</span>';
 												}
 											echo '</div>';
-											echo '<div class="clase-td">';
+											$mostrar = ($value->status == 0 || $value->status == 2)?'':'show_responsive';
+											echo '<div class="clase-td '.$mostrar.'">';
 							 					if($value->status == 0 || $value->status == 2) {
 													echo '<span class="boton-texto">
 											      			<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a> 
@@ -123,7 +125,8 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 														</span>';
 												}
 											echo '</div>';
-											echo '<div class="clase-td">';
+											$mostrar = (in_array($value->status, $status))?'':'show_responsive';
+											echo '<div class="clase-td '.$mostrar.'">';
 												if(in_array($value->status, $status)){
 													echo '<span class="boton-texto">
 															<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>
@@ -207,7 +210,8 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 															</a>
 													</span>
 												  </div>';
-											echo "<div class='clase-td'>";
+											$mostrar = (!empty($value->logs))?'':'show_responsive';
+											echo '<div class="clase-td '.$mostrar.'">';
 												if ( !empty($value->logs) ) {
 													echo '<span class="boton-texto">
 															<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JVIEW').'</a>
@@ -219,7 +223,8 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 													</span>';
 												}
 											echo '</div>';
-											echo "<div class='clase-td'>";
+											$mostrar = ($value->status == 0 || $value->status == 2)?'':'show_responsive';
+											echo '<div class="clase-td '.$mostrar.'">';
 												if($value->status == 0 || $value->status == 2) {
 													echo '<span class="boton-texto">
 															<a class="button" href="'.$value->editUrl.'">'.JText::_('JGO').'</a>
@@ -231,13 +236,16 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 													</span>';
 												}
 											echo "</div>";
-											echo '<div class="clase-td">';
+											$mostrar = (in_array($value->status, $status))?'':'show_responsive';
+											echo '<div class="clase-td '.$mostrar.'">';
 												if(in_array($value->status, $status)){
+
 													echo '<span class="boton-texto">
 																<a class="button" href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">'.JText::_('PROJECT_STATEMENT_RESULT').'</a>
-															<span class="boton-icono">
+															
+											</span><span class="boton-icono">
 															<a href="index.php?option=com_jumi&view=application&fileid=32&proyId='.$value->id.'">
-																<img width="30" src="components/com_jumi/files/escritorio/img/editar.jpg" />
+																<img width="30" src="components/com_jumi/files/escritorio/img/resultados.jpg" />
 															</a>
 															</span>';
 												}
