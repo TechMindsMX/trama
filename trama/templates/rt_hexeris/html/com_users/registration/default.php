@@ -27,7 +27,7 @@ jQuery(document).ready(function() {
 			jQuery('.validate').prop('disabled', false);
 		}
 		else {
-			jQuery('.validate').attr('disabled', 'disabled' );
+			jQuery('.validate').attr('disabled', 'disabled');
 		}
 	});
 });

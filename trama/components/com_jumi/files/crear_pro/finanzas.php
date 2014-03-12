@@ -35,9 +35,35 @@ JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 errorClass::manejoError($errorCode, $from, $proyid);
 JHtml::_('behavior.modal');
 
+$document->addScript('//code.jquery.com/ui/1.10.4/jquery-ui.js');
+$document->addStyleSheet('libraries/trama/css/jquery-ui.css');
+
 ?>
 
 <script>
+	jQuery(function() {
+	 	jQuery( "#productionStartDate" ).datepicker({
+	    	dateFormat: "dd-mm-yy",
+	 		minDate: 120,
+			onClose: function(selectedDate) {
+				console.log(selectedDate);
+				jQuery( "#premiereStartDate, #premiereEndDate" ).datepicker("option", "minDate", selectedDate );
+			}
+		});
+	 	jQuery( "#premiereStartDate" ).datepicker({
+	    	dateFormat: "dd-mm-yy",
+	 		minDate: 120,
+			onClose: function(selectedDate) {
+				jQuery( "#premiereEndDate" ).datepicker("option", "minDate", selectedDate );
+			}
+		});
+	 	jQuery( "#premiereEndDate" ).datepicker({
+	    	dateFormat: "dd-mm-yy",
+	 		minDate: 120
+		});
+    	jQuery( "#productionStartDate, #premiereStartDate, #premiereEndDate" ).prop('readonly', 'readonly');
+	});
+	
 	jQuery(document).ready(function(){
 		jQuery("#form2").validationEngine();
 
@@ -94,7 +120,7 @@ JHtml::_('behavior.modal');
 				              <input
 								type = "text" 
 								id = "productionStartDate" 
-								class = "validate[required, custom[date], custom[funciondate]]"
+								class = "validate[required]"
 								name = "productionStartDate" /> 
 							  <br>
 							
@@ -105,7 +131,7 @@ JHtml::_('behavior.modal');
 						  		class = "validate[required, custom[date], custom[fininicio]]"
 							    name = "premiereStartDate" />
 							       
-							<br> 
+								<br> 
 							
 							  <label for="premiereEndDate">'.JText::_('FECHA_CIERRE').'*:</label> 
 							  <input 

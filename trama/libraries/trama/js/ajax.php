@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER['SERVER_ADDR'] != 'localhost' && $_SERVER['SERVER_ADDR'] != '::1' ) {
-	define('MIDDLE', 'http://192.168.0.122:7272');
+	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070');
 } else {
 	define('MIDDLE', 'http://192.168.0.122:7272');
 }
