@@ -17,11 +17,13 @@ if ($usuario->guest == 1) {
 	$direccionGeneral		= $datos->domicilio($generales->id, 1);
 	$representante 			= $datos->datosGenerales($usuario->id, 2);
 	$pathJumi 				= 'components/com_jumi/files/perfil';
-	
-	if (isset($representante)) {
+
+	if (isset($representante) && isset($direccionGeneral) && isset($emailGeneral) && isset($telefonoGeneral) ) {
 		$existe = 1;
 	} else {
 		$existe = 0;
+		$url = JRoute::_('index.php?option=com_jumi&view=application&fileid=5&Itemid=151', false);
+		$app->redirect($url, JText::_('PROFILE_NOT_COMPLTE'), 'notice');
 	}
 	
 	$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=contac';
