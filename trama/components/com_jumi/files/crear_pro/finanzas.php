@@ -49,6 +49,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 	 	jQuery( "#productionStartDate" ).datepicker({
 	    	dateFormat: "dd-mm-yy",
 	 		minDate: 120,
+	 		maxDate: "+2y",
 			onSelect: function(selectedDate) {
 				var fecha 	= jQuery(this).datepicker("getDate");
 				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +1 )
@@ -60,6 +61,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 	 	jQuery( "#premiereStartDate" ).datepicker({
 	    	dateFormat: "dd-mm-yy",
 	 		minDate: 120,
+	 		maxDate: "+3y",
 			onClose: function(selectedDate) {
 				var fecha 	= jQuery(this).datepicker("getDate");
 				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +1 )
@@ -71,6 +73,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 	 	jQuery( "#premiereEndDate" ).datepicker({
 	    	dateFormat: "dd-mm-yy",
 	 		minDate: 120,
+	 		maxDate: "+5y",
 			onClose: function(selectedDate) {
 				jQuery(this).validationEngine('validate');
 			}
@@ -235,6 +238,9 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 		});
 		
 		jQuery("#guardar, #revision").click(function (){
+			
+    		jQuery( "#productionStartDate, #premiereStartDate, #premiereEndDate" ).prop('disabled', false);
+			
 			var form 		= jQuery("#form2")[0];
 			var total 		= form.length;
 			var section 	= new Array();
