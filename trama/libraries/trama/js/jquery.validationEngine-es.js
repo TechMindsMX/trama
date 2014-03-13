@@ -261,7 +261,7 @@
 function validaFechaDDMMAAAA(fecha){
 	var dtCh= "-";
 	var minYear=1900;
-	var maxYear=2100;
+	var maxYear=3000;
 	function isInteger(s){
 		var i;
 		for (i = 0; i < s.length; i++){

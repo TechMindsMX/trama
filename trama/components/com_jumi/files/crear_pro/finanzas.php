@@ -35,36 +35,54 @@ JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 errorClass::manejoError($errorCode, $from, $proyid);
 JHtml::_('behavior.modal');
 
-$document->addScript('//code.jquery.com/ui/1.10.4/jquery-ui.js');
+$document->addScript('libraries/trama/js/jquery-ui.min.js');
+$document->addScript("libraries/trama/js/jquery.ui.datepicker-es.js");
 $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 
 ?>
 
 <script>
+	
 	jQuery(function() {
+		jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "es" ] );
+		
 	 	jQuery( "#productionStartDate" ).datepicker({
 	    	dateFormat: "dd-mm-yy",
 	 		minDate: 120,
-			onClose: function(selectedDate) {
-				console.log(selectedDate);
-				jQuery( "#premiereStartDate, #premiereEndDate" ).datepicker("option", "minDate", selectedDate );
+			onSelect: function(selectedDate) {
+				var fecha 	= jQuery(this).datepicker("getDate");
+				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +1 )
+				jQuery( "#premiereStartDate" ).datepicker("option", "minDate", fecha1 );
+				jQuery( "#premiereStartDate").prop('disabled', false);
+				jQuery(this).validationEngine('validate');
 			}
 		});
 	 	jQuery( "#premiereStartDate" ).datepicker({
 	    	dateFormat: "dd-mm-yy",
 	 		minDate: 120,
 			onClose: function(selectedDate) {
-				jQuery( "#premiereEndDate" ).datepicker("option", "minDate", selectedDate );
+				var fecha 	= jQuery(this).datepicker("getDate");
+				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +1 )
+				jQuery( "#premiereEndDate" ).datepicker("option", "minDate", fecha1 );
+				jQuery( "#premiereEndDate").prop('disabled', false);
+				jQuery(this).validationEngine('validate');
 			}
 		});
 	 	jQuery( "#premiereEndDate" ).datepicker({
 	    	dateFormat: "dd-mm-yy",
-	 		minDate: 120
+	 		minDate: 120,
+			onClose: function(selectedDate) {
+				jQuery(this).validationEngine('validate');
+			}
 		});
     	jQuery( "#productionStartDate, #premiereStartDate, #premiereEndDate" ).prop('readonly', 'readonly');
 	});
 	
 	jQuery(document).ready(function(){
+		
+		jQuery( "#premiereStartDate, #premiereEndDate").attr('disabled', 'disabled');
+		
+		jQuery.validationEngine.defaults.validationEventTrigger = 'change';
 		jQuery("#form2").validationEngine();
 
 		<?php
