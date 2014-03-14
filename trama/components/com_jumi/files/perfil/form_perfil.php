@@ -7,11 +7,11 @@
 	$app = JFactory::getApplication();
 
 	if ($usuario->guest == 1) {
-	$return = JURI::getInstance()->toString();
-	$url    = 'index.php?option=com_users&view=login';
-	$url   .= '&return='.base64_encode($return);
-	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
-}
+		$return = JURI::getInstance()->toString();
+		$url    = 'index.php?option=com_users&view=login';
+		$url   .= '&return='.base64_encode($return);
+		$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+	}
 	$getdatos = new getDatosObj;
 	$tipoUsuario = 1;
  	$pathJumi = 'components/com_jumi/files/perfil';
@@ -28,8 +28,12 @@
 	// botones navegación perfil
 	require_once 'nav_perfil.php';
 
-	$fileid = $app->input->get('fileid', '','STR'); 
-	$navHtml = new NavPefil($fileid, $existe, $generales, $getdatos);
+	$params = new stdClass;
+	$params->idUsuario		= $usuario->id;
+	$params->fileid			= $app->input->get('fileid', '','STR');
+	$params->exite			= $existe;
+	
+	$navHtml = new NavPefil($params);
 	
 	echo $navHtml->navWizardHtml();
 	// fin botones navegación perfil
