@@ -25,6 +25,15 @@ if ($usuario->guest == 1) {
 		$url = JRoute::_('index.php?option=com_jumi&view=application&fileid=5&Itemid=151', false);
 		$app->redirect($url, JText::_('PROFILE_NOT_COMPLTE'), 'notice');
 	}
+
+	// botones navegación perfil
+	require_once 'nav_perfil.php';
+
+	$fileid = $app->input->get('fileid', '','STR'); 
+	$navHtml = new NavPefil($fileid, $existe, $generales, $datos);
+	
+	echo $navHtml->navWizardHtml();
+	// fin botones navegación perfil
 	
 	$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=contac';
 ?>

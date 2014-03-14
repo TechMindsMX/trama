@@ -22,6 +22,15 @@ if ($usuario->guest == 1) {
 	} else {
 		$existe = 0;
 	}
+
+	// botones navegación perfil
+	require_once 'nav_perfil.php';
+
+	$fileid = $app->input->get('fileid', '','STR'); 
+	$navHtml = new NavPefil($fileid, $existe, $generales, $datosgenerales);
+	
+	echo $navHtml->navWizardHtml();
+	// fin botones navegación perfil
 	
 	$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=empresa';
 ?>

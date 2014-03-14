@@ -1,6 +1,6 @@
 <?php
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
-	include_once 'utilidades.php';
+	require_once 'utilidades.php';
 	require_once 'libraries/trama/libreriasPP.php';
 
 	$usuario =& JFactory::getUser();
@@ -24,6 +24,15 @@
 		$telefono = $getdatos->telefono($generales->id);
 		$direccion = $getdatos->domicilio($generales->id, $tipoUsuario);
 	}
+	
+	// botones navegación perfil
+	require_once 'nav_perfil.php';
+
+	$fileid = $app->input->get('fileid', '','STR'); 
+	$navHtml = new NavPefil($fileid, $existe, $generales, $getdatos);
+	
+	echo $navHtml->navWizardHtml();
+	// fin botones navegación perfil
 
 ?>
 
