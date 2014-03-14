@@ -22,7 +22,6 @@ class NavPefil extends getDatosObj {
 		$this->links['empresa']['texto'] = JText::_('PERFIL_NAV_EMPRESA');
 		$this->links['contacto']['enlace'] = 'index.php?option=com_jumi&view=application&fileid=16'.$itemid;
 		$this->links['contacto']['texto'] = JText::_('PERFIL_NAV_CONTACTO');
-var_dump($this);
 	}
 	
 	function setParams($params)	{
@@ -36,6 +35,7 @@ var_dump($this);
 		$this->datGen = $this->datosGenerales($this->params->idUsuario, $tipoContacto);
 		$this->params->idPersona = $this->datGen->id;
 		$this->datGen->direccion = $this->domicilio($this->params->idPersona, 1);
+		$this->datFiscales = $this->datosFiscales($this->params->idPersona);
 		$this->perJuridica = $this->datGen->perfil_personalidadJuridica_idpersonalidadJuridica;
 	}
 	

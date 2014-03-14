@@ -151,7 +151,7 @@ class getDatosObj {
 			->where($conditions);
 		
 		$db->setQuery( $query );
-		$db->query();
+		$result = $db->query();
 	}
 	
 	function deleteFields($tabladb, $conditions){
@@ -163,6 +163,6 @@ class getDatosObj {
 		
 		$db->setQuery($query);
 		$db->query();
-	}	
+	}
 }
 ?>

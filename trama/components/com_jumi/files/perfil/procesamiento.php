@@ -499,6 +499,12 @@ class procesamiento extends manejoImagenes {
 			}
 		}
 	}	
+
+	function grabarPerJuridica($uid, $data, $objDatos) {
+		$campos = ' perfil_personalidadJuridica_idpersonalidadJuridica = "'.$data.'"';
+		$conditions = ' users_id = '.$uid;
+		$objDatos->updateFields('perfil_persona', $campos, $conditions);
+	}
 }
 
 $usuario = JFactory::getUser();
@@ -530,8 +536,13 @@ if ($form == 'perfil') {
 		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=17&Itemid=220', 'Sus datos fueron grabados exitosamente' );
 	}
 } elseif ($form == 'empresa') {
+	$dataGeneral	= $objDatos->datosGenerales($usuario->id, 1);
 	$datos_fiscales 	= $datos->get_datosFiscales($objDatos);
 	$domicilio_fiscales = $datos->get_domicilioFiscal($objDatos);
+	if($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 0 && $_POST['daFi_rfcRFC'] != '') {
+		$datos->grabarPerJuridica($usuario->id, 2, $objDatos);
+	}
+	
 	$allDone 			=& JFactory::getApplication();
 	
 	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16&Itemid=201', 'Sus datos fueron grabados exitosamente' );

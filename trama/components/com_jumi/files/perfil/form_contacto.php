@@ -29,8 +29,12 @@ if ($usuario->guest == 1) {
 	// botones navegación perfil
 	require_once 'nav_perfil.php';
 
-	$fileid = $app->input->get('fileid', '','STR'); 
-	$navHtml = new NavPefil($fileid, $existe);
+	$params = new stdClass;
+	$params->idUsuario		= $usuario->id;
+	$params->fileid			= $app->input->get('fileid', '','STR');
+	$params->exite			= $existe;
+	
+	$navHtml = new NavPefil($params);
 	
 	echo $navHtml->navWizardHtml();
 	// fin botones navegación perfil
