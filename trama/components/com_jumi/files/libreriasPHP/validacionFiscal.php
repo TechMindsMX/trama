@@ -10,11 +10,12 @@ function validacionFiscal($usuario){
 		
 		if(!isset($datosFiscales)){
 			$allDone =& JFactory::getApplication();
-			$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13', 'Para poder crear un proyecto tienes que llenar tus datos fiscales' );
+			$msg = JText::_('MESSAGE_DEBE_TENER_FISCALES').JText::_('MESSAGE_PERS_MORAL_O_CON_EMP');
+			$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13', $msg );
 		}
 	} else {
 		$allDone =& JFactory::getApplication();
-		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5', 'Persona Fisica con Actividad Empresarial o Moral' );
+		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=5', JText::_('MESSAGE_PERS_MORAL_O_CON_EMP') );
 	}
 }
 

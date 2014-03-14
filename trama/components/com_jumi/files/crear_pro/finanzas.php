@@ -83,6 +83,19 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 	
 	jQuery(document).ready(function(){
 		
+		jQuery('input[type="file"]').change(function () {
+		    var ext = this.value.match(/\.(.+)$/)[1];
+		    switch (ext) {
+		        case 'xls':
+		        case 'xlsx':
+		            $('#uploadButton').attr('disabled', false);
+		            break;
+		        default:
+		            alert('<?php echo JText::_('ALERT_BCASE_EXT_INVALID');?>');
+		            this.value = '';
+		    }
+		});
+		
 		jQuery( "#premiereStartDate, #premiereEndDate").attr('disabled', 'disabled');
 		
 		jQuery.validationEngine.defaults.validationEventTrigger = 'change';
