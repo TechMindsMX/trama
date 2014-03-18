@@ -7,6 +7,11 @@
  *
  */
 defined('_JEXEC') or die();
+$app = JFactory::getApplication();
+$url = JRoute::_('index.php?option=com_users&view=login');
+$app->redirect($url);
+
+
 ?>
 <div class="cGuest clearfix">
 
