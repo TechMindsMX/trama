@@ -6,41 +6,67 @@ jimport('trama.class');
 
 $token 		= JTrama::token();
 $adminId 	= JFactory::getUser();
-$proyeto 	= $this->items;
+$proyecto 	= $this->items;
 $urls 		= new JTrama;
-$urls1 		= $urls->getEditUrl($proyeto);
+$urls1 		= $urls->getEditUrl($proyecto);
 $boton 		= '';
+$logsHtml	= '';
+$logCount 	= 0;
 
-switch ( $proyeto->status ) {
+foreach ($proyecto->con as $conKey => $conValue) {
+	if (empty($conValue)) {
+		JFactory::getApplication()->enqueueMessage(JText::_($conKey), 'error');
+	}
+}
+
+foreach ($proyecto->logs as $key => $value) {
+	if($value->status == 2) {
+		$logCount++;
+	}
+	$fechacreacion = $value->timestamp/1000;
+	$logsHtml .= '<div style="margin-bottom: 10px;">'.
+		 '<li>'.
+		 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_MODIFIED").'</strong>: '.date('d-M-Y h:m:s', $fechacreacion).'</div>'.
+		 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_STATUS").'</strong>: '.JTrama::getStatusName($value->status)->fullName.'</div>'.
+		 '<div align="justify"><strong>'.JText::_("COM_TRAMAPROYECTOS_COMMENT").'</strong>: '.$value->comment.'</div>'.
+		 '</li>'.
+		 '</div>';
+}
+
+switch ( $proyecto->status ) {
 	case 1:
 		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND2').'" />';
 		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND4').'" />';
-		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" />';
+		if ($proyecto->autorizable) {
+			$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" />';
+		} else {
+			$boton .= '<input type="button" class="" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" disabled />';
+		}
 		break;
 	case 2:
 		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND3').'" />';
 		break;
 	case 3:
-		if( count($proyeto->logs) < 2 ){
+		if( $logCount < 2 ) {
 			$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND2').'" />';
 		}
 		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND4').'" />';
-		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" />';
+		if ($proyecto->autorizable) {
+			$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" />';
+		} else {
+			$boton .= '<input type="button" class="" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" disabled />';
+		}
 		break;
 	case 9:
 		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND1').'" />';
 		break;
-		
-	default:
-		
-		break;
 }
 
-if( !isset($proyeto->projectBusinessCase->name) ) {
+if( !isset($proyecto->projectBusinessCase->name) ) {
 	$bussinesCase = '';
 } else {
 	$bussinesCase = '<div style="margin-bottom:10px">
-		<a href="'.JURI::root().BCASE.'/'.$proyeto->projectBusinessCase->name.'.xlsx" target="blank">
+		<a href="'.JURI::root().BCASE.'/'.$proyecto->projectBusinessCase->name.'.xlsx" target="blank">
 			'.JText::_("COM_TRAMAPROYECTOS_BCASE").'
 		</a>
 	</div>';
@@ -54,15 +80,18 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 	<td width="100%" valign="top">
 		<div style="padding-right: 20px;">
 			<div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 20px;">
-				<?php echo $proyeto->name; ?>
+				<?php echo $proyecto->name; ?>
 			</div>
 			<div style="margin-bottom:10px; color:#FF0000;">
-				<?php echo JTrama::tipoProyProd($proyeto).' - '.JTrama::getStatusName($proyeto->status)->fullName; ?>			
+				<?php echo JTrama::tipoProyProd($proyecto).' - '.JTrama::getStatusName($proyecto->status)->fullName; ?>			
 			</div>
+			
+			<?php echo '<h3>'.JText::_('TABLA_FINANZAS').'</h3>'.$proyecto->financialTable; ?>
+
 			<?php echo $bussinesCase; ?>			
 			<div>
 				<p><?php echo JText::_('COM_TRAMAPROYECTOS_PROY_DESC'); ?></p>
-				<p align="justify"><?php echo $proyeto->description; ?></p>
+				<p align="justify"><?php echo $proyecto->description; ?></p>
 			</div>
 			
 			<div style="margin-bottom: 10px;">
@@ -72,7 +101,7 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 			<div>
 				<h4 align="center"><?php echo JText::_('COM_TRAMAPROYECTOS_CHANGE_STATUS'); ?></h4>
 				<input type="hidden" name="userId" value="<?php echo $adminId->id; ?>" />
-				<input type="hidden" name="projectId" value="<?php echo $proyeto->id; ?>" />
+				<input type="hidden" name="projectId" value="<?php echo $proyecto->id; ?>" />
 				<input type="hidden" name="status" class="statuschange" />
 								
 				<div>
@@ -87,22 +116,13 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 			</div>
 			
 			<?php
-			if( !empty($proyeto->logs) ) {
+			if( !empty($proyecto->logs) ) {
 			?>
 			<div>
 				<h4 align="center"><?php echo JText::_('COM_TRAMAPROYECTOS_CHANGES'); ?></h4>
 				<ul>
 					<?php
-					foreach ($proyeto->logs as $key => $value) {
-						$fechacreacion = $value->timestamp/1000;
-						echo '<div style="margin-bottom: 10px;">'.
-							 '<li>'.
-							 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_MODIFIED").'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
-							 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_STATUS").'</strong>: '.JTrama::getStatusName($value->status)->fullName.'</div>'.
-							 '<div align="justify"><strong>'.JText::_("COM_TRAMAPROYECTOS_COMMENT").'</strong>: '.$value->comment.'</div>'.
-							 '</li>'.
-							 '</div>';
-					}
+					echo $logsHtml;
 					?>
 				</ul>
 			</div>

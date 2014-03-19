@@ -5,9 +5,19 @@ defined('_JEXEC') or die('Restricted Access');
 JHtml::_('behavior.tooltip');
 $proyeto 	= $this->items;
 $document 	= JFactory::getDocument();
-$document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
+$document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
+$document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 
+$cssFinan	= '.tablaFinan {font-weight: bold; font-size 120%; width: 30%; width: 22%; display: inline-block; margin: 0 4% 0 0;}
+				.tablaFinan p span{float: right;}';
+$document	->addStyleDeclaration($cssFinan);
 ?>
+<script language="JavaScript">
+	jQuery(document).ready(function() {
+		jQuery('span.number').number(true,2);
+	});
+</script>
+
 <style>
 	input[type="button"]{
 		padding: 5px 10px;

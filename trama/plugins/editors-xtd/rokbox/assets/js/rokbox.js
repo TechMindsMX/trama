@@ -1,6 +1,6 @@
 /*
  * @author RocketTheme, LLC http://www.rockettheme.com
- * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
+ * @copyright Copyright (C) 2007 - 2014 RocketTheme, LLC
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  */
 ((function(){var b=new Class({initialize:function(){this.attach();this.pickers();this.switchBlock(document.getElement("[data-switcher]:checked"));},attach:function(){var h=document.retrieve("rokbox:insertNew",function(j,i){if(j){j.preventDefault();

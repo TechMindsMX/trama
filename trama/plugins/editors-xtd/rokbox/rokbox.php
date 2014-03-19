@@ -1,8 +1,8 @@
 <?php
 /**
- * @version   $Id: rokbox.php 10969 2013-05-30 17:53:35Z djamil $
+ * @version   $Id: rokbox.php 17060 2013-12-18 02:06:16Z djamil $
  * @author    RocketTheme http://www.rockettheme.com
- * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
+ * @copyright Copyright (C) 2007 - 2014 RocketTheme, LLC
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  */
 
@@ -42,6 +42,7 @@ class plgButtonRokBox extends JPlugin{
 
         $button = new JObject();
         $button->set('modal', true);
+        $button->set('class', 'btn');
         $button->set('link', $link);
         $button->set('text', JText::_('RokBox'));
         $button->set('name', 'linkrokbox');
