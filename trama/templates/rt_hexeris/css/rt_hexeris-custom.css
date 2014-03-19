@@ -733,3 +733,23 @@ div#community-wrap.cProfile .cSubmenu li {
 		margin: 0 10px 0 0;
 	}
 }
+.formErrorContentDescription{
+	background: none repeat scroll 0 0 #EE0101;
+    border: 2px solid #DDDDDD;
+    border-radius: 6px;
+    box-shadow: 0 0 6px #000000;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 4px 10px;
+    position: relative;
+    width: 22%;
+    display:none;
+    float: right;
+    z-index: 991;
+}
+@media screen and (max-width:1080px){
+	.formErrorContentDescription{
+	    float: left;
+	    width: 50%;
+	}
+}

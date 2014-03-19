@@ -205,12 +205,27 @@ $ligaSendReview = '<span class="liga" id="revision">
 				}
 			}
 			
-			jQuery("#form2").submit();
+			var rr = jQuery('iframe#description_ifr').contents().find('body p');
+
+			var aa = jQuery(rr).html();
+			
+			if(aa == '<br data-mce-bogus="1">' || aa == ''){
+				jQuery('.formErrorContentDescription').fadeIn();
+				jQuery('.formErrorArrowDescription').fadeIn();
+			}else{
+				jQuery('.formErrorContentDescription').fadeOut();
+				jQuery('.formErrorArrowDescription').fadeOut();
+				jQuery("#form2").submit();
+			}
+		});
+		
+		jQuery('.formErrorContentDescription').click(function(){
+			jQuery(this).hide();
+			jQuery('.formErrorArrowDescription').fadeOut();
 		});
 	});
         
 </script>
-
 <div class="divcontent" id="divContent">
 	<?php 
 	if( isset($datosObj) ){
@@ -487,9 +502,12 @@ $ligaSendReview = '<span class="liga" id="revision">
 			</LEGEND>
 			<br />
 			
+			<div class="formErrorContentDescription">
+				* El campo es obligatorio
+			</div>
+			<div>&nbsp;</div>
 			<label id="label-large"  for="descProy"><?php echo JText::_('LBL_DESCRIPCION').$textPro; ?>*:</label> 
 			<br />	
-			
 			<div style= "max-width:755px;">
 				<?php
 					$editor =& JFactory::getEditor('tinymce');
