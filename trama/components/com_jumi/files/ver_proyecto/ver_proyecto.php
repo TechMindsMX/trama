@@ -83,21 +83,20 @@ function tipoProyProd($data) {
 
 function buttons($data, $user) {
 	$share = '<span style="cursor: pointer;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
-	
+
 	if ( $user->id == strval(UserData::getUserJoomlaId($data->userId)) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
 		$proyid = '&proyid='.$data->id;
-		if( ($data->status == 0) || ($data->status == 2)) {
-			$html = '<div id="buttons">'.
-					'<div class="arrecho" ><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('LBL_EDIT').'</a></span></div>'.
-					'<div class="arrecho" >'.$share.'</div>'.
-					'<div class="arrecho hide-phone" >'.JTramaSocial::inviteToGroup($data->id).'</div></div>';
-		}else{
-			$html = '<div id="buttons">'.
-					'<div class="arrecho hide-phone" >'.JTramaSocial::inviteToGroup($data->id).'</div>'
-					.'<div class="arrecho" >'.$share.'</div>'
-					.'</div>';
-		}
+			$html = '<div id="buttons">';
+			if (($data->type != 'REPERTORY' && $data->status == 0) || ($data->type == 'REPERTORY' && $data->status == 2)) {
+				$html.=	'<div class="arrecho" ><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('LBL_EDIT').'</a></span></div>';
+			}
+			$html.=	'<div class="arrecho" >'.$share.'</div>';
+			
+			if ($data->type != 'REPERTORY' || in_array($data->status, array(8, 11))) {
+				$html.= '<div class="arrecho hide-phone" >'.JTramaSocial::inviteToGroup($data->id).'</div></div>';
+			}
+			$html .= '</div>';
 	} else {
 		$html = '<div id="buttons"><div class="arrecho">'.$share.'</div></div>';
 	}
@@ -256,10 +255,12 @@ function descripcion ($data) {
 }
 
 function irGrupo($data) {
-	$data->proyGroupUrl = JTramaSocial::getProyGroupUrl($data->id);
-	$html = '<a href="'.$data->proyGroupUrl.'" alt="'.$data->name.'" class="button" >'.JText::_('IR_GRUPO').'</a>';
-	
-	return $html;
+	if ($data->type != 'REPERTORY' || in_array($data->status, array(8, 11))) {
+		$data->proyGroupUrl = JTramaSocial::getProyGroupUrl($data->id);
+		$html = '<a href="'.$data->proyGroupUrl.'" alt="'.$data->name.'" class="button" >'.JText::_('IR_GRUPO').'</a>';
+		
+		return $html;
+	}
 }
 
 function rating($data) {
