@@ -520,6 +520,11 @@ $_POST['daCo_perfil_tipoContacto_idtipoContacto'] = 3;
 $datos->agrupacion($_POST);
 $form = $_GET['form'];
 
+$allDone 		=& JFactory::getApplication();
+$verPerfil		= 'index.php?option=com_jumi&view=application&fileid=17&Itemid=220';
+$formContacto	= 'index.php?option=com_jumi&view=application&fileid=16&Itemid=201';
+$formEmpresa	= 'index.php?option=com_jumi&view=application&fileid=13&Itemid=200';
+
 //llamar a las funciones de guardado
 if ($form == 'perfil') {
 	$generales 		= $datos->get_datosGenerales($objDatos);
@@ -528,12 +533,11 @@ if ($form == 'perfil') {
 	$mailGen 		= $datos->get_mailsGeneral($objDatos);
 	$dataGeneral	= $objDatos->datosGenerales($usuario->id, 1);
 	
-	if ($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 2 || $dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 3){
-		$allDone =& JFactory::getApplication();
-		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=13&Itemid=200', 'Sus datos fueron grabados exitosamente' );
+	if ($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 2 
+		|| $dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 3){
+		$allDone->redirect($formEmpresa, JText::_('MESSAGE_DATOS_GUARDADOS') );
 	} else {
-		$allDone =& JFactory::getApplication();
-		$allDone->redirect('index.php?option=com_jumi&view=application&fileid=17&Itemid=220', 'Sus datos fueron grabados exitosamente' );
+		$allDone->redirect($verPerfil, JText::_('MESSAGE_DATOS_GUARDADOS') );
 	}
 } elseif ($form == 'empresa') {
 	$dataGeneral	= $objDatos->datosGenerales($usuario->id, 1);
@@ -543,9 +547,7 @@ if ($form == 'perfil') {
 		$datos->grabarPerJuridica($usuario->id, 2, $objDatos);
 	}
 	
-	$allDone 			=& JFactory::getApplication();
-	
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=16&Itemid=201', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect($formContacto, JText::_('MESSAGE_DATOS_GUARDADOS') );
 
 } elseif ($form == 'contac') {
 	$repr 			= $datos->get_representante($objDatos);
@@ -557,7 +559,6 @@ if ($form == 'perfil') {
 	$dom_contacto 	= $datos->get_domicilioContacto($objDatos);
 	$telsCon 		= $datos->get_telsContacto($objDatos);
 	$mailCon 		= $datos->get_mailsContactos($objDatos);
-	$allDone 		=& JFactory::getApplication($objDatos);
 	
-	$allDone->redirect('index.php?option=com_jumi&view=application&fileid=17&Itemid=220', 'Sus datos fueron grabados exitosamente' );
+	$allDone->redirect($verPerfil, JText::_('MESSAGE_DATOS_GUARDADOS') );
 }

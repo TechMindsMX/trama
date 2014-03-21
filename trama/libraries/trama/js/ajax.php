@@ -1,6 +1,6 @@
 <?php
-$address = str_replace('.', '', $_SERVER['HTTP_HOST']);
-if (!is_numeric($address) && $address != 'localhost') {
+$address = intval(str_replace('.', '', $_SERVER['HTTP_HOST']));
+if (!is_int($address) && $address != 'localhost') {
 	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070'); // direccion produccion
 } else {
 	define('MIDDLE', 'http://192.168.0.122:7272'); // direccion staging

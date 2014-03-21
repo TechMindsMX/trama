@@ -18,7 +18,7 @@ if ($usuario->guest == 1) {
 	$representante 			= $datos->datosGenerales($usuario->id, 2);
 	$pathJumi 				= 'components/com_jumi/files/perfil';
 
-	if (isset($representante) && isset($direccionGeneral) && isset($emailGeneral) && isset($telefonoGeneral) ) {
+	if (isset($direccionGeneral) && isset($emailGeneral) && isset($telefonoGeneral) ) {
 		$existe = 1;
 	} else {
 		$existe = 0;
@@ -262,7 +262,7 @@ if ($usuario->guest == 1) {
             	</div>
             	<div>
                		<label for="doRe_iniCodigoPostal"><?php echo JText::_('LBL_CP'); ?> *:</label>
-               		<input name="doRe_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]] input_chica"  type="text" id="doRe_iniCodigoPostal" size="10" maxlength="5" />
+               		<input name="doRe_perfil_codigoPostal_idcodigoPostal" class="validate[required,custom[onlyNumberSp]] input_chica" type="text" id="doRe_iniCodigoPostal" size="10" maxlength="5" />
            		</div>
             	<div>
                		<label for="doRe_nomColonias"><?php echo JText::_('LBL_COLONIA'); ?> *:</label>
