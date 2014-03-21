@@ -109,7 +109,7 @@ if ( $tablaParam == 'perfilx_catalogoperfil' && in_array($usuario->persJuridicaI
 	<div id="triangle"> </div>
 	<div>
 		<span><?php echo JText::_('ES_GREMIO'); ?></span>&nbsp;&nbsp;
-		<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" id="<?php echo $instituciones->idcatalogoPerfil; ?>"/>
+		<input type="checkbox" class="esgremio" name="<?php echo $gremios->nomNombreCategoria; ?>" value="<?php echo $gremios->idcatalogoPerfil ?>" id="<?php echo $gremios->idcatalogoPerfil; ?>"/>
 	</div>
 	<div>
 		<span><?php echo JText::_('ES_INSTITUCION'); ?></span>
@@ -144,7 +144,6 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 
 			jQuery(document).ready(function() {
 				jQuery('#tree').tree({
-					/* specify here your options */
 					dnd: false
 				});
 			});
