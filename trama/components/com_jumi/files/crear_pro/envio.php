@@ -12,8 +12,11 @@ if ($usuario->guest == 1) {
 	$url   .= '&return='.base64_encode($return);
 	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
-$imagen 			= new manejoImagenes;
-$envio 				= $app->input->getArray($_POST);
+$imagen 				= new manejoImagenes;
+$envio 					= $app->input->getArray($_POST);
+$envio['description']	= $_POST['description'];
+$envio['cast']			= $_POST['cast'];
+
 $envio['token'] 	= JTrama::token();
 
 foreach ($_FILES as $key => $value) {
@@ -79,7 +82,6 @@ if ($envio['photos'] == '') {
 	$url = $_SERVER['HTTP_REFERER'];
 	JFactory::getApplication()->redirect($url, JText::_('SIN_FOTOS'), 'error');
 }
-
 
 $ch					= curl_init($envio['callback']);
 $url				= MIDDLE.PUERTO."/trama-middleware/rest/project/create";
