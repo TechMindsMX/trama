@@ -405,7 +405,7 @@ function userName($data) {
 		scrollwrapper();
 		jQuery(".ver_proyecto").hide();
 		jQuery("#banner").show();
-		jQuery("#rt-mainbody").css( "margin-top","55px" );
+		jQuery("#rt-mainbody").addClass("margen-proyecto");
 		jQuery(".menu-item").hover(
 			function(){
 				jQuery(this).addClass("over");

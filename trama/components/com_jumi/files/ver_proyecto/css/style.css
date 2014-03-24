@@ -251,6 +251,10 @@ div#banner div.rt-inner a {
 h3.line-space{
 	line-height: 70%;
 }
+#rt-mainbody-surround #rt-mainbody.margen-proyecto {
+	margin-top: 40px;
+}
+
 @media screen and (max-width:1200px) {
 	#menu-player {
 		max-width: 100%;
@@ -278,7 +282,11 @@ h3.line-space{
 		width: 500px;
 	}
 }
-
+@media screen and (max-width: 1024px) and (orientation:portrait) {
+	#rt-mainbody-surround #rt-mainbody.margen-proyecto {
+		margin-top: 90px;
+	}
+}
 @media screen and (max-width:960px) {
 	#menu-player {
 		max-width: 100%;
