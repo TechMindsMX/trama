@@ -276,6 +276,9 @@ div#community-wrap.cProfile .cSubmenu li {
 }
 /* fin escritorio */
 @media screen and (max-width: 768px) {
+	.gf-menu .dropdown .flyout {
+		left: -197px !important;
+	}
 	#rt-header {
 		margin-bottom: -35px;
 	}
@@ -298,6 +301,7 @@ div#community-wrap.cProfile .cSubmenu li {
 	}
 	#rt-mainbody-surround #rt-mainbody {
 		margin: 40px -5px;
+		width:95.6%;
 	}
 	div.barra-top {
 		margin-top: 50px;
