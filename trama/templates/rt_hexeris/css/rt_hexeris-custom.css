@@ -276,6 +276,9 @@ div#community-wrap.cProfile .cSubmenu li {
 }
 /* fin escritorio */
 @media screen and (max-width: 768px) {
+	.menu-block {
+		right: 10px;
+	}
 	.gf-menu .dropdown .flyout {
 		left: -197px !important;
 	}
