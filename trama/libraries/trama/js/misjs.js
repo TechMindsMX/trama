@@ -54,11 +54,12 @@ function copiarDomCon() {
 
 function datosxCP() {
 	jQuery('input[name$="perfil_codigoPostal_idcodigoPostal"]').on("focusout keydown keyup",function (e) {
+		var campoCP = this;
 		var code = e.keyCode || e.which; 
-		var cp = jQuery('input[name$="perfil_codigoPostal_idcodigoPostal"]').val();
+		var cp = jQuery(this).val();
 
 		if(cp.length == 5 && code != 13){
-			var select_colonias = jQuery('select[name$="perfil_colonias_idcolonias"]');
+			var select_colonias = jQuery(this).parent().next().children('select');
 			jQuery('option', select_colonias).remove();
 			
 			var request = $.ajax({
@@ -73,9 +74,9 @@ function datosxCP() {
 			request.done(function(result){
 				var obj 			= eval('('+result+')');
 				var colonias 		= obj.dAsenta;
-				var select_colonias = jQuery('select[name$="perfil_colonias_idcolonias"]');
-				var select_edos 	= jQuery('select[name$="perfil_estado_idestado"]');
-				var select_deleg 	= jQuery('select[name$="doFi_perfil_delegacion_iddelegacion"]');
+				var select_colonias = jQuery(campoCP).parent().next().children('select');
+				var select_edos 	= jQuery(campoCP).parent().next().next().children('select');
+				var select_deleg 	= jQuery(campoCP).parent().next().next().next().children('select');
 				
 				jQuery('option', select_colonias).remove();
 				jQuery('option', select_edos).remove();

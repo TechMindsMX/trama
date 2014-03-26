@@ -93,7 +93,7 @@
 	  					echo "jQuery('#dire_nomColonias').append(new Option('".$direccion->perfil_colonias_idcolonias."', '".$direccion->perfil_colonias_idcolonias."'));\n";
 	  					echo "jQuery('#dire_nomEstado').append(new Option('".$direccion->perfil_estado_idestado."', '".$direccion->perfil_estado_idestado."'));\n";
 	 					echo "jQuery('#dire_iniCodigoPostal').val('".$direccion->perfil_codigoPostal_idcodigoPostal."');\n";
-	 					echo "jQuery('#dire_nomDelegacion').val('".$direccion->perfil_delegacion_iddelegacion."');\n";
+	 					echo "jQuery('#dire_nomDelegacion').append(new Option('".$direccion->perfil_delegacion_iddelegacion."', '".$direccion->perfil_delegacion_iddelegacion."'));\n";
 	 					echo "jQuery('#dire_nomPais').val('".$direccion->perfil_pais_idpais."');\n";
 	 					echo "jQuery('input[name=daGr_perfil_personalidadJuridica_idpersonalidadJuridica][value=".$generales->perfil_personalidadJuridica_idpersonalidadJuridica."]').attr('checked', true);\n";
  					}
@@ -317,13 +317,8 @@
             	</div>
             	<div>
             	<label for="dire_nomDelegacion"><?php echo JText::_('LBL_DELEGACION'); ?> *:</label>
-            	<input
-            		readonly="readonly"
-            		name="dire_perfil_delegacion_iddelegacion"
-            		class="validate[required,custom[onlyLetterSp]] input_chica"
-            		type="text"
-            		id="dire_nomDelegacion"
-            		maxlength="50" />
+            	<select name="dire_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" id="dire_nomDelegacion">
+            	</select>
            		</div>
            		<div>
                	<label for="dire_nomEstado"><?php echo JText::_('LBL_ESTADO'); ?> *:</label>

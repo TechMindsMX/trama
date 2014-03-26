@@ -85,7 +85,7 @@ if ($usuario->guest == 1) {
 				echo "jQuery('#doRe_noInterior').val('".$direccionRepresentante->noInterior."');";
 				echo "jQuery('#doRe_nomColonias').append(new Option('".$direccionRepresentante->perfil_colonias_idcolonias."', '".$direccionRepresentante->perfil_colonias_idcolonias."'));";
 				echo "jQuery('#doRe_nomEstado').append(new Option('".$direccionRepresentante->perfil_estado_idestado."', '".$direccionRepresentante->perfil_estado_idestado."'));";
-				echo "jQuery('#doRe_nomDelegacion').val('".$direccionRepresentante->perfil_delegacion_iddelegacion."');";
+				echo "jQuery('#doRe_nomDelegacion').append(new Option('".$direccionRepresentante->perfil_delegacion_iddelegacion."', '".$direccionRepresentante->perfil_delegacion_iddelegacion."'));";
 				echo "jQuery('#doRe_iniCodigoPostal').val('".$direccionRepresentante->perfil_codigoPostal_idcodigoPostal."');";
 				echo "jQuery('#doRe_nomPais').val('".$direccionRepresentante->perfil_pais_idpais."');";
 				
@@ -114,7 +114,7 @@ if ($usuario->guest == 1) {
 				echo "jQuery('#doCo_noInterior').val('".$direccionContacto->noInterior."');";
 				echo "jQuery('#doCo_nomColonias').append(new Option('".$direccionContacto->perfil_colonias_idcolonias."', '".$direccionContacto->perfil_colonias_idcolonias."'));";
 				echo "jQuery('#doCo_nomEstado').append(new Option('".$direccionContacto->perfil_estado_idestado."', '".$direccionContacto->perfil_estado_idestado."'));";
-				echo "jQuery('#doCo_nomDelegacion').val('".$direccionContacto->perfil_delegacion_iddelegacion."');";
+				echo "jQuery('#doCo_nomDelegacion').append(new Option('".$direccionContacto->perfil_delegacion_iddelegacion."', '".$direccionContacto->perfil_delegacion_iddelegacion."'));";
 				echo "jQuery('#doCo_iniCodigoPostal').val('".$direccionContacto->perfil_codigoPostal_idcodigoPostal."');";
 				echo "jQuery('#doCo_nomPais').val('".$direccionContacto->perfil_pais_idpais."');";
 				
@@ -125,10 +125,15 @@ if ($usuario->guest == 1) {
 				jQuery('#doRe_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 				jQuery('#doRe_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
 				jQuery('#doRe_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');
+				
 				jQuery('option', jQuery('#doRe_nomColonias')).remove();
 				jQuery('#doRe_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));					
-				jQuery('#doRe_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');
+				
+				jQuery('option', jQuery('#doRe_nomDelegacion')).remove();
+				jQuery('#doRe_nomDelegacion').append(new Option('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>','<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>'));
+				
 				jQuery('#doRe_iniCodigoPostal').val('<?php echo $direccionGeneral->perfil_codigoPostal_idcodigoPostal;?>');
+				
 				jQuery('option', jQuery('#doRe_nomEstado')).remove();
 				jQuery('#doRe_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));					
 			});
@@ -156,10 +161,15 @@ if ($usuario->guest == 1) {
 				jQuery('#doCo_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 				jQuery('#doCo_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
 				jQuery('#doCo_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');					
+				
 				jQuery('option', jQuery('#doCo_nomColonias')).remove();
 				jQuery('#doCo_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));				
-				jQuery('#doCo_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');
+				
+				jQuery('option', jQuery('#doCo_nomDelegacion')).remove();
+				jQuery('#doCo_nomDelegacion').append(new Option('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>', '<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>'));
+				
 				jQuery('#doCo_iniCodigoPostal').val('<?php echo $direccionGeneral->perfil_codigoPostal_idcodigoPostal;?>');
+				
 				jQuery('option', jQuery('#doCo_nomEstado')).remove();
 				jQuery('#doCo_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));				
 			});
@@ -270,7 +280,7 @@ if ($usuario->guest == 1) {
            		</div>
             	<div>
             		<label for="doRe_nomDelegacion"><?php echo JText::_('LBL_DELEGACION'); ?> *:</label>
-            		<input name="doRe_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doRe_nomDelegacion" maxlength="50" />
+            		<select name="doRe_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" id="doRe_nomDelegacion"></select>
             	</div>
             	<div>
                		<label for="doRe_nomEstado"><?php echo JText::_('LBL_ESTADO'); ?> *:</label>
@@ -366,7 +376,7 @@ if ($usuario->guest == 1) {
            		</div>
 				<div>
             		<label for="doCo_nomDelegacion"><?php echo JText::_('LBL_DELEGACION'); ?> *:</label>
-            		<input name="doCo_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doCo_nomDelegacion" maxlength="50" />
+            		<select name="doCo_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" id="doCo_nomDelegacion"></select>
             	</div>
 				<div>
                		<label for="doCo_nomEstado"><?php echo JText::_('LBL_ESTADO'); ?> *:</label>

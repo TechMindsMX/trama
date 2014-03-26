@@ -53,12 +53,18 @@ if ($usuario->guest == 1) {
 					jQuery('#doFi_nomCalle').val('<?php echo $direccionGeneral->nomCalle;?>');
 					jQuery('#doFi_noExterior').val('<?php echo $direccionGeneral->noExterior;?>');
 					jQuery('#doFi_noInterior').val('<?php echo $direccionGeneral->noInterior;?>');
+					
 					jQuery('option', jQuery('#doFi_nomColonias')).remove();
-					jQuery('#doFi_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));					
-					jQuery('#doFi_nomDelegacion').val('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion;?>');
+					jQuery('#doFi_nomColonias').append(new Option('<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>','<?php echo $direccionGeneral->perfil_colonias_idcolonias;?>'));
+					
+					jQuery('option', jQuery('#doFi_nomDelegacion')).remove();
+					jQuery('#doFi_nomDelegacion').append(new Option('<?php echo $direccionGeneral->perfil_delegacion_iddelegacion; ?>', '<?php echo $direccionGeneral->perfil_delegacion_iddelegacion; ?>'));
+					
 					jQuery('#doFi_iniCodigoPostal').val('<?php echo $direccionGeneral->perfil_codigoPostal_idcodigoPostal;?>');
+					
 					jQuery('option', jQuery('#doFi_nomEstado')).remove();
 					jQuery('#doFi_nomEstado').append(new Option('<?php echo $direccionGeneral->perfil_estado_idestado;?>','<?php echo $direccionGeneral->perfil_estado_idestado;?>'));					
+					
 					jQuery('#doFi_nomPais').val('<?php echo $direccionGeneral->perfil_pais_idpais;?>');
 				});
 			<?php
@@ -76,7 +82,7 @@ if ($usuario->guest == 1) {
 				echo "jQuery('#doFi_noInterior').val('".$domcilioFiscal->noInterior."');";
 				echo "jQuery('#doFi_nomColonias').append(new Option('".$domcilioFiscal->perfil_colonias_idcolonias."', '".$domcilioFiscal->perfil_colonias_idcolonias."'));";
 				echo "jQuery('#doFi_nomEstado').append(new Option('".$domcilioFiscal->perfil_estado_idestado."', '".$domcilioFiscal->perfil_estado_idestado."'));";
-				echo "jQuery('#doFi_nomDelegacion').val('".$domcilioFiscal->perfil_delegacion_iddelegacion."');";
+				echo "jQuery('#doFi_nomDelegacion').append(new Option('".$domcilioFiscal->perfil_delegacion_iddelegacion."', '".$domcilioFiscal->perfil_delegacion_iddelegacion."'));";
 				echo "jQuery('#doFi_iniCodigoPostal').val('".$domcilioFiscal->perfil_codigoPostal_idcodigoPostal."');";
 				echo "jQuery('#doFi_nomPais').val('".$domcilioFiscal->perfil_pais_idpais."');";
 			}
@@ -122,7 +128,7 @@ if ($usuario->guest == 1) {
 				</div>
 				<div>
             	<label for="doFi_nomDelegacion"><?php echo JText::_('LBL_DELEGACION'); ?> *:</label>
-            	<input name="doFi_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" type="text" id="doFi_nomDelegacion" maxlength="50" />
+            	<select name="doFi_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]] input_chica" id="doFi_nomDelegacion"></select>
 				</div>
 				<div>
                	<label for="doFi_nomEstado"><?php echo JText::_('LBL_ESTADO'); ?> *:</label>
