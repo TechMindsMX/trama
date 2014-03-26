@@ -96,7 +96,17 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 		    }
 		});
 		
-		jQuery( "#premiereStartDate, #premiereEndDate").attr('disabled', 'disabled');
+		<?php
+		if($datosObj->type == 'PROJECT'){
+		?>
+			jQuery( "#premiereStartDate, #premiereEndDate").attr('disabled', 'disabled');
+		<?php
+		}else{
+		?>
+			jQuery( "#premiereEndDate").attr('disabled', 'disabled');
+		<?php
+		}
+		?>
 		
 		jQuery.validationEngine.defaults.validationEventTrigger = 'change';
 		jQuery("#form2").validationEngine();
