@@ -292,7 +292,7 @@ class procesamiento extends manejoImagenes {
 			}
 
 			foreach ($data as $key => $value) {
-				if (!empty($value)) {					
+				if (!empty($value) || $value == 0) {					
 			        $col[] = mysql_real_escape_string($key);
 					$val[] = "'".mysql_real_escape_string($value)."'";
 				}
