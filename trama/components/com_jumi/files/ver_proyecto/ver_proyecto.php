@@ -88,7 +88,7 @@ function buttons($data, $user) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
 		$proyid = '&proyid='.$data->id;
 			$html = '<div id="buttons">';
-			if (($data->type != 'REPERTORY' && $data->status == 0) || ($data->type == 'REPERTORY' && $data->status == 2)) {
+			if (($data->type != 'REPERTORY' && $data->status == 0) || ($data->type != 'REPERTORY' && $data->status == 2)) {
 				$html.=	'<div class="arrecho" ><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('LBL_EDIT').'</a></span></div>';
 			}
 			$html.=	'<div class="arrecho" >'.$share.'</div>';
