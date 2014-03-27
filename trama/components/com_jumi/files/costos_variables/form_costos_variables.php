@@ -52,10 +52,30 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		});
 
 		jQuery("#agregarOtros").click(function(){
-			jQuery('#otros').append('<div><input type="text" placeholder="<?php echo JText::_('CONCEPT');?>" id="agregado" onChange="cambio(this)" /> <input placeholder="<?php echo JText::_('PORCENTAJE_COSTOS');?>" class="validate[custom[onlyNumberRenta]]" type="text" id="campo" />%</div>');
-		
+			var div = '<div>'
+				div += '<input type="text" placeholder="<?php echo JText::_('CONCEPT');?>" id="agregado" onChange="cambio(this)" />';
+				div += '<input placeholder="<?php echo JText::_('PORCENTAJE_COSTOS');?>" class="validate[custom[onlyNumberRenta]]" type="text" id="campo" value="0" />%';
+				div += '</div>';
+				
+			jQuery('#otros').append(div);
 		});
 		
+		jQuery('#aplica').change(function(){
+			if(this.checked){
+				jQuery('#sogem').attr('disabled', 'disabled');
+				jQuery('#sogem').val(0);
+			}else{
+				jQuery('#sogem').prop('disabled', '');
+				jQuery('#sogem').val(1);
+			}
+		});
+		
+		jQuery('#sogem').change(function(){
+			if(jQuery(this).val() == 0){
+				jQuery(this).attr('disabled', 'disabled');
+				jQuery('#aplica').prop('checked', 'checked');
+			}
+		});
 		<?php
 		
 		if( !is_null($datosObj) ) {
@@ -105,7 +125,6 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		}
 	
 	if(!empty($existe)){
-		
 		foreach ($servEdicion->variableCosts as $key => $value) {
 			switch ($value->name) {
 				case 'rent':
@@ -137,6 +156,10 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	}
 	?>
 		
+		if( jQuery('#sogem').val() == 0 ){
+			jQuery('#sogem').attr('disabled', 'disabled');
+			jQuery('#aplica').prop('checked', 'checked');
+		}
 	});
 
 	function cambio(input) {
@@ -177,7 +200,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		id="renta"
 		class="validate[custom[onlyNumberRenta]]"
 		maxlength="5"
-		name="rent" /> %
+		name="rent"
+		value="0" /> %
 	</div>
 	<div>
 	<label for="ISEP"> <?php echo JText::_('IMPUESTOS_ISEP'); ?>: </label>  
@@ -210,13 +234,17 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 		value="6"
 		name="sacm" /> %
 	</div>
-	<label for="SOGEM"> <?php echo JText::_('LBL_SOGEM'); ?>: </label> 
+	<label for="SOGEM"> 
+		<?php echo JText::_('LBL_SOGEM'); ?>:
+		&nbsp;&nbsp;&nbsp;<?php echo JText::_('LBL_APLICA'); ?> <input type="checkbox" id="aplica" /> 
+	</label> 
 	<input 
 		type="text"
 		id="sogem"
 		class="validate[custom[onlyNumberSOGEM]]"
 		maxlength="5"
-		name="sogem" /> %
+		name="sogem"
+		value="0" /> %
 	
 	<div id="otros">
 		<h3><?php echo JText::_('LBL_OTROS'); ?></h3>
