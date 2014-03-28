@@ -127,7 +127,7 @@ function videos($obj, $param) {
 		if (key($video1) == 'youtube') {
 			$html .= '<iframe class="video-player" width="100%" '.
 					'src="//www.youtube.com/embed/'.$video1['youtube'].
-					'?rel=0" frameborder="0" allowfullscreen></iframe>';
+					'?rel=0&wmode=transparent" frameborder="0" allowfullscreen></iframe>';
 		}
 		elseif (key($video1) == 'vimeo') {
 			$html .= '<iframe class="video-player" width="100%" '.
