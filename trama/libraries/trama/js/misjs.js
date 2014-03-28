@@ -54,7 +54,7 @@ function copiarDomCon() {
 
 function datosxCP() {
 	jQuery('input[name$="perfil_codigoPostal_idcodigoPostal"]').on("focusout keydown keyup",function (e) {
-		var campoCP = this;
+		var campoCP = jQuery(this).parent().parent();
 		var code = e.keyCode || e.which; 
 		var cp = jQuery(this).val();
 
@@ -74,9 +74,10 @@ function datosxCP() {
 			request.done(function(result){
 				var obj 			= eval('('+result+')');
 				var colonias 		= obj.dAsenta;
-				var select_colonias = jQuery(campoCP).parent().next().children('select');
-				var select_edos 	= jQuery(campoCP).parent().next().next().children('select');
-				var select_deleg 	= jQuery(campoCP).parent().next().next().next().children('select');
+				var select_colonias = jQuery(campoCP).find('select[name$="colonias_idcolonias"]');
+				var select_edos 	= jQuery(campoCP).find('select[name$="estado_idestado"]');
+				var select_deleg 	= jQuery(campoCP).find('select[name$="delegacion_iddelegacion"]');
+console.log(jQuery(campoCP).find('select[name$="colonias_idColonias"]'));
 				
 				jQuery('option', select_colonias).remove();
 				jQuery('option', select_edos).remove();
