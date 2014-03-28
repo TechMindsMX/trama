@@ -1,3 +1,4 @@
+
 function datosxCP() {
 	jQuery('input[name$="perfil_codigoPostal_idcodigoPostal"]').on("focusout keydown keyup",function (e) {
 		var campoCP = jQuery(this).parent().parent();
@@ -23,7 +24,6 @@ function datosxCP() {
 				var select_colonias = jQuery(campoCP).find('select[name$="colonias_idcolonias"]');
 				var select_edos 	= jQuery(campoCP).find('select[name$="estado_idestado"]');
 				var select_deleg 	= jQuery(campoCP).find('select[name$="delegacion_iddelegacion"]');
-console.log(jQuery(campoCP).find('select[name$="colonias_idColonias"]'));
 				
 				jQuery('option', select_colonias).remove();
 				jQuery('option', select_edos).remove();
