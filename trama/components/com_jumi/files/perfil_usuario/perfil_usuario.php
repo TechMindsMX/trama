@@ -22,12 +22,14 @@ $input 				= JFactory::getApplication()->input;
 $document 			= JFactory::getDocument();
 $base 				= JUri::base();
 $userid 			= $input->get("userid", 0, "int");
-$userid 			= ($userid == 0) ? $usuario->id: $userid ;
+$userid 			= ($userid == 0) ? $usuario->id: $userid;
 $idMiddleware		= UserData::getUserMiddlewareId($userid);
 $pathJumi 			= $base.'components/com_jumi/files/perfil_usuario/';
 $proyectos	 		= JTrama::getProjectsByUser($idMiddleware->idMiddleware);
 $promedio 			= UserData::scoreUser($idMiddleware->idJoomla);
 $datosgenerales 	= UserData::datosGr($idMiddleware->idJoomla);
+$userLogged			= UserData::getUserMiddlewareId($usuario->id);
+
 if(is_null($datosgenerales)){
 	$app->redirect('index.php', ''.JText::_("JSIN_DATOS_USUARIO").'','notice');
 }
@@ -151,7 +153,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 									$fecha = $value->timeCreated/1000;
 									echo "<ul>";
 									echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
-										if ($idMiddleware->idMiddleware == $value->userId) {
+										if ($idMiddleware->idMiddleware == $userLogged->idMiddleware) {
 											if($value->status == 0 || $value->status == 2) {
 												echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('LBL_EDIT').'</a></span>';
 											}
