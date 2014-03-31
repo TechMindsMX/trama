@@ -80,9 +80,9 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 				}
 				
 				if(empty($datosObj->providers)){
-					$mensaje = JText::_('ALTA_PROVEEDORES');
+					$mensajeProv = JText::_('ALTA_PROVEEDORES');
 				} else {
-					$mensaje = JText::_('EDITAR_PROVEEDORES');
+					$mensajeProv = JText::_('EDITAR_PROVEEDORES');
 				}
 				
 				if(empty($datosObj->variablecost)){
@@ -95,7 +95,7 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 					$ligaSendReview = '<span class="liga" id="revision"><a href="#">'.$mensajeRevision.'</a></span>';
 				  
 					$ligaEditProveedores = '<span class="liga">
-											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensajeProv.'</a>
 								   		</span>';
 										
 					$ligaCostosVariable = '<span class="liga">
