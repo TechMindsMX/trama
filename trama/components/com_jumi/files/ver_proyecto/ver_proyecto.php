@@ -107,7 +107,7 @@ function buttons($data, $user) {
 }
 
 function checkShared($data, $user) {
-	include_once('/configuration.php');
+	include_once(getcwd().'/configuration.php');
 	
 	$configuracion 	= new JConfig;
 	$userId			= $user->id;
