@@ -18,6 +18,7 @@
 	jimport('trama.usuario_class');
 	jimport('trama.error_class');
 	JHTML::_('behavior.tooltip');
+
 	
 	$usuario->idMiddleware = ( $usuario->id != 0 ) ? UserData::getUserMiddlewareId($usuario->id)->idMiddleware : null;
 	
@@ -57,6 +58,8 @@ $json->etiquetaTipo = tipoProyProd($json);
 $json->acceso 		= JTramaSocial::checkUserGroup($proyecto, $usuario->id);
 $json->userIdJoomla = UserData::getUserJoomlaId($json->userId);
 
+checkShared($json, $usuario);
+
 if($json->name) {
 	$mydoc =& JFactory::getDocument();
 	$mydoc->setTitle($json->name);
@@ -82,7 +85,7 @@ function tipoProyProd($data) {
 }
 
 function buttons($data, $user) {
-	$share = '<span style="cursor: pointer;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
+	$share = checkShared($data, $user);
 
 	if ( $user->id == strval(UserData::getUserJoomlaId($data->userId)) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
@@ -102,6 +105,28 @@ function buttons($data, $user) {
 	}
 	return $html;
 }
+
+function checkShared($data, $user) {
+	include_once('/configuration.php');
+	
+	$configuracion 	= new JConfig;
+	$userId			= $user->id;
+	$projectId		= $data->id;
+
+	$bd = new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
+	$queryShared = 'SELECT * FROM c3rn2_community_activities WHERE actor = '.$userId.' && proyId = '.$projectId;
+	$resultShared = $bd->query($queryShared);
+	
+	if ($resultShared->num_rows == 0) {
+		$label = JText::_('SHARE_PROJECT');
+	} else {
+		$label = JText::_('ALREDY_SHARE_PROJECT_LBL');
+	}
+	$share = '<span style="cursor: pointer;" class="shareButton">'.$label.'</span>';
+	
+	return $share;
+}
+
 
 function videos($obj, $param) {
 	$html = '';
