@@ -17,6 +17,7 @@ if ($usuario->guest == 1) {
 	$direccionGeneral		= $datos->domicilio($generales->id, 1);
 	$representante 			= $datos->datosGenerales($usuario->id, 2);
 	$pathJumi 				= 'components/com_jumi/files/perfil';
+	$contacto 				= $datos->datosGenerales($usuario->id, 3);
 
 	if (isset($direccionGeneral) && isset($emailGeneral) && isset($telefonoGeneral) ) {
 		$existe = 1;
@@ -40,6 +41,7 @@ if ($usuario->guest == 1) {
 	// fin botones navegación perfil
 	
 	$accion = JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&exi='.$existe.'&form=contac';
+	
 ?>
 
 	<script>
@@ -50,14 +52,13 @@ if ($usuario->guest == 1) {
 			
 			<?php
 			//llenar Datos
-			if ($existe) {
-				$contacto 				= $datos->datosGenerales($usuario->id, 3);
-				$emailRepresentante 	= $datos->email($representante->id);
+			if ($existe && isset($representante) && isset($contacto)) {
 				$emailContacto 			= $datos->email($contacto->id);
-				$telefonoRepresentante 	= $datos->telefono($representante->id);
 				$telefonoContacto 		= $datos->telefono($contacto->id);
-				$direccionRepresentante = $datos->domicilio($representante->id, 1);
 				$direccionContacto 		= $datos->domicilio($contacto->id, 1);
+				$emailRepresentante 	= $datos->email($representante->id);
+				$telefonoRepresentante 	= $datos->telefono($representante->id);
+				$direccionRepresentante = $datos->domicilio($representante->id, 1);
 				
 				/*Llenado Representante Legal*/
 				echo "jQuery('#repr_nomNombre').val('".$representante->nomNombre."');";
