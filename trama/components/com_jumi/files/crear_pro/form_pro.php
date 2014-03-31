@@ -30,6 +30,7 @@ $proyid 				= $input->get("proyid",0,"int");
 $errorCode		 		= $input->get("error",0,"int");
 $from		 			= $input->get("from",0,"int");
 $datosObj 				= $proyid == 0 ? null: JTrama::getDatos($proyid);
+$ligaSendReview			= '';
 $comentarios			= '';
 $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
@@ -47,9 +48,6 @@ errorClass::manejoError($errorCode, $from, $proyid);
 $action = 'index.php?option=com_jumi&view=application&fileid=31';
 
 $mensajeRevision = JText::_('ENVIAR_REVISION');
-$ligaSendReview = '<span class="liga" id="revision">
-				     <a href="#">'.$mensajeRevision.'</a>'.
-				  '</span>';
 ?>
 <script>
 	emptyKeys();
@@ -86,23 +84,30 @@ $ligaSendReview = '<span class="liga" id="revision">
 				} else {
 					$mensaje = JText::_('EDITAR_PROVEEDORES');
 				}
-				$ligaEditProveedores = '<span class="liga">
-											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
-								   		</span>';
+				
 				if(empty($datosObj->variablecost)){
 					$mensaje = JText::_('ALTA_COSTOS_VARIABLES');
 				} else {
 					$mensaje = JText::_('EDITAR_COSTOS_VARIABLES');
 				}
-				$ligaCostosVariable = '<span class="liga">
-									  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
-								   	  '</span>';
-									  
-				$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
-
-				$ligaFinantialData = '<span class="liga">
-									  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
-								   	  '</span>';
+				
+				if( $datosObj->type != 'REPERTORY'){
+					$ligaSendReview = '<span class="liga" id="revision"><a href="#">'.$mensajeRevision.'</a></span>';
+				  
+					$ligaEditProveedores = '<span class="liga">
+											<a href="index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$datosObj->id.'">'.$mensaje.'</a>
+								   		</span>';
+										
+					$ligaCostosVariable = '<span class="liga">
+										  	<a href="index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$datosObj->id.'">'.$mensaje.'</a>'.
+									   	  '</span>';
+										  
+					$mensajeFinanzas = JText::_('EDITAR_FINANZAS');
+	
+					$ligaFinantialData = '<span class="liga">
+										  	<a href="index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$datosObj->id.'">'.$mensajeFinanzas.'</a>'.
+									   	  '</span>';
+				}
 			}
 			
 			foreach ($subCategorias as $key => $value) {
