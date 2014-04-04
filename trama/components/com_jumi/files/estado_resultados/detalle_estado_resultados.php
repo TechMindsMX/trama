@@ -18,6 +18,7 @@ $document 	= JFactory::getDocument();
 $input 		= JFactory::getApplication()->input;
 $proyId 	= $input->get("proyId",0,"int");
 $value 		= JTrama::getStateResult($proyId);
+var_dump($value);
 $pathJumi 	= JUri::base().'components/com_jumi/files/estado_resultados/';
 $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 
@@ -76,7 +77,7 @@ $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 				</tr>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_REEMBOLSO'); ?></td>
-					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toReemCap']; ?></span></td>
+					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toAporCap']; ?></span></td>
 				</tr>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_EPRODUCTOR'); ?></td>

@@ -23,7 +23,9 @@ class JTrama
 		return $cats;
 	}
 
-	public static function getStatusName ($id, $statusList) {
+	public static function getStatusName ($id, $statusList=null) {
+		$statusList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+		
 		if (!empty($statusList)) {
 			foreach ($statusList as $llave => $valor) {
 				if ( $valor->id == $id ) {
@@ -371,7 +373,7 @@ class JTrama
 				case 'OTHERS':
 					$objAgrupado['totalOtro'] = $objAgrupado['totalOtro']+$value->amount;
 					break;
-				case 'CAPITALCONTRIBUTIONS':
+				case 'PROVIDER_PARTNERSHIP':
 					$objAgrupado['toAporCap'] = $objAgrupado['toAporCap']+$value->amount;
 					break;
 				default:
