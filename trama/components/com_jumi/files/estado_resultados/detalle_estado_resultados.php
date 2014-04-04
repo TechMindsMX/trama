@@ -83,7 +83,7 @@ $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toProduct']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_COSTOS_VARIABLES'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_COSTOS_VARIABLES').JText::_('ESTADO_RESULTADOS_DETALLE_LVL_PROYECTADOS'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCostVar']; ?></span></td>
 				</tr>
 				<tr class="total">
@@ -97,7 +97,7 @@ $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 				<!--Resultados-->
 				<tr class="total">
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS_EGRESOS'); ?></td>
-					<td class="cantidades">$<span class="number"><?php echo $value['resultadoIE']; ?></span></td>
+					<td class="cantidades">$<?php echo number_format($value['resultadoIE'], 2); ?></td>
 				</tr>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_RETORNOS'); ?></td>

@@ -23,11 +23,9 @@ class JTrama
 		return $cats;
 	}
 
-	public static function getStatusName ($id) {
-		$allNames = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
-		
-		if (!empty($allNames)) {
-			foreach ($allNames as $llave => $valor) {
+	public static function getStatusName ($id, $statusList) {
+		if (!empty($statusList)) {
+			foreach ($statusList as $llave => $valor) {
 				if ( $valor->id == $id ) {
 					$valor->fullName 		= JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
 					$valor->tooltipTitle 	= JText::_('TIP_'.strtoupper($valor->name).'_TITLE');
@@ -42,7 +40,15 @@ class JTrama
 	public static function getStatus(){
 		$status = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 		
-		return $status;
+		foreach ($status as $obj) {
+				$map[] = array($obj->name, $obj);
+			}	
+			sort($map);
+			
+			foreach ($map as $key => $value) {
+				$statusListFinal[] = $value[1];
+			}
+		return $statusListFinal;
 	}
 	
 	public function getProjectsByUser ($userid) {
@@ -285,7 +291,7 @@ class JTrama
 	
 	public static function getStateResult($proyId){
 		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
-		$dataGral 							= self::getDatos($proyId);
+		$dataGral 							= self::getDatos($proyId); 
 		$user								= UserData::getUserJoomlaId($dataGral->userId);
 		$usuario							= JFactory::getUser($user);
 		$objagrupado					 	= self::agrupaIngresosEgresos($dataProyecto);
@@ -305,6 +311,7 @@ class JTrama
 		$objagrupado['fechafin']			= $dataGral->premiereEndDate;
 		$objagrupado['ingresosPotenciales']	= $dataGral->revenuePotential;
 		$objagrupado['account']				= $dataGral->account;		
+		
 		return $objagrupado;
 	}
 	
@@ -382,7 +389,6 @@ class JTrama
 		$objAgrupado['toReemCap'] = 0;
 		$objAgrupado['toProduct'] = 0;
 		$objAgrupado['toCostFij'] = 0;
-		$objAgrupado['toCostVar'] = 0;
 		
 		foreach ($objAgrupado['egresos'] as $key => $value) {
 			switch ($value->description) {
@@ -401,14 +407,14 @@ class JTrama
 				case 'FEXEDCOSTS':
 					$objAgrupado['toCostFij'] = $objAgrupado['toCostFij']+$value->amount;
 					break;
-				case 'VARCOSTS':
-					$objAgrupado['toCostVar'] = $objAgrupado['toCostVar']+$value->amount;
+				case 'PROVIDER_PAYMENT';
+					$objAgrupado['toProveed'] = $objAgrupado['toProveed'] + $value->amount;
 					break;
 				default:
 					break;
 			}
 		}
-		
+
 		return $objAgrupado;
 	}
 
@@ -426,7 +432,20 @@ class JTrama
 		$objagrupado['toResultado']		= $objagrupado['resultReden'] + $objagrupado['resultFinan'] + $objagrupado['resultInver'] + $objagrupado['resultComic'] + $objagrupado['resultOtros'];
 		$objagrupado['porcentaTRI']		= $dataGral->tri*100;
 		$objagrupado['porcentaTRF']		= $dataGral->trf*100;
+		$objagrupado['toCostVar']		= 0;
+
+		foreach ($dataGral->variableCosts as $key => $value) {
+			$detalle = new stdClass();
+			$detalle->nombre = $value->name;
+			$detalle->porcentaje = $value->value.'%';
+			$detalle->mount = ($value->value/100) * $dataGral->balance;
+			
+			$objagrupado['toCostVar'] = $objagrupado['toCostVar'] + (($value->value/100) * $dataGral->balance);
+			$detalleOperacion[] = $detalle;
+		}
 		
+		$objagrupado['detalleoperacion'] = $detalleOperacion;
+
 		return $objagrupado;
 	}
 }
