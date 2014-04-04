@@ -226,7 +226,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
 	<label for="renta"> <?php echo JText::_('LBL_SACM'); ?>: </label> 
 	<input 
 		type="text"
-		id="SACM"
+		id="sacm"
 		class="validate[custom[onlyNumberSACM]]"
 		maxlength="5"
 		name="sacm" /> %

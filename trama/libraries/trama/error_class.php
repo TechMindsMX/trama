@@ -6,7 +6,6 @@ class errorClass {
 	public static function manejoError($errorCode = null,$origen = null,$proyid = null) {
 		$app = JFactory::getApplication();
 		$url = JURI::base().'index.php?option=com_jumi&view=appliction&fileid='.$origen.'&proyid='.$proyid;
-		
 		switch ($errorCode) {
 			case 1:
 				$msg = JText::_('ERROR_TOKEN');
@@ -20,7 +19,10 @@ class errorClass {
 				$msg = JText::_('ERROR_NOUNITS');
 				$redirect = true;
 				break;
-				
+			case 21:
+				$msg = JText::_('ERROR_VALUE_OUT_OF_RANGE');
+				$redirect = true;
+				break;
 			default:
 				$redirect = false;
 				break;
