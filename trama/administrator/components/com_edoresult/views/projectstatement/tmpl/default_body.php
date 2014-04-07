@@ -10,119 +10,112 @@ $doc->addStyleDeclaration('table.table-striped {width: 100%;} table.table-stripe
 $value = $this->items;
 ?>
 <tr><td>
-		<div style="width:50%">
-	
-			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_INGRESOS'); ?></div>
+		<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS'); ?></div>
 			<table class="table table-striped">
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PORFINANCIAMIENTO'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORFINANCIAMIENTO'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totFundin']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PORINVERSION'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORINVERSION'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totInvers']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PORVENTAS'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORVENTAS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totVentas']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PORPATROCINIOS'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORPATROCINIOS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totPatroc']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PORAPOYO_DONATIVOS'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORAPOYO_DONATIVOS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['toApoDona']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_OTROS'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_OTROS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totalOtro']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_APORTACIONES_CAPITAL'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_APORTACIONES_CAPITAL'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['toAporCap']; ?></span></td>
 				</tr>
 				<tr class="total">
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_TOTAL'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_TOTAL'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totalIngresos']; ?></span></td>
 				</tr>
 			</table>
 
-			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_EGRESOS'); ?></div>
+			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_EGRESOS'); ?></div>
 			<table class="table table-striped">
 				<!--Seccion de Egresos-->
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PROVEEDORES'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PROVEEDORES'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toProveed']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_CAPITAL'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_CAPITAL'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCapital']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_REEMBOLSO'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_REEMBOLSO'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toReemCap']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_EPRODUCTOR'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_EPRODUCTOR'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toProduct']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_COSTOS_FIJOS'); ?></td>
-					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCostFij']; ?></span></td>
-				</tr>
-				
-				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_COSTOS_VARIABLES'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_COSTOS_VARIABLES').JText::_('ESTADO_RESULTADOS_DETALLE_LVL_PROYECTADOS'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCostVar']; ?></span></td>
 				</tr>
 				<tr class="total">
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_TOTAL'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_TOTAL'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['totalEgresos']; ?></span></td>
 				</tr>
 			</table>
 
-			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_RESULTADOS'); ?></div>
+			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_RESULTADOS'); ?></div>
 			<table class="table table-striped">
 				<!--Resultados-->
 				<tr class="total">
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_INGRESOS_EGRESOS'); ?></td>
-					<td class="cantidades">$<span class="number"><?php echo $value['resultadoIE']; ?></span></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS_EGRESOS'); ?></td>
+					<td class="cantidades">$<?php echo number_format($value['resultadoIE'], 2); ?></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_RETORNOS'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_RETORNOS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['retornos']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_DEFINANCIAMIENTO'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_DEFINANCIAMIENTO'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultFinan']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_DEINVERSION'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_DEINVERSION'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultInver']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_REDENCIONES'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_REDENCIONES'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultReden']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_COMICIONES'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_COMICIONES'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultComic']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_OTROS'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_OTROS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultOtros']; ?></span></td>
 				</tr>
 			</table>
 			
-			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_T1'); ?></div>
+			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_T1'); ?></div>
 			<table class="table table-striped">
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PRESUPUESTO'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PRESUPUESTO'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['presupuesto']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_BREAKEVEN'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_BREAKEVEN'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['breakeven']; ?></span></td>
 				</tr>
 				<tr>
@@ -130,15 +123,15 @@ $value = $this->items;
 					<td class="cantidades">$<span class="number"><?php echo $value['ingresosPotenciales']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_BALANCE'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_BALANCE'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['balance']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_TRI'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_TRI'); ?></td>
 					<td class="cantidades"><span class="number"><?php echo $value['porcentaTRI']; ?></span>%</td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_TRF'); ?></td>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_TRF'); ?></td>
 					<td class="cantidades"><span class="number"><?php echo $value['porcentaTRF']; ?></span>%</td>
 				</tr>
 				<tr>
