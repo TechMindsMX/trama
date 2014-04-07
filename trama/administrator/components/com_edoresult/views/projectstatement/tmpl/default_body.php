@@ -68,11 +68,6 @@ $value = $this->items;
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toProduct']; ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_COSTOS_FIJOS'); ?></td>
-					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCostFij']; ?></span></td>
-				</tr>
-				
-				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_COSTOS_VARIABLES'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCostVar']; ?></span></td>
 				</tr>
