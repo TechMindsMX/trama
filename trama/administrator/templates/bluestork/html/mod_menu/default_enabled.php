@@ -308,7 +308,7 @@ if ($components)
 	
 		foreach ($components as &$component)
 		{
-			$compo = array('com_flexicontact','com_tramaproyectos','com_tramagremios');
+			$compo = array('com_tramaproyectos','com_tramagremios','com_edoresult');
 			if (in_array($component -> element , $compo)){
 				if (!empty($component->submenu))
 				{
