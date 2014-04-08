@@ -140,9 +140,9 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			foreach ($datosObj->projectSoundclouds as $key => $value) {
 				echo 'jQuery("#linkSc1"+'.($key+1).').val("'.$value->url.'");';				
 			}
-			
+			$showground = addslashes($datosObj->showground);
 			echo 'jQuery("#nameRecinto").val("'.$datosObj->inclosure.'");';
-			echo 'jQuery("#searchTextField").val("'.$datosObj->showground.'");';
+			echo 'jQuery("#searchTextField").val("'.$showground.'");';
 			
 			foreach ($datosObj->providers as $key => $value) {
 				$suma = $value->advanceQuantity+$value->settlementQuantity+$suma;
