@@ -43,13 +43,12 @@ foreach ($_FILES as $key => $value) {
 			$ruta				= AVATAR.'/';
 			$envio['avatar'] 	= $fileName.'.jpg';
 		} else{
-			$alto 				= 700;
+			$alto 				= 655;
 			$ancho 				= 1165;
 			$ruta				= PHOTO.'/';
 			$archivos[] 		= $fileName.'.jpg';
-		}		
-		$imagen->resize($_FILES[$key]['tmp_name'], $ruta, $tipo, $fileName.'.', $ancho, $alto);
-		
+		}
+		$imagen->resizeAndCrop($_FILES[$key]['tmp_name'], $ruta, $fileName, $ancho, $alto);
 	}else{
 		if( $envio['bannerSave'] != '' && $_FILES['banner']['error'] != 0 ){
 			$envio['banner'] = $envio['bannerSave'];
@@ -67,6 +66,7 @@ foreach ($_FILES as $key => $value) {
 		}
 	}
 }
+
 $images = join(',', $archivos);
 
 if($envio['deleteprojectPhotosIds'] != ''){

@@ -152,7 +152,7 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			$breakevenCalc 	= $datosObj->calculatedBreakeven == null? 0: $datosObj->calculatedBreakeven;
 			
 			echo 'var breakeven 		= '.$breakeven.';';
-			echo 'var breakevencalc 	= '.$breakevenCalc.';';
+			echo 'var breakevencalc 	= '.round($breakevenCalc,2).';';
 			echo 'var suma 				= '.$suma.';';
 			echo 'var presupuesto 		= '.$presupuesto.';';
 		}
