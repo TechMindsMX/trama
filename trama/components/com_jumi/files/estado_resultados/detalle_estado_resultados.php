@@ -14,13 +14,15 @@ if ($usuario->guest == 1) {
 	$url   .= '&return='.base64_encode($return);
 	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
-$document 	= JFactory::getDocument();
-$input 		= JFactory::getApplication()->input;
-$proyId 	= $input->get("proyId",0,"int");
-$value 		= JTrama::getStateResult($proyId);
-$pathJumi 	= JUri::base().'components/com_jumi/files/estado_resultados/';
-$document	->addStyleSheet($pathJumi.'edo_resultados.css');
+$document	 	= JFactory::getDocument();
+$input 			= JFactory::getApplication()->input;
+$proyId 		= $input->get("proyId",0,"int");
+$value 			= JTrama::getStateResult($proyId);
+$pathJumi 		= JUri::base().'components/com_jumi/files/estado_resultados/';
+$userMiddleware	= UserData::getUserMiddlewareId($usuario->id);
 
+$document->addStyleSheet($pathJumi.'edo_resultados.css');
+JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware);
 ?>
 <h1><?php echo JText::_('LBL_EDO_RESULT'); ?></h1>
 <h2><?php echo $value['proyectName']; ?></h2>

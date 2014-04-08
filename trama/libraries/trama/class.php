@@ -291,6 +291,16 @@ class JTrama
 		}
 	}
 	
+	public static function havePermission($userIdData, $userIdLogged){
+		$app = JFactory::getApplication();
+		
+		if( $userIdData != $userIdLogged ) {
+			$url = 'index.php?option=com_jumi&view=application&fileid=24';
+			$mensaje = JText::_('CONTENIDO_PRIVADO');
+			$app->redirect($url, $mensaje, 'error');
+		}
+	}
+	
 	public static function getStateResult($proyId){
 		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
 		$dataGral 							= self::getDatos($proyId); 
@@ -300,7 +310,8 @@ class JTrama
 		$objagrupado					 	= self::sumatoriaIngresos($objagrupado);
 		$objagrupado						= self::sumatoriaEgresos($objagrupado);
 		$objagrupado						= self::operacionesEstadoResult($objagrupado,$dataGral);
-		$objagrupado['userIdJoomla']		= $user; 
+		$objagrupado['userIdJoomla']		= $user;
+		$objagrupado['userIdMiddleware']	= $dataGral->userId;
 		$objagrupado['proyectName'] 		= $dataGral->name;
 		$objagrupado['producerName'] 		= $usuario->name;
 		$objagrupado['breakeven'] 			= $dataGral->breakeven;
