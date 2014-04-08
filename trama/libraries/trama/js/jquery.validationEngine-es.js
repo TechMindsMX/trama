@@ -59,13 +59,13 @@
 						    var date3 = new Date();
 						    
 						    date1.setFullYear(arrayfecha[2],parseInt(arrayfecha[1])-1,parseInt(arrayfecha[0]));
-						    date2.setFullYear(arrayfechamin[2],parseInt(arrayfechamin[1])-1,parseInt(arrayfechamin[0])+120);
+						    date2.setFullYear(arrayfechamin[2],parseInt(arrayfechamin[1])-1,parseInt(arrayfechamin[0])+100);
 						    date3.setFullYear(arrayfechamin[2],parseInt(arrayfechamin[1])-1,parseInt(arrayfechamin[0]));
 						}
 						
 						return (date1 < date2) && (date1 > date3) ? true : false;
                 	},
-                	"alertText": "* La Fecha no puede ser mayor de 120 dias del inicio de producción"
+                	"alertText": "* La Fecha no puede ser mayor de 100 dias del inicio de producción"
                 },
                 "cierre": {
                 	"func": function ( field ) {
