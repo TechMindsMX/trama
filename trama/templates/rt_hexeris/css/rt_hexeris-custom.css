@@ -274,8 +274,42 @@ div#community-wrap.cProfile .cSubmenu li {
 		width: 35%;
 	}
 }
-/* fin escritorio */
+@media screen and (max-width: 800px) and (max-height: 1280px) and (orientation: portrait){
+	.videoHead {
+		width: 650px;
+	}
+	.rt-block {
+		padding-left: 2px;
+	}
+	.gf-menu .dropdown .flyout {
+		left: -197px !important;
+	}
+	#esc-proyectos .clase-th:first-of-type {
+		width: 21%;
+	}
+	#esc-proyectos .clase-td:first-of-type {
+		width: 21%;
+	}
+	#esc-proyectos .clase-th {
+		width: 9.3%;
+	}
+	#esc-proyectos .clase-td {
+		width: 9.3%;
+	}
+	#esc-suspendidos .clase-th:first-of-type {
+		width: 32%;
+	}
+	#esc-suspendidos .clase-td:first-of-type {
+		width: 32%;
+	}
+	.menu-item {
+		height: 6.6em;
+	}
+}
 @media screen and (max-width: 768px) {
+	.rt-block {
+		padding-left: 15px;
+	}
 	.menu-block {
 		right: 10px;
 	}
@@ -349,6 +383,9 @@ div#community-wrap.cProfile .cSubmenu li {
 	}
 }
 @media screen and (max-width: 600px) {
+	.rt-block {
+		padding-left: 15px;
+	}
 	.contenedor-resultados {
 		width: 90%;
 	}
@@ -553,6 +590,9 @@ div#community-wrap.cProfile .cSubmenu li {
 }
 
 @media screen and (max-width: 960px) and (max-height: 640px) and (orientation: landscape) {
+	#rt-mainbody-surround #rt-mainbody {
+		width: 100%;
+	}
 	.mitad {
 		width: 100%;
 	}
@@ -600,7 +640,7 @@ div#community-wrap.cProfile .cSubmenu li {
 		border: none;
 	}
 	#esc-suspendidos .clase-td {
-		border: none;
+/* 		border: none; */
 	}
 	#esc-repertorio .clase-td {
 		width: 43.5%;
@@ -639,6 +679,7 @@ div#community-wrap.cProfile .cSubmenu li {
 	#rt-mainbody-surround #rt-mainbody {
 		padding-right: 20px;
 		padding-left: 10px;
+		width: 98.8%;
 	}
 
 	.ac-container {
@@ -711,6 +752,10 @@ div#community-wrap.cProfile .cSubmenu li {
 	}
 	#community-wrap .cSidebar+ .cMain {
 		margin: 0 10px 0 0;
+	}
+	#community-wrap .cToolBar .cMenu-Text {
+		width: 118px;
+		float: right;
 	}
 }
 .formErrorContentDescription {
