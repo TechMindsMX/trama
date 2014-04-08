@@ -127,7 +127,8 @@ function loadImage(input1) {
     }
 
     function imageLoaded() {
-		if(img.width > 1920 || img.height > 1200 || img.width < 800 || img.height < 600 || peso  > 4096000){
+    	console.log( img.width, img.height );
+		if( (img.width > 1920) || (img.height > 1200) || (img.width < 800) || (img.height < 600) || (peso  > 4096000) ){
 			
 			
 		alert ("Solo se aceptan imagenes de resolucion entre 800 x 600, 1920 x 1080 y con un peso no mayor a 4 mb, su imagen no sera subida. ");
