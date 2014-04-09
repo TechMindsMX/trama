@@ -153,5 +153,28 @@ $value = $this->items;
 					<td class="cantidades"><?php echo $value['fechafin']; ?></td>
 				</tr>
 			</table>
+			
+			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_T2'); ?></div>
+			<table class="table table-striped">
+			<?php
+			foreach( $value['sections'] as $key=>$valor ){
+			?>
+				<tr>
+					<td colspan="2" style="font-weight: bold;"><?php echo '<span class="titulito">'.$valor->name.'</span>'; ?></td>
+				</tr>
+				<tr>
+					<td>
+						<div><?php echo JText::_('ESTADO_RESULTADOS_UNIDADES'); ?></div>
+						<div><?php echo JText::_('ESTADO_RESULTADOS_UNIDADES_VENDIDAS'); ?></div>
+					</td>
+					<td class="cantidades">
+						<div><?php echo $valor->units ?></div>
+						<div><?php echo $valor->total ?></div>
+					</td>
+				</tr>
+			<?php
+			}
+			?>
+			</table>
 </div>
 </td></tr>
