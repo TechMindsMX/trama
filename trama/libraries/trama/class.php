@@ -310,6 +310,8 @@ class JTrama
 		$objagrupado					 	= self::sumatoriaIngresos($objagrupado);
 		$objagrupado						= self::sumatoriaEgresos($objagrupado);
 		$objagrupado						= self::operacionesEstadoResult($objagrupado,$dataGral);
+		$objagrupado['sections']			= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getSections/'.$proyId));
+		echo MIDDLE.PUERTO.'/trama-middleware/rest/project/getSections/'.$proyId;
 		$objagrupado['userIdJoomla']		= $user;
 		$objagrupado['userIdMiddleware']	= $dataGral->userId;
 		$objagrupado['proyectName'] 		= $dataGral->name;

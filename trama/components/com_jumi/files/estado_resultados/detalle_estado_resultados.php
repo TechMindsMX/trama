@@ -185,8 +185,8 @@ JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware
 						<div><?php echo JText::_('ESTADO_RESULTADOS_UNIDADES_VENDIDAS'); ?></div>
 					</td>
 					<td class="cantidades">
-						<div><?php echo $valor->units ?></div>
-						<div><?php echo $valor->total ?></div>
+						<div><?php echo $valor->total; ?></div>
+						<div><?php echo $valor->units; ?></div>
 					</td>
 				</tr>
 			<?php
