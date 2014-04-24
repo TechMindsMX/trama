@@ -22,15 +22,15 @@ foreach ($proyecto->con as $conKey => $conValue) {
 foreach ($proyecto->logs as $key => $value) {
 	if($value->status == 2) {
 		$logCount++;
+		$fechacreacion = $value->timestamp/1000;
+		$logsHtml .= '<div style="margin-bottom: 10px;">'.
+			 '<li>'.
+			 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_MODIFIED").'</strong>: '.date('d-M-Y h:m:s', $fechacreacion).'</div>'.
+			 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_STATUS").'</strong>: '.JTrama::getStatusName($value->status)->fullName.'</div>'.
+			 '<div align="justify"><strong>'.JText::_("COM_TRAMAPROYECTOS_COMMENT").'</strong>: '.$value->comment.'</div>'.
+			 '</li>'.
+			 '</div>';
 	}
-	$fechacreacion = $value->timestamp/1000;
-	$logsHtml .= '<div style="margin-bottom: 10px;">'.
-		 '<li>'.
-		 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_MODIFIED").'</strong>: '.date('d-M-Y h:m:s', $fechacreacion).'</div>'.
-		 '<div><strong>'.JText::_("COM_TRAMAPROYECTOS_STATUS").'</strong>: '.JTrama::getStatusName($value->status)->fullName.'</div>'.
-		 '<div align="justify"><strong>'.JText::_("COM_TRAMAPROYECTOS_COMMENT").'</strong>: '.$value->comment.'</div>'.
-		 '</li>'.
-		 '</div>';
 }
 
 switch ( $proyecto->status ) {

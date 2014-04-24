@@ -145,18 +145,20 @@ $promedio = UserData::scoreUser($userMiddleId->idJoomla);
 							<div class="divcontent" id="divContent<?php echo $count; ?>">
 							<?php
 									foreach ($value->logs as $indice => $valor) {
-										$fechacreacion = $valor->timestamp/1000;
-										$statusName = JTrama::getStatusName($value->status);
-										
-										echo '<div style="margin-bottom: 10px;">'.
-											 '<li>'.
-											 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
-											 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>'.
-											 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
-											 '</li>'.
-											 '</div>';
-										}
-									?>
+										if ($valor->status == 2){
+											$fechacreacion = $valor->timestamp/1000;
+											$statusName = JTrama::getStatusName($valor->status);
+											
+											echo '<div style="margin-bottom: 10px;">'.
+												 '<li>'.
+												 '<div><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.date('d-M-Y', $fechacreacion).'</div>'.
+												 '<div><strong>'. JText::_('LABEL_STATUS').'</strong>: '.JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName).'</div>'.
+												 '<div align="justify"><strong>'.JText::_('JCOMENTARIOS').'</strong>: '.$valor->comment.'</div>'.
+												 '</li>'.
+												 '</div>';
+										 }
+									}
+								?>
 								</div>
 							<?php
 									$count = $count + 1;

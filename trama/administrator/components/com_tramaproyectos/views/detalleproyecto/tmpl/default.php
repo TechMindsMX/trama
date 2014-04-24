@@ -35,7 +35,7 @@ $document	->addStyleDeclaration($cssFinan);
 				switch(string[3]){
 					case 'Revisando':
 						jQuery('.statuschange').val(1);
-						jQuery('#callback').val("<?php echo $proyeto->callback.'&status=1&name='.$proyeto->id ?>");
+						jQuery('#callback').val("<?php echo $proyeto->callback.'&view=detalleproyecto&id='.$proyeto->id ?>");
 						<?php $statusName = JTrama::getStatusName(1); ?>
 						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
 						break;
