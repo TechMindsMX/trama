@@ -477,7 +477,7 @@ class JTrama
 			$detalle->porcentaje = $value->value.'%';
 			$detalle->mount = ($value->value/100) * $dataGral->balance;
 			
-			$objagrupado['toCostVar'] = $objagrupado['toCostVar'] + (($value->value/100) * $dataGral->balance);
+			$objagrupado['toCostVar'] = $objagrupado['toCostVar'] + (($value->value/100) * $objagrupado['totalIngresos']);
 			$detalleOperacion[] = $detalle;
 		}
 		
