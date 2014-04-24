@@ -205,7 +205,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 				$validacion = '';
 			}
 			
-			if( is_null($datosObj->eventCode) && is_null($datosObj->productionStartDate)){
+			if( is_null($datosObj->eventCode) ){
 				echo 'jQuery("#reqCode").prop("checked", "");';
 				$disabled = 'disabled="disabled"';
 			}

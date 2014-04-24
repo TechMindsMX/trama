@@ -35,30 +35,30 @@ foreach ($proyecto->logs as $key => $value) {
 
 switch ( $proyecto->status ) {
 	case 1:
-		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND2').'" />';
-		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND4').'" />';
+		$boton .= '<input type="button" class="submit yellow" value="'.JText::_('COM_TRAMAPROYECTOS_SEND2').'" />';
+		$boton .= '<input type="button" class="submit red" value="'.JText::_('COM_TRAMAPROYECTOS_SEND4').'" />';
 		if ($proyecto->autorizable) {
-			$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" />';
+			$boton .= '<input type="button" class="submit green" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" />';
 		} else {
 			$boton .= '<input type="button" class="" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" disabled />';
 		}
 		break;
 	case 2:
-		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND3').'" />';
+		$boton .= '<input type="button" class="submit green" value="'.JText::_('COM_TRAMAPROYECTOS_SEND3').'" />';
 		break;
 	case 3:
-		if( $logCount < 2 ) {
-			$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND2').'" />';
+		if( $logCount < 3 ) {
+			$boton .= '<input type="button" class="submit yellow" value="'.JText::_('COM_TRAMAPROYECTOS_SEND2').'" />';
 		}
-		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND4').'" />';
+		$boton .= '<input type="button" class="submit red" value="'.JText::_('COM_TRAMAPROYECTOS_SEND4').'" />';
 		if ($proyecto->autorizable) {
-			$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" />';
+			$boton .= '<input type="button" class="submit green" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" />';
 		} else {
 			$boton .= '<input type="button" class="" value="'.JText::_('COM_TRAMAPROYECTOS_SEND5').'" disabled />';
 		}
 		break;
 	case 9:
-		$boton .= '<input type="button" class="submit" value="'.JText::_('COM_TRAMAPROYECTOS_SEND1').'" />';
+		$boton .= '<input type="button" class="submit yellow" value="'.JText::_('COM_TRAMAPROYECTOS_SEND1').'" />';
 		break;
 }
 

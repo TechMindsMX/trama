@@ -9,7 +9,10 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 
 $cssFinan	= '.tablaFinan {font-weight: bold; font-size 120%; width: 30%; width: 22%; display: inline-block; margin: 0 4% 0 0;}
-				.tablaFinan p span{float: right;}';
+				.tablaFinan p span{float: right;}
+				.green{background: green; color: white;}
+				.red{background: red; color: white; font-weight: normal;}
+				.yellow{background: yellow;}';
 $document	->addStyleDeclaration($cssFinan);
 ?>
 <script language="JavaScript">
