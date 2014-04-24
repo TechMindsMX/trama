@@ -29,11 +29,15 @@ class TramaProyectosModelDetalleProyecto extends JModelList {
 		// verifica que exista inventario dado de alta en el proyecto
 		$datos -> con['TP_INV_INICIAL'] = !empty($datos -> projectUnitSales);
 		// verifica que el breakeven calcualdo sea igual al breakeven dado de alta
-		$datos -> con['BE_VS_CALC_BE'] = number_format($datos -> calculatedBreakeven, 0) == number_format($datos -> breakeven, 0);
+		$calcBE = number_format($datos -> calculatedBreakeven, 0);
+		$BE = number_format($datos -> breakeven, 0);
+		$deltaBE = 5;
+		$datos -> con['BE_VS_CALC_BE'] = ($BE <= ($calcBE + $deltaBE)) && ($BE >= ($calcBE - $deltaBE));
 		// verifica que la suma de los proveedores sea igual al presupuesto dado de alta
 		$datos -> con['BUDG_VS_CALC_BUDG'] = number_format($datos -> budget, 0) == number_format($datos -> calcBudget, 0);
 
 		self::getFinancialTable($datos);
+		
 		//Verifica si hay algún dato faltante y asigna boolean a la propiedad
 		$datos -> autorizable = !in_array(false, $datos -> con);
 	}

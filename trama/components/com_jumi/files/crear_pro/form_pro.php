@@ -235,7 +235,7 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 	<?php 
 	if( isset($datosObj) ){
 		foreach ($datosObj->logs as $key => $value) {
-			if ($valor->status == 2){
+			if ($value->status == 2){
 				$fechacreacion = $value->timestamp/1000;
 				$statusName = JTrama::getStatusName($value->status);
 				echo '<div style="margin-bottom: 10px;">'.
