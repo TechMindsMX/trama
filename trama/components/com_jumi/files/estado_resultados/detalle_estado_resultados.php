@@ -28,37 +28,89 @@ JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware
 <h2><?php echo $value['proyectName']; ?></h2>
 <h3><?php echo jtext::_('EDO_RESULT_CUENTA').$value['account']; ?></h3>
 		<div class="contenedor-resultados">
-	
+			<!--Seccion de Ingresos-->
 			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS'); ?></div>
 			<table class="table table-striped">
+<!--inicia seccion de ventas-->
 				<tr>
-					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORFINANCIAMIENTO'); ?></td>
-					<td class="cantidades">$<span class="number"><?php echo $value['totFundin']; ?></span></td>
+					<td colspan="2" style="font-weight: bold;">
+						<div><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORFINANCIAMIENTO'); ?></div>
+					</td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORINVERSION'); ?></td>
-					<td class="cantidades">$<span class="number"><?php echo $value['totInvers']; ?></span></td>
+					<td>
+						<div><?php echo JText::_('ALTA_PRO_MONTO'); ?>:</div>
+						<div><?php echo JText::_('PORCENTAJE_COSTOS'); ?>:</div>
+					</td>
+					<td class="cantidades">
+						<div>$<span class="number"><?php echo $value['totFundin']; ?></span></div>
+						<div><span class="number"><?php echo $value['porFundin']; ?></span>%</div>
+					</td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORVENTAS'); ?></td>
-					<td class="cantidades">$<span class="number"><?php echo $value['totVentas']; ?></span></td>
+					<td colspan="2" style="font-weight: bold;"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORINVERSION'); ?></td>
 				</tr>
+				<tr>
+					<td>
+						<div><?php echo JText::_('ALTA_PRO_MONTO'); ?>:</div>
+						<div><?php echo JText::_('PORCENTAJE_COSTOS'); ?>:</div>
+					</td>
+					<td class="cantidades">
+						<div>$<span class="number"><?php echo $value['totInvers']; ?></span></div>
+						<div><span class="number"><?php echo $value['porInvers']; ?></span>%</div>
+					</td>
+				</tr><tr>
+					<td colspan="2" style="font-weight: bold;"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORVENTAS'); ?></td>
+				</tr>
+				<tr>
+					<td>
+						<div><?php echo JText::_('ALTA_PRO_MONTO'); ?>:</div>
+						<div><?php echo JText::_('PORCENTAJE_COSTOS'); ?>:</div>
+					</td>
+					<td class="cantidades">
+						<div>$<span class="number"><?php echo $value['totVentas']; ?></span></div>
+						<div><span class="number"><?php echo $value['porVentas']; ?></span>%</div>
+					</td>
+				</tr>
+				<tr style="font-size: 16px; font-weight: bold;">
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_TOTALPORVENTAS'); ?></td>
+					<td class="cantidades">$<span class="number"><?php echo $value['totalPorVentas']; ?></span></td>
+				</tr>
+<!--Fin de la seccion de ventas-->
+				<?php 
+				if($value['totPatroc'] != 0){ 
+				?>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORPATROCINIOS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totPatroc']; ?></span></td>
 				</tr>
+				<?php
+				}
+				if($value['toApoDona'] != 0){
+				?>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORAPOYO_DONATIVOS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['toApoDona']; ?></span></td>
 				</tr>
+				<?php
+				}
+				if($value['totalOtro'] != 0){
+				?>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_OTROS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totalOtro']; ?></span></td>
 				</tr>
+				<?php
+				}
+				if($value['toAporCap'] != 0){
+				?>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_APORTACIONES_CAPITAL'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['toAporCap']; ?></span></td>
 				</tr>
+				<?php
+				}
+				?>
 				<tr class="total">
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_TOTAL'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totalIngresos']; ?></span></td>
@@ -76,10 +128,16 @@ JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_CAPITAL'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCapital']; ?></span></td>
 				</tr>
+				<?php
+				if($value['toAporCap'] != 0){
+				?>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_REEMBOLSO'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toReemCap']; ?></span></td>
 				</tr>
+				<?php
+				}
+				?>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_EPRODUCTOR'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toProduct']; ?></span></td>
@@ -113,10 +171,16 @@ JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_DEINVERSION'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultInver']; ?></span></td>
 				</tr>
+				<?php
+				if($value['resultReden'] != 0){
+				?>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_REDENCIONES'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultReden']; ?></span></td>
 				</tr>
+				<?php 
+				}
+				?>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_COMICIONES'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultComic']; ?></span></td>
@@ -133,10 +197,23 @@ JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PRESUPUESTO'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['presupuesto']; ?></span></td>
 				</tr>
+				
 				<tr>
-					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_BREAKEVEN'); ?></td>
-					<td class="cantidades">$<span class="number"><?php echo $value['breakeven']; ?></span></td>
+					<td colspan="2" style="font-weight: bold;">
+						<div><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_BREAKEVEN'); ?></div>
+					</td>
 				</tr>
+				<tr>
+					<td>
+						<div><?php echo JText::_('ALTA_PRO_MONTO'); ?>:</div>
+						<div><?php echo JText::_('PORCENTAJE_COSTOS'); ?>:</div>
+					</td>
+					<td class="cantidades">
+						<div>$<span class="number"><?php echo $value['breakeven']; ?></span></div>
+						<div><span class="number"><?php echo $value['porBreakeven']; ?></span>%</div>
+					</td>
+				</tr>
+				
 				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_INGRESO_POTENCIALES'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['ingresosPotenciales']; ?></span></td>
@@ -182,11 +259,15 @@ JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware
 				<tr>
 					<td>
 						<div><?php echo JText::_('ESTADO_RESULTADOS_UNIDADES'); ?></div>
+						<div><?php echo JText::_('ESTADO_RESULTADOS_UNIDADES_DISPONIBLES'); ?></div>
 						<div><?php echo JText::_('ESTADO_RESULTADOS_UNIDADES_VENDIDAS'); ?></div>
+						<div><?php echo JText::_('ESTADO_RESULTADOS_UNIDADES_PRECIO'); ?></div>
 					</td>
 					<td class="cantidades">
 						<div><?php echo $valor->total; ?></div>
 						<div><?php echo $valor->units; ?></div>
+						<div><?php echo $valor->unitSales; ?></div>
+						<div>$<span class="number"><?php echo $valor->price; ?></span></div>
 					</td>
 				</tr>
 			<?php
