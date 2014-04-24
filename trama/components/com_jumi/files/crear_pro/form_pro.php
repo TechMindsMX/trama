@@ -188,6 +188,7 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 							jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
 						} else if( jQuery('#status').val() == 2 ){
 							jQuery('#status').val(3);
+							jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
 						}
 					}else {
 						return false;
