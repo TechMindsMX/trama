@@ -323,11 +323,17 @@ function encabezado($data) {
 function informacionTmpl($data, $params) {
 	 $mapa= '<div id="map-wrapper"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
   	 <p style="max-width:300px;">'.$data->showground.'</p>';
-	 $botonContactar= JText::_('SOLICITA_PARTICIPAR');
+ 	$botonContactar = JText::_('SOLICITA_PARTICIPAR');
  	require_once 'solicitud_participar.php';
  	
- 	
- 	
+ 	if($data->type != 'REPERTORY'){
+ 		$botonparticipar = '<div class="gantry-width-spacer flotado">'.
+		  					participar($data->userIdJoomla,$botonContactar).
+						   '</div>';
+ 	}else{
+ 		$botonparticipar = '';
+ 	}
+	
 	switch ($params) {
 		case 'finanzas':
 			$izquierda = avatar($data).
@@ -341,12 +347,10 @@ function informacionTmpl($data, $params) {
 						tablaFinanzas($data).
 						fechas($data);
 			break;
-		
 		default:
 			$izquierda = avatar($data).
-				'<div class="gantry-width-spacer flotado">'.
-		  		participar($data->userIdJoomla,$botonContactar).
-				'</div>'.
+				
+				$botonparticipar.
 				
 				'<div class="gantry-width-spacer flotado">'.
 				irGrupo($data).
