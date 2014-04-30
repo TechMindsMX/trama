@@ -38,7 +38,6 @@ JHtml::_('behavior.modal');
 $document->addScript('libraries/trama/js/jquery-ui.min.js');
 $document->addScript("libraries/trama/js/jquery.ui.datepicker-es.js");
 $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
-
 ?>
 
 <script>
@@ -478,13 +477,6 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 			<input type="file" class="<?php echo $validacion; ?>" id="plantilla" name="businessCase"> 
 			</div>
 			<br />
-			<label for="presupuesto"><?php echo JText::_('PRESUPUESTO').JText::_('LBL_PROYECTO'); ?>*:</label> 
-			<input 
-				type="number" 
-				class="validate[required,custom[number]]"
-				id="presupuesto"
-				name="budget" /> 
-			<br /> 
 			<label for="reqCode"><?php echo JText::_('CODIGO_EVENTO_REQ'); ?>:</label> 
 			<input 
 				type="checkbox" 
@@ -614,25 +606,22 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 			<input type="button" class="button" onclick="moreFields()" value="<?php echo JText::_('AGREGAR_SECCION')?>" /> <br /> 
 			<br /> 
 			
-			<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('LBL_PROYECTO'); ?>*:</label> 
-			<input 
-				type="number" 
-				id="potenciales"
-				class="validate[required,custom[number]]"
-				name="revenuePotential"
-				step="any" /> 
-			<br>
+			<?php 
+			if( !is_null($datosObj->projectUnitSales) ){
+			?>
+				<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('LBL_PROYECTO'); ?>*:</label> 
+				<span>$<span class="number"><?php echo $datosObj->revenuePotential; ?></span></span>
+				<br />
 			
-			<label for="equilibrio"><?php echo JText::_('PUNTO_EQUILIBRIO'); ?>*:</label>
-			<input
-				type = "number" 
-				id = "equilibrio"
-				class = "validate[required,custom[number]]"
-				name = "breakeven"
-				step="any" /> 
-			<br>
+				<label for="equilibrio"><?php echo JText::_('PUNTO_EQUILIBRIO'); ?>*:</label>
+				<span>$<span class="number"><?php echo $datosObj->breakeven; ?></span></span>
+				<br /><br />
+				
 			
-			<?php echo $fechasPro; ?>
+			<?php
+			}
+			echo $fechasPro; 
+			?>
 		</fieldset>
 	</div>
 	

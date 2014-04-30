@@ -29,12 +29,7 @@ class TramaProyectosModelDetalleProyecto extends JModelList {
 		// verifica que exista inventario dado de alta en el proyecto
 		$datos -> con['TP_INV_INICIAL'] = !empty($datos -> projectUnitSales);
 		// verifica que el breakeven calcualdo sea igual al breakeven dado de alta
-		$calcBE = number_format($datos -> calculatedBreakeven, 0);
 		$BE = number_format($datos -> breakeven, 0);
-		$deltaBE = 5;
-		$datos -> con['BE_VS_CALC_BE'] = ($BE <= ($calcBE + $deltaBE)) && ($BE >= ($calcBE - $deltaBE));
-		// verifica que la suma de los proveedores sea igual al presupuesto dado de alta
-		$datos -> con['BUDG_VS_CALC_BUDG'] = number_format($datos -> budget, 0) == number_format($datos -> calcBudget, 0);
 
 		self::getFinancialTable($datos);
 		
@@ -43,16 +38,12 @@ class TramaProyectosModelDetalleProyecto extends JModelList {
 	}
 
 	static function getFinancialTable($datos) {
-		$igual = $datos -> con['BE_VS_CALC_BE'] ? 'color: green;' : 'color: red;';
-		$html = '<div class="tablaFinan" style="' . $igual . '">
+		$html = '<div class="tablaFinan">
 				<p>' . JText::_('TP_BE') . ' = <span class="number">' . number_format($datos -> breakeven, 2) . '</span></p>
-				<p>' . JText::_('TP_CALC_BE') . ' = <span class="number">' . number_format($datos -> calculatedBreakeven, 2) . '</span></p>
 				</div>';
 
-		$igual = $datos -> con['BUDG_VS_CALC_BUDG'] ? 'color: green;' : 'color: red;';
-		$html .= '<div class="tablaFinan" style="' . $igual . '">
-				<p>' . JText::_('TP_BUDGET') . ' = <span class="number">' . number_format($datos -> budget, 2) . '</span></p>
-				<p>' . JText::_('TP_CALC_BUDGET') . ' = <span class="number">' . number_format($datos -> calcBudget, 2) . '</span></p>
+		$html .= '<div class="tablaFinan">
+				<p>' . JText::_('TP_CALC_BUDGET') . ' = <span class="number">' . number_format($datos -> budget, 2) . '</span></p>
 				</div>';
 
 		$datos -> financialTable = $html;

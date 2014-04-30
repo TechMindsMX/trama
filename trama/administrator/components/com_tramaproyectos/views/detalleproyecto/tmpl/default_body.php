@@ -104,7 +104,7 @@ if( !isset($proyecto->projectBusinessCase->name) ) {
 				<input type="hidden" name="projectId" value="<?php echo $proyecto->id; ?>" />
 				<input type="hidden" name="status" class="statuschange" />
 								
-				<div>
+				<div id="comentarios">
 					<?php echo JText::_('COM_TRAMAPROYECTOS_COMMENTS'); ?><br />
 					<textarea name="comment" rows="15" cols="100"></textarea>
 				</div>

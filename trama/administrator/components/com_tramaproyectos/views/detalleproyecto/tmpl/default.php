@@ -3,7 +3,7 @@
 defined('_JEXEC') or die('Restricted Access');
  
 JHtml::_('behavior.tooltip');
-$proyeto 	= $this->items;
+$proyecto 	= $this->items;
 $document 	= JFactory::getDocument();
 $document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
@@ -14,10 +14,19 @@ $cssFinan	= '.tablaFinan {font-weight: bold; font-size 120%; width: 30%; width: 
 				.red{background: red; color: white; font-weight: normal;}
 				.yellow{background: yellow;}';
 $document	->addStyleDeclaration($cssFinan);
+var_dump($proyecto->status);
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
 		jQuery('span.number').number(true,2);
+		
+		<?php
+		if( ($proyecto->status == 3) || ($proyecto->status == 1) ){
+			echo "jQuery('#comentarios').show()";
+		}else{
+			echo "jQuery('#comentarios').hide()";
+		}
+		?>
 	});
 </script>
 
@@ -35,31 +44,31 @@ $document	->addStyleDeclaration($cssFinan);
 				switch(string[3]){
 					case 'Revisando':
 						jQuery('.statuschange').val(1);
-						jQuery('#callback').val("<?php echo $proyeto->callback.'&view=detalleproyecto&id='.$proyeto->id ?>");
+						jQuery('#callback').val("<?php echo $proyecto->callback.'&view=detalleproyecto&id='.$proyecto->id ?>");
 						<?php $statusName = JTrama::getStatusName(1); ?>
 						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
 						break;
 					case 'Observaciones':
 						jQuery('.statuschange').val(2);
-						jQuery('#callback').val("<?php echo $proyeto->callback.'&status=2&name='.$proyeto->id ?>");
+						jQuery('#callback').val("<?php echo $proyecto->callback.'&status=2&name='.$proyecto->id ?>");
 						<?php $statusName = JTrama::getStatusName(2); ?>
 						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
 						break;
 					case 'Corregido':
 						jQuery('.statuschange').val(3);
-						jQuery('#callback').val("<?php echo $proyeto->callback.'&status=3&name='.$proyeto->id ?>");
+						jQuery('#callback').val("<?php echo $proyecto->callback.'&status=3&name='.$proyecto->id ?>");
 						<?php $statusName = JTrama::getStatusName(3); ?>
 						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
 						break;
 					case 'Rechazado':
 						jQuery('.statuschange').val(4);
-						jQuery('#callback').val("<?php echo $proyeto->callback.'&status=4&name='.$proyeto->id ?>");
+						jQuery('#callback').val("<?php echo $proyecto->callback.'&status=4&name='.$proyecto->id ?>");
 						<?php $statusName = JTrama::getStatusName(4); ?>
 						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
 						break;
 					case 'Autorizado':
 						jQuery('.statuschange').val(5);
-						jQuery('#callback').val("<?php echo $proyeto->callback.'&status=5&name='.$proyeto->id ?>");
+						jQuery('#callback').val("<?php echo $proyecto->callback.'&status=5&name='.$proyecto->id ?>");
 						<?php $statusName = JTrama::getStatusName(5); ?>
 						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
 						break;

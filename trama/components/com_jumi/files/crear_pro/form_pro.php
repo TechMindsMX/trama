@@ -143,18 +143,6 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			$showground = addslashes($datosObj->showground);
 			echo 'jQuery("#nameRecinto").val("'.$datosObj->inclosure.'");';
 			echo 'jQuery("#searchTextField").val("'.$showground.'");';
-			
-			foreach ($datosObj->providers as $key => $value) {
-				$suma = $value->advanceQuantity+$value->settlementQuantity+$suma;
-			}
-			$presupuesto 	= $datosObj->budget == null? 0: $datosObj->budget;
-			$breakeven 		= $datosObj->breakeven == null? 0: $datosObj->breakeven;
-			$breakevenCalc 	= $datosObj->calculatedBreakeven == null? 0: $datosObj->calculatedBreakeven;
-			
-			echo 'var breakeven 		= '.$breakeven.';';
-			echo 'var breakevencalc 	= '.round($breakevenCalc,2).';';
-			echo 'var suma 				= '.$suma.';';
-			echo 'var presupuesto 		= '.$presupuesto.';';
 		}
 		?>
 		
@@ -178,33 +166,17 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			jQuery('#deleteprojectPhotosIds').val( deletePhotos.join(',') );
 
 			if( this.id == 'revision' ) {
-				var breakcapt = parseInt(breakeven);
-				var breakcalc = parseInt(breakevencalc);
-				
-				if( (suma == presupuesto) && (breakcapt == breakcalc)  && (presupuesto > 0 && breakcapt > 0)  ) {
-					if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
-						if( jQuery('#status').val() == 0 ) {
-							jQuery('#status').val(9);
-							jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
-						} else if( jQuery('#status').val() == 2 ){
-							jQuery('#status').val(3);
-							jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
-						}
-					}else {
-						return false;
+				if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
+					if( jQuery('#status').val() == 0 ) {
+						jQuery('#status').val(9);
+						jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
+					} else if( jQuery('#status').val() == 2 ){
+						jQuery('#status').val(3);
+						jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
 					}
-				}else{
-					if( suma != presupuesto ){
-						alert('<?php echo JText::_('ERROR_PRESUPUESTO'); ?>');
-					}
-					
-					if( breakeven != breakevencalc ) {
-						alert('<?php echo JText::_('ERROR_BREAKEVEN'); ?>');
-					}
-					
+				}else {
 					return false;
 				}
-				
 			} else if(this.id == 'guardar') {
 				if( jQuery('#status').val() != <?php echo $status_pro; ?> ) {
 					jQuery('#status').val(<?php echo $status_pro; ?>);
