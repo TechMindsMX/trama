@@ -79,7 +79,7 @@ class JTrama
 		
 		//JTrama::checkValidId($respuesta);
 		JTrama::formatDatosProy($respuesta);
-			
+
 		return $respuesta;
 	}
 	

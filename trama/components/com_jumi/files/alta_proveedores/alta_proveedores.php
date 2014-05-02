@@ -367,8 +367,10 @@ if (isset($proyecto->miembrosGrupo)) {
 			jQuery('#div<?php echo UserData::getUserMiddlewareId($usuario->id)->idMiddleware; ?>').find('input[type="number"]').each(function(){
 				suma += parseFloat(jQuery(this).val()); 
 			});
+			
+			pagoproductor = total*.2;
 
-			if(suma <= budget){
+			if(suma <= pagoproductor){
 				jQuery('#agregados').find('input[type="number"]').each(function() {
 				    if (jQuery(this).val() == '' ) {
 					    var parent = jQuery(this).parent().parent();
