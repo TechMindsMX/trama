@@ -360,7 +360,7 @@ if (isset($proyecto->miembrosGrupo)) {
 			?>
 		jQuery("#guardar").click(function (){
 
-			noboton();
+			//aqui estaba el llamado a la función noboton que valida que el presupuesto dado sea igual a la suma total de los proveedores.
 			var suma = 0;
 			var budget = parseFloat(<?php echo $proyecto -> objDatos -> budget; ?>) * .2;
 			
