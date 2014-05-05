@@ -257,15 +257,17 @@ function tablaFinanzas($data) {
 			JText::_('CANTIDAD').'</th></tr>';
 	$opentag = '<td>';
 	$closetag = '</td>';
-	foreach ($data->projectUnitSales as $key => $value) {
-		$html .= '<tr>';
-		$html .= $opentag.$value->section.$closetag;
-		$html .= $opentag.'$<span class="number">'.$value->unitSale.'</span>'.$closetag;
-		$html .= $opentag.$value->unit.$closetag;
-		$html .= '</tr>';
+	if (isset($data->projectUnitSales)) {
+		foreach ($data->projectUnitSales as $key => $value) {
+			$html .= '<tr>';
+			$html .= $opentag.$value->section.$closetag;
+			$html .= $opentag.'$<span class="number">'.$value->unitSale.'</span>'.$closetag;
+			$html .= $opentag.$value->unit.$closetag;
+			$html .= '</tr>';
+		}
 	}
 	$html .= '</table>';
-	
+
 	return $html;
 }
 
