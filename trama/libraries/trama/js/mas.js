@@ -16,59 +16,74 @@ function moreFields() {
 }
 
 jQuery(document).ready(function(){
+	
+	jQuery("#form2 select").click(function() {
+		var seleccion = jQuery(this).find('option:selected');
+		temp = seleccion.text();
+		bandera = jQuery(this).attr("id");
+		
+		if (bandera == 'selectCategoria') {
+			var subSeleccion = jQuery('#subcategoria').find('option:selected');
+			tmpSub = subSeleccion.text();
+		} else if (bandera == 'subcategoria') {
+			var subSeleccion = jQuery('#selectCategoria').find('option:selected');
+			tmpSub = subSeleccion.text();
+		}
+	});
 
-jQuery("#form2 select").click(function() {
+	jQuery("#form2 select#subcategoria").change(function(){
+		var catSelec = jQuery('#selectCategoria').find('option:selected');
+		var selectedCategoria = catSelec.text();
+		var subCatSelec = jQuery('#subcategoria').find('option:selected');
+		var selectedSubCategoria = subCatSelec.text();
+		var valortextarea = $('#tagsArea').val();
 	
-	var seleccion = jQuery(this).find('option:selected');
-	temp = seleccion.text();
-	bandera = jQuery(this).attr("id");
+		if (valortextarea == "") {
+		    $('#tagsArea').val(selectedCategoria);
+		} else {
+		    var arreglo 	= $.map(valortextarea.split(","), $.trim);
+		    var cuantos 	= arreglo.length;
+		    var arrayCat 	= findReplace(cuantos, selectedCategoria, selectedSubCategoria, arreglo, temp, tmpSub);
+		    var uniqueList 	= jQuery.unique(arrayCat);
+		    uniqueList		= uniqueList.sort();
+
+			var valorFinal 	= uniqueList.join(',');
+			
+		    $('#tagsArea').val(valorFinal);
+		    
+		    return;
+		}
+	});
 	
-	if (bandera == 'selectCategoria') {
-		
-		var subSeleccion = jQuery('#subcategoria').find('option:selected');
-		tmpSub = subSeleccion.text();
-		
-	} else if (bandera == 'subcategoria') {
-		
-		var subSeleccion = jQuery('#selectCategoria').find('option:selected');
-		tmpSub = subSeleccion.text();
-		
+	function findReplace(cuantos, valor1, valor2, arreglo, tmpCategoriaSeleccionada, tmpSubCategoriaSeleccionada) {
+		valor1 = capitaliseFirstLetter(valor1.trim());
+		valor2 = capitaliseFirstLetter(valor2.trim());
+
+		for (var i = 0; i < cuantos; i++) {
+			var posArreglo = capitaliseFirstLetter(arreglo[i].trim());
+			
+			// Find and remove item from an array
+			var indice = arreglo.indexOf(tmpCategoriaSeleccionada);
+			if(indice != -1) {
+				arreglo.splice(indice, 1);
+			}
+			var indice = arreglo.indexOf(tmpSubCategoriaSeleccionada);
+			if(indice != -1) {
+				arreglo.splice(indice, 1);
+			}
+			arreglo.push(valor1);
+			arreglo.push(valor2);
+			
+		}
+		return arreglo;
 	}
 	
-});
-
-jQuery("#form2 select").change(function(){
-	var categoriaSeleccionada = jQuery(this).find('option:selected');
-	var selectedCategoria = categoriaSeleccionada.text();
-	var valortextarea = $('#tagsArea').val();
-
-	if (valortextarea == "") {
-	    $('#tagsArea').val(selectedCategoria);
-	} else {
-	    var arreglo 	= valortextarea.split(',');
-	    var cuantos 	= arreglo.length;
-	    var arrayCat 	= findReplace(cuantos, selectedCategoria, arreglo, temp, tmpSub);
-	    var uniqueList 	= jQuery.unique(arrayCat);
-		var valorFinal 	= uniqueList.join(',');
-		
-	    $('#tagsArea').val(valorFinal);
+	function capitaliseFirstLetter(string)
+	{
+    	return string.charAt(0).toUpperCase() + string.slice(1);
 	}
-});
-
-
-function findReplace(cuantos, valor, arreglo, tmpCategoriaSeleccionada, tmpSubCategoriaSeleccionada) {
-	for (var i = 0; i < cuantos; i++) {
-	    if (arreglo[i] == valor || arreglo[i] == tmpCategoriaSeleccionada || arreglo[i] == tmpSubCategoriaSeleccionada) {
-	        arreglo[i] = valor;
-	        break;
-	    } else if (i == cuantos-1){
-	        arreglo[cuantos] = valor;
-	    }
-	}
-	return arreglo;
-}
-
-emptyKeys();
+	
+	// emptyKeys();
 
 });
 

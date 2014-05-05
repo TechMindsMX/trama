@@ -315,6 +315,19 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 		</select>
 		<br />
 		<br />
+			<label for="tags"><?php echo JText::_('LBL_KEYWORDS'); ?><br /><span style="font-size: 12px;"><?php echo JText::_('LBL_COMAS_SEPARADOS'); ?></span></label>
+			<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
+				if( isset($datosObj) && !empty($datosObj->tags)) {
+					foreach ($datosObj->tags as $key => $value) {
+						$array[] = $value->tag;
+					}
+					$tags = implode($array, ', ');
+					echo $tags;
+					
+				}else {
+					echo '';
+				}
+				?></textarea>
 		
 		
 		<label for="banner"><?php echo JText::_('LBL_BANNER').$textPro; ?>*:</label>
@@ -547,19 +560,6 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			<div id="map-canvas" style="height: 400px; max-width: 420px"></div>
 			<br />
 			
-			<label for="tags"><?php echo JText::_('LBL_KEYWORDS'); ?><br /><span style="font-size: 12px;"><?php echo JText::_('LBL_COMAS_SEPARADOS'); ?></span></label>
-			<textarea id="tagsArea" name="tags" cols="60" rows="5"><?php
-				if( isset($datosObj) && !empty($datosObj->tags)) {
-					foreach ($datosObj->tags as $key => $value) {
-						$array[] = $value->tag;
-					}
-					$tags = implode($array, ', ');
-					echo $tags;
-					
-				}else {
-					echo '';
-				}
-				?></textarea>
 		</fieldset>
 	</div>
 	

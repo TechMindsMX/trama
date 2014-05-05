@@ -1,4 +1,11 @@
 /*escritorio*/
+
+.ui-datepicker .ui-datepicker-prev span {
+	background-position: 0 -66px;
+}
+.ui-datepicker .ui-datepicker-next span {
+	background-position: 0 -22px;
+}
 .foca-magica {
 	display: none;
 }
