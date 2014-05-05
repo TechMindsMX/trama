@@ -23,6 +23,7 @@ $userMiddleware	= UserData::getUserMiddlewareId($usuario->id);
 
 $document->addStyleSheet($pathJumi.'edo_resultados.css');
 JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware);
+
 ?>
 <h1><?php echo JText::_('LBL_EDO_RESULT'); ?></h1>
 <h2><?php echo $value['proyectName']; ?></h2>
@@ -72,10 +73,12 @@ JTrama::havePermission($value['userIdMiddleware'], $userMiddleware->idMiddleware
 						<div><span class="number"><?php echo $value['porVentas']; ?></span>%</div>
 					</td>
 				</tr>
+				<?php if($value['totPatroc'] + $value['toApoDona'] + $value['totalOtro'] + $value['toAporCap'] != 0) { ?>
 				<tr style="font-size: 16px; font-weight: bold;">
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_TOTALPORVENTAS'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totalPorVentas']; ?></span></td>
 				</tr>
+				<?php } ?>
 <!--Fin de la seccion de ventas-->
 				<?php 
 				if($value['totPatroc'] != 0){ 
