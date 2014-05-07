@@ -51,7 +51,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 	 		maxDate: "+2y",
 			onSelect: function(selectedDate) {
 				var fecha 	= jQuery(this).datepicker("getDate");
-				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +1 )
+				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +7 )
 				jQuery( "#premiereStartDate" ).datepicker("option", "minDate", fecha1 );
 				jQuery( "#premiereStartDate").prop('disabled', false);
 				jQuery(this).validationEngine('validate');
@@ -63,7 +63,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 	 		maxDate: "+3y",
 			onClose: function(selectedDate) {
 				var fecha 	= jQuery(this).datepicker("getDate");
-				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +1 )
+				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +7 )
 				jQuery( "#premiereEndDate" ).datepicker("option", "minDate", fecha1 );
 				jQuery( "#premiereEndDate").prop('disabled', false);
 				jQuery(this).validationEngine('validate');
