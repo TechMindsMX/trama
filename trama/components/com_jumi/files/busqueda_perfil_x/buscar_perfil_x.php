@@ -161,7 +161,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="datosPerfil">';
 		var nombreCorto = members[i].nomNombre;
 		var largo = 10;
-		var trimmed = NombreCorto.substring(0, largo);
+		var trimmed = nombreCorto.substring(0, largo);
 		newcontent += '<h4>' + trimmed + ' ' + members[i].nomApellidoPaterno +'</h4>';
 		newcontent += '<h4>' + nomJobTitle + '</h4>';
 		newcontent += '<h4>' + nomCompania + '</h4>';
