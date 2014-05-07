@@ -135,7 +135,7 @@
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
                     "regex": /^[1-9]{1}?[0-9]{9}$/,
-                    "alertText": "* Número de teléfono inválido"
+                    "alertText": "*El número de teléfono debe tener 10 digitos"
                 },
                 "email": {
                     // Shamelessly lifted from Scott Gonzalez via the Bassistance Validation plugin http://projects.scottsplayground.com/email_address_validation/
