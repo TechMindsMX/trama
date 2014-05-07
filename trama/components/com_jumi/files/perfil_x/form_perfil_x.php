@@ -85,10 +85,7 @@ echo '<script src="'.$pathJumi.'/perfil_x/minified/jquery.tree.min.js"></script>
 ?>
 <script type="text/javascript">
 function habilita(campo) {
-	console.log(campo.name);
-	if (campo.checked) {
-		
-	} else {
+	if (!campo.checked) {
 		jQuery('#tree input').prop('disabled', false);
 		jQuery('#tree input').prop('checked', false);
 	}
@@ -153,6 +150,7 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 			jQuery(document).ready(function() {
 				jQuery('#tree').children().find('ul').hide();
 				jQuery('#tree').children().find('li.expanded').removeClass('expanded').addClass('collapsed');
+				jQuery('#tree').children().find('li.leaf span.daredevel-tree-anchor').removeClass('daredevel-tree-anchor');
 				jQuery('#tree').children().find('span.ui-draggable').removeClass('ui-draggable');
 
 				var orig = "<?php if(!empty($datosGrabados[0]->$campoTabla)) { echo $datosGrabados[0]->$campoTabla; } ?>";
