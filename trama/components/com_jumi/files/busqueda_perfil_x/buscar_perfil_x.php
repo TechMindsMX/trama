@@ -159,7 +159,10 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<a href="' + link + '">';
 		newcontent += '<div class="imgPerfil"><img style="width:175px;" src="' + members[i].Foto + '" alt="Foto" /></div>';
 		newcontent += '<div class="datosPerfil">';
-		newcontent += '<h4>' + members[i].nomNombre + ' ' + members[i].nomApellidoPaterno +'</h4>';
+		var nombreCorto = members[i].nomNombre;
+		var largo = 10;
+		var trimmed = NombreCorto.substring(0, largo);
+		newcontent += '<h4>' + trimmed + ' ' + members[i].nomApellidoPaterno +'</h4>';
 		newcontent += '<h4>' + nomJobTitle + '</h4>';
 		newcontent += '<h4>' + nomCompania + '</h4>';
 		newcontent += '</div>';
