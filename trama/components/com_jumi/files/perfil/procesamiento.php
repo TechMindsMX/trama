@@ -267,6 +267,9 @@ class procesamiento extends manejoImagenes {
 	function grabarDatosPerfil($data, $tabladb, $tipoContacto, $resultado) {
 		$db =& JFactory::getDBO();
 		$usuario =& JFactory::getUser();
+		if ($usuario->id === 0) {
+			JFactory::getApplication()->redirect(JRoute::_('index.php?option=com_users&view=login'), JText::_('MESSAGE_DATOS_NO_GUARDADOS'), 'error');
+		}
 
 		if (isset($data) && !empty($data)) {
 				
@@ -293,8 +296,8 @@ class procesamiento extends manejoImagenes {
 
 			foreach ($data as $key => $value) {
 				if (!empty($value) || $value == 0) {					
-			        $col[] = mysql_real_escape_string($key);
-					$val[] = "'".mysql_real_escape_string($value)."'";
+			        $col[] = $key;
+					$val[] = $db->quote($value);
 				}
 			}
 			
@@ -532,7 +535,7 @@ if ($form == 'perfil') {
 	$direccion 		= $datos->get_direccion($objDatos);
 	$mailGen 		= $datos->get_mailsGeneral($objDatos);
 	$dataGeneral	= $objDatos->datosGenerales($usuario->id, 1);
-	
+
 	if ($dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 2 
 		|| $dataGeneral->perfil_personalidadJuridica_idpersonalidadJuridica == 3){
 		$allDone->redirect($formEmpresa, JText::_('MESSAGE_DATOS_GUARDADOS') );

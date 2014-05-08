@@ -101,6 +101,7 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 			jQuery(document).ready(function() {
 				jQuery('#tree').children().find('ul').hide();
 				jQuery('#tree').children().find('li.expanded').removeClass('expanded').addClass('collapsed');
+				jQuery('#tree').children().find('li.leaf span.daredevel-tree-anchor').removeClass('daredevel-tree-anchor');
 				jQuery('#tree').children().find('span.ui-draggable').removeClass('ui-draggable');
 
 				jQuery('#uncheckAll').click(function() {

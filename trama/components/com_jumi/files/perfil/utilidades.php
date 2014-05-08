@@ -137,7 +137,7 @@ class getDatosObj {
 			->insert($db->quoteName($tabladb))
 			->columns($db->quoteName($col))
 			->values(implode(',', $val));
-		
+
 		$db->setQuery( $query );
 		$db->query();
 	}
