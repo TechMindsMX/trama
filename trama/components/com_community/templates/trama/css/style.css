@@ -6540,3 +6540,7 @@ body #community-wrap a.fb_button_medium:hover {
 		margin: 0
 	}
 }
+div.form-field img.cFloat-L {
+	max-width: 200px;
+	max-height: 220px;
+}
