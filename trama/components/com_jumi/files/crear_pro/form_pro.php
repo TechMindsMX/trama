@@ -55,10 +55,22 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 		jQuery("#form2").find(".toggle-editor").css("display","none");	
 		jQuery("#form2").validationEngine();
 		
+		var premiereEndDate = false;
+		var variableCosts 	= false;
+		var providers 		= false;
+		
 		<?php
 		if( !is_null($datosObj) ) {
 			JTrama::isEditable($datosObj, $userMiddleId->idMiddleware);
 			$callback .= $proyid;
+			
+			$premiereEndDate 	= !is_null($datosObj->premiereEndDate)?'true':'false';
+			$variableCosts 		= !empty($datosObj->variableCosts)?'true':'false';
+			$providers			= !empty($datosObj->providers)?'true':'false';
+			
+			echo 'premiereEndDate = '.$premiereEndDate.';';
+			echo 'variableCosts	= '.$variableCosts.';';
+			echo 'providers = '.$providers.';';
 			
 			$countImgs = $countImgs - count($datosObj->projectPhotos);
 			
@@ -166,15 +178,29 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			jQuery('#deleteprojectPhotosIds').val( deletePhotos.join(',') );
 
 			if( this.id == 'revision' ) {
-				if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
-					if( jQuery('#status').val() == 0 ) {
-						jQuery('#status').val(9);
-						jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
-					} else if( jQuery('#status').val() == 2 ){
-						jQuery('#status').val(3);
-						jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
+				if( premiereEndDate && variableCosts && providers ){
+					if(confirm('<?php echo JText::_('CONFIRMAR_ENVIAR');  ?>')){
+						if( jQuery('#status').val() == 0 ) {
+							jQuery('#status').val(9);
+							jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
+						} else if( jQuery('#status').val() == 2 ){
+							jQuery('#status').val(3);
+							jQuery('#callback').val('<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&from=27&fileid=11&proyid='.$proyid; ?>');
+						}
+					}else {
+						return false;
 					}
-				}else {
+				}else{
+					if( premiereEndDate == false){
+						alert('<?php echo JText::_('FALTA_FINANZAS'); ?>');
+					}
+					
+					if( variableCosts == false ){
+						alert('<?php echo JText::_('FALTA_COSTOSV'); ?>');
+					}
+					if( providers == false ){
+						alert('<?php echo JText::_('FALTA_PROVEEDORES'); ?>');
+					}
 					return false;
 				}
 			} else if(this.id == 'guardar') {

@@ -16,9 +16,27 @@ $imagen 				= new manejoImagenes;
 $envio 					= $app->input->getArray($_POST);
 $envio['description']	= $_POST['description'];
 $envio['cast']			= $_POST['cast'];
+$envio['token']		 	= JTrama::token();
+$proyId					= $_POST['id'];
+$datosObj 				= JTrama::getDatos($proyId);
 
-$envio['token'] 	= JTrama::token();
+if($_POST['status'] == 9 || $_POST['status'] == 3){
 
+	if( is_null($datosObj->premiereEndDate) ){
+		$urlrevision = 'index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$proyId;	
+		$app->redirect($urlrevision, JText::_('FALTA_FINANZAS'), 'message');
+	}
+	
+	if( empty($datosObj->variableCosts) ){
+		$urlrevision = 'index.php?option=com_jumi&view=appliction&fileid=26&proyid='.$proyId;
+		$app->redirect($urlrevision, JText::_('FALTA_COSTOSV'), 'message');
+	}
+	
+	if( empty($datosObj->providers) ){
+		$urlrevision = 'index.php?option=com_jumi&view=appliction&fileid=25&proyid='.$proyId;
+		$app->redirect($urlrevision, JText::_('FALTA_PROVEEDORES'), 'message');
+	}
+}
 foreach ($_FILES as $key => $value) {
 	if($_FILES[$key]['error'] != 4){
 		$fileName = explode(' ', microtime());
