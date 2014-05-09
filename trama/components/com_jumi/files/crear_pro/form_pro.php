@@ -302,15 +302,14 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			?>
 		</select>
 		<br />
-		
+			
 		<label for="subcategory"><?php echo JText::_('LBL_SUBCATEGORIA'); ?>: </label>
 		<select id="subcategoria" name="subcategory">
 			<option value="all">Todas</option>
 			<?php
 			foreach ( $subCategorias as $key => $value ) {
-				$opcionesSubCat .= '<option class="'.$value->father.'" value="'.$value->id.'" >'.$value->name.'</option>';
+				echo '<option class="'.$value->father.'" value="'.$value->id.'" >'.$value->name.'</option>';
 			}		
-			echo $opcionesSubCat;
 			?>
 		</select>
 		<br />

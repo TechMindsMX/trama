@@ -31,29 +31,33 @@ jQuery(document).ready(function(){
 		}
 	});
 
-	jQuery("#form2 select#subcategoria").change(function(){
+	jQuery("#form2 select").change(function(){
 		var catSelec = jQuery('#selectCategoria').find('option:selected');
 		var selectedCategoria = catSelec.text();
 		var subCatSelec = jQuery('#subcategoria').find('option:selected');
 		var selectedSubCategoria = subCatSelec.text();
 		var valortextarea = $('#tagsArea').val();
 	
-		if (valortextarea == "") {
-		    $('#tagsArea').val(selectedCategoria);
-		} else {
-		    var arreglo 	= $.map(valortextarea.split(","), $.trim);
-		    var cuantos 	= arreglo.length;
-		    var arrayCat 	= findReplace(cuantos, selectedCategoria, selectedSubCategoria, arreglo, temp, tmpSub);
-		    var uniqueList 	= jQuery.unique(arrayCat);
-		    uniqueList		= uniqueList.sort();
+	    var arreglo 	= $.map(valortextarea.split(","), $.trim);
+	    var cuantos 	= arreglo.length;
+	    var arrayCat 	= findReplace(cuantos, selectedCategoria, selectedSubCategoria, arreglo, temp, tmpSub);
+	    var uniqueList 	= unique(arrayCat);
+	    uniqueList		= uniqueList.sort();
 
-			var valorFinal 	= uniqueList.join(',');
-			
-		    $('#tagsArea').val(valorFinal);
-		    
-		    return;
-		}
+		var valorFinal 	= uniqueList.join(',');
+		
+	    $('#tagsArea').val(valorFinal);
+	    
+	    return;
 	});
+	
+	function unique(array) {
+	    return jQuery.grep(array, function(el, index) {
+	    	if (el != "") {
+	        	return index == $.inArray(el, array);
+	        }
+	    });
+	}
 	
 	function findReplace(cuantos, valor1, valor2, arreglo, tmpCategoriaSeleccionada, tmpSubCategoriaSeleccionada) {
 		valor1 = capitaliseFirstLetter(valor1.trim());

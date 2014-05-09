@@ -14,7 +14,7 @@ $cssFinan	= '.tablaFinan {font-weight: bold; font-size 120%; width: 30%; width: 
 				.red{background: red; color: white; font-weight: normal;}
 				.yellow{background: yellow;}';
 $document	->addStyleDeclaration($cssFinan);
-var_dump($proyecto->status);
+
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
