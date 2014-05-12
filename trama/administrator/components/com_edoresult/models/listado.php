@@ -18,6 +18,10 @@ class listadoModellistado extends JModelList
 			  ->where('idJoomla != 378');
 		
 		$db->setQuery($query);
+
+		// if($db->count == 0) {
+			// return null;
+		// }
 		$results = $db->loadObjectList();
 
 		$proyectos = JTrama::allProjects();
@@ -28,16 +32,20 @@ class listadoModellistado extends JModelList
 				$proyectosfiltrados[] = $value;
 			}
 		}
-
-		foreach ($proyectosfiltrados as $key => $value) {
-			foreach ($results as $llave => $valor) {
-				if($value->userId == $valor->idMiddleware){
-					$value->idJoomla 		= $valor->idJoomla;
-					$value->prodName 		= $valor->name;
-					$value->ligaEdoResult 	= '<a href="index.php?option=com_edoresult&task=projectstatement&id='.$value->id.'" >'.$value->name.'</a>';
+		
+		if (isset($proyectosfiltrados))	{
+			foreach ($proyectosfiltrados as $key => $value) {
+				foreach ($results as $llave => $valor) {
+					if($value->userId == $valor->idMiddleware){
+						$value->idJoomla 		= $valor->idJoomla;
+						$value->prodName 		= $valor->name;
+						$value->ligaEdoResult 	= '<a href="index.php?option=com_edoresult&task=projectstatement&id='.$value->id.'" >'.$value->name.'</a>';
+					}
 				}
 			}
-		}		
+		} else {
+			$proyectosfiltrados = '';
+		}
 		return $proyectosfiltrados;
 	}
 
