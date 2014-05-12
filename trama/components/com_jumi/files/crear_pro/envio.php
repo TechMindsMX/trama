@@ -37,6 +37,7 @@ if($_POST['status'] == 9 || $_POST['status'] == 3){
 		$app->redirect($urlrevision, JText::_('FALTA_PROVEEDORES'), 'message');
 	}
 }
+
 foreach ($_FILES as $key => $value) {
 	if($_FILES[$key]['error'] != 4){
 		$fileName = explode(' ', microtime());
@@ -48,6 +49,10 @@ foreach ($_FILES as $key => $value) {
 			$tipo = 'jpg';
 		}elseif( $_FILES[$key]['type'] == 'image/gif' ){
 			$tipo = 'gif';
+		} else {
+			// Si hay un archivo con extensión incorrecta envia de regreso al formulario
+			$url = $_SERVER['HTTP_REFERER'];
+			JFactory::getApplication()->redirect($url, JText::_('SIN_FOTOS'), 'error');
 		}
 	
 		if($key == 'banner'){
@@ -67,7 +72,7 @@ foreach ($_FILES as $key => $value) {
 			$archivos[] 		= $fileName.'.jpg';
 		}
 		$imagen->resizeAndCrop($_FILES[$key]['tmp_name'], $ruta, $fileName, $ancho, $alto);
-	}else{
+	} else {
 		if( $envio['bannerSave'] != '' && $_FILES['banner']['error'] != 0 ){
 			$envio['banner'] = $envio['bannerSave'];
 			$envio['bannerSave'] = '';

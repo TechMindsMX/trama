@@ -154,10 +154,11 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 				jQuery('#tree').children().find('span.ui-draggable').removeClass('ui-draggable');
 
 				var orig = "<?php if(!empty($datosGrabados[0]->$campoTabla)) { echo $datosGrabados[0]->$campoTabla; } ?>";
+				var cond = "<?php echo $campoTabla; ?>";
 				if (typeof orig != 'undefined') {
 				var aaa = orig.split(',');
 					jQuery.each(aaa, function(index, value) {
-						if(value == 166 || value == 151){
+						if((value == 166 && cond == 'respuestaPerfil') || (value == 151 && cond == 'respuestaPerfil')){
 							jQuery('#' + value).prop("checked", true);
 							
 							jQuery('#tree input').prop('disabled', true);
