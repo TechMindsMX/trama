@@ -10,21 +10,21 @@ class JTrama
 
 	//Metodos que usan Servicios MIDDLEWARE
 	public function	getAllSubCats() {
-		$url = MIDDLE . PUERTO . '/trama-middleware/rest/category/subcategories/all';
+		$url = MIDDLE . PUERTO . TIMONE.'category/subcategories/all';
 		$subcats = json_decode(@file_get_contents($url));
 		
 		return $subcats;
 	}	
 
 	public function	getAllCatsPadre() {
-	  	$url = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
+	  	$url = MIDDLE.PUERTO.TIMONE.'category/categories';
 		$cats = json_decode(@file_get_contents($url));
 		
 		return $cats;
 	}
 
 	public static function getStatusName ($id, $statusList=null) {
-		$statusList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+		$statusList = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'status/list'));
 		
 		if (!empty($statusList)) {
 			foreach ($statusList as $llave => $valor) {
@@ -40,7 +40,7 @@ class JTrama
 	}
 	
 	public static function getStatus(){
-		$status = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+		$status = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'status/list'));
 		
 		foreach ($status as $obj) {
 				$map[] = array($obj->name, $obj);
@@ -54,13 +54,13 @@ class JTrama
 	}
 	
 	public function getProjectsByUser ($userid) {
-		$projectList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByUser/'.$userid));
+		$projectList = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/getByUser/'.$userid));
 
 		return $projectList;
 	}
 	
 	public static function allProjects(){
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
+		$url = MIDDLE.PUERTO.TIMONE.'project/all';
 		$jsonAllProjects = file_get_contents($url);
 		$json = json_decode($jsonAllProjects);
 		
@@ -73,7 +73,7 @@ class JTrama
 	}
 
 	public static function getDatos ( $id ) {
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
+		$url = MIDDLE.PUERTO.TIMONE.'project/get/'.$id;
 		$json = file_get_contents($url);
 		$respuesta = json_decode($json); 
 		
@@ -84,7 +84,7 @@ class JTrama
 	}
 	
 	public static function token(){
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/security/getKey';
+		$url = MIDDLE.PUERTO.TIMONE.'security/getKey';
 		$token = file_get_contents($url);
 		
 		return $token;
@@ -302,7 +302,7 @@ class JTrama
 	}
 	
 	public static function getStateResult($proyId){
-		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
+		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'tx/getProjectStatement/'.$proyId));
 		$dataGral 							= self::getDatos($proyId);
 		$user								= UserData::getUserJoomlaId($dataGral->userId);
 		$usuario							= JFactory::getUser($user);
@@ -310,7 +310,7 @@ class JTrama
 		$objagrupado					 	= self::sumatoriaIngresos($objagrupado);
 		$objagrupado						= self::sumatoriaEgresos($objagrupado);
 		$objagrupado						= self::operacionesEstadoResult($objagrupado,$dataGral);
-		$objagrupado['sections']			= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getSections/'.$proyId));
+		$objagrupado['sections']			= json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/getSections/'.$proyId));
 		$objagrupado['userIdJoomla']		= $user;
 		$objagrupado['userIdMiddleware']	= $dataGral->userId;
 		$objagrupado['proyectName'] 		= $dataGral->name;

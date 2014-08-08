@@ -34,7 +34,7 @@ errorClass::manejoError($errorCode, $from, $proyid);
 $servEdicion = JTrama::getDatos($proyid );
 $existe = $servEdicion->variableCosts;
 //definicion de campos del formulario
-$action = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveVariableCosts';
+$action = MIDDLE.PUERTO.TIMONE.'project/saveVariableCosts';
 ?>
 
 <script>

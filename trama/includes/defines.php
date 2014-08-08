@@ -2,7 +2,7 @@
 /**
  * @package		Joomla.Site
  * @subpackage	Application
- * @copyright	Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -30,12 +30,11 @@ define('JPATH_THEMES',			JPATH_BASE . '/templates');
 define('JPATH_CACHE',			JPATH_BASE . '/cache');
 define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
-define("MIDDLE", "http://162.209.56.86");
-define("PUERTO", ":7070");
-define("AVATAR", "avatar");
-define("BANNER", "banner");
-define("BCASE", "businessCase");
-define("PHOTO", "photo");
+define("MIDDLE", "http://192.168.0.122");
+define("PUERTO", ":8081");
+define("AVATAR", "media/trama_files/avatar");
+define("BANNER", "media/trama_files/banner");
+define("PHOTO", "media/trama_files/photo");
+define("BCASE", "businesscase");
 define("SOUNDCLOUD_CLIENT_ID","52bdfab59cb4719ea8d5ea626efae0da");
 define("SOUNDCLOUD_CLIENT_SECRET","7688bd528138b2de5daf52edffc091c5");
-

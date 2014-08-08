@@ -37,23 +37,23 @@ function prodProy ($tipo) {
 	if( !empty($_POST) ) {
 		if (isset($_POST['tags'])) {
 			$tagLimpia = array_shift(tagLimpia($_POST['tags']));
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByTag/'.$tagLimpia;
+			$url = MIDDLE.PUERTO.TIMONE.'project/getByTag/'.$tagLimpia;
 		}
 		elseif ( ($tipo == 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
+			$url = MIDDLE.PUERTO.TIMONE.'project/all';
 		} elseif ( ($tipo == 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] == "all") ) {//Productos y Proyectos por categoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/all/'.$_POST['categoria'];
+			$url = MIDDLE.PUERTO.TIMONE.'project/category/all/'.$_POST['categoria'];
 		} elseif ( ($tipo == 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] != "all") ) {//Productos y proyectos por subcategoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/all/'.$_POST['subcategoria'];
+			$url = MIDDLE.PUERTO.TIMONE.'project/subcategory/all/'.$_POST['subcategoria'];
 		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] == "all") ) {//Productos o proyectos por categoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'.$_POST['categoria'];
+			$url = MIDDLE.PUERTO.TIMONE.'project/category/'.$tipo.'/'.$_POST['categoria'];
 		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] != "all") ) {//Productos o proyectos por Subcategoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$_POST['subcategoria'];
+			$url = MIDDLE.PUERTO.TIMONE.'project/subcategory/'.$tipo.'/'.$_POST['subcategoria'];
 		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) {//nose
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
+			$url = MIDDLE.PUERTO.TIMONE.'project/'.$tipo;
 		}	
 	} else {
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
+		$url = MIDDLE.PUERTO.TIMONE.'project/'.$tipo;
 	}
 
 	$json0 = @file_get_contents($url);
@@ -67,7 +67,7 @@ function prodProy ($tipo) {
 }
 
 $json = json_decode(prodProy($busquedaPor[$tipoPP]));
-$statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+$statusName = json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'status/list'));
 
 jimport('trama.class');
 jimport('trama.usuario_class');

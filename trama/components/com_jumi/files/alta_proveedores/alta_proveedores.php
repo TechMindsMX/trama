@@ -22,7 +22,7 @@ $comentarios			= '';
 $ligaEditProveedores	= '';
 $ligaCostosVariable		= '';
 $ligaFinantialData		= '';
-$accion 				= MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProvider';
+$accion 				= MIDDLE.PUERTO.TIMONE.'project/saveProvider';
 $callback 				= JURI::base().'index.php?option=com_jumi&view=application&fileid=25&from=25&proyid='.$proyid;
 
 errorClass::manejoError($errorCode, $from, $proyid);

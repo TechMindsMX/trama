@@ -12,7 +12,7 @@ class plgUserFFAccount extends JPlugin
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 		
-		$this->url = MIDDLE.PUERTO.'/trama-middleware/rest/user/saveUser';
+		$this->url = MIDDLE.PUERTO.TIMONE.'user/saveUser';
 		$this->token = JTrama::token();
 	}
 

@@ -8,7 +8,7 @@ class claseTraerDatos
 	public static function getDatos ( $tipo, $id ) {
 		
 		if( isset($id) ) {	
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
+			$url = MIDDLE.PUERTO.TIMONE.'project/get/'.$id;
 			$json = file_get_contents($url);
 			$jsonDecode = json_decode($json); 
 			
