@@ -84,6 +84,7 @@ class JTrama
 	}
 	
 	public static function token(){
+		
 		$url = MIDDLE.PUERTO.TIMONE.'security/getKey';
 		$token = file_get_contents($url);
 		

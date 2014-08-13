@@ -19,7 +19,7 @@
 	jimport('trama.error_class');
 	JHTML::_('behavior.tooltip');
 
-	
+
 	$usuario->idMiddleware = ( $usuario->id != 0 ) ? UserData::getUserMiddlewareId($usuario->id)->idMiddleware : null;
 	
 	// chequeamos si el usuario es Special
@@ -637,11 +637,11 @@ function codeAddress() {
 			$('#rating').raty({
 				click: function(score, evt) {
 					var request = $.ajax({
-						url:"<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/rate",
+						url:"<?php echo MIDDLE.PUERTO.TIMONE; ?>project/rate",
 						data: {
 							"score": score,
 							"projectId": "<?php echo $proyecto; ?>",
-							"token": "<?php echo JTrama::token(); ?>",
+							"token": "<?php echo $token; ?>",
 							"userId": <?php echo $usuario->idMiddleware; ?>
 						},
 						type: 'post'
@@ -676,7 +676,8 @@ function codeAddress() {
 					});
 					
 					request.fail(function (jqXHR, textStatus) {
-						alert('<?php echo JText::_("RATING_ERROR"); ?>');
+						console.log(jqXHR, textStatus);
+						alert('<?php echo JText::_("RATING_ERROR"); ?> 65654654654654');
 					});
 				},
 				score		: rating,
