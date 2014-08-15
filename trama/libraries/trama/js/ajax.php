@@ -1,9 +1,18 @@
 <?php
+// Incluimos el framework
+define('_JEXEC', 1);
+define('JPATH_BASE', realpath(dirname(__FILE__).'/../../..'));
+require_once ( JPATH_BASE .'/includes/defines.php' );
+require_once ( JPATH_BASE .'/includes/framework.php' );
+require_once ( JPATH_BASE .'/libraries/joomla/factory.php' );
+
 $address = str_replace('.', '', $_SERVER['HTTP_HOST']);
 if (!is_numeric($address) && $address != 'localhost') {
-	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070'); // direccion produccion
+	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR']); // direccion produccion
+	define('PUERTO', ':7070'); // direccion produccion
 } else {
-	define('MIDDLE', 'http://192.168.0.122:7272'); // direccion staging
+	define('MIDDLE', MIDDLE); // direccion staging
+	define('PUERTO', PUERTO); // direccion staging
 }
 
 $fun = is_numeric($_POST['fun']) ? $_POST['fun'] : 0;

@@ -119,6 +119,7 @@ $server_output = curl_exec ($ch);
 curl_close ($ch);
  
 $respuesta = json_decode($server_output);
+var_dump($respuesta)l exit;
 
 if( isset($envio['id']) ){
 	$respuesta = '';
