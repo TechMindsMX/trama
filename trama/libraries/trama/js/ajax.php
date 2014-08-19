@@ -5,18 +5,9 @@ define('JPATH_BASE', realpath(dirname(__FILE__).'/../../..'));
 require_once ( JPATH_BASE .'/includes/defines.php' );
 require_once ( JPATH_BASE .'/includes/framework.php' );
 require_once ( JPATH_BASE .'/libraries/joomla/factory.php' );
-
-$address = str_replace('.', '', $_SERVER['HTTP_HOST']);
-if (!is_numeric($address) && $address != 'localhost') {
-	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR']); // direccion produccion
-	define('PUERTO', ':7070'); // direccion produccion
-} else {
-	define('MIDDLE', MIDDLE); // direccion staging
-	define('PUERTO', PUERTO); // direccion staging
-}
+require_once ( JPATH_BASE .'/configuration.php' );
 
 $fun = is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
-include('../../../configuration.php');
 
 $configuracion = new JConfig;
 $bd = new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
@@ -65,7 +56,8 @@ switch ($fun) {
 		break;
 		
 	case 2:
-		$url = MIDDLE."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
+		// $url = MIDDLE.PUERTO."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
+		$url = MIDDLE.":7272/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
 		echo file_get_contents($url);
 		break;
 		
