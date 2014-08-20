@@ -243,7 +243,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 				var boton = this;
 				
 				var request = $.ajax({
-					url:"<?php echo MIDDLE.PUERTO.'/trama-middleware/rest/project/deleteProjectUnitSale' ?>",
+					url:"<?php echo MIDDLE.PUERTO.TIMONE.'project/deleteProjectUnitSale' ?>",
 					data: {
 						"projectUnitSaleId":seccionId,
 						"token":'<?php echo $token; ?>'

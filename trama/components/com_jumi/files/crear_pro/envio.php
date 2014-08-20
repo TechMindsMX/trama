@@ -107,7 +107,7 @@ if ($envio['photos'] == '') {
 }
 
 $ch					= curl_init($envio['callback']);
-$url				= MIDDLE.PUERTO."/trama-middleware/rest/project/create";
+$url				= MIDDLE.PUERTO.TIMONE."project/create";
  
 curl_setopt($ch, CURLOPT_URL,$url);
 curl_setopt($ch, CURLOPT_POST, true);
@@ -119,7 +119,6 @@ $server_output = curl_exec ($ch);
 curl_close ($ch);
  
 $respuesta = json_decode($server_output);
-var_dump($respuesta)l exit;
 
 if( isset($envio['id']) ){
 	$respuesta = '';
