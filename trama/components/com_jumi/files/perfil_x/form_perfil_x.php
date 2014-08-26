@@ -64,12 +64,14 @@ function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripci
 	}
 	
 	foreach ($results as $columna) {
-		$inputPadre = '<li><input type="checkbox" name="'.$columna->$columnaId.'" value="'.$columna->$columnaId.'" id="'.$columna->$columnaId.'" />';
-		$inputPadre .= '<span>'.$columna->$descripcion.'</span>';
-			
-		echo $inputPadre;
+		if ($columna->nomNombreCategoria != 'Gremios' AND $columna->nomNombreCategoria != 'Instituciones') {
+			$inputPadre = '<li><input type="checkbox" name="'.$columna->$columnaId.'" value="'.$columna->$columnaId.'" id="'.$columna->$columnaId.'" />';
+			$inputPadre .= '<span>'.$columna->$descripcion.'</span>';
 				
-		generacampos($columna->$columnaId,$tabla, $columnaId, $columnaIdPadre, $descripcion);
+			echo $inputPadre;
+					
+			generacampos($columna->$columnaId,$tabla, $columnaId, $columnaIdPadre, $descripcion);
+		}
 	}
 	
 	if (!empty($results)) {
