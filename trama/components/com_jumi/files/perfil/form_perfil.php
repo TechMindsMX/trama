@@ -219,7 +219,7 @@
                	<label for="teGr_telTelefono0"><?php echo JText::_('TELEFONO_CASA'); ?>:</label>              
                	<input 
                		name="teGr_telTelefono0" 
-               		class="validate[custom[phone]] input_chica" 
+               		class="validate[custom[phonezero],custom[phonesize]] input_chica" 
                		type="text" 
                		id="teGr_telTelefono0" 
                		maxlength="10" />
@@ -233,7 +233,7 @@
                	<label for="teGr_telTelefono1"><?php echo JText::_('TELEFONO_CELULAR'); ?>:</label>
                	<input 
                		name="teGr_telTelefono1"
-               		class="validate[custom[phone]] input_chica"
+               		class="validate[custom[phonezero],custom[phonesize]] input_chica"
                		type="text"
                		id="teGr_telTelefono1"
                		maxlength="10" />
@@ -247,7 +247,7 @@
                	<label for="teGr_telTelefono2"><?php echo JText::_('TELEFONO_OFICINA'); ?>:</label>
                	<input 
                		name="teGr_telTelefono2" 
-               		class="validate[custom[phone]] input_chica" 
+               		class="validate[custom[phonezero],custom[phonesize]] input_chica" 
                		type="text" 
                		id="teGr_telTelefono2" 
                		maxlength="10" />
