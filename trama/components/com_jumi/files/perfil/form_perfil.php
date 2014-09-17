@@ -367,7 +367,7 @@
 			<div class="datos_proy_cv">
             	<label for="daGr_dscDescripcionPersonal"><?php echo JText::_('DESC_EMP'); ?></label>            
                 
-                <div style= "max-width:7550px;">
+                <div style= "max-width:750px;">
 				<?php
 					$editor =& JFactory::getEditor('tinymce');
 					$contenidoDescription = isset($generales) ? $generales->dscDescripcionPersonal : '';

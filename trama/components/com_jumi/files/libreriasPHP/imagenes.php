@@ -8,7 +8,7 @@ class manejoImagenes {
 			move_uploaded_file($_FILES["daGr_Foto"]["tmp_name"], "images/fotoPerfil/" . $usuario . ".jpg");
 			$this -> resize("images/fotoPerfil/" . $usuario . ".jpg", $usuario . ".jpg", 400, 300);
 		} else {
-			echo 'no es imagen o el archivo esta corrupto <br />';
+			return false;
 		}
 
 	}
@@ -108,7 +108,9 @@ class manejoImagenes {
 		$archivo = $ruta . $fileName . '.jpg';
 
 		clearstatcache();
-		imagejpeg($desired_gdim, $archivo, 90);
+		$saved = imagejpeg($desired_gdim, $archivo, 90);
+
+		return $saved;
 	}
 
 }
