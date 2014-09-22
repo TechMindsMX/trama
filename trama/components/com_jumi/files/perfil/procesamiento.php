@@ -37,7 +37,9 @@ class procesamiento extends manejoImagenes {
 						if( $_FILES["daGr_Foto"]["name"] != ""){
 							$fotoSave = $this->cargar_imagen($_FILES['daGr_Foto']['type'], $campos['daGr_users_id']);
 							$gral['Foto'] = "images/fotoPerfil/" . $campos['daGr_users_id'].".jpg";
-							JFactory::getApplication()->enqueueMessage(JText::_('LBL_NO_ES_IMAGEN_QUEDA_DEFAULT'), 'notice');
+							if ($fotoSave === false){
+								JFactory::getApplication()->enqueueMessage(JText::_('LBL_NO_ES_IMAGEN_QUEDA_DEFAULT'), 'notice');
+							}
 						} elseif ($campos['daGr_Foto_guardada'] != '') {
 							$gral['Foto'] = $campos['daGr_Foto_guardada'];
 						} elseif ( $campos['daGr_Foto_guardada'] == '' || $_FILES["daGr_Foto"]["name"] == "" ) {

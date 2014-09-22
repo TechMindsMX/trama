@@ -6,7 +6,8 @@ class manejoImagenes {
 		$validaciones = (($tipo === 'image/jpeg') || ($tipo === 'image/gif') || ($tipo === 'image/png'));
 		if ($validaciones && getimagesize($_FILES["daGr_Foto"]["tmp_name"])) {
 			move_uploaded_file($_FILES["daGr_Foto"]["tmp_name"], "images/fotoPerfil/" . $usuario . ".jpg");
-			$this -> resize("images/fotoPerfil/" . $usuario . ".jpg", $usuario . ".jpg", 400, 300);
+			$img = $this -> resize("images/fotoPerfil/" . $usuario . ".jpg", $usuario . ".jpg", 400, 300);
+			return $img;
 		} else {
 			return false;
 		}
@@ -50,7 +51,9 @@ class manejoImagenes {
 		imagedestroy($img_original);
 
 		$calidad = 90;
-		imagejpeg($tmp, $ruta . $nombre . 'jpg', $calidad);
+		$imagenCrea = imagejpeg($tmp, $ruta . $nombre . 'jpg', $calidad);
+		
+		return $imagenCrea;
 	}
 
 	function resizeAndCrop($uploaded, $ruta, $fileName, $max_ancho, $max_alto) {
