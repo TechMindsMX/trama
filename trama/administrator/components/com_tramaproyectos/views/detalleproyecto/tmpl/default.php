@@ -67,11 +67,19 @@ $document	->addStyleDeclaration($cssFinan);
 						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
 						break;
 					case 'Autorizado':
-						jQuery('.statuschange').val(5);
-						jQuery('#callback').val("<?php echo $proyecto->callback.'&status=5&name='.$proyecto->id ?>");
-						<?php $statusName = JTrama::getStatusName(5); ?>
-						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
-						break;
+						<?php if($proyecto->type == 'PROJECT') { ?>
+							jQuery('.statuschange').val(5);
+							jQuery('#callback').val("<?php echo $proyecto->callback.'&status=5&name='.$proyecto->id ?>");
+							<?php $statusName = JTrama::getStatusName(5); ?>
+							msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
+							break;
+						<?php } elseif ($proyecto->type == 'PRODUCT') { ?>
+							jQuery('.statuschange').val(10);
+							jQuery('#callback').val("<?php echo $proyecto->callback.'&status=10&name='.$proyecto->id ?>");
+							<?php $statusName = JTrama::getStatusName(10); ?>
+							msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";
+							break;
+						<?php } ?>
 				}
 				
 				if(confirm(msg)){
@@ -80,7 +88,7 @@ $document	->addStyleDeclaration($cssFinan);
 			})
 		});
 	</script>
-	<form id="formstatus" action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/changeStatus" method="post" >
+	<form id="formstatus" action="<?php echo MIDDLE.PUERTO.TIMONE; ?>project/changeStatus" method="post" >
 	<table class="adminlist">
 		<thead><?php echo $this->loadTemplate('head');?></thead>
 		<tbody><?php echo $this->loadTemplate('body');?></tbody>
