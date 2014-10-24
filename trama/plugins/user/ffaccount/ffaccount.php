@@ -3,6 +3,7 @@
 defined('_JEXEC') or die;
 
 jimport('trama.class');
+jimport('trama.debug');
 
 class plgUserFFAccount extends JPlugin
 {
@@ -35,9 +36,13 @@ class plgUserFFAccount extends JPlugin
 		$query->select($db->quoteName('id'));
 		$query->from($db->quoteName('#__users'));
 		$query->where($db->quoteName('email').' = \''. $user['email'] . '\'');
-		
+
 		$db->setQuery( $query );
 		$id = $db->loadResult();
+
+		// Debug
+		$dData = implode("|", array(fecha=>date('d-m-Y h:i:s'),metodo=>__METHOD__,query=>$query,result=>$id));
+		new DebugClass($dData);
 
 		if( $isnew ){
 			
@@ -89,7 +94,12 @@ class plgUserFFAccount extends JPlugin
 			->values($values);
 		
 		$db->setQuery( $query );
-		$db->query();
+		$result = $db->query();
+		
+		// Debug
+		$dData = implode("|", array(fecha=>date('d-m-Y h:i:s'),metodo=>__METHOD__,query=>$query,result=>$result));
+		new DebugClass($dData);
+		
 	}
 	
 	function sendToMiddle ($email , $name) {
@@ -110,6 +120,10 @@ class plgUserFFAccount extends JPlugin
 		$server_output = curl_exec ($ch);
 		
 		curl_close ($ch);
+		
+		// Debug
+		$dData = implode("|", array(fecha=>date('d-m-Y h:i:s'),metodo=>__METHOD__,envio=>array($email,$name),response=>$server_output));
+		new DebugClass($dData);
 		
 		return $server_output;
 

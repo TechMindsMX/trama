@@ -145,12 +145,23 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			echo 'jQuery("#miniaturaAvatar").html(\'<img src="'.AVATAR.'/'.$datosObj->avatar.'" width="100" />\');';
 			echo 'jQuery("#url").val("'.$datosObj->url.'");';
 			
+			
 			foreach ($datosObj->projectVideos as $key => $value) {
-				echo 'jQuery("#linkYt"+'.($key+1).').val("'.$value->url.'");';				
+				if ($value->url !== '') {
+					$video_array[] = $value->url;
+				}
+			}
+			foreach ($video_array as $key => $value) {
+				echo 'jQuery("#linkYt"+'.($key+1).').val("'.$value.'");';
 			}
 			
 			foreach ($datosObj->projectSoundclouds as $key => $value) {
-				echo 'jQuery("#linkSc1"+'.($key+1).').val("'.$value->url.'");';				
+				if ($value->url !== '') {
+					$projectSoundclouds[] = $value->url;
+				}
+			}
+			foreach ($projectSoundclouds as $key => $value) {
+				echo 'jQuery("#linkSc1"+'.($key+1).').val("'.$value.'");';				
 			}
 			$showground = addslashes($datosObj->showground);
 			echo 'jQuery("#nameRecinto").val("'.$datosObj->inclosure.'");';

@@ -7,7 +7,7 @@ function moreFields() {
 	newFields.style.display = 'block';
 	var newField = newFields.childNodes;
 	for (var i=0;i<newField.length;i++) {
-		var theName = newField[i].name
+		var theName = newField[i].name;
 		if (theName)
 			newField[i].name = theName + counter;
 	}
@@ -17,7 +17,11 @@ function moreFields() {
 
 jQuery(document).ready(function(){
 	
-	jQuery("#form2 select").click(function() {
+	var $object = $('#tagsArea');
+	if($object.length) {
+		var valortextarea = $('#tagsArea').val();
+	}
+	jQuery("#form2 select").bind("change", function(){
 		var seleccion = jQuery(this).find('option:selected');
 		temp = seleccion.text();
 		bandera = jQuery(this).attr("id");
@@ -29,14 +33,17 @@ jQuery(document).ready(function(){
 			var subSeleccion = jQuery('#selectCategoria').find('option:selected');
 			tmpSub = subSeleccion.text();
 		}
+		var $object = $('#tagsArea');
+		if($object.length) {
+		    putTags(valortextarea, temp, tmpSub);
+		} 
 	});
 
-	jQuery("#form2 select").change(function(){
+	function putTags(valortextarea, temp, tmpSub){
 		var catSelec = jQuery('#selectCategoria').find('option:selected');
 		var selectedCategoria = catSelec.text();
 		var subCatSelec = jQuery('#subcategoria').find('option:selected');
 		var selectedSubCategoria = subCatSelec.text();
-		var valortextarea = $('#tagsArea').val();
 	
 	    var arreglo 	= $.map(valortextarea.split(","), $.trim);
 	    var cuantos 	= arreglo.length;
@@ -49,7 +56,7 @@ jQuery(document).ready(function(){
 	    $('#tagsArea').val(valorFinal);
 	    
 	    return;
-	});
+	}
 	
 	function unique(array) {
 	    return jQuery.grep(array, function(el, index) {

@@ -483,6 +483,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 				class=""
 				checked="checked"
 				id="reqCode"
+				maxlength="9"
 				name="" /> 
 			<br />
 			<br /> 
