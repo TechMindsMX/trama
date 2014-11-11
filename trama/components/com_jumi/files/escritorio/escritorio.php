@@ -25,6 +25,10 @@ $base 			= JUri::base();
 $proyectos 		= JTrama::getProjectsByUser($userMiddleId->idMiddleware);
 $status 		= array(5,10,6,7,8,11);
 
+if(empty($proyectos)){
+    $proyectos = array();
+}
+
 foreach ($proyectos as $key => $value) {
 	$entity = new JTrama;
 	$entity->getEditUrl($value);

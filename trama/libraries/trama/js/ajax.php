@@ -57,8 +57,9 @@ switch ($fun) {
 		
 	case 2:
 		// $url = MIDDLE.PUERTO."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
-		$url = MIDDLE.":7272/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
-		echo file_get_contents($url);
+		$url = "http://api.timone-sepomex.mx/sepomexes/".$_POST["cp"];
+
+        echo file_get_contents($url);
 		break;
 		
 	case 3:
