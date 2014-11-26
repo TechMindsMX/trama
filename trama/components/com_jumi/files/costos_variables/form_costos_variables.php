@@ -32,7 +32,7 @@ JTrama::isEditable($datosObj, $middlewareId->idMiddleware);
 errorClass::manejoError($errorCode, $from, $proyid);
 
 $servEdicion = JTrama::getDatos($proyid );
-$existe = $servEdicion->variableCosts;
+$existe = isset($servEdicion->variableCosts) ? $servEdicion->variableCosts : '';
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.TIMONE.'project/saveVariableCosts';
 ?>
@@ -42,7 +42,6 @@ $action = MIDDLE.PUERTO.TIMONE.'project/saveVariableCosts';
 		jQuery("#form_costos").validationEngine();
 
 		jQuery("#enviar").click(function (){
-			jQuery('#token').val('<?php echo $token;?>');
 
 			jQuery('#form_costos').find('input').each(function(key, value){
 			    switch($(value).prop('name')){
@@ -190,7 +189,7 @@ $action = MIDDLE.PUERTO.TIMONE.'project/saveVariableCosts';
 		
 	<input
 		type="hidden"
-		value="<?php $token ?>"
+		value="<?php echo $token ?>"
 		name="token"
 		id="token" />	
 	

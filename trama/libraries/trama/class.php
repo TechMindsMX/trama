@@ -87,7 +87,7 @@ class JTrama
 		
 		$url = MIDDLE.PUERTO.TIMONE.'security/getKey';
 		$token = file_get_contents($url);
-		
+
 		return $token;
 	}
 
@@ -217,34 +217,38 @@ class JTrama
 	}
 	
 	public static function formatDatosProy ($value) {
-		foreach ($value->projectFinancialData as $key => $valor) {
-			if($key != 'id'){	
-				$value->$key = $valor;
+		if ( !is_null( $value->projectFinancialData ) ) {
+			foreach ($value->projectFinancialData as $key => $valor) {
+				if($key != 'id'){
+					$value->$key = $valor;
+				}
 			}
-		}
-		
-		$value->fundStartDateCode 		= $value->fundStartDate;
-		$value->fundEndDateCode 		= $value->fundEndDate;
-		$value->productionStartDateCode = $value->productionStartDate;
-		$value->premiereStartDateCode 	= $value->premiereStartDate;
-		$value->premiereEndDateCode 	= $value->premiereEndDate;
 
-		if (isset($value->fundStartDate)) {
-			$value->fundStartDate = date('d-m-Y', ($value->fundStartDateCode/1000) );
+			$value->fundStartDateCode 		= $value->fundStartDate;
+			$value->fundEndDateCode 		= $value->fundEndDate;
+			$value->productionStartDateCode = $value->productionStartDate;
+			$value->premiereStartDateCode 	= $value->premiereStartDate;
+			$value->premiereEndDateCode 	= $value->premiereEndDate;
+
+			if (isset($value->fundStartDate)) {
+				$value->fundStartDate = date('d-m-Y', ($value->fundStartDateCode/1000) );
+			}
+			if (isset($value->fundEndDate)) {
+				$value->fundEndDate = date('d-m-Y', ($value->fundEndDateCode/1000) );
+			}
+			if (isset($value->productionStartDate)) {
+				$value->productionStartDate = date('d-m-Y', ($value->productionStartDateCode/1000) );
+			}
+			if (isset($value->premiereStartDate)) {
+				$value->premiereStartDate = date('d-m-Y', ($value->premiereStartDateCode/1000) );
+			}
+			if (isset($value->premiereEndDate)) {
+				$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDateCode/1000) );
+			}
+		} else {
+			$value->projectFinancialData = array();
 		}
-		if (isset($value->fundEndDate)) {
-			$value->fundEndDate = date('d-m-Y', ($value->fundEndDateCode/1000) );
-		}
-		if (isset($value->productionStartDate)) {
-			$value->productionStartDate = date('d-m-Y', ($value->productionStartDateCode/1000) );
-		}
-		if (isset($value->premiereStartDate)) {
-			$value->premiereStartDate = date('d-m-Y', ($value->premiereStartDateCode/1000) );
-		}
-		if (isset($value->premiereEndDate)) {
-			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDateCode/1000) );
-		}
-		
+
 		if($value->providers){
 			foreach ($value->providers as $clave => $valor) {
 				$valor->advanceDateCode 		= $valor->advanceDate; 

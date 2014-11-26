@@ -55,7 +55,13 @@ class AltaProveedores {
 		}
 		
 		$this -> getMiembrosGrupo();
-		$this -> fechas();
+
+		if (isset($this -> objDatos -> premiereStartDate)) {
+			$this -> fechas();
+		} else {
+			JFactory::getApplication()->redirect('index.php?option=com_jumi&view=appliction&fileid=28&proyid='.$proyId, 'DEBE_DAR_DE_ALTA_FECHAS', 'error');
+		}
+
 		//$this -> getProviders();
 
 	}
