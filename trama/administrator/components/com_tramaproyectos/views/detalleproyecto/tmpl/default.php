@@ -62,6 +62,7 @@ $document	->addStyleDeclaration($cssFinan);
 						break;
 					case 'Rechazado':
 						jQuery('.statuschange').val(4);
+						jQuery('#reason').val(3);
 						jQuery('#callback').val("<?php echo $proyecto->callback.'&status=4&name='.$proyecto->id ?>");
 						<?php $statusName = JTrama::getStatusName(4); ?>
 						msg = "<?php echo JText::_('COM_TRAMAPROYECTOS_ESTASEGURO').$statusName->fullName.' '.JText::_('COM_TRAMAPROYECTOS_LABEL_IRREVERSIBLE'); ?> ";

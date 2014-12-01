@@ -199,30 +199,35 @@ function imagenes($data) {
 }
 
 function validaURLs($arreglo){
-    // create a client object with your app credentials
-    $client = new Services_Soundcloud(SOUNDCLOUD_CLIENT_ID, SOUNDCLOUD_CLIENT_SECRET);
-    $client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
+	// create a client object with your app credentials
+	$client = new Services_Soundcloud(SOUNDCLOUD_CLIENT_ID, SOUNDCLOUD_CLIENT_SECRET);
+	$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
 
-    foreach ($arreglo as $key => $value) {
-        if (!empty($value->url)) {
-            $track_url = $value->url;
+	foreach ($arreglo as $key => $value) {
+		if (!empty($value->url)) {
+			$track_url = $value->url;
 
-            try {
-                $client->get('resolve', array('url' => $track_url));
-                $value->error = false;
-                $noerror[] = $value;
-            }
-            catch(Services_Soundcloud_Invalid_Http_Response_Code_Exception $e){
-                $value->error = true;
-                $errores[] = $value;
-            }
-            // render the html for the player widget
-        }
-    }
-    $final = array_merge($errores,$noerror);
+			try {
+				$client->get('resolve', array('url' => $track_url));
+				$value->error = false;
+				$noerror[] = $value;
+			}
+			catch(Services_Soundcloud_Invalid_Http_Response_Code_Exception $e){
+				$value->error = true;
+				$errores[] = $value;
+			}
+			// render the html for the player widget
+		}
+	}
+
+	if(is_null($noerror)){
+		$noerror = array();
+	}
+
+	$final = $noerror;
 
 
-    return $final;
+	return $final;
 }
 /**
  * @param $data

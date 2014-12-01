@@ -71,7 +71,7 @@ foreach ($_FILES as $key => $value) {
 			$ruta				= PHOTO.'/';
 			$archivos[] 		= $fileName.'.jpg';
 		}
-		$imagen->resizeAndCrop($_FILES[$key]['tmp_name'], $ruta, $fileName, $ancho, $alto);
+		$saved = $imagen->resizeAndCrop($_FILES[$key]['tmp_name'], $ruta, $fileName, $ancho, $alto);
 	} else {
 		if( $envio['bannerSave'] != '' && $_FILES['banner']['error'] != 0 ){
 			$envio['banner'] = $envio['bannerSave'];

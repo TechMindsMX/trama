@@ -1,4 +1,5 @@
 <?php
+jimport('trama.debug');
 
 class manejoImagenes {
 
@@ -111,9 +112,16 @@ class manejoImagenes {
 		$archivo = $ruta . $fileName . '.jpg';
 
 		clearstatcache();
-		$saved = imagejpeg($desired_gdim, $archivo, 90);
+		$is_writable = is_writable($ruta);
+		$return = imagejpeg($desired_gdim, $archivo, 90);
 
-		return $saved;
+		if (!$is_writable) {
+			$data = array($desired_gdim, $archivo, 'permisos carpetas' => $is_writable);
+			new DebugClass($data);
+			JFactory::getApplication()->enqueueMessage(JText::_('es'), 'error');
+		}
+
+		return $return;
 	}
 
 }
