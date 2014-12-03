@@ -26,13 +26,14 @@ define('JPATH_THEMES',			JPATH_BASE . '/templates');
 define('JPATH_CACHE',			JPATH_ROOT . '/cache');
 define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
-$middle = "192.168.0.122";
-$puertoTimOne =  ":8081";
+$middle = "api-stage.timone.mx";
+$puertoTimOne =  "";
 $controllerTimOne =  "/timone/services/";
 
 define("MIDDLE", 'http://'.$middle);
 define("PUERTO", $puertoTimOne);
 define("TIMONE", $controllerTimOne);
+define("SEPOMEX", 'http://sepomex.trama.mx/sepomexes/');
 
 define("AVATAR", "media/trama_files/avatar");
 define("BANNER", "media/trama_files/banner");
