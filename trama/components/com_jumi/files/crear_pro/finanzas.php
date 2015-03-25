@@ -206,6 +206,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 			
 			if( isset($datosObj->eventCode) ){
 				echo 'jQuery("#reqCode").prop("checked", "");';
+				echo 'jQuery("#reqCode").trigger("click");';
 				$disabled = 'disabled="disabled"';
 			}
 			$budget    = isset($datosObj->budget)?$datosObj->budget:'';
@@ -221,7 +222,8 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 				echo 'jQuery("#seccion2").val("'.$datosObj->projectUnitSales[0]->section.'");';
 				echo 'jQuery("#unidad2").val("'.$datosObj->projectUnitSales[0]->unitSale.'");';
 				echo 'jQuery("#inventario2").val("'.$datosObj->projectUnitSales[0]->unit.'");';
-				echo 'jQuery("#codeSection2").val("'.$datosObj->projectUnitSales[0]->codeSection.'");';
+				$codeSection = $datosObj->projectUnitSales[0]->codeSection == 0 ?'':$datosObj->projectUnitSales[0]->codeSection;
+				echo 'jQuery("#codeSection2").val("'.$codeSection.'");';
 			}
 
 			$productionStartDate = isset($datosObj->productionStartDate)?$datosObj->productionStartDate:'';
@@ -285,7 +287,8 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 			jQuery("#seccion").val("");
 			jQuery("#unidad").val("");
 			jQuery("#inventario").val("");
-			jQuery("#codeSection").val("");
+			jQuery("#codeSection").val("0");
+
 			var repetidos 	= false;
 			var sec 		= 0;
 			var unit 		= 0;
@@ -352,7 +355,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 				jQuery("#codeSection").val(codeSection.join(","));
 			} else {
 				jQuery("#codeSection").prop('disabled', false);
-				jQuery("#codeSection").val('');
+				jQuery("#codeSection").val('0');
 			}
 			
 			jQuery('#token').val('<?php echo $token;?>');

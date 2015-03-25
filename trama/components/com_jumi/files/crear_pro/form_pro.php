@@ -263,7 +263,7 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 
 <div class="left15"><h1><?php echo $titulo; ?></h1></div>
 
-<form id="form2" action="../post.php" enctype="multipart/form-data" method="POST">
+<form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
 	<div class="datos_proy">
 		<span id="camposHidden">
 			<input
