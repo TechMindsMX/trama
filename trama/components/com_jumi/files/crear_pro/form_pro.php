@@ -64,9 +64,9 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			JTrama::isEditable($datosObj, $userMiddleId->idMiddleware);
 			$callback .= $proyid;
 			
-			$premiereEndDate 	= !is_null($datosObj->premiereEndDate)?'true':'false';
-			$variableCosts 		= !empty($datosObj->variableCosts)?'true':'false';
-			$providers			= !empty($datosObj->providers)?'true':'false';
+			$premiereEndDate 	= !isset($datosObj->premiereEndDate)?'true':'false';
+			$variableCosts 		= !isset($datosObj->variableCosts)?'true':'false';
+			$providers			= !isset($datosObj->providers)?'true':'false';
 			
 			echo 'premiereEndDate = '.$premiereEndDate.';';
 			echo 'variableCosts	= '.$variableCosts.';';
@@ -154,7 +154,7 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			foreach ($video_array as $key => $value) {
 				echo 'jQuery("#linkYt"+'.($key+1).').val("'.$value.'");';
 			}
-			
+			$projectSoundclouds = array();
 			foreach ($datosObj->projectSoundclouds as $key => $value) {
 				if ($value->url !== '') {
 					$projectSoundclouds[] = $value->url;
@@ -263,7 +263,7 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 
 <div class="left15"><h1><?php echo $titulo; ?></h1></div>
 
-<form id="form2" action="<?php echo $action; ?>" enctype="multipart/form-data" method="POST">
+<form id="form2" action="../post.php" enctype="multipart/form-data" method="POST">
 	<div class="datos_proy">
 		<span id="camposHidden">
 			<input

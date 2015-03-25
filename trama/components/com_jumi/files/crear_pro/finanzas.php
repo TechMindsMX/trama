@@ -200,17 +200,19 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 								  name = "premiereEndDate" />';
 			}
 
-			if( !is_null($datosObj->projectBusinessCase) ){	
+			if( !isset($datosObj->projectBusinessCase) ){
 				$validacion = '';
 			}
 			
-			if( is_null($datosObj->eventCode) ){
+			if( isset($datosObj->eventCode) ){
 				echo 'jQuery("#reqCode").prop("checked", "");';
 				$disabled = 'disabled="disabled"';
 			}
-			
-			echo 'jQuery("#presupuesto").val('.$datosObj->budget.');';
-			echo 'jQuery("#event_code").val("'.$datosObj->eventCode.'");';
+			$budget    = isset($datosObj->budget)?$datosObj->budget:'';
+            $eventCode = isset($datosObj->eventCode)?$datosObj->eventCode:'';
+
+			echo 'jQuery("#presupuesto").val('.$budget.');';
+			echo 'jQuery("#event_code").val("'.$eventCode.'");';
 			
 			if( !empty($datosObj->projectUnitSales) ){
 				$countunitSales = count($datosObj->projectUnitSales);
@@ -221,19 +223,26 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 				echo 'jQuery("#inventario2").val("'.$datosObj->projectUnitSales[0]->unit.'");';
 				echo 'jQuery("#codeSection2").val("'.$datosObj->projectUnitSales[0]->codeSection.'");';
 			}
+
+			$productionStartDate = isset($datosObj->productionStartDate)?$datosObj->productionStartDate:'';
+            $premiereStartDate = isset($datosObj->premiereStartDate)?$datosObj->premiereStartDate:'';
+            $premiereEndDate = isset($datosObj->premiereEndDate)?$datosObj->premiereEndDate:'';
+            $revenuePotential = isset($datosObj->revenuePotential)?$datosObj->revenuePotential:'';
+            $breakeven = isset($datosObj->breakeven)?$datosObj->breakeven:'';
+            $breakeven = isset($datosObj->breakeven)?$datosObj->breakeven:'';
 			
-			echo 'jQuery("#productionStartDate").val("'.$datosObj->productionStartDate.'");';
-			echo 'jQuery("#premiereStartDate").val("'.$datosObj->premiereStartDate.'");';
-			echo 'jQuery("#premiereEndDate").val("'.$datosObj->premiereEndDate.'");';
-			echo 'jQuery("#potenciales").val("'.$datosObj->revenuePotential.'");';
-			echo 'jQuery("#equilibrio").val("'.$datosObj->breakeven.'");';
-			echo 'jQuery("#equilibrio").val("'.$datosObj->breakeven.'");';
+			echo 'jQuery("#productionStartDate").val("'.$productionStartDate.'");';
+			echo 'jQuery("#premiereStartDate").val("'.$premiereStartDate.'");';
+			echo 'jQuery("#premiereEndDate").val("'.$premiereEndDate.'");';
+			echo 'jQuery("#potenciales").val("'.$revenuePotential.'");';
+			echo 'jQuery("#equilibrio").val("'.$breakeven.'");';
+			echo 'jQuery("#equilibrio").val("'.$breakeven.'");';
 			
-			if($datosObj->productionStartDate != null) {
+			if(isset($datosObj->productionStartDate)) {
 				echo 'jQuery("#productionStartDate").prop("class", "validate[required, custom[date]")';
 			}
 			
-			$checkednumbers = $datosObj->numberPublic; 
+			$checkednumbers = isset($datosObj->numberPublic)?$datosObj->numberPublic:null;
 		}
 		?>
 
@@ -411,14 +420,17 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 		<input 
 			type="text" 
 			class="validate[required,custom[onlyLetterNumber]]"
-			name="section0">
+			name="section0"
+            disabled="disabled">
 		<br />
 		
 		<label for=""><?php echo JText::_('PRECIO_UNIDAD'); ?>*:</label> 
 		<input 
 			type="text" 
 			class="validate[required,custom[number]]" 
-			name="unitSale0" step="any"> 
+			name="unitSale0"
+            step="any"
+            disabled="disabled">
 		<br>
 		
 		<label for=""><?php echo JText::_('INVENTARIOPP'); ?>:</label> 
@@ -426,7 +438,8 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 			type="text" 
 			class="validate[required,custom[onlyNumberSp]]" 
 			value=""
-			name="capacity0"> 
+			name="capacity0"
+            disabled="disabled">
 		<br /> 
 		<label class="obligatorioCodeSeccion" for=""><?php echo JText::_('SECTION_CODE'); ?>:</label> 
 		<input 
@@ -436,7 +449,8 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 			maxlength="<?php echo $secMaxLenght; ?>"
 			name="codeSection0"
 			id="codeSection0"
-			<?php echo $disabled; ?> /> 
+			<?php echo $disabled; ?>
+            disabled="disabled"/>
 		<br /> 
 		
 		<input 
@@ -546,7 +560,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 			<input type="hidden" id="seccion" name="section"> 
 			<input type="hidden" id="unidad" name="unitSale"> 
 			<input type="hidden" id="inventario" name="capacity"> 
-			<input type="hidden" id="codeSection" name="codeSection"> 
+			<input type="hidden" id="codeSection" name="codeSection" value="0">
 			
 			<?php
 			for($i = 1; $i < $countunitSales; $i++) {
@@ -608,7 +622,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 			<br /> 
 			
 			<?php 
-			if( !is_null($datosObj->projectUnitSales) ){
+			if( !isset($datosObj->projectUnitSales) ){
 			?>
 				<label for="potenicales"><?php echo JText::_('INGRESOS_POTENCIALES').JText::_('LBL_PROYECTO'); ?>*:</label> 
 				<span>$<span class="number"><?php echo $datosObj->revenuePotential; ?></span></span>

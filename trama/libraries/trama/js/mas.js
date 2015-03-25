@@ -5,9 +5,10 @@ function moreFields() {
 	var newFields = document.getElementById('readroot').cloneNode(true);
 	newFields.id = '';
 	newFields.style.display = 'block';
-	var newField = newFields.childNodes;
-	for (var i=0;i<newField.length;i++) {
-		var theName = newField[i].name;
+    var newField = newFields.childNodes;
+    for (var i=0;i<newField.length;i++) {
+        jQuery(newField[i]).prop('disabled',false);
+        var theName = newField[i].name;
 		if (theName)
 			newField[i].name = theName + counter;
 	}
