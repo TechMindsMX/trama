@@ -287,7 +287,7 @@ $document->addStyleSheet('libraries/trama/css/jquery-ui.css');
             jQuery("#seccion").val("");
             jQuery("#unidad").val("");
             jQuery("#inventario").val("");
-            jQuery("#codeSection").val("0");
+
 
             var repetidos 	= false;
             var sec 		= 0;
