@@ -64,10 +64,10 @@ $mensajeRevision = JText::_('ENVIAR_REVISION');
 			JTrama::isEditable($datosObj, $userMiddleId->idMiddleware);
 			$callback .= $proyid;
 			
-			$premiereEndDate 	= !isset($datosObj->premiereEndDate)?'true':'false';
-			$variableCosts 		= !isset($datosObj->variableCosts)?'true':'false';
-			$providers			= !isset($datosObj->providers)?'true':'false';
-			
+			$premiereEndDate 	= isset($datosObj->premiereEndDate) ? 'true' : 'false';
+			$variableCosts 		= isset($datosObj->variableCosts) ? 'true' : 'false';
+			$providers			= isset($datosObj->providers) ? 'true' : 'false';
+
 			echo 'premiereEndDate = '.$premiereEndDate.';';
 			echo 'variableCosts	= '.$variableCosts.';';
 			echo 'providers = '.$providers.';';
